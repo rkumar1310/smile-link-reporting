@@ -1,0 +1,13 @@
+{
+  "id": "A_WARN_INCOMPLETE_ASSESSMENT",
+  "type": "a_block",
+  "name": "Incomplete Assessment Warning",
+  "description": "Warning when questionnaire data is incomplete",
+  "layer": "L1",
+  "target_section": 0,
+  "tone_variants": {
+    "TP-01": { "file": "TP-01.md", "word_count": 85 }
+  },
+  "version": "1.0.0",
+  "last_updated": "2025-01-04"
+}

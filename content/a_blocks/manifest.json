@@ -1,0 +1,50 @@
+{
+  "type": "a_blocks",
+  "description": "Warning, disclaimer, and safety blocks for L1 layer",
+  "blocks": [
+    {
+      "id": "A_DISCLAIMER",
+      "file": "A_DISCLAIMER.md",
+      "required": true,
+      "position": "header"
+    },
+    {
+      "id": "A_WARN_PAIN",
+      "file": "A_WARN_PAIN.md",
+      "trigger_driver": "pain_present",
+      "severity": "high"
+    },
+    {
+      "id": "A_WARN_ANXIETY",
+      "file": "A_WARN_ANXIETY.md",
+      "trigger_driver": "dental_anxiety",
+      "severity": "medium"
+    },
+    {
+      "id": "A_WARN_URGENCY",
+      "file": "A_WARN_URGENCY.md",
+      "trigger_driver": "urgency_flag",
+      "severity": "high"
+    },
+    {
+      "id": "A_WARN_SMOKING",
+      "file": "A_WARN_SMOKING.md",
+      "trigger_driver": "smoker_flag",
+      "severity": "medium"
+    },
+    {
+      "id": "A_WARN_MEDICAL",
+      "file": "A_WARN_MEDICAL.md",
+      "trigger_driver": "medical_contraindication",
+      "severity": "medium"
+    },
+    {
+      "id": "A_WARN_BUDGET",
+      "file": "A_WARN_BUDGET.md",
+      "trigger_driver": "budget_constraint",
+      "severity": "low"
+    }
+  ],
+  "version": "1.0",
+  "last_updated": "2024-01-04"
+}

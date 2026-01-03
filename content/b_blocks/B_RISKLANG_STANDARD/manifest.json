@@ -1,0 +1,18 @@
+{
+  "id": "B_RISKLANG_STANDARD",
+  "type": "b_block",
+  "name": "Standard Risk Language",
+  "description": "Risk language block for standard risk profiles",
+  "layer": "L2",
+  "target_section": 10,
+  "tone_variants": {
+    "TP-01": { "file": "TP-01.md", "word_count": 90 },
+    "TP-02": { "file": "TP-02.md", "word_count": 100 },
+    "TP-03": { "file": "TP-03.md", "word_count": 95 },
+    "TP-04": { "file": "TP-04.md", "word_count": 105 },
+    "TP-05": { "file": "TP-05.md", "word_count": 100 },
+    "TP-06": { "file": "TP-06.md", "word_count": 95 }
+  },
+  "version": "1.0.0",
+  "last_updated": "2025-01-04"
+}

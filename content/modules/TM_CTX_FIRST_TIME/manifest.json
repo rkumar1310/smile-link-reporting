@@ -1,0 +1,14 @@
+{
+  "id": "TM_CTX_FIRST_TIME",
+  "type": "module",
+  "name": "First-Time Context",
+  "description": "Context module for first-time dental treatment patients",
+  "layer": "L2",
+  "target_sections": [3],
+  "tone_variants": {
+    "TP-01": { "file": "TP-01.md", "word_count": 65 },
+    "TP-02": { "file": "TP-02.md", "word_count": 80 }
+  },
+  "version": "1.0.0",
+  "last_updated": "2025-01-04"
+}

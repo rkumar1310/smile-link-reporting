@@ -1,0 +1,123 @@
+{
+  "type": "text_modules",
+  "description": "Contextual and preference modules (TM_*) for personalized report content",
+  "modules": [
+    {
+      "id": "TM_PREGNANCY",
+      "file": "TM_PREGNANCY.md",
+      "category": "medical_context",
+      "trigger": "pregnancy_flag"
+    },
+    {
+      "id": "TM_DIABETES",
+      "file": "TM_DIABETES.md",
+      "category": "medical_context",
+      "trigger": "medical_condition"
+    },
+    {
+      "id": "TM_SMOKING",
+      "file": "TM_SMOKING.md",
+      "category": "lifestyle",
+      "trigger": "smoker_flag"
+    },
+    {
+      "id": "TM_BRUXISM",
+      "file": "TM_BRUXISM.md",
+      "category": "dental_condition",
+      "trigger": "bruxism_flag"
+    },
+    {
+      "id": "TM_PERIODONTITIS",
+      "file": "TM_PERIODONTITIS.md",
+      "category": "dental_condition",
+      "trigger": "gum_disease_flag"
+    },
+    {
+      "id": "TM_INFLAMMATION",
+      "file": "TM_INFLAMMATION.md",
+      "category": "dental_condition",
+      "trigger": "inflammation_flag"
+    },
+    {
+      "id": "TM_POOR_HYGIENE",
+      "file": "TM_POOR_HYGIENE.md",
+      "category": "dental_condition",
+      "trigger": "hygiene_flag"
+    },
+    {
+      "id": "TM_BONE_LOSS",
+      "file": "TM_BONE_LOSS.md",
+      "category": "dental_condition",
+      "trigger": "bone_loss_flag"
+    },
+    {
+      "id": "TM_DENTAL_ANXIETY",
+      "file": "TM_DENTAL_ANXIETY.md",
+      "category": "psychological",
+      "trigger": "dental_anxiety"
+    },
+    {
+      "id": "TM_AGE_FACTOR",
+      "file": "TM_AGE_FACTOR.md",
+      "category": "patient_profile",
+      "trigger": "age_relevant"
+    },
+    {
+      "id": "TM_PREMIUM_AESTHETIC",
+      "file": "TM_PREMIUM_AESTHETIC.md",
+      "category": "preference_profile",
+      "trigger": "aesthetic_preference_premium"
+    },
+    {
+      "id": "TM_AESTHETIC_STYLE",
+      "file": "TM_AESTHETIC_STYLE.md",
+      "category": "preference_profile",
+      "trigger": "aesthetic_style_preference"
+    },
+    {
+      "id": "TM_FUNCTIONAL_VS_AESTHETIC",
+      "file": "TM_FUNCTIONAL_VS_AESTHETIC.md",
+      "category": "preference_profile",
+      "trigger": "mixed_profile"
+    },
+    {
+      "id": "TM_BUDGET_LOW",
+      "file": "TM_BUDGET_LOW.md",
+      "category": "preference_profile",
+      "trigger": "budget_constraint"
+    },
+    {
+      "id": "TM_BUDGET_PREMIUM",
+      "file": "TM_BUDGET_PREMIUM.md",
+      "category": "preference_profile",
+      "trigger": "budget_premium"
+    },
+    {
+      "id": "TM_TOOTH_STATUS",
+      "file": "TM_TOOTH_STATUS.md",
+      "category": "dental_situation",
+      "trigger": "tooth_status_relevant"
+    },
+    {
+      "id": "TM_ORAL_COMPLEXITY",
+      "file": "TM_ORAL_COMPLEXITY.md",
+      "category": "dental_situation",
+      "trigger": "complexity_flag"
+    },
+    {
+      "id": "TM_TREATMENT_HISTORY",
+      "file": "TM_TREATMENT_HISTORY.md",
+      "category": "patient_profile",
+      "trigger": "has_treatment_history"
+    },
+    {
+      "id": "TM_GENERAL_HEALTH",
+      "file": "TM_GENERAL_HEALTH.md",
+      "category": "medical_context",
+      "trigger": "health_relevant"
+    }
+  ],
+  "version": "1.0",
+  "last_updated": "2024-01-04",
+  "source": "Moduleblokken.docx"
+}

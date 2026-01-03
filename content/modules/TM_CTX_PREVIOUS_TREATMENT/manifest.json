@@ -1,0 +1,14 @@
+{
+  "id": "TM_CTX_PREVIOUS_TREATMENT",
+  "type": "module",
+  "name": "Previous Treatment Context",
+  "description": "Context module for patients with previous dental treatment experience",
+  "layer": "L2",
+  "target_sections": [3],
+  "tone_variants": {
+    "TP-01": { "file": "TP-01.md", "word_count": 60 },
+    "TP-02": { "file": "TP-02.md", "word_count": 75 }
+  },
+  "version": "1.0.0",
+  "last_updated": "2025-01-04"
+}

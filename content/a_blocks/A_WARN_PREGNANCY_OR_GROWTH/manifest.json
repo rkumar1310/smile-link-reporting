@@ -1,0 +1,13 @@
+{
+  "id": "A_WARN_PREGNANCY_OR_GROWTH",
+  "type": "a_block",
+  "name": "Pregnancy/Growth Warning",
+  "description": "Warning for pregnancy or growth-related timing considerations",
+  "layer": "L1",
+  "target_section": 0,
+  "tone_variants": {
+    "TP-01": { "file": "TP-01.md", "word_count": 85 }
+  },
+  "version": "1.0.0",
+  "last_updated": "2025-01-04"
+}

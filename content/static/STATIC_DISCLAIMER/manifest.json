@@ -1,0 +1,13 @@
+{
+  "id": "STATIC_DISCLAIMER",
+  "type": "static",
+  "name": "Standard Disclaimer",
+  "description": "Legal disclaimer for all reports",
+  "layer": "L1",
+  "target_section": 1,
+  "tone_variants": {
+    "TP-01": { "file": "TP-01.md", "word_count": 95 }
+  },
+  "version": "1.0.0",
+  "last_updated": "2025-01-04"
+}

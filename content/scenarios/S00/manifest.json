@@ -1,0 +1,22 @@
+{
+  "id": "S00",
+  "type": "scenario",
+  "name": "Fallback - General dental consultation",
+  "description": "Default scenario when no specific pattern matches, general guidance",
+  "layer": "L2",
+  "trigger_drivers": {},
+  "is_fallback": true,
+  "target_sections": [2, 3, 11],
+  "placeholders": [
+    { "key": "{{PATIENT_NAME}}", "source": "intake.patient_name", "fallback": "you" }
+  ],
+  "tone_variants": {
+    "TP-01": { "file": "TP-01.md", "word_count": 300 },
+    "TP-02": { "file": "TP-02.md", "word_count": 320 },
+    "TP-04": { "file": "TP-04.md", "word_count": 340 },
+    "TP-06": { "file": "TP-06.md", "word_count": 290 }
+  },
+  "version": "1.0",
+  "last_updated": "2024-01-04",
+  "source": "Fallback scenario"
+}

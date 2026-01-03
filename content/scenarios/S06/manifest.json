@@ -1,0 +1,26 @@
+{
+  "id": "S06",
+  "type": "scenario",
+  "name": "Missing teeth + aesthetic problem (mixed)",
+  "description": "Combination of missing teeth and aesthetic concerns (color, shape, wear, asymmetry)",
+  "layer": "L2",
+  "trigger_drivers": {
+    "mouth_situation": ["mixed_functional_aesthetic"],
+    "profile_type": ["mixed"]
+  },
+  "target_sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+  "placeholders": [
+    { "key": "{{PATIENT_NAME}}", "source": "intake.patient_name", "fallback": "you" }
+  ],
+  "tone_variants": {
+    "TP-01": { "file": "TP-01.md", "word_count": 580 },
+    "TP-02": { "file": "TP-02.md", "word_count": 600 },
+    "TP-03": { "file": "TP-03.md", "word_count": 620 },
+    "TP-04": { "file": "TP-04.md", "word_count": 640 },
+    "TP-05": { "file": "TP-05.md", "word_count": 610 },
+    "TP-06": { "file": "TP-06.md", "word_count": 570 }
+  },
+  "version": "2.0",
+  "last_updated": "2024-01-04",
+  "source": "Scenarioblok per scenariodocx.docx - SL-S14-VISIBLE-v2.0"
+}

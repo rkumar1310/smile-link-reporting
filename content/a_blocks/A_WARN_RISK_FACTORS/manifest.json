@@ -1,0 +1,13 @@
+{
+  "id": "A_WARN_RISK_FACTORS",
+  "type": "a_block",
+  "name": "Risk Factors Warning",
+  "description": "Warning for patients with elevated risk factors",
+  "layer": "L1",
+  "target_section": 0,
+  "tone_variants": {
+    "TP-01": { "file": "TP-01.md", "word_count": 80 }
+  },
+  "version": "1.0.0",
+  "last_updated": "2025-01-04"
+}

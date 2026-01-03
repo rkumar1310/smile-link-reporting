@@ -1,0 +1,317 @@
+{
+  "$schema": "./schemas/scenario-profiles.schema.json",
+  "version": "1.0.0",
+  "scoring": {
+    "required_must_match": true,
+    "strong_weight": 3,
+    "supporting_weight": 1,
+    "excluding_disqualifies": true
+  },
+  "confidence_thresholds": {
+    "HIGH": 8,
+    "MEDIUM": 5,
+    "LOW": 3,
+    "FALLBACK": 0
+  },
+  "priority_order": ["S12", "S10", "S09", "S07", "S08", "S04", "S05", "S06", "S02", "S03", "S17", "S01", "S11", "S13", "S14", "S15", "S16"],
+  "scenarios": {
+    "S00_GENERIC": {
+      "name": "Generic Assessment",
+      "description": "Fallback scenario when no specific match",
+      "required_drivers": {},
+      "strong_drivers": {},
+      "supporting_drivers": {},
+      "excluding_drivers": {},
+      "is_fallback": true
+    },
+    "S01": {
+      "name": "No missing teeth, discoloration",
+      "description": "Patient with aesthetic concerns, no missing teeth",
+      "required_drivers": {
+        "mouth_situation": ["no_missing_teeth"],
+        "profile_type": ["aesthetic", "mixed"]
+      },
+      "strong_drivers": {
+        "clinical_priority": ["elective"]
+      },
+      "supporting_drivers": {
+        "aesthetic_tolerance": ["conservative", "moderate"],
+        "budget_type": ["balanced", "premium"]
+      },
+      "excluding_drivers": {
+        "clinical_priority": ["urgent", "semi_urgent"],
+        "mouth_situation": ["single_missing_tooth", "multiple_adjacent", "multiple_dispersed", "mixed_pattern", "extensive_missing", "full_mouth_compromised"]
+      }
+    },
+    "S02": {
+      "name": "Single tooth missing, visible zone",
+      "description": "Single missing tooth in anterior aesthetic zone",
+      "required_drivers": {
+        "mouth_situation": ["single_missing_tooth"]
+      },
+      "strong_drivers": {
+        "profile_type": ["aesthetic", "mixed"],
+        "clinical_priority": ["elective"]
+      },
+      "supporting_drivers": {
+        "aesthetic_tolerance": ["moderate", "aggressive"],
+        "biological_stability": ["stable"]
+      },
+      "excluding_drivers": {
+        "clinical_priority": ["urgent"]
+      },
+      "preferred_tags": ["location_anterior"]
+    },
+    "S03": {
+      "name": "Single tooth missing, posterior zone",
+      "description": "Single missing tooth in chewing area",
+      "required_drivers": {
+        "mouth_situation": ["single_missing_tooth"]
+      },
+      "strong_drivers": {
+        "profile_type": ["functional", "comfort"],
+        "clinical_priority": ["elective", "semi_urgent"]
+      },
+      "supporting_drivers": {
+        "treatment_philosophy": ["durability_focused"]
+      },
+      "excluding_drivers": {},
+      "preferred_tags": ["location_posterior"]
+    },
+    "S04": {
+      "name": "2-4 teeth adjacent",
+      "description": "Multiple adjacent teeth missing",
+      "required_drivers": {
+        "mouth_situation": ["multiple_adjacent"]
+      },
+      "strong_drivers": {
+        "treatment_viability": ["multiple_site"],
+        "biological_stability": ["stable", "moderate"]
+      },
+      "supporting_drivers": {
+        "profile_type": ["functional", "mixed"]
+      },
+      "excluding_drivers": {
+        "mouth_situation": ["single_missing_tooth", "multiple_dispersed", "full_mouth_compromised"]
+      }
+    },
+    "S05": {
+      "name": "2-4 teeth dispersed",
+      "description": "Multiple non-adjacent teeth missing",
+      "required_drivers": {
+        "mouth_situation": ["multiple_dispersed"]
+      },
+      "strong_drivers": {
+        "treatment_viability": ["multiple_site"]
+      },
+      "supporting_drivers": {
+        "profile_type": ["functional", "mixed"]
+      },
+      "excluding_drivers": {
+        "mouth_situation": ["single_missing_tooth", "multiple_adjacent", "full_mouth_compromised"]
+      }
+    },
+    "S06": {
+      "name": "Mix: missing teeth + aesthetic problem",
+      "description": "Combination of missing teeth and aesthetic concerns",
+      "required_drivers": {
+        "mouth_situation": ["single_missing_tooth", "multiple_adjacent", "multiple_dispersed", "mixed_pattern"],
+        "profile_type": ["mixed"]
+      },
+      "strong_drivers": {},
+      "supporting_drivers": {
+        "aesthetic_tolerance": ["moderate"]
+      },
+      "excluding_drivers": {
+        "profile_type": ["aesthetic", "functional", "comfort"]
+      },
+      "preferred_tags": ["bother_combination", "motivation_combination"]
+    },
+    "S07": {
+      "name": "5+ teeth adjacent (segmental)",
+      "description": "Extensive missing teeth in one segment",
+      "required_drivers": {
+        "mouth_situation": ["extensive_missing"]
+      },
+      "strong_drivers": {
+        "treatment_viability": ["full_mouth"],
+        "biological_stability": ["stable", "moderate"]
+      },
+      "supporting_drivers": {
+        "profile_type": ["functional"]
+      },
+      "excluding_drivers": {
+        "mouth_situation": ["single_missing_tooth", "multiple_adjacent", "multiple_dispersed"]
+      }
+    },
+    "S08": {
+      "name": "5+ teeth dispersed",
+      "description": "Extensive missing teeth spread across mouth",
+      "required_drivers": {
+        "mouth_situation": ["extensive_missing"]
+      },
+      "strong_drivers": {
+        "treatment_viability": ["full_mouth"]
+      },
+      "supporting_drivers": {
+        "profile_type": ["functional", "mixed"]
+      },
+      "excluding_drivers": {
+        "mouth_situation": ["single_missing_tooth", "multiple_adjacent", "multiple_dispersed"]
+      }
+    },
+    "S09": {
+      "name": "Full jaw edentulous",
+      "description": "Complete tooth loss in one or both jaws",
+      "required_drivers": {
+        "mouth_situation": ["full_mouth_compromised"]
+      },
+      "strong_drivers": {
+        "treatment_viability": ["full_mouth"]
+      },
+      "supporting_drivers": {
+        "age_stage": ["senior"],
+        "profile_type": ["functional"]
+      },
+      "excluding_drivers": {
+        "mouth_situation": ["no_missing_teeth", "single_missing_tooth", "multiple_adjacent", "multiple_dispersed"]
+      }
+    },
+    "S10": {
+      "name": "Almost all teeth unsaveable",
+      "description": "Most teeth have poor prognosis",
+      "required_drivers": {
+        "mouth_situation": ["full_mouth_compromised"]
+      },
+      "strong_drivers": {
+        "biological_stability": ["unstable", "compromised"]
+      },
+      "supporting_drivers": {
+        "clinical_priority": ["semi_urgent", "urgent"]
+      },
+      "excluding_drivers": {
+        "mouth_situation": ["no_missing_teeth", "single_missing_tooth", "multiple_adjacent", "multiple_dispersed"]
+      }
+    },
+    "S11": {
+      "name": "No missing teeth, alignment issue",
+      "description": "Alignment or spacing concerns without missing teeth",
+      "required_drivers": {
+        "mouth_situation": ["no_missing_teeth"]
+      },
+      "strong_drivers": {
+        "profile_type": ["aesthetic"],
+        "clinical_priority": ["elective"]
+      },
+      "supporting_drivers": {
+        "age_stage": ["young_adult", "adult"],
+        "aesthetic_tolerance": ["conservative"]
+      },
+      "excluding_drivers": {},
+      "preferred_tags": ["issue_alignment"]
+    },
+    "S12": {
+      "name": "Loose teeth or pain (ACUTE)",
+      "description": "Acute symptoms requiring immediate attention",
+      "required_drivers": {
+        "clinical_priority": ["urgent", "semi_urgent"]
+      },
+      "strong_drivers": {},
+      "supporting_drivers": {},
+      "excluding_drivers": {
+        "clinical_priority": ["elective"]
+      },
+      "is_safety_scenario": true,
+      "preferred_tags": ["acute_pain", "acute_infection", "acute_loose_missing", "issue_functional_pain"]
+    },
+    "S13": {
+      "name": "Young profile, mild discoloration",
+      "description": "Young adult with minor aesthetic concerns",
+      "required_drivers": {
+        "age_stage": ["young_adult"],
+        "mouth_situation": ["no_missing_teeth"]
+      },
+      "strong_drivers": {
+        "profile_type": ["aesthetic"],
+        "clinical_priority": ["elective"]
+      },
+      "supporting_drivers": {
+        "budget_type": ["balanced", "economy"]
+      },
+      "excluding_drivers": {
+        "age_stage": ["senior"]
+      },
+      "preferred_tags": ["issue_discoloration"]
+    },
+    "S14": {
+      "name": "Senior, limited budget",
+      "description": "Older patient with budget constraints",
+      "required_drivers": {
+        "age_stage": ["senior"],
+        "budget_type": ["economy", "balanced"]
+      },
+      "strong_drivers": {
+        "profile_type": ["functional", "comfort"]
+      },
+      "supporting_drivers": {
+        "treatment_philosophy": ["durability_focused"]
+      },
+      "excluding_drivers": {
+        "budget_type": ["premium"],
+        "age_stage": ["young_adult", "growing"]
+      }
+    },
+    "S15": {
+      "name": "Premium client, aesthetic profile",
+      "description": "High-budget patient seeking best aesthetic outcome",
+      "required_drivers": {
+        "budget_type": ["premium"],
+        "profile_type": ["aesthetic"]
+      },
+      "strong_drivers": {
+        "aesthetic_tolerance": ["moderate", "aggressive"],
+        "expectation_risk": ["moderate", "high"]
+      },
+      "supporting_drivers": {},
+      "excluding_drivers": {
+        "budget_type": ["economy", "unknown"],
+        "profile_type": ["functional", "comfort"]
+      },
+      "preferred_tags": ["style_hollywood", "style_classic"]
+    },
+    "S16": {
+      "name": "Wear or damage without missing teeth",
+      "description": "Tooth wear, cracks, or damage but no missing teeth",
+      "required_drivers": {
+        "mouth_situation": ["no_missing_teeth"]
+      },
+      "strong_drivers": {
+        "profile_type": ["functional", "mixed"]
+      },
+      "supporting_drivers": {
+        "clinical_priority": ["elective", "semi_urgent"]
+      },
+      "excluding_drivers": {
+        "mouth_situation": ["single_missing_tooth", "multiple_adjacent", "multiple_dispersed", "extensive_missing", "full_mouth_compromised"]
+      },
+      "preferred_tags": ["tooth_health_compromised", "tooth_health_bruxism"]
+    },
+    "S17": {
+      "name": "Single tooth missing, adjacent teeth restored",
+      "description": "Single gap with compromised neighboring teeth",
+      "required_drivers": {
+        "mouth_situation": ["single_missing_tooth"]
+      },
+      "strong_drivers": {
+        "biological_stability": ["moderate", "compromised"]
+      },
+      "supporting_drivers": {
+        "treatment_philosophy": ["minimally_invasive"]
+      },
+      "excluding_drivers": {
+        "mouth_situation": ["multiple_adjacent", "multiple_dispersed", "extensive_missing", "full_mouth_compromised"]
+      },
+      "preferred_tags": ["adjacent_partial_restored", "adjacent_heavily_restored"]
+    }
+  }
+}

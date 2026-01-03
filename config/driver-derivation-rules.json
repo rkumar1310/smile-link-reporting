@@ -1,0 +1,547 @@
+{
+  "$schema": "./schemas/driver-derivation-rules.schema.json",
+  "version": "1.0.0",
+  "drivers": {
+    "clinical_priority": {
+      "layer": "L1",
+      "safety_critical": true,
+      "rules": [
+        {
+          "tags": ["acute_pain", "acute_infection"],
+          "value": "urgent",
+          "priority": 1
+        },
+        {
+          "tags": ["acute_loose_missing"],
+          "value": "semi_urgent",
+          "priority": 2
+        },
+        {
+          "tags": ["no_acute_issues"],
+          "value": "elective",
+          "priority": 3
+        }
+      ],
+      "fallback": {
+        "value": "semi_urgent",
+        "reason": "Safety-first when clinical status unknown"
+      }
+    },
+    "biological_stability": {
+      "layer": "L1",
+      "safety_critical": true,
+      "rules": [
+        {
+          "tags_all": ["hygiene_good", "adjacent_intact"],
+          "value": "stable",
+          "priority": 1
+        },
+        {
+          "tags_any": ["hygiene_basic", "adjacent_partial_restored"],
+          "value": "moderate",
+          "priority": 2
+        },
+        {
+          "tags_any": ["hygiene_irregular", "hygiene_poor", "adjacent_heavily_restored"],
+          "value": "unstable",
+          "priority": 3
+        },
+        {
+          "tags_any": ["issue_gum_recession", "history_periodontal"],
+          "value": "compromised",
+          "priority": 4
+        }
+      ],
+      "fallback": {
+        "value": "unstable",
+        "reason": "Conservative assumption when stability unknown"
+      }
+    },
+    "mouth_situation": {
+      "layer": "L1",
+      "safety_critical": true,
+      "rules": [
+        {
+          "tags": ["status_no_missing"],
+          "value": "no_missing_teeth",
+          "priority": 1
+        },
+        {
+          "tags": ["status_single_missing"],
+          "value": "single_missing_tooth",
+          "priority": 2
+        },
+        {
+          "tags": ["status_2_4_adjacent"],
+          "value": "multiple_adjacent",
+          "priority": 3
+        },
+        {
+          "tags": ["status_2_4_dispersed"],
+          "value": "multiple_dispersed",
+          "priority": 4
+        },
+        {
+          "tags": ["status_mixed_pattern"],
+          "value": "mixed_pattern",
+          "priority": 5
+        },
+        {
+          "tags": ["status_5_plus_missing"],
+          "value": "extensive_missing",
+          "priority": 6
+        },
+        {
+          "tags": ["status_full_mouth_compromised"],
+          "value": "full_mouth_compromised",
+          "priority": 7
+        }
+      ],
+      "fallback": {
+        "value": "complex",
+        "reason": "Avoid oversimplification when status unknown"
+      }
+    },
+    "age_stage": {
+      "layer": "L1",
+      "safety_critical": false,
+      "rules": [
+        {
+          "tags": ["growth_incomplete"],
+          "value": "growing",
+          "priority": 1
+        },
+        {
+          "tags_all": ["age_under_30", "growth_complete"],
+          "value": "young_adult",
+          "priority": 2
+        },
+        {
+          "tags": ["age_under_30"],
+          "value": "young_adult",
+          "priority": 3
+        },
+        {
+          "tags_any": ["age_30_45", "age_45_60"],
+          "value": "adult",
+          "priority": 4
+        },
+        {
+          "tags": ["age_60_plus"],
+          "value": "senior",
+          "priority": 5
+        }
+      ],
+      "fallback": {
+        "value": "adult",
+        "reason": "Most common age group"
+      }
+    },
+    "medical_constraints": {
+      "layer": "L1",
+      "safety_critical": true,
+      "rules": [
+        {
+          "tags": ["medical_contraindication"],
+          "value": "surgical_contraindicated",
+          "priority": 1
+        },
+        {
+          "tags_any": ["pregnancy_yes", "pregnancy_planning"],
+          "value": "pregnancy_related",
+          "priority": 2
+        },
+        {
+          "tags_all": ["medical_clear", "pregnancy_no"],
+          "value": "none",
+          "priority": 3
+        },
+        {
+          "tags": ["medical_clear"],
+          "value": "none",
+          "priority": 4
+        }
+      ],
+      "fallback": {
+        "value": "possible_constraints",
+        "reason": "Flag for review when medical status unknown"
+      }
+    },
+    "treatment_viability": {
+      "layer": "L1",
+      "safety_critical": false,
+      "rules": [
+        {
+          "tags_any": ["status_no_missing", "status_single_missing"],
+          "value": "single_site",
+          "priority": 1
+        },
+        {
+          "tags_any": ["status_2_4_adjacent", "status_2_4_dispersed", "status_mixed_pattern"],
+          "value": "multiple_site",
+          "priority": 2
+        },
+        {
+          "tags_any": ["status_5_plus_missing", "status_full_mouth_compromised"],
+          "value": "full_mouth",
+          "priority": 3
+        }
+      ],
+      "fallback": {
+        "value": "conditional",
+        "reason": "Requires professional assessment"
+      }
+    },
+    "risk_profile_biological": {
+      "layer": "L1",
+      "safety_critical": true,
+      "rules": [
+        {
+          "tags_all": ["smoking_no", "hygiene_good"],
+          "value": "low",
+          "priority": 1
+        },
+        {
+          "tags_any": ["smoking_occasional", "hygiene_basic"],
+          "value": "moderate",
+          "priority": 2
+        },
+        {
+          "tags_any": ["smoking_weekly", "smoking_daily", "hygiene_irregular", "hygiene_poor"],
+          "value": "elevated",
+          "priority": 3
+        },
+        {
+          "tags": ["tooth_health_bruxism"],
+          "value": "elevated",
+          "priority": 4,
+          "additive": true
+        }
+      ],
+      "fallback": {
+        "value": "elevated",
+        "reason": "Conservative assumption when risk unknown"
+      }
+    },
+    "profile_type": {
+      "layer": "L2",
+      "safety_critical": false,
+      "rules": [
+        {
+          "tags_any": ["motivation_aesthetic_damage", "motivation_aesthetic_premium", "bother_aesthetic"],
+          "value": "aesthetic",
+          "priority": 1
+        },
+        {
+          "tags_any": ["motivation_functional", "bother_functional"],
+          "value": "functional",
+          "priority": 2
+        },
+        {
+          "tags_any": ["motivation_combination", "bother_combination"],
+          "value": "mixed",
+          "priority": 3
+        },
+        {
+          "tags": ["style_functional"],
+          "value": "comfort",
+          "priority": 4
+        }
+      ],
+      "fallback": {
+        "value": "mixed",
+        "reason": "Neutral middle ground"
+      }
+    },
+    "aesthetic_tolerance": {
+      "layer": "L2",
+      "safety_critical": false,
+      "rules": [
+        {
+          "tags_all": ["natural_priority_high", "style_natural"],
+          "value": "conservative",
+          "priority": 1
+        },
+        {
+          "tags": ["natural_priority_high"],
+          "value": "conservative",
+          "priority": 2
+        },
+        {
+          "tags": ["natural_priority_balanced"],
+          "value": "moderate",
+          "priority": 3
+        },
+        {
+          "tags_any": ["natural_priority_low", "style_hollywood"],
+          "value": "aggressive",
+          "priority": 4
+        }
+      ],
+      "fallback": {
+        "value": "moderate",
+        "reason": "Avoid extremes when preference unknown"
+      }
+    },
+    "expectation_risk": {
+      "layer": "L2",
+      "safety_critical": false,
+      "rules": [
+        {
+          "tags": ["satisfaction_minor_concerns"],
+          "value": "realistic",
+          "priority": 1
+        },
+        {
+          "tags": ["satisfaction_moderate_dissatisfaction"],
+          "value": "moderate",
+          "priority": 2
+        },
+        {
+          "tags_all": ["satisfaction_major_dissatisfaction", "motivation_full_transformation"],
+          "value": "high",
+          "priority": 3
+        },
+        {
+          "tags": ["satisfaction_major_dissatisfaction"],
+          "value": "moderate",
+          "priority": 4
+        }
+      ],
+      "fallback": {
+        "value": "moderate",
+        "reason": "Middle ground assumption"
+      }
+    },
+    "experience_history": {
+      "layer": "L2",
+      "safety_critical": false,
+      "rules": [
+        {
+          "tags": ["history_none"],
+          "value": "first_timer",
+          "priority": 1
+        },
+        {
+          "tags_any": ["history_implants", "history_veneers_crowns", "history_orthodontics"],
+          "value": "experienced",
+          "priority": 2
+        },
+        {
+          "tags": ["history_periodontal"],
+          "value": "experienced",
+          "priority": 3
+        }
+      ],
+      "fallback": {
+        "value": "first_timer",
+        "reason": "Assume first time when history unknown"
+      }
+    },
+    "decision_stage": {
+      "layer": "L2",
+      "safety_critical": false,
+      "rules": [
+        {
+          "tags_any": ["timeline_exploratory", "intent_exploratory"],
+          "value": "exploring",
+          "priority": 1
+        },
+        {
+          "tags_any": ["intent_moderate", "timeline_relaxed"],
+          "value": "comparing",
+          "priority": 2
+        },
+        {
+          "tags_all": ["intent_high", "timeline_urgent"],
+          "value": "ready",
+          "priority": 3
+        },
+        {
+          "tags_all": ["intent_high", "timeline_medium"],
+          "value": "ready",
+          "priority": 4
+        },
+        {
+          "tags": ["intent_high"],
+          "value": "comparing",
+          "priority": 5
+        }
+      ],
+      "fallback": {
+        "value": "exploring",
+        "reason": "Safe assumption for undecided"
+      }
+    },
+    "autonomy_level": {
+      "layer": "L2",
+      "safety_critical": false,
+      "rules": [
+        {
+          "tags": ["intent_high"],
+          "value": "guided",
+          "priority": 1
+        },
+        {
+          "tags": ["intent_moderate"],
+          "value": "collaborative",
+          "priority": 2
+        },
+        {
+          "tags": ["intent_exploratory"],
+          "value": "autonomous",
+          "priority": 3
+        }
+      ],
+      "fallback": {
+        "value": "collaborative",
+        "reason": "Balanced default"
+      }
+    },
+    "anxiety_level": {
+      "layer": "L3",
+      "safety_critical": false,
+      "rules": [
+        {
+          "tags": ["anxiety_none"],
+          "value": "none",
+          "priority": 1
+        },
+        {
+          "tags": ["anxiety_mild"],
+          "value": "mild",
+          "priority": 2
+        },
+        {
+          "tags": ["anxiety_severe"],
+          "value": "severe",
+          "priority": 3
+        }
+      ],
+      "fallback": {
+        "value": "mild",
+        "reason": "Empathic default"
+      }
+    },
+    "information_depth": {
+      "layer": "L3",
+      "safety_critical": false,
+      "rules": [
+        {
+          "tags": ["intent_exploratory"],
+          "value": "detailed",
+          "priority": 1
+        },
+        {
+          "tags": ["intent_moderate"],
+          "value": "standard",
+          "priority": 2
+        },
+        {
+          "tags_all": ["intent_high", "timeline_urgent"],
+          "value": "summary",
+          "priority": 3
+        },
+        {
+          "tags": ["intent_high"],
+          "value": "standard",
+          "priority": 4
+        }
+      ],
+      "fallback": {
+        "value": "standard",
+        "reason": "Balanced detail level"
+      }
+    },
+    "budget_type": {
+      "layer": "L3",
+      "safety_critical": false,
+      "rules": [
+        {
+          "tags": ["budget_premium"],
+          "value": "premium",
+          "priority": 1
+        },
+        {
+          "tags": ["budget_balanced"],
+          "value": "balanced",
+          "priority": 2
+        },
+        {
+          "tags": ["budget_conscious"],
+          "value": "economy",
+          "priority": 3
+        },
+        {
+          "tags": ["budget_uncertain"],
+          "value": "unknown",
+          "priority": 4
+        }
+      ],
+      "fallback": {
+        "value": "unknown",
+        "reason": "Omit cost section when unknown"
+      }
+    },
+    "treatment_philosophy": {
+      "layer": "L3",
+      "safety_critical": false,
+      "rules": [
+        {
+          "tags_all": ["style_natural", "natural_priority_high"],
+          "value": "minimally_invasive",
+          "priority": 1
+        },
+        {
+          "tags": ["style_natural"],
+          "value": "minimally_invasive",
+          "priority": 2
+        },
+        {
+          "tags": ["style_functional"],
+          "value": "durability_focused",
+          "priority": 3
+        },
+        {
+          "tags_any": ["style_hollywood", "motivation_full_transformation"],
+          "value": "aesthetic_maximalist",
+          "priority": 4
+        }
+      ],
+      "fallback": {
+        "value": "balanced",
+        "reason": "Neutral framing"
+      }
+    },
+    "time_horizon": {
+      "layer": "L3",
+      "safety_critical": false,
+      "rules": [
+        {
+          "tags": ["timeline_urgent"],
+          "value": "immediate",
+          "priority": 1
+        },
+        {
+          "tags": ["timeline_medium"],
+          "value": "short_term",
+          "priority": 2
+        },
+        {
+          "tags": ["timeline_relaxed"],
+          "value": "long_term",
+          "priority": 3
+        },
+        {
+          "tags": ["timeline_exploratory"],
+          "value": "undefined",
+          "priority": 4
+        }
+      ],
+      "fallback": {
+        "value": "undefined",
+        "reason": "Omit timeline language when unknown"
+      }
+    }
+  }
+}

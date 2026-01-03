@@ -1,0 +1,24 @@
+{
+  "id": "S17",
+  "type": "scenario",
+  "name": "Purely aesthetic improvement",
+  "description": "Patient with no missing teeth seeking purely cosmetic enhancement",
+  "layer": "L2",
+  "trigger_drivers": {
+    "mouth_situation": ["no_missing_teeth"],
+    "profile_type": ["aesthetic"]
+  },
+  "target_sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+  "placeholders": [
+    { "key": "{{PATIENT_NAME}}", "source": "intake.patient_name", "fallback": "you" }
+  ],
+  "tone_variants": {
+    "TP-01": { "file": "TP-01.md", "word_count": 580 },
+    "TP-02": { "file": "TP-02.md", "word_count": 600 },
+    "TP-04": { "file": "TP-04.md", "word_count": 640 },
+    "TP-06": { "file": "TP-06.md", "word_count": 570 }
+  },
+  "version": "2.0",
+  "last_updated": "2024-01-04",
+  "source": "Scenarioblok per scenariodocx.docx - SL-S17-VISIBLE-v2.0"
+}

@@ -1,0 +1,18 @@
+{
+  "id": "B_RISKLANG_ELEVATED",
+  "type": "b_block",
+  "name": "Elevated Risk Language",
+  "description": "Risk language block for elevated risk profiles",
+  "layer": "L2",
+  "target_section": 10,
+  "tone_variants": {
+    "TP-01": { "file": "TP-01.md", "word_count": 110 },
+    "TP-02": { "file": "TP-02.md", "word_count": 120 },
+    "TP-03": { "file": "TP-03.md", "word_count": 115 },
+    "TP-04": { "file": "TP-04.md", "word_count": 125 },
+    "TP-05": { "file": "TP-05.md", "word_count": 120 },
+    "TP-06": { "file": "TP-06.md", "word_count": 115 }
+  },
+  "version": "1.0.0",
+  "last_updated": "2025-01-04"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "TM_BUDGET_LIMITED",
+  "type": "module",
+  "name": "Budget Limited",
+  "description": "Cost considerations for economy-focused patients",
+  "layer": "L2",
+  "target_sections": [9],
+  "tone_variants": {
+    "TP-01": { "file": "TP-01.md", "word_count": 70 },
+    "TP-02": { "file": "TP-02.md", "word_count": 95 }
+  },
+  "version": "1.0.0",
+  "last_updated": "2025-01-04"
+}

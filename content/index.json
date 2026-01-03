@@ -1,0 +1,84 @@
+{
+  "name": "Smile-Link NLG Content Repository",
+  "version": "2.1",
+  "last_updated": "2024-01-04",
+  "description": "Complete content repository for the Smile-Link dental report generation system",
+
+  "structure": {
+    "scenarios": {
+      "path": "scenarios/",
+      "count": 18,
+      "items": [
+        {"id": "S00", "name": "Fallback scenario", "tones": 4},
+        {"id": "S01", "name": "No missing teeth, discoloration", "tones": 6},
+        {"id": "S02", "name": "Single tooth missing in visible zone", "tones": 6},
+        {"id": "S03", "name": "Single tooth missing in posterior zone", "tones": 6},
+        {"id": "S04", "name": "2-4 teeth missing adjacent", "tones": 6},
+        {"id": "S05", "name": "2-4 teeth missing scattered", "tones": 6},
+        {"id": "S06", "name": "Missing teeth + aesthetic problem", "tones": 6},
+        {"id": "S07", "name": "5+ teeth missing adjacent (segmental)", "tones": 4},
+        {"id": "S08", "name": "5+ teeth missing scattered", "tones": 4},
+        {"id": "S09", "name": "Complete jaw edentulous", "tones": 4},
+        {"id": "S10", "name": "Almost all teeth unsalvageable", "tones": 4},
+        {"id": "S11", "name": "No missing teeth, misalignment", "tones": 4},
+        {"id": "S12", "name": "Loose teeth or pain", "tones": 4},
+        {"id": "S13", "name": "Young profile, light discoloration", "tones": 4},
+        {"id": "S14", "name": "Older profile, wear and discoloration", "tones": 4},
+        {"id": "S15", "name": "Hollywood smile preference", "tones": 4},
+        {"id": "S16", "name": "Old restorations visible/failing", "tones": 4},
+        {"id": "S17", "name": "Purely aesthetic improvement", "tones": 4}
+      ]
+    },
+
+    "a_blocks": {
+      "path": "a_blocks/",
+      "description": "Warning, disclaimer, and safety blocks (L1 layer)",
+      "count": 7,
+      "items": [
+        {"id": "A_DISCLAIMER", "required": true, "position": "header"},
+        {"id": "A_WARN_PAIN", "trigger": "pain_present", "severity": "high"},
+        {"id": "A_WARN_ANXIETY", "trigger": "dental_anxiety", "severity": "medium"},
+        {"id": "A_WARN_URGENCY", "trigger": "urgency_flag", "severity": "high"},
+        {"id": "A_WARN_SMOKING", "trigger": "smoker_flag", "severity": "medium"},
+        {"id": "A_WARN_MEDICAL", "trigger": "medical_contraindication", "severity": "medium"},
+        {"id": "A_WARN_BUDGET", "trigger": "budget_constraint", "severity": "low"}
+      ]
+    },
+
+    "modules": {
+      "path": "modules/",
+      "description": "Contextual text modules (TM_*)",
+      "count": 19,
+      "categories": {
+        "medical_context": ["TM_PREGNANCY", "TM_DIABETES", "TM_GENERAL_HEALTH"],
+        "lifestyle": ["TM_SMOKING"],
+        "dental_condition": ["TM_BRUXISM", "TM_PERIODONTITIS", "TM_INFLAMMATION", "TM_POOR_HYGIENE", "TM_BONE_LOSS"],
+        "psychological": ["TM_DENTAL_ANXIETY"],
+        "patient_profile": ["TM_AGE_FACTOR", "TM_TREATMENT_HISTORY"],
+        "preference_profile": ["TM_PREMIUM_AESTHETIC", "TM_AESTHETIC_STYLE", "TM_FUNCTIONAL_VS_AESTHETIC", "TM_BUDGET_LOW", "TM_BUDGET_PREMIUM"],
+        "dental_situation": ["TM_TOOTH_STATUS", "TM_ORAL_COMPLEXITY"]
+      }
+    }
+  },
+
+  "tone_profiles": {
+    "TP-01": {"name": "Neutral-Informative", "description": "Factual, balanced presentation"},
+    "TP-02": {"name": "Empathic-Neutral", "description": "Warm, supportive tone"},
+    "TP-03": {"name": "Reflective-Contextual", "description": "Thoughtful, contextualizing"},
+    "TP-04": {"name": "Stability-Frame", "description": "Reassuring for anxious patients"},
+    "TP-05": {"name": "Expectation-Calibration", "description": "Realistic, calibrating expectations"},
+    "TP-06": {"name": "Autonomy-Respecting", "description": "Emphasizes patient choice"}
+  },
+
+  "sources": {
+    "scenarios": "Scenarioblok per scenariodocx.docx",
+    "modules": "Moduleblokken.docx"
+  },
+
+  "statistics": {
+    "total_md_files": 110,
+    "total_json_files": 20,
+    "scenarios_with_full_tones": 6,
+    "scenarios_with_core_tones": 12
+  }
+}

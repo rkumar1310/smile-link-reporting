@@ -1,0 +1,14 @@
+{
+  "id": "TM_BUDGET_FLEXIBLE",
+  "type": "module",
+  "name": "Budget Flexible",
+  "description": "Cost considerations for balanced budget patients",
+  "layer": "L2",
+  "target_sections": [9],
+  "tone_variants": {
+    "TP-01": { "file": "TP-01.md", "word_count": 75 },
+    "TP-02": { "file": "TP-02.md", "word_count": 90 }
+  },
+  "version": "1.0.0",
+  "last_updated": "2025-01-04"
+}

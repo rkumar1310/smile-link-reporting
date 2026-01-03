@@ -1,0 +1,15 @@
+{
+  "id": "A_WARN_ACTIVE_SYMPTOMS",
+  "type": "a_block",
+  "name": "Active Symptoms Warning",
+  "description": "Warning for patients with current pain or discomfort",
+  "layer": "L1",
+  "target_section": 0,
+  "tone_variants": {
+    "TP-01": { "file": "TP-01.md", "word_count": 80 },
+    "TP-02": { "file": "TP-02.md", "word_count": 95 },
+    "TP-04": { "file": "TP-04.md", "word_count": 100 }
+  },
+  "version": "1.0.0",
+  "last_updated": "2025-01-04"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "STATIC_NEXT_STEPS",
+  "type": "static",
+  "name": "Next Steps",
+  "description": "Closing section with next steps guidance",
+  "layer": "L3",
+  "target_section": 11,
+  "tone_variants": {
+    "TP-01": { "file": "TP-01.md", "word_count": 120 },
+    "TP-06": { "file": "TP-06.md", "word_count": 125 }
+  },
+  "version": "1.0.0",
+  "last_updated": "2025-01-04"
+}
