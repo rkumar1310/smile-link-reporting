@@ -15,6 +15,9 @@ export * from "./composition/index.js";
 // QA
 export * from "./qa/index.js";
 
+// Validation
+export * from "./validation/index.js";
+
 // Pipeline
 export * from "./pipeline/index.js";
 

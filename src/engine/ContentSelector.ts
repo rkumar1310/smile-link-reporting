@@ -80,14 +80,16 @@ const B_BLOCK_TRIGGERS: Record<string, { section: number; driver: DriverId; valu
 };
 
 // Text module triggers
-const MODULE_TRIGGERS: Record<string, { sections: number[]; driver?: DriverId; values?: string[]; tag?: string }> = {
+// priority: 0 = prepend (before scenario), 2 = append (after scenario), default is 2
+const MODULE_TRIGGERS: Record<string, { sections: number[]; driver?: DriverId; values?: string[]; tag?: string; priority?: number }> = {
   "TM_RISK_SMOKING": { sections: [3, 10], tag: "smoking_daily" },
   "TM_RISK_DIABETES": { sections: [3, 10], tag: "diabetes_yes" },
   "TM_CTX_FIRST_TIME": { sections: [3], driver: "experience_history", values: ["first_timer"] },
   "TM_CTX_PREVIOUS_TREATMENT": { sections: [3], driver: "experience_history", values: ["experienced"] },
   "TM_BUDGET_LIMITED": { sections: [9], driver: "budget_type", values: ["economy"] },
   "TM_BUDGET_FLEXIBLE": { sections: [9], driver: "budget_type", values: ["balanced"] },
-  "TM_BUDGET_PREMIUM": { sections: [9], driver: "budget_type", values: ["premium"] }
+  "TM_BUDGET_PREMIUM": { sections: [9], driver: "budget_type", values: ["premium"] },
+  "TM_ANXIETY_SEVERE": { sections: [2], driver: "anxiety_level", values: ["severe"], priority: 0 }
 };
 
 export class ContentSelector {
@@ -322,7 +324,7 @@ export class ContentSelector {
             type: "module",
             target_section: section,
             tone,
-            priority: 2, // Modules have lower priority than main blocks
+            priority: trigger.priority ?? 2, // 0 = prepend, 2 = append (default)
             suppressed: isSuppressed,
             suppression_reason: isSuppressed ? "Section suppressed by L1" : undefined
           });

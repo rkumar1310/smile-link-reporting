@@ -367,7 +367,7 @@ export const IntakeDataSchema = z.object({
     answer: z.union([z.string(), z.array(z.string())]),
     skipped: z.boolean().optional()
   })),
-  metadata: z.record(z.string()).optional()
+  metadata: z.record(z.string(), z.string()).optional()
 });
 
 export const ContentManifestSchema = z.object({
@@ -376,7 +376,7 @@ export const ContentManifestSchema = z.object({
   name: z.string(),
   description: z.string(),
   layer: z.enum(DriverLayers),
-  trigger_drivers: z.record(z.array(z.string())).optional(),
+  trigger_drivers: z.record(z.string(), z.array(z.string())).optional(),
   trigger_tags: z.array(z.string()).optional(),
   target_section: z.number().optional(),
   target_sections: z.array(z.number()).optional(),
@@ -385,7 +385,7 @@ export const ContentManifestSchema = z.object({
     sections: z.array(z.number()).optional(),
     blocks: z.array(z.string()).optional()
   }).optional(),
-  suppressed_by: z.record(z.boolean()).optional(),
+  suppressed_by: z.record(z.string(), z.boolean()).optional(),
   combinable_with: z.array(z.string()).optional(),
   conflicts_with: z.array(z.string()).optional(),
   placeholders: z.array(z.object({
@@ -393,7 +393,7 @@ export const ContentManifestSchema = z.object({
     source: z.string(),
     fallback: z.string()
   })).optional(),
-  tone_variants: z.record(z.object({
+  tone_variants: z.record(z.string(), z.object({
     file: z.string(),
     word_count: z.number()
   })),

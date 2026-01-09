@@ -1,0 +1,80 @@
+{
+  "$schema": "./schemas/section-composition-rules.schema.json",
+  "version": "1.0.0",
+  "sections": {
+    "0": {
+      "name": "Warnings",
+      "order": ["a_block"],
+      "scenarioSection": null,
+      "maxCardinality": { "a_block": 5 }
+    },
+    "1": {
+      "name": "Disclaimer",
+      "order": ["static"],
+      "scenarioSection": null
+    },
+    "2": {
+      "name": "Personal Summary",
+      "order": ["module", "scenario"],
+      "scenarioSection": "personal_summary"
+    },
+    "3": {
+      "name": "Context",
+      "order": ["b_block", "module", "scenario"],
+      "scenarioSection": "context"
+    },
+    "4": {
+      "name": "Interpretation",
+      "order": ["b_block"],
+      "scenarioSection": null
+    },
+    "5": {
+      "name": "Treatment Options",
+      "order": ["b_block", "scenario"],
+      "scenarioSection": "options",
+      "scenarioSectionAlt": ["directions"],
+      "maxCardinality": { "b_block": 2 }
+    },
+    "6": {
+      "name": "Comparison",
+      "order": ["b_block", "scenario"],
+      "scenarioSection": "comparison"
+    },
+    "7": {
+      "name": "Trade-offs",
+      "order": ["b_block", "scenario"],
+      "scenarioSection": "tradeoffs",
+      "scenarioSectionAlt": ["expected_results"]
+    },
+    "8": {
+      "name": "Process",
+      "order": ["b_block", "scenario"],
+      "scenarioSection": "process"
+    },
+    "9": {
+      "name": "Costs",
+      "order": ["module", "scenario"],
+      "scenarioSection": "costs"
+    },
+    "10": {
+      "name": "Risk Factors",
+      "order": ["b_block", "module", "scenario"],
+      "scenarioSection": "risk",
+      "scenarioSectionAlt": ["recovery"]
+    },
+    "11": {
+      "name": "Next Steps",
+      "order": ["static"],
+      "scenarioSection": null,
+      "toneOverride": "TP-06"
+    }
+  },
+  "scenarioSectionMappings": {
+    "personal_summary": ["Section 2", "Personal Summary", "Your Personal Summary"],
+    "context": ["Section 3", "Context", "Your Situation", "Situation"],
+    "options": ["Section 5", "Treatment Options", "Options", "Possible Treatment Directions"],
+    "process": ["Section 8", "Process", "Treatment Process", "Duration"],
+    "costs": ["Section 9", "Costs", "Cost Indication", "Cost Considerations"]
+  },
+  "maxModulesPerSection": 4
+}

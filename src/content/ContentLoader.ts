@@ -287,6 +287,121 @@ export class ContentLoader {
     this.manifestCache.clear();
     this.contentCache.clear();
   }
+
+  /**
+   * Parse scenario content into named sections for composition
+   * Maps section headers to standardized keys like "personal_summary", "context", etc.
+   */
+  parseScenarioSections(content: string): Map<string, string> {
+    const namedSections = new Map<string, string>();
+
+    // Strip frontmatter first
+    const cleanContent = this.stripFrontmatter(content);
+
+    // Section name mappings - ORDER MATTERS (more specific patterns first)
+    // Format: [pattern, key] - pattern is checked against lowercase header text
+    const sectionMappings: Array<[string, string]> = [
+      // Option patterns (must be before generic "section X" patterns)
+      ["option 1", "options"],
+      ["option 2", "options"],
+      ["single implant", "options"],
+      ["adhesive bridge", "options"],
+      ["maryland bridge", "options"],
+      ["dental bridge", "options"],
+      ["dental implant", "options"],
+
+      // Personal Summary / Section 2
+      ["personal summary", "personal_summary"],
+      ["your personal summary", "personal_summary"],
+      ["section 2", "personal_summary"],
+
+      // Context / Section 3
+      ["your situation", "context"],
+      ["situation", "context"],
+      ["context", "context"],
+      ["section 3", "context"],
+
+      // Section 4 - Interpretation or Treatment Directions
+      ["possible treatment directions", "directions"],
+      ["treatment directions", "directions"],
+      ["interpretation", "interpretation"],
+      ["section 4", "interpretation"],
+
+      // Comparison / Section 6
+      ["implant vs", "comparison"],
+      ["comparison", "comparison"],
+
+      // Trade-offs / Section 7
+      ["expected results", "expected_results"],
+      ["trade-offs", "tradeoffs"],
+      ["tradeoffs", "tradeoffs"],
+
+      // Process / Duration / Section 8
+      ["duration of the process", "process"],
+      ["duration", "process"],
+      ["treatment process", "process"],
+      ["process", "process"],
+
+      // Costs / Section 9
+      ["cost indication", "costs"],
+      ["cost considerations", "costs"],
+      ["costs", "costs"],
+
+      // Risk / Recovery / Section 10
+      ["risk factors", "risk"],
+      ["recovery time", "recovery"],
+
+      // Next Steps / Section 11
+      ["next steps", "next_steps"],
+      ["section 11", "next_steps"]
+    ];
+
+    // Split content by headers (# or ##)
+    // Match headers like "# Section 2: Personal Summary" or "## Your Situation"
+    const headerPattern = /^(#{1,3})\s*(?:Section\s*\d+[:.])?\s*(.+?)(?:\s*\*\[\d+\s*words\]\*)?$/gm;
+
+    const matches = [...cleanContent.matchAll(headerPattern)];
+
+    for (let i = 0; i < matches.length; i++) {
+      const match = matches[i];
+      const headerText = match[2].trim().toLowerCase();
+
+      // Find the standardized key for this header (order matters - first match wins)
+      let sectionKey: string | null = null;
+      for (const [pattern, key] of sectionMappings) {
+        if (headerText.includes(pattern)) {
+          sectionKey = key;
+          break;
+        }
+      }
+
+      if (!sectionKey) continue;
+
+      // Get content between this header and the next
+      const startIndex = match.index! + match[0].length;
+      const endIndex = matches[i + 1]?.index ?? cleanContent.length;
+
+      let sectionContent = cleanContent
+        .substring(startIndex, endIndex)
+        .trim();
+
+      // Remove word count markers like "*[96 words]*"
+      sectionContent = sectionContent.replace(/\*\[\d+\s*words\]\*/g, "").trim();
+
+      // Only add if there's actual content
+      if (sectionContent.length > 0) {
+        // If we already have this key, append (for subsections like Option 1, Option 2)
+        if (namedSections.has(sectionKey)) {
+          const existing = namedSections.get(sectionKey)!;
+          namedSections.set(sectionKey, existing + "\n\n" + sectionContent);
+        } else {
+          namedSections.set(sectionKey, sectionContent);
+        }
+      }
+    }
+
+    return namedSections;
+  }
 }
 
 export const contentLoader = new ContentLoader();

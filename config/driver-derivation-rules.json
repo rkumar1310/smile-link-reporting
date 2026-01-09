@@ -37,24 +37,34 @@
           "priority": 1
         },
         {
+          "tags_all": ["hygiene_good", "status_no_missing"],
+          "value": "stable",
+          "priority": 2
+        },
+        {
+          "tags": ["hygiene_good"],
+          "value": "moderate",
+          "priority": 3
+        },
+        {
           "tags_any": ["hygiene_basic", "adjacent_partial_restored"],
           "value": "moderate",
-          "priority": 2
+          "priority": 4
         },
         {
           "tags_any": ["hygiene_irregular", "hygiene_poor", "adjacent_heavily_restored"],
           "value": "unstable",
-          "priority": 3
+          "priority": 5
         },
         {
           "tags_any": ["issue_gum_recession", "history_periodontal"],
           "value": "compromised",
-          "priority": 4
+          "priority": 6
         }
       ],
       "fallback": {
-        "value": "unstable",
-        "reason": "Conservative assumption when stability unknown"
+        "value": "moderate",
+        "reason": "Conservative moderate assumption when stability unknown"
       }
     },
     "mouth_situation": {

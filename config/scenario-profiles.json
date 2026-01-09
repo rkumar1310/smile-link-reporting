@@ -9,8 +9,8 @@
   },
   "confidence_thresholds": {
     "HIGH": 8,
-    "MEDIUM": 5,
-    "LOW": 3,
+    "MEDIUM": 4,
+    "LOW": 2,
     "FALLBACK": 0
   },
   "priority_order": ["S12", "S10", "S09", "S07", "S08", "S04", "S05", "S06", "S02", "S03", "S17", "S01", "S11", "S13", "S14", "S15", "S16"],

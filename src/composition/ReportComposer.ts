@@ -1,13 +1,16 @@
 /**
  * Report Composer
  * Assembles the final report from selected content blocks
+ * Implements ordered assembly per section as defined in Composition_Contract_v1.md
  */
 
+import { promises as fs } from "fs";
 import type {
   DriverState,
   ToneProfileId,
   ConfidenceLevel,
   ContentSelection,
+  ContentType,
   ReportSection,
   ComposedReport,
   ScenarioMatchResult,
@@ -16,6 +19,23 @@ import type {
 
 import { PlaceholderResolver, type PlaceholderContext } from "./PlaceholderResolver.js";
 import { toneSelector } from "../engine/ToneSelector.js";
+import { contentLoader } from "../content/ContentLoader.js";
+
+// Section composition rules type
+interface SectionRule {
+  name: string;
+  order: ContentType[];
+  scenarioSection: string | null;
+  scenarioSectionAlt?: string[];  // Alternate scenario section keys to try
+  toneOverride?: ToneProfileId;
+  maxCardinality?: Record<string, number>;
+}
+
+interface CompositionRules {
+  sections: Record<string, SectionRule>;
+  scenarioSectionMappings: Record<string, string[]>;
+  maxModulesPerSection: number;
+}
 
 // Section names
 const SECTION_NAMES: Record<number, string> = {
@@ -50,6 +70,26 @@ const CONFIDENCE_LANGUAGE: Record<ConfidenceLevel, string[]> = {
   ]
 };
 
+// Default composition rules (fallback if config not loaded)
+const DEFAULT_RULES: CompositionRules = {
+  sections: {
+    "0": { name: "Warnings", order: ["a_block"], scenarioSection: null },
+    "1": { name: "Disclaimer", order: ["static"], scenarioSection: null },
+    "2": { name: "Personal Summary", order: ["module", "scenario"], scenarioSection: "personal_summary" },
+    "3": { name: "Context", order: ["b_block", "module", "scenario"], scenarioSection: "context" },
+    "4": { name: "Interpretation", order: ["b_block"], scenarioSection: null },
+    "5": { name: "Treatment Options", order: ["b_block", "scenario"], scenarioSection: "options" },
+    "6": { name: "Comparison", order: ["b_block"], scenarioSection: null },
+    "7": { name: "Trade-offs", order: ["b_block"], scenarioSection: null },
+    "8": { name: "Process", order: ["b_block", "scenario"], scenarioSection: "process" },
+    "9": { name: "Costs", order: ["module", "scenario"], scenarioSection: "costs" },
+    "10": { name: "Risk Factors", order: ["b_block", "module"], scenarioSection: null },
+    "11": { name: "Next Steps", order: ["static"], scenarioSection: null, toneOverride: "TP-06" }
+  },
+  scenarioSectionMappings: {},
+  maxModulesPerSection: 4
+};
+
 export interface ContentStore {
   getContent(contentId: string, tone: ToneProfileId): Promise<string | null>;
 }
@@ -65,6 +105,7 @@ class MockContentStore implements ContentStore {
 export class ReportComposer {
   private placeholderResolver: PlaceholderResolver;
   private contentStore: ContentStore;
+  private rules: CompositionRules | null = null;
 
   constructor(contentStore?: ContentStore) {
     this.placeholderResolver = new PlaceholderResolver();
@@ -72,15 +113,33 @@ export class ReportComposer {
   }
 
   /**
-   * Compose the final report
+   * Load composition rules from config file
+   */
+  private async loadRules(): Promise<CompositionRules> {
+    if (this.rules) return this.rules;
+
+    try {
+      const rulesPath = "config/section-composition-rules.json";
+      const data = await fs.readFile(rulesPath, "utf-8");
+      this.rules = JSON.parse(data) as CompositionRules;
+      return this.rules;
+    } catch {
+      return DEFAULT_RULES;
+    }
+  }
+
+  /**
+   * Compose the final report with ordered assembly
    */
   async compose(
     intake: IntakeData,
     driverState: DriverState,
     scenarioMatch: ScenarioMatchResult,
     contentSelections: ContentSelection[],
-    selectedTone: ToneProfileId
+    selectedTone: ToneProfileId,
+    scenarioContent?: string
   ): Promise<ComposedReport> {
+    const rules = await this.loadRules();
     const sections: ReportSection[] = [];
     const suppressedSections: number[] = [];
     let totalWordCount = 0;
@@ -88,7 +147,22 @@ export class ReportComposer {
     const placeholdersUnresolved: string[] = [];
     let warningsIncluded = false;
 
-    // Group selections by section
+    // Check if A_BLOCK_TREATMENT_OPTIONS is active - if so, suppress treatment sections
+    const hasBlockTreatmentOptions = contentSelections.some(
+      s => s.content_id === "A_BLOCK_TREATMENT_OPTIONS" && !s.suppressed
+    );
+    const l1SuppressedSections = new Set<number>();
+    if (hasBlockTreatmentOptions) {
+      // Sections 5, 6, 7, 8, 9 should be suppressed when treatment options are blocked
+      [5, 6, 7, 8, 9].forEach(s => l1SuppressedSections.add(s));
+    }
+
+    // Parse scenario into named sections
+    const scenarioSections = scenarioContent
+      ? contentLoader.parseScenarioSections(scenarioContent)
+      : new Map<string, string>();
+
+    // Group selections by section and type
     const selectionsBySection = this.groupBySection(contentSelections);
 
     // Build placeholder context
@@ -100,9 +174,16 @@ export class ReportComposer {
 
     // Process each section in order
     for (let sectionNum = 0; sectionNum <= 11; sectionNum++) {
-      const sectionSelections = selectionsBySection.get(sectionNum) || [];
+      // Check if section is suppressed by L1 rules (A_BLOCK_TREATMENT_OPTIONS)
+      if (l1SuppressedSections.has(sectionNum)) {
+        suppressedSections.push(sectionNum);
+        continue;
+      }
 
-      // Check if section is entirely suppressed
+      const sectionSelections = selectionsBySection.get(sectionNum) || [];
+      const sectionRule = rules.sections[sectionNum.toString()];
+
+      // Check if section is entirely suppressed by content selections
       const allSuppressed = sectionSelections.length > 0 &&
         sectionSelections.every(s => s.suppressed);
 
@@ -114,24 +195,22 @@ export class ReportComposer {
       // Get active (non-suppressed) selections
       const activeSelections = sectionSelections.filter(s => !s.suppressed);
 
-      if (activeSelections.length === 0 && sectionNum !== 1 && sectionNum !== 11) {
-        // Skip empty sections (except static ones)
-        continue;
-      }
-
       // Determine tone for this section
-      const sectionTone = toneSelector.getToneForSection(selectedTone, sectionNum);
+      const sectionTone = sectionRule?.toneOverride ??
+        toneSelector.getToneForSection(selectedTone, sectionNum);
 
-      // Compose section content
-      const sectionContent = await this.composeSection(
+      // Compose section content using ordered assembly
+      const sectionContent = await this.composeSectionOrdered(
         sectionNum,
         activeSelections,
         sectionTone,
         placeholderContext,
-        scenarioMatch.confidence
+        scenarioMatch.confidence,
+        scenarioSections,
+        sectionRule || DEFAULT_RULES.sections[sectionNum.toString()]
       );
 
-      if (sectionContent) {
+      if (sectionContent && sectionContent.content.trim().length > 0) {
         // Track warnings
         if (sectionNum === 0 && sectionContent.content.length > 0) {
           warningsIncluded = true;
@@ -149,7 +228,7 @@ export class ReportComposer {
           section_number: sectionNum,
           section_name: SECTION_NAMES[sectionNum] || `Section ${sectionNum}`,
           content: sectionContent.content,
-          sources: activeSelections.map(s => s.content_id),
+          sources: sectionContent.sources,
           word_count: wordCount
         });
       }
@@ -181,7 +260,7 @@ export class ReportComposer {
       grouped.set(selection.target_section, existing);
     }
 
-    // Sort each group by priority
+    // Sort each group by priority (lower = higher priority)
     for (const [section, items] of grouped) {
       items.sort((a, b) => a.priority - b.priority);
       grouped.set(section, items);
@@ -191,20 +270,24 @@ export class ReportComposer {
   }
 
   /**
-   * Compose a single section
+   * Compose a single section using ordered assembly rules
    */
-  private async composeSection(
+  private async composeSectionOrdered(
     sectionNum: number,
     selections: ContentSelection[],
     tone: ToneProfileId,
     context: PlaceholderContext,
-    confidence: ConfidenceLevel
+    confidence: ConfidenceLevel,
+    scenarioSections: Map<string, string>,
+    rule: SectionRule
   ): Promise<{
     content: string;
+    sources: string[];
     placeholdersResolved: number;
     placeholdersUnresolved: string[];
   } | null> {
     const contentParts: string[] = [];
+    const sources: string[] = [];
     let totalResolved = 0;
     const allUnresolved: string[] = [];
 
@@ -216,30 +299,75 @@ export class ReportComposer {
       }
     }
 
-    // Fetch and process each content block
-    for (const selection of selections) {
-      const rawContent = await this.contentStore.getContent(
-        selection.content_id,
-        selection.tone
-      );
-
-      if (rawContent) {
-        // Resolve placeholders
-        const resolved = this.placeholderResolver.resolve(rawContent, context);
-        contentParts.push(resolved.content);
-        totalResolved += resolved.resolved.length;
-        allUnresolved.push(...resolved.unresolved);
-      }
+    // Group selections by type for ordered processing
+    const selectionsByType = new Map<ContentType, ContentSelection[]>();
+    for (const sel of selections) {
+      const existing = selectionsByType.get(sel.type) || [];
+      existing.push(sel);
+      selectionsByType.set(sel.type, existing);
     }
 
-    // Handle static sections
-    if (selections.length === 0) {
-      const staticContent = await this.getStaticContent(sectionNum, tone);
-      if (staticContent) {
-        const resolved = this.placeholderResolver.resolve(staticContent, context);
-        contentParts.push(resolved.content);
-        totalResolved += resolved.resolved.length;
-        allUnresolved.push(...resolved.unresolved);
+    // Check if scenario has content for this section (used to skip B_* fallbacks)
+    const keysToTry = [rule.scenarioSection, ...(rule.scenarioSectionAlt || [])].filter(Boolean) as string[];
+    const scenarioHasContent = keysToTry.some(key => scenarioSections.has(key));
+
+    // Process in order defined by rule
+    for (const sourceType of rule.order) {
+      if (sourceType === "static") {
+        // Handle static content
+        const staticContent = await this.getStaticContent(sectionNum, tone);
+        if (staticContent) {
+          const resolved = this.placeholderResolver.resolve(staticContent, context);
+          contentParts.push(resolved.content);
+          totalResolved += resolved.resolved.length;
+          allUnresolved.push(...resolved.unresolved);
+          sources.push(`STATIC_${sectionNum}`);
+        }
+      } else if (sourceType === "scenario") {
+        // Handle scenario section content
+        // Try primary key first, then alternates
+        const keysToTry = [rule.scenarioSection, ...(rule.scenarioSectionAlt || [])].filter(Boolean) as string[];
+        let foundContent = false;
+
+        for (const scenarioKey of keysToTry) {
+          if (scenarioSections.has(scenarioKey)) {
+            const scenarioContent = scenarioSections.get(scenarioKey)!;
+            const resolved = this.placeholderResolver.resolve(scenarioContent, context);
+            contentParts.push(resolved.content);
+            totalResolved += resolved.resolved.length;
+            allUnresolved.push(...resolved.unresolved);
+            sources.push(`SCENARIO:${scenarioKey}`);
+            foundContent = true;
+            break;  // Only use first matching key
+          }
+        }
+      } else {
+        // Handle block types (a_block, b_block, module)
+        // Skip b_block when scenario has content for this section (b_block is fallback)
+        if (sourceType === "b_block" && scenarioHasContent) {
+          continue;  // Scenario takes precedence over B_* blocks
+        }
+
+        const typeSelections = selectionsByType.get(sourceType) || [];
+
+        // Apply cardinality limits
+        const maxItems = rule.maxCardinality?.[sourceType] ?? Infinity;
+        const limitedSelections = typeSelections.slice(0, maxItems);
+
+        for (const selection of limitedSelections) {
+          const rawContent = await this.contentStore.getContent(
+            selection.content_id,
+            selection.tone
+          );
+
+          if (rawContent) {
+            const resolved = this.placeholderResolver.resolve(rawContent, context);
+            contentParts.push(resolved.content);
+            totalResolved += resolved.resolved.length;
+            allUnresolved.push(...resolved.unresolved);
+            sources.push(selection.content_id);
+          }
+        }
       }
     }
 
@@ -249,6 +377,7 @@ export class ReportComposer {
 
     return {
       content: contentParts.join("\n\n"),
+      sources,
       placeholdersResolved: totalResolved,
       placeholdersUnresolved: allUnresolved
     };
@@ -277,7 +406,9 @@ export class ReportComposer {
   private getDisclaimerContent(): string {
     return `This report is generated based on your responses to our questionnaire and is intended for informational purposes only. It does not constitute medical advice, diagnosis, or treatment recommendations.
 
-Please consult with a qualified dental professional before making any decisions about your dental care. Your dentist will conduct a thorough examination and provide personalized recommendations based on your specific situation.`;
+Please consult with a qualified dental professional before making any decisions about your dental care. Your dentist will conduct a thorough examination and provide personalized recommendations based on your specific situation.
+
+The information presented here is general in nature and may not apply to your individual circumstances. Treatment outcomes vary between patients and depend on many factors that can only be assessed through clinical examination.`;
   }
 
   /**
@@ -291,7 +422,17 @@ Please consult with a qualified dental professional before making any decisions 
 - Schedule an appointment when you feel ready
 - Request additional information on specific topics
 
-Remember, this is your journey. Take the time you need to make decisions that feel right for you.`;
+Remember, this is your journey. Take the time you need to make decisions that feel right for you.
+
+## How to Prepare for Your Consultation
+
+Consider noting down:
+- Your main concerns and priorities
+- Questions about specific treatment options
+- Your timeline preferences
+- Budget considerations you'd like to discuss
+
+The choice of how to proceed is yours. Your dentist is there to provide information and guidance, but you remain in control of your dental care decisions.`;
   }
 
   /**
@@ -332,6 +473,13 @@ Remember, this is your journey. Take the time you need to make decisions that fe
    */
   setContentStore(store: ContentStore): void {
     this.contentStore = store;
+  }
+
+  /**
+   * Clear cached rules (for testing)
+   */
+  clearRulesCache(): void {
+    this.rules = null;
   }
 }
 

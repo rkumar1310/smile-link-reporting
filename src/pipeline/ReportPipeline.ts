@@ -10,6 +10,7 @@ import type {
   QAOutcome
 } from "../types/index.js";
 
+import { intakeValidator } from "../validation/index.js";
 import { tagExtractor } from "../engine/TagExtractor.js";
 import { driverDeriver } from "../engine/DriverDeriver.js";
 import { scenarioScorer } from "../engine/ScenarioScorer.js";
@@ -19,6 +20,7 @@ import { reportComposer, type ContentStore } from "../composition/ReportComposer
 import { createTraceCollector, type TraceCollector } from "../qa/TraceCollector.js";
 import { qaGate } from "../qa/QAGate.js";
 import { ContentStoreAdapter } from "../content/ContentStoreAdapter.js";
+import { contentLoader } from "../content/ContentLoader.js";
 
 export interface PipelineOptions {
   contentStore?: ContentStore;
@@ -48,6 +50,82 @@ export class ReportPipeline {
       : null;
 
     try {
+      // Phase 0: Input Validation
+      const validationTimer = trace?.startStage("input_validation");
+      const validationResult = intakeValidator.safeValidate(intake);
+      validationTimer?.complete(
+        "validate_input",
+        { answers: intake.answers.length },
+        { valid: validationResult.valid, errors: validationResult.errors.length }
+      );
+
+      if (!validationResult.valid) {
+        const errorMessages = validationResult.errors
+          .map(e => `${e.questionId ? `${e.questionId}: ` : ""}${e.message}`)
+          .join("; ");
+
+        const failedAudit: AuditRecord = {
+          session_id: intake.session_id,
+          created_at: new Date().toISOString(),
+          intake,
+          driver_state: {
+            session_id: intake.session_id,
+            drivers: {} as AuditRecord["driver_state"]["drivers"],
+            conflicts: [],
+            fallbacks_applied: []
+          },
+          scenario_match: {
+            session_id: intake.session_id,
+            matched_scenario: "VALIDATION_ERROR",
+            confidence: "FALLBACK",
+            score: 0,
+            all_scores: [],
+            fallback_used: true,
+            fallback_reason: "Input validation failed"
+          },
+          content_selections: [],
+          tone_selection: {
+            selected_tone: "TP-01",
+            reason: "Validation error fallback",
+            evaluated_triggers: []
+          },
+          composed_report: {
+            session_id: intake.session_id,
+            scenario_id: "VALIDATION_ERROR",
+            tone: "TP-01",
+            confidence: "FALLBACK",
+            sections: [],
+            total_word_count: 0,
+            warnings_included: false,
+            suppressed_sections: [],
+            placeholders_resolved: 0,
+            placeholders_unresolved: []
+          },
+          validation_result: {
+            valid: false,
+            errors: validationResult.errors.map(e => e.message),
+            warnings: validationResult.warnings.map(w => w.message),
+            semantic_violations: []
+          },
+          decision_trace: trace?.getTrace("BLOCK") ?? {
+            session_id: intake.session_id,
+            started_at: new Date().toISOString(),
+            completed_at: new Date().toISOString(),
+            events: [],
+            final_outcome: "BLOCK"
+          },
+          final_outcome: "BLOCK",
+          report_delivered: false
+        };
+
+        return {
+          success: false,
+          outcome: "BLOCK",
+          audit: failedAudit,
+          error: `Input validation failed: ${errorMessages}`
+        };
+      }
+
       // Phase 1: Tag Extraction
       const tagTimer = trace?.startStage("tag_extraction");
       const tagResult = tagExtractor.extract(intake);
@@ -83,14 +161,33 @@ export class ReportPipeline {
         { count: contentSelections.length }
       );
 
-      // Phase 6: Report Composition
+      // Phase 6: Load Scenario Content for ordered assembly
+      const scenarioLoadTimer = trace?.startStage("scenario_load");
+      let scenarioContent: string | undefined;
+      try {
+        const scenarioData = await contentLoader.loadContent(
+          scenarioMatch.matched_scenario,
+          toneResult.selected_tone
+        );
+        scenarioContent = scenarioData?.raw_content;
+      } catch {
+        // Scenario content optional - continue without it
+      }
+      scenarioLoadTimer?.complete(
+        "load_scenario",
+        { scenario_id: scenarioMatch.matched_scenario },
+        { loaded: !!scenarioContent }
+      );
+
+      // Phase 7: Report Composition
       const composeTimer = trace?.startStage("composition");
       const report = await reportComposer.compose(
         intake,
         driverState,
         scenarioMatch,
         contentSelections,
-        toneResult.selected_tone
+        toneResult.selected_tone,
+        scenarioContent
       );
       composeTimer?.complete(
         "compose_report",
@@ -98,7 +195,7 @@ export class ReportPipeline {
         { sections: report.sections.length, words: report.total_word_count }
       );
 
-      // Phase 7: QA Gate
+      // Phase 8: QA Gate
       const qaTimer = trace?.startStage("qa_gate");
       const qaResult = qaGate.check(report, contentSelections, toneResult.selected_tone);
       qaTimer?.complete("qa_check", { report_id: intake.session_id }, qaResult);

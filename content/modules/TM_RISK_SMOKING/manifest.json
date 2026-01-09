@@ -1,0 +1,13 @@
+{
+  "id": "TM_RISK_SMOKING",
+  "type": "module",
+  "name": "Smoking Risk Factor Module",
+  "description": "Content addressing smoking-related considerations for dental treatment",
+  "layer": "L1",
+  "tone_variants": {
+    "TP-01": { "file": "TP-01.md", "word_count": 120 },
+    "TP-06": { "file": "TP-06.md", "word_count": 100 }
+  },
+  "version": "1.0.0",
+  "last_updated": "2026-01-08"
+}
