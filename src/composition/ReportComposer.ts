@@ -14,8 +14,10 @@ import type {
   ReportSection,
   ComposedReport,
   ScenarioMatchResult,
-  IntakeData
+  IntakeData,
+  SupportedLanguage
 } from "../types/index.js";
+import { DEFAULT_LANGUAGE } from "../types/index.js";
 
 import { PlaceholderResolver, type PlaceholderContext } from "./PlaceholderResolver.js";
 import { toneSelector } from "../engine/ToneSelector.js";
@@ -37,8 +39,16 @@ interface CompositionRules {
   maxModulesPerSection: number;
 }
 
-// Section names
-const SECTION_NAMES: Record<number, string> = {
+// Language configuration type
+interface LanguageConfig {
+  supported_languages: string[];
+  default_language: string;
+  section_names: Record<string, Record<string, string>>;
+  confidence_language: Record<string, Record<string, string[]>>;
+}
+
+// Default section names (English fallback)
+const DEFAULT_SECTION_NAMES: Record<number, string> = {
   0: "Important Notices",
   1: "Disclaimer",
   2: "Your Personal Summary",
@@ -91,14 +101,14 @@ const DEFAULT_RULES: CompositionRules = {
 };
 
 export interface ContentStore {
-  getContent(contentId: string, tone: ToneProfileId): Promise<string | null>;
+  getContent(contentId: string, tone: ToneProfileId, language?: SupportedLanguage): Promise<string | null>;
 }
 
 // Mock content store for development
 class MockContentStore implements ContentStore {
-  async getContent(contentId: string, tone: ToneProfileId): Promise<string | null> {
+  async getContent(contentId: string, tone: ToneProfileId, language?: SupportedLanguage): Promise<string | null> {
     // Return placeholder content for now
-    return `[Content: ${contentId} in tone ${tone}]`;
+    return `[Content: ${contentId} in tone ${tone} lang ${language ?? "en"}]`;
   }
 }
 
@@ -106,6 +116,7 @@ export class ReportComposer {
   private placeholderResolver: PlaceholderResolver;
   private contentStore: ContentStore;
   private rules: CompositionRules | null = null;
+  private languageConfig: LanguageConfig | null = null;
 
   constructor(contentStore?: ContentStore) {
     this.placeholderResolver = new PlaceholderResolver();
@@ -129,6 +140,49 @@ export class ReportComposer {
   }
 
   /**
+   * Load language configuration
+   */
+  private async loadLanguageConfig(): Promise<LanguageConfig | null> {
+    if (this.languageConfig) return this.languageConfig;
+
+    try {
+      const langPath = "config/languages.json";
+      const data = await fs.readFile(langPath, "utf-8");
+      this.languageConfig = JSON.parse(data) as LanguageConfig;
+      return this.languageConfig;
+    } catch {
+      return null;
+    }
+  }
+
+  /**
+   * Get section name for a given section number and language
+   */
+  private getSectionName(sectionNum: number, language: SupportedLanguage): string {
+    const langConfig = this.languageConfig;
+    if (langConfig?.section_names?.[language]?.[sectionNum.toString()]) {
+      return langConfig.section_names[language][sectionNum.toString()];
+    }
+    // Fall back to English from config, then default
+    if (langConfig?.section_names?.["en"]?.[sectionNum.toString()]) {
+      return langConfig.section_names["en"][sectionNum.toString()];
+    }
+    return DEFAULT_SECTION_NAMES[sectionNum] || `Section ${sectionNum}`;
+  }
+
+  /**
+   * Get confidence language phrases for a given confidence level and language
+   */
+  private getConfidenceLanguage(confidence: ConfidenceLevel, language: SupportedLanguage): string[] {
+    const langConfig = this.languageConfig;
+    if (langConfig?.confidence_language?.[language]?.[confidence]) {
+      return langConfig.confidence_language[language][confidence];
+    }
+    // Fall back to default English
+    return CONFIDENCE_LANGUAGE[confidence] || [];
+  }
+
+  /**
    * Compose the final report with ordered assembly
    */
   async compose(
@@ -137,9 +191,11 @@ export class ReportComposer {
     scenarioMatch: ScenarioMatchResult,
     contentSelections: ContentSelection[],
     selectedTone: ToneProfileId,
+    language: SupportedLanguage = DEFAULT_LANGUAGE,
     scenarioContent?: string
   ): Promise<ComposedReport> {
     const rules = await this.loadRules();
+    await this.loadLanguageConfig();
     const sections: ReportSection[] = [];
     const suppressedSections: number[] = [];
     let totalWordCount = 0;
@@ -207,7 +263,8 @@ export class ReportComposer {
         placeholderContext,
         scenarioMatch.confidence,
         scenarioSections,
-        sectionRule || DEFAULT_RULES.sections[sectionNum.toString()]
+        sectionRule || DEFAULT_RULES.sections[sectionNum.toString()],
+        language
       );
 
       if (sectionContent && sectionContent.content.trim().length > 0) {
@@ -226,7 +283,7 @@ export class ReportComposer {
 
         sections.push({
           section_number: sectionNum,
-          section_name: SECTION_NAMES[sectionNum] || `Section ${sectionNum}`,
+          section_name: this.getSectionName(sectionNum, language),
           content: sectionContent.content,
           sources: sectionContent.sources,
           word_count: wordCount
@@ -238,6 +295,7 @@ export class ReportComposer {
       session_id: intake.session_id,
       scenario_id: scenarioMatch.matched_scenario,
       tone: selectedTone,
+      language,
       confidence: scenarioMatch.confidence,
       sections,
       total_word_count: totalWordCount,
@@ -279,7 +337,8 @@ export class ReportComposer {
     context: PlaceholderContext,
     confidence: ConfidenceLevel,
     scenarioSections: Map<string, string>,
-    rule: SectionRule
+    rule: SectionRule,
+    language: SupportedLanguage = DEFAULT_LANGUAGE
   ): Promise<{
     content: string;
     sources: string[];
@@ -293,7 +352,7 @@ export class ReportComposer {
 
     // Add uncertainty language if needed (for certain sections)
     if ([2, 3, 4].includes(sectionNum) && confidence !== "HIGH") {
-      const uncertaintyPhrases = CONFIDENCE_LANGUAGE[confidence];
+      const uncertaintyPhrases = this.getConfidenceLanguage(confidence, language);
       if (uncertaintyPhrases.length > 0) {
         contentParts.push(uncertaintyPhrases[0]);
       }
@@ -315,7 +374,7 @@ export class ReportComposer {
     for (const sourceType of rule.order) {
       if (sourceType === "static") {
         // Handle static content
-        const staticContent = await this.getStaticContent(sectionNum, tone);
+        const staticContent = await this.getStaticContent(sectionNum, tone, language);
         if (staticContent) {
           const resolved = this.placeholderResolver.resolve(staticContent, context);
           contentParts.push(resolved.content);
@@ -357,7 +416,8 @@ export class ReportComposer {
         for (const selection of limitedSelections) {
           const rawContent = await this.contentStore.getContent(
             selection.content_id,
-            selection.tone
+            selection.tone,
+            language
           );
 
           if (rawContent) {
@@ -386,15 +446,15 @@ export class ReportComposer {
   /**
    * Get static content for a section
    */
-  private async getStaticContent(sectionNum: number, tone: ToneProfileId): Promise<string | null> {
+  private async getStaticContent(sectionNum: number, tone: ToneProfileId, language: SupportedLanguage = DEFAULT_LANGUAGE): Promise<string | null> {
     if (sectionNum === 1) {
       // Try to load from content store first
-      const content = await this.contentStore.getContent("STATIC_DISCLAIMER", tone);
+      const content = await this.contentStore.getContent("STATIC_DISCLAIMER", tone, language);
       return content || this.getDisclaimerContent();
     }
     if (sectionNum === 11) {
       // Try to load from content store first
-      const content = await this.contentStore.getContent("STATIC_NEXT_STEPS", tone);
+      const content = await this.contentStore.getContent("STATIC_NEXT_STEPS", tone, language);
       return content || this.getNextStepsContent(tone);
     }
     return null;

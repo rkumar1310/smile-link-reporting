@@ -37,6 +37,10 @@ export type ConfidenceLevel = typeof ConfidenceLevels[number];
 export const QAOutcomes = ["PASS", "FLAG", "BLOCK"] as const;
 export type QAOutcome = typeof QAOutcomes[number];
 
+export const SupportedLanguages = ["en", "nl"] as const;
+export type SupportedLanguage = typeof SupportedLanguages[number];
+export const DEFAULT_LANGUAGE: SupportedLanguage = "en";
+
 // =============================================================================
 // LAYER 1: SAFETY DRIVERS (7)
 // =============================================================================
@@ -95,6 +99,7 @@ export interface QuestionAnswer {
 export interface IntakeData {
   session_id: string;
   timestamp: string;
+  language?: SupportedLanguage;
   answers: QuestionAnswer[];
   metadata?: {
     patient_name?: string;
@@ -281,6 +286,7 @@ export interface ComposedReport {
   session_id: string;
   scenario_id: string;
   tone: ToneProfileId;
+  language: SupportedLanguage;
   confidence: ConfidenceLevel;
   sections: ReportSection[];
   total_word_count: number;
@@ -362,6 +368,7 @@ export interface PipelineResult {
 export const IntakeDataSchema = z.object({
   session_id: z.string().min(1),
   timestamp: z.string().datetime(),
+  language: z.enum(SupportedLanguages).optional(),
   answers: z.array(z.object({
     question_id: z.enum(QuestionIds),
     answer: z.union([z.string(), z.array(z.string())]),

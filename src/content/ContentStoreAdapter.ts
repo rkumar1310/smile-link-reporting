@@ -3,7 +3,8 @@
  * Bridges ContentLoader to ReportComposer's ContentStore interface
  */
 
-import type { ToneProfileId } from "../types/index.js";
+import type { ToneProfileId, SupportedLanguage } from "../types/index.js";
+import { DEFAULT_LANGUAGE } from "../types/index.js";
 import type { ContentStore } from "../composition/ReportComposer.js";
 import { ContentLoader, type ContentLoaderOptions } from "./ContentLoader.js";
 
@@ -19,11 +20,11 @@ export class ContentStoreAdapter implements ContentStore {
   }
 
   /**
-   * Get content by ID and tone
+   * Get content by ID, tone, and language
    * Implements ContentStore interface
    */
-  async getContent(contentId: string, tone: ToneProfileId): Promise<string | null> {
-    const loaded = await this.loader.loadContent(contentId, tone);
+  async getContent(contentId: string, tone: ToneProfileId, language: SupportedLanguage = DEFAULT_LANGUAGE): Promise<string | null> {
+    const loaded = await this.loader.loadContent(contentId, tone, language);
 
     if (!loaded) {
       return null;

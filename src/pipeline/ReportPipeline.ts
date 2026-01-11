@@ -7,8 +7,10 @@ import type {
   IntakeData,
   PipelineResult,
   AuditRecord,
-  QAOutcome
+  QAOutcome,
+  SupportedLanguage
 } from "../types/index.js";
+import { DEFAULT_LANGUAGE } from "../types/index.js";
 
 import { intakeValidator } from "../validation/index.js";
 import { tagExtractor } from "../engine/TagExtractor.js";
@@ -93,6 +95,7 @@ export class ReportPipeline {
             session_id: intake.session_id,
             scenario_id: "VALIDATION_ERROR",
             tone: "TP-01",
+            language: intake.language ?? DEFAULT_LANGUAGE,
             confidence: "FALLBACK",
             sections: [],
             total_word_count: 0,
@@ -161,13 +164,17 @@ export class ReportPipeline {
         { count: contentSelections.length }
       );
 
+      // Extract language from intake (defaults to English)
+      const language: SupportedLanguage = intake.language ?? DEFAULT_LANGUAGE;
+
       // Phase 6: Load Scenario Content for ordered assembly
       const scenarioLoadTimer = trace?.startStage("scenario_load");
       let scenarioContent: string | undefined;
       try {
         const scenarioData = await contentLoader.loadContent(
           scenarioMatch.matched_scenario,
-          toneResult.selected_tone
+          toneResult.selected_tone,
+          language
         );
         scenarioContent = scenarioData?.raw_content;
       } catch {
@@ -175,7 +182,7 @@ export class ReportPipeline {
       }
       scenarioLoadTimer?.complete(
         "load_scenario",
-        { scenario_id: scenarioMatch.matched_scenario },
+        { scenario_id: scenarioMatch.matched_scenario, language },
         { loaded: !!scenarioContent }
       );
 
@@ -187,6 +194,7 @@ export class ReportPipeline {
         scenarioMatch,
         contentSelections,
         toneResult.selected_tone,
+        language,
         scenarioContent
       );
       composeTimer?.complete(
@@ -264,6 +272,7 @@ export class ReportPipeline {
           session_id: intake.session_id,
           scenario_id: "ERROR",
           tone: "TP-01",
+          language: intake.language ?? DEFAULT_LANGUAGE,
           confidence: "FALLBACK",
           sections: [],
           total_word_count: 0,

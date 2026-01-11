@@ -10,8 +10,10 @@ import type {
   ToneProfileId,
   ContentManifest,
   LoadedContent,
-  PlaceholderDef
+  PlaceholderDef,
+  SupportedLanguage
 } from "../types/index.js";
+import { DEFAULT_LANGUAGE } from "../types/index.js";
 
 // Content paths relative to project root
 const CONTENT_BASE_PATH = "content";
@@ -51,25 +53,38 @@ export class ContentLoader {
   }
 
   /**
-   * Load content by ID and tone
+   * Load content by ID, tone, and language
+   * Falls back: requested language → default language (en)
+   * Falls back: requested tone → tone fallback chain
    */
   async loadContent(
     contentId: string,
-    tone: ToneProfileId
+    tone: ToneProfileId,
+    language: SupportedLanguage = DEFAULT_LANGUAGE
   ): Promise<LoadedContent | null> {
     const manifest = await this.loadManifest(contentId);
     if (!manifest) return null;
 
     // Try requested tone, then fallbacks
     const tonesToTry = [tone, ...TONE_FALLBACKS[tone]];
+    // Try requested language, then fallback to default
+    const languagesToTry = language === DEFAULT_LANGUAGE
+      ? [language]
+      : [language, DEFAULT_LANGUAGE];
+
     let content: string | null = null;
     let actualTone: ToneProfileId = tone;
+    let actualLanguage: SupportedLanguage = language;
 
-    for (const t of tonesToTry) {
-      content = await this.loadToneContent(contentId, manifest.type, t);
-      if (content) {
-        actualTone = t;
-        break;
+    // Try each language, then each tone within that language
+    outer: for (const lang of languagesToTry) {
+      for (const t of tonesToTry) {
+        content = await this.loadToneContent(contentId, manifest.type, t, lang);
+        if (content) {
+          actualTone = t;
+          actualLanguage = lang;
+          break outer;
+        }
       }
     }
 
@@ -125,24 +140,29 @@ export class ContentLoader {
   }
 
   /**
-   * Load tone-specific content file
+   * Load tone-specific content file with language support
+   * Path format: content/{type}/{contentId}/{language}/{tone}.md
+   * Falls back to: content/{type}/{contentId}/{tone}.md (legacy format for migration)
    */
   private async loadToneContent(
     contentId: string,
     type: ContentType,
-    tone: ToneProfileId
+    tone: ToneProfileId,
+    language: SupportedLanguage = DEFAULT_LANGUAGE
   ): Promise<string | null> {
-    const cacheKey = `${contentId}:${tone}`;
+    const cacheKey = `${contentId}:${language}:${tone}`;
 
     if (this.cacheEnabled && this.contentCache.has(cacheKey)) {
       return this.contentCache.get(cacheKey)!;
     }
 
     const typePath = TYPE_PATHS[type];
-    const contentPath = path.join(this.basePath, typePath, contentId, `${tone}.md`);
+
+    // Try new language-aware path first: content/{type}/{id}/{lang}/{tone}.md
+    const langContentPath = path.join(this.basePath, typePath, contentId, language, `${tone}.md`);
 
     try {
-      const content = await fs.readFile(contentPath, "utf-8");
+      const content = await fs.readFile(langContentPath, "utf-8");
 
       if (this.cacheEnabled) {
         this.contentCache.set(cacheKey, content);
@@ -150,7 +170,20 @@ export class ContentLoader {
 
       return content;
     } catch {
-      return null;
+      // Fall back to legacy path without language: content/{type}/{id}/{tone}.md
+      const legacyContentPath = path.join(this.basePath, typePath, contentId, `${tone}.md`);
+
+      try {
+        const content = await fs.readFile(legacyContentPath, "utf-8");
+
+        if (this.cacheEnabled) {
+          this.contentCache.set(cacheKey, content);
+        }
+
+        return content;
+      } catch {
+        return null;
+      }
     }
   }
 
@@ -160,8 +193,8 @@ export class ContentLoader {
   private parseSections(content: string): Map<number, string> {
     const sections = new Map<number, string>();
 
-    // Match section headers like "# Section 2: Personal Summary" or "## 2. Personal Summary"
-    const sectionPattern = /^#+\s*(?:Section\s*)?(\d+)[:.]\s*(.+)$/gm;
+    // Match section headers like "# Section 2: Personal Summary", "# Sectie 2: ..." or "## 2. Personal Summary"
+    const sectionPattern = /^#+\s*(?:Section|Sectie)?\s*(\d+)[:.]\s*(.+)$/gm;
     let lastMatch: { index: number; section: number } | null = null;
 
     const matches = [...content.matchAll(sectionPattern)];
@@ -239,10 +272,11 @@ export class ContentLoader {
    * Load multiple content items
    */
   async loadBatch(
-    items: Array<{ contentId: string; tone: ToneProfileId }>
+    items: Array<{ contentId: string; tone: ToneProfileId }>,
+    language: SupportedLanguage = DEFAULT_LANGUAGE
   ): Promise<LoadedContent[]> {
     const results = await Promise.all(
-      items.map(item => this.loadContent(item.contentId, item.tone))
+      items.map(item => this.loadContent(item.contentId, item.tone, language))
     );
     return results.filter((r): r is LoadedContent => r !== null);
   }
@@ -300,8 +334,10 @@ export class ContentLoader {
 
     // Section name mappings - ORDER MATTERS (more specific patterns first)
     // Format: [pattern, key] - pattern is checked against lowercase header text
+    // Includes both English and Dutch patterns
     const sectionMappings: Array<[string, string]> = [
       // Option patterns (must be before generic "section X" patterns)
+      // English
       ["option 1", "options"],
       ["option 2", "options"],
       ["single implant", "options"],
@@ -309,56 +345,99 @@ export class ContentLoader {
       ["maryland bridge", "options"],
       ["dental bridge", "options"],
       ["dental implant", "options"],
+      // Dutch
+      ["optie 1", "options"],
+      ["optie 2", "options"],
 
       // Personal Summary / Section 2
+      // English
       ["personal summary", "personal_summary"],
       ["your personal summary", "personal_summary"],
       ["section 2", "personal_summary"],
+      // Dutch
+      ["persoonlijke samenvatting", "personal_summary"],
+      ["sectie 2", "personal_summary"],
 
       // Context / Section 3
+      // English
       ["your situation", "context"],
       ["situation", "context"],
       ["context", "context"],
       ["section 3", "context"],
+      // Dutch
+      ["uw situatie", "context"],
+      ["situatie", "context"],
+      ["sectie 3", "context"],
 
       // Section 4 - Interpretation or Treatment Directions
+      // English
       ["possible treatment directions", "directions"],
       ["treatment directions", "directions"],
       ["interpretation", "interpretation"],
       ["section 4", "interpretation"],
+      // Dutch
+      ["mogelijke behandelrichtingen", "directions"],
+      ["behandelrichtingen", "directions"],
+      ["sectie 4", "interpretation"],
 
       // Comparison / Section 6
+      // English
       ["implant vs", "comparison"],
       ["comparison", "comparison"],
+      // Dutch
+      ["implantaat vs", "comparison"],
+      ["vergelijking", "comparison"],
 
       // Trade-offs / Section 7
+      // English
       ["expected results", "expected_results"],
       ["trade-offs", "tradeoffs"],
       ["tradeoffs", "tradeoffs"],
+      // Dutch
+      ["verwachte resultaten", "expected_results"],
+      ["afwegingen", "tradeoffs"],
 
       // Process / Duration / Section 8
+      // English
       ["duration of the process", "process"],
       ["duration", "process"],
       ["treatment process", "process"],
       ["process", "process"],
+      // Dutch
+      ["duur van het traject", "process"],
+      ["duur", "process"],
+      ["behandelingsproces", "process"],
 
       // Costs / Section 9
+      // English
       ["cost indication", "costs"],
       ["cost considerations", "costs"],
       ["costs", "costs"],
+      // Dutch
+      ["kostenindicatie", "costs"],
+      ["kostenoverwegingen", "costs"],
+      ["kosten", "costs"],
 
       // Risk / Recovery / Section 10
+      // English
       ["risk factors", "risk"],
       ["recovery time", "recovery"],
+      // Dutch
+      ["risicofactoren", "risk"],
+      ["hersteltijd", "recovery"],
 
       // Next Steps / Section 11
+      // English
       ["next steps", "next_steps"],
-      ["section 11", "next_steps"]
+      ["section 11", "next_steps"],
+      // Dutch
+      ["volgende stappen", "next_steps"],
+      ["sectie 11", "next_steps"]
     ];
 
     // Split content by headers (# or ##)
-    // Match headers like "# Section 2: Personal Summary" or "## Your Situation"
-    const headerPattern = /^(#{1,3})\s*(?:Section\s*\d+[:.])?\s*(.+?)(?:\s*\*\[\d+\s*words\]\*)?$/gm;
+    // Match headers like "# Section 2: Personal Summary", "# Sectie 2: ..." or "## Your Situation"
+    const headerPattern = /^(#{1,3})\s*(?:(?:Section|Sectie)\s*\d+[:.])?\s*(.+?)(?:\s*\*\[\d+\s*words\]\*)?$/gm;
 
     const matches = [...cleanContent.matchAll(headerPattern)];
 

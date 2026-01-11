@@ -22,12 +22,19 @@ async function generateReport(inputFile: string) {
   const result = await pipeline.run(intake);
 
   if (!result.success) {
-    console.log(`  ERROR: ${result.error}`);
+    console.error(`\n❌ FAILED: ${baseName}`);
+    console.error(`   Error: ${result.error}`);
     if (result.audit?.validation_result) {
-      console.log(`  Validation errors: ${result.audit.validation_result.errors.join(", ")}`);
-      console.log(`  Semantic violations: ${result.audit.validation_result.semantic_violations.join(", ")}`);
+      console.error(`   Validation errors: ${result.audit.validation_result.errors.join(", ")}`);
+      console.error(`   Semantic violations: ${result.audit.validation_result.semantic_violations.join(", ")}`);
     }
-    return;
+    if (result.audit?.scenario_match) {
+      console.error(`   Scenario: ${result.audit.scenario_match.matched_scenario}`);
+    }
+    if (result.audit?.tone_selection) {
+      console.error(`   Tone: ${result.audit.tone_selection.selected_tone}`);
+    }
+    throw new Error(`Report generation failed for ${baseName}: ${result.error}`);
   }
 
   // Generate markdown report
