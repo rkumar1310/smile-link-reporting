@@ -300,6 +300,36 @@ export interface ComposedReport {
 // QA TYPES
 // =============================================================================
 
+// LLM Evaluation Types
+export interface LLMDimensionScore {
+  score: number;           // 1-10
+  confidence: number;      // 0-1 (LLM's self-reported confidence)
+  feedback: string;        // Detailed textual feedback
+  issues: string[];        // Specific issues identified
+  suggestions: string[];   // Improvement suggestions
+}
+
+export interface LLMEvaluationMetadata {
+  model_used: string;
+  evaluation_timestamp: string;
+  duration_ms: number;
+  token_usage: {
+    input_tokens: number;
+    output_tokens: number;
+  };
+}
+
+export interface LLMEvaluationResult {
+  quality: LLMDimensionScore;           // Writing quality, flow, readability
+  clinical_accuracy: LLMDimensionScore; // Medical accuracy, disclaimers, safety
+  personalization: LLMDimensionScore;   // Intake match, tone appropriateness
+  overall_score: number;                // Weighted average
+  overall_assessment: string;           // Summary assessment
+  recommended_outcome: QAOutcome;
+  outcome_reasoning: string;
+  metadata: LLMEvaluationMetadata;
+}
+
 export interface SemanticViolation {
   phrase: string;
   location: {
@@ -344,6 +374,7 @@ export interface AuditRecord {
   tone_selection: ToneSelectionResult;
   composed_report: ComposedReport;
   validation_result: ValidationResult;
+  llm_evaluation?: LLMEvaluationResult;  // Optional LLM-based quality evaluation
   decision_trace: DecisionTrace;
   final_outcome: QAOutcome;
   report_delivered: boolean;

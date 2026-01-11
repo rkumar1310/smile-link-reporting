@@ -203,9 +203,15 @@ export class ReportPipeline {
         { sections: report.sections.length, words: report.total_word_count }
       );
 
-      // Phase 8: QA Gate
+      // Phase 8: QA Gate (now async for LLM evaluation)
       const qaTimer = trace?.startStage("qa_gate");
-      const qaResult = qaGate.check(report, contentSelections, toneResult.selected_tone);
+      const qaResult = await qaGate.check(
+        report,
+        contentSelections,
+        toneResult.selected_tone,
+        intake,      // Pass intake for LLM evaluation context
+        driverState  // Pass driver state for LLM evaluation context
+      );
       qaTimer?.complete("qa_check", { report_id: intake.session_id }, qaResult);
 
       // Build audit record
@@ -219,6 +225,7 @@ export class ReportPipeline {
         tone_selection: toneResult,
         composed_report: report,
         validation_result: qaResult.validationResult,
+        llm_evaluation: qaResult.llmEvaluation,  // Include LLM evaluation in audit
         decision_trace: trace?.getTrace(qaResult.outcome) ?? {
           session_id: intake.session_id,
           started_at: new Date().toISOString(),

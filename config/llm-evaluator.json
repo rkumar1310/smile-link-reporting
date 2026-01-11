@@ -1,0 +1,25 @@
+{
+  "$schema": "./schemas/llm-evaluator.schema.json",
+  "version": "1.0.0",
+  "enabled": true,
+  "model": "claude-sonnet-4-20250514",
+  "api_key_env": "ANTHROPIC_API_KEY",
+  "timeout_ms": 30000,
+  "max_retries": 2,
+  "thresholds": {
+    "block_below": 4,
+    "flag_below": 7,
+    "dimension_block_below": 3,
+    "dimension_flag_below": 5
+  },
+  "weights": {
+    "quality": 0.3,
+    "clinical_accuracy": 0.4,
+    "personalization": 0.3
+  },
+  "skip_conditions": {
+    "high_confidence_pass": false,
+    "cost_control_sampling": 1.0
+  },
+  "fallback_on_error": "FLAG"
+}

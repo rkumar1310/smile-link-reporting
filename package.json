@@ -5,17 +5,24 @@
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
-    "dev": "tsx watch src/index.ts",
+    "dev": "tsx --env-file=.env watch src/index.ts",
     "build": "tsc",
-    "start": "node dist/index.js",
+    "start": "node --env-file=.env dist/index.js",
     "test": "vitest",
     "test:run": "vitest run",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "reports:generate": "tsx --env-file=.env scripts/generate-reports.ts"
   },
-  "keywords": ["nlg", "dental", "report-generation"],
+  "keywords": [
+    "nlg",
+    "dental",
+    "report-generation"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@ai-sdk/anthropic": "^3.0.9",
+    "ai": "^6.0.27",
     "typescript": "^5.9.3",
     "zod": "^4.3.4"
   },

@@ -2,18 +2,31 @@
  * Pipeline Integration Tests
  */
 
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, beforeAll, afterAll } from "vitest";
 import { ReportPipeline } from "../../src/pipeline/ReportPipeline.js";
 import { tagExtractor } from "../../src/engine/TagExtractor.js";
 import { driverDeriver } from "../../src/engine/DriverDeriver.js";
 import { scenarioScorer } from "../../src/engine/ScenarioScorer.js";
 import { toneSelector } from "../../src/engine/ToneSelector.js";
+import { qaGate, llmReportEvaluator } from "../../src/qa/index.js";
 import {
   sampleIntake1,
   sampleIntake2,
   sampleIntake3,
   sampleIntakeMinimal
 } from "../fixtures/sample-intake.js";
+
+// Disable LLM evaluator for tests (no API key in test environment)
+beforeAll(() => {
+  llmReportEvaluator.setEnabled(false);
+  qaGate.setLLMEvaluatorEnabled(false);
+});
+
+afterAll(() => {
+  // Reset to default (enabled)
+  llmReportEvaluator.setEnabled(true);
+  qaGate.setLLMEvaluatorEnabled(true);
+});
 
 describe("Tag Extraction", () => {
   it("should extract tags from intake data", () => {
