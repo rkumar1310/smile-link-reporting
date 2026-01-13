@@ -33,10 +33,7 @@
   },
   "confidence_language": {
     "en": {
-      "MEDIUM": [
-        "Based on the information provided...",
-        "From what you've shared..."
-      ],
+      "MEDIUM": [],
       "LOW": [
         "With the limited information available...",
         "A more complete picture would require..."
@@ -47,10 +44,7 @@
       ]
     },
     "nl": {
-      "MEDIUM": [
-        "Op basis van de verstrekte informatie...",
-        "Uit wat u heeft gedeeld..."
-      ],
+      "MEDIUM": [],
       "LOW": [
         "Met de beperkte beschikbare informatie...",
         "Een vollediger beeld zou vereisen..."

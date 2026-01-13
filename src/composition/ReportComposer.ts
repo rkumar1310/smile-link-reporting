@@ -66,10 +66,7 @@ const DEFAULT_SECTION_NAMES: Record<number, string> = {
 // Confidence level language
 const CONFIDENCE_LANGUAGE: Record<ConfidenceLevel, string[]> = {
   HIGH: [],
-  MEDIUM: [
-    "Based on the information provided...",
-    "From what you've shared..."
-  ],
+  MEDIUM: [],
   LOW: [
     "With the limited information available...",
     "A more complete picture would require..."

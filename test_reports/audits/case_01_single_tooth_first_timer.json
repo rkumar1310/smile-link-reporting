@@ -1,9 +1,9 @@
 {
   "session_id": "test-case-001",
-  "created_at": "2026-01-13T15:13:32.829Z",
+  "created_at": "2026-01-13T18:57:14.520Z",
   "intake": {
     "session_id": "test-case-001",
-    "timestamp": "2026-01-08T07:09:41.235Z",
+    "timestamp": "2026-01-13T18:34:39.459Z",
     "answers": [
       {
         "question_id": "Q1",
@@ -822,106 +822,106 @@
       {
         "section_number": 1,
         "section_name": "Disclaimer",
-        "content": "# Section 1: Disclaimer\n\nThis report is generated based on your responses to our questionnaire and is intended for informational purposes only. It does not constitute medical advice, diagnosis, or treatment recommendations.\n\nPlease consult with a qualified dental professional before making any decisions about your dental care. Your dentist will conduct a thorough examination and provide personalized recommendations based on your specific situation.\n\nThe information presented here is general in nature and may not apply to your individual circumstances. Treatment outcomes vary between patients and depend on many factors that can only be assessed through clinical examination.",
+        "content": "# Section 1: Disclaimer\n\nThis report is generated based on your responses to our questionnaire and is intended for informational purposes only. It does not constitute medical advice, diagnosis, or treatment recommendations.\n\nPlease consult with a qualified dental professional before making any decisions about your dental care. Your dentist will conduct a thorough examination and provide personalized recommendations based on your specific situation.\n\nThe information presented here is general in nature and may not apply to your individual circumstances. Treatment outcomes cannot be predicted with certainty. Results vary between patients and depend on many factors that can only be assessed through clinical examination.",
         "sources": [
           "STATIC_1"
         ],
-        "word_count": 96
+        "word_count": 102
       },
       {
         "section_number": 2,
         "section_name": "Your Personal Summary",
-        "content": "Based on the information provided...\n\nYou are missing one tooth in a visible zone, which can be noticeable both aesthetically and functionally. Your attention goes not only to the appearance of your smile, but also to comfort, stability, and long-term confidence.",
+        "content": "You are missing one tooth in a visible zone, affecting both appearance and function. Comfort and stability are relevant considerations.",
         "sources": [
           "SCENARIO:personal_summary"
         ],
-        "word_count": 41
+        "word_count": 20
       },
       {
         "section_number": 3,
         "section_name": "Context",
-        "content": "Based on the information provided...\n\n# First-Time Treatment Context\n\nAs this is your first time considering dental treatment of this type, it's natural to have many questions. The dental field offers various approaches, each with their own characteristics.\n\nYour dentist will guide you through the process step by step, explaining what to expect at each stage. There's no pressure to make immediate decisions—take whatever time feels right to understand your options.\n\nWhen one tooth is missing in a position that is visible when talking or smiling, this is often noticed more quickly than expected. Even if you have become accustomed to it yourself, others may continue to notice it. This makes this scenario more sensitive for many people than they initially anticipated.\n\nBeyond the aesthetic aspect, uncertainty can also arise about function. You may wonder whether chewing will continue evenly, whether surrounding teeth will shift, and whether the situation will remain stable in the future. This combination of visibility and functional doubt plays an important role in how this scenario is experienced.",
+        "content": "# First-Time Treatment Context\n\nTreatment decisions can be made after reviewing all information and consulting with your dentist.\n\nA missing front tooth is visible during conversation and social interactions.\n\nBeyond aesthetics, functional questions may include whether chewing will continue evenly, whether surrounding teeth will shift, and whether the situation will remain stable. Both visibility and function are relevant factors in this scenario.",
         "sources": [
           "TM_CTX_FIRST_TIME",
           "SCENARIO:context"
         ],
-        "word_count": 171
+        "word_count": 61
       },
       {
         "section_number": 4,
         "section_name": "Interpretation",
-        "content": "Based on the information provided...\n\n# Section 4: Interpretation\n\nBased on your responses, your dental situation can be addressed through established treatment approaches. The specific recommendations will depend on findings from your clinical examination.\n\nYour priorities—whether focused on aesthetics, function, comfort, or a combination—help guide the treatment direction. These preferences inform which options may be most suitable.\n\nThe next step is a professional assessment where your dentist can correlate your preferences with clinical findings to develop personalized recommendations.",
+        "content": "# Section 4: Interpretation\n\nYour dental situation can be addressed through established treatment approaches. The specific recommendations will depend on findings from your clinical examination.\n\nYour priorities regarding aesthetics, function, and comfort inform which treatment options may be most suitable.\n\nThe next step is a professional assessment where your dentist can correlate your preferences with clinical findings to develop personalized recommendations.",
         "sources": [
           "B_INTERP_STANDARD"
         ],
-        "word_count": 77
+        "word_count": 60
       },
       {
         "section_number": 5,
         "section_name": "Treatment Options",
-        "content": "**What this involves**\nAn implant is placed in the jawbone to replace the missing tooth root. Subsequently, a crown is placed that mimics the visible part of the tooth.\n\n**What you can expect**\nA fixed solution that combines aesthetics and function, without relying on adjacent teeth for support.\n\n**Advantages**\n- Very stable and durable solution\n- Natural appearance possible\n- No burden on neighboring teeth\n- Can contribute to preservation of bone structure\n\n**Points to consider**\n- Higher cost\n- Healing period of several months\n- Treatment proceeds in multiple steps\n\n**This may be logical for you if...**\nYou are looking for a long-term, fixed solution and are willing to go through a slightly longer process for extra stability.\n\n**What this involves**\nA bridge where the missing tooth is replaced by an artificial tooth that is attached to the back of the neighboring teeth with a thin construction.\n\n**What you can expect**\nA faster and less invasive solution, without surgical intervention.\n\n**Advantages**\n- Shorter treatment time\n- Usually lower or comparable cost\n- No implantation needed\n- Limited impact on daily life\n\n**Points to consider**\n- Less durable in the long term\n- Chance of coming loose\n- Not suitable for every situation\n\n**This may be logical for you if...**\nYou are looking for a quick and less invasive solution, or do not yet want to make a definitive choice.",
+        "content": "**What this involves**\nAn implant is placed in the jawbone to replace the missing tooth root. Subsequently, a crown is placed that mimics the visible part of the tooth.\n\n**What you can expect**\nA fixed solution that combines aesthetics and function, without relying on adjacent teeth for support.\n\n**Advantages**\n- Population studies show average lifespans of 15-25+ years; individual outcomes vary significantly based on bone quality, healing capacity, and maintenance\n- May achieve natural appearance in favorable cases; results depend on bone quality, gum health, material selection, and anatomical factors\n- No modification of neighboring teeth required\n- Can contribute to preservation of bone structure\n\n**Points to consider**\n- Higher cost\n- Healing period of several months\n- Treatment proceeds in multiple steps\n\n**Factors that may be relevant when considering this option:**\n- Long-term durability is a priority\n- Preserving healthy adjacent teeth is important\n- Bone quality is adequate (assessed by dentist)\n\n**What this involves**\nA bridge where the missing tooth is replaced by an artificial tooth that is attached to the back of the neighboring teeth with a thin construction.\n\n**What you can expect**\nA faster and less invasive solution, without surgical intervention.\n\n**Advantages**\n- Shorter treatment time\n- Usually lower or comparable cost\n- No implantation needed\n- Limited impact on daily life\n\n**Points to consider**\n- Less durable in the long term\n- Chance of coming loose\n- Not suitable for every situation\n\n**Factors that may be relevant when considering this option:**\n- A faster, non-surgical approach is preferred\n- A less invasive procedure is desired\n- Surgery is not possible or advised due to medical factors",
         "sources": [
           "SCENARIO:options"
         ],
-        "word_count": 216
+        "word_count": 251
       },
       {
         "section_number": 6,
         "section_name": "Comparison",
-        "content": "# Section 6: Comparison\n\n## Implant vs. Bridge\n\n| Factor | Dental Implant | Dental Bridge |\n|--------|----------------|---------------|\n| **Adjacent teeth** | Not affected | Must be prepared |\n| **Bone preservation** | Stimulates bone | Does not prevent bone loss |\n| **Procedure** | Surgical | Non-surgical |\n| **Treatment time** | 3-6 months | 2-4 weeks |\n| **Initial cost** | Higher | Lower |\n| **Expected lifespan** | 15-25+ years | 10-15 years |\n| **Maintenance** | Standard hygiene | Special cleaning required |\n\n**When implants may be preferred:**\n- Adjacent teeth are healthy\n- Bone quality is adequate\n- Long-term durability is prioritized\n\n**When bridges may be preferred:**\n- Adjacent teeth need crowns anyway\n- Surgery is not desired or possible\n- Faster completion is important\n\nYour dentist will help determine which option suits your situation.",
+        "content": "# Section 6: Comparison\n\n## Implant vs. Bridge\n\n| Factor | Dental Implant | Dental Bridge |\n|--------|----------------|---------------|\n| **Adjacent teeth** | Not affected | Must be prepared |\n| **Bone preservation** | Stimulates bone | Does not prevent bone loss |\n| **Procedure** | Surgical | Non-surgical |\n| **Treatment time** | 3-6 months | 2-4 weeks |\n| **Initial cost** | Higher | Lower |\n| **Expected lifespan*** | 15-25+ years | 10-15 years |\n| **Maintenance** | Standard hygiene | Special cleaning required |\n\n*Lifespans are population averages and vary significantly based on oral hygiene, bone quality, and other individual factors.*\n\n**Factors that may favor implants:**\n- Adjacent teeth are healthy\n- Bone quality is adequate\n- Long-term durability is prioritized\n\n**Factors that may favor bridges:**\n- Adjacent teeth need crowns anyway\n- Surgery is not desired or possible\n- Faster completion is important\n\nYour dentist will assess which option suits your individual situation based on clinical findings.",
         "sources": [
           "B_COMPARE_IMPLANT_VS_BRIDGE"
         ],
-        "word_count": 99
+        "word_count": 120
       },
       {
         "section_number": 7,
         "section_name": "Trade-offs to Consider",
-        "content": "With both options, the aim is a harmonious and natural result in the smile. Comfort during and after treatment plays an important role. With an implant, accounting for healing is essential; with a bridge, the emphasis is more on adjustment and stability.",
+        "content": "**Timeline vs. tooth preservation:**\nImplants require 3-6 months healing but preserve adjacent teeth. Bridges complete in 2-4 weeks but require modifying neighboring teeth.\n\n**Durability vs. invasiveness:**\nImplants involve surgery but typically last longer (15-25+ years vs. 10-15 years for bridges). Bridges avoid surgery but may need replacement sooner.\n\n**Cost vs. long-term value:**\nBridges have lower upfront cost. Implants cost more initially but may require fewer replacements over time.",
         "sources": [
           "SCENARIO:expected_results"
         ],
-        "word_count": 42
+        "word_count": 68
       },
       {
         "section_number": 8,
         "section_name": "Treatment Process",
-        "content": "- Implant + crown: average 3-7 months\n- Adhesive bridge: often achievable within a few weeks\n\nAfter an implant, temporary mild discomfort may occur. With a bridge, there is usually no recovery time.",
+        "content": "- Implant + crown: average 3-7 months\n- Adhesive bridge: often achievable within a few weeks\n\nImplant placement typically involves 3-7 days of swelling and discomfort, managed with medication. Bridge preparation may cause temporary sensitivity in adjacent teeth.",
         "sources": [
           "SCENARIO:process"
         ],
-        "word_count": 30
+        "word_count": 35
       },
       {
         "section_number": 9,
         "section_name": "Cost Considerations",
-        "content": "# Budget Considerations: Balanced Approach\n\nYou've indicated flexibility in your budget, with an interest in balancing cost and quality. This opens a range of treatment options.\n\nYour dentist can discuss:\n- How different materials and techniques affect both cost and outcomes\n- Where investing more provides meaningful benefits\n- Where more economical options perform equally well\n- The relationship between initial cost and long-term value\n\nA balanced approach often leads to solutions that deliver good value without unnecessary expense.\n\n- Single implant with crown: approximately €2,200 - €2,500\n- Adhesive bridge: approximately €1,500 - €2,500\n\nThe final cost depends on factors such as material choice, technical execution, and individual situation. Costs are part of the overall consideration, not an obligation.",
+        "content": "# Budget Considerations: Balanced Approach\n\nA flexible budget opens a range of treatment options. Your dentist can discuss:\n- How different materials and techniques affect both cost and outcomes\n- Where investing more provides meaningful benefits\n- Where more economical options perform equally well\n- The relationship between initial cost and long-term value\n\nYour dentist can help identify options within your budget parameters.\n\n- Single implant with crown: approximately €2,200 - €2,500\n- Adhesive bridge: approximately €1,500 - €2,500\n\n*Cost estimates only. Actual costs vary based on complexity, materials, location, and individual case factors. Request a detailed quote from your dentist.*",
         "sources": [
           "TM_BUDGET_FLEXIBLE",
           "SCENARIO:costs"
         ],
-        "word_count": 111
+        "word_count": 92
       },
       {
         "section_number": 10,
         "section_name": "Risk Factors",
-        "content": "**Implant with crown**\n- Recovery time: 2-5 days\n- Possible impact: discomfort and/or slight swelling\n- Daily functioning: daily activities usually resumed within a few days; temporarily adjusted chewing\n\n**Adhesive bridge**\n- Recovery time: none\n- Possible impact: short adjustment period (1-2 days)\n- Daily functioning: no limitation",
+        "content": "**Implant with crown**\n- Recovery time: 2-5 days for initial healing; full osseointegration takes 3-6 months\n- Possible impact: swelling, discomfort, and temporary dietary restrictions\n- Your individual risk profile may differ from population averages. Population studies show: infection (2-5%), implant failure (5-10% over 10 years), nerve damage (<1%), sinus complications (upper jaw only). Factors affecting your risk include bone quality, oral hygiene, smoking status, and medical conditions. Your dentist will assess these factors.\n- Daily functioning: daily activities usually resumed within a few days; temporarily adjusted chewing\n\n**Adhesive bridge**\n- Recovery time: none\n- Possible impact: short adjustment period (1-2 days)\n- Daily functioning: no limitation",
         "sources": [
           "SCENARIO:recovery"
         ],
-        "word_count": 42
+        "word_count": 100
       },
       {
         "section_number": 11,
         "section_name": "Next Steps",
-        "content": "# Section 11: Next Steps\n\n**Your next steps are entirely up to you.** Here are some options to consider:\n\n- Review this report at your own pace\n- Prepare questions for your dental consultation\n- Schedule an appointment when you feel ready\n- Request additional information on specific topics\n\nRemember, this is your journey. Take whatever time feels right to make decisions that work for you.\n\n## How to Prepare for Your Consultation\n\nConsider noting down:\n- Your main concerns and priorities\n- Questions about specific treatment options\n- Your timeline preferences\n- Budget considerations you'd like to discuss\n\nThe choice of how to proceed is yours. Your dentist is there to provide information and guidance, but you remain in control of your dental care decisions.",
+        "content": "# Section 11: Next Steps\n\nOptions to consider:\n\n- Review this report\n- Prepare questions for your dental consultation\n- Schedule an appointment when ready\n- Request additional information on specific topics\n\n## How to Prepare for Your Consultation\n\nConsider noting down:\n- Your main concerns and priorities\n- Questions about specific treatment options\n- Your timeline preferences\n- Budget considerations to discuss\n\nYour dentist can provide information and guidance based on clinical examination.",
         "sources": [
           "STATIC_11"
         ],
-        "word_count": 116
+        "word_count": 64
       }
     ],
-    "total_word_count": 1041,
+    "total_word_count": 973,
     "warnings_included": false,
     "suppressed_sections": [],
     "placeholders_resolved": 0,
@@ -931,297 +931,267 @@
     "valid": true,
     "errors": [],
     "warnings": [
-      "Section 2 has 41 words, minimum recommended is 100",
-      "Section 10 has 42 words, minimum recommended is 50"
+      "Section 2 has 20 words, minimum recommended is 100",
+      "Section 3 has 61 words, minimum recommended is 100"
     ],
     "semantic_violations": []
   },
   "llm_evaluation": {
     "professional_quality": {
-      "score": 4,
-      "confidence": 0.9,
-      "feedback": "The writing is verbose and repetitive with excessive filler phrases. Multiple sections begin with 'Based on the information provided...' which adds no value. Transitions are wordy and many sentences could be cut in half. The report feels padded rather than concise and professional.",
+      "score": 6,
+      "confidence": 0.85,
+      "feedback": "Writing is generally clear but contains significant verbosity and redundant phrasing. Multiple instances of filler language that add no value. Some sections repeat information unnecessarily. Structure is logical but could be tighter.",
       "issues": [
-        "Section 2 opens with 'Based on the information provided...' - pure filler that should be removed",
-        "Section 3 repeats 'Based on the information provided...' again - redundant pattern",
-        "Section 4 also starts with 'Based on the information provided...' - third time is excessive",
-        "Section 3 contains wordy phrases like 'it's natural to have many questions' and 'There's no pressure to make immediate decisions' that could be more direct",
-        "Section 3 has redundant phrasing: 'this is often noticed more quickly than expected' followed by 'Even if you have become accustomed to it yourself, others may continue to notice it' - says the same thing twice",
-        "Section 7 is extremely brief (42 words) and vague - doesn't provide concrete trade-offs",
-        "Section 8 is too brief (30 words) for a treatment process section - lacks detail",
-        "Awkward phrasing in Section 3: 'Your attention goes not only to the appearance' - unnatural English",
-        "Section 10 uses bullet formatting inconsistently with other sections"
+        "Section 3 contains filler: 'Treatment decisions can be made after reviewing all information and consulting with your dentist' - states the obvious",
+        "Section 4 opens with generic placeholder: 'Your dental situation can be addressed through established treatment approaches' - vague and adds nothing",
+        "Section 4: 'The next step is a professional assessment where your dentist can correlate your preferences with clinical findings' - wordy way to say 'consult your dentist'",
+        "Section 5 repeats 'What this involves' and 'What you can expect' structure verbatim for both options - mechanical and repetitive",
+        "Section 5: 'Factors that may be relevant when considering this option:' appears twice with similar bullet structure - could be consolidated",
+        "Section 8 is extremely brief (35 words) and feels incomplete compared to other sections",
+        "Section 10 has awkward phrasing: 'Your individual risk profile may differ from population averages. Population studies show:' - redundant setup",
+        "Section 11 lists obvious actions like 'Review this report' and 'Schedule an appointment when ready' - filler content"
       ],
       "suggestions": [
-        "Remove all instances of 'Based on the information provided...' - just start with the content",
-        "Cut Section 3 length by 30-40% by removing redundant statements about visibility and noticing",
-        "Rewrite Section 2 opening to be direct: 'You are missing one tooth in a visible zone...' without the filler intro",
-        "Expand Section 7 with concrete trade-offs between options (durability vs speed, cost vs longevity, etc.)",
-        "Expand Section 8 with actual process steps, not just timelines",
-        "Standardize formatting across all sections for consistency"
+        "Remove obvious statements about consulting dentists - this is implied throughout",
+        "Eliminate generic opening phrases like 'can be addressed through established treatment approaches'",
+        "Consolidate the 'Factors that may be relevant' sections into a single comparison rather than repeating the structure",
+        "Expand Section 8 or integrate it into Section 5 - it's too brief to stand alone",
+        "Tighten Section 10 risk language - state risks directly without meta-commentary about population averages",
+        "Section 11 should focus on substantive preparation steps, not obvious actions like 'review this report'"
       ]
     },
     "clinical_safety": {
-      "score": 6,
-      "confidence": 0.85,
-      "feedback": "Section 1 disclaimer is adequate but could be stronger. Some sections lack appropriate hedging language. Section 5 makes claims about advantages without sufficient qualification. Missing explicit disclaimers about individual variation in outcomes throughout the report.",
+      "score": 7,
+      "confidence": 0.9,
+      "feedback": "Disclaimers are present and generally adequate. Risk information includes appropriate hedging. However, some language could be more cautious, particularly around lifespan claims and aesthetic outcomes.",
       "issues": [
-        "Section 5 states 'Very stable and durable solution' without hedging - should be 'Generally considered stable' or 'Often provides durable results'",
-        "Section 5 claims 'Natural appearance possible' without noting this depends on many factors and isn't guaranteed",
-        "Section 6 comparison table presents timeframes and lifespans as definitive ranges without noting these are estimates that vary significantly",
-        "Section 7 mentions 'harmonious and natural result' as an aim without disclaiming that results vary",
-        "Section 9 cost ranges presented as factual without noting significant geographic and individual variation",
-        "No reminder in treatment sections that outcomes depend on individual clinical assessment"
+        "Section 5 states '15-25+ years' for implants multiple times without sufficient hedging in immediate context",
+        "Section 5: 'May achieve natural appearance in favorable cases' - 'may' is good but 'favorable cases' is vague and could set unrealistic expectations",
+        "Section 6 comparison table presents lifespans as ranges without inline disclaimer - asterisk reference is present but could be stronger",
+        "Section 10 risk percentages (2-5%, 5-10%, <1%) presented as definitive ranges when individual variation is much higher"
       ],
       "suggestions": [
-        "Add hedging to all advantage statements in Section 5: 'typically stable', 'may provide', 'can offer'",
-        "Include footnote in Section 6 table noting all values are estimates and vary by individual case",
-        "Add disclaimer before Section 7: 'Expected results vary significantly between patients'",
-        "Strengthen Section 1 disclaimer to explicitly state outcomes cannot be predicted",
-        "Add brief safety reminder before Section 10 noting risks are general and individual assessment required"
+        "Add 'under optimal conditions' or similar qualifier immediately after lifespan claims, not just in footnotes",
+        "Strengthen aesthetic outcome language: 'Aesthetic results vary significantly and depend on...' rather than 'may achieve'",
+        "Add inline qualifier in comparison table: '15-25+ years (highly variable)' rather than relying solely on asterisk",
+        "Frame risk percentages more cautiously: 'Studies report ranges of X-Y%, but your individual risk depends on...' rather than stating ranges as fact"
       ]
     },
     "tone_appropriateness": {
-      "score": 5,
+      "score": 7,
       "confidence": 0.8,
-      "feedback": "Tone is inconsistent across sections. Some sections are appropriately neutral and factual (Sections 1, 4, 6) while others drift into softer, more reassuring language that doesn't match TP-01 neutral-informative criteria. Section 11 is particularly problematic with phrases like 'your journey' and 'take whatever time feels right'.",
+      "feedback": "Tone is generally neutral and factual as required for TP-01. However, some sections drift toward slightly warmer or more reassuring language than strictly neutral. Consistency could be improved.",
       "issues": [
-        "Section 3 uses reassuring language: 'it's natural to have many questions' and 'There's no pressure' - too soft for neutral-informative tone",
-        "Section 11 uses emotional/journey language: 'this is your journey', 'take whatever time feels right' - not factual/neutral",
-        "Section 9 header 'Budget Considerations: Balanced Approach' editorializes rather than presenting facts",
-        "Section 5 uses persuasive framing: 'This may be logical for you if...' - should be more neutral",
-        "Section 3 contains empathetic phrasing about 'uncertainty can also arise' that's too soft for TP-01",
-        "Inconsistent formality: Section 6 is appropriately clinical while Section 11 is conversational"
+        "Section 9 uses 'opens a range of treatment options' which has slightly positive framing rather than pure neutrality",
+        "Section 4: 'can be addressed' and 'most suitable' have subtle optimistic undertones",
+        "Section 11: 'Options to consider' followed by bullet list feels slightly guiding rather than purely informational"
       ],
       "suggestions": [
-        "Rewrite Section 3 to remove reassuring language - just present facts about first-time treatment considerations",
-        "Completely rewrite Section 11 to be factual: 'Next steps typically include: reviewing information, preparing questions, scheduling consultation'",
-        "Remove 'This may be logical for you if...' framing from Section 5 - replace with 'Commonly selected when...'",
-        "Make Section 9 header purely descriptive: 'Cost Information'",
-        "Standardize tone across all sections to match the neutral, factual approach of Sections 1, 4, and 6"
+        "Section 9: Replace 'opens a range' with 'allows consideration of various' for stricter neutrality",
+        "Section 4: Use 'available treatment approaches exist' instead of 'can be addressed'",
+        "Section 11: Reframe as 'Typical preparation steps include:' to maintain informational rather than suggestive tone"
       ]
     },
     "personalization": {
       "score": 5,
-      "confidence": 0.75,
-      "feedback": "Limited personalization despite available patient data. Patient name 'John' is never used. Specific details about 'upper front tooth' location mentioned in intake are not referenced. Generic content dominates with minimal tailoring to John's specific priorities (natural/subtle aesthetics, balanced budget, 6-month timeline).",
+      "confidence": 0.85,
+      "feedback": "Minimal personalization despite patient name (John) being provided. Content reads as generic template with very few patient-specific references. Missing opportunities to reference specific patient priorities and situation.",
       "issues": [
-        "Patient name 'John' provided but never used in the report",
-        "Specific tooth location 'upper front tooth' from intake not mentioned - Section 2 just says 'visible zone'",
-        "John's aesthetic priority (Q7: natural_subtle, Q8: very_important_natural) not explicitly addressed in options discussion",
-        "John's 6-month timeline (Q12) not connected to treatment duration discussion in Section 8",
-        "John's balanced budget approach (Q10: price_quality_flexible) mentioned generically in Section 9 but not personalized",
-        "Section 2 could reference John's specific situation but uses generic 'you are missing one tooth'",
-        "No connection made between John's mild anxiety (Q18) and treatment process expectations"
+        "Patient name 'John' never used despite being provided in intake",
+        "Section 2 mentions 'visible zone' but doesn't reference patient's specific 'upper front tooth' location",
+        "No reference to patient's stated priority of 'natural_subtle' aesthetic preference (Q7)",
+        "No acknowledgment of patient's 'very_important_natural' aesthetic importance rating (Q8)",
+        "Section 9 mentions 'flexible budget' but doesn't connect to patient's 'price_quality_flexible' response (Q10)",
+        "No reference to patient being a 'first_timer' with 'mild' anxiety (Q18) - could personalize tone or reassurance level",
+        "Section 3 generic 'first-time treatment' module doesn't acknowledge patient's specific first-timer status"
       ],
       "suggestions": [
-        "Use 'John' at least 2-3 times throughout report, especially in Section 2 opening",
-        "Specify 'upper front tooth' in Section 2 instead of generic 'visible zone'",
-        "In Section 5, explicitly note which options best match John's natural/subtle aesthetic priority",
-        "Connect John's 6-month timeline to treatment options in Section 8: 'Given your 6-month timeframe...'",
-        "Personalize Section 9 opening: 'John, you indicated flexibility in balancing cost and quality...'",
-        "Add sentence in Section 3 acknowledging John's mild anxiety and what to expect"
+        "Use patient name at least once, ideally in Section 2: 'John, you are missing...'",
+        "Specify 'upper front tooth' instead of generic 'visible zone'",
+        "Add sentence in Section 5 acknowledging aesthetic priority: 'Given your preference for natural, subtle results, aesthetic outcome is a key consideration'",
+        "Reference anxiety level in Section 8 or 10: 'As someone new to dental procedures, understanding the recovery process...'",
+        "Connect budget discussion in Section 9 to patient's balanced approach: 'Your balanced approach to cost and quality...'",
+        "Tailor Section 3 first-timer content to acknowledge this is patient's first major dental decision"
       ]
     },
     "patient_autonomy": {
-      "score": 7,
-      "confidence": 0.85,
-      "feedback": "Generally respects patient autonomy with appropriate non-directive language in most sections. Section 11 emphasizes patient control effectively. However, some subtle directive language appears in Sections 3 and 5 that could be more neutral.",
+      "score": 8,
+      "confidence": 0.9,
+      "feedback": "Generally respects patient autonomy well. Language is non-directive and presents options neutrally. However, a few instances of subtle framing that could influence choice.",
       "issues": [
-        "Section 3 states 'Your dentist will guide you through the process step by step' - slightly paternalistic, implies passive patient role",
-        "Section 5 uses 'This may be logical for you if...' which subtly directs toward certain choices",
-        "Section 11 repeats autonomy emphasis multiple times ('entirely up to you', 'your journey', 'you remain in control') - once is sufficient, repetition feels forced",
-        "Section 4 phrase 'help guide the treatment direction' could imply less patient control than intended"
+        "Section 6 comparison table structure may subtly favor implants by listing them first consistently and using 'vs.' framing",
+        "Section 6: 'Factors that may favor implants' listed before bridge factors - order could imply preference",
+        "Section 5: 'Points to consider' for bridge includes 'Less durable in the long term' and 'Chance of coming loose' - negative framing compared to implant's neutral 'Points to consider'"
       ],
       "suggestions": [
-        "Rewrite Section 3 guidance statement to: 'Your dentist will provide information about each stage of the process'",
-        "Change Section 5 framing to: 'Commonly selected in situations where...' to remove directive 'you' language",
-        "Reduce autonomy repetition in Section 11 to single clear statement rather than multiple variations",
-        "Ensure all option presentations are equally weighted without subtle preference signals"
+        "Alternate order in comparison table or use neutral headers like 'Option A' and 'Option B' rather than always listing implant first",
+        "Present 'factors that may favor' sections in alternating order or use identical neutral framing for both",
+        "Balance 'Points to consider' language - either make both neutral or both include limitations. Current framing makes bridge sound inferior"
       ]
     },
     "structure_completeness": {
-      "score": 6,
-      "confidence": 0.9,
-      "feedback": "All required sections present but several are underdeveloped. Section 7 (Trade-offs) and Section 8 (Process) are too brief to be useful. Section flow is logical but some sections feel like placeholders rather than complete content. Comparison table in Section 6 is well-structured.",
+      "score": 7,
+      "confidence": 0.95,
+      "feedback": "All required sections present and generally complete. Logical flow from disclaimer through options to next steps. However, significant length imbalance between sections and some content feels thin.",
       "issues": [
-        "Section 7 is only 42 words - insufficient depth for trade-offs discussion",
-        "Section 8 is only 30 words - treatment process needs more detail about actual steps",
-        "Section 2 is very brief (41 words) for a personal summary - should establish more context",
-        "Section 10 formatting differs from other sections (uses bold subheadings) - inconsistent structure",
-        "Missing explicit connection between sections - each feels standalone rather than building narrative",
-        "Section 3 combines two different topics (first-time context and missing tooth impact) that could be separated",
-        "No summary or synthesis section before Next Steps"
+        "Section 8 (Treatment Process) is only 35 words - disproportionately brief compared to other sections",
+        "Section 2 (Personal Summary) is only 20 words - feels incomplete as a 'summary'",
+        "Section 3 combines two different content sources awkwardly - first-time context feels disconnected from scenario context",
+        "No clear transition between Section 5 (options) and Section 6 (comparison) - feels repetitive",
+        "Section 10 splits recovery information awkwardly between two treatment types without clear structure"
       ],
       "suggestions": [
-        "Expand Section 7 to 150-200 words with concrete trade-off examples (time vs permanence, cost vs durability, invasiveness vs longevity)",
-        "Expand Section 8 to 150+ words detailing actual process steps for each option, not just timelines",
-        "Expand Section 2 to 100-120 words to properly establish patient situation and priorities",
-        "Standardize formatting across all sections - use consistent heading and subheading styles",
-        "Add transitional sentences between sections to create narrative flow",
-        "Consider splitting Section 3 into two focused sections",
-        "Add brief synthesis section (Section 10.5) summarizing key decision factors before Next Steps"
+        "Expand Section 8 to include more detail about what happens at each appointment, or integrate into Section 5",
+        "Expand Section 2 to include 2-3 sentences that truly summarize patient's situation and priorities",
+        "Restructure Section 3 to better integrate first-time context with scenario-specific context, or separate into subsections",
+        "Add transitional sentence between Sections 5 and 6: 'The following table provides a direct comparison of these options'",
+        "Restructure Section 10 with clearer subheadings or table format for easier comparison of recovery profiles"
       ]
     },
     "content_issues": [
       {
-        "section_number": 2,
-        "source_content": "content/scenarios/S02/en/TP-01.md",
-        "quote": "Based on the information provided...",
-        "problem": "Filler phrase that adds no value. This opening appears in multiple sections and should be removed entirely.",
-        "severity": "warning",
-        "suggested_fix": "Delete this phrase and start directly with: 'You are missing one tooth in a visible zone...'"
-      },
-      {
         "section_number": 3,
         "source_content": "content/modules/TM_CTX_FIRST_TIME/en/TP-01.md",
-        "quote": "As this is your first time considering dental treatment of this type, it's natural to have many questions.",
-        "problem": "Tone too soft and reassuring for TP-01 neutral-informative. Also verbose.",
+        "quote": "Treatment decisions can be made after reviewing all information and consulting with your dentist.",
+        "problem": "Filler sentence that states the obvious - adds no value and wastes words",
         "severity": "warning",
-        "suggested_fix": "Replace with factual statement: 'First-time dental treatment involves multiple steps and options to consider.'"
-      },
-      {
-        "section_number": 3,
-        "source_content": "content/scenarios/S02/en/TP-01.md",
-        "quote": "Even if you have become accustomed to it yourself, others may continue to notice it. This makes this scenario more sensitive for many people than they initially anticipated.",
-        "problem": "Redundant with previous sentence about visibility. Also uses vague 'this scenario' twice.",
-        "severity": "warning",
-        "suggested_fix": "Combine into single sentence: 'Missing front teeth are typically noticeable to others, which affects both aesthetic and functional considerations.'"
-      },
-      {
-        "section_number": 3,
-        "source_content": "content/modules/TM_CTX_FIRST_TIME/en/TP-01.md",
-        "quote": "There's no pressure to make immediate decisions—take whatever time feels right to understand your options.",
-        "problem": "Too reassuring/soft for neutral-informative tone. Also verbose.",
-        "severity": "info",
-        "suggested_fix": "Remove entirely or replace with: 'Treatment decisions can be made after reviewing all available information.'"
+        "suggested_fix": "Remove entirely. The concept is already covered in disclaimer and next steps sections."
       },
       {
         "section_number": 4,
         "source_content": "content/b_blocks/B_INTERP_STANDARD/en/TP-01.md",
-        "quote": "Based on the information provided...",
-        "problem": "Same filler phrase repeated for third time in report. Completely unnecessary.",
+        "quote": "Your dental situation can be addressed through established treatment approaches.",
+        "problem": "Vague placeholder language that communicates nothing specific",
         "severity": "warning",
-        "suggested_fix": "Delete this phrase entirely."
+        "suggested_fix": "Remove or replace with specific statement: 'Your missing tooth can be replaced using either an implant or bridge approach.'"
+      },
+      {
+        "section_number": 4,
+        "source_content": "content/b_blocks/B_INTERP_STANDARD/en/TP-01.md",
+        "quote": "The next step is a professional assessment where your dentist can correlate your preferences with clinical findings to develop personalized recommendations.",
+        "problem": "Overly wordy way to say 'consult your dentist' - 23 words where 5-8 would suffice",
+        "severity": "warning",
+        "suggested_fix": "Replace with: 'Your dentist will assess your situation and discuss options based on clinical findings.'"
       },
       {
         "section_number": 5,
         "source_content": "content/scenarios/S02/en/TP-01.md",
-        "quote": "Very stable and durable solution",
-        "problem": "Unhedged claim that could be interpreted as guarantee. Missing clinical safety language.",
-        "severity": "critical",
-        "suggested_fix": "Change to: 'Generally considered a stable and durable solution' or 'Typically provides long-term stability'"
+        "quote": "Population studies show average lifespans of 15-25+ years; individual outcomes vary significantly",
+        "problem": "Lifespan claim needs stronger immediate hedging, not just follow-up clause",
+        "severity": "warning",
+        "suggested_fix": "Rewrite as: 'Under optimal conditions, studies report lifespans of 15-25+ years, though individual outcomes vary significantly based on...'"
       },
       {
         "section_number": 5,
         "source_content": "content/scenarios/S02/en/TP-01.md",
-        "quote": "Natural appearance possible",
-        "problem": "Vague claim without appropriate hedging about individual variation.",
+        "quote": "May achieve natural appearance in favorable cases; results depend on bone quality, gum health, material selection, and anatomical factors",
+        "problem": "'Favorable cases' is vague and could set unrealistic expectations about what constitutes 'favorable'",
         "severity": "warning",
-        "suggested_fix": "Change to: 'Natural appearance can often be achieved, though results vary based on individual factors'"
+        "suggested_fix": "Replace with: 'Aesthetic results vary significantly and depend on bone quality, gum health, material selection, and anatomical factors.'"
       },
       {
         "section_number": 5,
         "source_content": "content/scenarios/S02/en/TP-01.md",
-        "quote": "This may be logical for you if...",
-        "problem": "Directive language that subtly guides patient toward specific choice. Appears twice in section.",
-        "severity": "warning",
-        "suggested_fix": "Replace with: 'Commonly selected in situations where...' or 'Often appropriate when...'"
+        "quote": "Factors that may be relevant when considering this option: [repeated structure for both implant and bridge]",
+        "problem": "Mechanical repetition of identical structure for both options - reads as template-driven rather than thoughtfully written",
+        "severity": "info",
+        "suggested_fix": "Vary the structure or consolidate into a single 'Choosing Between Options' subsection that compares factors side-by-side."
       },
       {
-        "section_number": 6,
-        "source_content": "content/b_blocks/B_COMPARE_IMPLANT_VS_BRIDGE/en/TP-01.md",
-        "quote": "Expected lifespan: 15-25+ years vs 10-15 years",
-        "problem": "Presents timeframes as definitive without noting these are estimates that vary significantly by individual case.",
-        "severity": "warning",
-        "suggested_fix": "Add footnote to table: '*All values are estimates and vary based on individual factors, oral hygiene, and clinical conditions'"
-      },
-      {
-        "section_number": 7,
+        "section_number": 2,
         "source_content": "content/scenarios/S02/en/TP-01.md",
-        "quote": "With both options, the aim is a harmonious and natural result in the smile.",
-        "problem": "Section is far too brief (42 words total) and doesn't provide concrete trade-offs. Also 'aim' should be hedged.",
+        "quote": "You are missing one tooth in a visible zone, affecting both appearance and function.",
+        "problem": "Patient name 'John' provided but never used. Generic 'you' instead of personalized address. Location 'upper front tooth' not specified.",
         "severity": "warning",
-        "suggested_fix": "Expand to 150-200 words covering concrete trade-offs: permanence vs reversibility, time investment vs immediate results, surgical vs non-surgical, cost vs longevity, etc."
+        "suggested_fix": "Rewrite as: 'John, you are missing your upper front tooth, which affects both appearance and function.'"
+      },
+      {
+        "section_number": 5,
+        "source_content": "content/scenarios/S02/en/TP-01.md",
+        "quote": "Points to consider [for bridge]: Less durable in the long term, Chance of coming loose, Not suitable for every situation",
+        "problem": "Negative framing compared to implant's neutral 'Points to consider' - creates bias toward implants",
+        "severity": "warning",
+        "suggested_fix": "Use parallel neutral structure for both options. Either list limitations for both or advantages for both, not mixed framing."
       },
       {
         "section_number": 8,
         "source_content": "content/scenarios/S02/en/TP-01.md",
-        "quote": "Implant + crown: average 3-7 months. Adhesive bridge: often achievable within a few weeks",
-        "problem": "Section too brief (30 words) - lists timelines but not actual process steps. Doesn't explain what happens during treatment.",
+        "quote": "Implant + crown: average 3-7 months, Adhesive bridge: often achievable within a few weeks [entire section is 35 words]",
+        "problem": "Section is disproportionately brief and feels incomplete - lacks detail about actual process steps",
         "severity": "warning",
-        "suggested_fix": "Expand to 150+ words detailing: consultation, preparation steps, placement procedure, healing/adjustment period, follow-up appointments for each option."
+        "suggested_fix": "Expand to include: number of appointments, what happens at each visit, healing milestones, or integrate this content into Section 5."
       },
       {
         "section_number": 9,
         "source_content": "content/modules/TM_BUDGET_FLEXIBLE/en/TP-01.md",
-        "quote": "You've indicated flexibility in your budget, with an interest in balancing cost and quality.",
-        "problem": "Generic reference to patient input without personalization. Patient name not used despite being available.",
+        "quote": "A flexible budget opens a range of treatment options.",
+        "problem": "Slightly positive framing ('opens') inconsistent with neutral tone profile TP-01. Also doesn't reference patient's specific 'price_quality_flexible' response.",
         "severity": "info",
-        "suggested_fix": "Personalize: 'John, you indicated flexibility in balancing cost and quality...'"
+        "suggested_fix": "Replace with: 'Your balanced approach to cost and quality allows consideration of various treatment options.'"
+      },
+      {
+        "section_number": 10,
+        "source_content": "content/scenarios/S02/en/TP-01.md",
+        "quote": "Your individual risk profile may differ from population averages. Population studies show: infection (2-5%), implant failure (5-10% over 10 years)",
+        "problem": "Redundant setup about population averages before stating them. Also presents ranges as more definitive than appropriate.",
+        "severity": "info",
+        "suggested_fix": "Streamline to: 'Risk factors include infection (studies report 2-5%), implant failure (5-10% over 10 years), though your individual risk depends on...'"
       },
       {
         "section_number": 11,
         "source_content": "content/static/11/en.md",
-        "quote": "Remember, this is your journey. Take whatever time feels right to make decisions that work for you.",
-        "problem": "Emotional 'journey' language inappropriate for TP-01 neutral-informative tone. Too soft and conversational.",
-        "severity": "warning",
-        "suggested_fix": "Replace with factual statement: 'Treatment decisions can be made on your preferred timeline after reviewing all relevant information.'"
-      },
-      {
-        "section_number": 11,
-        "source_content": "content/static/11/en.md",
-        "quote": "Your next steps are entirely up to you... you remain in control of your dental care decisions.",
-        "problem": "Autonomy emphasis repeated three times in one section (entirely up to you, your journey, you remain in control). Once is sufficient - repetition feels forced and verbose.",
+        "quote": "Options to consider: Review this report, Prepare questions for your dental consultation, Schedule an appointment when ready",
+        "problem": "Lists obvious actions that add no value - 'review this report' and 'schedule appointment' are self-evident",
         "severity": "info",
-        "suggested_fix": "State autonomy once clearly at start: 'Next steps are determined by your preferences.' Then list options factually without repeating the autonomy message."
+        "suggested_fix": "Remove obvious items. Focus on substantive preparation: specific questions to ask, information to gather, factors to consider before consultation."
       },
       {
-        "section_number": 2,
-        "source_content": "content/scenarios/S02/en/TP-01.md",
-        "quote": "You are missing one tooth in a visible zone",
-        "problem": "Patient intake specifies 'upper front tooth' but report uses generic 'visible zone'. Missed personalization opportunity.",
+        "section_number": 6,
+        "source_content": "content/b_blocks/B_COMPARE_IMPLANT_VS_BRIDGE/en/TP-01.md",
+        "quote": "Factors that may favor implants: [listed first] Factors that may favor bridges: [listed second]",
+        "problem": "Consistent ordering (implants always first) may subtly imply preference or hierarchy",
         "severity": "info",
-        "suggested_fix": "Use specific location: 'You are missing your upper front tooth' or 'John, you are missing one upper front tooth'"
+        "suggested_fix": "Either alternate the order or use neutral framing like 'Considerations for each option' without 'favor' language."
       },
       {
-        "section_number": 2,
-        "source_content": "content/scenarios/S02/en/TP-01.md",
-        "quote": "Your attention goes not only to the appearance of your smile, but also to comfort, stability, and long-term confidence.",
-        "problem": "Awkward phrasing. 'Your attention goes' is unnatural English. Also makes assumptions about patient priorities not clearly stated in intake.",
-        "severity": "warning",
-        "suggested_fix": "Rewrite to: 'This affects both the appearance of your smile and functional aspects like comfort and stability.'"
+        "section_number": 3,
+        "source_content": "content/modules/TM_CTX_FIRST_TIME/en/TP-01.md, content/scenarios/S02/en/TP-01.md",
+        "quote": "[First-Time Treatment Context paragraph followed by missing front tooth paragraph]",
+        "problem": "Two content sources merged awkwardly - first-time context feels disconnected from scenario-specific context",
+        "severity": "info",
+        "suggested_fix": "Better integrate the two sources with transitional language, or separate into clear subsections: 'Your Treatment Context' and 'Your Specific Situation'."
       }
     ],
     "content_files_to_review": [
-      "content/scenarios/S02/en/TP-01.md",
       "content/modules/TM_CTX_FIRST_TIME/en/TP-01.md",
       "content/b_blocks/B_INTERP_STANDARD/en/TP-01.md",
-      "content/b_blocks/B_COMPARE_IMPLANT_VS_BRIDGE/en/TP-01.md",
+      "content/scenarios/S02/en/TP-01.md",
       "content/modules/TM_BUDGET_FLEXIBLE/en/TP-01.md",
-      "content/static/11/en.md"
+      "content/static/11/en.md",
+      "content/b_blocks/B_COMPARE_IMPLANT_VS_BRIDGE/en/TP-01.md",
+      "content/modules/TM_CTX_FIRST_TIME/en/TP-01.md, content/scenarios/S02/en/TP-01.md"
     ],
-    "overall_score": 5.5,
-    "overall_assessment": "This report has acceptable structure and covers required topics but suffers from verbose, repetitive writing with excessive filler phrases. Clinical safety needs strengthening with better hedging and disclaimers. Tone inconsistency is problematic - some sections are appropriately neutral while others drift into soft, reassuring language inappropriate for TP-01. Personalization is weak despite available patient data. Multiple sections are underdeveloped placeholders rather than complete content. Significant revision needed to tighten writing, strengthen safety language, standardize tone, and add genuine personalization.",
-    "recommended_outcome": "BLOCK",
-    "outcome_reasoning": "Overall score 5.5 below blocking threshold 6",
+    "overall_score": 6.7,
+    "overall_assessment": "This report is structurally complete and generally safe, but suffers from significant verbosity, minimal personalization despite available patient data, and mechanical template-driven writing. Content quality is mediocre (5-6 range across most dimensions). Key improvements needed: eliminate filler language, use patient name and specific details, balance option framing to avoid subtle bias, and expand thin sections. The writing is clear but not tight - many sentences could be shortened or removed entirely without losing meaning.",
+    "recommended_outcome": "FLAG",
+    "outcome_reasoning": "Overall score 6.7 below flagging threshold 8",
     "metadata": {
       "model_used": "claude-sonnet-4-5-20250929",
-      "evaluation_timestamp": "2026-01-13T15:13:32.829Z",
-      "duration_ms": 109357,
+      "evaluation_timestamp": "2026-01-13T18:57:14.520Z",
+      "duration_ms": 81238,
       "token_usage": {
-        "input_tokens": 6747,
-        "output_tokens": 4025
+        "input_tokens": 6759,
+        "output_tokens": 3606
       }
     }
   },
   "decision_trace": {
     "session_id": "test-case-001",
-    "started_at": "2026-01-13T15:11:43.463Z",
-    "completed_at": "2026-01-13T15:13:32.829Z",
+    "started_at": "2026-01-13T18:55:53.272Z",
+    "completed_at": "2026-01-13T18:57:14.521Z",
     "events": [
       {
-        "timestamp": "2026-01-13T15:11:43.464Z",
+        "timestamp": "2026-01-13T18:55:53.272Z",
         "stage": "input_validation",
         "action": "validate_input",
         "input": {
@@ -1231,10 +1201,10 @@
           "valid": true,
           "errors": 0
         },
-        "duration_ms": 1
+        "duration_ms": 0
       },
       {
-        "timestamp": "2026-01-13T15:11:43.465Z",
+        "timestamp": "2026-01-13T18:55:53.273Z",
         "stage": "tag_extraction",
         "action": "extract_tags",
         "input": {
@@ -1356,10 +1326,10 @@
           ],
           "missing_questions": []
         },
-        "duration_ms": 1
+        "duration_ms": 0
       },
       {
-        "timestamp": "2026-01-13T15:11:43.465Z",
+        "timestamp": "2026-01-13T18:55:53.274Z",
         "stage": "driver_derivation",
         "action": "derive_drivers",
         "input": {
@@ -1567,10 +1537,10 @@
             "profile_type"
           ]
         },
-        "duration_ms": 0
+        "duration_ms": 1
       },
       {
-        "timestamp": "2026-01-13T15:11:43.465Z",
+        "timestamp": "2026-01-13T18:55:53.274Z",
         "stage": "scenario_scoring",
         "action": "score_scenarios",
         "input": {
@@ -1968,7 +1938,7 @@
         "duration_ms": 0
       },
       {
-        "timestamp": "2026-01-13T15:11:43.465Z",
+        "timestamp": "2026-01-13T18:55:53.274Z",
         "stage": "tone_selection",
         "action": "select_tone",
         "input": {
@@ -2022,7 +1992,7 @@
         "duration_ms": 0
       },
       {
-        "timestamp": "2026-01-13T15:11:43.466Z",
+        "timestamp": "2026-01-13T18:55:53.274Z",
         "stage": "content_selection",
         "action": "select_content",
         "input": {
@@ -2031,10 +2001,10 @@
         "output": {
           "count": 11
         },
-        "duration_ms": 1
+        "duration_ms": 0
       },
       {
-        "timestamp": "2026-01-13T15:11:43.466Z",
+        "timestamp": "2026-01-13T18:55:53.275Z",
         "stage": "scenario_load",
         "action": "load_scenario",
         "input": {
@@ -2044,10 +2014,10 @@
         "output": {
           "loaded": true
         },
-        "duration_ms": 0
+        "duration_ms": 1
       },
       {
-        "timestamp": "2026-01-13T15:11:43.470Z",
+        "timestamp": "2026-01-13T18:55:53.279Z",
         "stage": "composition",
         "action": "compose_report",
         "input": {
@@ -2055,12 +2025,12 @@
         },
         "output": {
           "sections": 11,
-          "words": 1041
+          "words": 973
         },
         "duration_ms": 4
       },
       {
-        "timestamp": "2026-01-13T15:13:32.829Z",
+        "timestamp": "2026-01-13T18:57:14.520Z",
         "stage": "qa_gate",
         "action": "qa_check",
         "input": {
@@ -2068,9 +2038,9 @@
         },
         "output": {
           "_truncated": true,
-          "_size": 18308
+          "_size": 16726
         },
-        "duration_ms": 109359
+        "duration_ms": 81240
       }
     ],
     "final_outcome": "FLAG"

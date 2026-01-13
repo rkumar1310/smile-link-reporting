@@ -1,170 +1,164 @@
 {
   "session_id": "test-case-006",
   "case_id": "case_06_pregnancy_consultation",
-  "evaluation_timestamp": "2026-01-13T15:20:59.942Z",
+  "evaluation_timestamp": "2026-01-13T19:38:47.300Z",
   "outcome": "BLOCK",
-  "overall_score": 5.5,
+  "overall_score": 6.2,
   "dimensions": {
     "professional_quality": {
-      "score": 4,
-      "feedback": "The writing is verbose and repetitive, with excessive filler phrases that dilute the message. Multiple sections begin with 'Based on the information provided...' which adds no value. The report uses padding language throughout ('It's interesting that...', 'What's worth noting...') that makes it feel bloated. Sentences are often unnecessarily long and could be tightened significantly. The tone shifts between clinical and conversational awkwardly."
+      "score": 5,
+      "feedback": "Writing quality is inconsistent with significant verbosity issues. Multiple sections contain filler phrases and redundant statements that pad content without adding value. Some sections are tight and effective, but others meander. The report says in 1024 words what could be communicated in 700-800."
     },
     "clinical_safety": {
-      "score": 6,
-      "feedback": "The disclaimer in Section 1 is adequate but could be stronger. Section 0 pregnancy warning is appropriately cautious. However, several sections make claims that need more hedging. Section 5 states implants 'often' last decades without proper qualification about individual variation. Section 6 comparison table presents ranges as facts without sufficient caveats. The report lacks consistent reminders that outcomes vary significantly by individual."
+      "score": 7,
+      "feedback": "Safety disclaimers are present and generally appropriate, but some treatment descriptions lack sufficient hedging about outcomes. The pregnancy warning is prominent and appropriate. Risk percentages are provided but could use more context about individual variation."
     },
     "tone_appropriateness": {
-      "score": 5,
-      "feedback": "The tone is inconsistent throughout. Section 3 attempts philosophical reflection ('deeper desire for stability') which feels forced for TP-03. Section 4 suddenly shifts to clinical/technical language ('falls within established treatment frameworks'). Section 5 tries conversational ('Worth reflecting on') but comes across as artificial. Section 6 is purely clinical with no contextual framing. The reflective-contextual tone should be more naturally integrated, not applied as a surface layer."
+      "score": 6,
+      "feedback": "Tone is inconsistent across sections. Some sections achieve the reflective, contextual tone well (Sections 2, 3), while others revert to generic clinical language (Sections 4, 6, 11). The thoughtful framing is present but not sustained throughout."
     },
     "personalization": {
       "score": 4,
-      "feedback": "The report is largely generic and could apply to almost any patient with a missing front tooth. Emma's name is never used despite being provided. Her specific priorities (natural/subtle aesthetics, very important natural look, pregnancy status, first-timer, exploring stage) are barely addressed. The pregnancy warning is isolated in Section 0 but never integrated into the treatment discussion. Her conservative aesthetic tolerance and balanced budget approach get minimal specific attention."
+      "feedback": "Personalization is weak throughout. Emma's name appears only in the header. Her specific situation (pregnancy, front tooth, first-timer, exploring stage, natural aesthetic preference) is barely referenced. Most content is generic and could apply to any single missing tooth case."
     },
     "patient_autonomy": {
-      "score": 7,
-      "feedback": "The report generally respects patient autonomy with good use of non-directive language. Section 11 is strong on patient control. However, there are subtle directive moments: Section 4 says 'professional assessment is the logical next step' (implies should), Section 5 uses 'This approach often resonates with people who...' which creates implicit pressure. The comparison section is appropriately neutral. Overall maintains autonomy well but has a few slips."
+      "score": 8,
+      "feedback": "Autonomy is generally well-respected with non-directive language throughout. Options are presented neutrally without pushing toward specific choices. However, some subtle framing issues exist, and the 'often resonates with people who' structure could be more neutral."
     },
     "structure_completeness": {
       "score": 7,
-      "feedback": "The report includes all required sections and follows a logical progression. Section 0 pregnancy warning is appropriately placed. The flow from personal summary through options to next steps makes sense. However, Section 2 is extremely brief (37 words) and doesn't adequately introduce the report. Section 4 'Interpretation' feels redundant with Section 2. The comparison table in Section 6 is well-structured. Cost information is appropriately placed. Overall structure is solid but some sections need better development."
+      "feedback": "Structure is complete with all required sections present and generally logical flow. However, Section 4 is underdeveloped, Section 7 is redundant with Section 5, and the pregnancy warning placement could be better integrated."
     }
   },
   "content_issues": [
     {
-      "section_number": 2,
-      "source_content": "content/scenarios/S02/en/TP-03.md",
-      "quote": "Based on the information provided...",
-      "problem": "Filler phrase that adds no value - this appears at the start of multiple sections",
-      "severity": "warning",
-      "suggested_fix": "Remove entirely. Start directly with: 'You're missing one tooth in a visible area.'"
-    },
-    {
       "section_number": 3,
       "source_content": "content/modules/TM_CTX_FIRST_TIME/en/TP-03.md",
-      "quote": "Based on the information provided...",
-      "problem": "Same filler phrase repeated - creates repetitive pattern",
+      "quote": "Your dentist will explain the process step by step, including what to expect at each stage.",
+      "problem": "Generic filler sentence that adds no value - obvious and uninformative",
       "severity": "warning",
-      "suggested_fix": "Remove this phrase from the module template entirely"
+      "suggested_fix": "Remove entirely or replace with specific information about what first-timers should expect"
     },
     {
       "section_number": 3,
       "source_content": "content/scenarios/S02/en/TP-03.md",
-      "quote": "These aren't just practical questions—they often reflect a deeper desire for stability and predictability",
-      "problem": "Overly philosophical and verbose - doesn't add concrete value",
+      "quote": "These aren't just practical questions—they often reflect a deeper desire for stability and predictability.",
+      "problem": "Overwrought philosophical interpretation that pads content without adding substance",
       "severity": "warning",
-      "suggested_fix": "Cut this sentence entirely or replace with: 'These questions reflect natural concerns about long-term stability.'"
-    },
-    {
-      "section_number": 3,
-      "source_content": "content/scenarios/S02/en/TP-03.md",
-      "quote": "What's interesting about this scenario is how personal it is",
-      "problem": "Unnecessary meta-commentary that wastes words",
-      "severity": "info",
-      "suggested_fix": "Remove this sentence. Start next sentence with 'Some people find...'"
+      "suggested_fix": "Remove this sentence - the practical questions speak for themselves"
     },
     {
       "section_number": 4,
       "source_content": "content/b_blocks/B_INTERP_STANDARD/en/TP-03.md",
-      "quote": "Based on the information provided...",
-      "problem": "Third instance of same filler phrase - clear pattern of padding",
+      "quote": "Your priorities regarding aesthetics, function, and comfort help narrow the range of suitable options. Clinical examination will determine specific recommendations based on your individual factors.",
+      "problem": "Section is too brief (28 words) and generic - doesn't interpret Emma's actual profile",
       "severity": "warning",
-      "suggested_fix": "Remove from B-block template. This phrase should never appear in any content."
-    },
-    {
-      "section_number": 4,
-      "source_content": "content/b_blocks/B_INTERP_STANDARD/en/TP-03.md",
-      "quote": "A professional assessment is the logical next step",
-      "problem": "Subtly directive language that implies patient should take this action",
-      "severity": "warning",
-      "suggested_fix": "Change to: 'A professional assessment can provide additional clarity' - makes it optional"
+      "suggested_fix": "Expand to interpret Emma's specific priorities: pregnancy timing, natural aesthetics, first-timer status, exploring stage"
     },
     {
       "section_number": 5,
       "source_content": "content/scenarios/S02/en/TP-03.md",
-      "quote": "This approach often resonates with people who...",
-      "problem": "Creates implicit pressure by categorizing patient types - appears twice",
-      "severity": "warning",
-      "suggested_fix": "Remove this framing entirely from both options. Just present the facts neutrally."
-    },
-    {
-      "section_number": 5,
-      "source_content": "content/scenarios/S02/en/TP-03.md",
-      "quote": "It's designed for the long term—often decades",
-      "problem": "Needs stronger hedging about individual variation in outcomes",
+      "quote": "A solution that becomes part of your mouth, functioning like a natural tooth and standing independently from the rest.",
+      "problem": "Too definitive - implies guaranteed outcome without hedging",
       "severity": "critical",
-      "suggested_fix": "Change to: 'It can last for decades in favorable conditions with proper maintenance and care'"
+      "suggested_fix": "Revise to: 'Designed to integrate with your mouth and function similarly to a natural tooth for most patients'"
+    },
+    {
+      "section_number": 5,
+      "source_content": "content/scenarios/S02/en/TP-03.md",
+      "quote": "This approach often resonates with people who... Value permanence and are comfortable taking a longer path for a more integrated result.",
+      "problem": "Subtly prescriptive - categorizes patients and could feel directive",
+      "severity": "info",
+      "suggested_fix": "Reframe neutrally: 'Some people prioritize permanence and are comfortable with a longer process'"
+    },
+    {
+      "section_number": 7,
+      "source_content": "content/scenarios/S02/en/TP-03.md",
+      "quote": "Both options can restore your smile in meaningful ways. The implant path offers a sense of permanence and integration; the bridge path offers speed and simplicity. Comfort is part of both—though the nature of that comfort differs. With an implant, there's initial healing; with a bridge, there's adjustment. Both lead to a stable outcome.",
+      "problem": "Entire section is redundant - restates Section 5 content in vague, abstract terms without adding new information",
+      "severity": "warning",
+      "suggested_fix": "Remove section entirely or replace with concrete decision framework specific to Emma's situation"
+    },
+    {
+      "section_number": 7,
+      "source_content": "content/scenarios/S02/en/TP-03.md",
+      "quote": "Both lead to a stable outcome.",
+      "problem": "Overly optimistic - outcomes vary significantly between patients",
+      "severity": "critical",
+      "suggested_fix": "Revise to: 'Both can lead to stable outcomes for appropriate candidates, though individual results vary'"
+    },
+    {
+      "section_number": 2,
+      "source_content": "content/scenarios/S02/en/TP-03.md",
+      "quote": "You're missing one tooth in a visible area.",
+      "problem": "Emma's name is never used despite being provided - missed personalization opportunity",
+      "severity": "info",
+      "suggested_fix": "Revise to: 'Emma, you're missing one tooth in a visible area' or use her name elsewhere in the report"
+    },
+    {
+      "section_number": 5,
+      "source_content": "content/scenarios/S02/en/TP-03.md",
+      "quote": "[Entire options section]",
+      "problem": "Emma's pregnancy is not mentioned in treatment options despite being a critical timing factor",
+      "severity": "warning",
+      "suggested_fix": "Add to implant option: 'Given your pregnancy, the surgical timeline would typically begin after delivery' and to bridge: 'This non-surgical option could be considered during pregnancy if timing is a priority'"
+    },
+    {
+      "section_number": 5,
+      "source_content": "content/scenarios/S02/en/TP-03.md",
+      "quote": "[Entire options section]",
+      "problem": "Emma's stated preference for 'natural_subtle' aesthetics is never explicitly addressed",
+      "severity": "warning",
+      "suggested_fix": "Add to each option how it addresses natural appearance: 'Implants typically provide the most natural appearance as they emerge from the gum like a natural tooth' and 'Bridges can achieve natural results though the connection points may be slightly visible'"
     },
     {
       "section_number": 6,
       "source_content": "content/b_blocks/B_COMPARE_IMPLANT_VS_BRIDGE/en/TP-03.md",
-      "quote": "Longevity: 15-25+ years | 10-15 years",
-      "problem": "Presents timeframes as facts without qualification about individual variation",
-      "severity": "critical",
-      "suggested_fix": "Add 'Typical longevity' as row header and footnote: '*Actual longevity varies significantly based on individual factors'"
+      "quote": "Implants may suit you if: [bullets] Bridges may suit you if: [bullets]",
+      "problem": "Mildly directive language - 'may suit you' implies recommendation rather than neutral information",
+      "severity": "info",
+      "suggested_fix": "Reframe as: 'Factors that may be relevant to your decision:' with neutral bullet points"
     },
     {
-      "section_number": 7,
+      "section_number": 8,
       "source_content": "content/scenarios/S02/en/TP-03.md",
-      "quote": "Both lead to a stable outcome",
-      "problem": "Too definitive - outcomes are not guaranteed",
-      "severity": "critical",
-      "suggested_fix": "Change to: 'Both can lead to stable outcomes when conditions are favorable'"
+      "quote": "[Entire section - 31 words]",
+      "problem": "Section is too brief and could be integrated into Section 5 options rather than standing alone",
+      "severity": "info",
+      "suggested_fix": "Integrate timeline information into each treatment option in Section 5 for better flow"
     },
     {
-      "section_number": 7,
-      "source_content": "content/scenarios/S02/en/TP-03.md",
-      "quote": "Both options can restore your smile in meaningful ways",
-      "problem": "Vague language that doesn't provide concrete information",
-      "severity": "warning",
-      "suggested_fix": "Replace with specific outcomes: 'Both options can restore appearance and function in the front aesthetic zone'"
-    },
-    {
-      "section_number": 9,
-      "source_content": "content/scenarios/S02/en/TP-03.md",
-      "quote": "These figures are guides, not commitments",
-      "problem": "Needs stronger disclaimer about potential cost increases from complications",
-      "severity": "warning",
-      "suggested_fix": "Add: 'These figures assume uncomplicated cases. Additional procedures or complications may increase costs.'"
+      "section_number": 11,
+      "source_content": "content/static/11/en.md",
+      "quote": "Consider noting down: [bullets]",
+      "problem": "Directive language - tells patient what to do rather than offering suggestions",
+      "severity": "info",
+      "suggested_fix": "Revise to: 'You might find it helpful to note down:' or 'Some patients prepare by noting:'"
     },
     {
       "section_number": 0,
       "source_content": "[unknown: A_WARN_PREGNANCY_OR_GROWTH]",
-      "quote": "Your dentist will discuss which options are suitable",
-      "problem": "Pregnancy warning is isolated and never integrated into treatment discussion",
-      "severity": "warning",
-      "suggested_fix": "Add specific pregnancy timing considerations to Section 5 or 8 for each treatment option"
-    },
-    {
-      "section_number": 2,
-      "source_content": "content/scenarios/S02/en/TP-03.md",
-      "quote": "[entire section - no use of patient name]",
-      "problem": "Patient name 'Emma' provided but never used anywhere in report",
-      "severity": "warning",
-      "suggested_fix": "Add patient name at least 2-3 times: 'Emma, you're missing...' in Section 2, and in Section 11"
-    },
-    {
-      "section_number": 5,
-      "source_content": "content/scenarios/S02/en/TP-03.md",
-      "quote": "[no mention of natural/subtle aesthetic priorities]",
-      "problem": "Patient indicated 'natural_subtle' and 'very_important_natural' but this isn't specifically addressed",
-      "severity": "warning",
-      "suggested_fix": "Add paragraph in Section 5 addressing how each option achieves natural aesthetics, especially for front tooth"
+      "quote": "[Entire pregnancy warning]",
+      "problem": "Warning is isolated and not integrated into treatment discussions where pregnancy affects timing",
+      "severity": "info",
+      "suggested_fix": "Keep warning but also integrate pregnancy considerations into Sections 5, 8, and 10 where relevant"
     }
   ],
   "content_files_to_review": [
-    "content/scenarios/S02/en/TP-03.md",
     "content/modules/TM_CTX_FIRST_TIME/en/TP-03.md",
+    "content/scenarios/S02/en/TP-03.md",
     "content/b_blocks/B_INTERP_STANDARD/en/TP-03.md",
-    "content/b_blocks/B_COMPARE_IMPLANT_VS_BRIDGE/en/TP-03.md"
+    "content/b_blocks/B_COMPARE_IMPLANT_VS_BRIDGE/en/TP-03.md",
+    "content/static/11/en.md"
   ],
-  "overall_assessment": "This report suffers from significant verbosity and repetitive filler language that undermines professional quality. The same padding phrases appear multiple times, and philosophical language often replaces concrete information. Clinical safety is adequate but needs stronger hedging on outcome claims. Personalization is weak - the patient's name is never used and specific priorities are barely addressed. The structure is complete but several sections are underdeveloped. Most critically, the content needs to be tightened by 25-30% to remove filler and improve clarity.",
+  "overall_assessment": "This report demonstrates moderate quality with significant room for improvement. The main weaknesses are verbosity (particularly Sections 3, 5, 7), poor personalization (Emma's specific situation barely referenced), and inconsistent tone (shifts from reflective to generic clinical). Section 7 is largely redundant and Section 4 is underdeveloped. Clinical safety is acceptable but needs stronger hedging in outcome statements. The structure is complete but could be streamlined. Most critically, the report reads as generic template content rather than a thoughtful analysis of Emma's specific situation as a pregnant first-timer seeking natural aesthetics for a front tooth.",
   "metadata": {
     "model_used": "claude-sonnet-4-5-20250929",
-    "duration_ms": 84613,
+    "evaluation_timestamp": "2026-01-13T19:38:47.300Z",
+    "duration_ms": 78189,
     "token_usage": {
-      "input_tokens": 7000,
-      "output_tokens": 3489
+      "input_tokens": 6829,
+      "output_tokens": 3539
     }
   }
 }

@@ -2,7 +2,7 @@
 
 **Case ID:** case_01_single_tooth_first_timer
 **Session:** test-case-001
-**Generated:** 2026-01-13T15:13:32.829Z
+**Generated:** 2026-01-13T18:36:08.533Z
 
 ## Pipeline Metadata
 
@@ -13,98 +13,9 @@
 | Confidence | MEDIUM |
 | Outcome | FLAG |
 | Success | true |
-| Total Words | 1041 |
+| Total Words | 1020 |
 | Sections | 11 |
 | Warnings Included | false |
-
-## LLM Quality Evaluation
-
-| Dimension | Score | Weight |
-|-----------|-------|--------|
-| Professional Quality | 4/10 | 15% |
-| Clinical Safety | 6/10 | 25% |
-| Tone Appropriateness | 5/10 | 20% |
-| Personalization | 5/10 | 15% |
-| Patient Autonomy | 7/10 | 15% |
-| Structure & Completeness | 6/10 | 10% |
-| **Overall** | **5.5/10** | |
-
-**Assessment:** This report has acceptable structure and covers required topics but suffers from verbose, repetitive writing with excessive filler phrases. Clinical safety needs strengthening with better hedging and disclaimers. Tone inconsistency is problematic - some sections are appropriately neutral while others drift into soft, reassuring language inappropriate for TP-01. Personalization is weak despite available patient data. Multiple sections are underdeveloped placeholders rather than complete content. Significant revision needed to tighten writing, strengthen safety language, standardize tone, and add genuine personalization.
-
-### Content Issues (16)
-
-- **[WARNING]** Section 2: Filler phrase that adds no value. This opening appears in multiple sections and should be removed entirely.
-  - Source: `content/scenarios/S02/en/TP-01.md`
-  - Fix: Delete this phrase and start directly with: 'You are missing one tooth in a visible zone...'
-
-- **[WARNING]** Section 3: Tone too soft and reassuring for TP-01 neutral-informative. Also verbose.
-  - Source: `content/modules/TM_CTX_FIRST_TIME/en/TP-01.md`
-  - Fix: Replace with factual statement: 'First-time dental treatment involves multiple steps and options to consider.'
-
-- **[WARNING]** Section 3: Redundant with previous sentence about visibility. Also uses vague 'this scenario' twice.
-  - Source: `content/scenarios/S02/en/TP-01.md`
-  - Fix: Combine into single sentence: 'Missing front teeth are typically noticeable to others, which affects both aesthetic and functional considerations.'
-
-- **[INFO]** Section 3: Too reassuring/soft for neutral-informative tone. Also verbose.
-  - Source: `content/modules/TM_CTX_FIRST_TIME/en/TP-01.md`
-  - Fix: Remove entirely or replace with: 'Treatment decisions can be made after reviewing all available information.'
-
-- **[WARNING]** Section 4: Same filler phrase repeated for third time in report. Completely unnecessary.
-  - Source: `content/b_blocks/B_INTERP_STANDARD/en/TP-01.md`
-  - Fix: Delete this phrase entirely.
-
-- **[CRITICAL]** Section 5: Unhedged claim that could be interpreted as guarantee. Missing clinical safety language.
-  - Source: `content/scenarios/S02/en/TP-01.md`
-  - Fix: Change to: 'Generally considered a stable and durable solution' or 'Typically provides long-term stability'
-
-- **[WARNING]** Section 5: Vague claim without appropriate hedging about individual variation.
-  - Source: `content/scenarios/S02/en/TP-01.md`
-  - Fix: Change to: 'Natural appearance can often be achieved, though results vary based on individual factors'
-
-- **[WARNING]** Section 5: Directive language that subtly guides patient toward specific choice. Appears twice in section.
-  - Source: `content/scenarios/S02/en/TP-01.md`
-  - Fix: Replace with: 'Commonly selected in situations where...' or 'Often appropriate when...'
-
-- **[WARNING]** Section 6: Presents timeframes as definitive without noting these are estimates that vary significantly by individual case.
-  - Source: `content/b_blocks/B_COMPARE_IMPLANT_VS_BRIDGE/en/TP-01.md`
-  - Fix: Add footnote to table: '*All values are estimates and vary based on individual factors, oral hygiene, and clinical conditions'
-
-- **[WARNING]** Section 7: Section is far too brief (42 words total) and doesn't provide concrete trade-offs. Also 'aim' should be hedged.
-  - Source: `content/scenarios/S02/en/TP-01.md`
-  - Fix: Expand to 150-200 words covering concrete trade-offs: permanence vs reversibility, time investment vs immediate results, surgical vs non-surgical, cost vs longevity, etc.
-
-- **[WARNING]** Section 8: Section too brief (30 words) - lists timelines but not actual process steps. Doesn't explain what happens during treatment.
-  - Source: `content/scenarios/S02/en/TP-01.md`
-  - Fix: Expand to 150+ words detailing: consultation, preparation steps, placement procedure, healing/adjustment period, follow-up appointments for each option.
-
-- **[INFO]** Section 9: Generic reference to patient input without personalization. Patient name not used despite being available.
-  - Source: `content/modules/TM_BUDGET_FLEXIBLE/en/TP-01.md`
-  - Fix: Personalize: 'John, you indicated flexibility in balancing cost and quality...'
-
-- **[WARNING]** Section 11: Emotional 'journey' language inappropriate for TP-01 neutral-informative tone. Too soft and conversational.
-  - Source: `content/static/11/en.md`
-  - Fix: Replace with factual statement: 'Treatment decisions can be made on your preferred timeline after reviewing all relevant information.'
-
-- **[INFO]** Section 11: Autonomy emphasis repeated three times in one section (entirely up to you, your journey, you remain in control). Once is sufficient - repetition feels forced and verbose.
-  - Source: `content/static/11/en.md`
-  - Fix: State autonomy once clearly at start: 'Next steps are determined by your preferences.' Then list options factually without repeating the autonomy message.
-
-- **[INFO]** Section 2: Patient intake specifies 'upper front tooth' but report uses generic 'visible zone'. Missed personalization opportunity.
-  - Source: `content/scenarios/S02/en/TP-01.md`
-  - Fix: Use specific location: 'You are missing your upper front tooth' or 'John, you are missing one upper front tooth'
-
-- **[WARNING]** Section 2: Awkward phrasing. 'Your attention goes' is unnatural English. Also makes assumptions about patient priorities not clearly stated in intake.
-  - Source: `content/scenarios/S02/en/TP-01.md`
-  - Fix: Rewrite to: 'This affects both the appearance of your smile and functional aspects like comfort and stability.'
-
-### Files to Review
-
-- `content/scenarios/S02/en/TP-01.md`
-- `content/modules/TM_CTX_FIRST_TIME/en/TP-01.md`
-- `content/b_blocks/B_INTERP_STANDARD/en/TP-01.md`
-- `content/b_blocks/B_COMPARE_IMPLANT_VS_BRIDGE/en/TP-01.md`
-- `content/modules/TM_BUDGET_FLEXIBLE/en/TP-01.md`
-- `content/static/11/en.md`
 
 ## Driver State
 
@@ -147,9 +58,9 @@ The information presented here is general in nature and may not apply to your in
 
 Based on the information provided...
 
-You are missing one tooth in a visible zone, which can be noticeable both aesthetically and functionally. Your attention goes not only to the appearance of your smile, but also to comfort, stability, and long-term confidence.
+You are missing one tooth in a visible zone, affecting both appearance and function. Comfort and stability are relevant considerations.
 
-*[41 words]*
+*[25 words]*
 
 ## Context
 
@@ -157,15 +68,13 @@ Based on the information provided...
 
 # First-Time Treatment Context
 
-As this is your first time considering dental treatment of this type, it's natural to have many questions. The dental field offers various approaches, each with their own characteristics.
+Your dentist will explain the process step by step, including what to expect at each stage. Treatment decisions can be made after reviewing all information and consulting with your dentist.
 
-Your dentist will guide you through the process step by step, explaining what to expect at each stage. There's no pressure to make immediate decisions—take whatever time feels right to understand your options.
+A missing tooth in a visible position is often more noticeable to others than to the patient, particularly in social interactions. This visibility factor is one reason many people consider treatment for this scenario.
 
-When one tooth is missing in a position that is visible when talking or smiling, this is often noticed more quickly than expected. Even if you have become accustomed to it yourself, others may continue to notice it. This makes this scenario more sensitive for many people than they initially anticipated.
+Beyond the aesthetic aspect, uncertainty can also arise about function. You may wonder whether chewing will continue evenly, whether surrounding teeth will shift, and whether the situation will remain stable in the future. Both visibility and function are relevant factors in this scenario.
 
-Beyond the aesthetic aspect, uncertainty can also arise about function. You may wonder whether chewing will continue evenly, whether surrounding teeth will shift, and whether the situation will remain stable in the future. This combination of visibility and functional doubt plays an important role in how this scenario is experienced.
-
-*[171 words]*
+*[115 words]*
 
 ## Interpretation
 
@@ -173,13 +82,13 @@ Based on the information provided...
 
 # Section 4: Interpretation
 
-Based on your responses, your dental situation can be addressed through established treatment approaches. The specific recommendations will depend on findings from your clinical examination.
+Your dental situation can be addressed through established treatment approaches. The specific recommendations will depend on findings from your clinical examination.
 
 Your priorities—whether focused on aesthetics, function, comfort, or a combination—help guide the treatment direction. These preferences inform which options may be most suitable.
 
 The next step is a professional assessment where your dentist can correlate your preferences with clinical findings to develop personalized recommendations.
 
-*[77 words]*
+*[73 words]*
 
 ## Treatment Options
 
@@ -190,9 +99,9 @@ An implant is placed in the jawbone to replace the missing tooth root. Subsequen
 A fixed solution that combines aesthetics and function, without relying on adjacent teeth for support.
 
 **Advantages**
-- Very stable and durable solution
-- Natural appearance possible
-- No burden on neighboring teeth
+- May provide stable, long-term results when properly maintained (average lifespan 15-25+ years in population studies, though individual outcomes vary significantly based on bone quality, healing capacity, and maintenance)
+- Can achieve natural appearance depending on factors like bone quality, gum health, and material selection
+- No modification of neighboring teeth required
 - Can contribute to preservation of bone structure
 
 **Points to consider**
@@ -200,8 +109,10 @@ A fixed solution that combines aesthetics and function, without relying on adjac
 - Healing period of several months
 - Treatment proceeds in multiple steps
 
-**This may be logical for you if...**
-You are looking for a long-term, fixed solution and are willing to go through a slightly longer process for extra stability.
+**Common reasons patients choose this option:**
+- Prioritizing long-term durability over treatment speed
+- Wanting to avoid modification of healthy adjacent teeth
+- Adequate bone quality confirmed by dentist assessment
 
 **What this involves**
 A bridge where the missing tooth is replaced by an artificial tooth that is attached to the back of the neighboring teeth with a thin construction.
@@ -220,10 +131,12 @@ A faster and less invasive solution, without surgical intervention.
 - Chance of coming loose
 - Not suitable for every situation
 
-**This may be logical for you if...**
-You are looking for a quick and less invasive solution, or do not yet want to make a definitive choice.
+**Common reasons patients choose this option:**
+- Preferring a faster, non-surgical approach
+- Not yet ready for a more invasive procedure
+- Surgery is not possible or advised due to medical factors
 
-*[216 words]*
+*[253 words]*
 
 ## Comparison
 
@@ -238,37 +151,39 @@ You are looking for a quick and less invasive solution, or do not yet want to ma
 | **Procedure** | Surgical | Non-surgical |
 | **Treatment time** | 3-6 months | 2-4 weeks |
 | **Initial cost** | Higher | Lower |
-| **Expected lifespan** | 15-25+ years | 10-15 years |
+| **Expected lifespan*** | 15-25+ years | 10-15 years |
 | **Maintenance** | Standard hygiene | Special cleaning required |
 
-**When implants may be preferred:**
+*Lifespans are population averages and vary significantly based on oral hygiene, bone quality, and other individual factors.*
+
+**Situations where implants are often considered:**
 - Adjacent teeth are healthy
 - Bone quality is adequate
 - Long-term durability is prioritized
 
-**When bridges may be preferred:**
+**Situations where bridges are often considered:**
 - Adjacent teeth need crowns anyway
 - Surgery is not desired or possible
 - Faster completion is important
 
-Your dentist will help determine which option suits your situation.
+Your dentist will assess which option suits your individual situation based on clinical findings.
 
-*[99 words]*
+*[122 words]*
 
 ## Trade-offs to Consider
 
-With both options, the aim is a harmonious and natural result in the smile. Comfort during and after treatment plays an important role. With an implant, accounting for healing is essential; with a bridge, the emphasis is more on adjustment and stability.
+Implants require surgical healing (3-6 months) but avoid altering adjacent teeth. Bridges provide faster results (2-4 weeks) but require modifying healthy teeth and have a shorter expected lifespan. Key trade-offs to consider include your timeline, budget, and long-term goals.
 
-*[42 words]*
+*[39 words]*
 
 ## Treatment Process
 
 - Implant + crown: average 3-7 months
 - Adhesive bridge: often achievable within a few weeks
 
-After an implant, temporary mild discomfort may occur. With a bridge, there is usually no recovery time.
+Implant placement typically involves 3-7 days of swelling and discomfort, managed with medication. Bridge preparation may cause temporary sensitivity in adjacent teeth.
 
-*[30 words]*
+*[35 words]*
 
 ## Cost Considerations
 
@@ -282,20 +197,21 @@ Your dentist can discuss:
 - Where more economical options perform equally well
 - The relationship between initial cost and long-term value
 
-A balanced approach often leads to solutions that deliver good value without unnecessary expense.
+A balanced approach often leads to solutions that deliver good value within your stated budget parameters.
 
 - Single implant with crown: approximately €2,200 - €2,500
 - Adhesive bridge: approximately €1,500 - €2,500
 
-The final cost depends on factors such as material choice, technical execution, and individual situation. Costs are part of the overall consideration, not an obligation.
+*Cost estimates only. Actual costs vary based on complexity, materials, location, and individual case factors. Request a detailed quote from your dentist.*
 
-*[111 words]*
+*[110 words]*
 
 ## Risk Factors
 
 **Implant with crown**
-- Recovery time: 2-5 days
-- Possible impact: discomfort and/or slight swelling
+- Recovery time: 2-5 days for initial healing; full osseointegration takes 3-6 months
+- Possible impact: swelling, discomfort, and temporary dietary restrictions
+- Population studies indicate risks of infection (2-5%), implant failure (5-10% over 10 years), nerve damage (rare), and sinus complications (upper jaw). Your individual risk may be higher or lower based on factors your dentist will assess.
 - Daily functioning: daily activities usually resumed within a few days; temporarily adjusted chewing
 
 **Adhesive bridge**
@@ -303,20 +219,18 @@ The final cost depends on factors such as material choice, technical execution, 
 - Possible impact: short adjustment period (1-2 days)
 - Daily functioning: no limitation
 
-*[42 words]*
+*[88 words]*
 
 ## Next Steps
 
 # Section 11: Next Steps
 
-**Your next steps are entirely up to you.** Here are some options to consider:
+Options to consider:
 
-- Review this report at your own pace
+- Review this report
 - Prepare questions for your dental consultation
-- Schedule an appointment when you feel ready
+- Schedule an appointment when ready
 - Request additional information on specific topics
-
-Remember, this is your journey. Take whatever time feels right to make decisions that work for you.
 
 ## How to Prepare for Your Consultation
 
@@ -324,9 +238,8 @@ Consider noting down:
 - Your main concerns and priorities
 - Questions about specific treatment options
 - Your timeline preferences
-- Budget considerations you'd like to discuss
+- Budget considerations to discuss
 
-The choice of how to proceed is yours. Your dentist is there to provide information and guidance, but you remain in control of your dental care decisions.
+Your dentist can provide information and guidance based on clinical examination.
 
-*[116 words]*
-
+*[64 words]*

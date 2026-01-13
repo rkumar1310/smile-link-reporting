@@ -11,7 +11,7 @@
     "test": "vitest",
     "test:run": "vitest run",
     "lint": "tsc --noEmit",
-    "reports:generate": "tsx --env-file=.env scripts/generate-reports.ts"
+    "reports:generate": "tsx --env-file=.env scripts/regenerate-reports.ts"
   },
   "keywords": [
     "nlg",

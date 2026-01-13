@@ -1,162 +1,197 @@
 {
   "session_id": "test-case-005",
   "case_id": "case_05_young_professional_implant",
-  "evaluation_timestamp": "2026-01-13T15:19:35.318Z",
+  "evaluation_timestamp": "2026-01-13T19:36:52.906Z",
   "outcome": "BLOCK",
-  "overall_score": 5.9,
+  "overall_score": 6.4,
   "dimensions": {
     "professional_quality": {
-      "score": 4,
-      "feedback": "Excessive verbosity and filler language throughout. The phrase 'Based on the information provided...' appears THREE times in the first four sections - this is pure padding that adds zero value. Many sections use 10 words where 5 would suffice. Transitions are wordy and repetitive. The writing lacks crispness and directness."
+      "score": 5,
+      "feedback": "Writing is generally clear but suffers from significant verbosity and filler language. Multiple sections contain redundant phrases and padding that dilutes the message. Transitions are often unnecessary. Some sections are too brief while others are wordy without adding value."
     },
     "clinical_safety": {
-      "score": 6,
-      "feedback": "Disclaimer is present but weak. Language throughout is too casual about outcomes ('can restore comfortable chewing', 'Either can work well'). Missing specific risk disclosures for implant failure, bridge complications. Cost ranges presented without caveats about variability. Recovery information oversimplified."
+      "score": 7,
+      "feedback": "Disclaimer is comprehensive and appropriately cautious. Language generally avoids guarantees. However, some statements could be more carefully hedged, and risk disclosures in Section 10 are somewhat superficial."
     },
     "tone_appropriateness": {
-      "score": 7,
-      "feedback": "Generally maintains autonomy-respecting tone well. Good use of 'you choose', 'your decision', 'up to you' language. However, some sections slip into slightly directive framing, particularly in the comparison table and 'you might choose this if' statements. Tone is consistent but could be more neutral in places."
+      "score": 8,
+      "feedback": "Tone is consistently autonomy-respecting throughout most sections. Language emphasizes choice and avoids directive statements. Minor lapses where language becomes slightly prescriptive."
     },
     "personalization": {
-      "score": 5,
-      "feedback": "Minimal personalization despite available patient data. Patient name 'Sarah' not used anywhere. Specific situation (one missing back tooth, side chewing area, premium budget preference, durability focus) barely referenced. Content reads generic and could apply to any single-tooth case. Missed opportunities to connect to stated priorities."
+      "score": 4,
+      "feedback": "Content is largely generic and could apply to almost any patient with a missing tooth. Patient name Sarah is never used. Specific priorities mentioned in profile (durability-focused, premium budget, short timeline) are barely referenced. Feels cookie-cutter."
     },
     "patient_autonomy": {
-      "score": 6,
-      "feedback": "Autonomy emphasis is present but overdone to the point of being performative. The constant repetition of 'your choice', 'up to you', 'your decision' across multiple sections feels forced rather than genuine. Some subtle directive language remains in option presentations. The autonomy messaging would be stronger if stated once clearly rather than repeated constantly."
+      "score": 7,
+      "feedback": "Generally respects patient autonomy with non-directive language. However, some subtle framing issues and the 'You might choose this if...' structure creates implicit guidance toward certain options."
     },
     "structure_completeness": {
-      "score": 7,
-      "feedback": "All required sections present and in logical order. Structure follows standard report format well. However, Section 7 (Trade-offs) is underdeveloped at only 29 words - too brief to be useful. Section 10 (Risk Factors) focuses only on recovery, missing actual risk discussion. Some sections could be better integrated rather than standing alone as fragments."
+      "score": 6,
+      "feedback": "All required sections present but several are underdeveloped. Section lengths are inconsistent - some critical sections are too brief while less important ones are verbose. Logical flow is acceptable but some sections feel out of place."
     }
   },
   "content_issues": [
     {
       "section_number": 2,
       "source_content": "content/scenarios/S03/en/TP-06.md",
-      "quote": "Based on the information provided...",
-      "problem": "Filler phrase that adds no value. This exact phrase appears in sections 2, 3, and 4. Pure padding.",
-      "severity": "warning",
-      "suggested_fix": "Remove entirely. Start directly with: 'You're missing one tooth in the back of your mouth...'"
-    },
-    {
-      "section_number": 3,
-      "source_content": "content/modules/TM_CTX_FIRST_TIME/en/TP-06.md",
-      "quote": "As this is your first time considering dental treatment of this type, it's natural to have many questions.",
-      "problem": "Verbose opening that states the obvious. Wastes words on assumption rather than providing value.",
+      "quote": "What you choose to do, if anything, is entirely your decision.",
+      "problem": "Filler phrase 'if anything' adds no value and weakens the statement",
       "severity": "info",
-      "suggested_fix": "Cut to: 'First time considering this treatment? Here's what to know.' or remove entirely and start with substantive content."
+      "suggested_fix": "Remove 'if anything' - change to 'What you choose to do is entirely your decision.'"
     },
     {
       "section_number": 3,
       "source_content": "content/scenarios/S03/en/TP-06.md",
-      "quote": "There's no pressure to make immediate decisions—take whatever time feels right to understand your options.",
-      "problem": "Autonomy padding that will be repeated in other sections. Verbose and unnecessary here.",
+      "quote": "There are potential long-term considerations—neighboring teeth may shift",
+      "problem": "Verbose transition phrase that delays the actual information",
       "severity": "warning",
-      "suggested_fix": "Remove from this section. Consolidate all autonomy messaging into Section 11 only."
+      "suggested_fix": "Cut the transition and start directly: 'Neighboring teeth may shift over time...'"
+    },
+    {
+      "section_number": 3,
+      "source_content": "content/scenarios/S03/en/TP-06.md",
+      "quote": "but these vary by individual and don't occur in every case",
+      "problem": "Redundant hedging - variability is already implied by 'potential' and 'may'",
+      "severity": "info",
+      "suggested_fix": "Remove this phrase entirely - the hedging is already clear from 'may' language"
+    },
+    {
+      "section_number": 3,
+      "source_content": "content/modules/TM_CTX_FIRST_TIME/en/TP-06.md",
+      "quote": "Treatment decisions can be made after reviewing all information and consulting with your dentist.",
+      "problem": "Generic filler sentence that states the obvious and adds no value",
+      "severity": "warning",
+      "suggested_fix": "Remove entirely or replace with specific context about what first-time patients should know"
     },
     {
       "section_number": 4,
       "source_content": "content/b_blocks/B_INTERP_STANDARD/en/TP-06.md",
-      "quote": "Based on your responses, your dental situation appears to fall within established treatment frameworks.",
-      "problem": "Meaningless corporate speak. 'Established treatment frameworks' says nothing concrete.",
+      "quote": "A dentist would evaluate whether your situation fits common treatment patterns.",
+      "problem": "Vague statement that doesn't provide actionable interpretation",
       "severity": "warning",
-      "suggested_fix": "Replace with specific interpretation: 'Your responses indicate a straightforward single-tooth replacement case with good overall oral health.'"
+      "suggested_fix": "Provide specific examples of what patterns might apply to this patient's situation"
+    },
+    {
+      "section_number": 4,
+      "source_content": "content/b_blocks/B_INTERP_STANDARD/en/TP-06.md",
+      "quote": "entire section",
+      "problem": "Section is severely underdeveloped at only 45 words - doesn't fulfill its purpose",
+      "severity": "critical",
+      "suggested_fix": "Expand to 80-100 words with concrete interpretation of patient's specific situation"
     },
     {
       "section_number": 5,
       "source_content": "content/scenarios/S03/en/TP-06.md",
       "quote": "Long-term stability if healing is successful",
-      "problem": "Too optimistic. Doesn't disclose implant failure rates or what 'if healing is successful' actually means.",
-      "severity": "critical",
-      "suggested_fix": "Revise to: 'Long-term stability in 90-95% of cases. Implants can fail to integrate (5-10% of cases) requiring removal or replacement.'"
+      "problem": "Implies guaranteed stability after successful healing - needs hedging",
+      "severity": "warning",
+      "suggested_fix": "Change to 'May provide long-term stability when healing is successful'"
     },
     {
       "section_number": 5,
       "source_content": "content/scenarios/S03/en/TP-06.md",
       "quote": "You might choose this if...",
-      "problem": "Subtly directive framing despite autonomy-respecting tone profile. Guides patient toward specific choices.",
+      "problem": "Repetitive structure becomes monotonous and subtly directive",
+      "severity": "info",
+      "suggested_fix": "Vary the phrasing or reframe as 'Patients often consider this when...'"
+    },
+    {
+      "section_number": 6,
+      "source_content": "content/b_blocks/B_COMPARE_IMPLANT_VS_BRIDGE/en/TP-06.md",
+      "quote": "Typical lifespan: 15-25+ years / 10-15 years",
+      "problem": "Presents lifespan as definitive without hedging about individual variation",
       "severity": "warning",
-      "suggested_fix": "Reframe to observational: 'Patients who choose this often prioritize...' or 'This option is selected by those who...'"
+      "suggested_fix": "Add qualifier in table header or footnote: 'Typical lifespan (varies significantly)'"
     },
     {
       "section_number": 7,
       "source_content": "content/scenarios/S03/en/TP-06.md",
-      "quote": "Either can work well if chosen thoughtfully.",
-      "problem": "Implies guaranteed success with right choice. Oversimplifies outcomes. Also, entire section is only 29 words - insufficient depth.",
+      "quote": "entire section",
+      "problem": "Only 28 words for critical trade-offs section - severely underdeveloped",
       "severity": "critical",
-      "suggested_fix": "Expand section to 100+ words with concrete trade-offs. Revise to: 'Both options have documented success and failure cases. Outcomes depend on individual factors your dentist will assess.'"
+      "suggested_fix": "Expand to 100+ words discussing meaningful trade-offs between permanence, process, cost, and impact on mouth"
     },
     {
-      "section_number": 9,
+      "section_number": 7,
       "source_content": "content/scenarios/S03/en/TP-06.md",
-      "quote": "Implant with crown: approximately €2,200 – €2,500",
-      "problem": "Cost ranges given without disclaimer about significant variability. No mention that complexity, materials, location can dramatically affect price.",
+      "quote": "Both options are designed to restore comfortable chewing",
+      "problem": "Too definitive about outcomes - implies guaranteed result",
       "severity": "warning",
-      "suggested_fix": "Add disclaimer: 'Costs vary significantly based on case complexity, materials chosen, and provider. These are approximate ranges for straightforward cases only.'"
-    },
-    {
-      "section_number": 10,
-      "source_content": "content/scenarios/S03/en/TP-06.md",
-      "quote": "Recovery time: 2–5 days, Possible impact: mild discomfort",
-      "problem": "Oversimplified. No mention of potential complications like infection, prolonged pain, implant failure during healing. Section titled 'Risk Factors' but only covers recovery.",
-      "severity": "critical",
-      "suggested_fix": "Rename section to 'Recovery Timeline' and add actual risk factors to Section 5. Include: 'Potential complications include infection (1-5%), prolonged healing, or implant failure requiring removal.'"
-    },
-    {
-      "section_number": 11,
-      "source_content": "content/static/11/en.md",
-      "quote": "Remember, this is your journey.",
-      "problem": "Forced empathy language that doesn't match the clinical, professional tone of the rest of the report. Feels performative.",
-      "severity": "info",
-      "suggested_fix": "Remove this sentence. Maintain professional neutrality throughout. The autonomy message is clear without emotional language."
-    },
-    {
-      "section_number": 2,
-      "source_content": "content/scenarios/S03/en/TP-06.md",
-      "quote": "You're missing one tooth in the back of your mouth—the chewing zone.",
-      "problem": "Patient name 'Sarah' provided but never used. Generic language when specific personalization is available (side chewing area per Q6b).",
-      "severity": "warning",
-      "suggested_fix": "Personalize: 'Sarah, you're missing one tooth in your side chewing area.' Use name 2-3 times throughout report."
-    },
-    {
-      "section_number": 5,
-      "source_content": "content/scenarios/S03/en/TP-06.md",
-      "quote": "A fixed, self-supporting solution",
-      "problem": "Doesn't connect to patient's stated 'functional_durable' priority (Q7) or 'very_important_natural' aesthetic concern (Q8). Generic description.",
-      "severity": "warning",
-      "suggested_fix": "Add: 'Given your focus on durability and natural appearance, the 15-25+ year lifespan and bone preservation may align with your priorities.'"
+      "suggested_fix": "Change to 'Both options aim to restore comfortable chewing, though individual outcomes vary'"
     },
     {
       "section_number": 8,
       "source_content": "content/scenarios/S03/en/TP-06.md",
-      "quote": "You choose the pace that works for your situation.",
-      "problem": "Patient indicated 6-month timeline (Q12) but this isn't referenced. Missed personalization opportunity.",
-      "severity": "info",
-      "suggested_fix": "Add: 'Your indicated 6-month timeframe aligns well with implant treatment duration (3-7 months).'"
+      "quote": "entire section",
+      "problem": "Only 18 words - completely inadequate for describing treatment processes",
+      "severity": "critical",
+      "suggested_fix": "Expand to 100+ words describing actual steps involved in each treatment process"
     },
     {
-      "section_number": 3,
-      "source_content": "content/modules/TM_CTX_FIRST_TIME/en/TP-06.md",
-      "quote": "There's no objectively correct timeline.",
-      "problem": "Autonomy statement that will be repeated multiple times. Verbose and unnecessary repetition.",
+      "section_number": 9,
+      "source_content": "content/modules/TM_BUDGET_PREMIUM/en/TP-06.md",
+      "quote": "You've indicated a preference for premium treatment options",
+      "problem": "Generic budget module doesn't personalize to patient's specific priorities",
+      "severity": "warning",
+      "suggested_fix": "Connect premium preference to patient's durability focus and long-term value"
+    },
+    {
+      "section_number": 9,
+      "source_content": "content/scenarios/S03/en/TP-06.md",
+      "quote": "approximately €2,200 – €2,500 / €2,100 – €2,700",
+      "problem": "Cost ranges presented without sufficient caveats about high variability",
       "severity": "info",
-      "suggested_fix": "Remove. Autonomy messaging should appear once clearly, not scattered across multiple sections."
+      "suggested_fix": "Add stronger disclaimer: 'Costs vary significantly by location and complexity - these are rough estimates only'"
+    },
+    {
+      "section_number": 10,
+      "source_content": "content/scenarios/S03/en/TP-06.md",
+      "quote": "Recovery time: typically 2–5 days",
+      "problem": "Presents recovery time as fact rather than typical range with variation",
+      "severity": "info",
+      "suggested_fix": "Rephrase as 'Recovery commonly ranges from 2-5 days, though individual experiences vary'"
+    },
+    {
+      "section_number": 11,
+      "source_content": "content/static/11/en.md",
+      "quote": "Your dentist can provide information and guidance based on clinical examination.",
+      "problem": "Obvious closing statement that adds no value - assumed by reader",
+      "severity": "info",
+      "suggested_fix": "Remove this sentence entirely"
+    },
+    {
+      "section_number": 0,
+      "source_content": "content/scenarios/S03/en/TP-06.md",
+      "quote": "entire report",
+      "problem": "Patient name 'Sarah' never used despite being provided - feels impersonal",
+      "severity": "warning",
+      "suggested_fix": "Use patient name at least once, preferably in opening of Section 2"
+    },
+    {
+      "section_number": 0,
+      "source_content": "content/scenarios/S03/en/TP-06.md",
+      "quote": "entire report",
+      "problem": "No reference to patient-specific details: side_chewing location, mostly_intact_enamel, durability focus",
+      "severity": "warning",
+      "suggested_fix": "Incorporate specific patient details throughout to increase personalization"
     }
   ],
   "content_files_to_review": [
     "content/scenarios/S03/en/TP-06.md",
     "content/modules/TM_CTX_FIRST_TIME/en/TP-06.md",
     "content/b_blocks/B_INTERP_STANDARD/en/TP-06.md",
+    "content/b_blocks/B_COMPARE_IMPLANT_VS_BRIDGE/en/TP-06.md",
+    "content/modules/TM_BUDGET_PREMIUM/en/TP-06.md",
     "content/static/11/en.md"
   ],
-  "overall_assessment": "This report suffers from excessive verbosity and filler language that undermines professional quality. The phrase 'Based on the information provided' appears three times in four sections - pure padding. Clinical safety is compromised by overly optimistic language about outcomes and missing risk disclosures (implant failure rates, bridge complications). Personalization is weak despite available patient data - name never used, specific priorities not connected to options. Autonomy emphasis is overdone to the point of being performative, with repetitive statements across 5+ sections. Structure is complete but Section 7 is underdeveloped (29 words) and Section 10 misnamed. Content needs significant tightening, stronger safety language, and genuine personalization. Score: 5.2/10 weighted average.",
+  "overall_assessment": "This report is structurally complete but suffers from significant quality issues. The writing is verbose with filler language, several critical sections are severely underdeveloped (Sections 4, 7, 8), and personalization is minimal despite detailed patient information being available. Clinical safety is acceptable but could be stronger. The tone appropriately respects autonomy but some framing is subtly directive. Most critically, the report feels generic and cookie-cutter rather than tailored to Sarah's specific situation and priorities.",
   "metadata": {
     "model_used": "claude-sonnet-4-5-20250929",
-    "duration_ms": 88080,
+    "evaluation_timestamp": "2026-01-13T19:36:52.906Z",
+    "duration_ms": 73953,
     "token_usage": {
-      "input_tokens": 6582,
-      "output_tokens": 3941
+      "input_tokens": 6391,
+      "output_tokens": 3364
     }
   }
 }

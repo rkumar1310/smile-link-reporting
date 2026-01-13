@@ -1,6 +1,6 @@
 {
   "session_id": "test-case-004",
-  "created_at": "2026-01-13T15:18:07.225Z",
+  "created_at": "2026-01-13T19:35:13.501Z",
   "intake": {
     "session_id": "test-case-004",
     "timestamp": "2026-01-08T07:09:41.236Z",
@@ -411,20 +411,20 @@
       {
         "section_number": 0,
         "section_name": "Important Notices",
-        "content": "# Important Notice: Treatment Considerations\n\nBased on your responses, certain treatment approaches may not be suitable at this time. This is determined by medical or surgical contraindications.\n\n**What this means:**\n- Some standard treatment options may not apply to your situation\n- Your dentist will focus on alternatives that are appropriate for you\n- This report will not include options that aren't suitable\n- Your safety is the priority in all recommendations\n\nPlease discuss your complete medical history with your dentist so they can provide guidance tailored to your circumstances.",
+        "content": "# Important Notice: Treatment Considerations\n\nCertain treatment approaches may not be suitable at this time due to medical or surgical contraindications indicated in your responses.\n\n**What this means:**\n- Some standard treatment options are not discussed in this report\n- Your dentist will focus on alternatives appropriate for your situation\n\nPlease discuss your complete medical history with your dentist for guidance tailored to your circumstances.",
         "sources": [
           "A_BLOCK_TREATMENT_OPTIONS"
         ],
-        "word_count": 85
+        "word_count": 62
       },
       {
         "section_number": 1,
         "section_name": "Disclaimer",
-        "content": "# Section 1: Disclaimer\n\nThis report is generated based on your responses to our questionnaire and is intended for informational purposes only. It does not constitute medical advice, diagnosis, or treatment recommendations.\n\nPlease consult with a qualified dental professional before making any decisions about your dental care. Your dentist will conduct a thorough examination and provide personalized recommendations based on your specific situation.\n\nThe information presented here is general in nature and may not apply to your individual circumstances. Treatment outcomes vary between patients and depend on many factors that can only be assessed through clinical examination.",
+        "content": "# Section 1: Disclaimer\n\nThis report is generated based on your responses to our questionnaire and is intended for informational purposes only. It does not constitute medical advice, diagnosis, or treatment recommendations.\n\nPlease consult with a qualified dental professional before making any decisions about your dental care. Your dentist will conduct a thorough examination and provide personalized recommendations based on your specific situation.\n\nThe information presented here is general in nature and may not apply to your individual circumstances. Treatment outcomes cannot be predicted with certainty. Results vary between patients and depend on many factors that can only be assessed through clinical examination.",
         "sources": [
           "STATIC_1"
         ],
-        "word_count": 96
+        "word_count": 102
       },
       {
         "section_number": 2,
@@ -438,42 +438,42 @@
       {
         "section_number": 3,
         "section_name": "Context",
-        "content": "# First-Time Treatment Context\n\nAs this is your first time considering dental treatment of this type, it's natural to have many questions. The dental field offers various approaches, each with their own characteristics.\n\nYour dentist will guide you through the process step by step, explaining what to expect at each stage. There's no pressure to make immediate decisions—take whatever time feels right to understand your options.\n\nWhen teeth feel loose or cause pain, this can evoke uncertainty. Many people notice this during chewing, with pressure on certain teeth, or even at rest. Confidence in your own teeth decreases and simple activities, such as eating or brushing, can require extra attention.\n\nIn this scenario, aesthetics is not primary, but functional confidence. The question is rarely how it looks, but mainly: how do I get a stable and comfortable feeling again? Because looseness and pain can have different causes, it's important to have the situation carefully assessed. The Smile report helps you understand possible follow-up directions, without drawing conclusions.",
+        "content": "# First-Time Treatment Context\n\nYour dentist will explain the process step by step, including what to expect at each stage.\n\nLoose or painful teeth often cause uncertainty, especially during chewing or daily activities like eating and brushing.\n\nIn this scenario, the focus is functional confidence rather than aesthetics. The question is: how to restore a stable, comfortable feeling? Because looseness and pain can have different causes, careful assessment is important.",
         "sources": [
           "TM_CTX_FIRST_TIME",
           "SCENARIO:context"
         ],
-        "word_count": 166
+        "word_count": 69
       },
       {
         "section_number": 4,
         "section_name": "Interpretation",
-        "content": "# Section 4: Interpretation\n\nYour responses indicate a dental situation that falls within established treatment frameworks. Clinical examination findings will refine the specific recommendations.\n\nYour stated priorities—whether emphasizing aesthetics, function, comfort, or balance—provide direction for treatment planning. These preferences help narrow the range of suitable options.\n\nA professional assessment is the logical next step, allowing your dentist to integrate your preferences with clinical observations to formulate appropriate recommendations.",
+        "content": "# Section 4: Interpretation\n\nYour priorities regarding aesthetics, function, and comfort help narrow the range of suitable options.\n\nClinical examination will determine specific recommendations based on your individual factors.",
         "sources": [
           "B_INTERP_STANDARD"
         ],
-        "word_count": 67
+        "word_count": 28
       },
       {
         "section_number": 10,
         "section_name": "Risk Factors",
-        "content": "**Implant or bridge solutions**\n- Recovery time: 3-7 days\n- Possible impact: discomfort or sensitivity\n- Daily functioning: improvement of stability after recovery",
+        "content": "**Implant or bridge solutions**\n- Typical recovery time: 3-7 days, though individual experiences vary\n- Possible impact: mild to moderate discomfort for 3-7 days, temporary sensitivity to temperature\n- Risks: Individual risk varies. Population studies show implant failure rates of 5-10% over 10 years. Infection risk is 2-5%. Additional risks depend on medical history and bone quality.\n- Daily functioning: Most resume normal activities within a week",
         "sources": [
-          "SCENARIO:recovery"
+          "SCENARIO:risk"
         ],
-        "word_count": 20
+        "word_count": 63
       },
       {
         "section_number": 11,
         "section_name": "Next Steps",
-        "content": "# Section 11: Next Steps\n\n**Your next steps are entirely up to you.** Here are some options to consider:\n\n- Review this report at your own pace\n- Prepare questions for your dental consultation\n- Schedule an appointment when you feel ready\n- Request additional information on specific topics\n\nRemember, this is your journey. Take whatever time feels right to make decisions that work for you.\n\n## How to Prepare for Your Consultation\n\nConsider noting down:\n- Your main concerns and priorities\n- Questions about specific treatment options\n- Your timeline preferences\n- Budget considerations you'd like to discuss\n\nThe choice of how to proceed is yours. Your dentist is there to provide information and guidance, but you remain in control of your dental care decisions.",
+        "content": "# Section 11: Next Steps\n\nOptions to consider:\n\n- Review this report\n- Prepare questions for your dental consultation\n- Schedule an appointment when ready\n- Request additional information on specific topics\n\n## How to Prepare for Your Consultation\n\nConsider noting down:\n- Your main concerns and priorities\n- Questions about specific treatment options\n- Your timeline preferences\n- Budget considerations to discuss\n\nYour dentist can provide information and guidance based on clinical examination.",
         "sources": [
           "STATIC_11"
         ],
-        "word_count": 116
+        "word_count": 64
       }
     ],
-    "total_word_count": 579,
+    "total_word_count": 417,
     "warnings_included": true,
     "suppressed_sections": [
       5,
@@ -490,290 +490,260 @@
     "errors": [],
     "warnings": [
       "Section 2 has 29 words, minimum recommended is 100",
-      "Section 10 has 20 words, minimum recommended is 50"
+      "Section 3 has 69 words, minimum recommended is 100",
+      "Section 4 has 28 words, minimum recommended is 50"
     ],
-    "semantic_violations": [
-      {
-        "phrase": "simple",
-        "location": {
-          "section": 3,
-          "position": 629
-        },
-        "severity": "WARNING",
-        "rule": "General banned phrase"
-      }
-    ]
+    "semantic_violations": []
   },
   "llm_evaluation": {
     "professional_quality": {
       "score": 4,
       "confidence": 0.85,
-      "feedback": "Writing quality is poor with excessive filler phrases, redundant statements, and verbose padding throughout. Multiple sections waste words on obvious statements that add no value. Transitions are weak and repetitive.",
+      "feedback": "Writing quality is poor with significant verbosity, awkward phrasing, and filler language throughout. Multiple sections contain padding that adds no value. Transitions are weak and repetitive patterns appear across sections.",
       "issues": [
-        "Section 0: 'Based on your responses' is filler - just state the facts",
-        "Section 0: 'What this means:' followed by bullet points that repeat the same idea four different ways",
-        "Section 1: 'This report is generated based on your responses' - obvious filler opening",
-        "Section 1: Entire disclaimer is generic boilerplate that could be half the length",
-        "Section 3: 'As this is your first time considering dental treatment of this type, it's natural to have many questions' - patronizing filler",
-        "Section 3: 'There's no pressure to make immediate decisions—take whatever time feels right' - vague padding",
-        "Section 3: Second paragraph repeats looseness/pain concept three times in different words",
-        "Section 3: 'Because looseness and pain can have different causes' - stating the obvious",
-        "Section 4: 'Your responses indicate a dental situation that falls within established treatment frameworks' - meaningless corporate speak",
-        "Section 4: 'Clinical examination findings will refine the specific recommendations' - filler",
-        "Section 11: 'Your next steps are entirely up to you' followed by 'Remember, this is your journey' - repetitive autonomy padding",
-        "Section 11: Bullet list of obvious preparation items adds no value"
+        "Section 0: 'indicated in your responses' is awkward phrasing",
+        "Section 0: 'Please discuss your complete medical history with your dentist for guidance tailored to your circumstances' is verbose filler",
+        "Section 1: 'This report is generated based on your responses to our questionnaire and is intended for informational purposes only' - wordy opening",
+        "Section 1: 'The information presented here is general in nature and may not apply to your individual circumstances' - redundant with earlier disclaimer",
+        "Section 3: 'Your dentist will explain the process step by step, including what to expect at each stage' - generic filler that says nothing specific",
+        "Section 3: 'Because looseness and pain can have different causes, careful assessment is important' - obvious statement, no value added",
+        "Section 4: Entire section is filler - 28 words that say nothing actionable",
+        "Section 11: 'Options to consider:' followed by generic bullet list is padding",
+        "Section 11: 'Your dentist can provide information and guidance based on clinical examination' - empty closing statement"
       ],
       "suggestions": [
-        "Cut Section 0 by 50% - one clear statement about contraindications is enough",
-        "Rewrite Section 1 disclaimer in 40-50 words maximum",
-        "Remove all 'it's natural to' and 'take your time' filler from Section 3",
-        "Section 3 second paragraph: state the functional impact once, clearly, without repetition",
-        "Replace Section 4 corporate speak with direct, concrete statements",
-        "Section 11: Cut the autonomy repetition - state it once or not at all",
-        "Every section needs aggressive editing to remove padding and redundancy"
+        "Section 0: Rewrite as 'Your medical history indicates certain treatments may not be suitable. Your dentist will focus on appropriate alternatives.'",
+        "Section 1: Cut redundant sentences. One clear disclaimer statement is sufficient.",
+        "Section 3: Remove generic 'step by step' sentence entirely. Start with the actual context.",
+        "Section 4: Either provide specific interpretation or remove this section entirely. Current content is worthless.",
+        "Section 11: Replace generic bullets with specific actions tied to William's situation.",
+        "Overall: Cut word count by 30-40% by removing all filler phrases and redundant statements."
       ]
     },
     "clinical_safety": {
-      "score": 3,
+      "score": 6,
       "confidence": 0.9,
-      "feedback": "Critical safety failures. Section 0 makes vague claims about contraindications without proper medical disclaimer. Section 10 provides recovery timelines and outcome expectations without adequate hedging or risk disclosure. Missing comprehensive disclaimers about individual variation and unpredictability.",
+      "feedback": "Disclaimers are present but weak in several areas. Risk disclosure is vague and lacks proper hedging in places. Some language could be interpreted as more certain than appropriate for a preliminary report.",
       "issues": [
-        "Section 0: States 'certain treatment approaches may not be suitable' but doesn't clarify this is AI-generated speculation, not clinical diagnosis",
-        "Section 0: 'Your safety is the priority' implies guarantee of safety assessment - dangerous claim",
-        "Section 0: No disclaimer that contraindication determination requires actual medical evaluation",
-        "Section 10: '3-7 days' recovery timeline presented as fact without 'typically' or 'may vary significantly'",
-        "Section 10: 'improvement of stability after recovery' implies guaranteed outcome",
-        "Section 10: No mention of potential complications, failures, or individual variation",
-        "Section 1: Generic disclaimer doesn't specifically address the contraindication claims in Section 0",
-        "Overall: Missing strong language about unpredictability of outcomes and necessity of professional evaluation"
+        "Section 0: 'may not be suitable' is too soft - should be stronger given surgical contraindication",
+        "Section 2: States goals as fact ('Your main goal is...') without hedging - assumes too much",
+        "Section 3: 'careful assessment is important' implies assessment hasn't happened yet, but report already makes claims",
+        "Section 10: '3-7 days' recovery time stated as typical without sufficient hedging",
+        "Section 10: 'Most resume normal activities within a week' - too definitive, lacks proper disclaimer",
+        "Section 10: Risk percentages given without context of study populations or individual variation emphasis",
+        "Missing: No explicit statement that this report cannot diagnose or recommend specific treatments"
       ],
       "suggestions": [
-        "Section 0: Add explicit disclaimer that contraindication assessment is preliminary and requires professional medical evaluation",
-        "Section 0: Remove 'Your safety is the priority' - this is a claim the AI cannot make",
-        "Section 10: Add 'typically' or 'generally' to all timeframes and outcomes",
-        "Section 10: Include statement about potential complications and individual variation",
-        "Section 10: Add disclaimer that recovery experiences vary significantly between patients",
-        "Add comprehensive risk disclosure section or strengthen existing disclaimers",
-        "Every outcome statement needs hedging language (may, might, typically, often)"
+        "Section 0: Change to 'Based on your responses, certain treatments are contraindicated and are not discussed in this report.'",
+        "Section 2: Add hedging: 'Based on your responses, your primary concerns appear to be...'",
+        "Section 10: Add before statistics: 'Population-level data shows... however, individual outcomes vary significantly and cannot be predicted.'",
+        "Section 10: Replace 'Most resume' with 'Many patients report resuming' to reduce certainty",
+        "Add explicit statement: 'This report cannot determine which treatments are appropriate for you - only clinical examination can establish this.'"
       ]
     },
     "tone_appropriateness": {
       "score": 5,
-      "confidence": 0.75,
-      "feedback": "Tone is inconsistent and often misses the 'Reflective-Contextual' target. Some sections are appropriately thoughtful, but others slip into generic corporate speak or patronizing language. The broader life context consideration is weak.",
+      "confidence": 0.8,
+      "feedback": "Tone is inconsistent and often generic rather than reflective-contextual. Missing the thoughtful consideration of broader life circumstances expected for TP-03. Several sections feel cookie-cutter rather than contextually aware.",
       "issues": [
-        "Section 0: Bureaucratic tone ('This is determined by medical or surgical contraindications') doesn't match reflective approach",
-        "Section 3: 'it's natural to have many questions' is patronizing, not reflective",
-        "Section 3: Good reflective tone in second paragraph about looseness/pain experience, but undermined by verbose delivery",
-        "Section 4: Corporate jargon ('falls within established treatment frameworks') completely wrong tone",
-        "Section 11: Repetitive autonomy statements feel forced rather than genuinely reflective",
-        "Overall: Missing consideration of broader life circumstances for a 60+ patient - no reflection on life stage, priorities at this age, etc."
+        "Section 0: Clinical/administrative tone doesn't match reflective-contextual profile",
+        "Section 2: Blunt statement of goals lacks the thoughtful framing expected",
+        "Section 3: 'First-Time Treatment Context' header is generic, not reflective",
+        "Section 4: Completely generic tone, could be any tone profile",
+        "Section 11: Generic checklist tone, not reflective or contextual",
+        "Missing: No consideration of William being 60+ and exploring options for first time",
+        "Missing: No acknowledgment of the broader life context of dealing with extensive tooth loss as a senior"
       ],
       "suggestions": [
-        "Section 0: Rewrite in more conversational, less bureaucratic language",
-        "Section 3: Remove patronizing phrases, trust the patient's intelligence",
-        "Section 4: Replace corporate speak with genuine reflection on the patient's situation",
-        "Add content that reflects on life stage considerations for 60+ patient",
-        "Strengthen connection between functional priorities and daily life quality",
-        "Make tone consistently thoughtful throughout, not just in isolated paragraphs"
+        "Section 2: Reframe with more reflection: 'At this stage of life, dealing with loose or painful teeth affects not just eating, but confidence in daily interactions...'",
+        "Section 3: Replace generic header with something contextual: 'Understanding Your Situation'",
+        "Section 4: Either make this genuinely interpretive of William's specific context or remove it",
+        "Section 11: Reframe as reflective: 'As you consider these options, you might find it helpful to...' rather than bullet list",
+        "Overall: Infuse more awareness of William's life stage and what this situation means for him personally"
       ]
     },
     "personalization": {
       "score": 4,
-      "confidence": 0.8,
-      "feedback": "Personalization is weak and generic. Patient name William is never used. Specific details from intake (5+ missing teeth, heavily restored, chewing issues) are barely referenced. Content reads like a template with minimal customization.",
+      "confidence": 0.95,
+      "feedback": "Severely lacking personalization. Patient name William is never used despite being provided. Content is almost entirely generic and could apply to anyone. No reference to specific details from intake like being 60+, first-timer, or economy budget focus.",
       "issues": [
-        "Patient name 'William' never appears in the report",
-        "Section 2: Generic statement about looseness/pain doesn't reference specific intake details (5+ missing, heavily restored, chewing problems)",
-        "Section 3: 'First-time treatment' context is good but not connected to William's specific situation",
-        "Section 10: Generic recovery info not tailored to 60+ age or economy budget concerns",
-        "No reference to patient's stated priority: 'functional_durable' and 'very_important_natural'",
-        "No acknowledgment of 'affordable_durable' budget constraint",
-        "Missing connection to 'chewing_missing' specific functional issue"
+        "Patient name 'William' never used anywhere in report",
+        "No reference to age (60+) or life stage implications",
+        "No acknowledgment of first-time treatment experience",
+        "No mention of economy/affordable budget priority from Q10",
+        "Section 2: Generic statement about goals, not tied to William's specific responses",
+        "Section 3: Generic first-timer content, not personalized",
+        "Section 10: Generic risk data, not contextualized for William's situation",
+        "Section 11: Generic preparation list, not tailored to William's decision stage or priorities",
+        "Missing: Any connection between extensive missing teeth (5+ in one jaw) and treatment discussion"
       ],
       "suggestions": [
-        "Use patient name William at least 2-3 times throughout report",
-        "Section 2: Reference specific intake details - '5+ missing teeth affecting chewing'",
-        "Connect treatment discussion to stated priorities: durability, natural feel, affordability",
-        "Section 10: Tailor recovery discussion to 60+ age considerations",
-        "Add content addressing the specific chewing/missing teeth functional issue",
-        "Reference the 'heavily restored' mouth situation in context",
-        "Make budget considerations explicit given 'economy' and 'affordable_durable' responses"
+        "Use 'William' at least 2-3 times throughout report, especially in opening sections",
+        "Section 2: Reference specific intake details: 'William, you indicated that chewing difficulty is your primary concern...'",
+        "Section 3: Personalize: 'As someone approaching dental treatment for the first time at this stage of life...'",
+        "Section 10: Context for William: 'Given your focus on durability and function over aesthetics...'",
+        "Section 11: Tailor to his stage: 'William, since you're still exploring options and prioritizing affordability...'",
+        "Add specific reference to his extensive tooth loss and how that shapes the treatment landscape"
       ]
     },
     "patient_autonomy": {
-      "score": 6,
+      "score": 7,
       "confidence": 0.85,
-      "feedback": "Autonomy is stated repeatedly but feels forced and repetitive rather than genuinely empowering. The constant reassurance ('no pressure', 'your journey', 'entirely up to you') becomes patronizing through overuse. Actual empowerment through information is weak.",
+      "feedback": "Generally respects autonomy with non-directive language. However, some subtle framing issues and the generic nature of Section 11 could be stronger in emphasizing patient control.",
       "issues": [
-        "Section 3: 'There's no pressure to make immediate decisions—take whatever time feels right' - first autonomy statement",
-        "Section 11: 'Your next steps are entirely up to you' - repetition",
-        "Section 11: 'Remember, this is your journey' - third repetition of same concept",
-        "Section 11: 'The choice of how to proceed is yours' - fourth repetition",
-        "Autonomy stated four times but actual empowering information is thin",
-        "No genuine exploration of trade-offs that would enable informed choice",
-        "Reassurance replaces substantive information"
+        "Section 0: 'Please discuss your complete medical history' has slight directive tone",
+        "Section 3: 'careful assessment is important' implies what patient should value",
+        "Section 11: 'Options to consider' list format could feel prescriptive rather than empowering",
+        "Missing: Explicit statement that patient controls timing and decision-making"
       ],
       "suggestions": [
-        "Reduce autonomy statements to ONE clear statement, not four repetitions",
-        "Replace autonomy padding with actual empowering information about options",
-        "Provide substantive trade-off discussions that enable real choice",
-        "Remove patronizing reassurance language",
-        "Focus on information quality over autonomy quantity",
-        "Let autonomy be implicit through information quality, not explicit through repetition"
+        "Section 0: Reframe as 'You may wish to discuss...' to maintain autonomy",
+        "Section 3: Remove value judgment about what's 'important'",
+        "Section 11: Reframe as 'You might choose to...' rather than 'Options to consider'",
+        "Add explicit autonomy statement: 'You're in control of whether, when, and how to proceed with any treatment.'"
       ]
     },
     "structure_completeness": {
-      "score": 5,
+      "score": 6,
       "confidence": 0.9,
-      "feedback": "Structure has significant gaps. Sections 5-9 are suppressed, leaving major content holes. Section 0 placement is awkward. Section 10 is too brief. Flow between sections is poor with weak transitions.",
+      "feedback": "Basic structure is present but several issues with section utility and flow. Section 4 adds no value. Large gap from Section 4 to Section 10 with no explanation. Section ordering feels disjointed.",
       "issues": [
-        "Sections 5-9 completely missing (treatment options, comparisons, considerations, timeline, costs)",
-        "Section 0 'Important Notices' awkwardly placed before disclaimer",
-        "Section 10 only 20 words - inadequate for risk factors",
-        "No treatment options section despite this being core purpose of report",
-        "No cost/timeline information despite patient indicating 'economy' budget concern",
-        "Section 3 combines two different topics (first-time context + scenario context) awkwardly",
-        "Transition from Section 4 to Section 10 is jarring - missing 5 sections in between"
+        "Section 4 (Interpretation) contains only 28 words of generic filler - serves no purpose",
+        "Sections 5-9 suppressed with no explanation to reader about the gap",
+        "Section 10 (Risk Factors) appears abruptly after Section 4 with no transition",
+        "Section 2 (Personal Summary) is extremely brief at 29 words - underdeveloped",
+        "No clear logical flow from personal summary → context → interpretation → risks",
+        "Missing: Any treatment options discussion despite Section 0 mentioning them"
       ],
       "suggestions": [
-        "Restore critical missing sections or explain why suppressed",
-        "Move Section 0 content into Section 1 or after it",
-        "Expand Section 10 to adequately cover risk factors",
-        "Add treatment options content - this is a major gap",
-        "Include cost/timeline information given patient's budget concerns",
-        "Separate first-time context from scenario context into distinct sections",
-        "Add transitional content to bridge section gaps"
+        "Remove Section 4 entirely or make it substantive with actual interpretation",
+        "Add brief note explaining why middle sections aren't included: 'The following sections focus on aspects most relevant to your situation...'",
+        "Expand Section 2 to provide more substantial personal summary (target 80-100 words)",
+        "Add transition before Section 10: 'Understanding potential considerations...'",
+        "Consider restructuring: Personal Summary → Context → Treatment Landscape → Risks → Next Steps",
+        "If treatment options are contraindicated (per Section 0), explain what IS being considered"
       ]
     },
     "content_issues": [
       {
         "section_number": 0,
         "source_content": "content/a_blocks/A_BLOCK_TREATMENT_OPTIONS/en/TP-03.md",
-        "quote": "Based on your responses, certain treatment approaches may not be suitable at this time.",
-        "problem": "Filler opening phrase 'Based on your responses' adds no value. Also implies AI has made clinical determination about contraindications without proper medical disclaimer.",
+        "quote": "indicated in your responses",
+        "problem": "Awkward phrasing - 'indicated' is clinical jargon inappropriate for patient-facing content",
         "severity": "warning",
-        "suggested_fix": "Remove 'Based on your responses,' and add disclaimer: 'Preliminary assessment suggests certain approaches may require medical evaluation. Only your dentist can determine actual contraindications.'"
+        "suggested_fix": "Change to 'based on your responses' or 'according to your medical history'"
       },
       {
         "section_number": 0,
         "source_content": "content/a_blocks/A_BLOCK_TREATMENT_OPTIONS/en/TP-03.md",
-        "quote": "Your safety is the priority in all recommendations",
-        "problem": "Implies guarantee of safety assessment that AI cannot provide. Overpromises.",
-        "severity": "critical",
-        "suggested_fix": "Remove this sentence entirely or replace with: 'Your dentist will prioritize safety in all recommendations after proper evaluation.'"
+        "quote": "Please discuss your complete medical history with your dentist for guidance tailored to your circumstances.",
+        "problem": "Verbose filler sentence that adds no value. Obvious and patronizing.",
+        "severity": "warning",
+        "suggested_fix": "Remove entirely. The point is already made in previous sentences."
       },
       {
         "section_number": 1,
         "source_content": "content/static/1/en.md",
         "quote": "This report is generated based on your responses to our questionnaire and is intended for informational purposes only.",
-        "problem": "Obvious filler opening. 'Based on your responses' is redundant - how else would it be generated?",
+        "problem": "Wordy opening. 'Generated based on' and 'intended for' are verbose constructions.",
         "severity": "info",
-        "suggested_fix": "Start with: 'This report is for informational purposes only and does not constitute medical advice.'"
+        "suggested_fix": "Simplify to: 'This report provides general information based on your questionnaire responses.'"
       },
       {
         "section_number": 1,
         "source_content": "content/static/1/en.md",
         "quote": "The information presented here is general in nature and may not apply to your individual circumstances.",
-        "problem": "Weak disclaimer that doesn't address specific contraindication claims made in Section 0.",
+        "problem": "Redundant with earlier disclaimer statement. Repeats same concept unnecessarily.",
         "severity": "warning",
-        "suggested_fix": "Add specific disclaimer: 'Any mentions of contraindications or unsuitable treatments are preliminary assessments only. Your dentist must evaluate your complete medical history to determine actual contraindications.'"
+        "suggested_fix": "Remove this sentence entirely. Point already made."
+      },
+      {
+        "section_number": 2,
+        "source_content": "content/scenarios/S12/en/TP-03.md",
+        "quote": "Your main goal is restoring comfort, security, and stability",
+        "problem": "States as definitive fact without hedging. Assumes patient's goals without qualification.",
+        "severity": "warning",
+        "suggested_fix": "Add hedging: 'Based on your responses, your primary concerns appear to be restoring comfort...'"
       },
       {
         "section_number": 2,
         "source_content": "content/scenarios/S12/en/TP-03.md",
         "quote": "You are experiencing looseness of teeth and/or pain complaints.",
-        "problem": "Generic statement that doesn't use patient name or reference specific intake details (5+ missing teeth, chewing issues, heavily restored).",
+        "problem": "Patient name 'William' not used despite being provided. Missed personalization opportunity.",
         "severity": "warning",
-        "suggested_fix": "William, you've indicated experiencing chewing difficulties due to 5+ missing teeth in one jaw, with remaining teeth heavily restored and some looseness or pain."
+        "suggested_fix": "Start with: 'William, you are experiencing...'"
       },
       {
         "section_number": 3,
         "source_content": "content/modules/TM_CTX_FIRST_TIME/en/TP-03.md",
-        "quote": "As this is your first time considering dental treatment of this type, it's natural to have many questions.",
-        "problem": "Patronizing filler phrase. 'It's natural to have many questions' adds no value and talks down to patient.",
+        "quote": "Your dentist will explain the process step by step, including what to expect at each stage.",
+        "problem": "Generic filler that provides no actual information. Obvious statement with no value.",
         "severity": "warning",
-        "suggested_fix": "Remove entire sentence or replace with: 'Since this is your first time considering treatment of this scope, your dentist will guide you through each step.'"
-      },
-      {
-        "section_number": 3,
-        "source_content": "content/modules/TM_CTX_FIRST_TIME/en/TP-03.md",
-        "quote": "There's no pressure to make immediate decisions—take whatever time feels right to understand your options.",
-        "problem": "Vague autonomy padding that wastes words without adding substance.",
-        "severity": "info",
-        "suggested_fix": "Remove entirely or replace with concrete information about typical decision timelines."
+        "suggested_fix": "Remove entirely. If keeping, make specific: 'Your dentist will walk you through examination, diagnosis, and treatment planning phases.'"
       },
       {
         "section_number": 3,
         "source_content": "content/scenarios/S12/en/TP-03.md",
-        "quote": "When teeth feel loose or cause pain, this can evoke uncertainty. Many people notice this during chewing, with pressure on certain teeth, or even at rest. Confidence in your own teeth decreases and simple activities, such as eating or brushing, can require extra attention.",
-        "problem": "Repetitive - says the same thing three different ways. Verbose and padded.",
-        "severity": "warning",
-        "suggested_fix": "Condense to: 'Loose or painful teeth often cause uncertainty, especially during chewing or daily activities like eating and brushing.'"
-      },
-      {
-        "section_number": 3,
-        "source_content": "content/scenarios/S12/en/TP-03.md",
-        "quote": "Because looseness and pain can have different causes, it's important to have the situation carefully assessed.",
-        "problem": "States the obvious. Filler content.",
+        "quote": "Because looseness and pain can have different causes, careful assessment is important.",
+        "problem": "Obvious statement that adds no value. Patronizing tone.",
         "severity": "info",
-        "suggested_fix": "Remove entirely - this is implied by the need for professional consultation."
+        "suggested_fix": "Remove or make specific: 'Assessment will determine whether looseness stems from bone loss, gum disease, or other factors.'"
       },
       {
         "section_number": 4,
         "source_content": "content/b_blocks/B_INTERP_STANDARD/en/TP-03.md",
-        "quote": "Your responses indicate a dental situation that falls within established treatment frameworks.",
-        "problem": "Meaningless corporate jargon. 'Falls within established treatment frameworks' says nothing concrete.",
+        "quote": "Your priorities regarding aesthetics, function, and comfort help narrow the range of suitable options. Clinical examination will determine specific recommendations based on your individual factors.",
+        "problem": "Entire section is worthless filler. 28 words that say nothing actionable or specific. Generic to the point of being meaningless.",
+        "severity": "critical",
+        "suggested_fix": "Either provide actual interpretation of William's specific priorities and situation, or remove this section entirely. Current content serves no purpose."
+      },
+      {
+        "section_number": 10,
+        "source_content": "content/scenarios/S12/en/TP-03.md",
+        "quote": "Typical recovery time: 3-7 days, though individual experiences vary",
+        "problem": "States timeframe too definitively. 'Though individual experiences vary' is weak hedging for clinical claim.",
         "severity": "warning",
-        "suggested_fix": "Replace with specific statement: 'Your situation involves extensive missing teeth with remaining teeth heavily restored, which has several established treatment approaches.'"
-      },
-      {
-        "section_number": 4,
-        "source_content": "content/b_blocks/B_INTERP_STANDARD/en/TP-03.md",
-        "quote": "Clinical examination findings will refine the specific recommendations.",
-        "problem": "Obvious filler statement that adds no value.",
-        "severity": "info",
-        "suggested_fix": "Remove entirely or integrate into a more substantive statement about what the examination will assess."
+        "suggested_fix": "Reframe: 'Recovery time varies by individual; some patients report 3-7 days while others need longer.'"
       },
       {
         "section_number": 10,
         "source_content": "content/scenarios/S12/en/TP-03.md",
-        "quote": "Recovery time: 3-7 days",
-        "problem": "Presented as fact without hedging language. No 'typically' or 'may vary'. Implies guaranteed timeline.",
-        "severity": "critical",
-        "suggested_fix": "Change to: 'Typical recovery time: 3-7 days (varies significantly by individual)'"
+        "quote": "Most resume normal activities within a week",
+        "problem": "Too definitive. 'Most' is a statistical claim without proper disclaimer or context.",
+        "severity": "warning",
+        "suggested_fix": "Change to: 'Many patients report resuming normal activities within a week, though individual recovery varies significantly.'"
       },
       {
         "section_number": 10,
         "source_content": "content/scenarios/S12/en/TP-03.md",
-        "quote": "Daily functioning: improvement of stability after recovery",
-        "problem": "Implies guaranteed outcome without proper hedging or mention of potential complications.",
-        "severity": "critical",
-        "suggested_fix": "Change to: 'Daily functioning: most patients experience improved stability after recovery, though individual results vary and complications are possible.'"
-      },
-      {
-        "section_number": 10,
-        "source_content": "content/scenarios/S12/en/TP-03.md",
-        "quote": "Possible impact: discomfort or sensitivity",
-        "problem": "Section 10 is only 20 words total - completely inadequate for risk factors. Missing comprehensive risk discussion.",
-        "severity": "critical",
-        "suggested_fix": "Expand to include: potential complications, failure rates, individual variation factors, long-term maintenance requirements, and realistic outcome ranges."
+        "quote": "Population studies show implant failure rates of 5-10% over 10 years.",
+        "problem": "Statistics given without context of study populations, individual variation, or limitations. Could mislead patient.",
+        "severity": "warning",
+        "suggested_fix": "Add context: 'Population-level studies show failure rates of 5-10% over 10 years, but individual risk depends on many factors including bone quality, oral hygiene, and medical history that can only be assessed clinically.'"
       },
       {
         "section_number": 11,
         "source_content": "content/static/11/en.md",
-        "quote": "Your next steps are entirely up to you... Remember, this is your journey... The choice of how to proceed is yours.",
-        "problem": "Autonomy stated three separate times in one short section. Repetitive padding that becomes patronizing.",
+        "quote": "Options to consider: Review this report, Prepare questions for your dental consultation, Schedule an appointment when ready, Request additional information on specific topics",
+        "problem": "Generic bullet list that could apply to anyone. No personalization for William's situation, decision stage, or priorities.",
         "severity": "warning",
-        "suggested_fix": "State autonomy once clearly, then focus on substantive preparation guidance. Remove repetitive reassurance."
+        "suggested_fix": "Personalize: 'William, as you explore your options, you might: [bullets tailored to his economy focus, first-timer status, and functional priorities]'"
       },
       {
         "section_number": 11,
         "source_content": "content/static/11/en.md",
-        "quote": "Consider noting down: Your main concerns and priorities, Questions about specific treatment options, Your timeline preferences, Budget considerations you'd like to discuss",
-        "problem": "Generic bullet list that adds minimal value. Obvious preparation items.",
+        "quote": "Your dentist can provide information and guidance based on clinical examination.",
+        "problem": "Empty closing statement. Obvious filler that adds nothing.",
         "severity": "info",
-        "suggested_fix": "Replace with specific preparation guidance relevant to this patient's situation: questions about durability, natural feel, affordability trade-offs, etc."
+        "suggested_fix": "Remove or make specific: 'Your dentist will conduct a thorough examination to determine which approaches align with your functional priorities and budget considerations.'"
+      },
+      {
+        "section_number": 2,
+        "source_content": "content/scenarios/S12/en/TP-03.md",
+        "quote": "[entire section - 29 words]",
+        "problem": "Section severely underdeveloped. At 29 words, provides minimal personal summary. Should be 80-100 words minimum.",
+        "severity": "warning",
+        "suggested_fix": "Expand to include: William's name, age context (60+), first-timer status, functional priorities, economy budget focus, and specific concerns about chewing difficulty."
       }
     ],
     "content_files_to_review": [
@@ -784,27 +754,27 @@
       "content/b_blocks/B_INTERP_STANDARD/en/TP-03.md",
       "content/static/11/en.md"
     ],
-    "overall_score": 4.4,
-    "overall_assessment": "This report suffers from poor writing quality with excessive filler, weak clinical safety disclaimers, and minimal personalization. Content is verbose and repetitive, with autonomy stated four times while actual empowering information is thin. Critical sections (5-9) are missing entirely. Recovery timelines and outcomes lack proper hedging. The report needs major revision: cut verbosity by 40%, strengthen safety disclaimers, add patient-specific details, restore missing treatment content, and replace padding with substance.",
+    "overall_score": 5.4,
+    "overall_assessment": "This report suffers from severe verbosity, lack of personalization, and generic filler content throughout. Section 4 is completely worthless. Patient name never used despite being provided. Multiple sections contain obvious padding that should be cut. Clinical safety disclaimers are present but weak. Tone fails to deliver the reflective-contextual approach expected. Needs major revision to tighten writing, personalize content, and remove all filler.",
     "recommended_outcome": "BLOCK",
-    "outcome_reasoning": "Overall score 4.4 below blocking threshold 6",
+    "outcome_reasoning": "Overall score 5.4 below blocking threshold 6",
     "metadata": {
       "model_used": "claude-sonnet-4-5-20250929",
-      "evaluation_timestamp": "2026-01-13T15:18:07.225Z",
-      "duration_ms": 85968,
+      "evaluation_timestamp": "2026-01-13T19:35:13.501Z",
+      "duration_ms": 154419,
       "token_usage": {
-        "input_tokens": 5709,
-        "output_tokens": 3849
+        "input_tokens": 5520,
+        "output_tokens": 3635
       }
     }
   },
   "decision_trace": {
     "session_id": "test-case-004",
-    "started_at": "2026-01-13T15:16:41.250Z",
-    "completed_at": "2026-01-13T15:18:07.225Z",
+    "started_at": "2026-01-13T19:32:39.073Z",
+    "completed_at": "2026-01-13T19:35:13.501Z",
     "events": [
       {
-        "timestamp": "2026-01-13T15:16:41.250Z",
+        "timestamp": "2026-01-13T19:32:39.074Z",
         "stage": "input_validation",
         "action": "validate_input",
         "input": {
@@ -814,10 +784,10 @@
           "valid": true,
           "errors": 0
         },
-        "duration_ms": 0
+        "duration_ms": 1
       },
       {
-        "timestamp": "2026-01-13T15:16:41.251Z",
+        "timestamp": "2026-01-13T19:32:39.075Z",
         "stage": "tag_extraction",
         "action": "extract_tags",
         "input": {
@@ -932,7 +902,7 @@
         "duration_ms": 1
       },
       {
-        "timestamp": "2026-01-13T15:16:41.251Z",
+        "timestamp": "2026-01-13T19:32:39.075Z",
         "stage": "driver_derivation",
         "action": "derive_drivers",
         "input": {
@@ -1149,7 +1119,7 @@
         "duration_ms": 0
       },
       {
-        "timestamp": "2026-01-13T15:16:41.251Z",
+        "timestamp": "2026-01-13T19:32:39.075Z",
         "stage": "scenario_scoring",
         "action": "score_scenarios",
         "input": {
@@ -1166,7 +1136,7 @@
         "duration_ms": 0
       },
       {
-        "timestamp": "2026-01-13T15:16:41.251Z",
+        "timestamp": "2026-01-13T19:32:39.075Z",
         "stage": "tone_selection",
         "action": "select_tone",
         "input": {
@@ -1217,7 +1187,7 @@
         "duration_ms": 0
       },
       {
-        "timestamp": "2026-01-13T15:16:41.251Z",
+        "timestamp": "2026-01-13T19:32:39.075Z",
         "stage": "content_selection",
         "action": "select_content",
         "input": {
@@ -1229,7 +1199,7 @@
         "duration_ms": 0
       },
       {
-        "timestamp": "2026-01-13T15:16:41.253Z",
+        "timestamp": "2026-01-13T19:32:39.076Z",
         "stage": "scenario_load",
         "action": "load_scenario",
         "input": {
@@ -1239,10 +1209,10 @@
         "output": {
           "loaded": true
         },
-        "duration_ms": 2
+        "duration_ms": 1
       },
       {
-        "timestamp": "2026-01-13T15:16:41.255Z",
+        "timestamp": "2026-01-13T19:32:39.080Z",
         "stage": "composition",
         "action": "compose_report",
         "input": {
@@ -1250,12 +1220,12 @@
         },
         "output": {
           "sections": 7,
-          "words": 579
+          "words": 417
         },
-        "duration_ms": 2
+        "duration_ms": 4
       },
       {
-        "timestamp": "2026-01-13T15:18:07.225Z",
+        "timestamp": "2026-01-13T19:35:13.501Z",
         "stage": "qa_gate",
         "action": "qa_check",
         "input": {
@@ -1263,9 +1233,9 @@
         },
         "output": {
           "_truncated": true,
-          "_size": 18734
+          "_size": 17141
         },
-        "duration_ms": 85970
+        "duration_ms": 154421
       }
     ],
     "final_outcome": "FLAG"
