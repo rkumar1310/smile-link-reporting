@@ -1,0 +1,1275 @@
+{
+  "session_id": "test-case-004",
+  "created_at": "2026-01-13T15:18:07.225Z",
+  "intake": {
+    "session_id": "test-case-004",
+    "timestamp": "2026-01-08T07:09:41.236Z",
+    "answers": [
+      {
+        "question_id": "Q1",
+        "answer": "functional_issues"
+      },
+      {
+        "question_id": "Q2",
+        "answer": "1"
+      },
+      {
+        "question_id": "Q2a",
+        "answer": "chewing_missing"
+      },
+      {
+        "question_id": "Q3",
+        "answer": [
+          "missing_damaged"
+        ]
+      },
+      {
+        "question_id": "Q4",
+        "answer": [
+          "no_never"
+        ]
+      },
+      {
+        "question_id": "Q5",
+        "answer": "no_aesthetic_only"
+      },
+      {
+        "question_id": "Q6a",
+        "answer": "5_plus_one_jaw"
+      },
+      {
+        "question_id": "Q6c",
+        "answer": "heavily_restored"
+      },
+      {
+        "question_id": "Q7",
+        "answer": "functional_durable"
+      },
+      {
+        "question_id": "Q8",
+        "answer": "very_important_natural"
+      },
+      {
+        "question_id": "Q9",
+        "answer": "60_plus"
+      },
+      {
+        "question_id": "Q10",
+        "answer": "affordable_durable"
+      },
+      {
+        "question_id": "Q11",
+        "answer": "ai_report_first"
+      },
+      {
+        "question_id": "Q12",
+        "answer": "still_exploring"
+      },
+      {
+        "question_id": "Q13",
+        "answer": "no"
+      },
+      {
+        "question_id": "Q14",
+        "answer": "no"
+      },
+      {
+        "question_id": "Q15",
+        "answer": "basic"
+      },
+      {
+        "question_id": "Q16a",
+        "answer": "no_complete"
+      },
+      {
+        "question_id": "Q17",
+        "answer": "yes"
+      },
+      {
+        "question_id": "Q18",
+        "answer": "no"
+      }
+    ],
+    "metadata": {
+      "patient_name": "William",
+      "age": 72
+    }
+  },
+  "driver_state": {
+    "session_id": "test-case-004",
+    "drivers": {
+      "clinical_priority": {
+        "driver_id": "clinical_priority",
+        "layer": "L1",
+        "value": "elective",
+        "source": "derived",
+        "source_tags": [
+          "no_acute_issues"
+        ],
+        "confidence": 0.7
+      },
+      "biological_stability": {
+        "driver_id": "biological_stability",
+        "layer": "L1",
+        "value": "moderate",
+        "source": "derived",
+        "source_tags": [
+          "hygiene_basic"
+        ],
+        "confidence": 0.7
+      },
+      "mouth_situation": {
+        "driver_id": "mouth_situation",
+        "layer": "L1",
+        "value": "extensive_missing",
+        "source": "derived",
+        "source_tags": [
+          "status_5_plus_missing"
+        ],
+        "confidence": 0.7
+      },
+      "age_stage": {
+        "driver_id": "age_stage",
+        "layer": "L1",
+        "value": "senior",
+        "source": "derived",
+        "source_tags": [
+          "age_60_plus"
+        ],
+        "confidence": 0.7
+      },
+      "medical_constraints": {
+        "driver_id": "medical_constraints",
+        "layer": "L1",
+        "value": "surgical_contraindicated",
+        "source": "derived",
+        "source_tags": [
+          "medical_contraindication"
+        ],
+        "confidence": 0.7
+      },
+      "treatment_viability": {
+        "driver_id": "treatment_viability",
+        "layer": "L1",
+        "value": "full_mouth",
+        "source": "derived",
+        "source_tags": [
+          "status_5_plus_missing"
+        ],
+        "confidence": 0.7
+      },
+      "risk_profile_biological": {
+        "driver_id": "risk_profile_biological",
+        "layer": "L1",
+        "value": "moderate",
+        "source": "derived",
+        "source_tags": [
+          "hygiene_basic"
+        ],
+        "confidence": 0.7
+      },
+      "profile_type": {
+        "driver_id": "profile_type",
+        "layer": "L2",
+        "value": "functional",
+        "source": "derived",
+        "source_tags": [
+          "motivation_functional",
+          "bother_functional"
+        ],
+        "confidence": 1
+      },
+      "aesthetic_tolerance": {
+        "driver_id": "aesthetic_tolerance",
+        "layer": "L2",
+        "value": "conservative",
+        "source": "derived",
+        "source_tags": [
+          "natural_priority_high"
+        ],
+        "confidence": 0.7
+      },
+      "expectation_risk": {
+        "driver_id": "expectation_risk",
+        "layer": "L2",
+        "value": "moderate",
+        "source": "derived",
+        "source_tags": [
+          "satisfaction_major_dissatisfaction"
+        ],
+        "confidence": 0.7
+      },
+      "experience_history": {
+        "driver_id": "experience_history",
+        "layer": "L2",
+        "value": "first_timer",
+        "source": "derived",
+        "source_tags": [
+          "history_none"
+        ],
+        "confidence": 0.7
+      },
+      "decision_stage": {
+        "driver_id": "decision_stage",
+        "layer": "L2",
+        "value": "exploring",
+        "source": "derived",
+        "source_tags": [
+          "timeline_exploratory",
+          "intent_exploratory"
+        ],
+        "confidence": 1
+      },
+      "autonomy_level": {
+        "driver_id": "autonomy_level",
+        "layer": "L2",
+        "value": "autonomous",
+        "source": "derived",
+        "source_tags": [
+          "intent_exploratory"
+        ],
+        "confidence": 0.7
+      },
+      "anxiety_level": {
+        "driver_id": "anxiety_level",
+        "layer": "L3",
+        "value": "none",
+        "source": "derived",
+        "source_tags": [
+          "anxiety_none"
+        ],
+        "confidence": 0.7
+      },
+      "information_depth": {
+        "driver_id": "information_depth",
+        "layer": "L3",
+        "value": "detailed",
+        "source": "derived",
+        "source_tags": [
+          "intent_exploratory"
+        ],
+        "confidence": 0.7
+      },
+      "budget_type": {
+        "driver_id": "budget_type",
+        "layer": "L3",
+        "value": "economy",
+        "source": "derived",
+        "source_tags": [
+          "budget_conscious"
+        ],
+        "confidence": 0.7
+      },
+      "treatment_philosophy": {
+        "driver_id": "treatment_philosophy",
+        "layer": "L3",
+        "value": "durability_focused",
+        "source": "derived",
+        "source_tags": [
+          "style_functional"
+        ],
+        "confidence": 0.7
+      },
+      "time_horizon": {
+        "driver_id": "time_horizon",
+        "layer": "L3",
+        "value": "undefined",
+        "source": "derived",
+        "source_tags": [
+          "timeline_exploratory"
+        ],
+        "confidence": 0.7
+      }
+    },
+    "conflicts": [
+      {
+        "driver_id": "biological_stability",
+        "conflicting_values": [
+          "moderate",
+          "unstable"
+        ],
+        "resolved_value": "moderate",
+        "resolution_reason": "Priority-based: rule priority 4 wins"
+      },
+      {
+        "driver_id": "profile_type",
+        "conflicting_values": [
+          "functional",
+          "comfort"
+        ],
+        "resolved_value": "functional",
+        "resolution_reason": "Priority-based: rule priority 2 wins"
+      }
+    ],
+    "fallbacks_applied": []
+  },
+  "scenario_match": {
+    "session_id": "test-case-004",
+    "matched_scenario": "S12",
+    "confidence": "HIGH",
+    "score": 100,
+    "all_scores": [],
+    "fallback_used": false
+  },
+  "content_selections": [
+    {
+      "content_id": "A_BLOCK_TREATMENT_OPTIONS",
+      "type": "a_block",
+      "target_section": 0,
+      "tone": "TP-03",
+      "priority": 1,
+      "suppressed": false
+    },
+    {
+      "content_id": "S12",
+      "type": "scenario",
+      "target_section": 2,
+      "tone": "TP-03",
+      "priority": 1,
+      "suppressed": false
+    },
+    {
+      "content_id": "B_INTERP_STANDARD",
+      "type": "b_block",
+      "target_section": 4,
+      "tone": "TP-03",
+      "priority": 1,
+      "suppressed": false
+    },
+    {
+      "content_id": "B_RISKLANG_STANDARD",
+      "type": "b_block",
+      "target_section": 10,
+      "tone": "TP-03",
+      "priority": 1,
+      "suppressed": false
+    },
+    {
+      "content_id": "TM_CTX_FIRST_TIME",
+      "type": "module",
+      "target_section": 3,
+      "tone": "TP-03",
+      "priority": 2,
+      "suppressed": false
+    },
+    {
+      "content_id": "TM_BUDGET_LIMITED",
+      "type": "module",
+      "target_section": 9,
+      "tone": "TP-03",
+      "priority": 2,
+      "suppressed": true,
+      "suppression_reason": "Section suppressed by L1"
+    },
+    {
+      "content_id": "STATIC_DISCLAIMER",
+      "type": "static",
+      "target_section": 1,
+      "tone": "TP-03",
+      "priority": 1,
+      "suppressed": false
+    },
+    {
+      "content_id": "STATIC_NEXT_STEPS",
+      "type": "static",
+      "target_section": 11,
+      "tone": "TP-06",
+      "priority": 1,
+      "suppressed": false
+    }
+  ],
+  "tone_selection": {
+    "selected_tone": "TP-03",
+    "reason": "Triggered by information_depth: detailed",
+    "evaluated_triggers": [
+      {
+        "tone": "TP-04",
+        "matched": false
+      },
+      {
+        "tone": "TP-05",
+        "matched": false
+      },
+      {
+        "tone": "TP-02",
+        "matched": false
+      },
+      {
+        "tone": "TP-03",
+        "matched": true,
+        "trigger_driver": "information_depth"
+      }
+    ]
+  },
+  "composed_report": {
+    "session_id": "test-case-004",
+    "scenario_id": "S12",
+    "tone": "TP-03",
+    "language": "en",
+    "confidence": "HIGH",
+    "sections": [
+      {
+        "section_number": 0,
+        "section_name": "Important Notices",
+        "content": "# Important Notice: Treatment Considerations\n\nBased on your responses, certain treatment approaches may not be suitable at this time. This is determined by medical or surgical contraindications.\n\n**What this means:**\n- Some standard treatment options may not apply to your situation\n- Your dentist will focus on alternatives that are appropriate for you\n- This report will not include options that aren't suitable\n- Your safety is the priority in all recommendations\n\nPlease discuss your complete medical history with your dentist so they can provide guidance tailored to your circumstances.",
+        "sources": [
+          "A_BLOCK_TREATMENT_OPTIONS"
+        ],
+        "word_count": 85
+      },
+      {
+        "section_number": 1,
+        "section_name": "Disclaimer",
+        "content": "# Section 1: Disclaimer\n\nThis report is generated based on your responses to our questionnaire and is intended for informational purposes only. It does not constitute medical advice, diagnosis, or treatment recommendations.\n\nPlease consult with a qualified dental professional before making any decisions about your dental care. Your dentist will conduct a thorough examination and provide personalized recommendations based on your specific situation.\n\nThe information presented here is general in nature and may not apply to your individual circumstances. Treatment outcomes vary between patients and depend on many factors that can only be assessed through clinical examination.",
+        "sources": [
+          "STATIC_1"
+        ],
+        "word_count": 96
+      },
+      {
+        "section_number": 2,
+        "section_name": "Your Personal Summary",
+        "content": "You are experiencing looseness of teeth and/or pain complaints. Your main goal is restoring comfort, security, and stability, so that eating and daily functioning become possible again without tension.",
+        "sources": [
+          "SCENARIO:personal_summary"
+        ],
+        "word_count": 29
+      },
+      {
+        "section_number": 3,
+        "section_name": "Context",
+        "content": "# First-Time Treatment Context\n\nAs this is your first time considering dental treatment of this type, it's natural to have many questions. The dental field offers various approaches, each with their own characteristics.\n\nYour dentist will guide you through the process step by step, explaining what to expect at each stage. There's no pressure to make immediate decisions—take whatever time feels right to understand your options.\n\nWhen teeth feel loose or cause pain, this can evoke uncertainty. Many people notice this during chewing, with pressure on certain teeth, or even at rest. Confidence in your own teeth decreases and simple activities, such as eating or brushing, can require extra attention.\n\nIn this scenario, aesthetics is not primary, but functional confidence. The question is rarely how it looks, but mainly: how do I get a stable and comfortable feeling again? Because looseness and pain can have different causes, it's important to have the situation carefully assessed. The Smile report helps you understand possible follow-up directions, without drawing conclusions.",
+        "sources": [
+          "TM_CTX_FIRST_TIME",
+          "SCENARIO:context"
+        ],
+        "word_count": 166
+      },
+      {
+        "section_number": 4,
+        "section_name": "Interpretation",
+        "content": "# Section 4: Interpretation\n\nYour responses indicate a dental situation that falls within established treatment frameworks. Clinical examination findings will refine the specific recommendations.\n\nYour stated priorities—whether emphasizing aesthetics, function, comfort, or balance—provide direction for treatment planning. These preferences help narrow the range of suitable options.\n\nA professional assessment is the logical next step, allowing your dentist to integrate your preferences with clinical observations to formulate appropriate recommendations.",
+        "sources": [
+          "B_INTERP_STANDARD"
+        ],
+        "word_count": 67
+      },
+      {
+        "section_number": 10,
+        "section_name": "Risk Factors",
+        "content": "**Implant or bridge solutions**\n- Recovery time: 3-7 days\n- Possible impact: discomfort or sensitivity\n- Daily functioning: improvement of stability after recovery",
+        "sources": [
+          "SCENARIO:recovery"
+        ],
+        "word_count": 20
+      },
+      {
+        "section_number": 11,
+        "section_name": "Next Steps",
+        "content": "# Section 11: Next Steps\n\n**Your next steps are entirely up to you.** Here are some options to consider:\n\n- Review this report at your own pace\n- Prepare questions for your dental consultation\n- Schedule an appointment when you feel ready\n- Request additional information on specific topics\n\nRemember, this is your journey. Take whatever time feels right to make decisions that work for you.\n\n## How to Prepare for Your Consultation\n\nConsider noting down:\n- Your main concerns and priorities\n- Questions about specific treatment options\n- Your timeline preferences\n- Budget considerations you'd like to discuss\n\nThe choice of how to proceed is yours. Your dentist is there to provide information and guidance, but you remain in control of your dental care decisions.",
+        "sources": [
+          "STATIC_11"
+        ],
+        "word_count": 116
+      }
+    ],
+    "total_word_count": 579,
+    "warnings_included": true,
+    "suppressed_sections": [
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "placeholders_resolved": 0,
+    "placeholders_unresolved": []
+  },
+  "validation_result": {
+    "valid": true,
+    "errors": [],
+    "warnings": [
+      "Section 2 has 29 words, minimum recommended is 100",
+      "Section 10 has 20 words, minimum recommended is 50"
+    ],
+    "semantic_violations": [
+      {
+        "phrase": "simple",
+        "location": {
+          "section": 3,
+          "position": 629
+        },
+        "severity": "WARNING",
+        "rule": "General banned phrase"
+      }
+    ]
+  },
+  "llm_evaluation": {
+    "professional_quality": {
+      "score": 4,
+      "confidence": 0.85,
+      "feedback": "Writing quality is poor with excessive filler phrases, redundant statements, and verbose padding throughout. Multiple sections waste words on obvious statements that add no value. Transitions are weak and repetitive.",
+      "issues": [
+        "Section 0: 'Based on your responses' is filler - just state the facts",
+        "Section 0: 'What this means:' followed by bullet points that repeat the same idea four different ways",
+        "Section 1: 'This report is generated based on your responses' - obvious filler opening",
+        "Section 1: Entire disclaimer is generic boilerplate that could be half the length",
+        "Section 3: 'As this is your first time considering dental treatment of this type, it's natural to have many questions' - patronizing filler",
+        "Section 3: 'There's no pressure to make immediate decisions—take whatever time feels right' - vague padding",
+        "Section 3: Second paragraph repeats looseness/pain concept three times in different words",
+        "Section 3: 'Because looseness and pain can have different causes' - stating the obvious",
+        "Section 4: 'Your responses indicate a dental situation that falls within established treatment frameworks' - meaningless corporate speak",
+        "Section 4: 'Clinical examination findings will refine the specific recommendations' - filler",
+        "Section 11: 'Your next steps are entirely up to you' followed by 'Remember, this is your journey' - repetitive autonomy padding",
+        "Section 11: Bullet list of obvious preparation items adds no value"
+      ],
+      "suggestions": [
+        "Cut Section 0 by 50% - one clear statement about contraindications is enough",
+        "Rewrite Section 1 disclaimer in 40-50 words maximum",
+        "Remove all 'it's natural to' and 'take your time' filler from Section 3",
+        "Section 3 second paragraph: state the functional impact once, clearly, without repetition",
+        "Replace Section 4 corporate speak with direct, concrete statements",
+        "Section 11: Cut the autonomy repetition - state it once or not at all",
+        "Every section needs aggressive editing to remove padding and redundancy"
+      ]
+    },
+    "clinical_safety": {
+      "score": 3,
+      "confidence": 0.9,
+      "feedback": "Critical safety failures. Section 0 makes vague claims about contraindications without proper medical disclaimer. Section 10 provides recovery timelines and outcome expectations without adequate hedging or risk disclosure. Missing comprehensive disclaimers about individual variation and unpredictability.",
+      "issues": [
+        "Section 0: States 'certain treatment approaches may not be suitable' but doesn't clarify this is AI-generated speculation, not clinical diagnosis",
+        "Section 0: 'Your safety is the priority' implies guarantee of safety assessment - dangerous claim",
+        "Section 0: No disclaimer that contraindication determination requires actual medical evaluation",
+        "Section 10: '3-7 days' recovery timeline presented as fact without 'typically' or 'may vary significantly'",
+        "Section 10: 'improvement of stability after recovery' implies guaranteed outcome",
+        "Section 10: No mention of potential complications, failures, or individual variation",
+        "Section 1: Generic disclaimer doesn't specifically address the contraindication claims in Section 0",
+        "Overall: Missing strong language about unpredictability of outcomes and necessity of professional evaluation"
+      ],
+      "suggestions": [
+        "Section 0: Add explicit disclaimer that contraindication assessment is preliminary and requires professional medical evaluation",
+        "Section 0: Remove 'Your safety is the priority' - this is a claim the AI cannot make",
+        "Section 10: Add 'typically' or 'generally' to all timeframes and outcomes",
+        "Section 10: Include statement about potential complications and individual variation",
+        "Section 10: Add disclaimer that recovery experiences vary significantly between patients",
+        "Add comprehensive risk disclosure section or strengthen existing disclaimers",
+        "Every outcome statement needs hedging language (may, might, typically, often)"
+      ]
+    },
+    "tone_appropriateness": {
+      "score": 5,
+      "confidence": 0.75,
+      "feedback": "Tone is inconsistent and often misses the 'Reflective-Contextual' target. Some sections are appropriately thoughtful, but others slip into generic corporate speak or patronizing language. The broader life context consideration is weak.",
+      "issues": [
+        "Section 0: Bureaucratic tone ('This is determined by medical or surgical contraindications') doesn't match reflective approach",
+        "Section 3: 'it's natural to have many questions' is patronizing, not reflective",
+        "Section 3: Good reflective tone in second paragraph about looseness/pain experience, but undermined by verbose delivery",
+        "Section 4: Corporate jargon ('falls within established treatment frameworks') completely wrong tone",
+        "Section 11: Repetitive autonomy statements feel forced rather than genuinely reflective",
+        "Overall: Missing consideration of broader life circumstances for a 60+ patient - no reflection on life stage, priorities at this age, etc."
+      ],
+      "suggestions": [
+        "Section 0: Rewrite in more conversational, less bureaucratic language",
+        "Section 3: Remove patronizing phrases, trust the patient's intelligence",
+        "Section 4: Replace corporate speak with genuine reflection on the patient's situation",
+        "Add content that reflects on life stage considerations for 60+ patient",
+        "Strengthen connection between functional priorities and daily life quality",
+        "Make tone consistently thoughtful throughout, not just in isolated paragraphs"
+      ]
+    },
+    "personalization": {
+      "score": 4,
+      "confidence": 0.8,
+      "feedback": "Personalization is weak and generic. Patient name William is never used. Specific details from intake (5+ missing teeth, heavily restored, chewing issues) are barely referenced. Content reads like a template with minimal customization.",
+      "issues": [
+        "Patient name 'William' never appears in the report",
+        "Section 2: Generic statement about looseness/pain doesn't reference specific intake details (5+ missing, heavily restored, chewing problems)",
+        "Section 3: 'First-time treatment' context is good but not connected to William's specific situation",
+        "Section 10: Generic recovery info not tailored to 60+ age or economy budget concerns",
+        "No reference to patient's stated priority: 'functional_durable' and 'very_important_natural'",
+        "No acknowledgment of 'affordable_durable' budget constraint",
+        "Missing connection to 'chewing_missing' specific functional issue"
+      ],
+      "suggestions": [
+        "Use patient name William at least 2-3 times throughout report",
+        "Section 2: Reference specific intake details - '5+ missing teeth affecting chewing'",
+        "Connect treatment discussion to stated priorities: durability, natural feel, affordability",
+        "Section 10: Tailor recovery discussion to 60+ age considerations",
+        "Add content addressing the specific chewing/missing teeth functional issue",
+        "Reference the 'heavily restored' mouth situation in context",
+        "Make budget considerations explicit given 'economy' and 'affordable_durable' responses"
+      ]
+    },
+    "patient_autonomy": {
+      "score": 6,
+      "confidence": 0.85,
+      "feedback": "Autonomy is stated repeatedly but feels forced and repetitive rather than genuinely empowering. The constant reassurance ('no pressure', 'your journey', 'entirely up to you') becomes patronizing through overuse. Actual empowerment through information is weak.",
+      "issues": [
+        "Section 3: 'There's no pressure to make immediate decisions—take whatever time feels right' - first autonomy statement",
+        "Section 11: 'Your next steps are entirely up to you' - repetition",
+        "Section 11: 'Remember, this is your journey' - third repetition of same concept",
+        "Section 11: 'The choice of how to proceed is yours' - fourth repetition",
+        "Autonomy stated four times but actual empowering information is thin",
+        "No genuine exploration of trade-offs that would enable informed choice",
+        "Reassurance replaces substantive information"
+      ],
+      "suggestions": [
+        "Reduce autonomy statements to ONE clear statement, not four repetitions",
+        "Replace autonomy padding with actual empowering information about options",
+        "Provide substantive trade-off discussions that enable real choice",
+        "Remove patronizing reassurance language",
+        "Focus on information quality over autonomy quantity",
+        "Let autonomy be implicit through information quality, not explicit through repetition"
+      ]
+    },
+    "structure_completeness": {
+      "score": 5,
+      "confidence": 0.9,
+      "feedback": "Structure has significant gaps. Sections 5-9 are suppressed, leaving major content holes. Section 0 placement is awkward. Section 10 is too brief. Flow between sections is poor with weak transitions.",
+      "issues": [
+        "Sections 5-9 completely missing (treatment options, comparisons, considerations, timeline, costs)",
+        "Section 0 'Important Notices' awkwardly placed before disclaimer",
+        "Section 10 only 20 words - inadequate for risk factors",
+        "No treatment options section despite this being core purpose of report",
+        "No cost/timeline information despite patient indicating 'economy' budget concern",
+        "Section 3 combines two different topics (first-time context + scenario context) awkwardly",
+        "Transition from Section 4 to Section 10 is jarring - missing 5 sections in between"
+      ],
+      "suggestions": [
+        "Restore critical missing sections or explain why suppressed",
+        "Move Section 0 content into Section 1 or after it",
+        "Expand Section 10 to adequately cover risk factors",
+        "Add treatment options content - this is a major gap",
+        "Include cost/timeline information given patient's budget concerns",
+        "Separate first-time context from scenario context into distinct sections",
+        "Add transitional content to bridge section gaps"
+      ]
+    },
+    "content_issues": [
+      {
+        "section_number": 0,
+        "source_content": "content/a_blocks/A_BLOCK_TREATMENT_OPTIONS/en/TP-03.md",
+        "quote": "Based on your responses, certain treatment approaches may not be suitable at this time.",
+        "problem": "Filler opening phrase 'Based on your responses' adds no value. Also implies AI has made clinical determination about contraindications without proper medical disclaimer.",
+        "severity": "warning",
+        "suggested_fix": "Remove 'Based on your responses,' and add disclaimer: 'Preliminary assessment suggests certain approaches may require medical evaluation. Only your dentist can determine actual contraindications.'"
+      },
+      {
+        "section_number": 0,
+        "source_content": "content/a_blocks/A_BLOCK_TREATMENT_OPTIONS/en/TP-03.md",
+        "quote": "Your safety is the priority in all recommendations",
+        "problem": "Implies guarantee of safety assessment that AI cannot provide. Overpromises.",
+        "severity": "critical",
+        "suggested_fix": "Remove this sentence entirely or replace with: 'Your dentist will prioritize safety in all recommendations after proper evaluation.'"
+      },
+      {
+        "section_number": 1,
+        "source_content": "content/static/1/en.md",
+        "quote": "This report is generated based on your responses to our questionnaire and is intended for informational purposes only.",
+        "problem": "Obvious filler opening. 'Based on your responses' is redundant - how else would it be generated?",
+        "severity": "info",
+        "suggested_fix": "Start with: 'This report is for informational purposes only and does not constitute medical advice.'"
+      },
+      {
+        "section_number": 1,
+        "source_content": "content/static/1/en.md",
+        "quote": "The information presented here is general in nature and may not apply to your individual circumstances.",
+        "problem": "Weak disclaimer that doesn't address specific contraindication claims made in Section 0.",
+        "severity": "warning",
+        "suggested_fix": "Add specific disclaimer: 'Any mentions of contraindications or unsuitable treatments are preliminary assessments only. Your dentist must evaluate your complete medical history to determine actual contraindications.'"
+      },
+      {
+        "section_number": 2,
+        "source_content": "content/scenarios/S12/en/TP-03.md",
+        "quote": "You are experiencing looseness of teeth and/or pain complaints.",
+        "problem": "Generic statement that doesn't use patient name or reference specific intake details (5+ missing teeth, chewing issues, heavily restored).",
+        "severity": "warning",
+        "suggested_fix": "William, you've indicated experiencing chewing difficulties due to 5+ missing teeth in one jaw, with remaining teeth heavily restored and some looseness or pain."
+      },
+      {
+        "section_number": 3,
+        "source_content": "content/modules/TM_CTX_FIRST_TIME/en/TP-03.md",
+        "quote": "As this is your first time considering dental treatment of this type, it's natural to have many questions.",
+        "problem": "Patronizing filler phrase. 'It's natural to have many questions' adds no value and talks down to patient.",
+        "severity": "warning",
+        "suggested_fix": "Remove entire sentence or replace with: 'Since this is your first time considering treatment of this scope, your dentist will guide you through each step.'"
+      },
+      {
+        "section_number": 3,
+        "source_content": "content/modules/TM_CTX_FIRST_TIME/en/TP-03.md",
+        "quote": "There's no pressure to make immediate decisions—take whatever time feels right to understand your options.",
+        "problem": "Vague autonomy padding that wastes words without adding substance.",
+        "severity": "info",
+        "suggested_fix": "Remove entirely or replace with concrete information about typical decision timelines."
+      },
+      {
+        "section_number": 3,
+        "source_content": "content/scenarios/S12/en/TP-03.md",
+        "quote": "When teeth feel loose or cause pain, this can evoke uncertainty. Many people notice this during chewing, with pressure on certain teeth, or even at rest. Confidence in your own teeth decreases and simple activities, such as eating or brushing, can require extra attention.",
+        "problem": "Repetitive - says the same thing three different ways. Verbose and padded.",
+        "severity": "warning",
+        "suggested_fix": "Condense to: 'Loose or painful teeth often cause uncertainty, especially during chewing or daily activities like eating and brushing.'"
+      },
+      {
+        "section_number": 3,
+        "source_content": "content/scenarios/S12/en/TP-03.md",
+        "quote": "Because looseness and pain can have different causes, it's important to have the situation carefully assessed.",
+        "problem": "States the obvious. Filler content.",
+        "severity": "info",
+        "suggested_fix": "Remove entirely - this is implied by the need for professional consultation."
+      },
+      {
+        "section_number": 4,
+        "source_content": "content/b_blocks/B_INTERP_STANDARD/en/TP-03.md",
+        "quote": "Your responses indicate a dental situation that falls within established treatment frameworks.",
+        "problem": "Meaningless corporate jargon. 'Falls within established treatment frameworks' says nothing concrete.",
+        "severity": "warning",
+        "suggested_fix": "Replace with specific statement: 'Your situation involves extensive missing teeth with remaining teeth heavily restored, which has several established treatment approaches.'"
+      },
+      {
+        "section_number": 4,
+        "source_content": "content/b_blocks/B_INTERP_STANDARD/en/TP-03.md",
+        "quote": "Clinical examination findings will refine the specific recommendations.",
+        "problem": "Obvious filler statement that adds no value.",
+        "severity": "info",
+        "suggested_fix": "Remove entirely or integrate into a more substantive statement about what the examination will assess."
+      },
+      {
+        "section_number": 10,
+        "source_content": "content/scenarios/S12/en/TP-03.md",
+        "quote": "Recovery time: 3-7 days",
+        "problem": "Presented as fact without hedging language. No 'typically' or 'may vary'. Implies guaranteed timeline.",
+        "severity": "critical",
+        "suggested_fix": "Change to: 'Typical recovery time: 3-7 days (varies significantly by individual)'"
+      },
+      {
+        "section_number": 10,
+        "source_content": "content/scenarios/S12/en/TP-03.md",
+        "quote": "Daily functioning: improvement of stability after recovery",
+        "problem": "Implies guaranteed outcome without proper hedging or mention of potential complications.",
+        "severity": "critical",
+        "suggested_fix": "Change to: 'Daily functioning: most patients experience improved stability after recovery, though individual results vary and complications are possible.'"
+      },
+      {
+        "section_number": 10,
+        "source_content": "content/scenarios/S12/en/TP-03.md",
+        "quote": "Possible impact: discomfort or sensitivity",
+        "problem": "Section 10 is only 20 words total - completely inadequate for risk factors. Missing comprehensive risk discussion.",
+        "severity": "critical",
+        "suggested_fix": "Expand to include: potential complications, failure rates, individual variation factors, long-term maintenance requirements, and realistic outcome ranges."
+      },
+      {
+        "section_number": 11,
+        "source_content": "content/static/11/en.md",
+        "quote": "Your next steps are entirely up to you... Remember, this is your journey... The choice of how to proceed is yours.",
+        "problem": "Autonomy stated three separate times in one short section. Repetitive padding that becomes patronizing.",
+        "severity": "warning",
+        "suggested_fix": "State autonomy once clearly, then focus on substantive preparation guidance. Remove repetitive reassurance."
+      },
+      {
+        "section_number": 11,
+        "source_content": "content/static/11/en.md",
+        "quote": "Consider noting down: Your main concerns and priorities, Questions about specific treatment options, Your timeline preferences, Budget considerations you'd like to discuss",
+        "problem": "Generic bullet list that adds minimal value. Obvious preparation items.",
+        "severity": "info",
+        "suggested_fix": "Replace with specific preparation guidance relevant to this patient's situation: questions about durability, natural feel, affordability trade-offs, etc."
+      }
+    ],
+    "content_files_to_review": [
+      "content/a_blocks/A_BLOCK_TREATMENT_OPTIONS/en/TP-03.md",
+      "content/static/1/en.md",
+      "content/scenarios/S12/en/TP-03.md",
+      "content/modules/TM_CTX_FIRST_TIME/en/TP-03.md",
+      "content/b_blocks/B_INTERP_STANDARD/en/TP-03.md",
+      "content/static/11/en.md"
+    ],
+    "overall_score": 4.4,
+    "overall_assessment": "This report suffers from poor writing quality with excessive filler, weak clinical safety disclaimers, and minimal personalization. Content is verbose and repetitive, with autonomy stated four times while actual empowering information is thin. Critical sections (5-9) are missing entirely. Recovery timelines and outcomes lack proper hedging. The report needs major revision: cut verbosity by 40%, strengthen safety disclaimers, add patient-specific details, restore missing treatment content, and replace padding with substance.",
+    "recommended_outcome": "BLOCK",
+    "outcome_reasoning": "Overall score 4.4 below blocking threshold 6",
+    "metadata": {
+      "model_used": "claude-sonnet-4-5-20250929",
+      "evaluation_timestamp": "2026-01-13T15:18:07.225Z",
+      "duration_ms": 85968,
+      "token_usage": {
+        "input_tokens": 5709,
+        "output_tokens": 3849
+      }
+    }
+  },
+  "decision_trace": {
+    "session_id": "test-case-004",
+    "started_at": "2026-01-13T15:16:41.250Z",
+    "completed_at": "2026-01-13T15:18:07.225Z",
+    "events": [
+      {
+        "timestamp": "2026-01-13T15:16:41.250Z",
+        "stage": "input_validation",
+        "action": "validate_input",
+        "input": {
+          "answers": 20
+        },
+        "output": {
+          "valid": true,
+          "errors": 0
+        },
+        "duration_ms": 0
+      },
+      {
+        "timestamp": "2026-01-13T15:16:41.251Z",
+        "stage": "tag_extraction",
+        "action": "extract_tags",
+        "input": {
+          "answers": 20
+        },
+        "output": {
+          "session_id": "test-case-004",
+          "tags": [
+            {
+              "tag": "motivation_functional",
+              "source_question": "Q1",
+              "source_answer": "functional_issues"
+            },
+            {
+              "tag": "satisfaction_major_dissatisfaction",
+              "source_question": "Q2",
+              "source_answer": "1"
+            },
+            {
+              "tag": "bother_functional",
+              "source_question": "Q2a",
+              "source_answer": "chewing_missing"
+            },
+            {
+              "tag": "issue_missing_damaged",
+              "source_question": "Q3",
+              "source_answer": "missing_damaged"
+            },
+            {
+              "tag": "history_none",
+              "source_question": "Q4",
+              "source_answer": "no_never"
+            },
+            {
+              "tag": "no_acute_issues",
+              "source_question": "Q5",
+              "source_answer": "no_aesthetic_only"
+            },
+            {
+              "tag": "status_5_plus_missing",
+              "source_question": "Q6a",
+              "source_answer": "5_plus_one_jaw"
+            },
+            {
+              "tag": "adjacent_heavily_restored",
+              "source_question": "Q6c",
+              "source_answer": "heavily_restored"
+            },
+            {
+              "tag": "style_functional",
+              "source_question": "Q7",
+              "source_answer": "functional_durable"
+            },
+            {
+              "tag": "natural_priority_high",
+              "source_question": "Q8",
+              "source_answer": "very_important_natural"
+            },
+            {
+              "tag": "age_60_plus",
+              "source_question": "Q9",
+              "source_answer": "60_plus"
+            },
+            {
+              "tag": "budget_conscious",
+              "source_question": "Q10",
+              "source_answer": "affordable_durable"
+            },
+            {
+              "tag": "intent_exploratory",
+              "source_question": "Q11",
+              "source_answer": "ai_report_first"
+            },
+            {
+              "tag": "timeline_exploratory",
+              "source_question": "Q12",
+              "source_answer": "still_exploring"
+            },
+            {
+              "tag": "pregnancy_no",
+              "source_question": "Q13",
+              "source_answer": "no"
+            },
+            {
+              "tag": "smoking_no",
+              "source_question": "Q14",
+              "source_answer": "no"
+            },
+            {
+              "tag": "hygiene_basic",
+              "source_question": "Q15",
+              "source_answer": "basic"
+            },
+            {
+              "tag": "growth_complete",
+              "source_question": "Q16a",
+              "source_answer": "no_complete"
+            },
+            {
+              "tag": "medical_contraindication",
+              "source_question": "Q17",
+              "source_answer": "yes"
+            },
+            {
+              "tag": "anxiety_none",
+              "source_question": "Q18",
+              "source_answer": "no"
+            }
+          ],
+          "missing_questions": []
+        },
+        "duration_ms": 1
+      },
+      {
+        "timestamp": "2026-01-13T15:16:41.251Z",
+        "stage": "driver_derivation",
+        "action": "derive_drivers",
+        "input": {
+          "tags": 20
+        },
+        "output": {
+          "session_id": "test-case-004",
+          "drivers": {
+            "clinical_priority": {
+              "driver_id": "clinical_priority",
+              "layer": "L1",
+              "value": "elective",
+              "source": "derived",
+              "source_tags": [
+                "no_acute_issues"
+              ],
+              "confidence": 0.7
+            },
+            "biological_stability": {
+              "driver_id": "biological_stability",
+              "layer": "L1",
+              "value": "moderate",
+              "source": "derived",
+              "source_tags": [
+                "hygiene_basic"
+              ],
+              "confidence": 0.7
+            },
+            "mouth_situation": {
+              "driver_id": "mouth_situation",
+              "layer": "L1",
+              "value": "extensive_missing",
+              "source": "derived",
+              "source_tags": [
+                "status_5_plus_missing"
+              ],
+              "confidence": 0.7
+            },
+            "age_stage": {
+              "driver_id": "age_stage",
+              "layer": "L1",
+              "value": "senior",
+              "source": "derived",
+              "source_tags": [
+                "age_60_plus"
+              ],
+              "confidence": 0.7
+            },
+            "medical_constraints": {
+              "driver_id": "medical_constraints",
+              "layer": "L1",
+              "value": "surgical_contraindicated",
+              "source": "derived",
+              "source_tags": [
+                "medical_contraindication"
+              ],
+              "confidence": 0.7
+            },
+            "treatment_viability": {
+              "driver_id": "treatment_viability",
+              "layer": "L1",
+              "value": "full_mouth",
+              "source": "derived",
+              "source_tags": [
+                "status_5_plus_missing"
+              ],
+              "confidence": 0.7
+            },
+            "risk_profile_biological": {
+              "driver_id": "risk_profile_biological",
+              "layer": "L1",
+              "value": "moderate",
+              "source": "derived",
+              "source_tags": [
+                "hygiene_basic"
+              ],
+              "confidence": 0.7
+            },
+            "profile_type": {
+              "driver_id": "profile_type",
+              "layer": "L2",
+              "value": "functional",
+              "source": "derived",
+              "source_tags": [
+                "motivation_functional",
+                "bother_functional"
+              ],
+              "confidence": 1
+            },
+            "aesthetic_tolerance": {
+              "driver_id": "aesthetic_tolerance",
+              "layer": "L2",
+              "value": "conservative",
+              "source": "derived",
+              "source_tags": [
+                "natural_priority_high"
+              ],
+              "confidence": 0.7
+            },
+            "expectation_risk": {
+              "driver_id": "expectation_risk",
+              "layer": "L2",
+              "value": "moderate",
+              "source": "derived",
+              "source_tags": [
+                "satisfaction_major_dissatisfaction"
+              ],
+              "confidence": 0.7
+            },
+            "experience_history": {
+              "driver_id": "experience_history",
+              "layer": "L2",
+              "value": "first_timer",
+              "source": "derived",
+              "source_tags": [
+                "history_none"
+              ],
+              "confidence": 0.7
+            },
+            "decision_stage": {
+              "driver_id": "decision_stage",
+              "layer": "L2",
+              "value": "exploring",
+              "source": "derived",
+              "source_tags": [
+                "timeline_exploratory",
+                "intent_exploratory"
+              ],
+              "confidence": 1
+            },
+            "autonomy_level": {
+              "driver_id": "autonomy_level",
+              "layer": "L2",
+              "value": "autonomous",
+              "source": "derived",
+              "source_tags": [
+                "intent_exploratory"
+              ],
+              "confidence": 0.7
+            },
+            "anxiety_level": {
+              "driver_id": "anxiety_level",
+              "layer": "L3",
+              "value": "none",
+              "source": "derived",
+              "source_tags": [
+                "anxiety_none"
+              ],
+              "confidence": 0.7
+            },
+            "information_depth": {
+              "driver_id": "information_depth",
+              "layer": "L3",
+              "value": "detailed",
+              "source": "derived",
+              "source_tags": [
+                "intent_exploratory"
+              ],
+              "confidence": 0.7
+            },
+            "budget_type": {
+              "driver_id": "budget_type",
+              "layer": "L3",
+              "value": "economy",
+              "source": "derived",
+              "source_tags": [
+                "budget_conscious"
+              ],
+              "confidence": 0.7
+            },
+            "treatment_philosophy": {
+              "driver_id": "treatment_philosophy",
+              "layer": "L3",
+              "value": "durability_focused",
+              "source": "derived",
+              "source_tags": [
+                "style_functional"
+              ],
+              "confidence": 0.7
+            },
+            "time_horizon": {
+              "driver_id": "time_horizon",
+              "layer": "L3",
+              "value": "undefined",
+              "source": "derived",
+              "source_tags": [
+                "timeline_exploratory"
+              ],
+              "confidence": 0.7
+            }
+          },
+          "conflicts": [
+            {
+              "driver_id": "biological_stability",
+              "conflicting_values": [
+                "moderate",
+                "unstable"
+              ],
+              "resolved_value": "moderate",
+              "resolution_reason": "Priority-based: rule priority 4 wins"
+            },
+            {
+              "driver_id": "profile_type",
+              "conflicting_values": [
+                "functional",
+                "comfort"
+              ],
+              "resolved_value": "functional",
+              "resolution_reason": "Priority-based: rule priority 2 wins"
+            }
+          ],
+          "fallbacks_applied": []
+        },
+        "duration_ms": 0
+      },
+      {
+        "timestamp": "2026-01-13T15:16:41.251Z",
+        "stage": "scenario_scoring",
+        "action": "score_scenarios",
+        "input": {
+          "session_id": "test-case-004"
+        },
+        "output": {
+          "session_id": "test-case-004",
+          "matched_scenario": "S12",
+          "confidence": "HIGH",
+          "score": 100,
+          "all_scores": [],
+          "fallback_used": false
+        },
+        "duration_ms": 0
+      },
+      {
+        "timestamp": "2026-01-13T15:16:41.251Z",
+        "stage": "tone_selection",
+        "action": "select_tone",
+        "input": {
+          "drivers": [
+            "clinical_priority",
+            "biological_stability",
+            "mouth_situation",
+            "age_stage",
+            "medical_constraints",
+            "treatment_viability",
+            "risk_profile_biological",
+            "profile_type",
+            "aesthetic_tolerance",
+            "expectation_risk",
+            "experience_history",
+            "decision_stage",
+            "autonomy_level",
+            "anxiety_level",
+            "information_depth",
+            "budget_type",
+            "treatment_philosophy",
+            "time_horizon"
+          ]
+        },
+        "output": {
+          "selected_tone": "TP-03",
+          "reason": "Triggered by information_depth: detailed",
+          "evaluated_triggers": [
+            {
+              "tone": "TP-04",
+              "matched": false
+            },
+            {
+              "tone": "TP-05",
+              "matched": false
+            },
+            {
+              "tone": "TP-02",
+              "matched": false
+            },
+            {
+              "tone": "TP-03",
+              "matched": true,
+              "trigger_driver": "information_depth"
+            }
+          ]
+        },
+        "duration_ms": 0
+      },
+      {
+        "timestamp": "2026-01-13T15:16:41.251Z",
+        "stage": "content_selection",
+        "action": "select_content",
+        "input": {
+          "scenario": "S12"
+        },
+        "output": {
+          "count": 8
+        },
+        "duration_ms": 0
+      },
+      {
+        "timestamp": "2026-01-13T15:16:41.253Z",
+        "stage": "scenario_load",
+        "action": "load_scenario",
+        "input": {
+          "scenario_id": "S12",
+          "language": "en"
+        },
+        "output": {
+          "loaded": true
+        },
+        "duration_ms": 2
+      },
+      {
+        "timestamp": "2026-01-13T15:16:41.255Z",
+        "stage": "composition",
+        "action": "compose_report",
+        "input": {
+          "selections": 8
+        },
+        "output": {
+          "sections": 7,
+          "words": 579
+        },
+        "duration_ms": 2
+      },
+      {
+        "timestamp": "2026-01-13T15:18:07.225Z",
+        "stage": "qa_gate",
+        "action": "qa_check",
+        "input": {
+          "report_id": "test-case-004"
+        },
+        "output": {
+          "_truncated": true,
+          "_size": 18734
+        },
+        "duration_ms": 85970
+      }
+    ],
+    "final_outcome": "FLAG"
+  },
+  "final_outcome": "FLAG",
+  "report_delivered": true
+}

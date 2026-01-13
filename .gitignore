@@ -3,7 +3,6 @@
 .env.local
 
 # Test output
-test_reports/
 
 # Dependencies
 node_modules/

@@ -6,6 +6,27 @@
 
 import { promises as fs } from "fs";
 import { z } from "zod";
+
+// Logger for evaluation operations
+const log = {
+  info: (msg: string, data?: Record<string, unknown>) => {
+    const timestamp = new Date().toISOString();
+    console.log(`[${timestamp}] [EVAL] ${msg}`, data ? JSON.stringify(data, null, 2) : "");
+  },
+  warn: (msg: string, data?: Record<string, unknown>) => {
+    const timestamp = new Date().toISOString();
+    console.warn(`[${timestamp}] [EVAL] ⚠️  ${msg}`, data ? JSON.stringify(data, null, 2) : "");
+  },
+  error: (msg: string, data?: Record<string, unknown>) => {
+    const timestamp = new Date().toISOString();
+    console.error(`[${timestamp}] [EVAL] ❌ ${msg}`, data ? JSON.stringify(data, null, 2) : "");
+  },
+  success: (msg: string, data?: Record<string, unknown>) => {
+    const timestamp = new Date().toISOString();
+    console.log(`[${timestamp}] [EVAL] ✅ ${msg}`, data ? JSON.stringify(data, null, 2) : "");
+  }
+};
+
 import type {
   ComposedReport,
   IntakeData,
@@ -207,13 +228,23 @@ export class LLMReportEvaluator {
     // Load config if not already loaded
     await this.loadConfig();
 
+    log.info("Starting LLM evaluation", {
+      session_id: context.report.session_id,
+      scenario: context.scenarioId,
+      tone: context.tone,
+      reportSections: context.report.sections.length,
+      reportWordCount: context.report.total_word_count
+    });
+
     // Check if evaluation should run
     if (!this.shouldEvaluate(context)) {
+      log.info("Evaluation skipped", { reason: "skip conditions met" });
       return null;
     }
 
     // Check API key availability - this is required when LLM evaluation is enabled
     if (!this.isApiKeyConfigured()) {
+      log.error("API key not configured", { env_var: this.config.api_key_env });
       throw new Error(
         `LLM evaluation is enabled but ${this.config.api_key_env} environment variable is not set. ` +
         `Cannot generate reports without quality evaluation. ` +
@@ -238,6 +269,13 @@ export class LLMReportEvaluator {
         contentSelections: context.contentSelections
       });
 
+      log.info("Calling LLM for evaluation", {
+        model: this.config.model,
+        temperature: this.config.temperature,
+        systemPromptChars: systemPrompt.length,
+        userPromptChars: userPrompt.length
+      });
+
       // Call LLM with structured output
       const response = await client.generateStructured(
         [
@@ -259,6 +297,28 @@ export class LLMReportEvaluator {
       // Extract unique content files to review
       const content_files_to_review = this.extractContentFilesToReview(evaluation.content_issues);
 
+      const duration = Date.now() - startTime;
+
+      log.success("Evaluation completed", {
+        session_id: context.report.session_id,
+        overall_score,
+        outcome,
+        reasoning,
+        dimensions: {
+          professional_quality: evaluation.professional_quality.score,
+          clinical_safety: evaluation.clinical_safety.score,
+          tone_appropriateness: evaluation.tone_appropriateness.score,
+          personalization: evaluation.personalization.score,
+          patient_autonomy: evaluation.patient_autonomy.score,
+          structure_completeness: evaluation.structure_completeness.score
+        },
+        content_issues_count: evaluation.content_issues.length,
+        critical_issues: evaluation.content_issues.filter(i => i.severity === "critical").length,
+        warning_issues: evaluation.content_issues.filter(i => i.severity === "warning").length,
+        duration_ms: duration,
+        tokens: response.usage
+      });
+
       return {
         professional_quality: evaluation.professional_quality,
         clinical_safety: evaluation.clinical_safety,
@@ -275,18 +335,28 @@ export class LLMReportEvaluator {
         metadata: {
           model_used: this.config.model,
           evaluation_timestamp: new Date().toISOString(),
-          duration_ms: Date.now() - startTime,
+          duration_ms: duration,
           token_usage: response.usage
         }
       };
 
     } catch (error) {
+      const duration = Date.now() - startTime;
+
       // Re-throw API key errors - these should block report generation
       if (error instanceof Error && error.message.includes(this.config.api_key_env)) {
         throw error;
       }
-      // For other errors (network, parsing, etc.), use fallback
-      console.error("LLM evaluation failed:", error);
+
+      // Log detailed error info
+      log.error("Evaluation failed", {
+        session_id: context.report.session_id,
+        duration_ms: duration,
+        errorType: error?.constructor?.name ?? "Unknown",
+        message: error instanceof Error ? error.message : String(error),
+        fallback_outcome: this.config.fallback_on_error
+      });
+
       return this.createFallbackResult(error, startTime);
     }
   }

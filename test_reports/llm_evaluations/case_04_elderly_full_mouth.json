@@ -1,0 +1,180 @@
+{
+  "session_id": "test-case-004",
+  "case_id": "case_04_elderly_full_mouth",
+  "evaluation_timestamp": "2026-01-13T15:18:07.225Z",
+  "outcome": "BLOCK",
+  "overall_score": 4.4,
+  "dimensions": {
+    "professional_quality": {
+      "score": 4,
+      "feedback": "Writing quality is poor with excessive filler phrases, redundant statements, and verbose padding throughout. Multiple sections waste words on obvious statements that add no value. Transitions are weak and repetitive."
+    },
+    "clinical_safety": {
+      "score": 3,
+      "feedback": "Critical safety failures. Section 0 makes vague claims about contraindications without proper medical disclaimer. Section 10 provides recovery timelines and outcome expectations without adequate hedging or risk disclosure. Missing comprehensive disclaimers about individual variation and unpredictability."
+    },
+    "tone_appropriateness": {
+      "score": 5,
+      "feedback": "Tone is inconsistent and often misses the 'Reflective-Contextual' target. Some sections are appropriately thoughtful, but others slip into generic corporate speak or patronizing language. The broader life context consideration is weak."
+    },
+    "personalization": {
+      "score": 4,
+      "feedback": "Personalization is weak and generic. Patient name William is never used. Specific details from intake (5+ missing teeth, heavily restored, chewing issues) are barely referenced. Content reads like a template with minimal customization."
+    },
+    "patient_autonomy": {
+      "score": 6,
+      "feedback": "Autonomy is stated repeatedly but feels forced and repetitive rather than genuinely empowering. The constant reassurance ('no pressure', 'your journey', 'entirely up to you') becomes patronizing through overuse. Actual empowerment through information is weak."
+    },
+    "structure_completeness": {
+      "score": 5,
+      "feedback": "Structure has significant gaps. Sections 5-9 are suppressed, leaving major content holes. Section 0 placement is awkward. Section 10 is too brief. Flow between sections is poor with weak transitions."
+    }
+  },
+  "content_issues": [
+    {
+      "section_number": 0,
+      "source_content": "content/a_blocks/A_BLOCK_TREATMENT_OPTIONS/en/TP-03.md",
+      "quote": "Based on your responses, certain treatment approaches may not be suitable at this time.",
+      "problem": "Filler opening phrase 'Based on your responses' adds no value. Also implies AI has made clinical determination about contraindications without proper medical disclaimer.",
+      "severity": "warning",
+      "suggested_fix": "Remove 'Based on your responses,' and add disclaimer: 'Preliminary assessment suggests certain approaches may require medical evaluation. Only your dentist can determine actual contraindications.'"
+    },
+    {
+      "section_number": 0,
+      "source_content": "content/a_blocks/A_BLOCK_TREATMENT_OPTIONS/en/TP-03.md",
+      "quote": "Your safety is the priority in all recommendations",
+      "problem": "Implies guarantee of safety assessment that AI cannot provide. Overpromises.",
+      "severity": "critical",
+      "suggested_fix": "Remove this sentence entirely or replace with: 'Your dentist will prioritize safety in all recommendations after proper evaluation.'"
+    },
+    {
+      "section_number": 1,
+      "source_content": "content/static/1/en.md",
+      "quote": "This report is generated based on your responses to our questionnaire and is intended for informational purposes only.",
+      "problem": "Obvious filler opening. 'Based on your responses' is redundant - how else would it be generated?",
+      "severity": "info",
+      "suggested_fix": "Start with: 'This report is for informational purposes only and does not constitute medical advice.'"
+    },
+    {
+      "section_number": 1,
+      "source_content": "content/static/1/en.md",
+      "quote": "The information presented here is general in nature and may not apply to your individual circumstances.",
+      "problem": "Weak disclaimer that doesn't address specific contraindication claims made in Section 0.",
+      "severity": "warning",
+      "suggested_fix": "Add specific disclaimer: 'Any mentions of contraindications or unsuitable treatments are preliminary assessments only. Your dentist must evaluate your complete medical history to determine actual contraindications.'"
+    },
+    {
+      "section_number": 2,
+      "source_content": "content/scenarios/S12/en/TP-03.md",
+      "quote": "You are experiencing looseness of teeth and/or pain complaints.",
+      "problem": "Generic statement that doesn't use patient name or reference specific intake details (5+ missing teeth, chewing issues, heavily restored).",
+      "severity": "warning",
+      "suggested_fix": "William, you've indicated experiencing chewing difficulties due to 5+ missing teeth in one jaw, with remaining teeth heavily restored and some looseness or pain."
+    },
+    {
+      "section_number": 3,
+      "source_content": "content/modules/TM_CTX_FIRST_TIME/en/TP-03.md",
+      "quote": "As this is your first time considering dental treatment of this type, it's natural to have many questions.",
+      "problem": "Patronizing filler phrase. 'It's natural to have many questions' adds no value and talks down to patient.",
+      "severity": "warning",
+      "suggested_fix": "Remove entire sentence or replace with: 'Since this is your first time considering treatment of this scope, your dentist will guide you through each step.'"
+    },
+    {
+      "section_number": 3,
+      "source_content": "content/modules/TM_CTX_FIRST_TIME/en/TP-03.md",
+      "quote": "There's no pressure to make immediate decisions—take whatever time feels right to understand your options.",
+      "problem": "Vague autonomy padding that wastes words without adding substance.",
+      "severity": "info",
+      "suggested_fix": "Remove entirely or replace with concrete information about typical decision timelines."
+    },
+    {
+      "section_number": 3,
+      "source_content": "content/scenarios/S12/en/TP-03.md",
+      "quote": "When teeth feel loose or cause pain, this can evoke uncertainty. Many people notice this during chewing, with pressure on certain teeth, or even at rest. Confidence in your own teeth decreases and simple activities, such as eating or brushing, can require extra attention.",
+      "problem": "Repetitive - says the same thing three different ways. Verbose and padded.",
+      "severity": "warning",
+      "suggested_fix": "Condense to: 'Loose or painful teeth often cause uncertainty, especially during chewing or daily activities like eating and brushing.'"
+    },
+    {
+      "section_number": 3,
+      "source_content": "content/scenarios/S12/en/TP-03.md",
+      "quote": "Because looseness and pain can have different causes, it's important to have the situation carefully assessed.",
+      "problem": "States the obvious. Filler content.",
+      "severity": "info",
+      "suggested_fix": "Remove entirely - this is implied by the need for professional consultation."
+    },
+    {
+      "section_number": 4,
+      "source_content": "content/b_blocks/B_INTERP_STANDARD/en/TP-03.md",
+      "quote": "Your responses indicate a dental situation that falls within established treatment frameworks.",
+      "problem": "Meaningless corporate jargon. 'Falls within established treatment frameworks' says nothing concrete.",
+      "severity": "warning",
+      "suggested_fix": "Replace with specific statement: 'Your situation involves extensive missing teeth with remaining teeth heavily restored, which has several established treatment approaches.'"
+    },
+    {
+      "section_number": 4,
+      "source_content": "content/b_blocks/B_INTERP_STANDARD/en/TP-03.md",
+      "quote": "Clinical examination findings will refine the specific recommendations.",
+      "problem": "Obvious filler statement that adds no value.",
+      "severity": "info",
+      "suggested_fix": "Remove entirely or integrate into a more substantive statement about what the examination will assess."
+    },
+    {
+      "section_number": 10,
+      "source_content": "content/scenarios/S12/en/TP-03.md",
+      "quote": "Recovery time: 3-7 days",
+      "problem": "Presented as fact without hedging language. No 'typically' or 'may vary'. Implies guaranteed timeline.",
+      "severity": "critical",
+      "suggested_fix": "Change to: 'Typical recovery time: 3-7 days (varies significantly by individual)'"
+    },
+    {
+      "section_number": 10,
+      "source_content": "content/scenarios/S12/en/TP-03.md",
+      "quote": "Daily functioning: improvement of stability after recovery",
+      "problem": "Implies guaranteed outcome without proper hedging or mention of potential complications.",
+      "severity": "critical",
+      "suggested_fix": "Change to: 'Daily functioning: most patients experience improved stability after recovery, though individual results vary and complications are possible.'"
+    },
+    {
+      "section_number": 10,
+      "source_content": "content/scenarios/S12/en/TP-03.md",
+      "quote": "Possible impact: discomfort or sensitivity",
+      "problem": "Section 10 is only 20 words total - completely inadequate for risk factors. Missing comprehensive risk discussion.",
+      "severity": "critical",
+      "suggested_fix": "Expand to include: potential complications, failure rates, individual variation factors, long-term maintenance requirements, and realistic outcome ranges."
+    },
+    {
+      "section_number": 11,
+      "source_content": "content/static/11/en.md",
+      "quote": "Your next steps are entirely up to you... Remember, this is your journey... The choice of how to proceed is yours.",
+      "problem": "Autonomy stated three separate times in one short section. Repetitive padding that becomes patronizing.",
+      "severity": "warning",
+      "suggested_fix": "State autonomy once clearly, then focus on substantive preparation guidance. Remove repetitive reassurance."
+    },
+    {
+      "section_number": 11,
+      "source_content": "content/static/11/en.md",
+      "quote": "Consider noting down: Your main concerns and priorities, Questions about specific treatment options, Your timeline preferences, Budget considerations you'd like to discuss",
+      "problem": "Generic bullet list that adds minimal value. Obvious preparation items.",
+      "severity": "info",
+      "suggested_fix": "Replace with specific preparation guidance relevant to this patient's situation: questions about durability, natural feel, affordability trade-offs, etc."
+    }
+  ],
+  "content_files_to_review": [
+    "content/a_blocks/A_BLOCK_TREATMENT_OPTIONS/en/TP-03.md",
+    "content/static/1/en.md",
+    "content/scenarios/S12/en/TP-03.md",
+    "content/modules/TM_CTX_FIRST_TIME/en/TP-03.md",
+    "content/b_blocks/B_INTERP_STANDARD/en/TP-03.md",
+    "content/static/11/en.md"
+  ],
+  "overall_assessment": "This report suffers from poor writing quality with excessive filler, weak clinical safety disclaimers, and minimal personalization. Content is verbose and repetitive, with autonomy stated four times while actual empowering information is thin. Critical sections (5-9) are missing entirely. Recovery timelines and outcomes lack proper hedging. The report needs major revision: cut verbosity by 40%, strengthen safety disclaimers, add patient-specific details, restore missing treatment content, and replace padding with substance.",
+  "metadata": {
+    "model_used": "claude-sonnet-4-5-20250929",
+    "duration_ms": 85968,
+    "token_usage": {
+      "input_tokens": 5709,
+      "output_tokens": 3849
+    }
+  }
+}

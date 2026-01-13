@@ -21,8 +21,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@openrouter/ai-sdk-provider": "^1.5.4",
-    "ai": "^5.0.121",
+    "@ai-sdk/anthropic": "^3.0.12",
+    "ai": "^6.0.31",
     "typescript": "^5.9.3",
     "zod": "^4.3.4"
   },

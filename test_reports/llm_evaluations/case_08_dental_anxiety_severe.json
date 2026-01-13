@@ -1,0 +1,165 @@
+{
+  "session_id": "test-case-008",
+  "case_id": "case_08_dental_anxiety_severe",
+  "evaluation_timestamp": "2026-01-13T15:23:51.489Z",
+  "outcome": "BLOCK",
+  "overall_score": 6,
+  "dimensions": {
+    "professional_quality": {
+      "score": 4,
+      "feedback": "The writing is severely bloated with filler phrases and repetitive content. Nearly every section opens with 'Based on the information provided...' which adds zero value. The report uses 1229 words to convey what could be said in 600-700. Transitions are wordy, autonomy statements are repeated excessively, and many sentences pad simple facts with unnecessary preamble."
+    },
+    "clinical_safety": {
+      "score": 6,
+      "feedback": "Disclaimer is present but treatment language is too optimistic in places. Phrases like 'predictable result', 'proven technique', and 'well-established' appear without sufficient hedging. Risk section is too brief and doesn't adequately cover potential complications. Missing explicit statement that outcomes vary significantly between patients."
+    },
+    "tone_appropriateness": {
+      "score": 7,
+      "feedback": "Tone is generally reassuring and stability-focused as required for TP-04. However, some sections drift into overly warm/empathetic language that feels forced. The anxiety handling in Section 2 is appropriate, but similar reassurance patterns repeat too often in later sections, diluting impact."
+    },
+    "personalization": {
+      "score": 5,
+      "feedback": "Patient name (Lisa) is never used despite being provided. Generic content dominates - most sections could apply to any single-tooth case. Specific patient priorities (natural/subtle aesthetics, severe anxiety, first-timer status) are acknowledged but not woven throughout. The 'visible area' mention is good but underutilized."
+    },
+    "patient_autonomy": {
+      "score": 6,
+      "feedback": "Autonomy is emphasized repeatedly but becomes preachy and repetitive. Section 2, Section 11, and scattered statements throughout all remind patient of their control. While non-directive, the excessive repetition of autonomy language feels like overcompensation and wastes space. Some option framing subtly favors implants."
+    },
+    "structure_completeness": {
+      "score": 8,
+      "feedback": "All required sections present and in logical order. Flow is coherent. Section 4 (Interpretation) feels thin and could be merged or expanded. Section 7 (Trade-offs) is too brief at 39 words. Otherwise structure is solid with appropriate progression from context to options to next steps."
+    }
+  },
+  "content_issues": [
+    {
+      "section_number": 2,
+      "source_content": "content/modules/TM_ANXIETY_SEVERE/en/TP-04.md",
+      "quote": "Based on the information provided...",
+      "problem": "Filler phrase that adds no value - appears at start of multiple sections",
+      "severity": "warning",
+      "suggested_fix": "Remove entirely. Start with: 'We understand that thinking about dental treatment...'"
+    },
+    {
+      "section_number": 2,
+      "source_content": "content/modules/TM_ANXIETY_SEVERE/en/TP-04.md",
+      "quote": "If at any point you feel overwhelmed: You can close this report and return to it later / There's no timeline or pressure",
+      "problem": "Excessive autonomy emphasis before any content delivered - wastes space",
+      "severity": "warning",
+      "suggested_fix": "Cut this list to single sentence: 'Read at your own pace and return anytime.'"
+    },
+    {
+      "section_number": 3,
+      "source_content": "content/modules/TM_CTX_FIRST_TIME/en/TP-04.md",
+      "quote": "Based on the information provided...",
+      "problem": "Same filler phrase repeated - pure padding",
+      "severity": "warning",
+      "suggested_fix": "Remove. Start directly with 'A missing tooth in a visible spot...'"
+    },
+    {
+      "section_number": 3,
+      "source_content": "content/scenarios/S02/en/TP-04.md",
+      "quote": "It's completely normal to have questions and perhaps some uncertainty about what to expect.",
+      "problem": "Generic reassurance that doesn't add information - filler",
+      "severity": "info",
+      "suggested_fix": "Remove or replace with specific guidance about what first-timers should know"
+    },
+    {
+      "section_number": 4,
+      "source_content": "content/b_blocks/B_INTERP_STANDARD/en/TP-04.md",
+      "quote": "Based on the information provided...",
+      "problem": "Third instance of same filler phrase",
+      "severity": "warning",
+      "suggested_fix": "Remove. Start with 'Your dental situation is the type we see regularly...'"
+    },
+    {
+      "section_number": 4,
+      "source_content": "content/b_blocks/B_INTERP_STANDARD/en/TP-04.md",
+      "quote": "Based on your responses, your dental situation is the type we see regularly and can address with proven treatment approaches. The specific recommendations will come from your clinical examination.",
+      "problem": "Entire section says nothing concrete - 101 words of generic statements",
+      "severity": "warning",
+      "suggested_fix": "Either add meaningful interpretation of Lisa's specific situation or merge this into Section 3"
+    },
+    {
+      "section_number": 5,
+      "source_content": "content/scenarios/S02/en/TP-04.md",
+      "quote": "A stable, predictable result that becomes a permanent part of your mouth.",
+      "problem": "Too absolute - no hedging about potential complications or failures",
+      "severity": "critical",
+      "suggested_fix": "Change to: 'In most cases, a stable result that can last many years with proper care.'"
+    },
+    {
+      "section_number": 5,
+      "source_content": "content/scenarios/S02/en/TP-04.md",
+      "quote": "Implants have a long track record of success",
+      "problem": "Missing context about failure rates or complications",
+      "severity": "warning",
+      "suggested_fix": "Add: 'Implants have high success rates (typically 90-95% over 10 years), though individual results vary.'"
+    },
+    {
+      "section_number": 6,
+      "source_content": "content/b_blocks/B_COMPARE_IMPLANT_VS_BRIDGE/en/TP-04.md",
+      "quote": "Expected lifespan: Often 15-25+ years / Typically 10-15 years",
+      "problem": "Presented as facts without 'average' qualifier or variation acknowledgment",
+      "severity": "warning",
+      "suggested_fix": "Change to 'Average lifespan' and add footnote: 'Individual results vary significantly'"
+    },
+    {
+      "section_number": 7,
+      "source_content": "content/scenarios/S02/en/TP-04.md",
+      "quote": "Both options lead to a natural-looking, comfortable result.",
+      "problem": "Too absolute - outcomes vary, not guaranteed",
+      "severity": "critical",
+      "suggested_fix": "Change to: 'Both options can provide natural-looking, comfortable results in appropriate cases.'"
+    },
+    {
+      "section_number": 7,
+      "source_content": "content/scenarios/S02/en/TP-04.md",
+      "quote": "The goal is the same: a stable, confident smile that you don't have to think about.",
+      "problem": "Overpromising outcome - not all patients achieve this",
+      "severity": "warning",
+      "suggested_fix": "Change to: 'The goal is to restore function and appearance as naturally as possible.'"
+    },
+    {
+      "section_number": 9,
+      "source_content": "content/modules/TM_BUDGET_FLEXIBLE/en/TP-04.md",
+      "quote": "Let's find that balance together.",
+      "problem": "Overly warm, forced intimacy that doesn't match clinical context",
+      "severity": "info",
+      "suggested_fix": "Remove or change to: 'Your dentist can help identify the best value for your situation.'"
+    },
+    {
+      "section_number": 10,
+      "source_content": "content/scenarios/S02/en/TP-04.md",
+      "quote": "Recovery: 2–5 days of mild tenderness",
+      "problem": "Section titled 'Risk Factors' but only covers recovery, not actual risks",
+      "severity": "critical",
+      "suggested_fix": "Add actual risks: implant failure, infection, nerve damage, bridge debonding, etc. Or retitle section to 'Recovery & Risks'"
+    },
+    {
+      "section_number": 11,
+      "source_content": "content/static/11/en.md",
+      "quote": "Your next steps are entirely up to you.",
+      "problem": "Fourth major autonomy statement - excessive repetition",
+      "severity": "info",
+      "suggested_fix": "This is the right place for autonomy emphasis, but acknowledge it was mentioned before: 'As mentioned, your next steps are yours to decide.'"
+    }
+  ],
+  "content_files_to_review": [
+    "content/modules/TM_ANXIETY_SEVERE/en/TP-04.md",
+    "content/modules/TM_CTX_FIRST_TIME/en/TP-04.md",
+    "content/scenarios/S02/en/TP-04.md",
+    "content/b_blocks/B_INTERP_STANDARD/en/TP-04.md",
+    "content/b_blocks/B_COMPARE_IMPLANT_VS_BRIDGE/en/TP-04.md",
+    "content/modules/TM_BUDGET_FLEXIBLE/en/TP-04.md",
+    "content/static/11/en.md"
+  ],
+  "overall_assessment": "This report has solid structure and appropriate tone for an anxious first-timer, but suffers from severe verbosity and repetitive filler content. Clinical safety needs strengthening with better hedging and risk disclosure. Personalization is minimal despite available patient data. The 1229-word count could be cut to 700-800 words without losing substance by removing filler phrases, consolidating repetitive autonomy statements, and tightening wordy sections. Most critical issues: remove 'Based on the information provided' padding, strengthen outcome disclaimers, expand risk discussion beyond recovery, and use patient name for personalization.",
+  "metadata": {
+    "model_used": "claude-sonnet-4-5-20250929",
+    "duration_ms": 82633,
+    "token_usage": {
+      "input_tokens": 6999,
+      "output_tokens": 3176
+    }
+  }
+}

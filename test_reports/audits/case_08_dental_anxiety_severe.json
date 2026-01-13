@@ -1,0 +1,2023 @@
+{
+  "session_id": "test-case-008",
+  "created_at": "2026-01-13T15:23:51.489Z",
+  "intake": {
+    "session_id": "test-case-008",
+    "timestamp": "2026-01-08T07:09:41.236Z",
+    "answers": [
+      {
+        "question_id": "Q1",
+        "answer": "missing_teeth_long_term"
+      },
+      {
+        "question_id": "Q2",
+        "answer": "8"
+      },
+      {
+        "question_id": "Q3",
+        "answer": [
+          "missing_damaged"
+        ]
+      },
+      {
+        "question_id": "Q4",
+        "answer": [
+          "no_never"
+        ]
+      },
+      {
+        "question_id": "Q5",
+        "answer": "no_aesthetic_only"
+      },
+      {
+        "question_id": "Q6a",
+        "answer": "one_missing"
+      },
+      {
+        "question_id": "Q6b",
+        "answer": "side_chewing"
+      },
+      {
+        "question_id": "Q6c",
+        "answer": "intact"
+      },
+      {
+        "question_id": "Q7",
+        "answer": "natural_subtle"
+      },
+      {
+        "question_id": "Q8",
+        "answer": "very_important_natural"
+      },
+      {
+        "question_id": "Q9",
+        "answer": "30_45"
+      },
+      {
+        "question_id": "Q10",
+        "answer": "price_quality_flexible"
+      },
+      {
+        "question_id": "Q11",
+        "answer": "ai_report_first"
+      },
+      {
+        "question_id": "Q12",
+        "answer": "still_exploring"
+      },
+      {
+        "question_id": "Q13",
+        "answer": "no"
+      },
+      {
+        "question_id": "Q14",
+        "answer": "no"
+      },
+      {
+        "question_id": "Q15",
+        "answer": "good"
+      },
+      {
+        "question_id": "Q16a",
+        "answer": "no_complete"
+      },
+      {
+        "question_id": "Q17",
+        "answer": "no"
+      },
+      {
+        "question_id": "Q18",
+        "answer": "yes_severe"
+      }
+    ],
+    "metadata": {
+      "patient_name": "Lisa",
+      "previous_negative_experience": true
+    }
+  },
+  "driver_state": {
+    "session_id": "test-case-008",
+    "drivers": {
+      "clinical_priority": {
+        "driver_id": "clinical_priority",
+        "layer": "L1",
+        "value": "elective",
+        "source": "derived",
+        "source_tags": [
+          "no_acute_issues"
+        ],
+        "confidence": 0.7
+      },
+      "biological_stability": {
+        "driver_id": "biological_stability",
+        "layer": "L1",
+        "value": "stable",
+        "source": "derived",
+        "source_tags": [
+          "hygiene_good",
+          "adjacent_intact"
+        ],
+        "confidence": 1
+      },
+      "mouth_situation": {
+        "driver_id": "mouth_situation",
+        "layer": "L1",
+        "value": "single_missing_tooth",
+        "source": "derived",
+        "source_tags": [
+          "status_single_missing"
+        ],
+        "confidence": 0.7
+      },
+      "age_stage": {
+        "driver_id": "age_stage",
+        "layer": "L1",
+        "value": "adult",
+        "source": "derived",
+        "source_tags": [
+          "age_30_45"
+        ],
+        "confidence": 0.7
+      },
+      "medical_constraints": {
+        "driver_id": "medical_constraints",
+        "layer": "L1",
+        "value": "none",
+        "source": "derived",
+        "source_tags": [
+          "medical_clear",
+          "pregnancy_no"
+        ],
+        "confidence": 1
+      },
+      "treatment_viability": {
+        "driver_id": "treatment_viability",
+        "layer": "L1",
+        "value": "single_site",
+        "source": "derived",
+        "source_tags": [
+          "status_single_missing"
+        ],
+        "confidence": 0.7
+      },
+      "risk_profile_biological": {
+        "driver_id": "risk_profile_biological",
+        "layer": "L1",
+        "value": "low",
+        "source": "derived",
+        "source_tags": [
+          "smoking_no",
+          "hygiene_good"
+        ],
+        "confidence": 1
+      },
+      "profile_type": {
+        "driver_id": "profile_type",
+        "layer": "L2",
+        "value": "mixed",
+        "source": "fallback",
+        "source_tags": [],
+        "confidence": 0.5
+      },
+      "aesthetic_tolerance": {
+        "driver_id": "aesthetic_tolerance",
+        "layer": "L2",
+        "value": "conservative",
+        "source": "derived",
+        "source_tags": [
+          "natural_priority_high",
+          "style_natural"
+        ],
+        "confidence": 1
+      },
+      "expectation_risk": {
+        "driver_id": "expectation_risk",
+        "layer": "L2",
+        "value": "realistic",
+        "source": "derived",
+        "source_tags": [
+          "satisfaction_minor_concerns"
+        ],
+        "confidence": 0.7
+      },
+      "experience_history": {
+        "driver_id": "experience_history",
+        "layer": "L2",
+        "value": "first_timer",
+        "source": "derived",
+        "source_tags": [
+          "history_none"
+        ],
+        "confidence": 0.7
+      },
+      "decision_stage": {
+        "driver_id": "decision_stage",
+        "layer": "L2",
+        "value": "exploring",
+        "source": "derived",
+        "source_tags": [
+          "timeline_exploratory",
+          "intent_exploratory"
+        ],
+        "confidence": 1
+      },
+      "autonomy_level": {
+        "driver_id": "autonomy_level",
+        "layer": "L2",
+        "value": "autonomous",
+        "source": "derived",
+        "source_tags": [
+          "intent_exploratory"
+        ],
+        "confidence": 0.7
+      },
+      "anxiety_level": {
+        "driver_id": "anxiety_level",
+        "layer": "L3",
+        "value": "severe",
+        "source": "derived",
+        "source_tags": [
+          "anxiety_severe"
+        ],
+        "confidence": 0.7
+      },
+      "information_depth": {
+        "driver_id": "information_depth",
+        "layer": "L3",
+        "value": "detailed",
+        "source": "derived",
+        "source_tags": [
+          "intent_exploratory"
+        ],
+        "confidence": 0.7
+      },
+      "budget_type": {
+        "driver_id": "budget_type",
+        "layer": "L3",
+        "value": "balanced",
+        "source": "derived",
+        "source_tags": [
+          "budget_balanced"
+        ],
+        "confidence": 0.7
+      },
+      "treatment_philosophy": {
+        "driver_id": "treatment_philosophy",
+        "layer": "L3",
+        "value": "minimally_invasive",
+        "source": "derived",
+        "source_tags": [
+          "style_natural",
+          "natural_priority_high"
+        ],
+        "confidence": 1
+      },
+      "time_horizon": {
+        "driver_id": "time_horizon",
+        "layer": "L3",
+        "value": "undefined",
+        "source": "derived",
+        "source_tags": [
+          "timeline_exploratory"
+        ],
+        "confidence": 0.7
+      }
+    },
+    "conflicts": [
+      {
+        "driver_id": "biological_stability",
+        "conflicting_values": [
+          "stable",
+          "moderate"
+        ],
+        "resolved_value": "stable",
+        "resolution_reason": "Priority-based: rule priority 1 wins"
+      }
+    ],
+    "fallbacks_applied": [
+      "profile_type"
+    ]
+  },
+  "scenario_match": {
+    "session_id": "test-case-008",
+    "matched_scenario": "S02",
+    "confidence": "MEDIUM",
+    "score": 7,
+    "all_scores": [
+      {
+        "scenario_id": "S02",
+        "score": 7,
+        "matched_required": 1,
+        "matched_strong": 2,
+        "matched_supporting": 1,
+        "excluded": false,
+        "breakdown": [
+          {
+            "driver_id": "mouth_situation",
+            "criterion": "required",
+            "matched": true,
+            "points": 0
+          },
+          {
+            "driver_id": "clinical_priority",
+            "criterion": "excluding",
+            "matched": false,
+            "points": 0
+          },
+          {
+            "driver_id": "profile_type",
+            "criterion": "strong",
+            "matched": true,
+            "points": 3
+          },
+          {
+            "driver_id": "clinical_priority",
+            "criterion": "strong",
+            "matched": true,
+            "points": 3
+          },
+          {
+            "driver_id": "aesthetic_tolerance",
+            "criterion": "supporting",
+            "matched": false,
+            "points": 0
+          },
+          {
+            "driver_id": "biological_stability",
+            "criterion": "supporting",
+            "matched": true,
+            "points": 1
+          }
+        ]
+      },
+      {
+        "scenario_id": "S03",
+        "score": 3,
+        "matched_required": 1,
+        "matched_strong": 1,
+        "matched_supporting": 0,
+        "excluded": false,
+        "breakdown": [
+          {
+            "driver_id": "mouth_situation",
+            "criterion": "required",
+            "matched": true,
+            "points": 0
+          },
+          {
+            "driver_id": "profile_type",
+            "criterion": "strong",
+            "matched": false,
+            "points": 0
+          },
+          {
+            "driver_id": "clinical_priority",
+            "criterion": "strong",
+            "matched": true,
+            "points": 3
+          },
+          {
+            "driver_id": "treatment_philosophy",
+            "criterion": "supporting",
+            "matched": false,
+            "points": 0
+          }
+        ]
+      },
+      {
+        "scenario_id": "S17",
+        "score": 1,
+        "matched_required": 1,
+        "matched_strong": 0,
+        "matched_supporting": 1,
+        "excluded": false,
+        "breakdown": [
+          {
+            "driver_id": "mouth_situation",
+            "criterion": "required",
+            "matched": true,
+            "points": 0
+          },
+          {
+            "driver_id": "mouth_situation",
+            "criterion": "excluding",
+            "matched": false,
+            "points": 0
+          },
+          {
+            "driver_id": "biological_stability",
+            "criterion": "strong",
+            "matched": false,
+            "points": 0
+          },
+          {
+            "driver_id": "treatment_philosophy",
+            "criterion": "supporting",
+            "matched": true,
+            "points": 1
+          }
+        ]
+      },
+      {
+        "scenario_id": "S06",
+        "score": 0,
+        "matched_required": 2,
+        "matched_strong": 0,
+        "matched_supporting": 0,
+        "excluded": false,
+        "breakdown": [
+          {
+            "driver_id": "mouth_situation",
+            "criterion": "required",
+            "matched": true,
+            "points": 0
+          },
+          {
+            "driver_id": "profile_type",
+            "criterion": "required",
+            "matched": true,
+            "points": 0
+          },
+          {
+            "driver_id": "profile_type",
+            "criterion": "excluding",
+            "matched": false,
+            "points": 0
+          },
+          {
+            "driver_id": "aesthetic_tolerance",
+            "criterion": "supporting",
+            "matched": false,
+            "points": 0
+          }
+        ]
+      },
+      {
+        "scenario_id": "S12",
+        "score": null,
+        "matched_required": 0,
+        "matched_strong": 0,
+        "matched_supporting": 0,
+        "excluded": true,
+        "breakdown": [
+          {
+            "driver_id": "clinical_priority",
+            "criterion": "required",
+            "matched": false,
+            "points": null
+          }
+        ]
+      },
+      {
+        "scenario_id": "S10",
+        "score": null,
+        "matched_required": 0,
+        "matched_strong": 0,
+        "matched_supporting": 0,
+        "excluded": true,
+        "breakdown": [
+          {
+            "driver_id": "mouth_situation",
+            "criterion": "required",
+            "matched": false,
+            "points": null
+          }
+        ]
+      },
+      {
+        "scenario_id": "S09",
+        "score": null,
+        "matched_required": 0,
+        "matched_strong": 0,
+        "matched_supporting": 0,
+        "excluded": true,
+        "breakdown": [
+          {
+            "driver_id": "mouth_situation",
+            "criterion": "required",
+            "matched": false,
+            "points": null
+          }
+        ]
+      },
+      {
+        "scenario_id": "S07",
+        "score": null,
+        "matched_required": 0,
+        "matched_strong": 0,
+        "matched_supporting": 0,
+        "excluded": true,
+        "breakdown": [
+          {
+            "driver_id": "mouth_situation",
+            "criterion": "required",
+            "matched": false,
+            "points": null
+          }
+        ]
+      },
+      {
+        "scenario_id": "S08",
+        "score": null,
+        "matched_required": 0,
+        "matched_strong": 0,
+        "matched_supporting": 0,
+        "excluded": true,
+        "breakdown": [
+          {
+            "driver_id": "mouth_situation",
+            "criterion": "required",
+            "matched": false,
+            "points": null
+          }
+        ]
+      },
+      {
+        "scenario_id": "S04",
+        "score": null,
+        "matched_required": 0,
+        "matched_strong": 0,
+        "matched_supporting": 0,
+        "excluded": true,
+        "breakdown": [
+          {
+            "driver_id": "mouth_situation",
+            "criterion": "required",
+            "matched": false,
+            "points": null
+          }
+        ]
+      },
+      {
+        "scenario_id": "S05",
+        "score": null,
+        "matched_required": 0,
+        "matched_strong": 0,
+        "matched_supporting": 0,
+        "excluded": true,
+        "breakdown": [
+          {
+            "driver_id": "mouth_situation",
+            "criterion": "required",
+            "matched": false,
+            "points": null
+          }
+        ]
+      },
+      {
+        "scenario_id": "S01",
+        "score": null,
+        "matched_required": 1,
+        "matched_strong": 0,
+        "matched_supporting": 0,
+        "excluded": true,
+        "breakdown": [
+          {
+            "driver_id": "mouth_situation",
+            "criterion": "required",
+            "matched": false,
+            "points": null
+          },
+          {
+            "driver_id": "profile_type",
+            "criterion": "required",
+            "matched": true,
+            "points": 0
+          }
+        ]
+      },
+      {
+        "scenario_id": "S11",
+        "score": null,
+        "matched_required": 0,
+        "matched_strong": 0,
+        "matched_supporting": 0,
+        "excluded": true,
+        "breakdown": [
+          {
+            "driver_id": "mouth_situation",
+            "criterion": "required",
+            "matched": false,
+            "points": null
+          }
+        ]
+      },
+      {
+        "scenario_id": "S13",
+        "score": null,
+        "matched_required": 0,
+        "matched_strong": 0,
+        "matched_supporting": 0,
+        "excluded": true,
+        "breakdown": [
+          {
+            "driver_id": "age_stage",
+            "criterion": "required",
+            "matched": false,
+            "points": null
+          },
+          {
+            "driver_id": "mouth_situation",
+            "criterion": "required",
+            "matched": false,
+            "points": null
+          }
+        ]
+      },
+      {
+        "scenario_id": "S14",
+        "score": null,
+        "matched_required": 1,
+        "matched_strong": 0,
+        "matched_supporting": 0,
+        "excluded": true,
+        "breakdown": [
+          {
+            "driver_id": "age_stage",
+            "criterion": "required",
+            "matched": false,
+            "points": null
+          },
+          {
+            "driver_id": "budget_type",
+            "criterion": "required",
+            "matched": true,
+            "points": 0
+          }
+        ]
+      },
+      {
+        "scenario_id": "S15",
+        "score": null,
+        "matched_required": 0,
+        "matched_strong": 0,
+        "matched_supporting": 0,
+        "excluded": true,
+        "breakdown": [
+          {
+            "driver_id": "budget_type",
+            "criterion": "required",
+            "matched": false,
+            "points": null
+          },
+          {
+            "driver_id": "profile_type",
+            "criterion": "required",
+            "matched": false,
+            "points": null
+          }
+        ]
+      },
+      {
+        "scenario_id": "S16",
+        "score": null,
+        "matched_required": 0,
+        "matched_strong": 0,
+        "matched_supporting": 0,
+        "excluded": true,
+        "breakdown": [
+          {
+            "driver_id": "mouth_situation",
+            "criterion": "required",
+            "matched": false,
+            "points": null
+          }
+        ]
+      }
+    ],
+    "fallback_used": false
+  },
+  "content_selections": [
+    {
+      "content_id": "S02",
+      "type": "scenario",
+      "target_section": 2,
+      "tone": "TP-04",
+      "priority": 1,
+      "suppressed": false
+    },
+    {
+      "content_id": "B_CTX_SINGLE_TOOTH",
+      "type": "b_block",
+      "target_section": 3,
+      "tone": "TP-04",
+      "priority": 1,
+      "suppressed": false
+    },
+    {
+      "content_id": "B_INTERP_STANDARD",
+      "type": "b_block",
+      "target_section": 4,
+      "tone": "TP-04",
+      "priority": 1,
+      "suppressed": false
+    },
+    {
+      "content_id": "B_OPT_IMPLANT",
+      "type": "b_block",
+      "target_section": 5,
+      "tone": "TP-04",
+      "priority": 1,
+      "suppressed": false
+    },
+    {
+      "content_id": "B_OPT_BRIDGE",
+      "type": "b_block",
+      "target_section": 5,
+      "tone": "TP-04",
+      "priority": 1,
+      "suppressed": false
+    },
+    {
+      "content_id": "B_COMPARE_IMPLANT_VS_BRIDGE",
+      "type": "b_block",
+      "target_section": 6,
+      "tone": "TP-04",
+      "priority": 1,
+      "suppressed": false
+    },
+    {
+      "content_id": "B_RISKLANG_STANDARD",
+      "type": "b_block",
+      "target_section": 10,
+      "tone": "TP-04",
+      "priority": 1,
+      "suppressed": false
+    },
+    {
+      "content_id": "TM_CTX_FIRST_TIME",
+      "type": "module",
+      "target_section": 3,
+      "tone": "TP-04",
+      "priority": 2,
+      "suppressed": false
+    },
+    {
+      "content_id": "TM_BUDGET_FLEXIBLE",
+      "type": "module",
+      "target_section": 9,
+      "tone": "TP-04",
+      "priority": 2,
+      "suppressed": false
+    },
+    {
+      "content_id": "TM_ANXIETY_SEVERE",
+      "type": "module",
+      "target_section": 2,
+      "tone": "TP-04",
+      "priority": 0,
+      "suppressed": false
+    },
+    {
+      "content_id": "STATIC_DISCLAIMER",
+      "type": "static",
+      "target_section": 1,
+      "tone": "TP-04",
+      "priority": 1,
+      "suppressed": false
+    },
+    {
+      "content_id": "STATIC_NEXT_STEPS",
+      "type": "static",
+      "target_section": 11,
+      "tone": "TP-06",
+      "priority": 1,
+      "suppressed": false
+    }
+  ],
+  "tone_selection": {
+    "selected_tone": "TP-04",
+    "reason": "Triggered by anxiety_level: severe",
+    "evaluated_triggers": [
+      {
+        "tone": "TP-04",
+        "matched": true,
+        "trigger_driver": "anxiety_level"
+      }
+    ]
+  },
+  "composed_report": {
+    "session_id": "test-case-008",
+    "scenario_id": "S02",
+    "tone": "TP-04",
+    "language": "en",
+    "confidence": "MEDIUM",
+    "sections": [
+      {
+        "section_number": 1,
+        "section_name": "Disclaimer",
+        "content": "# Section 1: Disclaimer\n\nThis report is generated based on your responses to our questionnaire and is intended for informational purposes only. It does not constitute medical advice, diagnosis, or treatment recommendations.\n\nPlease consult with a qualified dental professional before making any decisions about your dental care. Your dentist will conduct a thorough examination and provide personalized recommendations based on your specific situation.\n\nThe information presented here is general in nature and may not apply to your individual circumstances. Treatment outcomes vary between patients and depend on many factors that can only be assessed through clinical examination.",
+        "sources": [
+          "STATIC_1"
+        ],
+        "word_count": 96
+      },
+      {
+        "section_number": 2,
+        "section_name": "Your Personal Summary",
+        "content": "Based on the information provided...\n\n# Before We Begin\n\nWe understand that thinking about dental treatment can bring up difficult feelings. Many people share similar concerns, and those feelings are completely valid.\n\nThis report is not asking you to make any decisions right now. It's simply here to give you information at your own pace. You can read as much or as little as feels comfortable.\n\nIf at any point you feel overwhelmed:\n- You can close this report and return to it later\n- There's no timeline or pressure\n- Your feelings are part of the conversation, not separate from it\n\nWhen you're ready, we'll walk through your situation together—one small step at a time.\n\nYou're missing one tooth in a visible area, and it's understandable if this feels like a bigger concern than others might realize. Both options available to you are well-established, predictable, and designed to restore your comfort and confidence.",
+        "sources": [
+          "TM_ANXIETY_SEVERE",
+          "SCENARIO:personal_summary"
+        ],
+        "word_count": 150
+      },
+      {
+        "section_number": 3,
+        "section_name": "Context",
+        "content": "Based on the information provided...\n\n# First-Time Treatment Context\n\nWe understand that considering dental treatment for the first time can feel overwhelming. It's completely normal to have questions and perhaps some uncertainty about what to expect.\n\nYour dentist is there to guide you through each step of the process. Take your time to understand your options—there's no need to rush into any decisions. Many patients find that their initial concerns ease once they have a clear picture of what's involved.\n\nA missing tooth in a visible spot can feel more significant than it might seem from the outside. You might notice it every time you smile or speak. That awareness is completely normal.\n\nWhat's important to know is that this is a very common situation, and it's one that dental professionals handle regularly. The surrounding teeth are stable, and your mouth is capable of supporting a reliable solution. Nothing about your situation is unusual or cause for alarm.\n\nMany people in your position have similar questions: Will chewing feel normal again? Will things stay stable? The answer, in most cases, is yes—both treatment options are designed to restore function and appearance in a predictable, controlled way.",
+        "sources": [
+          "TM_CTX_FIRST_TIME",
+          "SCENARIO:context"
+        ],
+        "word_count": 195
+      },
+      {
+        "section_number": 4,
+        "section_name": "Interpretation",
+        "content": "Based on the information provided...\n\n# Section 4: Interpretation\n\nBased on your responses, your dental situation is the type we see regularly and can address with proven treatment approaches. The specific recommendations will come from your clinical examination.\n\nYour priorities are important in guiding treatment direction. Whether you're focused on aesthetics, function, comfort, or a balance of these, your preferences help determine which options are most appropriate.\n\nMeeting with your dentist is the natural next step. They can connect your goals with their findings to develop a plan that addresses your needs in a way that has worked well for many patients.",
+        "sources": [
+          "B_INTERP_STANDARD"
+        ],
+        "word_count": 101
+      },
+      {
+        "section_number": 5,
+        "section_name": "Treatment Options",
+        "content": "**What this involves**\nA small titanium post is placed into the jawbone in a routine procedure. Once healed, a custom crown is attached. The result is a fixed tooth that functions like your natural ones.\n\n**What you can expect**\nA stable, predictable result that becomes a permanent part of your mouth.\n\n**Why this is considered reliable**\n- Implants have a long track record of success\n- They don't affect neighboring teeth\n- They help preserve bone structure\n- Once healed, they require no special maintenance\n\n**What to know about the process**\n- It takes a few months for full healing\n- The procedure itself is straightforward\n- Some mild discomfort is normal afterward, but manageable\n\n**This is often chosen by people who...**\nWant the peace of mind that comes with a permanent, self-supporting solution.\n\n**What this involves**\nA replacement tooth is bonded to the back of the adjacent teeth. No placement procedure is required.\n\n**What you can expect**\nA simple, gentle way to restore your smile quickly.\n\n**Why this is considered reliable**\n- It's a proven technique for single-tooth replacement\n- No recovery period needed\n- Results are immediate and natural-looking\n\n**What to know about the process**\n- It may need to be replaced after several years\n- It relies on the condition of adjacent teeth\n- Not every case is suitable, but many are\n\n**This is often chosen by people who...**\nPrefer a gentler approach or want a quicker, less involved process.",
+        "sources": [
+          "SCENARIO:options"
+        ],
+        "word_count": 230
+      },
+      {
+        "section_number": 6,
+        "section_name": "Comparison",
+        "content": "# Section 6: Comparison\n\n## Implant vs. Bridge\n\nBoth options have helped many patients successfully. Here's how they compare:\n\n| Factor | Dental Implant | Dental Bridge |\n|--------|----------------|---------------|\n| **Adjacent teeth** | Stay healthy and intact | Prepared for crowns |\n| **Bone health** | Maintained through use | May gradually decrease |\n| **Procedure** | Placement procedure | Non-placement |\n| **Treatment time** | 3-6 months | 2-4 weeks |\n| **Initial cost** | Higher upfront | More affordable initially |\n| **Expected lifespan** | Often 15-25+ years | Typically 10-15 years |\n| **Care routine** | Same as natural teeth | Special cleaning technique |\n\n**Implants are often chosen when:**\n- Adjacent teeth are healthy and you want to keep them that way\n- Bone is sufficient (your dentist can confirm)\n- You value long-term durability\n\n**Bridges are often chosen when:**\n- Adjacent teeth already have restorations\n- A non-placement approach is preferred\n- A quicker timeline is important\n\nBoth are reliable—your dentist can guide you to what's most suitable.",
+        "sources": [
+          "B_COMPARE_IMPLANT_VS_BRIDGE"
+        ],
+        "word_count": 132
+      },
+      {
+        "section_number": 7,
+        "section_name": "Trade-offs to Consider",
+        "content": "Both options lead to a natural-looking, comfortable result. The implant offers long-term permanence; the bridge offers simplicity and speed. Whichever path you choose, the goal is the same: a stable, confident smile that you don't have to think about.",
+        "sources": [
+          "SCENARIO:expected_results"
+        ],
+        "word_count": 39
+      },
+      {
+        "section_number": 8,
+        "section_name": "Treatment Process",
+        "content": "- Implant + crown: typically 3–7 months (most of which is healing time)\n- Adhesive bridge: usually completed within a few weeks\n\nBoth timelines are well-established and predictable.",
+        "sources": [
+          "SCENARIO:process"
+        ],
+        "word_count": 25
+      },
+      {
+        "section_number": 9,
+        "section_name": "Cost Considerations",
+        "content": "# Budget Considerations: Balanced Approach\n\nWe appreciate that you're looking for good value—quality treatment at a reasonable cost. This is a sensible approach that many patients share.\n\nYour dentist can help you understand:\n- Where additional investment provides real benefits\n- Where more economical options perform just as well\n- How different choices affect long-term costs and outcomes\n- The best value options for your specific situation\n\nThere's often a sweet spot where you get excellent results without overspending. Let's find that balance together.\n\n- Single implant with crown: approximately €2,200 – €2,500\n- Adhesive bridge: approximately €1,500 – €2,500\n\nThese ranges are based on typical cases. Your dentist can provide a more precise estimate.",
+        "sources": [
+          "TM_BUDGET_FLEXIBLE",
+          "SCENARIO:costs"
+        ],
+        "word_count": 106
+      },
+      {
+        "section_number": 10,
+        "section_name": "Risk Factors",
+        "content": "**Implant with crown**\n- Recovery: 2–5 days of mild tenderness\n- Daily life: Most people resume normal activities quickly\n- Long-term: Once healed, no special care needed\n\n**Adhesive bridge**\n- Recovery: None required\n- Daily life: Immediate return to normal\n- Long-term: Periodic check-ups recommended",
+        "sources": [
+          "SCENARIO:recovery"
+        ],
+        "word_count": 39
+      },
+      {
+        "section_number": 11,
+        "section_name": "Next Steps",
+        "content": "# Section 11: Next Steps\n\n**Your next steps are entirely up to you.** Here are some options to consider:\n\n- Review this report at your own pace\n- Prepare questions for your dental consultation\n- Schedule an appointment when you feel ready\n- Request additional information on specific topics\n\nRemember, this is your journey. Take whatever time feels right to make decisions that work for you.\n\n## How to Prepare for Your Consultation\n\nConsider noting down:\n- Your main concerns and priorities\n- Questions about specific treatment options\n- Your timeline preferences\n- Budget considerations you'd like to discuss\n\nThe choice of how to proceed is yours. Your dentist is there to provide information and guidance, but you remain in control of your dental care decisions.",
+        "sources": [
+          "STATIC_11"
+        ],
+        "word_count": 116
+      }
+    ],
+    "total_word_count": 1229,
+    "warnings_included": false,
+    "suppressed_sections": [],
+    "placeholders_resolved": 0,
+    "placeholders_unresolved": []
+  },
+  "validation_result": {
+    "valid": true,
+    "errors": [],
+    "warnings": [
+      "Section 10 has 39 words, minimum recommended is 50"
+    ],
+    "semantic_violations": []
+  },
+  "llm_evaluation": {
+    "professional_quality": {
+      "score": 4,
+      "confidence": 0.9,
+      "feedback": "The writing is severely bloated with filler phrases and repetitive content. Nearly every section opens with 'Based on the information provided...' which adds zero value. The report uses 1229 words to convey what could be said in 600-700. Transitions are wordy, autonomy statements are repeated excessively, and many sentences pad simple facts with unnecessary preamble.",
+      "issues": [
+        "'Based on the information provided...' appears 4 times as section opener - pure filler",
+        "Section 2 opens with entire anxiety preamble before getting to patient's actual situation",
+        "Section 3 repeats 'completely normal' twice in opening paragraphs",
+        "'It's important to know' and similar hedging phrases waste words throughout",
+        "Excessive reassurance padding ('This is completely valid', 'That's understandable') dilutes key information",
+        "Section 4 uses 101 words to say essentially nothing concrete",
+        "Multiple sections end with autonomy reminders that could be consolidated",
+        "Treatment options repeat 'What this involves' structure verbosely"
+      ],
+      "suggestions": [
+        "Remove ALL instances of 'Based on the information provided...' - start sections directly",
+        "Cut Section 2 anxiety preamble by 50% - get to patient situation faster",
+        "Consolidate repetitive reassurance phrases - say it once, say it well",
+        "Section 4 should be cut to 50 words maximum or merged elsewhere",
+        "Combine autonomy reminders into one strong statement in Next Steps",
+        "Tighten treatment options to bullet points - current prose is padded",
+        "Remove hedging phrases like 'It's important to know' - just state facts",
+        "Cut word count to under 900 words without losing substance"
+      ]
+    },
+    "clinical_safety": {
+      "score": 6,
+      "confidence": 0.85,
+      "feedback": "Disclaimer is present but treatment language is too optimistic in places. Phrases like 'predictable result', 'proven technique', and 'well-established' appear without sufficient hedging. Risk section is too brief and doesn't adequately cover potential complications. Missing explicit statement that outcomes vary significantly between patients.",
+      "issues": [
+        "Section 5 states 'stable, predictable result' without qualifying that complications can occur",
+        "'Implants have a long track record of success' lacks failure rate context",
+        "Section 7 claims 'Both options lead to natural-looking, comfortable result' - too absolute",
+        "Risk section (10) only covers recovery, not actual treatment risks or complications",
+        "No mention of implant failure rates, bridge debonding, or other common issues",
+        "Lifespan ranges in comparison table presented as facts without 'typical' or 'average' qualifier",
+        "Missing disclaimer that individual results may differ significantly"
+      ],
+      "suggestions": [
+        "Add 'in most cases' or 'typically' to all outcome statements",
+        "Include actual complication rates or at minimum acknowledge they exist",
+        "Expand Section 10 to cover treatment-specific risks beyond just recovery",
+        "Add explicit statement: 'Individual outcomes vary and cannot be guaranteed'",
+        "Qualify lifespan data as 'average' or 'typical' with note about variation",
+        "Strengthen disclaimer to emphasize this is educational, not predictive",
+        "Add note that unforeseen complications can occur even with routine procedures"
+      ]
+    },
+    "tone_appropriateness": {
+      "score": 7,
+      "confidence": 0.8,
+      "feedback": "Tone is generally reassuring and stability-focused as required for TP-04. However, some sections drift into overly warm/empathetic language that feels forced. The anxiety handling in Section 2 is appropriate, but similar reassurance patterns repeat too often in later sections, diluting impact.",
+      "issues": [
+        "Section 3 repeats reassurance patterns already covered in Section 2",
+        "'Your feelings are part of the conversation' feels overly therapeutic for dental report",
+        "Some transitions use forced warmth ('Let's find that balance together') that doesn't match clinical context",
+        "Tone consistency wavers between clinical facts and emotional support"
+      ],
+      "suggestions": [
+        "Consolidate emotional support language to Section 2 only",
+        "Keep Sections 3-10 more clinical and factual while maintaining reassuring tone",
+        "Remove overly therapeutic phrases - keep professional warmth without forced intimacy",
+        "Ensure stability/safety emphasis comes through facts, not just reassuring words"
+      ]
+    },
+    "personalization": {
+      "score": 5,
+      "confidence": 0.85,
+      "feedback": "Patient name (Lisa) is never used despite being provided. Generic content dominates - most sections could apply to any single-tooth case. Specific patient priorities (natural/subtle aesthetics, severe anxiety, first-timer status) are acknowledged but not woven throughout. The 'visible area' mention is good but underutilized.",
+      "issues": [
+        "Patient name 'Lisa' never appears in report",
+        "Aesthetic priority (natural_subtle) mentioned once but not reinforced in options discussion",
+        "Severe anxiety acknowledged in Section 2 but not referenced when discussing procedures",
+        "First-timer status gets generic treatment in Section 3, not personalized guidance",
+        "Budget type (balanced) gets module content but not connected to patient's specific situation",
+        "No reference to patient's age range (30-45) which could inform timeline discussions"
+      ],
+      "suggestions": [
+        "Use 'Lisa' at least 2-3 times throughout report for personalization",
+        "Reference aesthetic priorities when describing crown/bridge appearance options",
+        "Connect anxiety level to specific procedure details (what to expect, how it feels)",
+        "Tailor first-timer guidance to Lisa's specific concerns, not generic reassurance",
+        "Link budget discussion to Lisa's stated flexibility and priorities",
+        "Consider age-appropriate timeline discussion (career, lifestyle factors)"
+      ]
+    },
+    "patient_autonomy": {
+      "score": 6,
+      "confidence": 0.9,
+      "feedback": "Autonomy is emphasized repeatedly but becomes preachy and repetitive. Section 2, Section 11, and scattered statements throughout all remind patient of their control. While non-directive, the excessive repetition of autonomy language feels like overcompensation and wastes space. Some option framing subtly favors implants.",
+      "issues": [
+        "'Your choice', 'you decide', 'at your own pace' repeated 8+ times across report",
+        "Section 2 entire opening is autonomy reminder before any content",
+        "Section 11 repeats autonomy emphasis already made multiple times",
+        "Treatment options 'often chosen by people who...' framing is good but implant gets more positive framing",
+        "Comparison table structure is neutral but surrounding text leans toward implant benefits",
+        "Multiple 'no pressure' statements feel like protesting too much"
+      ],
+      "suggestions": [
+        "Consolidate autonomy emphasis to 2 locations: brief mention in Section 2, full statement in Section 11",
+        "Remove scattered autonomy reminders from middle sections",
+        "Trust that non-directive content speaks for itself without constant reminders",
+        "Ensure 'often chosen by' framing is equally positive for both options",
+        "Let comparison table stand without additional commentary that could bias",
+        "Cut autonomy word count by 60% while maintaining non-directive stance"
+      ]
+    },
+    "structure_completeness": {
+      "score": 8,
+      "confidence": 0.95,
+      "feedback": "All required sections present and in logical order. Flow is coherent. Section 4 (Interpretation) feels thin and could be merged or expanded. Section 7 (Trade-offs) is too brief at 39 words. Otherwise structure is solid with appropriate progression from context to options to next steps.",
+      "issues": [
+        "Section 4 at 101 words says very little - feels like placeholder content",
+        "Section 7 at 39 words doesn't adequately cover trade-offs - too superficial",
+        "Section 8 (Process) could be integrated into Section 5 (Options) for better flow",
+        "Some redundancy between Sections 5, 6, and 7 - could be consolidated"
+      ],
+      "suggestions": [
+        "Either expand Section 4 with meaningful interpretation or merge into Section 3",
+        "Expand Section 7 to 100-150 words with substantive trade-off discussion",
+        "Consider integrating timeline info from Section 8 into treatment options",
+        "Reduce overlap between options, comparison, and trade-offs sections"
+      ]
+    },
+    "content_issues": [
+      {
+        "section_number": 2,
+        "source_content": "content/modules/TM_ANXIETY_SEVERE/en/TP-04.md",
+        "quote": "Based on the information provided...",
+        "problem": "Filler phrase that adds no value - appears at start of multiple sections",
+        "severity": "warning",
+        "suggested_fix": "Remove entirely. Start with: 'We understand that thinking about dental treatment...'"
+      },
+      {
+        "section_number": 2,
+        "source_content": "content/modules/TM_ANXIETY_SEVERE/en/TP-04.md",
+        "quote": "If at any point you feel overwhelmed: You can close this report and return to it later / There's no timeline or pressure",
+        "problem": "Excessive autonomy emphasis before any content delivered - wastes space",
+        "severity": "warning",
+        "suggested_fix": "Cut this list to single sentence: 'Read at your own pace and return anytime.'"
+      },
+      {
+        "section_number": 3,
+        "source_content": "content/modules/TM_CTX_FIRST_TIME/en/TP-04.md",
+        "quote": "Based on the information provided...",
+        "problem": "Same filler phrase repeated - pure padding",
+        "severity": "warning",
+        "suggested_fix": "Remove. Start directly with 'A missing tooth in a visible spot...'"
+      },
+      {
+        "section_number": 3,
+        "source_content": "content/scenarios/S02/en/TP-04.md",
+        "quote": "It's completely normal to have questions and perhaps some uncertainty about what to expect.",
+        "problem": "Generic reassurance that doesn't add information - filler",
+        "severity": "info",
+        "suggested_fix": "Remove or replace with specific guidance about what first-timers should know"
+      },
+      {
+        "section_number": 4,
+        "source_content": "content/b_blocks/B_INTERP_STANDARD/en/TP-04.md",
+        "quote": "Based on the information provided...",
+        "problem": "Third instance of same filler phrase",
+        "severity": "warning",
+        "suggested_fix": "Remove. Start with 'Your dental situation is the type we see regularly...'"
+      },
+      {
+        "section_number": 4,
+        "source_content": "content/b_blocks/B_INTERP_STANDARD/en/TP-04.md",
+        "quote": "Based on your responses, your dental situation is the type we see regularly and can address with proven treatment approaches. The specific recommendations will come from your clinical examination.",
+        "problem": "Entire section says nothing concrete - 101 words of generic statements",
+        "severity": "warning",
+        "suggested_fix": "Either add meaningful interpretation of Lisa's specific situation or merge this into Section 3"
+      },
+      {
+        "section_number": 5,
+        "source_content": "content/scenarios/S02/en/TP-04.md",
+        "quote": "A stable, predictable result that becomes a permanent part of your mouth.",
+        "problem": "Too absolute - no hedging about potential complications or failures",
+        "severity": "critical",
+        "suggested_fix": "Change to: 'In most cases, a stable result that can last many years with proper care.'"
+      },
+      {
+        "section_number": 5,
+        "source_content": "content/scenarios/S02/en/TP-04.md",
+        "quote": "Implants have a long track record of success",
+        "problem": "Missing context about failure rates or complications",
+        "severity": "warning",
+        "suggested_fix": "Add: 'Implants have high success rates (typically 90-95% over 10 years), though individual results vary.'"
+      },
+      {
+        "section_number": 6,
+        "source_content": "content/b_blocks/B_COMPARE_IMPLANT_VS_BRIDGE/en/TP-04.md",
+        "quote": "Expected lifespan: Often 15-25+ years / Typically 10-15 years",
+        "problem": "Presented as facts without 'average' qualifier or variation acknowledgment",
+        "severity": "warning",
+        "suggested_fix": "Change to 'Average lifespan' and add footnote: 'Individual results vary significantly'"
+      },
+      {
+        "section_number": 7,
+        "source_content": "content/scenarios/S02/en/TP-04.md",
+        "quote": "Both options lead to a natural-looking, comfortable result.",
+        "problem": "Too absolute - outcomes vary, not guaranteed",
+        "severity": "critical",
+        "suggested_fix": "Change to: 'Both options can provide natural-looking, comfortable results in appropriate cases.'"
+      },
+      {
+        "section_number": 7,
+        "source_content": "content/scenarios/S02/en/TP-04.md",
+        "quote": "The goal is the same: a stable, confident smile that you don't have to think about.",
+        "problem": "Overpromising outcome - not all patients achieve this",
+        "severity": "warning",
+        "suggested_fix": "Change to: 'The goal is to restore function and appearance as naturally as possible.'"
+      },
+      {
+        "section_number": 9,
+        "source_content": "content/modules/TM_BUDGET_FLEXIBLE/en/TP-04.md",
+        "quote": "Let's find that balance together.",
+        "problem": "Overly warm, forced intimacy that doesn't match clinical context",
+        "severity": "info",
+        "suggested_fix": "Remove or change to: 'Your dentist can help identify the best value for your situation.'"
+      },
+      {
+        "section_number": 10,
+        "source_content": "content/scenarios/S02/en/TP-04.md",
+        "quote": "Recovery: 2–5 days of mild tenderness",
+        "problem": "Section titled 'Risk Factors' but only covers recovery, not actual risks",
+        "severity": "critical",
+        "suggested_fix": "Add actual risks: implant failure, infection, nerve damage, bridge debonding, etc. Or retitle section to 'Recovery & Risks'"
+      },
+      {
+        "section_number": 11,
+        "source_content": "content/static/11/en.md",
+        "quote": "Your next steps are entirely up to you.",
+        "problem": "Fourth major autonomy statement - excessive repetition",
+        "severity": "info",
+        "suggested_fix": "This is the right place for autonomy emphasis, but acknowledge it was mentioned before: 'As mentioned, your next steps are yours to decide.'"
+      }
+    ],
+    "content_files_to_review": [
+      "content/modules/TM_ANXIETY_SEVERE/en/TP-04.md",
+      "content/modules/TM_CTX_FIRST_TIME/en/TP-04.md",
+      "content/scenarios/S02/en/TP-04.md",
+      "content/b_blocks/B_INTERP_STANDARD/en/TP-04.md",
+      "content/b_blocks/B_COMPARE_IMPLANT_VS_BRIDGE/en/TP-04.md",
+      "content/modules/TM_BUDGET_FLEXIBLE/en/TP-04.md",
+      "content/static/11/en.md"
+    ],
+    "overall_score": 6,
+    "overall_assessment": "This report has solid structure and appropriate tone for an anxious first-timer, but suffers from severe verbosity and repetitive filler content. Clinical safety needs strengthening with better hedging and risk disclosure. Personalization is minimal despite available patient data. The 1229-word count could be cut to 700-800 words without losing substance by removing filler phrases, consolidating repetitive autonomy statements, and tightening wordy sections. Most critical issues: remove 'Based on the information provided' padding, strengthen outcome disclaimers, expand risk discussion beyond recovery, and use patient name for personalization.",
+    "recommended_outcome": "BLOCK",
+    "outcome_reasoning": "3 critical content issue(s) found",
+    "metadata": {
+      "model_used": "claude-sonnet-4-5-20250929",
+      "evaluation_timestamp": "2026-01-13T15:23:51.489Z",
+      "duration_ms": 82633,
+      "token_usage": {
+        "input_tokens": 6999,
+        "output_tokens": 3176
+      }
+    }
+  },
+  "decision_trace": {
+    "session_id": "test-case-008",
+    "started_at": "2026-01-13T15:22:28.850Z",
+    "completed_at": "2026-01-13T15:23:51.489Z",
+    "events": [
+      {
+        "timestamp": "2026-01-13T15:22:28.851Z",
+        "stage": "input_validation",
+        "action": "validate_input",
+        "input": {
+          "answers": 20
+        },
+        "output": {
+          "valid": true,
+          "errors": 0
+        },
+        "duration_ms": 1
+      },
+      {
+        "timestamp": "2026-01-13T15:22:28.851Z",
+        "stage": "tag_extraction",
+        "action": "extract_tags",
+        "input": {
+          "answers": 20
+        },
+        "output": {
+          "session_id": "test-case-008",
+          "tags": [
+            {
+              "tag": "motivation_missing_teeth",
+              "source_question": "Q1",
+              "source_answer": "missing_teeth_long_term"
+            },
+            {
+              "tag": "satisfaction_minor_concerns",
+              "source_question": "Q2",
+              "source_answer": "8"
+            },
+            {
+              "tag": "issue_missing_damaged",
+              "source_question": "Q3",
+              "source_answer": "missing_damaged"
+            },
+            {
+              "tag": "history_none",
+              "source_question": "Q4",
+              "source_answer": "no_never"
+            },
+            {
+              "tag": "no_acute_issues",
+              "source_question": "Q5",
+              "source_answer": "no_aesthetic_only"
+            },
+            {
+              "tag": "status_single_missing",
+              "source_question": "Q6a",
+              "source_answer": "one_missing"
+            },
+            {
+              "tag": "location_posterior",
+              "source_question": "Q6b",
+              "source_answer": "side_chewing"
+            },
+            {
+              "tag": "adjacent_intact",
+              "source_question": "Q6c",
+              "source_answer": "intact"
+            },
+            {
+              "tag": "style_natural",
+              "source_question": "Q7",
+              "source_answer": "natural_subtle"
+            },
+            {
+              "tag": "natural_priority_high",
+              "source_question": "Q8",
+              "source_answer": "very_important_natural"
+            },
+            {
+              "tag": "age_30_45",
+              "source_question": "Q9",
+              "source_answer": "30_45"
+            },
+            {
+              "tag": "budget_balanced",
+              "source_question": "Q10",
+              "source_answer": "price_quality_flexible"
+            },
+            {
+              "tag": "intent_exploratory",
+              "source_question": "Q11",
+              "source_answer": "ai_report_first"
+            },
+            {
+              "tag": "timeline_exploratory",
+              "source_question": "Q12",
+              "source_answer": "still_exploring"
+            },
+            {
+              "tag": "pregnancy_no",
+              "source_question": "Q13",
+              "source_answer": "no"
+            },
+            {
+              "tag": "smoking_no",
+              "source_question": "Q14",
+              "source_answer": "no"
+            },
+            {
+              "tag": "hygiene_good",
+              "source_question": "Q15",
+              "source_answer": "good"
+            },
+            {
+              "tag": "growth_complete",
+              "source_question": "Q16a",
+              "source_answer": "no_complete"
+            },
+            {
+              "tag": "medical_clear",
+              "source_question": "Q17",
+              "source_answer": "no"
+            },
+            {
+              "tag": "anxiety_severe",
+              "source_question": "Q18",
+              "source_answer": "yes_severe"
+            }
+          ],
+          "missing_questions": []
+        },
+        "duration_ms": 0
+      },
+      {
+        "timestamp": "2026-01-13T15:22:28.851Z",
+        "stage": "driver_derivation",
+        "action": "derive_drivers",
+        "input": {
+          "tags": 20
+        },
+        "output": {
+          "session_id": "test-case-008",
+          "drivers": {
+            "clinical_priority": {
+              "driver_id": "clinical_priority",
+              "layer": "L1",
+              "value": "elective",
+              "source": "derived",
+              "source_tags": [
+                "no_acute_issues"
+              ],
+              "confidence": 0.7
+            },
+            "biological_stability": {
+              "driver_id": "biological_stability",
+              "layer": "L1",
+              "value": "stable",
+              "source": "derived",
+              "source_tags": [
+                "hygiene_good",
+                "adjacent_intact"
+              ],
+              "confidence": 1
+            },
+            "mouth_situation": {
+              "driver_id": "mouth_situation",
+              "layer": "L1",
+              "value": "single_missing_tooth",
+              "source": "derived",
+              "source_tags": [
+                "status_single_missing"
+              ],
+              "confidence": 0.7
+            },
+            "age_stage": {
+              "driver_id": "age_stage",
+              "layer": "L1",
+              "value": "adult",
+              "source": "derived",
+              "source_tags": [
+                "age_30_45"
+              ],
+              "confidence": 0.7
+            },
+            "medical_constraints": {
+              "driver_id": "medical_constraints",
+              "layer": "L1",
+              "value": "none",
+              "source": "derived",
+              "source_tags": [
+                "medical_clear",
+                "pregnancy_no"
+              ],
+              "confidence": 1
+            },
+            "treatment_viability": {
+              "driver_id": "treatment_viability",
+              "layer": "L1",
+              "value": "single_site",
+              "source": "derived",
+              "source_tags": [
+                "status_single_missing"
+              ],
+              "confidence": 0.7
+            },
+            "risk_profile_biological": {
+              "driver_id": "risk_profile_biological",
+              "layer": "L1",
+              "value": "low",
+              "source": "derived",
+              "source_tags": [
+                "smoking_no",
+                "hygiene_good"
+              ],
+              "confidence": 1
+            },
+            "profile_type": {
+              "driver_id": "profile_type",
+              "layer": "L2",
+              "value": "mixed",
+              "source": "fallback",
+              "source_tags": [],
+              "confidence": 0.5
+            },
+            "aesthetic_tolerance": {
+              "driver_id": "aesthetic_tolerance",
+              "layer": "L2",
+              "value": "conservative",
+              "source": "derived",
+              "source_tags": [
+                "natural_priority_high",
+                "style_natural"
+              ],
+              "confidence": 1
+            },
+            "expectation_risk": {
+              "driver_id": "expectation_risk",
+              "layer": "L2",
+              "value": "realistic",
+              "source": "derived",
+              "source_tags": [
+                "satisfaction_minor_concerns"
+              ],
+              "confidence": 0.7
+            },
+            "experience_history": {
+              "driver_id": "experience_history",
+              "layer": "L2",
+              "value": "first_timer",
+              "source": "derived",
+              "source_tags": [
+                "history_none"
+              ],
+              "confidence": 0.7
+            },
+            "decision_stage": {
+              "driver_id": "decision_stage",
+              "layer": "L2",
+              "value": "exploring",
+              "source": "derived",
+              "source_tags": [
+                "timeline_exploratory",
+                "intent_exploratory"
+              ],
+              "confidence": 1
+            },
+            "autonomy_level": {
+              "driver_id": "autonomy_level",
+              "layer": "L2",
+              "value": "autonomous",
+              "source": "derived",
+              "source_tags": [
+                "intent_exploratory"
+              ],
+              "confidence": 0.7
+            },
+            "anxiety_level": {
+              "driver_id": "anxiety_level",
+              "layer": "L3",
+              "value": "severe",
+              "source": "derived",
+              "source_tags": [
+                "anxiety_severe"
+              ],
+              "confidence": 0.7
+            },
+            "information_depth": {
+              "driver_id": "information_depth",
+              "layer": "L3",
+              "value": "detailed",
+              "source": "derived",
+              "source_tags": [
+                "intent_exploratory"
+              ],
+              "confidence": 0.7
+            },
+            "budget_type": {
+              "driver_id": "budget_type",
+              "layer": "L3",
+              "value": "balanced",
+              "source": "derived",
+              "source_tags": [
+                "budget_balanced"
+              ],
+              "confidence": 0.7
+            },
+            "treatment_philosophy": {
+              "driver_id": "treatment_philosophy",
+              "layer": "L3",
+              "value": "minimally_invasive",
+              "source": "derived",
+              "source_tags": [
+                "style_natural",
+                "natural_priority_high"
+              ],
+              "confidence": 1
+            },
+            "time_horizon": {
+              "driver_id": "time_horizon",
+              "layer": "L3",
+              "value": "undefined",
+              "source": "derived",
+              "source_tags": [
+                "timeline_exploratory"
+              ],
+              "confidence": 0.7
+            }
+          },
+          "conflicts": [
+            {
+              "driver_id": "biological_stability",
+              "conflicting_values": [
+                "stable",
+                "moderate"
+              ],
+              "resolved_value": "stable",
+              "resolution_reason": "Priority-based: rule priority 1 wins"
+            }
+          ],
+          "fallbacks_applied": [
+            "profile_type"
+          ]
+        },
+        "duration_ms": 0
+      },
+      {
+        "timestamp": "2026-01-13T15:22:28.851Z",
+        "stage": "scenario_scoring",
+        "action": "score_scenarios",
+        "input": {
+          "session_id": "test-case-008"
+        },
+        "output": {
+          "session_id": "test-case-008",
+          "matched_scenario": "S02",
+          "confidence": "MEDIUM",
+          "score": 7,
+          "all_scores": [
+            {
+              "scenario_id": "S02",
+              "score": 7,
+              "matched_required": 1,
+              "matched_strong": 2,
+              "matched_supporting": 1,
+              "excluded": false,
+              "breakdown": [
+                {
+                  "driver_id": "mouth_situation",
+                  "criterion": "required",
+                  "matched": true,
+                  "points": 0
+                },
+                {
+                  "driver_id": "clinical_priority",
+                  "criterion": "excluding",
+                  "matched": false,
+                  "points": 0
+                },
+                {
+                  "driver_id": "profile_type",
+                  "criterion": "strong",
+                  "matched": true,
+                  "points": 3
+                },
+                {
+                  "driver_id": "clinical_priority",
+                  "criterion": "strong",
+                  "matched": true,
+                  "points": 3
+                },
+                {
+                  "driver_id": "aesthetic_tolerance",
+                  "criterion": "supporting",
+                  "matched": false,
+                  "points": 0
+                },
+                {
+                  "driver_id": "biological_stability",
+                  "criterion": "supporting",
+                  "matched": true,
+                  "points": 1
+                }
+              ]
+            },
+            {
+              "scenario_id": "S03",
+              "score": 3,
+              "matched_required": 1,
+              "matched_strong": 1,
+              "matched_supporting": 0,
+              "excluded": false,
+              "breakdown": [
+                {
+                  "driver_id": "mouth_situation",
+                  "criterion": "required",
+                  "matched": true,
+                  "points": 0
+                },
+                {
+                  "driver_id": "profile_type",
+                  "criterion": "strong",
+                  "matched": false,
+                  "points": 0
+                },
+                {
+                  "driver_id": "clinical_priority",
+                  "criterion": "strong",
+                  "matched": true,
+                  "points": 3
+                },
+                {
+                  "driver_id": "treatment_philosophy",
+                  "criterion": "supporting",
+                  "matched": false,
+                  "points": 0
+                }
+              ]
+            },
+            {
+              "scenario_id": "S17",
+              "score": 1,
+              "matched_required": 1,
+              "matched_strong": 0,
+              "matched_supporting": 1,
+              "excluded": false,
+              "breakdown": [
+                {
+                  "driver_id": "mouth_situation",
+                  "criterion": "required",
+                  "matched": true,
+                  "points": 0
+                },
+                {
+                  "driver_id": "mouth_situation",
+                  "criterion": "excluding",
+                  "matched": false,
+                  "points": 0
+                },
+                {
+                  "driver_id": "biological_stability",
+                  "criterion": "strong",
+                  "matched": false,
+                  "points": 0
+                },
+                {
+                  "driver_id": "treatment_philosophy",
+                  "criterion": "supporting",
+                  "matched": true,
+                  "points": 1
+                }
+              ]
+            },
+            {
+              "scenario_id": "S06",
+              "score": 0,
+              "matched_required": 2,
+              "matched_strong": 0,
+              "matched_supporting": 0,
+              "excluded": false,
+              "breakdown": [
+                {
+                  "driver_id": "mouth_situation",
+                  "criterion": "required",
+                  "matched": true,
+                  "points": 0
+                },
+                {
+                  "driver_id": "profile_type",
+                  "criterion": "required",
+                  "matched": true,
+                  "points": 0
+                },
+                {
+                  "driver_id": "profile_type",
+                  "criterion": "excluding",
+                  "matched": false,
+                  "points": 0
+                },
+                {
+                  "driver_id": "aesthetic_tolerance",
+                  "criterion": "supporting",
+                  "matched": false,
+                  "points": 0
+                }
+              ]
+            },
+            {
+              "scenario_id": "S12",
+              "score": null,
+              "matched_required": 0,
+              "matched_strong": 0,
+              "matched_supporting": 0,
+              "excluded": true,
+              "breakdown": [
+                {
+                  "driver_id": "clinical_priority",
+                  "criterion": "required",
+                  "matched": false,
+                  "points": null
+                }
+              ]
+            },
+            {
+              "scenario_id": "S10",
+              "score": null,
+              "matched_required": 0,
+              "matched_strong": 0,
+              "matched_supporting": 0,
+              "excluded": true,
+              "breakdown": [
+                {
+                  "driver_id": "mouth_situation",
+                  "criterion": "required",
+                  "matched": false,
+                  "points": null
+                }
+              ]
+            },
+            {
+              "scenario_id": "S09",
+              "score": null,
+              "matched_required": 0,
+              "matched_strong": 0,
+              "matched_supporting": 0,
+              "excluded": true,
+              "breakdown": [
+                {
+                  "driver_id": "mouth_situation",
+                  "criterion": "required",
+                  "matched": false,
+                  "points": null
+                }
+              ]
+            },
+            {
+              "scenario_id": "S07",
+              "score": null,
+              "matched_required": 0,
+              "matched_strong": 0,
+              "matched_supporting": 0,
+              "excluded": true,
+              "breakdown": [
+                {
+                  "driver_id": "mouth_situation",
+                  "criterion": "required",
+                  "matched": false,
+                  "points": null
+                }
+              ]
+            },
+            {
+              "scenario_id": "S08",
+              "score": null,
+              "matched_required": 0,
+              "matched_strong": 0,
+              "matched_supporting": 0,
+              "excluded": true,
+              "breakdown": [
+                {
+                  "driver_id": "mouth_situation",
+                  "criterion": "required",
+                  "matched": false,
+                  "points": null
+                }
+              ]
+            },
+            {
+              "scenario_id": "S04",
+              "score": null,
+              "matched_required": 0,
+              "matched_strong": 0,
+              "matched_supporting": 0,
+              "excluded": true,
+              "breakdown": [
+                {
+                  "driver_id": "mouth_situation",
+                  "criterion": "required",
+                  "matched": false,
+                  "points": null
+                }
+              ]
+            },
+            {
+              "scenario_id": "S05",
+              "score": null,
+              "matched_required": 0,
+              "matched_strong": 0,
+              "matched_supporting": 0,
+              "excluded": true,
+              "breakdown": [
+                {
+                  "driver_id": "mouth_situation",
+                  "criterion": "required",
+                  "matched": false,
+                  "points": null
+                }
+              ]
+            },
+            {
+              "scenario_id": "S01",
+              "score": null,
+              "matched_required": 1,
+              "matched_strong": 0,
+              "matched_supporting": 0,
+              "excluded": true,
+              "breakdown": [
+                {
+                  "driver_id": "mouth_situation",
+                  "criterion": "required",
+                  "matched": false,
+                  "points": null
+                },
+                {
+                  "driver_id": "profile_type",
+                  "criterion": "required",
+                  "matched": true,
+                  "points": 0
+                }
+              ]
+            },
+            {
+              "scenario_id": "S11",
+              "score": null,
+              "matched_required": 0,
+              "matched_strong": 0,
+              "matched_supporting": 0,
+              "excluded": true,
+              "breakdown": [
+                {
+                  "driver_id": "mouth_situation",
+                  "criterion": "required",
+                  "matched": false,
+                  "points": null
+                }
+              ]
+            },
+            {
+              "scenario_id": "S13",
+              "score": null,
+              "matched_required": 0,
+              "matched_strong": 0,
+              "matched_supporting": 0,
+              "excluded": true,
+              "breakdown": [
+                {
+                  "driver_id": "age_stage",
+                  "criterion": "required",
+                  "matched": false,
+                  "points": null
+                },
+                {
+                  "driver_id": "mouth_situation",
+                  "criterion": "required",
+                  "matched": false,
+                  "points": null
+                }
+              ]
+            },
+            {
+              "scenario_id": "S14",
+              "score": null,
+              "matched_required": 1,
+              "matched_strong": 0,
+              "matched_supporting": 0,
+              "excluded": true,
+              "breakdown": [
+                {
+                  "driver_id": "age_stage",
+                  "criterion": "required",
+                  "matched": false,
+                  "points": null
+                },
+                {
+                  "driver_id": "budget_type",
+                  "criterion": "required",
+                  "matched": true,
+                  "points": 0
+                }
+              ]
+            },
+            {
+              "scenario_id": "S15",
+              "score": null,
+              "matched_required": 0,
+              "matched_strong": 0,
+              "matched_supporting": 0,
+              "excluded": true,
+              "breakdown": [
+                {
+                  "driver_id": "budget_type",
+                  "criterion": "required",
+                  "matched": false,
+                  "points": null
+                },
+                {
+                  "driver_id": "profile_type",
+                  "criterion": "required",
+                  "matched": false,
+                  "points": null
+                }
+              ]
+            },
+            {
+              "scenario_id": "S16",
+              "score": null,
+              "matched_required": 0,
+              "matched_strong": 0,
+              "matched_supporting": 0,
+              "excluded": true,
+              "breakdown": [
+                {
+                  "driver_id": "mouth_situation",
+                  "criterion": "required",
+                  "matched": false,
+                  "points": null
+                }
+              ]
+            }
+          ],
+          "fallback_used": false
+        },
+        "duration_ms": 0
+      },
+      {
+        "timestamp": "2026-01-13T15:22:28.851Z",
+        "stage": "tone_selection",
+        "action": "select_tone",
+        "input": {
+          "drivers": [
+            "clinical_priority",
+            "biological_stability",
+            "mouth_situation",
+            "age_stage",
+            "medical_constraints",
+            "treatment_viability",
+            "risk_profile_biological",
+            "profile_type",
+            "aesthetic_tolerance",
+            "expectation_risk",
+            "experience_history",
+            "decision_stage",
+            "autonomy_level",
+            "anxiety_level",
+            "information_depth",
+            "budget_type",
+            "treatment_philosophy",
+            "time_horizon"
+          ]
+        },
+        "output": {
+          "selected_tone": "TP-04",
+          "reason": "Triggered by anxiety_level: severe",
+          "evaluated_triggers": [
+            {
+              "tone": "TP-04",
+              "matched": true,
+              "trigger_driver": "anxiety_level"
+            }
+          ]
+        },
+        "duration_ms": 0
+      },
+      {
+        "timestamp": "2026-01-13T15:22:28.851Z",
+        "stage": "content_selection",
+        "action": "select_content",
+        "input": {
+          "scenario": "S02"
+        },
+        "output": {
+          "count": 12
+        },
+        "duration_ms": 0
+      },
+      {
+        "timestamp": "2026-01-13T15:22:28.853Z",
+        "stage": "scenario_load",
+        "action": "load_scenario",
+        "input": {
+          "scenario_id": "S02",
+          "language": "en"
+        },
+        "output": {
+          "loaded": true
+        },
+        "duration_ms": 2
+      },
+      {
+        "timestamp": "2026-01-13T15:22:28.855Z",
+        "stage": "composition",
+        "action": "compose_report",
+        "input": {
+          "selections": 12
+        },
+        "output": {
+          "sections": 11,
+          "words": 1229
+        },
+        "duration_ms": 2
+      },
+      {
+        "timestamp": "2026-01-13T15:23:51.489Z",
+        "stage": "qa_gate",
+        "action": "qa_check",
+        "input": {
+          "report_id": "test-case-008"
+        },
+        "output": {
+          "_truncated": true,
+          "_size": 14812
+        },
+        "duration_ms": 82634
+      }
+    ],
+    "final_outcome": "FLAG"
+  },
+  "final_outcome": "FLAG",
+  "report_delivered": true
+}

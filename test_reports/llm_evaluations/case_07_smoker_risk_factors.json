@@ -1,0 +1,212 @@
+{
+  "session_id": "test-case-007",
+  "case_id": "case_07_smoker_risk_factors",
+  "evaluation_timestamp": "2026-01-13T15:22:28.843Z",
+  "outcome": "BLOCK",
+  "overall_score": 5.5,
+  "dimensions": {
+    "professional_quality": {
+      "score": 4,
+      "feedback": "Severely verbose with excessive filler phrases. The phrase 'Based on the information provided...' appears 4 times as pure padding. Repetitive structure across sections wastes words. Many sentences use 10 words where 5 would suffice. Generic transitions add no value."
+    },
+    "clinical_safety": {
+      "score": 6,
+      "feedback": "Disclaimers present but weak. Section 1 is adequate but subsequent sections lack appropriate hedging. Treatment outcome language is too casual ('can restore functional chewing') without sufficient caveats. Risk discussion is superficial and doesn't adequately convey uncertainty."
+    },
+    "tone_appropriateness": {
+      "score": 5,
+      "feedback": "Tone is inconsistent. Some sections maintain autonomy-respecting voice well, but others slip into generic professional language that doesn't match TP-06. Section 4 particularly fails with corporate speak. Autonomy emphasis becomes repetitive rather than natural."
+    },
+    "personalization": {
+      "score": 5,
+      "feedback": "Minimal personalization despite available patient data. Patient name 'James' never used. Specific situation (2-4 non-adjacent teeth, both arches, functional priority) barely referenced. Content reads generic and could apply to many patients. Missed opportunities to reference his durability focus and 6-month timeline."
+    },
+    "patient_autonomy": {
+      "score": 6,
+      "feedback": "Autonomy is emphasized but becomes heavy-handed and repetitive, especially in Section 11. Some subtle directive language present. The constant emphasis on choice paradoxically feels like being told how to feel about having choices rather than naturally presenting options."
+    },
+    "structure_completeness": {
+      "score": 7,
+      "feedback": "Structure is mostly complete with all required sections present. Logical flow is reasonable. However, Section 7 is underdeveloped at only 24 words, and there's significant redundancy with smoking content appearing in both Sections 3 and 10. Section 6 appears to be missing entirely."
+    }
+  },
+  "content_issues": [
+    {
+      "section_number": 2,
+      "source_content": "content/scenarios/S05/en/TP-06.md",
+      "quote": "Based on the information provided...",
+      "problem": "Pure filler phrase that adds no value. This opener appears 4 times across the report and should be removed entirely.",
+      "severity": "warning",
+      "suggested_fix": "Delete this phrase and start directly with content: 'You're missing several teeth...'"
+    },
+    {
+      "section_number": 2,
+      "source_content": "content/scenarios/S05/en/TP-06.md",
+      "quote": "a situation that affects how you chew and may influence how you feel about your smile",
+      "problem": "Verbose padding. Uses 15 words where 5 would suffice.",
+      "severity": "warning",
+      "suggested_fix": "Replace with: 'affecting chewing and appearance'"
+    },
+    {
+      "section_number": 2,
+      "source_content": "content/scenarios/S05/en/TP-06.md",
+      "quote": "these are all personal decisions that depend on your circumstances, preferences, and goals",
+      "problem": "Obvious statement that wastes words. Patronizing tone.",
+      "severity": "info",
+      "suggested_fix": "Delete this sentence entirely. The personal nature of decisions is implicit."
+    },
+    {
+      "section_number": 3,
+      "source_content": "content/modules/TM_RISK_SMOKING/en/TP-06.md",
+      "quote": "You've indicated regular smoking. This is relevant to treatment planning.\n\n**Key points:**\n- Healing may take longer than average\n- Some procedures carry slightly elevated risk\n- Your dentist will account for this in recommendations\n\n**Recovery considerations:**\n- Longer healing periods may be advised\n- More frequent follow-up may be recommended\n- Outcomes can vary based on individual factors\n\nYour dentist can discuss how this applies to your specific situation.",
+      "problem": "This exact content is duplicated verbatim in Section 10. Complete redundancy wastes space and reader attention.",
+      "severity": "critical",
+      "suggested_fix": "Remove smoking content entirely from Section 3. Keep only in Section 10 where risk factors belong."
+    },
+    {
+      "section_number": 3,
+      "source_content": "content/modules/TM_RISK_SMOKING/en/TP-06.md",
+      "quote": "Some procedures carry slightly elevated risk",
+      "problem": "Understates smoking risks. 'Slightly elevated' minimizes significant clinical concerns about implant failure rates.",
+      "severity": "critical",
+      "suggested_fix": "Change to 'elevated risk' or 'increased risk' without 'slightly' qualifier. Add specific mention of implant complications."
+    },
+    {
+      "section_number": 3,
+      "source_content": "content/modules/TM_CTX_FIRST_TIME/en/TP-06.md",
+      "quote": "There's no pressure to make immediate decisions—take whatever time feels right to understand your options.",
+      "problem": "Generic reassurance that doesn't add value. Autonomy-respecting tone should be implicit, not stated.",
+      "severity": "info",
+      "suggested_fix": "Delete this sentence. Show respect for patient autonomy through how options are presented, not by stating it."
+    },
+    {
+      "section_number": 4,
+      "source_content": "content/b_blocks/B_INTERP_STANDARD/en/TP-06.md",
+      "quote": "Based on your responses, your dental situation appears to fall within established treatment frameworks.",
+      "problem": "Meaningless corporate speak. 'Established treatment frameworks' conveys nothing concrete. Plus another 'Based on' filler.",
+      "severity": "warning",
+      "suggested_fix": "Replace with specific statement: 'Your situation—multiple missing teeth in different areas—has several proven treatment approaches.'"
+    },
+    {
+      "section_number": 4,
+      "source_content": "content/b_blocks/B_INTERP_STANDARD/en/TP-06.md",
+      "quote": "Clinical findings will help determine specific recommendations.",
+      "problem": "Vague filler sentence that states the obvious.",
+      "severity": "warning",
+      "suggested_fix": "Delete or replace with something specific about what clinical exam will reveal for this patient's situation."
+    },
+    {
+      "section_number": 5,
+      "source_content": "content/scenarios/S05/en/TP-06.md",
+      "quote": "Both approaches can restore functional chewing.",
+      "problem": "Too definitive. No hedging or acknowledgment that outcomes vary. Implies guaranteed result.",
+      "severity": "critical",
+      "suggested_fix": "Change to: 'Both approaches typically restore functional chewing, though individual outcomes vary based on many factors.'"
+    },
+    {
+      "section_number": 5,
+      "source_content": "content/scenarios/S05/en/TP-06.md",
+      "quote": "Treatment options presented without risk/complication information",
+      "problem": "Each treatment option lacks any mention of risks, complications, or failure rates. Only benefits and considerations listed.",
+      "severity": "critical",
+      "suggested_fix": "Add a 'Potential complications' or 'Risks to consider' bullet to each option discussing possible issues."
+    },
+    {
+      "section_number": 7,
+      "source_content": "content/scenarios/S05/en/TP-06.md",
+      "quote": "The result will improve upon your current situation",
+      "problem": "Guarantees improvement without qualification. No acknowledgment that outcomes cannot be guaranteed.",
+      "severity": "critical",
+      "suggested_fix": "Change to: 'Treatment typically improves function compared to missing teeth, though individual results vary and cannot be guaranteed.'"
+    },
+    {
+      "section_number": 7,
+      "source_content": "content/scenarios/S05/en/TP-06.md",
+      "quote": "Section 7 entire content: 24 words",
+      "problem": "Section is severely underdeveloped. Trade-offs deserve substantive discussion, not a brief mention.",
+      "severity": "warning",
+      "suggested_fix": "Expand to 80-100 words discussing specific trade-offs: individual vs zone treatment, staging decisions, cost vs time, maintenance differences."
+    },
+    {
+      "section_number": 9,
+      "source_content": "content/scenarios/S05/en/TP-06.md",
+      "quote": "approximately €2,200 – €2,500 per tooth",
+      "problem": "Cost ranges presented without disclaimer that these are estimates and actual costs may vary significantly.",
+      "severity": "warning",
+      "suggested_fix": "Add: 'These are approximate ranges for planning purposes. Actual costs depend on your specific situation and will be discussed during consultation.'"
+    },
+    {
+      "section_number": 10,
+      "source_content": "content/modules/TM_RISK_SMOKING/en/TP-06.md",
+      "quote": "Duplicate of Section 3 smoking content",
+      "problem": "Exact duplication of content from Section 3. Redundant and wastes space.",
+      "severity": "critical",
+      "suggested_fix": "This is the correct location for smoking risks. Ensure Section 3 version is removed."
+    },
+    {
+      "section_number": 11,
+      "source_content": "content/static/11/en.md",
+      "quote": "Your next steps are entirely up to you... Remember, this is your journey... you remain in control of your dental care decisions",
+      "problem": "Over-emphasis on autonomy becomes patronizing. Three separate statements about patient control in one section.",
+      "severity": "warning",
+      "suggested_fix": "Reduce to one clear statement: 'The choice of how to proceed is yours.' Remove repetitive autonomy language."
+    },
+    {
+      "section_number": 0,
+      "source_content": "Report structure",
+      "quote": "Missing Section 6",
+      "problem": "Section numbering jumps from 5 to 7. Section 6 is completely absent from the report.",
+      "severity": "critical",
+      "suggested_fix": "Add Section 6 content or renumber sections 7-11 to eliminate the gap."
+    },
+    {
+      "section_number": 2,
+      "source_content": "content/scenarios/S05/en/TP-06.md",
+      "quote": "You're missing several teeth in different areas of your mouth",
+      "problem": "Vague description despite specific patient data. Patient has 2-4 non-adjacent teeth missing in both arches—be specific.",
+      "severity": "warning",
+      "suggested_fix": "Replace with: 'You're missing 2-4 teeth in non-adjacent positions across both your upper and lower arches'"
+    },
+    {
+      "section_number": 2,
+      "source_content": "content/scenarios/S05/en/TP-06.md",
+      "quote": "No use of patient name 'James' anywhere in report",
+      "problem": "Patient name provided but never used. Missed personalization opportunity.",
+      "severity": "info",
+      "suggested_fix": "Use 'James' 2-3 times throughout report, e.g., 'James, you're missing several teeth...' or 'For your situation, James...'"
+    },
+    {
+      "section_number": 5,
+      "source_content": "content/scenarios/S05/en/TP-06.md",
+      "quote": "No mention of durability in options discussion",
+      "problem": "Patient indicated 'functional_durable' as priority (Q7) but durability not addressed when comparing options.",
+      "severity": "warning",
+      "suggested_fix": "Add durability comparison: 'Both options offer long-term durability with proper care, typically lasting 15-25 years.'"
+    },
+    {
+      "section_number": 8,
+      "source_content": "content/scenarios/S05/en/TP-06.md",
+      "quote": "4–7 months... similar timeframe",
+      "problem": "Patient indicated 6-month timeline preference (Q12) but this isn't acknowledged or compared to treatment duration.",
+      "severity": "info",
+      "suggested_fix": "Add: 'This aligns with your indicated 6-month timeline, though individual cases may vary.'"
+    }
+  ],
+  "content_files_to_review": [
+    "content/scenarios/S05/en/TP-06.md",
+    "content/modules/TM_RISK_SMOKING/en/TP-06.md",
+    "content/modules/TM_CTX_FIRST_TIME/en/TP-06.md",
+    "content/b_blocks/B_INTERP_STANDARD/en/TP-06.md",
+    "content/static/11/en.md",
+    "Report structure"
+  ],
+  "overall_assessment": "This report suffers from severe verbosity with excessive filler phrases ('Based on the information provided' appears 4 times), complete content duplication (smoking section repeated verbatim), and minimal personalization despite available patient data. Clinical safety is compromised by weak disclaimers and overly definitive outcome language. Structure has critical gaps (missing Section 6) and underdeveloped sections (Section 7 only 24 words). The autonomy-respecting tone becomes heavy-handed and patronizing through repetition. Significant revision needed to tighten writing, eliminate redundancy, strengthen safety language, and add genuine personalization.",
+  "metadata": {
+    "model_used": "claude-sonnet-4-5-20250929",
+    "duration_ms": 88888,
+    "token_usage": {
+      "input_tokens": 6495,
+      "output_tokens": 4144
+    }
+  }
+}
