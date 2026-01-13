@@ -57,7 +57,7 @@ describe("LLM Evaluator Integration", () => {
 
   it("should require API key when LLM evaluation is enabled", async () => {
     // When enabled and no API key, evaluate() should throw
-    // (In test environment, ANTHROPIC_API_KEY is not set)
+    // (In test environment, OPENROUTER_API_KEY is not set)
     if (!llmReportEvaluator.isApiKeyConfigured()) {
       const mockContext = {
         report: {
@@ -89,7 +89,7 @@ describe("LLM Evaluator Integration", () => {
       };
 
       await expect(llmReportEvaluator.evaluate(mockContext)).rejects.toThrow(
-        /ANTHROPIC_API_KEY environment variable is not set/
+        /OPENROUTER_API_KEY environment variable is not set/
       );
     }
   });

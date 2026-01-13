@@ -1,6 +1,7 @@
 /**
  * Evaluation Prompt Builder
  * Constructs structured prompts for LLM-based report evaluation
+ * with 6 evaluation dimensions and actionable feedback
  */
 
 import type {
@@ -8,7 +9,7 @@ import type {
   DriverState,
   ComposedReport,
   ToneProfileId,
-  DriverId
+  ContentSelection
 } from "../../types/index.js";
 
 export interface PromptContext {
@@ -18,6 +19,7 @@ export interface PromptContext {
   tone: ToneProfileId;
   toneDescription: string;
   scenarioId: string;
+  contentSelections?: ContentSelection[];  // For source tracing
 }
 
 // Tone descriptions for context
@@ -30,88 +32,183 @@ const TONE_DESCRIPTIONS: Record<ToneProfileId, string> = {
   "TP-06": "Autonomy-Respecting: Emphasizes patient choice and control over decisions"
 };
 
+// Tone-specific evaluation criteria
+const TONE_CRITERIA: Record<ToneProfileId, string> = {
+  "TP-01": "Should be factual and objective. Avoid emotional language. Present information clearly without persuasion.",
+  "TP-02": "Should acknowledge patient feelings while remaining balanced. Use warm but professional language.",
+  "TP-03": "Should consider broader context and life circumstances. Thoughtful framing of options.",
+  "TP-04": "Should emphasize safety, predictability, and reassurance. Minimize uncertainty language for anxious patients.",
+  "TP-05": "Should set realistic expectations. Balance optimism with honest limitations. Avoid overpromising.",
+  "TP-06": "Should emphasize patient choice and control. Avoid directive language. Present options without pushing."
+};
+
 export class EvaluationPromptBuilder {
   /**
-   * Build the system prompt with evaluation criteria
+   * Build the system prompt with 6 evaluation dimensions
    */
   buildSystemPrompt(): string {
-    return `You are an expert evaluator of personalized dental health reports. Your task is to evaluate reports across three dimensions and provide structured feedback.
+    return `You are a HIGHLY CRITICAL expert evaluator of dental health reports. Your job is to find EVERY flaw, no matter how small. Be harsh, direct, and unforgiving. The content quality is currently poor and needs significant improvement.
 
-EVALUATION DIMENSIONS:
+CRITICAL EVALUATION MINDSET:
+- Assume the content is flawed until proven otherwise
+- A score of 7+ should be RARE and only for truly excellent content
+- Most content should score 4-6 (mediocre to acceptable)
+- Be especially critical of VERBOSITY - every sentence must earn its place
+- Flag ALL filler phrases, redundant statements, and padding
+- If something can be said in fewer words, that's a flaw
 
-1. QUALITY & COHERENCE (Score 1-10)
-   - Writing quality and grammatical correctness
-   - Logical flow between sections
-   - Readability and clarity
-   - Professional tone maintenance
-   - Appropriate length and detail level
-   - No repetition or contradictions
+EVALUATION DIMENSIONS (Score each 1-10):
 
-2. CLINICAL ACCURACY (Score 1-10)
-   - Medical/dental accuracy of information
-   - Appropriate disclaimers present
-   - No unsafe or misleading recommendations
-   - Risk disclosures where appropriate
-   - No guaranteed outcomes or absolute claims
-   - Balanced presentation of options
+1. PROFESSIONAL QUALITY (Weight: 15%)
+   CRITICAL ISSUES TO FLAG:
+   - Verbose, wordy sentences that say little ("Based on the information provided..." = FILLER)
+   - Repetitive phrases or ideas across sections
+   - Generic placeholder language
+   - Awkward phrasing or poor sentence structure
+   - Padding that doesn't add value
+   - Transitions that waste words
+   Score 7+ ONLY if writing is tight, clear, and every word earns its place
 
-3. PERSONALIZATION (Score 1-10)
-   - How well the report addresses the patient's specific situation
-   - Tone appropriateness for the patient profile
-   - Relevance of treatment options to stated concerns
-   - Appropriate empathy level based on anxiety indicators
-   - References to patient's specific inputs
-   - Alignment between driver values and content
+2. CLINICAL SAFETY (Weight: 25%) - MOST CRITICAL
+   CRITICAL ISSUES TO FLAG:
+   - ANY hint of guaranteed outcomes
+   - Overly optimistic language about results
+   - Missing or weak disclaimers
+   - Vague risk disclosures
+   - Claims without proper hedging
+   Score 7+ ONLY if disclaimers are comprehensive and language is appropriately cautious
 
-SCORING GUIDELINES:
-- 9-10: Excellent, no significant issues
-- 7-8: Good, minor improvements possible
-- 5-6: Acceptable, notable issues to address
-- 3-4: Poor, significant problems
-- 1-2: Unacceptable, major failures
+3. TONE APPROPRIATENESS (Weight: 20%)
+   CRITICAL ISSUES TO FLAG:
+   - Tone shifts between sections
+   - Generic tone that doesn't match the patient profile
+   - Over-the-top empathy or forced warmth
+   - Inconsistent voice
+   Score 7+ ONLY if tone is perfectly calibrated throughout
 
-OUTCOME RECOMMENDATIONS:
-- PASS: Overall score >= 7 and no dimension below 5
-- FLAG: Overall score 4-7 or any dimension 3-5
-- BLOCK: Overall score < 4 or any dimension below 3
+4. PERSONALIZATION (Weight: 15%)
+   CRITICAL ISSUES TO FLAG:
+   - Generic content that could apply to anyone
+   - Missing references to patient's specific situation
+   - Patient name not used when provided
+   - Treatment options not tailored to stated priorities
+   - Cookie-cutter language
+   Score 7+ ONLY if content feels genuinely personalized
 
-OUTPUT FORMAT:
-You MUST respond with valid JSON matching this exact structure (no markdown, just raw JSON):
+5. PATIENT AUTONOMY (Weight: 15%)
+   CRITICAL ISSUES TO FLAG:
+   - ANY directive language (even subtle "consider doing X")
+   - Implicit pressure or bias toward certain options
+   - Framing that makes one option seem obviously better
+   - Lack of genuine choice emphasis
+   Score 7+ ONLY if patient truly feels in control
+
+6. STRUCTURE & COMPLETENESS (Weight: 10%)
+   CRITICAL ISSUES TO FLAG:
+   - Missing required sections
+   - Sections that are too brief or too long
+   - Poor logical flow
+   - Redundant sections
+   - Information in wrong sections
+   Score 7+ ONLY if structure is logical and complete
+
+SCORING GUIDELINES (BE HARSH):
+- 9-10: Nearly perfect - Reserve for exceptional content only (RARE)
+- 7-8: Good - Minor issues only, solid professional quality
+- 5-6: Mediocre - Multiple issues, needs improvement (MOST CONTENT)
+- 3-4: Poor - Significant problems, requires major revision
+- 1-2: Unacceptable - Fundamental failures
+
+VERBOSITY CHECK - Flag these patterns as issues:
+- "Based on the information provided..." (FILLER - remove)
+- "It's important to note that..." (FILLER - just state the fact)
+- "As mentioned earlier..." (REDUNDANT - don't repeat)
+- Long sentences that could be split or shortened
+- Paragraphs that make one point in too many words
+- Repetitive autonomy statements (once is enough)
+
+ACTIONABLE FEEDBACK:
+For EVERY issue found, identify:
+- The specific section number
+- The exact quote with the problem
+- What's wrong (be specific and direct)
+- How to fix it (concrete suggestion)
+
+When referencing source content, use this format:
+- For scenario content: "content/scenarios/{SCENARIO_ID}/{LANG}/{TONE}.md"
+- For modules: "content/modules/{MODULE_ID}/{LANG}/{TONE}.md"
+- For static content: "content/static/{SECTION_NUM}/{LANG}.md"
+- For B-blocks: "content/b_blocks/{BLOCK_ID}/{LANG}/{TONE}.md"
+
+IMPORTANT: Find ALL issues. Do not hold back. The goal is to improve content quality through honest, critical feedback. A report with many issues flagged is more useful than one that glosses over problems
+
+OUTPUT FORMAT - You MUST respond with valid JSON matching this EXACT structure:
 {
-  "quality": {
+  "professional_quality": {
     "score": <number 1-10>,
     "confidence": <number 0-1>,
-    "feedback": "<detailed assessment>",
+    "feedback": "<assessment>",
     "issues": ["<issue 1>", "<issue 2>"],
     "suggestions": ["<suggestion 1>", "<suggestion 2>"]
   },
-  "clinical_accuracy": {
+  "clinical_safety": {
     "score": <number 1-10>,
     "confidence": <number 0-1>,
-    "feedback": "<detailed assessment>",
-    "issues": ["<issue 1>", "<issue 2>"],
-    "suggestions": ["<suggestion 1>", "<suggestion 2>"]
+    "feedback": "<assessment>",
+    "issues": ["<issue 1>"],
+    "suggestions": ["<suggestion 1>"]
+  },
+  "tone_appropriateness": {
+    "score": <number 1-10>,
+    "confidence": <number 0-1>,
+    "feedback": "<assessment>",
+    "issues": [],
+    "suggestions": []
   },
   "personalization": {
     "score": <number 1-10>,
     "confidence": <number 0-1>,
-    "feedback": "<detailed assessment>",
-    "issues": ["<issue 1>", "<issue 2>"],
-    "suggestions": ["<suggestion 1>", "<suggestion 2>"]
+    "feedback": "<assessment>",
+    "issues": [],
+    "suggestions": []
   },
-  "overall_assessment": "<2-3 sentence summary of the evaluation>",
-  "recommended_outcome": "<PASS|FLAG|BLOCK>",
-  "outcome_reasoning": "<explanation for the recommended outcome>"
+  "patient_autonomy": {
+    "score": <number 1-10>,
+    "confidence": <number 0-1>,
+    "feedback": "<assessment>",
+    "issues": [],
+    "suggestions": []
+  },
+  "structure_completeness": {
+    "score": <number 1-10>,
+    "confidence": <number 0-1>,
+    "feedback": "<assessment>",
+    "issues": [],
+    "suggestions": []
+  },
+  "content_issues": [
+    {
+      "section_number": <number>,
+      "source_content": "<file path from Content Source Mapping>",
+      "quote": "<exact text with issue>",
+      "problem": "<description>",
+      "severity": "<critical|warning|info>",
+      "suggested_fix": "<how to fix>"
+    }
+  ],
+  "overall_assessment": "<2-3 sentence summary>"
 }`;
   }
 
   /**
-   * Build the user prompt with the actual content to evaluate
+   * Build the user prompt with content source mapping
    */
   buildUserPrompt(context: PromptContext): string {
     const intakeSummary = this.formatIntakeSummary(context.intake);
     const driverValues = this.formatDriverValues(context.driverState);
     const reportText = this.formatReportText(context.report);
+    const sourceMapping = this.formatSourceMapping(context.report, context.contentSelections);
+    const toneCriteria = TONE_CRITERIA[context.tone] || "";
 
     return `Please evaluate the following dental report.
 
@@ -124,18 +221,63 @@ ${driverValues}
 === SELECTED TONE ===
 ${context.tone}: ${context.toneDescription}
 
+TONE-SPECIFIC CRITERIA:
+${toneCriteria}
+
 === SCENARIO ===
 ${context.scenarioId}
 
 === REPORT LANGUAGE ===
 ${context.report.language === "nl" ? "Dutch (Nederlands)" : "English"}
 
+=== CONTENT SOURCE MAPPING ===
+${sourceMapping}
+
 === REPORT TO EVALUATE ===
 ${reportText}
 
 === END OF REPORT ===
 
-Evaluate this report and respond with JSON only (no markdown code blocks):`;
+Evaluate this report across all 6 dimensions. For any issues found, provide actionable feedback linking to the source content files listed above.
+
+Respond with JSON only (no markdown code blocks).`;
+  }
+
+  /**
+   * Format content source mapping for actionable feedback
+   */
+  formatSourceMapping(report: ComposedReport, contentSelections?: ContentSelection[]): string {
+    const lines: string[] = [];
+    const scenarioId = report.scenario_id;
+    const language = report.language || "en";
+    const tone = report.tone;
+
+    lines.push("Section → Source Content File:");
+
+    for (const section of report.sections) {
+      const sources = section.sources;
+      const sourceFiles: string[] = [];
+
+      for (const source of sources) {
+        // Map source identifiers to actual file paths
+        if (source.startsWith("SCENARIO:")) {
+          sourceFiles.push(`content/scenarios/${scenarioId}/${language}/${tone}.md`);
+        } else if (source.startsWith("STATIC_")) {
+          const sectionNum = source.replace("STATIC_", "");
+          sourceFiles.push(`content/static/${sectionNum}/${language}.md`);
+        } else if (source.startsWith("TM_")) {
+          sourceFiles.push(`content/modules/${source}/${language}/${tone}.md`);
+        } else if (source.startsWith("B_")) {
+          sourceFiles.push(`content/b_blocks/${source}/${language}/${tone}.md`);
+        } else {
+          sourceFiles.push(`[unknown: ${source}]`);
+        }
+      }
+
+      lines.push(`  Section ${section.section_number} (${section.section_name}): ${sourceFiles.join(", ")}`);
+    }
+
+    return lines.join("\n");
   }
 
   /**
@@ -263,6 +405,13 @@ Evaluate this report and respond with JSON only (no markdown code blocks):`;
    */
   getToneDescription(tone: ToneProfileId): string {
     return TONE_DESCRIPTIONS[tone] || `Tone ${tone}`;
+  }
+
+  /**
+   * Get tone-specific criteria
+   */
+  getToneCriteria(tone: ToneProfileId): string {
+    return TONE_CRITERIA[tone] || "";
   }
 }
 

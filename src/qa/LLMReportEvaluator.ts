@@ -1,9 +1,11 @@
 /**
  * LLM Report Evaluator
  * Orchestrates LLM-based quality evaluation of composed reports
+ * with 6 evaluation dimensions and actionable feedback
  */
 
 import { promises as fs } from "fs";
+import { z } from "zod";
 import type {
   ComposedReport,
   IntakeData,
@@ -11,23 +13,67 @@ import type {
   ToneProfileId,
   QAOutcome,
   LLMEvaluationResult,
-  LLMDimensionScore
+  LLMDimensionScore,
+  ContentIssue,
+  ContentSelection
 } from "../types/index.js";
 import { LLMClient, createLLMClient } from "./llm/LLMClient.js";
 import { EvaluationPromptBuilder, evaluationPromptBuilder } from "./llm/EvaluationPromptBuilder.js";
 
+// Zod schema for dimension scores
+// Note: Removed .min()/.max() constraints - not supported by all providers
+const DimensionScoreSchema = z.object({
+  score: z.number().describe("Score from 1-10"),
+  confidence: z.number().describe("Confidence level 0-1"),
+  feedback: z.string().describe("Brief explanation of the score"),
+  issues: z.array(z.string()).describe("List of specific issues found"),
+  suggestions: z.array(z.string()).describe("Suggestions for improvement")
+});
+
+// Zod schema for content issues (actionable feedback)
+const ContentIssueSchema = z.object({
+  section_number: z.number().describe("Report section number with the issue"),
+  source_content: z.string().describe("Source content file path"),
+  quote: z.string().describe("Exact text with the issue"),
+  problem: z.string().describe("Description of the problem"),
+  severity: z.enum(["critical", "warning", "info"]).describe("Issue severity"),
+  suggested_fix: z.string().describe("How to fix the issue")
+});
+
+// Zod schema for structured LLM output with 6 dimensions
+const EvaluationResponseSchema = z.object({
+  // 6 Evaluation Dimensions
+  professional_quality: DimensionScoreSchema.describe("Writing quality, clarity, flow"),
+  clinical_safety: DimensionScoreSchema.describe("Safety, disclaimers, no guarantees"),
+  tone_appropriateness: DimensionScoreSchema.describe("Matches tone profile"),
+  personalization: DimensionScoreSchema.describe("Patient-specific content"),
+  patient_autonomy: DimensionScoreSchema.describe("Non-directive, respects choice"),
+  structure_completeness: DimensionScoreSchema.describe("Required sections, logical order"),
+
+  // Actionable feedback
+  content_issues: z.array(ContentIssueSchema).describe("Specific issues with source file references"),
+
+  // Overall assessment
+  overall_assessment: z.string().describe("Overall assessment summary")
+});
+
+type EvaluationResponse = z.infer<typeof EvaluationResponseSchema>;
+
 // Configuration types
 export interface LLMEvaluatorThresholds {
-  block_below: number;           // Block if overall_score < this (default: 4)
-  flag_below: number;            // Flag if overall_score < this (default: 7)
-  dimension_block_below: number; // Block if any dimension < this (default: 3)
-  dimension_flag_below: number;  // Flag if any dimension < this (default: 5)
+  block_below: number;           // Block if overall_score < this (default: 6)
+  flag_below: number;            // Flag if overall_score < this (default: 8)
+  dimension_block_below: number; // Block if any dimension < this (default: 4)
+  dimension_flag_below: number;  // Flag if any dimension < this (default: 6)
 }
 
 export interface LLMEvaluatorWeights {
-  quality: number;               // Default: 0.3
-  clinical_accuracy: number;     // Default: 0.4 (highest - safety critical)
-  personalization: number;       // Default: 0.3
+  professional_quality: number;    // Default: 0.15
+  clinical_safety: number;         // Default: 0.25 (highest - safety critical)
+  tone_appropriateness: number;    // Default: 0.20
+  personalization: number;         // Default: 0.15
+  patient_autonomy: number;        // Default: 0.15
+  structure_completeness: number;  // Default: 0.10
 }
 
 export interface LLMEvaluatorSkipConditions {
@@ -41,6 +87,7 @@ export interface LLMEvaluatorConfig {
   api_key_env: string;
   timeout_ms: number;
   max_retries: number;
+  temperature: number;
   thresholds: LLMEvaluatorThresholds;
   weights: LLMEvaluatorWeights;
   skip_conditions: LLMEvaluatorSkipConditions;
@@ -53,25 +100,30 @@ export interface EvaluationContext {
   driverState: DriverState;
   tone: ToneProfileId;
   scenarioId: string;
+  contentSelections?: ContentSelection[];  // For source tracing
 }
 
-// Default configuration
+// Default configuration with tighter thresholds
 const DEFAULT_CONFIG: LLMEvaluatorConfig = {
   enabled: true,  // Enabled by default - always evaluate reports
-  model: "claude-sonnet-4-20250514",
-  api_key_env: "ANTHROPIC_API_KEY",
+  model: "anthropic/claude-sonnet-4.5",
+  api_key_env: "OPENROUTER_API_KEY",
   timeout_ms: 30000,
   max_retries: 2,
+  temperature: 0.1,  // Low temperature for consistent evaluations
   thresholds: {
-    block_below: 4,
-    flag_below: 7,
-    dimension_block_below: 3,
-    dimension_flag_below: 5
+    block_below: 6,           // Tighter than before (was 4)
+    flag_below: 8,            // Tighter than before (was 7)
+    dimension_block_below: 4, // Tighter than before (was 3)
+    dimension_flag_below: 6   // Tighter than before (was 5)
   },
   weights: {
-    quality: 0.3,
-    clinical_accuracy: 0.4,  // Highest weight - patient safety
-    personalization: 0.3
+    professional_quality: 0.15,
+    clinical_safety: 0.25,      // Highest weight - patient safety
+    tone_appropriateness: 0.20,
+    personalization: 0.15,
+    patient_autonomy: 0.15,
+    structure_completeness: 0.10
   },
   skip_conditions: {
     high_confidence_pass: false,
@@ -132,7 +184,8 @@ export class LLMReportEvaluator {
         model: this.config.model,
         apiKey,
         timeout: this.config.timeout_ms,
-        maxRetries: this.config.max_retries
+        maxRetries: this.config.max_retries,
+        temperature: this.config.temperature
       });
     }
     return this.client;
@@ -147,7 +200,7 @@ export class LLMReportEvaluator {
   }
 
   /**
-   * Evaluate a report using LLM
+   * Evaluate a report using LLM with structured output
    * Throws an error if API key is not configured (required for quality assurance)
    */
   async evaluate(context: EvaluationContext): Promise<LLMEvaluationResult | null> {
@@ -181,17 +234,21 @@ export class LLMReportEvaluator {
         driverState: context.driverState,
         tone: context.tone,
         toneDescription: this.promptBuilder.getToneDescription(context.tone),
-        scenarioId: context.scenarioId
+        scenarioId: context.scenarioId,
+        contentSelections: context.contentSelections
       });
 
-      // Call LLM
-      const response = await client.chat([
-        { role: "system", content: systemPrompt },
-        { role: "user", content: userPrompt }
-      ]);
+      // Call LLM with structured output
+      const response = await client.generateStructured(
+        [
+          { role: "system", content: systemPrompt },
+          { role: "user", content: userPrompt }
+        ],
+        EvaluationResponseSchema
+      );
 
-      // Parse response
-      const evaluation = this.parseResponse(response.content);
+      // Extract evaluation from structured response
+      const evaluation = response.object;
 
       // Calculate overall score
       const overall_score = this.calculateOverallScore(evaluation);
@@ -199,10 +256,18 @@ export class LLMReportEvaluator {
       // Determine recommended outcome
       const { outcome, reasoning } = this.determineOutcome(evaluation, overall_score);
 
+      // Extract unique content files to review
+      const content_files_to_review = this.extractContentFilesToReview(evaluation.content_issues);
+
       return {
-        quality: evaluation.quality,
-        clinical_accuracy: evaluation.clinical_accuracy,
+        professional_quality: evaluation.professional_quality,
+        clinical_safety: evaluation.clinical_safety,
+        tone_appropriateness: evaluation.tone_appropriateness,
         personalization: evaluation.personalization,
+        patient_autonomy: evaluation.patient_autonomy,
+        structure_completeness: evaluation.structure_completeness,
+        content_issues: evaluation.content_issues,
+        content_files_to_review,
         overall_score,
         overall_assessment: evaluation.overall_assessment,
         recommended_outcome: outcome,
@@ -224,6 +289,19 @@ export class LLMReportEvaluator {
       console.error("LLM evaluation failed:", error);
       return this.createFallbackResult(error, startTime);
     }
+  }
+
+  /**
+   * Extract unique content files that need review from issues
+   */
+  private extractContentFilesToReview(contentIssues: ContentIssue[]): string[] {
+    const files = new Set<string>();
+    for (const issue of contentIssues) {
+      if (issue.source_content && !issue.source_content.startsWith("[unknown")) {
+        files.add(issue.source_content);
+      }
+    }
+    return Array.from(files);
   }
 
   /**
@@ -257,92 +335,18 @@ export class LLMReportEvaluator {
   }
 
   /**
-   * Parse LLM response into structured result
-   */
-  private parseResponse(content: string): {
-    quality: LLMDimensionScore;
-    clinical_accuracy: LLMDimensionScore;
-    personalization: LLMDimensionScore;
-    overall_assessment: string;
-  } {
-    // Extract JSON from response (handle markdown code blocks if present)
-    let jsonStr = content.trim();
-
-    // Remove markdown code block if present
-    const jsonMatch = jsonStr.match(/```(?:json)?\s*([\s\S]*?)\s*```/);
-    if (jsonMatch) {
-      jsonStr = jsonMatch[1].trim();
-    }
-
-    // Try to find JSON object
-    const objectMatch = jsonStr.match(/\{[\s\S]*\}/);
-    if (!objectMatch) {
-      throw new Error("Failed to parse LLM response: no JSON object found");
-    }
-
-    const json = JSON.parse(objectMatch[0]);
-
-    // Validate structure
-    this.validateEvaluationStructure(json);
-
-    return {
-      quality: this.normalizeDimensionScore(json.quality),
-      clinical_accuracy: this.normalizeDimensionScore(json.clinical_accuracy),
-      personalization: this.normalizeDimensionScore(json.personalization),
-      overall_assessment: json.overall_assessment || ""
-    };
-  }
-
-  /**
-   * Normalize dimension score to ensure all fields are present
-   */
-  private normalizeDimensionScore(dim: Partial<LLMDimensionScore>): LLMDimensionScore {
-    return {
-      score: Math.min(10, Math.max(1, dim.score ?? 5)),
-      confidence: Math.min(1, Math.max(0, dim.confidence ?? 0.5)),
-      feedback: dim.feedback ?? "",
-      issues: Array.isArray(dim.issues) ? dim.issues : [],
-      suggestions: Array.isArray(dim.suggestions) ? dim.suggestions : []
-    };
-  }
-
-  /**
-   * Validate the evaluation structure
-   */
-  private validateEvaluationStructure(json: unknown): void {
-    if (!json || typeof json !== "object") {
-      throw new Error("Invalid evaluation structure: not an object");
-    }
-
-    const obj = json as Record<string, unknown>;
-    const requiredFields = ["quality", "clinical_accuracy", "personalization"];
-
-    for (const field of requiredFields) {
-      if (!obj[field] || typeof obj[field] !== "object") {
-        throw new Error(`Invalid evaluation structure: missing or invalid ${field}`);
-      }
-
-      const dim = obj[field] as Record<string, unknown>;
-      if (typeof dim.score !== "number") {
-        throw new Error(`Invalid evaluation structure: ${field}.score must be a number`);
-      }
-    }
-  }
-
-  /**
    * Calculate weighted overall score
    */
-  private calculateOverallScore(evaluation: {
-    quality: LLMDimensionScore;
-    clinical_accuracy: LLMDimensionScore;
-    personalization: LLMDimensionScore;
-  }): number {
+  private calculateOverallScore(evaluation: EvaluationResponse): number {
     const { weights } = this.config;
 
     const score = (
-      evaluation.quality.score * weights.quality +
-      evaluation.clinical_accuracy.score * weights.clinical_accuracy +
-      evaluation.personalization.score * weights.personalization
+      evaluation.professional_quality.score * weights.professional_quality +
+      evaluation.clinical_safety.score * weights.clinical_safety +
+      evaluation.tone_appropriateness.score * weights.tone_appropriateness +
+      evaluation.personalization.score * weights.personalization +
+      evaluation.patient_autonomy.score * weights.patient_autonomy +
+      evaluation.structure_completeness.score * weights.structure_completeness
     );
 
     // Round to 1 decimal place
@@ -353,19 +357,18 @@ export class LLMReportEvaluator {
    * Determine PASS/FLAG/BLOCK outcome
    */
   private determineOutcome(
-    evaluation: {
-      quality: LLMDimensionScore;
-      clinical_accuracy: LLMDimensionScore;
-      personalization: LLMDimensionScore;
-    },
+    evaluation: EvaluationResponse,
     overall_score: number
   ): { outcome: QAOutcome; reasoning: string } {
     const { thresholds } = this.config;
 
     const dimensions = [
-      { name: "quality", score: evaluation.quality.score },
-      { name: "clinical_accuracy", score: evaluation.clinical_accuracy.score },
-      { name: "personalization", score: evaluation.personalization.score }
+      { name: "professional_quality", score: evaluation.professional_quality.score },
+      { name: "clinical_safety", score: evaluation.clinical_safety.score },
+      { name: "tone_appropriateness", score: evaluation.tone_appropriateness.score },
+      { name: "personalization", score: evaluation.personalization.score },
+      { name: "patient_autonomy", score: evaluation.patient_autonomy.score },
+      { name: "structure_completeness", score: evaluation.structure_completeness.score }
     ];
 
     // Check for blocking conditions
@@ -385,6 +388,15 @@ export class LLMReportEvaluator {
       }
     }
 
+    // Check for critical content issues
+    const criticalIssues = evaluation.content_issues.filter(i => i.severity === "critical");
+    if (criticalIssues.length > 0) {
+      return {
+        outcome: "BLOCK",
+        reasoning: `${criticalIssues.length} critical content issue(s) found`
+      };
+    }
+
     // Check for flagging conditions
     if (overall_score < thresholds.flag_below) {
       return {
@@ -402,9 +414,18 @@ export class LLMReportEvaluator {
       }
     }
 
+    // Check for warning content issues
+    const warningIssues = evaluation.content_issues.filter(i => i.severity === "warning");
+    if (warningIssues.length >= 3) {
+      return {
+        outcome: "FLAG",
+        reasoning: `${warningIssues.length} warning-level content issues found`
+      };
+    }
+
     return {
       outcome: "PASS",
-      reasoning: "All scores above thresholds"
+      reasoning: "All scores above thresholds, no critical issues"
     };
   }
 
@@ -426,9 +447,14 @@ export class LLMReportEvaluator {
     };
 
     return {
-      quality: fallbackDimension,
-      clinical_accuracy: fallbackDimension,
+      professional_quality: fallbackDimension,
+      clinical_safety: fallbackDimension,
+      tone_appropriateness: fallbackDimension,
       personalization: fallbackDimension,
+      patient_autonomy: fallbackDimension,
+      structure_completeness: fallbackDimension,
+      content_issues: [],
+      content_files_to_review: [],
       overall_score: 0,
       overall_assessment: `LLM evaluation failed: ${errorMessage}`,
       recommended_outcome: this.config.fallback_on_error,

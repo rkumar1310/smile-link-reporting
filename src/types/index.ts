@@ -319,12 +319,34 @@ export interface LLMEvaluationMetadata {
   };
 }
 
+// Actionable content issue with source file reference
+export type ContentIssueSeverity = "critical" | "warning" | "info";
+
+export interface ContentIssue {
+  section_number: number;      // Which report section has the issue
+  source_content: string;      // Source file path (e.g., "content/scenarios/S11/en/TP-05.md")
+  quote: string;               // Exact text with the issue
+  problem: string;             // Description of what's wrong
+  severity: ContentIssueSeverity;
+  suggested_fix: string;       // How to fix it in the source content
+}
+
 export interface LLMEvaluationResult {
-  quality: LLMDimensionScore;           // Writing quality, flow, readability
-  clinical_accuracy: LLMDimensionScore; // Medical accuracy, disclaimers, safety
-  personalization: LLMDimensionScore;   // Intake match, tone appropriateness
-  overall_score: number;                // Weighted average
-  overall_assessment: string;           // Summary assessment
+  // 6 Evaluation Dimensions
+  professional_quality: LLMDimensionScore;    // Writing clarity, grammar, flow, no repetition
+  clinical_safety: LLMDimensionScore;         // No unsafe claims, proper disclaimers, no guarantees
+  tone_appropriateness: LLMDimensionScore;    // Matches TP-xx profile, consistent throughout
+  personalization: LLMDimensionScore;         // References patient inputs, relevant options
+  patient_autonomy: LLMDimensionScore;        // Non-directive, emphasizes choice
+  structure_completeness: LLMDimensionScore;  // Required sections present, logical order
+
+  // Actionable feedback
+  content_issues: ContentIssue[];             // Specific issues linked to source files
+  content_files_to_review: string[];          // List of content files that need updates
+
+  // Overall assessment
+  overall_score: number;                      // Weighted average
+  overall_assessment: string;                 // Summary assessment
   recommended_outcome: QAOutcome;
   outcome_reasoning: string;
   metadata: LLMEvaluationMetadata;

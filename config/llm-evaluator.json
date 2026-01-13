@@ -1,21 +1,25 @@
 {
   "$schema": "./schemas/llm-evaluator.schema.json",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "enabled": true,
-  "model": "claude-sonnet-4-20250514",
-  "api_key_env": "ANTHROPIC_API_KEY",
+  "model": "anthropic/claude-sonnet-4.5",
+  "api_key_env": "OPENROUTER_API_KEY",
   "timeout_ms": 30000,
   "max_retries": 2,
+  "temperature": 0.1,
   "thresholds": {
-    "block_below": 4,
-    "flag_below": 7,
-    "dimension_block_below": 3,
-    "dimension_flag_below": 5
+    "block_below": 6,
+    "flag_below": 8,
+    "dimension_block_below": 4,
+    "dimension_flag_below": 6
   },
   "weights": {
-    "quality": 0.3,
-    "clinical_accuracy": 0.4,
-    "personalization": 0.3
+    "professional_quality": 0.15,
+    "clinical_safety": 0.25,
+    "tone_appropriateness": 0.20,
+    "personalization": 0.15,
+    "patient_autonomy": 0.15,
+    "structure_completeness": 0.10
   },
   "skip_conditions": {
     "high_confidence_pass": false,

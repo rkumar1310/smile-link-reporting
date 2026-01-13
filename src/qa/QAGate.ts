@@ -348,11 +348,17 @@ export class QAGate {
       const llm = result.llmEvaluation;
       lines.push("LLM Evaluation:");
       lines.push(`  Overall Score: ${llm.overall_score.toFixed(1)}/10`);
-      lines.push(`  Quality: ${llm.quality.score}/10`);
-      lines.push(`  Clinical Accuracy: ${llm.clinical_accuracy.score}/10`);
+      lines.push(`  Professional Quality: ${llm.professional_quality.score}/10`);
+      lines.push(`  Clinical Safety: ${llm.clinical_safety.score}/10`);
+      lines.push(`  Tone Appropriateness: ${llm.tone_appropriateness.score}/10`);
       lines.push(`  Personalization: ${llm.personalization.score}/10`);
+      lines.push(`  Patient Autonomy: ${llm.patient_autonomy.score}/10`);
+      lines.push(`  Structure & Completeness: ${llm.structure_completeness.score}/10`);
       lines.push(`  Recommended: ${llm.recommended_outcome}`);
       lines.push(`  Assessment: ${llm.overall_assessment}`);
+      if (llm.content_issues.length > 0) {
+        lines.push(`  Content Issues: ${llm.content_issues.length}`);
+      }
     }
 
     return lines.join("\n");
