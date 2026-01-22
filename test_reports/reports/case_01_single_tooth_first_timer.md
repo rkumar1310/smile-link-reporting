@@ -2,7 +2,7 @@
 
 **Case ID:** case_01_single_tooth_first_timer
 **Session:** test-case-001
-**Generated:** 2026-01-13T18:36:08.533Z
+**Generated:** 2026-01-19T15:34:37.914Z
 
 ## Pipeline Metadata
 
@@ -11,9 +11,7 @@
 | Scenario | S02 |
 | Tone Profile | TP-01 |
 | Confidence | MEDIUM |
-| Outcome | FLAG |
-| Success | true |
-| Total Words | 1020 |
+| Total Words | 998 |
 | Sections | 11 |
 | Warnings Included | false |
 
@@ -46,97 +44,104 @@
 
 # Section 1: Disclaimer
 
-This report is generated based on your responses to our questionnaire and is intended for informational purposes only. It does not constitute medical advice, diagnosis, or treatment recommendations.
+This report is generated based on your questionnaire responses and is for informational purposes only. It does not constitute medical advice, diagnosis, or treatment recommendations.
 
-Please consult with a qualified dental professional before making any decisions about your dental care. Your dentist will conduct a thorough examination and provide personalized recommendations based on your specific situation.
+**Important:** A clinical examination is required before any treatment can be recommended or provided. Do not make treatment decisions based solely on this report.
 
-The information presented here is general in nature and may not apply to your individual circumstances. Treatment outcomes vary between patients and depend on many factors that can only be assessed through clinical examination.
+Treatment outcomes cannot be predicted with certainty. Results vary between patients and depend on factors that can only be assessed through clinical examination. Your dentist will provide personalized recommendations based on your specific situation.
 
-*[96 words]*
+*[86 words]*
 
 ## Your Personal Summary
 
-Based on the information provided...
+John, you have one missing tooth in the area, affecting both appearance and function. Your focus is addressing a long-term gap from missing teeth.
 
-You are missing one tooth in a visible zone, affecting both appearance and function. Comfort and stability are relevant considerations.
-
-*[25 words]*
+*[24 words]*
 
 ## Context
 
-Based on the information provided...
-
 # First-Time Treatment Context
 
-Your dentist will explain the process step by step, including what to expect at each stage. Treatment decisions can be made after reviewing all information and consulting with your dentist.
+This is your first dental treatment of this type. The information below covers what each option involves and typical experiences.
 
-A missing tooth in a visible position is often more noticeable to others than to the patient, particularly in social interactions. This visibility factor is one reason many people consider treatment for this scenario.
+# Functional vs Aesthetic Priorities
 
-Beyond the aesthetic aspect, uncertainty can also arise about function. You may wonder whether chewing will continue evenly, whether surrounding teeth will shift, and whether the situation will remain stable in the future. Both visibility and function are relevant factors in this scenario.
+Your situation involves both functional and aesthetic considerations. Treatment options may address these aspects differently, and understanding how each option balances function and appearance helps inform your decision.
 
-*[115 words]*
+Your dentist will explain how different treatments address both the functional and aesthetic aspects of your dental needs.
+
+# Current Tooth Status
+
+The current condition of your teeth influences which treatment options are most suitable. Factors like tooth structure, existing restorations, and overall oral health all play a role in planning.
+
+Your dentist will assess your current tooth status and explain how this shapes the recommended treatment approach.
+
+# Balanced Approach
+
+Based on your preferences, you value multiple factors in your treatment decision—function, appearance, comfort, and cost all play a role. Finding the right balance between these considerations is the goal.
+
+Your dentist will discuss options that balance these different priorities and explain how each option addresses your various concerns.
+
+This area is visible during conversation and affects both aesthetics and chewing. Your surrounding teeth are stable, which means both treatment options are suitable for you.
+
+*[199 words]*
 
 ## Interpretation
 
-Based on the information provided...
-
 # Section 4: Interpretation
 
-Your dental situation can be addressed through established treatment approaches. The specific recommendations will depend on findings from your clinical examination.
+John, your situation has established treatment options. Both approaches are suitable for your case.
 
-Your priorities—whether focused on aesthetics, function, comfort, or a combination—help guide the treatment direction. These preferences inform which options may be most suitable.
+Your priorities (addressing a long-term gap from missing teeth) will help determine which option aligns with your goals. Your dentist will examine your specific situation to confirm clinical suitability.
 
-The next step is a professional assessment where your dentist can correlate your preferences with clinical findings to develop personalized recommendations.
-
-*[73 words]*
+*[46 words]*
 
 ## Treatment Options
 
 **What this involves**
-An implant is placed in the jawbone to replace the missing tooth root. Subsequently, a crown is placed that mimics the visible part of the tooth.
+A titanium post is placed into the jawbone. After healing (3-6 months), a custom crown attaches to it. The result functions like a natural tooth.
 
-**What you can expect**
-A fixed solution that combines aesthetics and function, without relying on adjacent teeth for support.
+**Outcomes**
+Studies show implants remain functional and stable in approximately 90-95% of cases over 10 years. Your individual outcome depends on bone quality, oral hygiene, and overall health—factors your dentist will assess.
 
-**Advantages**
-- May provide stable, long-term results when properly maintained (average lifespan 15-25+ years in population studies, though individual outcomes vary significantly based on bone quality, healing capacity, and maintenance)
-- Can achieve natural appearance depending on factors like bone quality, gum health, and material selection
-- No modification of neighboring teeth required
-- Can contribute to preservation of bone structure
+**Benefits**
+- Does not modify neighboring teeth
+- Helps preserve bone structure
+- No special maintenance once healed
 
-**Points to consider**
-- Higher cost
-- Healing period of several months
-- Treatment proceeds in multiple steps
+**Considerations**
+- Higher upfront cost
+- Healing period of 3-6 months
+- Multiple appointments required
 
-**Common reasons patients choose this option:**
-- Prioritizing long-term durability over treatment speed
-- Wanting to avoid modification of healthy adjacent teeth
-- Adequate bone quality confirmed by dentist assessment
+**This option may suit you if:**
+- You prioritize long-term durability
+- Preserving healthy adjacent teeth is important
+- Bone quality is adequate (dentist will assess)
 
 **What this involves**
-A bridge where the missing tooth is replaced by an artificial tooth that is attached to the back of the neighboring teeth with a thin construction.
+A replacement tooth bonds to the back of adjacent teeth. No surgical procedure is required.
 
-**What you can expect**
-A faster and less invasive solution, without surgical intervention.
+**Outcomes**
+Results are typically immediate and natural-looking. The appearance depends on the health and color of adjacent teeth, which your dentist will assess.
 
-**Advantages**
-- Shorter treatment time
-- Usually lower or comparable cost
-- No implantation needed
-- Limited impact on daily life
+**Benefits**
+- Shorter treatment time (2-4 weeks)
+- Usually lower upfront cost
+- No surgery required
+- Minimal impact on daily life
 
-**Points to consider**
-- Less durable in the long term
-- Chance of coming loose
-- Not suitable for every situation
+**Considerations**
+- May need replacement after 10-15 years
+- Relies on adjacent teeth for support
+- Not suitable for every case
 
-**Common reasons patients choose this option:**
-- Preferring a faster, non-surgical approach
-- Not yet ready for a more invasive procedure
-- Surgery is not possible or advised due to medical factors
+**This option may suit you if:**
+- You prefer a non-surgical approach
+- A faster timeline is important
+- Surgery is not possible or advised
 
-*[253 words]*
+*[209 words]*
 
 ## Comparison
 
@@ -151,75 +156,80 @@ A faster and less invasive solution, without surgical intervention.
 | **Procedure** | Surgical | Non-surgical |
 | **Treatment time** | 3-6 months | 2-4 weeks |
 | **Initial cost** | Higher | Lower |
-| **Expected lifespan*** | 15-25+ years | 10-15 years |
+| **Expected lifespan*** | Typically 15-25+ years | Typically 10-15 years |
 | **Maintenance** | Standard hygiene | Special cleaning required |
 
-*Lifespans are population averages and vary significantly based on oral hygiene, bone quality, and other individual factors.*
+*Lifespans are population averages from studies. Your actual lifespan depends on bone quality, oral hygiene, and health factors. Individual outcomes vary.
 
-**Situations where implants are often considered:**
-- Adjacent teeth are healthy
-- Bone quality is adequate
-- Long-term durability is prioritized
+Both implants and bridges are proven approaches. Here's what each offers:
 
-**Situations where bridges are often considered:**
-- Adjacent teeth need crowns anyway
-- Surgery is not desired or possible
-- Faster completion is important
+**Implants may suit you if:**
+- You prefer a self-supporting option
+- Long-term durability is a priority
+- You're comfortable with a surgical approach
 
-Your dentist will assess which option suits your individual situation based on clinical findings.
+**Bridges may suit you if:**
+- You prefer a non-surgical approach
+- You want faster results (2-4 weeks)
+- A simpler process appeals to you
 
-*[122 words]*
+Your dentist will assess clinical factors; you decide which aligns with your priorities.
+
+*[142 words]*
 
 ## Trade-offs to Consider
 
-Implants require surgical healing (3-6 months) but avoid altering adjacent teeth. Bridges provide faster results (2-4 weeks) but require modifying healthy teeth and have a shorter expected lifespan. Key trade-offs to consider include your timeline, budget, and long-term goals.
+Both options typically provide natural-looking, functional results. Success depends on bone quality, adjacent tooth health, and oral care—factors your dentist will assess.
 
-*[39 words]*
+**Trade-offs:**
+- **Timeline:** Bridges take 2-4 weeks; implants take 3-6 months
+- **Procedure type:** Bridges are non-surgical; implants require minor surgery
+- **Adjacent teeth:** Bridges use them for support; implants are self-supporting
+- **Typical lifespan:** Bridges last 10-15 years; implants last 15-25+ years
+
+*[61 words]*
 
 ## Treatment Process
 
-- Implant + crown: average 3-7 months
-- Adhesive bridge: often achievable within a few weeks
+**Implant with crown:** 3-7 months total
+- Initial placement: 1-2 hours
+- Healing period: 3-6 months
+- Crown placement: separate appointment
 
-Implant placement typically involves 3-7 days of swelling and discomfort, managed with medication. Bridge preparation may cause temporary sensitivity in adjacent teeth.
+**Adhesive bridge:** 2-4 weeks
+- Preparation and fitting over 2-3 appointments
 
-*[35 words]*
+Your dentist will provide a timeline specific to your situation after examination.
+
+*[40 words]*
 
 ## Cost Considerations
 
-# Budget Considerations: Balanced Approach
+# Budget Considerations
 
-You've indicated flexibility in your budget, with an interest in balancing cost and quality. This opens a range of treatment options.
+You indicated flexibility when quality matters. Both options are available at different price points. Your dentist can provide specific costs based on your clinical situation.
 
-Your dentist can discuss:
-- How different materials and techniques affect both cost and outcomes
-- Where investing more provides meaningful benefits
-- Where more economical options perform equally well
-- The relationship between initial cost and long-term value
+- Single implant with crown: approximately €2,200 – €2,500
+- Adhesive bridge: approximately €1,500 – €2,500
 
-A balanced approach often leads to solutions that deliver good value within your stated budget parameters.
+Costs vary by location, materials, and complexity. Your dentist can provide a detailed estimate.
 
-- Single implant with crown: approximately €2,200 - €2,500
-- Adhesive bridge: approximately €1,500 - €2,500
-
-*Cost estimates only. Actual costs vary based on complexity, materials, location, and individual case factors. Request a detailed quote from your dentist.*
-
-*[110 words]*
+*[53 words]*
 
 ## Risk Factors
 
 **Implant with crown**
-- Recovery time: 2-5 days for initial healing; full osseointegration takes 3-6 months
-- Possible impact: swelling, discomfort, and temporary dietary restrictions
-- Population studies indicate risks of infection (2-5%), implant failure (5-10% over 10 years), nerve damage (rare), and sinus complications (upper jaw). Your individual risk may be higher or lower based on factors your dentist will assess.
-- Daily functioning: daily activities usually resumed within a few days; temporarily adjusted chewing
+- Recovery: 2-5 days of mild to moderate tenderness, managed with over-the-counter medication.
+- Risks: Infection (2-5%), implant failure (5-10% over 10 years). Your individual risk depends on bone quality, oral hygiene, and health factors your dentist will assess.
+- Daily life: Most people resume normal activities within a few days.
+- Long-term: Standard dental care once healed.
 
 **Adhesive bridge**
-- Recovery time: none
-- Possible impact: short adjustment period (1-2 days)
-- Daily functioning: no limitation
+- Recovery: None required—adjustment period of 1-2 days.
+- Daily life: No limitation.
+- Long-term: Periodic check-ups recommended.
 
-*[88 words]*
+*[74 words]*
 
 ## Next Steps
 
@@ -243,3 +253,4 @@ Consider noting down:
 Your dentist can provide information and guidance based on clinical examination.
 
 *[64 words]*
+

@@ -53,7 +53,7 @@
     },
     "9": {
       "name": "Costs",
-      "order": ["module", "scenario"],
+      "order": ["b_block", "module", "scenario"],
       "scenarioSection": "costs"
     },
     "10": {

@@ -1,6 +1,6 @@
 {
   "session_id": "test-case-007",
-  "created_at": "2026-01-13T18:16:33.173Z",
+  "created_at": "2026-01-19T15:34:37.950Z",
   "intake": {
     "session_id": "test-case-007",
     "timestamp": "2026-01-08T07:09:41.236Z",
@@ -644,6 +644,14 @@
   },
   "content_selections": [
     {
+      "content_id": "A_CFB_BRUXISM",
+      "type": "a_block",
+      "target_section": 0,
+      "tone": "TP-06",
+      "priority": 10,
+      "suppressed": false
+    },
+    {
       "content_id": "S05",
       "type": "scenario",
       "target_section": 2,
@@ -684,6 +692,22 @@
       "suppressed": false
     },
     {
+      "content_id": "B_NUANCE_S05",
+      "type": "b_block",
+      "target_section": 3,
+      "tone": "TP-06",
+      "priority": 2,
+      "suppressed": false
+    },
+    {
+      "content_id": "B_COST_S05",
+      "type": "b_block",
+      "target_section": 9,
+      "tone": "TP-06",
+      "priority": 1,
+      "suppressed": false
+    },
+    {
       "content_id": "TM_RISK_SMOKING",
       "type": "module",
       "target_section": 3,
@@ -711,6 +735,30 @@
       "content_id": "TM_BUDGET_FLEXIBLE",
       "type": "module",
       "target_section": 9,
+      "tone": "TP-06",
+      "priority": 2,
+      "suppressed": false
+    },
+    {
+      "content_id": "TM_CTX_FUNCTIONAL_VS_AESTHETIC",
+      "type": "module",
+      "target_section": 3,
+      "tone": "TP-06",
+      "priority": 2,
+      "suppressed": false
+    },
+    {
+      "content_id": "TM_CTX_TOOTH_STATUS",
+      "type": "module",
+      "target_section": 3,
+      "tone": "TP-06",
+      "priority": 2,
+      "suppressed": false
+    },
+    {
+      "content_id": "TM_PROFILE_FUNCTIONAL",
+      "type": "module",
+      "target_section": 3,
       "tone": "TP-06",
       "priority": 2,
       "suppressed": false
@@ -767,42 +815,54 @@
     "confidence": "MEDIUM",
     "sections": [
       {
+        "section_number": 0,
+        "section_name": "Important Notices",
+        "content": "# Conditional: Bruxism Consideration\n\n**Your teeth grinding habit affects treatment recommendations.**\n\nBruxism (teeth grinding) puts additional stress on dental work. Your dentist will consider this when recommending materials and may suggest protective measures like a night guard.\n\nTreatment can proceed, but choices may be adjusted to account for the additional forces involved.",
+        "sources": [
+          "A_CFB_BRUXISM"
+        ],
+        "word_count": 51
+      },
+      {
         "section_number": 1,
         "section_name": "Disclaimer",
-        "content": "# Section 1: Disclaimer\n\nThis report is generated based on your responses to our questionnaire and is intended for informational purposes only. It does not constitute medical advice, diagnosis, or treatment recommendations.\n\nPlease consult with a qualified dental professional before making any decisions about your dental care. Your dentist will conduct a thorough examination and provide personalized recommendations based on your specific situation.\n\nThe information presented here is general in nature and may not apply to your individual circumstances. Treatment outcomes vary between patients and depend on many factors that can only be assessed through clinical examination.",
+        "content": "# Section 1: Disclaimer\n\nThis report is generated based on your questionnaire responses and is for informational purposes only. It does not constitute medical advice, diagnosis, or treatment recommendations.\n\n**Important:** A clinical examination is required before any treatment can be recommended or provided. Do not make treatment decisions based solely on this report.\n\nTreatment outcomes cannot be predicted with certainty. Results vary between patients and depend on factors that can only be assessed through clinical examination. Your dentist will provide personalized recommendations based on your specific situation.",
         "sources": [
           "STATIC_1"
         ],
-        "word_count": 96
+        "word_count": 86
       },
       {
         "section_number": 2,
         "section_name": "Your Personal Summary",
-        "content": "Based on the information provided...\n\nYou're missing several teeth in different areas of your mouth, a situation that affects how you chew and may influence how you feel about your smile. This scattered pattern of tooth loss is common and can be addressed in different ways. Treatment options range from individual implants for each missing tooth to bridge solutions that restore multiple teeth per zone. Each approach has different implications for cost, treatment time, and long-term maintenance. What you choose to do, how you prioritize different areas, and whether to address everything at once or in stages—these are all personal decisions that depend on your circumstances, preferences, and goals.",
+        "content": "You're missing several teeth in different areas of your mouth, a situation that affects how you chew and may influence how you feel about your smile. This scattered pattern of tooth loss is common and can be addressed in different ways. Treatment options range from individual implants for each missing tooth to bridge solutions that restore multiple teeth per zone. Each approach has different implications for cost, treatment time, and long-term maintenance. What you choose to do, how you prioritize different areas, and whether to address everything at once or in stages—these are all personal decisions that depend on your circumstances, preferences, and goals.",
         "sources": [
           "SCENARIO:personal_summary"
         ],
-        "word_count": 109
+        "word_count": 104
       },
       {
         "section_number": 3,
         "section_name": "Context",
-        "content": "Based on the information provided...\n\n# Smoking Consideration\n\nYou've indicated regular smoking. This is relevant to treatment planning.\n\n**Key points:**\n- Healing may take longer than average\n- Some procedures carry slightly elevated risk\n- Your dentist will account for this in recommendations\n\n**Recovery considerations:**\n- Longer healing periods may be advised\n- More frequent follow-up may be recommended\n- Outcomes can vary based on individual factors\n\nYour dentist can discuss how this applies to your specific situation.\n\n# First-Time Treatment Context\n\nAs this is your first time considering dental treatment of this type, it's natural to have many questions. The dental field offers various approaches, each with their own characteristics.\n\nYour dentist will guide you through the process step by step, explaining what to expect at each stage. There's no pressure to make immediate decisions—take whatever time feels right to understand your options.\n\nScattered tooth loss affects chewing in multiple areas simultaneously. You may have adapted to this situation, or you may find it limiting. Both experiences are valid.\n\nThe complexity of multiple gaps means there's no single obvious solution. Treatment typically involves decisions about which areas to address and in what order. These are personal decisions that depend on your priorities.\n\nA dental professional can help you understand the implications of different approaches, but the choice of what to pursue remains yours.",
+        "content": "# Smoking Consideration\n\nYou've indicated regular smoking. This is clinically relevant.\n\n**Key points:**\n- Healing typically takes longer\n- Implant success rates may be 10-20% lower than for non-smokers in population studies\n- Your dentist will assess how this affects your options\n\n**Recovery considerations:**\n- Extended healing periods are common\n- More frequent follow-up is typically recommended\n- Individual outcomes vary significantly\n\nYour dentist can discuss specific implications for your situation.\n\n# First-Time Treatment Context\n\nThis is your first dental treatment of this type. The information below covers what each option involves and typical experiences.\n\n# Functional vs Aesthetic Priorities\n\nHow you balance function and aesthetics is your choice. Different options weight these aspects differently, giving you control over what matters most in your treatment.\n\nYour dentist will explain how each option addresses function and appearance. You decide which balance reflects your personal priorities.\n\n# Current Tooth Status\n\nYour current tooth condition determines what options are available to you. Understanding your situation helps you participate meaningfully in treatment decisions.\n\nYour dentist will explain your tooth status and what it means for your choices. You can then decide which treatment direction aligns with your goals.\n\n# Function-Focused Approach\n\nYour functional priorities guide the treatment options presented. Different approaches have different functional capabilities, and you can choose based on what level of function you need.\n\nYour dentist will explain how each option performs functionally. You decide which approach best meets your functional needs.\n\nScattered tooth loss affects chewing in multiple areas simultaneously. You may have adapted to this situation, or you may find it limiting. Both experiences are valid.\n\nThe complexity of multiple gaps means there's no single obvious solution. Treatment typically involves decisions about which areas to address and in what order. These are personal decisions that depend on your priorities.\n\nA dental professional can help you understand the implications of different approaches, but the choice of what to pursue remains yours.",
         "sources": [
           "TM_RISK_SMOKING",
           "TM_CTX_FIRST_TIME",
+          "TM_CTX_FUNCTIONAL_VS_AESTHETIC",
+          "TM_CTX_TOOTH_STATUS",
+          "TM_PROFILE_FUNCTIONAL",
           "SCENARIO:context"
         ],
-        "word_count": 216
+        "word_count": 310
       },
       {
         "section_number": 4,
         "section_name": "Interpretation",
-        "content": "Based on the information provided...\n\n# Section 4: Interpretation\n\nBased on your responses, your dental situation appears to fall within established treatment frameworks. Clinical findings will help determine specific recommendations.\n\nYour priorities—whether focused on aesthetics, function, comfort, or balance—are valuable input. These preferences help identify options that align with what matters to you.\n\nA consultation with your dentist would allow them to combine your goals with clinical findings. From there, you can explore options and decide what direction feels right for your situation.",
+        "content": "# Section 4: Interpretation\n\nA dentist would evaluate whether your situation fits common treatment patterns. Only clinical examination determines specific recommendations.\n\nYour priorities help identify options that align with what matters to you.\n\nA consultation allows you to explore options and decide what direction feels right.",
         "sources": [
           "B_INTERP_STANDARD"
         ],
-        "word_count": 82
+        "word_count": 45
       },
       {
         "section_number": 5,
@@ -816,11 +876,11 @@
       {
         "section_number": 7,
         "section_name": "Trade-offs to Consider",
-        "content": "Both approaches can restore functional chewing. The result will improve upon your current situation, though it will differ from natural teeth in some ways.",
+        "content": "Both approaches are designed to restore functional chewing, though outcomes vary by individual. The goal is improvement over your current situation. Results differ from natural teeth in some ways.",
         "sources": [
           "SCENARIO:expected_results"
         ],
-        "word_count": 24
+        "word_count": 29
       },
       {
         "section_number": 8,
@@ -834,292 +894,54 @@
       {
         "section_number": 9,
         "section_name": "Cost Considerations",
-        "content": "# Budget Considerations: Balanced Approach\n\nYou've indicated flexibility in your budget, with an interest in balancing cost and quality. This opens a range of treatment options.\n\nYour dentist can discuss:\n- How different materials and techniques affect both cost and outcomes\n- Where investing more provides meaningful benefits\n- Where more economical options perform equally well\n- The relationship between initial cost and long-term value\n\nA balanced approach often leads to solutions that deliver good value without unnecessary expense.\n\n- Implant with crown: approximately €2,200 – €2,500 per tooth\n- Bridge on implants: approximately €4,500 – €6,000 per zone\n\nThese are ranges to help you plan.",
+        "content": "# Budget Considerations\n\nYou indicated flexibility when quality matters. Both options are available at different price points. Your dentist can provide specific costs based on your clinical situation.\n\nCosts vary significantly based on case complexity and materials. These are general estimates:\n\n- Implant with crown: approximately €2,200 – €2,500 per tooth\n- Bridge on implants: approximately €4,500 – €6,000 per zone",
         "sources": [
           "TM_BUDGET_FLEXIBLE",
           "SCENARIO:costs"
         ],
-        "word_count": 97
+        "word_count": 56
       },
       {
         "section_number": 10,
         "section_name": "Risk Factors",
-        "content": "# Smoking Consideration\n\nYou've indicated regular smoking. This is relevant to treatment planning.\n\n**Key points:**\n- Healing may take longer than average\n- Some procedures carry slightly elevated risk\n- Your dentist will account for this in recommendations\n\n**Recovery considerations:**\n- Longer healing periods may be advised\n- More frequent follow-up may be recommended\n- Outcomes can vary based on individual factors\n\nYour dentist can discuss how this applies to your specific situation.\n\n- Recovery: 2–5 days per surgical phase\n- Daily life: limited, spread impact over time",
+        "content": "# Smoking Consideration\n\nYou've indicated regular smoking. This is clinically relevant.\n\n**Key points:**\n- Healing typically takes longer\n- Implant success rates may be 10-20% lower than for non-smokers in population studies\n- Your dentist will assess how this affects your options\n\n**Recovery considerations:**\n- Extended healing periods are common\n- More frequent follow-up is typically recommended\n- Individual outcomes vary significantly\n\nYour dentist can discuss specific implications for your situation.\n\n- Recovery: 2–5 days per surgical phase\n- Daily life: limited, spread impact over time",
         "sources": [
           "TM_RISK_SMOKING",
           "SCENARIO:recovery"
         ],
-        "word_count": 79
+        "word_count": 77
       },
       {
         "section_number": 11,
         "section_name": "Next Steps",
-        "content": "# Section 11: Next Steps\n\n**Your next steps are entirely up to you.** Here are some options to consider:\n\n- Review this report at your own pace\n- Prepare questions for your dental consultation\n- Schedule an appointment when you feel ready\n- Request additional information on specific topics\n\nRemember, this is your journey. Take whatever time feels right to make decisions that work for you.\n\n## How to Prepare for Your Consultation\n\nConsider noting down:\n- Your main concerns and priorities\n- Questions about specific treatment options\n- Your timeline preferences\n- Budget considerations you'd like to discuss\n\nThe choice of how to proceed is yours. Your dentist is there to provide information and guidance, but you remain in control of your dental care decisions.",
+        "content": "# Section 11: Next Steps\n\nOptions to consider:\n\n- Review this report\n- Prepare questions for your dental consultation\n- Schedule an appointment when ready\n- Request additional information on specific topics\n\n## How to Prepare for Your Consultation\n\nConsider noting down:\n- Your main concerns and priorities\n- Questions about specific treatment options\n- Your timeline preferences\n- Budget considerations to discuss\n\nYour dentist can provide information and guidance based on clinical examination.",
         "sources": [
           "STATIC_11"
         ],
-        "word_count": 116
+        "word_count": 64
       }
     ],
-    "total_word_count": 954,
-    "warnings_included": false,
+    "total_word_count": 957,
+    "warnings_included": true,
     "suppressed_sections": [],
-    "placeholders_resolved": 0,
+    "placeholders_resolved": 1,
     "placeholders_unresolved": []
   },
   "validation_result": {
     "valid": true,
     "errors": [],
-    "warnings": [],
+    "warnings": [
+      "Section 4 has 45 words, minimum recommended is 50"
+    ],
     "semantic_violations": []
-  },
-  "llm_evaluation": {
-    "professional_quality": {
-      "score": 4,
-      "confidence": 0.9,
-      "feedback": "The writing is plagued by verbose filler phrases and repetitive content. 'Based on the information provided...' appears THREE times as pure padding. Multiple sections repeat the same smoking information verbatim. Transitions waste words without adding value. Sentences are often wordy when they could be direct. The report feels padded rather than purposeful.",
-      "issues": [
-        "'Based on the information provided...' used 3 times as filler - adds zero value",
-        "Section 3 and Section 10 contain IDENTICAL smoking content - complete redundancy",
-        "Wordy phrases like 'This is relevant to treatment planning' state the obvious",
-        "'Both experiences are valid' is unnecessary filler",
-        "'From there, you can explore options' - vague transition padding",
-        "Section 4 is entirely generic placeholder content that could apply to any patient"
-      ],
-      "suggestions": [
-        "Remove ALL instances of 'Based on the information provided' - just start with the content",
-        "Consolidate smoking information into ONE section only - eliminate the duplicate",
-        "Cut obvious statements - if something is in the report, it's relevant",
-        "Tighten every sentence - aim for 20% fewer words with same meaning",
-        "Replace Section 4 with actual patient-specific interpretation or remove it",
-        "Use concrete language instead of vague transitions"
-      ]
-    },
-    "clinical_safety": {
-      "score": 6,
-      "confidence": 0.85,
-      "feedback": "Disclaimers are present but weak. Section 1 is adequate but generic. The report makes soft claims about outcomes ('can restore functional chewing') without sufficient hedging. Risk disclosure for smoking is repetitive but lacks depth about actual failure rates or complications. Missing clear statements about individual variation in outcomes.",
-      "issues": [
-        "'Both approaches can restore functional chewing' - too definitive, needs hedging",
-        "Smoking risk section mentions 'slightly elevated risk' - too vague, minimizes actual risk",
-        "No mention of potential implant failure rates or complications",
-        "Cost ranges presented without disclaimer about variation",
-        "'The result will improve upon your current situation' - assumes positive outcome"
-      ],
-      "suggestions": [
-        "Add hedging: 'Both approaches MAY restore functional chewing in many cases'",
-        "Strengthen smoking warnings with specific risks: infection rates, failure rates",
-        "Add statement: 'Implant success rates vary; some implants may fail and require replacement'",
-        "Qualify cost ranges: 'Costs vary significantly based on individual factors; these are estimates only'",
-        "Revise to: 'The result is INTENDED to improve your situation, though outcomes vary'"
-      ]
-    },
-    "tone_appropriateness": {
-      "score": 7,
-      "confidence": 0.8,
-      "feedback": "Tone is generally consistent with TP-06 autonomy-respecting approach. Good use of 'you might choose' and 'your decision' language. However, some sections slip into slightly directive phrasing. The repetition of autonomy statements becomes performative rather than genuine.",
-      "issues": [
-        "'Your dentist will guide you through the process' - slightly paternalistic",
-        "'Clinical findings will help determine recommendations' - passive, not autonomy-focused",
-        "Multiple autonomy statements feel forced: 'these are personal decisions' appears repeatedly",
-        "Section 11 over-emphasizes autonomy to the point of being preachy"
-      ],
-      "suggestions": [
-        "Revise to: 'Your dentist can walk you through the process if you'd like guidance'",
-        "Change to: 'Clinical findings provide information you can use in your decision-making'",
-        "Reduce autonomy statements to 2-3 key moments rather than constant repetition",
-        "Simplify Section 11 - the autonomy message is clear without belaboring it"
-      ]
-    },
-    "personalization": {
-      "score": 5,
-      "confidence": 0.85,
-      "feedback": "Minimal personalization despite patient name being provided. Generic content dominates. Patient's specific situation (2-4 non-adjacent teeth, both arches, functional priority, durability focus) barely referenced. Could apply to almost any multiple-tooth-loss patient. Section 4 is entirely generic placeholder text.",
-      "issues": [
-        "Patient name 'James' never used despite being provided",
-        "No reference to 'both arches' affecting treatment complexity",
-        "'Functional_durable' priority from Q7 not explicitly addressed",
-        "'Very_important_natural' aesthetic preference (Q8) ignored",
-        "'6_months' timeline preference (Q12) not mentioned in planning",
-        "Section 4 could be copy-pasted into any report - zero personalization"
-      ],
-      "suggestions": [
-        "Use patient name at least once: 'James, your situation involves...'",
-        "Add: 'With missing teeth in both upper and lower arches, treatment coordination becomes important'",
-        "Explicitly connect to priorities: 'Given your focus on durability and function...'",
-        "Address aesthetic preference: 'You've indicated natural appearance is very important to you'",
-        "Reference timeline: 'Your 6-month timeframe is achievable with proper planning'",
-        "Rewrite Section 4 with patient-specific interpretation or remove it entirely"
-      ]
-    },
-    "patient_autonomy": {
-      "score": 8,
-      "confidence": 0.9,
-      "feedback": "Strong autonomy emphasis throughout. Good use of non-directive language in options section. 'You might choose this if' framing is excellent. Section 11 reinforces patient control well. Minor issues with some passive constructions that imply dentist control rather than patient choice.",
-      "issues": [
-        "'Your dentist will account for this' - implies dentist decides rather than discusses",
-        "'Your dentist can help you understand' - slightly paternalistic framing",
-        "Autonomy statements become repetitive and lose impact through overuse"
-      ],
-      "suggestions": [
-        "Change to: 'You and your dentist can discuss how this affects your options'",
-        "Revise to: 'You can explore with your dentist how different approaches work'",
-        "Reduce autonomy reinforcement to key decision points rather than constant repetition"
-      ]
-    },
-    "structure_completeness": {
-      "score": 7,
-      "confidence": 0.95,
-      "feedback": "All required sections present. Logical flow from summary through options to next steps. However, Section 6 (Expected Results) is missing entirely - only Section 7 (Trade-offs) appears. Section 4 is too brief and generic. Some sections are redundant (smoking appears twice). Structure is complete but not optimized.",
-      "issues": [
-        "Section 6 (Expected Results) is completely missing from the report",
-        "Section 4 is only 82 words and entirely generic - doesn't fulfill its purpose",
-        "Section 3 and Section 10 both contain identical smoking content - structural redundancy",
-        "Section 7 is only 24 words - too brief to be useful",
-        "Treatment options lack clear comparison structure"
-      ],
-      "suggestions": [
-        "Add Section 6 with specific expected outcomes for this patient's situation",
-        "Expand Section 4 with actual patient-specific interpretation or integrate into Section 2",
-        "Move all smoking content to Section 10 only - remove from Section 3",
-        "Expand Section 7 with meaningful trade-off analysis between the two approaches",
-        "Add comparison table or clearer structure to options section for easier decision-making"
-      ]
-    },
-    "content_issues": [
-      {
-        "section_number": 2,
-        "source_content": "content/scenarios/S05/en/TP-06.md",
-        "quote": "Based on the information provided...",
-        "problem": "Pure filler phrase that adds zero value. This opener appears 3 times in the report and should be removed everywhere.",
-        "severity": "warning",
-        "suggested_fix": "Delete this phrase entirely. Start directly with: 'You're missing several teeth...'"
-      },
-      {
-        "section_number": 3,
-        "source_content": "content/modules/TM_RISK_SMOKING/en/TP-06.md",
-        "quote": "You've indicated regular smoking. This is relevant to treatment planning.\n\n**Key points:**\n- Healing may take longer than average\n- Some procedures carry slightly elevated risk\n- Your dentist will account for this in recommendations",
-        "problem": "This exact content is duplicated verbatim in Section 10. Complete redundancy wastes space and annoys readers.",
-        "severity": "critical",
-        "suggested_fix": "Remove all smoking content from Section 3. Keep only in Section 10 where risk factors belong."
-      },
-      {
-        "section_number": 3,
-        "source_content": "content/scenarios/S05/en/TP-06.md",
-        "quote": "Based on the information provided...",
-        "problem": "Second instance of filler phrase. Adds nothing.",
-        "severity": "warning",
-        "suggested_fix": "Delete and start with actual content."
-      },
-      {
-        "section_number": 3,
-        "source_content": "content/scenarios/S05/en/TP-06.md",
-        "quote": "Both experiences are valid.",
-        "problem": "Unnecessary validation statement that adds no information. Feels like padding.",
-        "severity": "info",
-        "suggested_fix": "Remove this sentence entirely. The point is made without it."
-      },
-      {
-        "section_number": 4,
-        "source_content": "content/b_blocks/B_INTERP_STANDARD/en/TP-06.md",
-        "quote": "Based on the information provided...",
-        "problem": "Third instance of the same filler phrase. This is becoming a pattern problem.",
-        "severity": "warning",
-        "suggested_fix": "Delete this phrase. Start with: 'Your dental situation appears to fall...'"
-      },
-      {
-        "section_number": 4,
-        "source_content": "content/b_blocks/B_INTERP_STANDARD/en/TP-06.md",
-        "quote": "Based on your responses, your dental situation appears to fall within established treatment frameworks. Clinical findings will help determine specific recommendations.",
-        "problem": "Entirely generic content that could apply to any patient. Zero personalization despite having detailed patient profile. This section fails its purpose.",
-        "severity": "critical",
-        "suggested_fix": "Rewrite with patient-specific interpretation: 'James, with 2-4 missing teeth in non-adjacent areas across both arches, your situation requires coordinated planning. Your focus on durability and function, combined with your 6-month timeline, suggests [specific approach].'"
-      },
-      {
-        "section_number": 5,
-        "source_content": "content/scenarios/S05/en/TP-06.md",
-        "quote": "Both approaches can restore functional chewing.",
-        "problem": "Too definitive. Needs hedging for clinical safety. Implies guaranteed outcome.",
-        "severity": "critical",
-        "suggested_fix": "Revise to: 'Both approaches are designed to restore functional chewing in most cases, though individual outcomes vary.'"
-      },
-      {
-        "section_number": 6,
-        "source_content": "MISSING",
-        "quote": "N/A",
-        "problem": "Section 6 (Expected Results) is completely missing from the report. This is a required section per the structure.",
-        "severity": "critical",
-        "suggested_fix": "Add Section 6 between current sections 5 and 7. Include specific expected outcomes for this patient's situation: functional improvement, aesthetic results, timeline for seeing results, what 'success' looks like."
-      },
-      {
-        "section_number": 7,
-        "source_content": "content/scenarios/S05/en/TP-06.md",
-        "quote": "The result will improve upon your current situation, though it will differ from natural teeth in some ways.",
-        "problem": "Assumes positive outcome without sufficient hedging. Also too vague - 'in some ways' is not informative.",
-        "severity": "warning",
-        "suggested_fix": "Revise to: 'The goal is to improve your current situation, though results vary between patients. Implant-supported teeth function differently from natural teeth in [specific ways].'"
-      },
-      {
-        "section_number": 9,
-        "source_content": "content/scenarios/S05/en/TP-06.md",
-        "quote": "- Implant with crown: approximately €2,200 – €2,500 per tooth\n- Bridge on implants: approximately €4,500 – €6,000 per zone",
-        "problem": "Cost ranges presented without disclaimer about significant individual variation or factors affecting cost.",
-        "severity": "warning",
-        "suggested_fix": "Add before costs: 'Costs vary significantly based on individual factors, materials chosen, and complexity. These ranges are general estimates only:' Then list costs."
-      },
-      {
-        "section_number": 10,
-        "source_content": "content/modules/TM_RISK_SMOKING/en/TP-06.md",
-        "quote": "Some procedures carry slightly elevated risk",
-        "problem": "'Slightly elevated' minimizes the actual risk. Smoking significantly impacts implant success rates.",
-        "severity": "critical",
-        "suggested_fix": "Revise to: 'Smoking is associated with higher rates of implant complications and failure. Success rates may be 10-20% lower than for non-smokers.'"
-      },
-      {
-        "section_number": 10,
-        "source_content": "content/modules/TM_RISK_SMOKING/en/TP-06.md",
-        "quote": "Outcomes can vary based on individual factors",
-        "problem": "Too vague. Doesn't specify what outcomes or how much variation.",
-        "severity": "info",
-        "suggested_fix": "Be specific: 'Healing time may be 30-50% longer, and implant failure rates may be higher. Your dentist can discuss specific risks for your situation.'"
-      },
-      {
-        "section_number": 11,
-        "source_content": "content/static/11/en.md",
-        "quote": "Remember, this is your journey. Take whatever time feels right to make decisions that work for you... The choice of how to proceed is yours. Your dentist is there to provide information and guidance, but you remain in control of your dental care decisions.",
-        "problem": "Autonomy message is belabored and becomes preachy. The point is made multiple times when once would suffice.",
-        "severity": "info",
-        "suggested_fix": "Consolidate to single statement: 'Take whatever time you need to make decisions that work for you. Your dentist can provide information and guidance while you remain in control of your care.'"
-      }
-    ],
-    "content_files_to_review": [
-      "content/scenarios/S05/en/TP-06.md",
-      "content/modules/TM_RISK_SMOKING/en/TP-06.md",
-      "content/b_blocks/B_INTERP_STANDARD/en/TP-06.md",
-      "MISSING",
-      "content/static/11/en.md"
-    ],
-    "overall_score": 6.2,
-    "overall_assessment": "This report suffers from significant verbosity and redundancy issues that undermine its professionalism. The same filler phrase appears three times, smoking content is duplicated verbatim across sections, and generic placeholder text fills space without adding value. Clinical safety is adequate but needs stronger hedging and risk disclosure. Personalization is weak despite detailed patient data being available. The structure is complete but unoptimized, with Section 6 missing entirely. Most critically, the content needs to be cut by 20-30% to remove padding and improve clarity. Scores reflect harsh but fair assessment - this is mediocre content that requires substantial revision to meet professional standards.",
-    "recommended_outcome": "BLOCK",
-    "outcome_reasoning": "5 critical content issue(s) found",
-    "metadata": {
-      "model_used": "claude-sonnet-4-5-20250929",
-      "evaluation_timestamp": "2026-01-13T18:16:33.173Z",
-      "duration_ms": 67122,
-      "token_usage": {
-        "input_tokens": 6495,
-        "output_tokens": 3135
-      }
-    }
   },
   "decision_trace": {
     "session_id": "test-case-007",
-    "started_at": "2026-01-13T18:15:26.044Z",
-    "completed_at": "2026-01-13T18:16:33.173Z",
+    "started_at": "2026-01-19T15:34:37.946Z",
+    "completed_at": "2026-01-19T15:34:37.950Z",
     "events": [
       {
-        "timestamp": "2026-01-13T18:15:26.044Z",
+        "timestamp": "2026-01-19T15:34:37.946Z",
         "stage": "input_validation",
         "action": "validate_input",
         "input": {
@@ -1132,7 +954,7 @@
         "duration_ms": 0
       },
       {
-        "timestamp": "2026-01-13T18:15:26.044Z",
+        "timestamp": "2026-01-19T15:34:37.946Z",
         "stage": "tag_extraction",
         "action": "extract_tags",
         "input": {
@@ -1247,7 +1069,7 @@
         "duration_ms": 0
       },
       {
-        "timestamp": "2026-01-13T18:15:26.045Z",
+        "timestamp": "2026-01-19T15:34:37.946Z",
         "stage": "driver_derivation",
         "action": "derive_drivers",
         "input": {
@@ -1471,10 +1293,10 @@
           ],
           "fallbacks_applied": []
         },
-        "duration_ms": 1
+        "duration_ms": 0
       },
       {
-        "timestamp": "2026-01-13T18:15:26.045Z",
+        "timestamp": "2026-01-19T15:34:37.946Z",
         "stage": "scenario_scoring",
         "action": "score_scenarios",
         "input": {
@@ -1812,7 +1634,7 @@
         "duration_ms": 0
       },
       {
-        "timestamp": "2026-01-13T18:15:26.045Z",
+        "timestamp": "2026-01-19T15:34:37.946Z",
         "stage": "tone_selection",
         "action": "select_tone",
         "input": {
@@ -1867,19 +1689,19 @@
         "duration_ms": 0
       },
       {
-        "timestamp": "2026-01-13T18:15:26.045Z",
+        "timestamp": "2026-01-19T15:34:37.946Z",
         "stage": "content_selection",
         "action": "select_content",
         "input": {
           "scenario": "S05"
         },
         "output": {
-          "count": 11
+          "count": 17
         },
         "duration_ms": 0
       },
       {
-        "timestamp": "2026-01-13T18:15:26.046Z",
+        "timestamp": "2026-01-19T15:34:37.947Z",
         "stage": "scenario_load",
         "action": "load_scenario",
         "input": {
@@ -1892,34 +1714,56 @@
         "duration_ms": 1
       },
       {
-        "timestamp": "2026-01-13T18:15:26.049Z",
+        "timestamp": "2026-01-19T15:34:37.949Z",
         "stage": "composition",
         "action": "compose_report",
         "input": {
-          "selections": 11
+          "selections": 17
         },
         "output": {
-          "sections": 10,
-          "words": 954
+          "sections": 11,
+          "words": 957
         },
         "duration_ms": 2
       },
       {
-        "timestamp": "2026-01-13T18:16:33.173Z",
+        "timestamp": "2026-01-19T15:34:37.950Z",
         "stage": "qa_gate",
         "action": "qa_check",
         "input": {
           "report_id": "test-case-007"
         },
         "output": {
-          "_truncated": true,
-          "_size": 14578
+          "outcome": "PASS",
+          "validationResult": {
+            "valid": true,
+            "errors": [],
+            "warnings": [
+              "Section 4 has 45 words, minimum recommended is 50"
+            ],
+            "semantic_violations": []
+          },
+          "semanticResult": {
+            "violations": [],
+            "hasViolations": false,
+            "hasCriticalViolations": false,
+            "summary": {
+              "total": 0,
+              "critical": 0,
+              "warning": 0
+            }
+          },
+          "reasons": [
+            "All QA checks passed"
+          ],
+          "canDeliver": true,
+          "requiresReview": false
         },
-        "duration_ms": 67124
+        "duration_ms": 1
       }
     ],
-    "final_outcome": "FLAG"
+    "final_outcome": "PASS"
   },
-  "final_outcome": "FLAG",
+  "final_outcome": "PASS",
   "report_delivered": true
 }

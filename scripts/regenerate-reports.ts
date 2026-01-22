@@ -13,8 +13,6 @@ const reportDir = "./test_reports/reports";
 const auditDir = "./test_reports/audits";
 const llmEvalDir = "./test_reports/llm_evaluations";
 
-const pipeline = new ReportPipeline();
-
 interface LLMEvaluationFile {
   session_id: string;
   case_id: string;
@@ -106,6 +104,47 @@ async function generateReport(inputFile: string) {
 
   console.log(`Processing: ${baseName}`);
 
+  // Create pipeline with callback to write report BEFORE LLM evaluation
+  const pipeline = new ReportPipeline({
+    onReportComposed: async (report, partialAudit) => {
+      // Write preliminary report immediately after composition
+      let markdown = `# ${description}\n\n`;
+      markdown += `**Case ID:** ${baseName}\n`;
+      markdown += `**Session:** ${intake.session_id}\n`;
+      markdown += `**Generated:** ${new Date().toISOString()}\n\n`;
+
+      markdown += `## Pipeline Metadata\n\n`;
+      markdown += `| Field | Value |\n`;
+      markdown += `|-------|-------|\n`;
+      markdown += `| Scenario | ${partialAudit.scenario_match?.matched_scenario} |\n`;
+      markdown += `| Tone Profile | ${partialAudit.tone_selection?.selected_tone} |\n`;
+      markdown += `| Confidence | ${partialAudit.scenario_match?.confidence} |\n`;
+      markdown += `| Total Words | ${report.total_word_count} |\n`;
+      markdown += `| Sections | ${report.sections.length} |\n`;
+      markdown += `| Warnings Included | ${report.warnings_included} |\n\n`;
+
+      markdown += `## Driver State\n\n`;
+      if (partialAudit.driver_state) {
+        for (const [key, driver] of Object.entries(partialAudit.driver_state.drivers) as [string, { value: string; source: string }][]) {
+          markdown += `- **${key}:** ${driver.value} (source: ${driver.source})\n`;
+        }
+      }
+      markdown += `\n---\n\n`;
+
+      markdown += `# Generated Report\n\n`;
+      for (const section of report.sections) {
+        markdown += `## ${section.section_name}\n\n`;
+        markdown += section.content;
+        markdown += `\n\n*[${section.word_count} words]*\n\n`;
+      }
+
+      // Write report BEFORE LLM evaluation
+      const reportPath = path.resolve(reportDir, `${baseName}.md`);
+      await fs.writeFile(reportPath, markdown);
+      console.log(`  → Report (pre-eval): ${reportPath}`);
+    }
+  });
+
   const result = await pipeline.run(intake);
 
   if (!result.success) {
@@ -124,29 +163,28 @@ async function generateReport(inputFile: string) {
     throw new Error(`Report generation failed for ${baseName}: ${result.error}`);
   }
 
-  // Generate markdown report
   const report = result.report!;
   const audit = result.audit;
 
-  let markdown = `# ${description}\n\n`;
-  markdown += `**Case ID:** ${baseName}\n`;
-  markdown += `**Session:** ${intake.session_id}\n`;
-  markdown += `**Generated:** ${new Date().toISOString()}\n\n`;
-
-  markdown += `## Pipeline Metadata\n\n`;
-  markdown += `| Field | Value |\n`;
-  markdown += `|-------|-------|\n`;
-  markdown += `| Scenario | ${audit.scenario_match.matched_scenario} |\n`;
-  markdown += `| Tone Profile | ${audit.tone_selection.selected_tone} |\n`;
-  markdown += `| Confidence | ${audit.scenario_match.confidence} |\n`;
-  markdown += `| Outcome | ${result.outcome} |\n`;
-  markdown += `| Success | ${result.success} |\n`;
-  markdown += `| Total Words | ${report.total_word_count} |\n`;
-  markdown += `| Sections | ${report.sections.length} |\n`;
-  markdown += `| Warnings Included | ${report.warnings_included} |\n\n`;
-
-  // Add LLM evaluation summary to markdown if available
+  // Update report with LLM evaluation results if available
   if (audit.llm_evaluation) {
+    let markdown = `# ${description}\n\n`;
+    markdown += `**Case ID:** ${baseName}\n`;
+    markdown += `**Session:** ${intake.session_id}\n`;
+    markdown += `**Generated:** ${new Date().toISOString()}\n\n`;
+
+    markdown += `## Pipeline Metadata\n\n`;
+    markdown += `| Field | Value |\n`;
+    markdown += `|-------|-------|\n`;
+    markdown += `| Scenario | ${audit.scenario_match.matched_scenario} |\n`;
+    markdown += `| Tone Profile | ${audit.tone_selection.selected_tone} |\n`;
+    markdown += `| Confidence | ${audit.scenario_match.confidence} |\n`;
+    markdown += `| Outcome | ${result.outcome} |\n`;
+    markdown += `| Success | ${result.success} |\n`;
+    markdown += `| Total Words | ${report.total_word_count} |\n`;
+    markdown += `| Sections | ${report.sections.length} |\n`;
+    markdown += `| Warnings Included | ${report.warnings_included} |\n\n`;
+
     const llmEval = audit.llm_evaluation;
     markdown += `## LLM Quality Evaluation\n\n`;
     markdown += `| Dimension | Score | Weight |\n`;
@@ -176,34 +214,37 @@ async function generateReport(inputFile: string) {
       }
       markdown += `\n`;
     }
+
+    markdown += `## Driver State\n\n`;
+    for (const [key, driver] of Object.entries(audit.driver_state.drivers) as [string, { value: string; source: string }][]) {
+      markdown += `- **${key}:** ${driver.value} (source: ${driver.source})\n`;
+    }
+    markdown += `\n---\n\n`;
+
+    markdown += `# Generated Report\n\n`;
+    for (const section of report.sections) {
+      markdown += `## ${section.section_name}\n\n`;
+      markdown += section.content;
+      markdown += `\n\n*[${section.word_count} words]*\n\n`;
+    }
+
+    // Update report with LLM evaluation
+    const reportPath = path.resolve(reportDir, `${baseName}.md`);
+    await fs.writeFile(reportPath, markdown);
+    console.log(`  → Report (with eval): ${reportPath}`);
   }
 
-  markdown += `## Driver State\n\n`;
-  for (const [key, driver] of Object.entries(audit.driver_state.drivers) as [string, { value: string; source: string }][]) {
-    markdown += `- **${key}:** ${driver.value} (source: ${driver.source})\n`;
-  }
-  markdown += `\n---\n\n`;
-
-  markdown += `# Generated Report\n\n`;
-  for (const section of report.sections) {
-    markdown += `## ${section.section_name}\n\n`;
-    markdown += section.content;
-    markdown += `\n\n*[${section.word_count} words]*\n\n`;
-  }
-
-  // Write report
-  const reportPath = path.join(reportDir, `${baseName}.md`);
-  await fs.writeFile(reportPath, markdown);
-
-  // Write audit (full audit still goes to audits dir)
-  const auditPath = path.join(auditDir, `${baseName}.json`);
+  // Write audit
+  const auditPath = path.resolve(auditDir, `${baseName}.json`);
   await fs.writeFile(auditPath, JSON.stringify(audit, null, 2));
+  console.log(`  → Audit: ${auditPath}`);
 
   // Write separate LLM evaluation file if available
   const llmEvalFile = extractLLMEvaluation(audit, baseName);
   if (llmEvalFile) {
-    const llmEvalPath = path.join(llmEvalDir, `${baseName}.json`);
+    const llmEvalPath = path.resolve(llmEvalDir, `${baseName}.json`);
     await fs.writeFile(llmEvalPath, JSON.stringify(llmEvalFile, null, 2));
+    console.log(`  → LLM Eval: ${llmEvalPath}`);
   }
 
   // Build output status
@@ -211,8 +252,8 @@ async function generateReport(inputFile: string) {
   if (audit.llm_evaluation) {
     status += `, LLM: ${audit.llm_evaluation.overall_score}/10`;
     if (audit.llm_evaluation.content_issues.length > 0) {
-      const critical = audit.llm_evaluation.content_issues.filter(i => i.severity === "critical").length;
-      const warning = audit.llm_evaluation.content_issues.filter(i => i.severity === "warning").length;
+      const critical = audit.llm_evaluation.content_issues.filter((i: { severity: string }) => i.severity === "critical").length;
+      const warning = audit.llm_evaluation.content_issues.filter((i: { severity: string }) => i.severity === "warning").length;
       status += ` (${critical}C/${warning}W issues)`;
     }
   }
@@ -226,10 +267,22 @@ async function main() {
   await fs.mkdir(auditDir, { recursive: true });
   await fs.mkdir(llmEvalDir, { recursive: true });
 
-  const files = await fs.readdir(inputDir);
-  const jsonFiles = files.filter(f => f.endsWith(".json")).sort();
+  // Check for case filter argument (e.g., "case_08" or "08")
+  const caseFilter = process.argv[2];
 
-  console.log(`Regenerating ${jsonFiles.length} reports...\n`);
+  const files = await fs.readdir(inputDir);
+  let jsonFiles = files.filter(f => f.endsWith(".json")).sort();
+
+  if (caseFilter) {
+    const filterPattern = caseFilter.includes("case_") ? caseFilter : `case_${caseFilter.padStart(2, "0")}`;
+    jsonFiles = jsonFiles.filter(f => f.includes(filterPattern));
+    if (jsonFiles.length === 0) {
+      console.error(`No files found matching filter: ${caseFilter}`);
+      process.exit(1);
+    }
+  }
+
+  console.log(`Regenerating ${jsonFiles.length} report(s)...${caseFilter ? ` (filter: ${caseFilter})` : ""}\n`);
 
   let passCount = 0;
   let flagCount = 0;

@@ -56,18 +56,33 @@ const L1_SUPPRESSION_RULES: Record<string, { blocks: string[]; sections: number[
   }
 };
 
-// A_* block triggers
-const A_BLOCK_TRIGGERS: Record<string, { driver: DriverId; values: string[] }> = {
+// A_* block triggers - supports both driver-based and tag-based triggers
+const A_BLOCK_TRIGGERS: Record<string, { driver?: DriverId; values?: string[]; tag?: string }> = {
+  // Driver-based triggers (general warnings)
   "A_WARN_ACTIVE_SYMPTOMS": { driver: "clinical_priority", values: ["urgent", "semi_urgent"] },
   "A_WARN_PREGNANCY_OR_GROWTH": { driver: "medical_constraints", values: ["pregnancy_related"] },
   "A_WARN_BIOLOGICAL_INSTABILITY": { driver: "biological_stability", values: ["unstable", "compromised"] },
   "A_BLOCK_TREATMENT_OPTIONS": { driver: "medical_constraints", values: ["surgical_contraindicated"] },
   "A_WARN_RISK_FACTORS": { driver: "risk_profile_biological", values: ["elevated"] },
-  "A_WARN_INCOMPLETE_ASSESSMENT": { driver: "clinical_priority", values: ["unknown"] }
+  "A_WARN_INCOMPLETE_ASSESSMENT": { driver: "clinical_priority", values: ["unknown"] },
+
+  // Tag-based triggers (specific conditions)
+  "A_FB_PREGNANCY": { driver: "medical_constraints", values: ["pregnancy_related"] },
+  "A_FB_SMOKING": { tag: "smoking_daily" },
+  "A_FB_POOR_HYGIENE": { tag: "hygiene_poor" },
+  "A_CFB_BRUXISM": { tag: "tooth_health_bruxism" },
+  "A_CFB_DENTAL_ANXIETY": { driver: "anxiety_level", values: ["severe", "moderate"] },
+  "A_CFB_GROWTH_INCOMPLETE": { tag: "growth_incomplete" }
+
+  // Disabled until questionnaire captures these conditions:
+  // "A_FB_MEDICAL_DIABETES": { tag: "diabetes_yes" },
+  // "A_FB_PERIODONTITIS": { tag: "periodontitis_yes" },
+  // "A_FB_CHRONIC_INFLAMMATION": { tag: "chronic_inflammation_yes" },
+  // "A_CFB_BONE_LOSS": { tag: "bone_loss_yes" },
 };
 
 // B_* block triggers (by section)
-const B_BLOCK_TRIGGERS: Record<string, { section: number; driver: DriverId; values: string[] }> = {
+const B_BLOCK_TRIGGERS: Record<string, { section: number; driver: DriverId; values: string[]; scenario?: string }> = {
   "B_CTX_SINGLE_TOOTH": { section: 3, driver: "mouth_situation", values: ["single_missing_tooth"] },
   "B_CTX_MULTIPLE_TEETH": { section: 3, driver: "mouth_situation", values: ["multiple_adjacent", "multiple_dispersed", "mixed_pattern"] },
   "B_CTX_GENERAL": { section: 3, driver: "mouth_situation", values: ["no_missing_teeth", "complex"] },
@@ -79,9 +94,31 @@ const B_BLOCK_TRIGGERS: Record<string, { section: number; driver: DriverId; valu
   "B_RISKLANG_ELEVATED": { section: 10, driver: "risk_profile_biological", values: ["elevated"] }
 };
 
+// Scenario-based B_* block mapping (for nuance and cost blocks)
+const SCENARIO_B_BLOCKS: Record<string, { nuance: string; cost: string }> = {
+  "S01": { nuance: "B_NUANCE_S01", cost: "B_COST_S01" },
+  "S02": { nuance: "B_NUANCE_S02", cost: "B_COST_S02" },
+  "S03": { nuance: "B_NUANCE_S03", cost: "B_COST_S03" },
+  "S04": { nuance: "B_NUANCE_S04", cost: "B_COST_S04" },
+  "S05": { nuance: "B_NUANCE_S05", cost: "B_COST_S05" },
+  "S06": { nuance: "B_NUANCE_S06", cost: "B_COST_S06" },
+  "S07": { nuance: "B_NUANCE_S07", cost: "B_COST_S07" },
+  "S08": { nuance: "B_NUANCE_S08", cost: "B_COST_S08" },
+  "S09": { nuance: "B_NUANCE_S09", cost: "B_COST_S09" },
+  "S10": { nuance: "B_NUANCE_S10", cost: "B_COST_S10" },
+  "S11": { nuance: "B_NUANCE_S11", cost: "B_COST_S11" },
+  "S12": { nuance: "B_NUANCE_S12", cost: "B_COST_S12" },
+  "S13": { nuance: "B_NUANCE_S13", cost: "B_COST_S13" },
+  "S14": { nuance: "B_NUANCE_S14", cost: "B_COST_S14" },
+  "S15": { nuance: "B_NUANCE_S15", cost: "B_COST_S15" },
+  "S16": { nuance: "B_NUANCE_S16", cost: "B_COST_S16" },
+  "S17": { nuance: "B_NUANCE_S17", cost: "B_COST_S17" }
+};
+
 // Text module triggers
 // priority: 0 = prepend (before scenario), 2 = append (after scenario), default is 2
 const MODULE_TRIGGERS: Record<string, { sections: number[]; driver?: DriverId; values?: string[]; tag?: string; priority?: number }> = {
+  // Existing modules
   "TM_RISK_SMOKING": { sections: [3, 10], tag: "smoking_daily" },
   "TM_RISK_DIABETES": { sections: [3, 10], tag: "diabetes_yes" },
   "TM_CTX_FIRST_TIME": { sections: [3], driver: "experience_history", values: ["first_timer"] },
@@ -89,7 +126,33 @@ const MODULE_TRIGGERS: Record<string, { sections: number[]; driver?: DriverId; v
   "TM_BUDGET_LIMITED": { sections: [9], driver: "budget_type", values: ["economy"] },
   "TM_BUDGET_FLEXIBLE": { sections: [9], driver: "budget_type", values: ["balanced"] },
   "TM_BUDGET_PREMIUM": { sections: [9], driver: "budget_type", values: ["premium"] },
-  "TM_ANXIETY_SEVERE": { sections: [2], driver: "anxiety_level", values: ["severe"], priority: 0 }
+  "TM_ANXIETY_SEVERE": { sections: [2], driver: "anxiety_level", values: ["severe"], priority: 0 },
+
+  // New Risk Modules
+  "TM_RISK_PREGNANCY": { sections: [3, 10], tag: "pregnancy_yes" },
+  "TM_RISK_MEDICAL": { sections: [3, 10], tag: "medical_conditions_yes" },
+  "TM_RISK_BRUXISM": { sections: [3, 10], tag: "bruxism_yes" },
+  "TM_RISK_PERIODONTITIS": { sections: [3, 10], tag: "periodontitis_yes" },
+  "TM_RISK_CHRONIC_INFLAMMATION": { sections: [3, 10], tag: "chronic_inflammation_yes" },
+  "TM_RISK_POOR_HYGIENE": { sections: [3, 10], tag: "poor_hygiene_yes" },
+  "TM_RISK_BONE_LOSS": { sections: [3, 10], tag: "bone_loss_yes" },
+
+  // New Context Modules
+  "TM_CTX_AGE": { sections: [3], driver: "age_stage", values: ["young_adult", "middle_aged", "senior"] },
+  "TM_CTX_PREMIUM_AESTHETIC": { sections: [3], driver: "profile_type", values: ["aesthetic"] },
+  "TM_CTX_AESTHETIC_STYLE": { sections: [3], driver: "aesthetic_tolerance", values: ["high", "normal"] },
+  "TM_CTX_FUNCTIONAL_VS_AESTHETIC": { sections: [3], driver: "profile_type", values: ["functional", "mixed"] },
+  "TM_CTX_TOOTH_STATUS": { sections: [3], driver: "mouth_situation", values: ["single_missing_tooth", "multiple_adjacent", "multiple_dispersed"] },
+  "TM_CTX_ORAL_COMPLEXITY": { sections: [3], driver: "mouth_situation", values: ["complex", "mixed_pattern"] },
+  "TM_CTX_GENERAL_HEALTH": { sections: [3], driver: "risk_profile_biological", values: ["elevated"] },
+
+  // New Profile Modules
+  "TM_PROFILE_COMFORT": { sections: [3], driver: "profile_type", values: ["comfort"] },
+  "TM_PROFILE_AESTHETIC": { sections: [3], driver: "profile_type", values: ["aesthetic"] },
+  "TM_PROFILE_FUNCTIONAL": { sections: [3], driver: "profile_type", values: ["functional"] },
+  "TM_PROFILE_BUDGET": { sections: [9], driver: "budget_type", values: ["economy"] },
+  "TM_PROFILE_PREMIUM": { sections: [9], driver: "budget_type", values: ["premium"] },
+  "TM_PROFILE_COMBINATION": { sections: [3], driver: "profile_type", values: ["mixed"] }
 };
 
 export class ContentSelector {
@@ -109,7 +172,7 @@ export class ContentSelector {
     const suppressedBlockPatterns = this.getL1SuppressedBlocks(driverState);
 
     // Select A_* blocks (warnings)
-    const aBlocks = this.selectABlocks(driverState, tone, suppressedBlockPatterns);
+    const aBlocks = this.selectABlocks(driverState, tone, suppressedBlockPatterns, tags);
     selections.push(...aBlocks);
 
     // Select scenario content for Section 2
@@ -125,6 +188,10 @@ export class ContentSelector {
     // Select B_* blocks
     const bBlocks = this.selectBBlocks(driverState, tone, suppressedSections, suppressedBlockPatterns);
     selections.push(...bBlocks);
+
+    // Select scenario-specific nuance and cost blocks
+    const scenarioBlocks = this.selectScenarioBlocks(scenarioMatch.matched_scenario, tone, suppressedSections);
+    selections.push(...scenarioBlocks);
 
     // Select text modules
     const modules = this.selectModules(driverState, tone, tags, suppressedSections);
@@ -207,18 +274,33 @@ export class ContentSelector {
 
   /**
    * Select A_* blocks (warnings)
+   * Supports both driver-based and tag-based triggers
    */
   private selectABlocks(
     driverState: DriverState,
     tone: ToneProfileId,
-    suppressedPatterns: string[]
+    suppressedPatterns: string[],
+    tags: Set<string> = new Set()
   ): ContentSelection[] {
     const selections: ContentSelection[] = [];
 
     for (const [blockId, trigger] of Object.entries(A_BLOCK_TRIGGERS)) {
-      const driverValue = driverState.drivers[trigger.driver];
+      let shouldSelect = false;
 
-      if (driverValue && trigger.values.includes(driverValue.value)) {
+      // Check driver trigger
+      if (trigger.driver && trigger.values) {
+        const driverValue = driverState.drivers[trigger.driver];
+        if (driverValue && trigger.values.includes(driverValue.value)) {
+          shouldSelect = true;
+        }
+      }
+
+      // Check tag trigger
+      if (trigger.tag && tags.has(trigger.tag)) {
+        shouldSelect = true;
+      }
+
+      if (shouldSelect) {
         const isSuppressed = this.isBlockSuppressed(blockId, suppressedPatterns);
 
         selections.push({
@@ -283,6 +365,48 @@ export class ContentSelector {
         });
       }
     }
+
+    return selections;
+  }
+
+  /**
+   * Select scenario-specific nuance and cost blocks
+   */
+  private selectScenarioBlocks(
+    scenarioId: string,
+    tone: ToneProfileId,
+    suppressedSections: Set<number>
+  ): ContentSelection[] {
+    const selections: ContentSelection[] = [];
+
+    const scenarioBlocks = SCENARIO_B_BLOCKS[scenarioId];
+    if (!scenarioBlocks) {
+      return selections;
+    }
+
+    // Add nuance block to section 3 (Context)
+    const nuanceSuppressed = suppressedSections.has(3);
+    selections.push({
+      content_id: scenarioBlocks.nuance,
+      type: "b_block",
+      target_section: 3,
+      tone,
+      priority: 2,
+      suppressed: nuanceSuppressed,
+      suppression_reason: nuanceSuppressed ? "Section suppressed by L1" : undefined
+    });
+
+    // Add cost block to section 9 (Costs)
+    const costSuppressed = suppressedSections.has(9);
+    selections.push({
+      content_id: scenarioBlocks.cost,
+      type: "b_block",
+      target_section: 9,
+      tone,
+      priority: 1,
+      suppressed: costSuppressed,
+      suppression_reason: costSuppressed ? "Section suppressed by L1" : undefined
+    });
 
     return selections;
   }

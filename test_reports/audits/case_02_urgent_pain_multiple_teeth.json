@@ -1,9 +1,9 @@
 {
   "session_id": "test-case-002",
-  "created_at": "2026-01-13T19:11:40.596Z",
+  "created_at": "2026-01-19T15:34:37.923Z",
   "intake": {
     "session_id": "test-case-002",
-    "timestamp": "2026-01-13T18:34:39.459Z",
+    "timestamp": "2026-01-08T07:09:41.236Z",
     "answers": [
       {
         "question_id": "Q1",
@@ -679,6 +679,22 @@
       "suppressed": false
     },
     {
+      "content_id": "A_CFB_BRUXISM",
+      "type": "a_block",
+      "target_section": 0,
+      "tone": "TP-04",
+      "priority": 10,
+      "suppressed": false
+    },
+    {
+      "content_id": "A_CFB_DENTAL_ANXIETY",
+      "type": "a_block",
+      "target_section": 0,
+      "tone": "TP-04",
+      "priority": 10,
+      "suppressed": false
+    },
+    {
       "content_id": "S04",
       "type": "scenario",
       "target_section": 2,
@@ -736,6 +752,22 @@
       "suppressed": false
     },
     {
+      "content_id": "B_NUANCE_S04",
+      "type": "b_block",
+      "target_section": 3,
+      "tone": "TP-04",
+      "priority": 2,
+      "suppressed": false
+    },
+    {
+      "content_id": "B_COST_S04",
+      "type": "b_block",
+      "target_section": 9,
+      "tone": "TP-04",
+      "priority": 1,
+      "suppressed": false
+    },
+    {
       "content_id": "TM_CTX_FIRST_TIME",
       "type": "module",
       "target_section": 3,
@@ -757,6 +789,38 @@
       "target_section": 2,
       "tone": "TP-04",
       "priority": 0,
+      "suppressed": false
+    },
+    {
+      "content_id": "TM_CTX_FUNCTIONAL_VS_AESTHETIC",
+      "type": "module",
+      "target_section": 3,
+      "tone": "TP-04",
+      "priority": 2,
+      "suppressed": false
+    },
+    {
+      "content_id": "TM_CTX_TOOTH_STATUS",
+      "type": "module",
+      "target_section": 3,
+      "tone": "TP-04",
+      "priority": 2,
+      "suppressed": false
+    },
+    {
+      "content_id": "TM_PROFILE_FUNCTIONAL",
+      "type": "module",
+      "target_section": 3,
+      "tone": "TP-04",
+      "priority": 2,
+      "suppressed": false
+    },
+    {
+      "content_id": "TM_PROFILE_BUDGET",
+      "type": "module",
+      "target_section": 9,
+      "tone": "TP-04",
+      "priority": 2,
       "suppressed": false
     },
     {
@@ -797,49 +861,54 @@
       {
         "section_number": 0,
         "section_name": "Important Notices",
-        "content": "# Important Notice: Active Symptoms\n\nYou've mentioned experiencing some pain or discomfort. This is something your dentist can help with, and it's good that you're seeking guidance.\n\n**Here's what typically happens:**\n- Your dentist will first evaluate what's causing your symptoms\n- Addressing any acute issues takes priority—this is standard practice\n- Once you're comfortable, treatment planning can proceed as normal\n\nThis approach has helped many patients. By addressing symptoms first, the foundation is set for stable, lasting results. Your dentist will guide you through each step.",
+        "content": "# Important Notice: Active Symptoms\n\nYou've mentioned experiencing some pain or discomfort. This is something your dentist can help with, and it's good that you're seeking guidance.\n\n**Here's what typically happens:**\n- Your dentist will first evaluate what's causing your symptoms\n- Addressing any acute issues takes priority—this is standard practice\n- Once you're comfortable, treatment planning can proceed as normal\n\nThis approach has helped many patients. By addressing symptoms first, the foundation is set for stable, lasting results. Your dentist will guide you through each step.\n\n# Conditional: Bruxism Consideration\n\n**Bruxism is a well-managed factor in dental treatment.**\n\nThere are established material choices and protective protocols for patients with bruxism. Your dentist will apply these proven approaches to optimize treatment durability.\n\nStronger materials and protective appliances are standard solutions that work effectively for patients who grind their teeth.\n\n# Conditional: Dental Anxiety Consideration\n\n**Managing dental anxiety is a routine part of dental practice.**\n\nThere are established techniques for helping anxious patients, including sedation options, careful communication, and modified treatment approaches. These methods are proven and widely used.\n\nYour dentist will discuss available options for making your treatment experience as comfortable as possible.",
         "sources": [
-          "A_WARN_ACTIVE_SYMPTOMS"
+          "A_WARN_ACTIVE_SYMPTOMS",
+          "A_CFB_BRUXISM",
+          "A_CFB_DENTAL_ANXIETY"
         ],
-        "word_count": 83
+        "word_count": 187
       },
       {
         "section_number": 1,
         "section_name": "Disclaimer",
-        "content": "# Section 1: Disclaimer\n\nThis report is generated based on your responses to our questionnaire and is intended for informational purposes only. It does not constitute medical advice, diagnosis, or treatment recommendations.\n\nPlease consult with a qualified dental professional before making any decisions about your dental care. Your dentist will conduct a thorough examination and provide personalized recommendations based on your specific situation.\n\nThe information presented here is general in nature and may not apply to your individual circumstances. Treatment outcomes cannot be predicted with certainty. Results vary between patients and depend on many factors that can only be assessed through clinical examination.",
+        "content": "# Section 1: Disclaimer\n\nThis report is generated based on your questionnaire responses and is for informational purposes only. It does not constitute medical advice, diagnosis, or treatment recommendations.\n\n**Important:** A clinical examination is required before any treatment can be recommended or provided. Do not make treatment decisions based solely on this report.\n\nTreatment outcomes cannot be predicted with certainty. Results vary between patients and depend on factors that can only be assessed through clinical examination. Your dentist will provide personalized recommendations based on your specific situation.",
         "sources": [
           "STATIC_1"
         ],
-        "word_count": 102
+        "word_count": 86
       },
       {
         "section_number": 2,
         "section_name": "Your Personal Summary",
-        "content": "# Before We Begin\n\nThinking about dental treatment can bring up difficult feelings. This report provides information at your own pace—no decisions are needed now.\n\nYou can return to this report at any time. There is no timeline or pressure.\n\nYou're missing several teeth next to each other. This is a common situation that dentists handle regularly. The treatment approach for this type of case is well-established and predictable, with the goal of restoring comfortable, reliable chewing.",
+        "content": "# Before We Begin\n\nThis report gives you the information you need to make a confident choice. Both treatment approaches are proven and reliable, and your dentist will support you through whichever process you choose.\n\nYou're missing several teeth next to each other. This is a common situation that dentists handle regularly. The treatment approach for this type of case is well-established and predictable, with the goal of restoring comfortable, reliable chewing.",
         "sources": [
           "TM_ANXIETY_SEVERE",
           "SCENARIO:personal_summary"
         ],
-        "word_count": 76
+        "word_count": 71
       },
       {
         "section_number": 3,
         "section_name": "Context",
-        "content": "# First-Time Treatment Context\n\nWe understand that considering dental treatment for the first time can feel overwhelming. It's completely normal to have questions and perhaps some uncertainty about what to expect.\n\nYour dentist is there to guide you through each step of the process. Take your time to understand your options—there's no need to rush into any decisions. Many patients find that their initial concerns ease once they have a clear picture of what's involved.\n\nWhen multiple adjacent teeth are missing, chewing can feel different. You might notice that you favor one side of your mouth or that certain foods require more effort. This is a normal response to the changed situation.\n\nThis type of scenario has clear, proven solutions. Your remaining teeth are stable, and your mouth can support a reliable restoration.\n\nWith proper treatment, the situation typically stabilizes rather than worsening. The goal is to restore comfortable chewing function.",
+        "content": "# First-Time Treatment Context\n\nThis is your first dental treatment of this type. The information below covers what each option involves and typical experiences.\n\n# Functional vs Aesthetic Priorities\n\nModern dental treatments are designed to address both function and aesthetics. There are established options that reliably achieve good results in both areas.\n\nYour dentist will present proven solutions that can meet your functional requirements while delivering aesthetic results appropriate for your situation.\n\n# Current Tooth Status\n\nYour tooth condition has been assessed and there are established treatment approaches for situations like yours. Modern dentistry has well-defined protocols for various states of tooth health.\n\nYour dentist will explain the standard approaches appropriate for your tooth status and what outcomes you can reliably expect.\n\n# Function-Focused Approach\n\nRestoring dental function is well-established in modern dentistry. There are proven treatment approaches for recovering the ability to chew, bite, and speak properly.\n\nYour dentist will recommend functionally-focused options that have established track records for restoring normal use.\n\nWhen multiple adjacent teeth are missing, chewing can feel different. You might notice that you favor one side of your mouth or that certain foods require more effort. This is a normal response to the changed situation.\n\nThis type of scenario has clear, proven solutions. Your remaining teeth are stable, and your mouth can support a reliable restoration.\n\nWith proper treatment, the situation typically stabilizes rather than worsening. The goal is to restore comfortable chewing function.",
         "sources": [
           "TM_CTX_FIRST_TIME",
+          "TM_CTX_FUNCTIONAL_VS_AESTHETIC",
+          "TM_CTX_TOOTH_STATUS",
+          "TM_PROFILE_FUNCTIONAL",
           "SCENARIO:context"
         ],
-        "word_count": 150
+        "word_count": 235
       },
       {
         "section_number": 4,
         "section_name": "Interpretation",
-        "content": "# Section 4: Interpretation\n\nYour dental situation has proven treatment approaches. The specific recommendations will come from your clinical examination.\n\nYour priorities regarding aesthetics, function, and comfort help determine which options are most appropriate.\n\nYour dentist can connect your goals with clinical findings to develop a personalized plan.",
+        "content": "# Section 4: Interpretation\n\nMaria, your situation has established treatment options. Both approaches are suitable for you.\n\nYour priorities (your dental situation) will help determine which option feels right. Your dentist will examine your specific situation to confirm clinical suitability.",
         "sources": [
           "B_INTERP_STANDARD"
         ],
-        "word_count": 47
+        "word_count": 39
       },
       {
         "section_number": 5,
@@ -872,12 +941,13 @@
       {
         "section_number": 9,
         "section_name": "Cost Considerations",
-        "content": "# Budget Considerations: Economy Approach\n\nWe understand that budget is an important consideration for you, and we want to help you find solutions that work within your means.\n\nRest assured that effective treatment options exist at various price points. Your dentist can help you explore:\n- Options that offer the best value for your specific needs\n- Possible payment plans or phased approaches\n- Which components are essential vs. optional\n- How different choices affect long-term costs\n\nYou don't need to compromise on quality to find something affordable. Let's work together to find the right fit.\n\n- Bridge on implants: approximately €4,500 – €6,000\n\nYour dentist can provide a more precise estimate for your specific case.",
+        "content": "# Budget Considerations: Economy Approach\n\nWe understand that budget is an important consideration for you, and we want to help you find solutions that work within your means.\n\nRest assured that effective treatment options exist at various price points. Your dentist can help you explore:\n- Options that offer the best value for your specific needs\n- Possible payment plans or phased approaches\n- Which components are essential vs. optional\n- How different choices affect long-term costs\n\nYou don't need to compromise on quality to find something affordable. Let's work together to find the right fit.\n\n# Budget-Conscious Approach\n\nThere are established treatment options across different price ranges. Quality dental care is available at various cost levels, with clear differences in what each tier provides.\n\nYour dentist will present options appropriate for your budget and explain what each level of investment can achieve.\n\n- Bridge on implants: approximately €4,500 – €6,000\n\nYour dentist can provide a more precise estimate for your specific case.",
         "sources": [
           "TM_BUDGET_LIMITED",
+          "TM_PROFILE_BUDGET",
           "SCENARIO:costs"
         ],
-        "word_count": 109
+        "word_count": 155
       },
       {
         "section_number": 10,
@@ -898,20 +968,20 @@
         "word_count": 64
       }
     ],
-    "total_word_count": 1099,
+    "total_word_count": 1305,
     "warnings_included": true,
     "suppressed_sections": [
       6
     ],
-    "placeholders_resolved": 0,
+    "placeholders_resolved": 2,
     "placeholders_unresolved": []
   },
   "validation_result": {
     "valid": true,
     "errors": [],
     "warnings": [
-      "Section 2 has 76 words, minimum recommended is 100",
-      "Section 4 has 47 words, minimum recommended is 50"
+      "Section 2 has 71 words, minimum recommended is 100",
+      "Section 4 has 39 words, minimum recommended is 50"
     ],
     "semantic_violations": [
       {
@@ -979,270 +1049,13 @@
       }
     ]
   },
-  "llm_evaluation": {
-    "professional_quality": {
-      "score": 5,
-      "confidence": 0.85,
-      "feedback": "Writing is generally clear but suffers from significant verbosity and repetitive patterns. Multiple sections contain filler phrases and padding that dilute the message. The report says the same things multiple times in different ways, particularly around reassurance and patient autonomy. Transitions waste words without adding value.",
-      "issues": [
-        "Section 2 opens with vague filler: 'Thinking about dental treatment can bring up difficult feelings' - too generic",
-        "Section 3: 'It's completely normal to have questions and perhaps some uncertainty' - padding that states the obvious",
-        "Section 3: 'This is a normal response to the changed situation' - redundant after already establishing normalcy",
-        "Section 5 Bridge: 'A dental bridge is a proven solution that has served patients well for decades' - wordy introduction",
-        "Section 9: 'Rest assured that effective treatment options exist at various price points' - empty reassurance",
-        "Multiple sections repeat 'Your dentist will guide you' or similar - once is enough",
-        "Section 11: 'Options to consider:' followed by bullet list is redundant structure"
-      ],
-      "suggestions": [
-        "Remove all 'It's important to note' and 'Rest assured' type phrases",
-        "Cut Section 2 opening to one direct sentence about the clinical situation",
-        "Eliminate repetitive reassurance statements across sections",
-        "Tighten all introductory sentences - get to the point faster",
-        "Remove redundant 'normal' and 'common' qualifiers after first use",
-        "Consolidate dentist guidance mentions to one clear statement",
-        "Rewrite Section 11 to be more direct and actionable"
-      ]
-    },
-    "clinical_safety": {
-      "score": 6,
-      "confidence": 0.9,
-      "feedback": "Disclaimers are present but could be stronger. Some language is overly optimistic about outcomes without sufficient hedging. Success rates are cited without enough context about individual variation. Risk disclosures exist but are somewhat buried and could be more prominent.",
-      "issues": [
-        "Section 5 Implants: 'Success rates are typically 90-95% over 10 years' - needs stronger individual variation disclaimer",
-        "Section 5 Bridge: 'With proper care, bridges typically last 10-15 years' - 'typically' is weak hedging",
-        "Section 7: Timeline ranges presented as facts without enough uncertainty language",
-        "Section 8: Process timelines too definitive - no mention of possible complications or variations",
-        "Section 10: Risk percentages given without enough context about individual factors",
-        "Missing explicit statement that all outcomes are unpredictable and vary by individual"
-      ],
-      "suggestions": [
-        "Add 'however, individual results vary significantly' immediately after all success rate claims",
-        "Strengthen Section 1 disclaimer with more explicit language about outcome unpredictability",
-        "Add uncertainty qualifiers to all timeline estimates in Section 8",
-        "Move risk information earlier or make it more prominent",
-        "Add explicit statement that population statistics may not reflect individual outcomes",
-        "Include disclaimer that complications can extend timelines and costs"
-      ]
-    },
-    "tone_appropriateness": {
-      "score": 7,
-      "confidence": 0.8,
-      "feedback": "Tone is generally consistent with TP-04 stability-frame approach. Reassuring language is present throughout and uncertainty is minimized appropriately for anxious patients. However, some sections feel slightly generic rather than fully calibrated to the severe anxiety profile.",
-      "issues": [
-        "Section 4 is too brief and clinical for severe anxiety - needs more reassurance",
-        "Section 10 risk section could be more carefully framed for anxious patients",
-        "Some transitions between sections feel abrupt rather than smoothly reassuring",
-        "Cost section tone shifts slightly to more transactional language"
-      ],
-      "suggestions": [
-        "Expand Section 4 with more stability-focused language",
-        "Frame risks in Section 10 with more context about management and prevention",
-        "Add smoother transitions that maintain reassuring tone throughout",
-        "Adjust cost section language to maintain supportive rather than transactional tone"
-      ]
-    },
-    "personalization": {
-      "score": 6,
-      "confidence": 0.85,
-      "feedback": "Report includes some personalization (Maria's name, specific situation) but much content feels generic and could apply to any patient. Missing opportunities to reference her specific priorities around durability and function. Budget considerations are mentioned but not deeply integrated.",
-      "issues": [
-        "Patient name 'Maria' not used after initial sections - feels impersonal",
-        "Section 2: Generic anxiety language not tailored to her specific concerns",
-        "No explicit connection to her stated priority of 'functional_durable' from Q7",
-        "Budget section mentions economy approach but doesn't connect to her Q8 answer about 'best_price_quality_flexible'",
-        "Missing reference to her 1-3 month timeline preference from Q12",
-        "No acknowledgment of her severe anxiety throughout most sections",
-        "Treatment options don't explicitly address her chewing difficulties mentioned in Q2a"
-      ],
-      "suggestions": [
-        "Use 'Maria' or 'your' more consistently throughout to maintain personal connection",
-        "Add explicit statement connecting treatment options to her durability priorities",
-        "Integrate her timeline preferences into process section",
-        "Reference her specific chewing challenges when discussing functional restoration",
-        "Connect budget discussion to her flexibility on payment mentioned in Q8",
-        "Add personalized reassurance about anxiety management in treatment process section"
-      ]
-    },
-    "patient_autonomy": {
-      "score": 7,
-      "confidence": 0.85,
-      "feedback": "Report generally respects patient autonomy with non-directive language. However, some subtle framing makes certain options seem preferable. The phrase 'Your dentist will guide you' appears too frequently, which could feel paternalistic rather than empowering.",
-      "issues": [
-        "Section 5 Implants: 'durability often makes this worthwhile' - implies preference",
-        "Section 5 Bridge: 'Bridges work well when you prefer...' - frames as secondary choice",
-        "Repeated 'Your dentist will guide you' reduces patient agency",
-        "Section 9: 'Let's work together' is slightly directive",
-        "Section 3: 'Take your time' could feel patronizing to some patients"
-      ],
-      "suggestions": [
-        "Reframe implant cost discussion to be neutral about value judgment",
-        "Present bridge as equally valid choice without conditional language",
-        "Reduce dentist guidance mentions and emphasize patient decision-making",
-        "Change 'Let's work together' to more neutral language about exploring options",
-        "Remove potentially patronizing time pressure statements"
-      ]
-    },
-    "structure_completeness": {
-      "score": 8,
-      "confidence": 0.9,
-      "feedback": "Structure is logical and includes all required sections. Flow is generally good with clear progression from context to options to practical considerations. Section 6 is appropriately suppressed. Minor issues with section brevity and balance.",
-      "issues": [
-        "Section 4 (Interpretation) is very brief at 47 words - feels incomplete",
-        "Section 0 (Important Notices) could be better integrated rather than feeling tacked on",
-        "Section 11 (Next Steps) is somewhat generic and could be more actionable",
-        "Some sections are significantly longer than others creating imbalance"
-      ],
-      "suggestions": [
-        "Expand Section 4 with more substantive interpretation content",
-        "Consider integrating active symptoms notice more smoothly into report flow",
-        "Make Section 11 more specific and actionable with concrete next steps",
-        "Balance section lengths for better reading experience"
-      ]
-    },
-    "content_issues": [
-      {
-        "section_number": 2,
-        "source_content": "content/modules/TM_ANXIETY_SEVERE/en/TP-04.md",
-        "quote": "Thinking about dental treatment can bring up difficult feelings.",
-        "problem": "Vague filler opening that doesn't add value. Too generic for personalization.",
-        "severity": "warning",
-        "suggested_fix": "Remove or replace with direct statement about Maria's specific situation"
-      },
-      {
-        "section_number": 3,
-        "source_content": "content/modules/TM_CTX_FIRST_TIME/en/TP-04.md",
-        "quote": "It's completely normal to have questions and perhaps some uncertainty about what to expect.",
-        "problem": "Obvious padding that states what patient already knows. Wastes words.",
-        "severity": "warning",
-        "suggested_fix": "Delete this sentence entirely. Move directly to substantive information."
-      },
-      {
-        "section_number": 3,
-        "source_content": "content/scenarios/S04/en/TP-04.md",
-        "quote": "This is a normal response to the changed situation.",
-        "problem": "Redundant after already establishing normalcy in previous paragraph.",
-        "severity": "info",
-        "suggested_fix": "Remove this sentence. Point is already made."
-      },
-      {
-        "section_number": 5,
-        "source_content": "content/b_blocks/B_OPT_IMPLANT/en/TP-04.md",
-        "quote": "Success rates are typically 90-95% over 10 years when bone quality is adequate, though individual results vary",
-        "problem": "Success rate claim needs stronger disclaimer. 'Though individual results vary' is too weak for clinical safety.",
-        "severity": "critical",
-        "suggested_fix": "Add: 'However, these are population averages and your individual outcome may differ significantly based on factors only assessable through examination.'"
-      },
-      {
-        "section_number": 5,
-        "source_content": "content/b_blocks/B_OPT_IMPLANT/en/TP-04.md",
-        "quote": "The initial cost is higher, but durability often makes this worthwhile",
-        "problem": "Implies value judgment that favors implants. Violates patient autonomy.",
-        "severity": "warning",
-        "suggested_fix": "Change to: 'The initial cost is higher, though some patients find the durability aligns with their long-term goals.'"
-      },
-      {
-        "section_number": 5,
-        "source_content": "content/b_blocks/B_OPT_BRIDGE/en/TP-04.md",
-        "quote": "A dental bridge is a proven solution that has served patients well for decades.",
-        "problem": "Wordy introduction with filler. 'Proven solution' and 'served patients well' add little.",
-        "severity": "warning",
-        "suggested_fix": "Simplify to: 'A dental bridge replaces missing teeth by...' and get directly to the description."
-      },
-      {
-        "section_number": 5,
-        "source_content": "content/b_blocks/B_OPT_BRIDGE/en/TP-04.md",
-        "quote": "With proper care, bridges typically last 10-15 years, after which they may need replacement. Some last longer, some shorter depending on individual factors",
-        "problem": "Weak hedging on longevity claim. Clinical safety issue.",
-        "severity": "warning",
-        "suggested_fix": "Rewrite: 'Bridge longevity varies significantly by individual. While some last 10-15 years, outcomes depend on many factors including oral health, bite forces, and maintenance.'"
-      },
-      {
-        "section_number": 5,
-        "source_content": "content/b_blocks/B_OPT_BRIDGE/en/TP-04.md",
-        "quote": "Bridges work well when you prefer a non-surgical approach or want faster completion.",
-        "problem": "Frames bridge as conditional/secondary choice. Violates autonomy by implying implants are primary.",
-        "severity": "warning",
-        "suggested_fix": "Change to: 'Bridges offer a non-surgical approach with faster completion.' Remove conditional framing."
-      },
-      {
-        "section_number": 7,
-        "source_content": "content/scenarios/S04/en/TP-04.md",
-        "quote": "Implant-supported bridges require 3-7 months for healing but provide a long-term solution (15-25+ years typical).",
-        "problem": "Timeline and longevity stated too definitively without uncertainty qualifiers. Clinical safety issue.",
-        "severity": "warning",
-        "suggested_fix": "Add qualifiers: 'may require' and 'outcomes vary significantly - some patients experience longer or shorter timeframes.'"
-      },
-      {
-        "section_number": 9,
-        "source_content": "content/modules/TM_BUDGET_LIMITED/en/TP-04.md",
-        "quote": "Rest assured that effective treatment options exist at various price points.",
-        "problem": "Empty reassurance filler that adds no value. Pure padding.",
-        "severity": "warning",
-        "suggested_fix": "Delete this sentence. Move directly to concrete information about options and payment plans."
-      },
-      {
-        "section_number": 9,
-        "source_content": "content/modules/TM_BUDGET_LIMITED/en/TP-04.md",
-        "quote": "You don't need to compromise on quality to find something affordable. Let's work together to find the right fit.",
-        "problem": "'Let's work together' is subtly directive. Also makes quality claim without basis.",
-        "severity": "info",
-        "suggested_fix": "Change to: 'Your dentist can help you explore options that align with your budget and goals.'"
-      },
-      {
-        "section_number": 10,
-        "source_content": "content/scenarios/S04/en/TP-04.md",
-        "quote": "Population studies show implant failure rates of 5-10% over 10 years, infection risk of 2-5%.",
-        "problem": "Statistics without sufficient context about individual variation. Needs stronger disclaimer.",
-        "severity": "warning",
-        "suggested_fix": "Add: 'These are population averages. Your individual risk profile depends on factors your dentist will assess.'"
-      },
-      {
-        "section_number": 4,
-        "source_content": "content/b_blocks/B_INTERP_STANDARD/en/TP-04.md",
-        "quote": "Your dental situation has proven treatment approaches.",
-        "problem": "Section is too brief (47 words total) and feels incomplete. Doesn't provide substantive interpretation.",
-        "severity": "warning",
-        "suggested_fix": "Expand with specific interpretation of Maria's situation, connecting her priorities to treatment implications."
-      },
-      {
-        "section_number": 0,
-        "source_content": "[unknown: A_WARN_ACTIVE_SYMPTOMS]",
-        "quote": "This approach has helped many patients.",
-        "problem": "Vague claim without basis. What evidence supports this statement?",
-        "severity": "info",
-        "suggested_fix": "Either remove or make more specific: 'Addressing acute symptoms before treatment planning is standard clinical practice.'"
-      }
-    ],
-    "content_files_to_review": [
-      "content/modules/TM_ANXIETY_SEVERE/en/TP-04.md",
-      "content/modules/TM_CTX_FIRST_TIME/en/TP-04.md",
-      "content/scenarios/S04/en/TP-04.md",
-      "content/b_blocks/B_OPT_IMPLANT/en/TP-04.md",
-      "content/b_blocks/B_OPT_BRIDGE/en/TP-04.md",
-      "content/modules/TM_BUDGET_LIMITED/en/TP-04.md",
-      "content/b_blocks/B_INTERP_STANDARD/en/TP-04.md"
-    ],
-    "overall_score": 6.4,
-    "overall_assessment": "This report demonstrates acceptable structure and generally appropriate tone for an anxious patient, but suffers from significant verbosity, repetitive reassurance patterns, and insufficient clinical safety disclaimers. Content quality is mediocre (5-6 range) with multiple opportunities for tightening language, strengthening hedging around outcomes, and improving personalization. The report needs substantial revision to remove filler, strengthen disclaimers, and make content more specific to Maria's situation and priorities.",
-    "recommended_outcome": "BLOCK",
-    "outcome_reasoning": "1 critical content issue(s) found",
-    "metadata": {
-      "model_used": "claude-sonnet-4-5-20250929",
-      "evaluation_timestamp": "2026-01-13T19:11:40.596Z",
-      "duration_ms": 67372,
-      "token_usage": {
-        "input_tokens": 6947,
-        "output_tokens": 3094
-      }
-    }
-  },
   "decision_trace": {
     "session_id": "test-case-002",
-    "started_at": "2026-01-13T19:10:33.213Z",
-    "completed_at": "2026-01-13T19:11:40.596Z",
+    "started_at": "2026-01-19T15:34:37.917Z",
+    "completed_at": "2026-01-19T15:34:37.923Z",
     "events": [
       {
-        "timestamp": "2026-01-13T19:10:33.213Z",
+        "timestamp": "2026-01-19T15:34:37.917Z",
         "stage": "input_validation",
         "action": "validate_input",
         "input": {
@@ -1255,7 +1068,7 @@
         "duration_ms": 0
       },
       {
-        "timestamp": "2026-01-13T19:10:33.214Z",
+        "timestamp": "2026-01-19T15:34:37.918Z",
         "stage": "tag_extraction",
         "action": "extract_tags",
         "input": {
@@ -1372,10 +1185,10 @@
           ],
           "missing_questions": []
         },
-        "duration_ms": 0
+        "duration_ms": 1
       },
       {
-        "timestamp": "2026-01-13T19:10:33.215Z",
+        "timestamp": "2026-01-19T15:34:37.918Z",
         "stage": "driver_derivation",
         "action": "derive_drivers",
         "input": {
@@ -1610,10 +1423,10 @@
             "clinical_priority"
           ]
         },
-        "duration_ms": 1
+        "duration_ms": 0
       },
       {
-        "timestamp": "2026-01-13T19:10:33.215Z",
+        "timestamp": "2026-01-19T15:34:37.918Z",
         "stage": "scenario_scoring",
         "action": "score_scenarios",
         "input": {
@@ -1963,7 +1776,7 @@
         "duration_ms": 0
       },
       {
-        "timestamp": "2026-01-13T19:10:33.215Z",
+        "timestamp": "2026-01-19T15:34:37.918Z",
         "stage": "tone_selection",
         "action": "select_tone",
         "input": {
@@ -2002,19 +1815,19 @@
         "duration_ms": 0
       },
       {
-        "timestamp": "2026-01-13T19:10:33.215Z",
+        "timestamp": "2026-01-19T15:34:37.918Z",
         "stage": "content_selection",
         "action": "select_content",
         "input": {
           "scenario": "S04"
         },
         "output": {
-          "count": 13
+          "count": 21
         },
         "duration_ms": 0
       },
       {
-        "timestamp": "2026-01-13T19:10:33.216Z",
+        "timestamp": "2026-01-19T15:34:37.918Z",
         "stage": "scenario_load",
         "action": "load_scenario",
         "input": {
@@ -2024,33 +1837,184 @@
         "output": {
           "loaded": true
         },
-        "duration_ms": 1
+        "duration_ms": 0
       },
       {
-        "timestamp": "2026-01-13T19:10:33.222Z",
+        "timestamp": "2026-01-19T15:34:37.922Z",
         "stage": "composition",
         "action": "compose_report",
         "input": {
-          "selections": 13
+          "selections": 21
         },
         "output": {
           "sections": 11,
-          "words": 1099
+          "words": 1305
         },
-        "duration_ms": 6
+        "duration_ms": 4
       },
       {
-        "timestamp": "2026-01-13T19:11:40.596Z",
+        "timestamp": "2026-01-19T15:34:37.923Z",
         "stage": "qa_gate",
         "action": "qa_check",
         "input": {
           "report_id": "test-case-002"
         },
         "output": {
-          "_truncated": true,
-          "_size": 16555
+          "outcome": "FLAG",
+          "validationResult": {
+            "valid": true,
+            "errors": [],
+            "warnings": [
+              "Section 2 has 71 words, minimum recommended is 100",
+              "Section 4 has 39 words, minimum recommended is 50"
+            ],
+            "semantic_violations": [
+              {
+                "phrase": "surgery",
+                "location": {
+                  "section": 7,
+                  "position": 249
+                },
+                "severity": "WARNING",
+                "rule": "General banned phrase"
+              },
+              {
+                "phrase": "surgery",
+                "location": {
+                  "section": 7,
+                  "position": 379
+                },
+                "severity": "WARNING",
+                "rule": "General banned phrase"
+              },
+              {
+                "phrase": "surgery",
+                "location": {
+                  "section": 8,
+                  "position": 113
+                },
+                "severity": "WARNING",
+                "rule": "General banned phrase"
+              },
+              {
+                "phrase": "surgery",
+                "location": {
+                  "section": 10,
+                  "position": 84
+                },
+                "severity": "WARNING",
+                "rule": "General banned phrase"
+              },
+              {
+                "phrase": "risk",
+                "location": {
+                  "section": 10,
+                  "position": 174
+                },
+                "severity": "WARNING",
+                "rule": "General banned phrase"
+              },
+              {
+                "phrase": "risk",
+                "location": {
+                  "section": 10,
+                  "position": 267
+                },
+                "severity": "WARNING",
+                "rule": "General banned phrase"
+              },
+              {
+                "phrase": "failure",
+                "location": {
+                  "section": 10,
+                  "position": 219
+                },
+                "severity": "WARNING",
+                "rule": "General banned phrase"
+              }
+            ]
+          },
+          "semanticResult": {
+            "violations": [
+              {
+                "phrase": "surgery",
+                "location": {
+                  "section": 7,
+                  "position": 249
+                },
+                "severity": "WARNING",
+                "rule": "General banned phrase"
+              },
+              {
+                "phrase": "surgery",
+                "location": {
+                  "section": 7,
+                  "position": 379
+                },
+                "severity": "WARNING",
+                "rule": "General banned phrase"
+              },
+              {
+                "phrase": "surgery",
+                "location": {
+                  "section": 8,
+                  "position": 113
+                },
+                "severity": "WARNING",
+                "rule": "General banned phrase"
+              },
+              {
+                "phrase": "surgery",
+                "location": {
+                  "section": 10,
+                  "position": 84
+                },
+                "severity": "WARNING",
+                "rule": "General banned phrase"
+              },
+              {
+                "phrase": "risk",
+                "location": {
+                  "section": 10,
+                  "position": 174
+                },
+                "severity": "WARNING",
+                "rule": "General banned phrase"
+              },
+              {
+                "phrase": "risk",
+                "location": {
+                  "section": 10,
+                  "position": 267
+                },
+                "severity": "WARNING",
+                "rule": "General banned phrase"
+              },
+              {
+                "phrase": "failure",
+                "location": {
+                  "section": 10,
+                  "position": 219
+                },
+                "severity": "WARNING",
+                "rule": "General banned phrase"
+              }
+            ],
+            "hasViolations": true,
+            "hasCriticalViolations": false,
+            "summary": {
+              "total": 7,
+              "critical": 0,
+              "warning": 7
+            }
+          },
+          "reasons": [
+            "7 semantic warning(s) exceed threshold"
+          ],
+          "canDeliver": true,
+          "requiresReview": true
         },
-        "duration_ms": 67374
+        "duration_ms": 1
       }
     ],
     "final_outcome": "FLAG"

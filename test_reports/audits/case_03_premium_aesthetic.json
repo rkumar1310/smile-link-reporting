@@ -1,6 +1,6 @@
 {
   "session_id": "test-case-003",
-  "created_at": "2026-01-13T19:21:50.368Z",
+  "created_at": "2026-01-19T15:34:37.932Z",
   "intake": {
     "session_id": "test-case-003",
     "timestamp": "2026-01-08T07:09:41.236Z",
@@ -744,6 +744,22 @@
       "suppressed": false
     },
     {
+      "content_id": "B_NUANCE_S11",
+      "type": "b_block",
+      "target_section": 3,
+      "tone": "TP-05",
+      "priority": 2,
+      "suppressed": false
+    },
+    {
+      "content_id": "B_COST_S11",
+      "type": "b_block",
+      "target_section": 9,
+      "tone": "TP-05",
+      "priority": 1,
+      "suppressed": false
+    },
+    {
       "content_id": "TM_CTX_PREVIOUS_TREATMENT",
       "type": "module",
       "target_section": 3,
@@ -753,6 +769,30 @@
     },
     {
       "content_id": "TM_BUDGET_PREMIUM",
+      "type": "module",
+      "target_section": 9,
+      "tone": "TP-05",
+      "priority": 2,
+      "suppressed": false
+    },
+    {
+      "content_id": "TM_CTX_PREMIUM_AESTHETIC",
+      "type": "module",
+      "target_section": 3,
+      "tone": "TP-05",
+      "priority": 2,
+      "suppressed": false
+    },
+    {
+      "content_id": "TM_PROFILE_AESTHETIC",
+      "type": "module",
+      "target_section": 3,
+      "tone": "TP-05",
+      "priority": 2,
+      "suppressed": false
+    },
+    {
+      "content_id": "TM_PROFILE_PREMIUM",
       "type": "module",
       "target_section": 9,
       "tone": "TP-05",
@@ -801,11 +841,11 @@
       {
         "section_number": 1,
         "section_name": "Disclaimer",
-        "content": "# Section 1: Disclaimer\n\nThis report is generated based on your responses to our questionnaire and is intended for informational purposes only. It does not constitute medical advice, diagnosis, or treatment recommendations.\n\nPlease consult with a qualified dental professional before making any decisions about your dental care. Your dentist will conduct a thorough examination and provide personalized recommendations based on your specific situation.\n\nThe information presented here is general in nature and may not apply to your individual circumstances. Treatment outcomes cannot be predicted with certainty. Results vary between patients and depend on many factors that can only be assessed through clinical examination.",
+        "content": "# Section 1: Disclaimer\n\nThis report is generated based on your questionnaire responses and is for informational purposes only. It does not constitute medical advice, diagnosis, or treatment recommendations.\n\n**Important:** A clinical examination is required before any treatment can be recommended or provided. Do not make treatment decisions based solely on this report.\n\nTreatment outcomes cannot be predicted with certainty. Results vary between patients and depend on factors that can only be assessed through clinical examination. Your dentist will provide personalized recommendations based on your specific situation.",
         "sources": [
           "STATIC_1"
         ],
-        "word_count": 102
+        "word_count": 86
       },
       {
         "section_number": 2,
@@ -819,12 +859,14 @@
       {
         "section_number": 3,
         "section_name": "Context",
-        "content": "# Previous Treatment Experience\n\nYour previous dental treatment experience provides valuable context. Whether positive or negative, past experiences shape expectations and preferences for future care.\n\nYour dentist can take your history into account when discussing approaches. If there are specific aspects of previous treatments you'd like to address differently, sharing these helps tailor the approach to your comfort.\n\nWith misalignment without missing teeth, it's usually not about a functional problem, but about how your smile feels and looks. Often it's small shifts, rotations, or uneven lines that you notice in photos or in the mirror.\n\nMany people live with this for years, until the feeling arises that the teeth \"just don't quite fit.\" Sometimes that's aesthetically bothersome when smiling, sometimes it gives the idea that teeth are harder to clean. The doubt often lies in the question: can this be subtly corrected without drastic steps?",
+        "content": "# Previous Treatment Experience\n\nYour previous dental treatment experience provides valuable context. Whether positive or negative, past experiences shape expectations and preferences for future care.\n\nYour dentist can take your history into account when discussing approaches. If there are specific aspects of previous treatments you'd like to address differently, sharing these helps tailor the approach to your comfort.\n\n# Premium Aesthetic Considerations\n\nAesthetic results can vary based on many factors including the existing situation, chosen materials, and individual healing. While excellent outcomes are often achievable, expectations should account for this variability.\n\nYour dentist will discuss what's realistically achievable for your specific situation and what factors might influence the aesthetic result.\n\n# Aesthetic-Focused Approach\n\nAesthetic outcomes depend on multiple factors including the starting situation, materials used, and how tissues heal. Results can vary between individuals even with similar treatments.\n\nYour dentist will discuss realistic aesthetic expectations for your specific situation and what factors might influence the outcome.\n\nWith misalignment without missing teeth, it's usually not about a functional problem, but about how your smile feels and looks. Often it's small shifts, rotations, or uneven lines that you notice in photos or in the mirror.\n\nMany people live with this for years, until the feeling arises that the teeth \"just don't quite fit.\" Sometimes that's aesthetically bothersome when smiling, sometimes it gives the idea that teeth are harder to clean. The doubt often lies in the question: can this be subtly corrected without drastic steps?",
         "sources": [
           "TM_CTX_PREVIOUS_TREATMENT",
+          "TM_CTX_PREMIUM_AESTHETIC",
+          "TM_PROFILE_AESTHETIC",
           "SCENARIO:context"
         ],
-        "word_count": 144
+        "word_count": 240
       },
       {
         "section_number": 4,
@@ -865,12 +907,13 @@
       {
         "section_number": 9,
         "section_name": "Cost Considerations",
-        "content": "# Budget Considerations: Premium Options\n\nYou've indicated interest in premium options. Your dentist can discuss:\n- Premium ceramic and porcelain material options\n- Advanced techniques for color matching and translucency\n- Digital smile design for treatment planning\n- Master ceramist involvement for custom work\n- How different materials affect longevity and stain resistance\n\nPremium materials and techniques offer certain advantages, though all approaches have trade-offs. Your dentist can explain which options may be appropriate for your situation.\n\n- Aligners: approximately €2,000 - €4,000\n- Porcelain veneers: approximately €900 - €1,300 per tooth\n\nThe final cost depends on the number of teeth, material choice, and planning. Costs are part of an aesthetic consideration, not a necessity.",
+        "content": "# Budget Considerations: Premium Options\n\nYou've indicated interest in premium options. Your dentist can discuss:\n- Premium ceramic and porcelain material options\n- Advanced techniques for color matching and translucency\n- Digital smile design for treatment planning\n- Master ceramist involvement for custom work\n- How different materials affect longevity and stain resistance\n\nPremium materials and techniques offer certain advantages, though all approaches have trade-offs. Your dentist can explain which options may be appropriate for your situation.\n\n# Premium Quality Approach\n\nEven premium treatments have outcomes that can vary. While top-tier options generally deliver excellent results, individual factors still play a role in the final outcome.\n\nYour dentist will discuss what premium options can realistically achieve in your specific situation and what factors might influence results.\n\n- Aligners: approximately €2,000 - €4,000\n- Porcelain veneers: approximately €900 - €1,300 per tooth\n\nThe final cost depends on the number of teeth, material choice, and planning. Costs are part of an aesthetic consideration, not a necessity.",
         "sources": [
           "TM_BUDGET_PREMIUM",
+          "TM_PROFILE_PREMIUM",
           "SCENARIO:costs"
         ],
-        "word_count": 105
+        "word_count": 153
       },
       {
         "section_number": 10,
@@ -891,7 +934,7 @@
         "word_count": 64
       }
     ],
-    "total_word_count": 842,
+    "total_word_count": 970,
     "warnings_included": false,
     "suppressed_sections": [],
     "placeholders_resolved": 0,
@@ -905,233 +948,13 @@
     ],
     "semantic_violations": []
   },
-  "llm_evaluation": {
-    "professional_quality": {
-      "score": 5,
-      "confidence": 0.85,
-      "feedback": "Writing is generally clear but suffers from verbosity, repetitive phrasing, and filler language. Multiple sections contain padding that doesn't add value. Transitions are often wordy. Some awkward constructions present.",
-      "issues": [
-        "Section 3 contains filler phrase 'Your previous dental treatment experience provides valuable context' - states the obvious",
-        "Section 3: 'Whether positive or negative, past experiences shape expectations' - generic truism that adds no value",
-        "Section 4 opens with 'Your situation can likely be addressed with standard treatments, pending clinical examination' - vague and wordy",
-        "Section 5 repeats 'What this involves' and 'What you can expect' structure verbatim - mechanical and repetitive",
-        "Section 7: 'Both options may help achieve a straighter-looking smile, though outcomes vary by individual circumstances' - hedged to the point of meaninglessness",
-        "Section 9: 'Costs are part of an aesthetic consideration, not a necessity' - awkward phrasing, unclear meaning",
-        "Section 11: 'Options to consider:' followed by bullet list is redundant - the list itself shows options"
-      ],
-      "suggestions": [
-        "Remove filler opening in Section 3, start directly with substantive content about how past experience informs current treatment",
-        "Cut generic truisms - if something applies to everyone, it adds nothing specific",
-        "Tighten Section 4 opening to: 'Standard treatments can likely address your situation, pending examination'",
-        "Vary the structure in Section 5 options to avoid mechanical repetition",
-        "Rewrite hedged statements in Section 7 to be more direct while maintaining appropriate caution",
-        "Clarify or remove the confusing cost statement in Section 9",
-        "Remove redundant list introduction in Section 11"
-      ]
-    },
-    "clinical_safety": {
-      "score": 7,
-      "confidence": 0.9,
-      "feedback": "Disclaimers are present and appropriately cautious. Language generally avoids guarantees. However, some statements could be more carefully hedged, and outcome uncertainty could be emphasized more consistently throughout.",
-      "issues": [
-        "Section 5 veneers advantage states 'Typically provides visible improvement quickly' - could imply guaranteed outcome",
-        "Section 5 veneers advantage 'Can affect smile harmony' - vague and doesn't clearly indicate uncertainty",
-        "Section 7 'Both options may help achieve' - 'may help' is good hedging but could be stronger given individual variation",
-        "Section 8 timeline ranges presented without sufficient caveats about individual variation"
-      ],
-      "suggestions": [
-        "Revise Section 5 veneers to: 'May provide visible improvement quickly in many cases, though results vary'",
-        "Strengthen Section 5 harmony statement: 'May improve smile harmony, though results depend heavily on individual factors'",
-        "Add explicit caveat to Section 8: 'These are typical ranges - your timeline may differ based on individual factors'",
-        "Consider adding outcome uncertainty statement earlier in report, not just in Section 7"
-      ]
-    },
-    "tone_appropriateness": {
-      "score": 6,
-      "confidence": 0.8,
-      "feedback": "Tone is generally expectation-calibrating but inconsistently applied. Some sections are appropriately realistic while others slip into more optimistic language. The balance between optimism and honest limitations wavers across sections.",
-      "issues": [
-        "Section 5 veneers advantages list leans optimistic without sufficient balancing of limitations",
-        "Section 2 'Your wish is mainly aesthetic: a straighter, more harmonious whole' - assumes outcome achievability",
-        "Section 3 ends with 'can this be subtly corrected without drastic steps?' - frames question optimistically",
-        "Premium budget section (Section 9) emphasizes advantages without equal weight on limitations of premium options"
-      ],
-      "suggestions": [
-        "Rebalance Section 5 veneers advantages with more explicit limitations integrated into each point",
-        "Revise Section 2 to frame as goal rather than achievable outcome: 'Your goal is mainly aesthetic...'",
-        "Reframe Section 3 question more neutrally: 'whether this can be corrected, and what that involves'",
-        "Add limitations of premium options in Section 9 to balance the advantages listed"
-      ]
-    },
-    "personalization": {
-      "score": 7,
-      "confidence": 0.85,
-      "feedback": "Report includes patient name and references specific questionnaire responses (previous treatment, premium budget, aesthetic goals). However, some sections feel generic and could better integrate Robert's specific situation and priorities.",
-      "issues": [
-        "Section 2 doesn't use patient name Robert despite it being provided",
-        "Section 3 previous treatment module is entirely generic - doesn't reference Robert's specific experience level",
-        "Section 4 is completely generic boilerplate",
-        "Section 11 next steps are generic and don't reference Robert's readiness stage or short timeline preference"
-      ],
-      "suggestions": [
-        "Open Section 2 with 'Robert, your teeth are...' to establish personal connection",
-        "Integrate Robert's 'experienced' status into Section 3: 'Given your previous experience with dental work...'",
-        "Customize Section 4 to reference Robert's aesthetic maximalist philosophy",
-        "Tailor Section 11 to Robert's short timeline: 'Given your 6-month timeline preference, scheduling a consultation soon would be advisable'"
-      ]
-    },
-    "patient_autonomy": {
-      "score": 8,
-      "confidence": 0.9,
-      "feedback": "Report generally respects patient autonomy well. Language is non-directive and emphasizes choice. However, a few subtle instances of framing could be more neutral.",
-      "issues": [
-        "Section 5 ends each option with 'This may be logical for you if...' - subtly directive framing",
-        "Section 7 'Both options may help achieve a straighter-looking smile' - frames both as viable without equal weight to 'neither may be suitable'",
-        "Section 9 'Costs are part of an aesthetic consideration, not a necessity' - implies judgment about treatment necessity"
-      ],
-      "suggestions": [
-        "Reframe Section 5 endings to: 'Consider this option if...' or 'This option may suit situations where...'",
-        "Add to Section 7: 'Your dentist can assess whether either approach is suitable for your specific case'",
-        "Remove or neutralize the necessity statement in Section 9 - let patient determine what's necessary for them"
-      ]
-    },
-    "structure_completeness": {
-      "score": 7,
-      "confidence": 0.95,
-      "feedback": "All required sections present and in logical order. However, Section 6 (Expected Results) is missing entirely, and some sections are underdeveloped. Flow between sections could be smoother.",
-      "issues": [
-        "Section 6 (Expected Results) is completely missing from the report",
-        "Section 8 (Treatment Process) is extremely brief at only 14 words - underdeveloped",
-        "Section 2 is very short at 28 words - could provide more context",
-        "No clear transition between Section 5 options and Section 7 trade-offs",
-        "Section 4 feels like filler between substantive sections"
-      ],
-      "suggestions": [
-        "Add Section 6 with realistic outcome expectations for both aligners and veneers",
-        "Expand Section 8 to include what patient experiences during each treatment process",
-        "Develop Section 2 to better set up the patient's situation and goals",
-        "Add transitional sentence at end of Section 5: 'Understanding the trade-offs between these approaches can help guide your decision'",
-        "Consider integrating Section 4 content into Section 3 or 5 rather than standalone boilerplate"
-      ]
-    },
-    "content_issues": [
-      {
-        "section_number": 3,
-        "source_content": "content/modules/TM_CTX_PREVIOUS_TREATMENT/en/TP-05.md",
-        "quote": "Your previous dental treatment experience provides valuable context. Whether positive or negative, past experiences shape expectations and preferences for future care.",
-        "problem": "Generic filler content that states obvious truisms without adding specific value. Could apply to any patient.",
-        "severity": "warning",
-        "suggested_fix": "Remove this paragraph entirely or replace with content that specifically addresses how Robert's 'experienced' status affects treatment approach"
-      },
-      {
-        "section_number": 3,
-        "source_content": "content/scenarios/S11/en/TP-05.md",
-        "quote": "The doubt often lies in the question: can this be subtly corrected without drastic steps?",
-        "problem": "Frames question optimistically, implying correction is likely possible. Doesn't match expectation-calibration tone.",
-        "severity": "warning",
-        "suggested_fix": "Reframe neutrally: 'The key questions are whether correction is possible, what approaches might work, and what each involves.'"
-      },
-      {
-        "section_number": 4,
-        "source_content": "content/b_blocks/B_INTERP_STANDARD/en/TP-05.md",
-        "quote": "Your situation can likely be addressed with standard treatments, pending clinical examination. Some options may be more feasible than others.",
-        "problem": "Vague, wordy filler that doesn't provide actionable information. 'Can likely be addressed' is weak hedging.",
-        "severity": "info",
-        "suggested_fix": "Either remove this section or make it specific: 'Clinical examination will determine which of the following approaches suits your case.'"
-      },
-      {
-        "section_number": 5,
-        "source_content": "content/scenarios/S11/en/TP-05.md",
-        "quote": "Typically provides visible improvement quickly, though individual results vary",
-        "problem": "'Typically provides' implies high probability of success. Insufficient hedging for clinical safety.",
-        "severity": "warning",
-        "suggested_fix": "Revise to: 'May provide visible improvement quickly in many cases, though results vary significantly by individual'"
-      },
-      {
-        "section_number": 5,
-        "source_content": "content/scenarios/S11/en/TP-05.md",
-        "quote": "Can affect smile harmony, though results depend on individual factors",
-        "problem": "'Can affect' is vague and doesn't clearly communicate uncertainty. Weak hedging.",
-        "severity": "warning",
-        "suggested_fix": "Revise to: 'May improve smile harmony in some cases, though results depend heavily on individual anatomy and expectations'"
-      },
-      {
-        "section_number": 5,
-        "source_content": "content/scenarios/S11/en/TP-05.md",
-        "quote": "This may be logical for you if...",
-        "problem": "Subtly directive framing that guides patient toward option. Repeated for both options.",
-        "severity": "info",
-        "suggested_fix": "Change to: 'Consider this option if...' or 'This approach may suit situations where...'"
-      },
-      {
-        "section_number": 6,
-        "source_content": "MISSING",
-        "quote": "N/A",
-        "problem": "Section 6 (Expected Results) is completely missing from the report. This is a structural gap.",
-        "severity": "critical",
-        "suggested_fix": "Add Section 6 with realistic outcome expectations, including what can and cannot be achieved, typical result ranges, and factors affecting outcomes"
-      },
-      {
-        "section_number": 7,
-        "source_content": "content/scenarios/S11/en/TP-05.md",
-        "quote": "Both options may help achieve a straighter-looking smile, though outcomes vary by individual circumstances.",
-        "problem": "Hedged to the point of meaninglessness. Doesn't provide useful guidance on trade-offs.",
-        "severity": "warning",
-        "suggested_fix": "Be more specific about actual trade-offs: 'Aligners move teeth structurally but require longer treatment. Veneers provide faster visual results but involve permanent tooth modification.'"
-      },
-      {
-        "section_number": 8,
-        "source_content": "content/scenarios/S11/en/TP-05.md",
-        "quote": "Aligners: average 6-18 months. Veneers: usually a few weeks, depending on number of teeth",
-        "problem": "Extremely brief section (14 words) that doesn't explain what patient experiences during treatment. Timeline ranges lack caveats.",
-        "severity": "warning",
-        "suggested_fix": "Expand to describe treatment experience: what happens at appointments, adjustment periods, what patient does between visits. Add caveat: 'These are typical ranges - your timeline may differ.'"
-      },
-      {
-        "section_number": 9,
-        "source_content": "content/scenarios/S11/en/TP-05.md",
-        "quote": "Costs are part of an aesthetic consideration, not a necessity.",
-        "problem": "Awkward phrasing with unclear meaning. Implies judgment about what's necessary for patient.",
-        "severity": "info",
-        "suggested_fix": "Remove this sentence or clarify: 'As an elective aesthetic treatment, costs reflect personal priorities rather than medical necessity.'"
-      },
-      {
-        "section_number": 11,
-        "source_content": "content/static/11/en.md",
-        "quote": "Options to consider:",
-        "problem": "Redundant list introduction - the bullet points themselves show options.",
-        "severity": "info",
-        "suggested_fix": "Remove 'Options to consider:' and start directly with bullet list, or integrate into sentence: 'You might consider reviewing this report, preparing questions...'"
-      }
-    ],
-    "content_files_to_review": [
-      "content/modules/TM_CTX_PREVIOUS_TREATMENT/en/TP-05.md",
-      "content/scenarios/S11/en/TP-05.md",
-      "content/b_blocks/B_INTERP_STANDARD/en/TP-05.md",
-      "MISSING",
-      "content/static/11/en.md"
-    ],
-    "overall_score": 6.7,
-    "overall_assessment": "This report is structurally complete but suffers from verbosity, generic filler content, and inconsistent tone application. The writing is mediocre - clear enough but padded with phrases that don't add value. Clinical safety is acceptable but could be stronger. Personalization exists but feels surface-level. The missing Section 6 is a critical structural gap. Most concerning is the amount of generic boilerplate that could apply to any patient, reducing the report's usefulness for Robert specifically.",
-    "recommended_outcome": "BLOCK",
-    "outcome_reasoning": "1 critical content issue(s) found",
-    "metadata": {
-      "model_used": "claude-sonnet-4-5-20250929",
-      "evaluation_timestamp": "2026-01-13T19:21:50.368Z",
-      "duration_ms": 62733,
-      "token_usage": {
-        "input_tokens": 6353,
-        "output_tokens": 2890
-      }
-    }
-  },
   "decision_trace": {
     "session_id": "test-case-003",
-    "started_at": "2026-01-13T19:20:47.625Z",
-    "completed_at": "2026-01-13T19:21:50.368Z",
+    "started_at": "2026-01-19T15:34:37.926Z",
+    "completed_at": "2026-01-19T15:34:37.932Z",
     "events": [
       {
-        "timestamp": "2026-01-13T19:20:47.626Z",
+        "timestamp": "2026-01-19T15:34:37.926Z",
         "stage": "input_validation",
         "action": "validate_input",
         "input": {
@@ -1141,10 +964,10 @@
           "valid": true,
           "errors": 0
         },
-        "duration_ms": 1
+        "duration_ms": 0
       },
       {
-        "timestamp": "2026-01-13T19:20:47.627Z",
+        "timestamp": "2026-01-19T15:34:37.926Z",
         "stage": "tag_extraction",
         "action": "extract_tags",
         "input": {
@@ -1254,7 +1077,7 @@
         "duration_ms": 0
       },
       {
-        "timestamp": "2026-01-13T19:20:47.627Z",
+        "timestamp": "2026-01-19T15:34:37.926Z",
         "stage": "driver_derivation",
         "action": "derive_drivers",
         "input": {
@@ -1474,7 +1297,7 @@
         "duration_ms": 0
       },
       {
-        "timestamp": "2026-01-13T19:20:47.628Z",
+        "timestamp": "2026-01-19T15:34:37.926Z",
         "stage": "scenario_scoring",
         "action": "score_scenarios",
         "input": {
@@ -1887,10 +1710,10 @@
           ],
           "fallback_used": false
         },
-        "duration_ms": 1
+        "duration_ms": 0
       },
       {
-        "timestamp": "2026-01-13T19:20:47.628Z",
+        "timestamp": "2026-01-19T15:34:37.926Z",
         "stage": "tone_selection",
         "action": "select_tone",
         "input": {
@@ -1933,19 +1756,19 @@
         "duration_ms": 0
       },
       {
-        "timestamp": "2026-01-13T19:20:47.628Z",
+        "timestamp": "2026-01-19T15:34:37.926Z",
         "stage": "content_selection",
         "action": "select_content",
         "input": {
           "scenario": "S11"
         },
         "output": {
-          "count": 8
+          "count": 13
         },
         "duration_ms": 0
       },
       {
-        "timestamp": "2026-01-13T19:20:47.629Z",
+        "timestamp": "2026-01-19T15:34:37.929Z",
         "stage": "scenario_load",
         "action": "load_scenario",
         "input": {
@@ -1955,37 +1778,59 @@
         "output": {
           "loaded": true
         },
-        "duration_ms": 1
+        "duration_ms": 2
       },
       {
-        "timestamp": "2026-01-13T19:20:47.633Z",
+        "timestamp": "2026-01-19T15:34:37.931Z",
         "stage": "composition",
         "action": "compose_report",
         "input": {
-          "selections": 8
+          "selections": 13
         },
         "output": {
           "sections": 10,
-          "words": 842
+          "words": 970
         },
-        "duration_ms": 4
+        "duration_ms": 2
       },
       {
-        "timestamp": "2026-01-13T19:21:50.368Z",
+        "timestamp": "2026-01-19T15:34:37.932Z",
         "stage": "qa_gate",
         "action": "qa_check",
         "input": {
           "report_id": "test-case-003"
         },
         "output": {
-          "_truncated": true,
-          "_size": 13703
+          "outcome": "PASS",
+          "validationResult": {
+            "valid": true,
+            "errors": [],
+            "warnings": [
+              "Section 2 has 28 words, minimum recommended is 100"
+            ],
+            "semantic_violations": []
+          },
+          "semanticResult": {
+            "violations": [],
+            "hasViolations": false,
+            "hasCriticalViolations": false,
+            "summary": {
+              "total": 0,
+              "critical": 0,
+              "warning": 0
+            }
+          },
+          "reasons": [
+            "All QA checks passed"
+          ],
+          "canDeliver": true,
+          "requiresReview": false
         },
-        "duration_ms": 62735
+        "duration_ms": 0
       }
     ],
-    "final_outcome": "FLAG"
+    "final_outcome": "PASS"
   },
-  "final_outcome": "FLAG",
+  "final_outcome": "PASS",
   "report_delivered": true
 }

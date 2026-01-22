@@ -218,10 +218,10 @@ export class ReportComposer {
     // Group selections by section and type
     const selectionsBySection = this.groupBySection(contentSelections);
 
-    // Build placeholder context
+    // Build placeholder context with calculated values from intake
     const placeholderContext: PlaceholderContext = {
       intake,
-      calculated: this.buildCalculatedValues(driverState),
+      calculated: this.buildCalculatedValues(driverState, intake),
       custom: {}
     };
 
@@ -493,12 +493,17 @@ The choice of how to proceed is yours. Your dentist is there to provide informat
   }
 
   /**
-   * Build calculated values for placeholders
+   * Build calculated values for placeholders from driver state and intake
    */
-  private buildCalculatedValues(driverState: DriverState): Record<string, string | number> {
+  private buildCalculatedValues(
+    driverState: DriverState,
+    intake?: IntakeData
+  ): Record<string, string | number> {
     const calculated: Record<string, string | number> = {};
 
-    // Add driver-based calculations
+    // ========================================
+    // Mouth situation → Treatment complexity
+    // ========================================
     const mouthSituation = driverState.drivers.mouth_situation?.value;
     if (mouthSituation === "single_missing_tooth") {
       calculated["TREATMENT_COMPLEXITY"] = "straightforward";
@@ -509,6 +514,92 @@ The choice of how to proceed is yours. Your dentist is there to provide informat
     } else if (mouthSituation === "extensive_missing" || mouthSituation === "full_mouth_compromised") {
       calculated["TREATMENT_COMPLEXITY"] = "comprehensive";
       calculated["ESTIMATED_VISITS"] = "multiple appointments over several months";
+    }
+
+    // ========================================
+    // Extract values from intake answers
+    // ========================================
+    if (intake?.answers) {
+      const getAnswer = (qId: string): string | string[] | undefined => {
+        const qa = intake.answers.find(a => a.question_id === qId);
+        return qa?.answer;
+      };
+
+      // Q6b: Tooth zone (visible vs chewing)
+      const toothZone = getAnswer("Q6b");
+      if (toothZone === "front_visible" || toothZone === "anterior") {
+        calculated["TOOTH_ZONE"] = "a visible area";
+        calculated["TOOTH_ZONE_DESCRIPTION"] = "A missing tooth in a visible area";
+      } else if (toothZone === "side_chewing" || toothZone === "posterior") {
+        calculated["TOOTH_ZONE"] = "the chewing area";
+        calculated["TOOTH_ZONE_DESCRIPTION"] = "A missing tooth in the chewing area";
+      } else if (toothZone === "both_areas" || toothZone === "mixed") {
+        calculated["TOOTH_ZONE"] = "both visible and chewing areas";
+        calculated["TOOTH_ZONE_DESCRIPTION"] = "Your missing teeth in multiple areas";
+      }
+
+      // Q1: Primary concern/motivation
+      const motivation = getAnswer("Q1");
+      if (motivation === "confidence_smile") {
+        calculated["PRIMARY_CONCERN"] = "improving confidence in your smile";
+      } else if (motivation === "missing_teeth_long_term") {
+        calculated["PRIMARY_CONCERN"] = "addressing a long-term gap from missing teeth";
+      } else if (motivation === "function_chewing") {
+        calculated["PRIMARY_CONCERN"] = "restoring comfortable chewing function";
+      } else if (motivation === "pain_discomfort") {
+        calculated["PRIMARY_CONCERN"] = "resolving discomfort or pain";
+      } else if (motivation === "aesthetic_damage") {
+        calculated["PRIMARY_CONCERN"] = "repairing visible damage to teeth";
+      }
+
+      // Q12: Timeline/decision stage
+      const timeline = getAnswer("Q12");
+      if (timeline === "within_month" || timeline === "1_3_months") {
+        calculated["TIMELINE_PREFERENCE"] = "relatively soon";
+        calculated["DECISION_STAGE_DESCRIPTION"] = "ready to move forward";
+      } else if (timeline === "3_6_months" || timeline === "6_12_months") {
+        calculated["TIMELINE_PREFERENCE"] = "in the coming months";
+        calculated["DECISION_STAGE_DESCRIPTION"] = "taking time to decide";
+      } else if (timeline === "still_exploring" || timeline === "no_rush") {
+        calculated["TIMELINE_PREFERENCE"] = "when you feel ready";
+        calculated["DECISION_STAGE_DESCRIPTION"] = "still exploring options";
+      }
+
+      // Q10: Budget approach
+      const budget = getAnswer("Q10");
+      if (budget === "price_quality_flexible") {
+        calculated["BUDGET_APPROACH"] = "flexibility when quality matters";
+      } else if (budget === "best_available" || budget === "premium") {
+        calculated["BUDGET_APPROACH"] = "prioritizing quality and durability";
+      } else if (budget === "budget_conscious" || budget === "economy") {
+        calculated["BUDGET_APPROACH"] = "finding cost-effective solutions";
+      } else if (budget === "balanced") {
+        calculated["BUDGET_APPROACH"] = "balancing cost and quality";
+      }
+
+      // Q4: Experience context
+      const experience = getAnswer("Q4");
+      if (Array.isArray(experience)) {
+        if (experience.includes("no_never")) {
+          calculated["EXPERIENCE_CONTEXT"] = "As this is your first time considering dental treatment";
+        } else if (experience.includes("implant_yes") || experience.includes("crown_bridge_yes")) {
+          calculated["EXPERIENCE_CONTEXT"] = "Given your previous dental treatment experience";
+        }
+      } else if (experience === "no_never") {
+        calculated["EXPERIENCE_CONTEXT"] = "As this is your first time considering dental treatment";
+      }
+
+      // Q9: Age bracket
+      const age = getAnswer("Q9");
+      if (age === "under_30" || age === "18_29") {
+        calculated["AGE_BRACKET"] = "younger adults";
+      } else if (age === "30_45" || age === "30_49") {
+        calculated["AGE_BRACKET"] = "adults in their 30s and 40s";
+      } else if (age === "45_60" || age === "50_64") {
+        calculated["AGE_BRACKET"] = "adults in their 50s and 60s";
+      } else if (age === "over_60" || age === "65_plus") {
+        calculated["AGE_BRACKET"] = "older adults";
+      }
     }
 
     return calculated;

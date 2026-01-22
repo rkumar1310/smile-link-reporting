@@ -8,7 +8,8 @@ import type {
   PipelineResult,
   AuditRecord,
   QAOutcome,
-  SupportedLanguage
+  SupportedLanguage,
+  ComposedReport
 } from "../types/index.js";
 import { DEFAULT_LANGUAGE } from "../types/index.js";
 
@@ -28,15 +29,19 @@ export interface PipelineOptions {
   contentStore?: ContentStore;
   skipQA?: boolean;
   traceEnabled?: boolean;
+  /** Callback called after report composition but before LLM evaluation */
+  onReportComposed?: (report: ComposedReport, audit: Partial<AuditRecord>) => Promise<void> | void;
 }
 
 export class ReportPipeline {
   private contentStore?: ContentStore;
   private traceEnabled: boolean;
+  private onReportComposed?: (report: ComposedReport, audit: Partial<AuditRecord>) => Promise<void> | void;
 
   constructor(options?: PipelineOptions) {
     this.contentStore = options?.contentStore;
     this.traceEnabled = options?.traceEnabled ?? true;
+    this.onReportComposed = options?.onReportComposed;
 
     if (this.contentStore) {
       reportComposer.setContentStore(this.contentStore);
@@ -202,6 +207,21 @@ export class ReportPipeline {
         { selections: contentSelections.length },
         { sections: report.sections.length, words: report.total_word_count }
       );
+
+      // Call callback with composed report before LLM evaluation
+      if (this.onReportComposed) {
+        const partialAudit: Partial<AuditRecord> = {
+          session_id: intake.session_id,
+          created_at: new Date().toISOString(),
+          intake,
+          driver_state: driverState,
+          scenario_match: scenarioMatch,
+          content_selections: contentSelections,
+          tone_selection: toneResult,
+          composed_report: report
+        };
+        await this.onReportComposed(report, partialAudit);
+      }
 
       // Phase 8: QA Gate (now async for LLM evaluation)
       const qaTimer = trace?.startStage("qa_gate");

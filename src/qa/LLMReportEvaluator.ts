@@ -127,7 +127,7 @@ export interface EvaluationContext {
 // Default configuration with tighter thresholds
 const DEFAULT_CONFIG: LLMEvaluatorConfig = {
   enabled: true,  // Enabled by default - always evaluate reports
-  model: "anthropic/claude-sonnet-4.5",
+  model: "anthropic/claude-haiku-4.5",  // Using Haiku for faster/cheaper evals
   api_key_env: "OPENROUTER_API_KEY",
   timeout_ms: 30000,
   max_retries: 2,

@@ -1,164 +1,181 @@
 {
   "session_id": "test-case-006",
   "case_id": "case_06_pregnancy_consultation",
-  "evaluation_timestamp": "2026-01-13T19:38:47.300Z",
+  "evaluation_timestamp": "2026-01-17T20:48:08.664Z",
   "outcome": "BLOCK",
-  "overall_score": 6.2,
+  "overall_score": 5.3,
   "dimensions": {
     "professional_quality": {
       "score": 5,
-      "feedback": "Writing quality is inconsistent with significant verbosity issues. Multiple sections contain filler phrases and redundant statements that pad content without adding value. Some sections are tight and effective, but others meander. The report says in 1024 words what could be communicated in 700-800."
+      "feedback": "Writing is generally clear but suffers from significant verbosity and filler language. Many sentences could be tightened, and several paragraphs repeat ideas unnecessarily. The reflective tone sometimes masks lack of substance with flowery language that doesn't add clinical value."
     },
     "clinical_safety": {
-      "score": 7,
-      "feedback": "Safety disclaimers are present and generally appropriate, but some treatment descriptions lack sufficient hedging about outcomes. The pregnancy warning is prominent and appropriate. Risk percentages are provided but could use more context about individual variation."
+      "score": 6,
+      "feedback": "Disclaimers are present and reasonably comprehensive, but language around outcomes and risks could be more cautious. Risk percentages are provided but lack sufficient hedging about individual variation. Pregnancy warning is appropriate but could be more explicit about treatment postponement."
     },
     "tone_appropriateness": {
-      "score": 6,
-      "feedback": "Tone is inconsistent across sections. Some sections achieve the reflective, contextual tone well (Sections 2, 3), while others revert to generic clinical language (Sections 4, 6, 11). The thoughtful framing is present but not sustained throughout."
+      "score": 5,
+      "feedback": "Tone shifts inconsistently between reflective-contextual and clinical-factual. Some sections are overly philosophical ('deeper desire for stability') while others are purely informational. The reflective tone sometimes feels forced or patronizing rather than genuinely thoughtful. Doesn't consistently match TP-03 criteria of 'thoughtful framing of options.'"
     },
     "personalization": {
-      "score": 4,
-      "feedback": "Personalization is weak throughout. Emma's name appears only in the header. Her specific situation (pregnancy, front tooth, first-timer, exploring stage, natural aesthetic preference) is barely referenced. Most content is generic and could apply to any single missing tooth case."
+      "score": 3,
+      "feedback": "Severely lacking personalization. Content is almost entirely generic and could apply to any patient with a single missing tooth. Patient name 'Emma' appears nowhere in the report. No references to her specific answers: pregnancy status, first-timer anxiety, aesthetic priorities, or flexible budget approach. Reflective sections use generic observations rather than addressing her unique situation."
     },
     "patient_autonomy": {
-      "score": 8,
-      "feedback": "Autonomy is generally well-respected with non-directive language throughout. Options are presented neutrally without pushing toward specific choices. However, some subtle framing issues exist, and the 'often resonates with people who' structure could be more neutral."
+      "score": 6,
+      "feedback": "Generally respects patient choice and avoids directive language, but contains subtle bias toward implants and some implicit pressure. Language like 'This approach often resonates with people who...' frames options as personality types rather than neutral choices. Autonomy statements are present but could be stronger and more explicit about genuine equipoise."
     },
     "structure_completeness": {
       "score": 7,
-      "feedback": "Structure is complete with all required sections present and generally logical flow. However, Section 4 is underdeveloped, Section 7 is redundant with Section 5, and the pregnancy warning placement could be better integrated."
+      "feedback": "Structure is logical and complete with all required sections present in appropriate order. Sections flow reasonably well from warning through options to next steps. However, some sections are disproportionately long (Section 5 at 251 words) while others are too brief (Section 4 at 28 words). Section 3 combines two content sources awkwardly. Overall organization is sound but could be tightened."
     }
   },
   "content_issues": [
     {
+      "section_number": 2,
+      "source_content": "content/scenarios/S02/en/TP-03.md",
+      "quote": "Beyond the immediate aesthetic concern, this situation often raises deeper questions—about comfort, stability, and what you want for your smile in the years ahead.",
+      "problem": "Filler language that doesn't add value. 'Beyond the immediate aesthetic concern' is unnecessary preamble. The sentence could be tightened significantly.",
+      "severity": "warning",
+      "suggested_fix": "Replace with: 'This situation raises questions about comfort, stability, and what you want for your smile long-term.' Remove 'Beyond the immediate aesthetic concern' as it's obvious and wastes words."
+    },
+    {
       "section_number": 3,
       "source_content": "content/modules/TM_CTX_FIRST_TIME/en/TP-03.md",
-      "quote": "Your dentist will explain the process step by step, including what to expect at each stage.",
-      "problem": "Generic filler sentence that adds no value - obvious and uninformative",
+      "quote": "Even when you've adjusted to it, there can be a lingering awareness, especially when smiling or speaking in certain situations. But the experience goes beyond appearance. Many people find themselves thinking about function too: Will the bite remain balanced? Might neighboring teeth gradually shift? Is this something that will get more complicated over time? These aren't just practical questions—they often reflect a deeper desire for stability and predictability.",
+      "problem": "Excessive verbosity and psychologizing. The paragraph repeats the same idea (awareness of the gap) multiple times and makes presumptive statements about patient motivation ('deeper desire for stability'). This is generic filler that doesn't address Emma's specific situation.",
       "severity": "warning",
-      "suggested_fix": "Remove entirely or replace with specific information about what first-timers should expect"
+      "suggested_fix": "Consolidate to: 'A missing tooth can affect both appearance and function. You may wonder about bite balance, whether neighboring teeth will shift, and whether this will become more complicated over time. Your dentist can address these concerns during consultation.' Remove psychologizing language."
     },
     {
       "section_number": 3,
-      "source_content": "content/scenarios/S02/en/TP-03.md",
-      "quote": "These aren't just practical questions—they often reflect a deeper desire for stability and predictability.",
-      "problem": "Overwrought philosophical interpretation that pads content without adding substance",
-      "severity": "warning",
-      "suggested_fix": "Remove this sentence - the practical questions speak for themselves"
-    },
-    {
-      "section_number": 4,
-      "source_content": "content/b_blocks/B_INTERP_STANDARD/en/TP-03.md",
-      "quote": "Your priorities regarding aesthetics, function, and comfort help narrow the range of suitable options. Clinical examination will determine specific recommendations based on your individual factors.",
-      "problem": "Section is too brief (28 words) and generic - doesn't interpret Emma's actual profile",
-      "severity": "warning",
-      "suggested_fix": "Expand to interpret Emma's specific priorities: pregnancy timing, natural aesthetics, first-timer status, exploring stage"
-    },
-    {
-      "section_number": 5,
-      "source_content": "content/scenarios/S02/en/TP-03.md",
-      "quote": "A solution that becomes part of your mouth, functioning like a natural tooth and standing independently from the rest.",
-      "problem": "Too definitive - implies guaranteed outcome without hedging",
-      "severity": "critical",
-      "suggested_fix": "Revise to: 'Designed to integrate with your mouth and function similarly to a natural tooth for most patients'"
-    },
-    {
-      "section_number": 5,
-      "source_content": "content/scenarios/S02/en/TP-03.md",
-      "quote": "This approach often resonates with people who... Value permanence and are comfortable taking a longer path for a more integrated result.",
-      "problem": "Subtly prescriptive - categorizes patients and could feel directive",
+      "source_content": "content/modules/TM_CTX_FIRST_TIME/en/TP-03.md",
+      "quote": "The experience varies—some find the gap manageable while others feel it affects confidence. Understanding your own experience helps inform your choice.",
+      "problem": "Generic placeholder language that applies to any patient. Doesn't reference Emma's specific situation or answers. Wastes words on obvious statement.",
       "severity": "info",
-      "suggested_fix": "Reframe neutrally: 'Some people prioritize permanence and are comfortable with a longer process'"
+      "suggested_fix": "Remove or replace with: 'Your own experience with the gap will help inform your choice of treatment.' More concise and still valid."
+    },
+    {
+      "section_number": 5,
+      "source_content": "content/scenarios/S02/en/TP-03.md",
+      "quote": "Worth reflecting on\n- It requires surgery and several months of healing\n- The investment is higher upfront\n- Not everyone wants to go through a multi-step process\n\n**This approach often resonates with people who...**\nValue permanence and are comfortable taking a longer path for a more integrated result.\n\n**What this involves**\nA replacement tooth is bonded to adjacent teeth with minimal preparation, avoiding surgery.\n\n**What you can expect**\nA relatively quick restoration that can provide a good aesthetic result with minimal intervention.\n\n**The broader picture**\n- The process is simpler and faster\n- No surgery is involved\n- It's often more affordable\n- It preserves more of your natural tooth structure in the short term\n\n**Worth reflecting on**\n- Typical lifespan is 10-15 years, after which replacement may be needed\n- There's a small risk of loosening\n- It depends on the condition and position of adjacent teeth\n\n**This approach often resonates with people who...**\nPrefer a gentler first step, or who want more time before committing to a long-term fixed solution.",
+      "problem": "Excessive repetition of 'Worth reflecting on' (appears twice in this section alone, 4 times total in report). Personality framing ('This approach often resonates with people who...') subtly pressures patient to identify with one option. Asymmetric framing: implant gets 'permanence' and 'integration' while bridge gets 'simpler' and 'faster.' Implant described as 'becomes part of your mouth' (aspirational) vs bridge as 'relatively quick restoration' (utilitarian).",
+      "severity": "warning",
+      "suggested_fix": "Remove repetitive 'Worth reflecting on' headers. Replace personality framing with neutral language: 'Consider whether you prefer...' instead of 'This approach often resonates with people who...' Use parallel structure for both options. Reframe bridge description to match implant's positive framing: 'A durable restoration that functions naturally and preserves adjacent teeth.'"
+    },
+    {
+      "section_number": 5,
+      "source_content": "content/scenarios/S02/en/TP-03.md",
+      "quote": "This approach often resonates with people who...\nValue permanence and are comfortable taking a longer path for a more integrated result.",
+      "problem": "Personality typing that subtly pressures patient choice. Frames implant as choice for people with certain values, implying patient should identify with these values to choose implant. Reduces autonomy by making choice seem personality-dependent rather than preference-dependent.",
+      "severity": "warning",
+      "suggested_fix": "Replace with neutral language: 'An implant may be suitable if you prioritize long-term durability and are comfortable with a multi-step process.' Removes personality framing and focuses on objective factors."
+    },
+    {
+      "section_number": 6,
+      "source_content": "content/b_blocks/B_COMPARE_IMPLANT_VS_BRIDGE/en/TP-03.md",
+      "quote": "| **Longevity** | 15-25+ years | 10-15 years |",
+      "problem": "Longevity comparison emphasizes implant advantage without context. Doesn't note that bridge longevity is also substantial, or that individual variation is significant. Subtly biases toward implant.",
+      "severity": "warning",
+      "suggested_fix": "Add context row or note: 'Both options provide durable solutions. Implants typically last longer, but bridges are also long-lasting. Individual outcomes vary based on oral hygiene and other factors.'"
     },
     {
       "section_number": 7,
       "source_content": "content/scenarios/S02/en/TP-03.md",
       "quote": "Both options can restore your smile in meaningful ways. The implant path offers a sense of permanence and integration; the bridge path offers speed and simplicity. Comfort is part of both—though the nature of that comfort differs. With an implant, there's initial healing; with a bridge, there's adjustment. Both lead to a stable outcome.",
-      "problem": "Entire section is redundant - restates Section 5 content in vague, abstract terms without adding new information",
+      "problem": "Asymmetric framing: implant gets positive descriptors ('permanence,' 'integration') while bridge gets utilitarian ones ('speed,' 'simplicity'). Vague language ('the nature of that comfort differs') doesn't add value. Redundant conclusion ('Both lead to a stable outcome' repeats what was already stated).",
       "severity": "warning",
-      "suggested_fix": "Remove section entirely or replace with concrete decision framework specific to Emma's situation"
+      "suggested_fix": "Reframe with parallel structure: 'Both options restore your smile effectively. The implant offers long-term durability and independent function; the bridge offers faster completion and simpler maintenance. Both provide stable, comfortable results. Your choice depends on your priorities regarding timeline, durability, and treatment approach.'"
     },
     {
-      "section_number": 7,
+      "section_number": 9,
+      "source_content": "content/modules/TM_BUDGET_FLEXIBLE/en/TP-03.md",
+      "quote": "These figures are guides, not commitments. Actual costs depend on your specific needs and the complexity of your case.",
+      "problem": "Weak disclaimer about cost variability. Doesn't note that costs could be significantly higher, or what factors drive variation. Doesn't address that Emma's pregnancy may affect timing and thus costs.",
+      "severity": "info",
+      "suggested_fix": "Expand to: 'These figures are guides based on typical cases. Actual costs may be higher depending on bone quality, complexity, and any additional procedures needed. Your dentist will provide a detailed estimate after clinical examination.'"
+    },
+    {
+      "section_number": 10,
       "source_content": "content/scenarios/S02/en/TP-03.md",
-      "quote": "Both lead to a stable outcome.",
-      "problem": "Overly optimistic - outcomes vary significantly between patients",
+      "quote": "Risks: infection (2-5%), implant failure (5-10% over 10 years) in population studies; individual risk varies",
+      "problem": "Risk statistics presented without adequate hedging. Percentages lack context about what factors increase/decrease risk. No statement that Emma's pregnancy may affect healing and infection risk. No qualifier about how individual factors affect these population statistics.",
+      "severity": "warning",
+      "suggested_fix": "Expand to: 'Risks vary based on individual factors including bone quality, oral hygiene, and overall health. Population studies show infection rates of 2-5% and implant failure of 5-10% over 10 years; your individual risk will be assessed during clinical examination. Pregnancy may affect healing; discuss timing with your dentist.'"
+    },
+    {
+      "section_number": 0,
+      "source_content": "[unknown: A_WARN_PREGNANCY_OR_GROWTH]",
+      "quote": "You have indicated pregnancy or that growth is still occurring. This affects the timing and type of treatments that are appropriate.\n\n**Key considerations:**\n- Certain procedures are postponed during pregnancy as a precaution\n- X-rays and some medications are typically avoided\n- Non-urgent treatments are often scheduled for after delivery\n- Growth phases in younger patients may affect treatment timing",
+      "problem": "Generic warning that doesn't explicitly state Emma should postpone elective treatment until after delivery. Uses vague language ('typically avoided,' 'often scheduled') rather than clear guidance. Doesn't address that this is elective treatment and should wait.",
       "severity": "critical",
-      "suggested_fix": "Revise to: 'Both can lead to stable outcomes for appropriate candidates, though individual results vary'"
+      "suggested_fix": "Revise to: 'You have indicated pregnancy. Elective dental treatments are typically postponed until after delivery as a precaution. X-rays and certain medications are avoided during pregnancy. Your dentist will discuss which options, if any, are appropriate during pregnancy versus after delivery. This missing tooth is not urgent and can be safely addressed after your baby is born.'"
     },
     {
       "section_number": 2,
       "source_content": "content/scenarios/S02/en/TP-03.md",
       "quote": "You're missing one tooth in a visible area.",
-      "problem": "Emma's name is never used despite being provided - missed personalization opportunity",
+      "problem": "Generic opening that doesn't use patient's name or acknowledge her specific situation. Misses opportunity for personalization. Should reference Emma by name and acknowledge her specific aesthetic priority.",
       "severity": "info",
-      "suggested_fix": "Revise to: 'Emma, you're missing one tooth in a visible area' or use her name elsewhere in the report"
+      "suggested_fix": "Replace with: 'Emma, you're missing one tooth in a visible area. Given your preference for natural-looking results, this is understandably a concern.'"
     },
     {
-      "section_number": 5,
-      "source_content": "content/scenarios/S02/en/TP-03.md",
-      "quote": "[Entire options section]",
-      "problem": "Emma's pregnancy is not mentioned in treatment options despite being a critical timing factor",
+      "section_number": 4,
+      "source_content": "content/b_blocks/B_INTERP_STANDARD/en/TP-03.md",
+      "quote": "Your priorities regarding aesthetics, function, and comfort help narrow the range of suitable options.\n\nClinical examination will determine specific recommendations based on your individual factors.",
+      "problem": "Too brief and generic. Doesn't specifically reference Emma's stated priorities (natural aesthetic, first-timer status, pregnancy). Doesn't explain how her specific answers narrow options. Section is only 28 words and provides minimal value.",
       "severity": "warning",
-      "suggested_fix": "Add to implant option: 'Given your pregnancy, the surgical timeline would typically begin after delivery' and to bridge: 'This non-surgical option could be considered during pregnancy if timing is a priority'"
+      "suggested_fix": "Expand to: 'Your priorities—natural-looking aesthetics, comfort, and long-term stability—help narrow the suitable options. As this is your first treatment of this type, your dentist will explain each option thoroughly. Your pregnancy will also affect timing recommendations. Clinical examination will determine which option is best for your specific situation.'"
     },
     {
-      "section_number": 5,
-      "source_content": "content/scenarios/S02/en/TP-03.md",
-      "quote": "[Entire options section]",
-      "problem": "Emma's stated preference for 'natural_subtle' aesthetics is never explicitly addressed",
-      "severity": "warning",
-      "suggested_fix": "Add to each option how it addresses natural appearance: 'Implants typically provide the most natural appearance as they emerge from the gum like a natural tooth' and 'Bridges can achieve natural results though the connection points may be slightly visible'"
-    },
-    {
-      "section_number": 6,
-      "source_content": "content/b_blocks/B_COMPARE_IMPLANT_VS_BRIDGE/en/TP-03.md",
-      "quote": "Implants may suit you if: [bullets] Bridges may suit you if: [bullets]",
-      "problem": "Mildly directive language - 'may suit you' implies recommendation rather than neutral information",
+      "section_number": 1,
+      "source_content": "content/static/1/en.md",
+      "quote": "This report is generated based on your questionnaire responses and is for informational purposes only. It does not constitute medical advice, diagnosis, or treatment recommendations.",
+      "problem": "Disclaimer is present but could be stronger. Doesn't explicitly state that patient should not make treatment decisions based on this report alone, or that clinical examination is required before any treatment.",
       "severity": "info",
-      "suggested_fix": "Reframe as: 'Factors that may be relevant to your decision:' with neutral bullet points"
+      "suggested_fix": "Strengthen to: 'This report is generated based on your questionnaire responses and is for informational purposes only. It does not constitute medical advice, diagnosis, or treatment recommendations. Do not make treatment decisions based solely on this report. A clinical examination is required before any treatment can be recommended or provided.'"
     },
     {
       "section_number": 8,
       "source_content": "content/scenarios/S02/en/TP-03.md",
-      "quote": "[Entire section - 31 words]",
-      "problem": "Section is too brief and could be integrated into Section 5 options rather than standing alone",
+      "quote": "- Implant + crown: typically 3–7 months\n- Adhesive bridge: often achievable within a few weeks\n\nThe implant process includes healing time, which varies by individual. The bridge process is faster, with minimal recovery.",
+      "problem": "Too brief and lacks detail about what happens during each phase. Doesn't explain what patient should expect during the 3-7 month implant timeline. Doesn't address how pregnancy might affect timeline. Section is only 31 words of actual content.",
       "severity": "info",
-      "suggested_fix": "Integrate timeline information into each treatment option in Section 5 for better flow"
+      "suggested_fix": "Expand to: 'Implant timeline: 3-7 months total, including initial healing (2-5 days), bone integration (3-6 months), and crown placement. Bridge timeline: typically 2-4 weeks from consultation to completion. Given your pregnancy, your dentist will discuss whether to proceed now or wait until after delivery, which may affect your preferred timeline.'"
     },
     {
       "section_number": 11,
       "source_content": "content/static/11/en.md",
-      "quote": "Consider noting down: [bullets]",
-      "problem": "Directive language - tells patient what to do rather than offering suggestions",
+      "quote": "Options to consider:\n\n- Review this report\n- Prepare questions for your dental consultation\n- Schedule an appointment when ready\n- Request additional information on specific topics",
+      "problem": "Generic next steps that don't acknowledge Emma's 'exploring' decision stage or her pregnancy status. Doesn't empower patient to make choice or state that either option is acceptable. Missing explicit statement that patient is in control of decision.",
       "severity": "info",
-      "suggested_fix": "Revise to: 'You might find it helpful to note down:' or 'Some patients prepare by noting:'"
+      "suggested_fix": "Personalize to: 'You're still exploring your options, which is exactly the right approach. Consider: Review this report and note any questions. Think about your priorities regarding timeline, durability, and treatment approach. Schedule a consultation when you're ready—your dentist can discuss which options are appropriate given your pregnancy. Remember: you're in control of this decision, and either option is clinically appropriate for your situation.'"
     },
     {
-      "section_number": 0,
-      "source_content": "[unknown: A_WARN_PREGNANCY_OR_GROWTH]",
-      "quote": "[Entire pregnancy warning]",
-      "problem": "Warning is isolated and not integrated into treatment discussions where pregnancy affects timing",
-      "severity": "info",
-      "suggested_fix": "Keep warning but also integrate pregnancy considerations into Sections 5, 8, and 10 where relevant"
+      "section_number": 5,
+      "source_content": "content/scenarios/S02/en/TP-03.md",
+      "quote": "**What this involves**\nAn implant—a titanium post—is placed in the jawbone where the tooth root once was. Over time, it integrates with the bone, and a custom crown is attached to restore the visible tooth.\n\n**What you can expect**\nA solution that becomes part of your mouth, functioning like a natural tooth and standing independently from the rest.",
+      "problem": "Aspirational language ('becomes part of your mouth,' 'standing independently') creates positive bias toward implant. Bridge description uses more utilitarian language. Asymmetric framing reduces autonomy by making implant seem more desirable.",
+      "severity": "warning",
+      "suggested_fix": "Use parallel, neutral language for both: 'An implant is a titanium post placed in the jawbone. It integrates with bone over time, and a custom crown is attached. The result functions independently and typically feels natural.' Avoid aspirational framing that biases choice."
     }
   ],
   "content_files_to_review": [
-    "content/modules/TM_CTX_FIRST_TIME/en/TP-03.md",
     "content/scenarios/S02/en/TP-03.md",
-    "content/b_blocks/B_INTERP_STANDARD/en/TP-03.md",
+    "content/modules/TM_CTX_FIRST_TIME/en/TP-03.md",
     "content/b_blocks/B_COMPARE_IMPLANT_VS_BRIDGE/en/TP-03.md",
+    "content/modules/TM_BUDGET_FLEXIBLE/en/TP-03.md",
+    "content/b_blocks/B_INTERP_STANDARD/en/TP-03.md",
+    "content/static/1/en.md",
     "content/static/11/en.md"
   ],
-  "overall_assessment": "This report demonstrates moderate quality with significant room for improvement. The main weaknesses are verbosity (particularly Sections 3, 5, 7), poor personalization (Emma's specific situation barely referenced), and inconsistent tone (shifts from reflective to generic clinical). Section 7 is largely redundant and Section 4 is underdeveloped. Clinical safety is acceptable but needs stronger hedging in outcome statements. The structure is complete but could be streamlined. Most critically, the report reads as generic template content rather than a thoughtful analysis of Emma's specific situation as a pregnant first-timer seeking natural aesthetics for a front tooth.",
+  "overall_assessment": "This report has significant structural and content issues that undermine its effectiveness. While the basic structure is sound and disclaimers are present, the content suffers from excessive verbosity, generic language that ignores Emma's specific situation, and subtle bias toward implants. Most critically, the report fails to personalize content to Emma's unique circumstances (pregnancy, first-timer status, aesthetic priorities) and contains repetitive filler language that wastes words. The pregnancy warning is inadequately explicit about treatment postponement. Substantial revision is needed to tighten writing, eliminate generic observations, add genuine personalization, and ensure truly neutral presentation of options.",
   "metadata": {
-    "model_used": "claude-sonnet-4-5-20250929",
-    "evaluation_timestamp": "2026-01-13T19:38:47.300Z",
-    "duration_ms": 78189,
+    "model_used": "claude-haiku-4-5-20251001",
+    "duration_ms": 72751,
     "token_usage": {
-      "input_tokens": 6829,
-      "output_tokens": 3539
+      "input_tokens": 6815,
+      "output_tokens": 6423
     }
   }
 }

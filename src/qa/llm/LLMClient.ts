@@ -61,7 +61,7 @@ export interface LLMStructuredResponse<T> {
 }
 
 const DEFAULT_CONFIG: Required<Omit<LLMClientConfig, "apiKey">> = {
-  model: "claude-sonnet-4-5-20250929",  // Anthropic model ID
+  model: "claude-haiku-4-5-20251001",  // Anthropic model ID - using Haiku for faster/cheaper evals
   timeout: 30000,
   maxRetries: 2,
   temperature: 0.1  // Low temperature for consistent, deterministic evaluations
@@ -117,7 +117,7 @@ export class LLMClient {
   ): Promise<LLMStructuredResponse<T>> {
     const systemMessage = messages.find(m => m.role === "system");
     const nonSystemMessages = messages.filter(m => m.role !== "system");
-    const maxTokens = 8000; // Increased for detailed critical evaluations
+    const maxTokens = 12000; // Increased for detailed critical evaluations
 
     log.info("Starting structured generation", {
       model: this.config.model,
@@ -179,7 +179,8 @@ export class LLMClient {
       const errorInfo: Record<string, unknown> = {
         duration_ms: duration,
         errorType: error?.constructor?.name ?? "Unknown",
-        message: error instanceof Error ? error.message : String(error)
+        message: error instanceof Error ? error.message : String(error),
+        stack: error instanceof Error ? error.stack : undefined
       };
 
       // Check for specific error types
@@ -187,9 +188,14 @@ export class LLMClient {
         const err = error as Record<string, unknown>;
         if (err.finishReason) errorInfo.finishReason = err.finishReason;
         if (err.usage) errorInfo.usage = err.usage;
+        if (err.status) errorInfo.status = err.status;
+        if (err.statusCode) errorInfo.statusCode = err.statusCode;
+        if (err.body) errorInfo.body = err.body;
+        if (err.error) errorInfo.error = err.error;
         if (err.cause && typeof err.cause === "object") {
           const cause = err.cause as Record<string, unknown>;
           errorInfo.causeType = cause.constructor?.name;
+          errorInfo.causeMessage = cause.message;
           if (cause.text) {
             // Truncate the raw text for logging
             const text = String(cause.text);
@@ -200,6 +206,10 @@ export class LLMClient {
       }
 
       log.error("Structured generation failed", errorInfo);
+
+      // Also log the full error for debugging
+      console.error("Full LLM error:", error);
+
       throw error;
     }
   }

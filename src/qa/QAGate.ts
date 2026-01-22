@@ -99,8 +99,8 @@ export class QAGate {
       intake &&
       driverState
     ) {
-      // Update LLM evaluator enabled state
-      llmReportEvaluator.setEnabled(true);
+      // Note: llmReportEvaluator respects its own config file (config/llm-evaluator.json)
+      // The enabled state is controlled by that config, not overridden here
 
       llmEvaluation = await llmReportEvaluator.evaluate({
         report,

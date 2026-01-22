@@ -10,12 +10,29 @@ const PLACEHOLDER_PATTERN = /\{\{([A-Z_]+)\}\}/g;
 
 // Default fallback values
 const DEFAULT_FALLBACKS: Record<string, string> = {
+  // Patient identity
   PATIENT_NAME: "you",
+  AGE_BRACKET: "your age group",
+
+  // Tooth/situation specifics
   TOOTH_LOCATION: "the affected area",
   TOOTH_POSITION: "the missing tooth",
+  TOOTH_ZONE: "the area",
+  TOOTH_ZONE_DESCRIPTION: "This area",
+
+  // Treatment details
   TREATMENT_DURATION: "the treatment period",
   ESTIMATED_VISITS: "multiple appointments",
-  AGE_BRACKET: "your age group",
+  TREATMENT_COMPLEXITY: "your situation",
+
+  // Patient profile
+  PRIMARY_CONCERN: "your dental situation",
+  DECISION_STAGE_DESCRIPTION: "your current stage",
+  BUDGET_APPROACH: "your budget preferences",
+  TIMELINE_PREFERENCE: "your preferred timeline",
+  EXPERIENCE_CONTEXT: "your situation",
+
+  // Clinic info
   CLINIC_NAME: "your dental clinic",
   DENTIST_NAME: "your dental professional"
 };

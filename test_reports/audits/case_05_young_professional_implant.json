@@ -1,6 +1,6 @@
 {
   "session_id": "test-case-005",
-  "created_at": "2026-01-13T19:36:52.906Z",
+  "created_at": "2026-01-19T15:34:37.940Z",
   "intake": {
     "session_id": "test-case-005",
     "timestamp": "2026-01-08T07:09:41.236Z",
@@ -746,6 +746,22 @@
       "suppressed": false
     },
     {
+      "content_id": "B_NUANCE_S03",
+      "type": "b_block",
+      "target_section": 3,
+      "tone": "TP-06",
+      "priority": 2,
+      "suppressed": false
+    },
+    {
+      "content_id": "B_COST_S03",
+      "type": "b_block",
+      "target_section": 9,
+      "tone": "TP-06",
+      "priority": 1,
+      "suppressed": false
+    },
+    {
       "content_id": "TM_CTX_FIRST_TIME",
       "type": "module",
       "target_section": 3,
@@ -755,6 +771,30 @@
     },
     {
       "content_id": "TM_BUDGET_PREMIUM",
+      "type": "module",
+      "target_section": 9,
+      "tone": "TP-06",
+      "priority": 2,
+      "suppressed": false
+    },
+    {
+      "content_id": "TM_CTX_TOOTH_STATUS",
+      "type": "module",
+      "target_section": 3,
+      "tone": "TP-06",
+      "priority": 2,
+      "suppressed": false
+    },
+    {
+      "content_id": "TM_PROFILE_COMFORT",
+      "type": "module",
+      "target_section": 3,
+      "tone": "TP-06",
+      "priority": 2,
+      "suppressed": false
+    },
+    {
+      "content_id": "TM_PROFILE_PREMIUM",
       "type": "module",
       "target_section": 9,
       "tone": "TP-06",
@@ -815,11 +855,11 @@
       {
         "section_number": 1,
         "section_name": "Disclaimer",
-        "content": "# Section 1: Disclaimer\n\nThis report is generated based on your responses to our questionnaire and is intended for informational purposes only. It does not constitute medical advice, diagnosis, or treatment recommendations.\n\nPlease consult with a qualified dental professional before making any decisions about your dental care. Your dentist will conduct a thorough examination and provide personalized recommendations based on your specific situation.\n\nThe information presented here is general in nature and may not apply to your individual circumstances. Treatment outcomes cannot be predicted with certainty. Results vary between patients and depend on many factors that can only be assessed through clinical examination.",
+        "content": "# Section 1: Disclaimer\n\nThis report is generated based on your questionnaire responses and is for informational purposes only. It does not constitute medical advice, diagnosis, or treatment recommendations.\n\n**Important:** A clinical examination is required before any treatment can be recommended or provided. Do not make treatment decisions based solely on this report.\n\nTreatment outcomes cannot be predicted with certainty. Results vary between patients and depend on factors that can only be assessed through clinical examination. Your dentist will provide personalized recommendations based on your specific situation.",
         "sources": [
           "STATIC_1"
         ],
-        "word_count": 102
+        "word_count": 86
       },
       {
         "section_number": 2,
@@ -833,12 +873,14 @@
       {
         "section_number": 3,
         "section_name": "Context",
-        "content": "# First-Time Treatment Context\n\nTreatment decisions can be made after reviewing all information and consulting with your dentist.\n\nA missing back tooth primarily affects chewing. You may have noticed changes in how you eat, or you may have adapted without much difficulty.\n\nThere are potential long-term considerations—neighboring teeth may shift, bone may gradually diminish in the gap area—but these vary by individual and don't occur in every case. A dental professional can help you understand what applies to your specific case.\n\nSome people want to address it promptly; others prefer to wait and see. There's no objectively correct timeline.",
+        "content": "# First-Time Treatment Context\n\nThis is your first dental treatment of this type. The information below covers what each option involves and typical experiences.\n\n# Current Tooth Status\n\nYour current tooth condition determines what options are available to you. Understanding your situation helps you participate meaningfully in treatment decisions.\n\nYour dentist will explain your tooth status and what it means for your choices. You can then decide which treatment direction aligns with your goals.\n\n# Comfort-Focused Approach\n\nYour comfort preferences are valid and will guide the options presented to you. Treatment choices can be made with comfort as a priority alongside other factors.\n\nYour dentist will explain comfort aspects of each option. You decide what balance of comfort and other factors works best for you.\n\nA missing back tooth primarily affects chewing. You may have noticed changes in how you eat, or you may have adapted without much difficulty.\n\nThere are potential long-term considerations—neighboring teeth may shift, bone may gradually diminish in the gap area—but these vary by individual and don't occur in every case. A dental professional can help you understand what applies to your specific case.\n\nSome people want to address it promptly; others prefer to wait and see. There's no objectively correct timeline.",
         "sources": [
           "TM_CTX_FIRST_TIME",
+          "TM_CTX_TOOTH_STATUS",
+          "TM_PROFILE_COMFORT",
           "SCENARIO:context"
         ],
-        "word_count": 98
+        "word_count": 203
       },
       {
         "section_number": 4,
@@ -888,12 +930,13 @@
       {
         "section_number": 9,
         "section_name": "Cost Considerations",
-        "content": "# Budget Considerations: Premium Approach\n\nYou've indicated a preference for premium treatment options, prioritizing quality and long-term results over cost savings.\n\nYour dentist can discuss:\n- The highest-quality materials and techniques available\n- How premium options may provide enhanced durability and aesthetics\n- Advanced treatment technologies that optimize outcomes\n- The long-term value of investing in quality dental work\n\nA premium approach often means access to the best available solutions, with materials and techniques that can maximize both function and appearance.\n\nCosts vary by practice, location, and case complexity. These ranges are illustrative:\n\n- Implant with crown: approximately €2,200 – €2,500\n- Bridge: approximately €2,100 – €2,700",
+        "content": "# Budget Considerations: Premium Approach\n\nYou've indicated a preference for premium treatment options, prioritizing quality and long-term results over cost savings.\n\nYour dentist can discuss:\n- The highest-quality materials and techniques available\n- How premium options may provide enhanced durability and aesthetics\n- Advanced treatment technologies that optimize outcomes\n- The long-term value of investing in quality dental work\n\nA premium approach often means access to the best available solutions, with materials and techniques that can maximize both function and appearance.\n\n# Premium Quality Approach\n\nYour preference for premium quality gives you access to the full spectrum of available treatments. You can choose based on which aspects of quality matter most to you.\n\nYour dentist will present premium options and explain what makes each stand out. You decide which premium approach aligns with your specific goals.\n\nCosts vary by practice, location, and case complexity. These ranges are illustrative:\n\n- Implant with crown: approximately €2,200 – €2,500\n- Bridge: approximately €2,100 – €2,700",
         "sources": [
           "TM_BUDGET_PREMIUM",
+          "TM_PROFILE_PREMIUM",
           "SCENARIO:costs"
         ],
-        "word_count": 98
+        "word_count": 152
       },
       {
         "section_number": 10,
@@ -914,7 +957,7 @@
         "word_count": 64
       }
     ],
-    "total_word_count": 769,
+    "total_word_count": 912,
     "warnings_included": false,
     "suppressed_sections": [],
     "placeholders_resolved": 0,
@@ -925,310 +968,18 @@
     "errors": [],
     "warnings": [
       "Section 2 has 31 words, minimum recommended is 100",
-      "Section 3 has 98 words, minimum recommended is 100",
       "Section 4 has 45 words, minimum recommended is 50",
       "Section 10 has 35 words, minimum recommended is 50"
     ],
     "semantic_violations": []
   },
-  "llm_evaluation": {
-    "professional_quality": {
-      "score": 5,
-      "confidence": 0.85,
-      "feedback": "Writing is generally clear but suffers from significant verbosity and filler language. Multiple sections contain redundant phrases and padding that dilutes the message. Transitions are often unnecessary. Some sections are too brief while others are wordy without adding value.",
-      "issues": [
-        "Section 2 uses filler phrase 'if anything' - adds no value",
-        "Section 3 contains verbose transition 'There are potential long-term considerations—' - just state the considerations",
-        "Section 3 has redundant phrase 'but these vary by individual and don't occur in every case' - already implied",
-        "Section 4 is extremely brief (45 words) and feels incomplete compared to other sections",
-        "Section 5 repetitive structure 'What this involves/offers/to consider' becomes monotonous",
-        "Section 7 is too brief (28 words) for a critical comparison section",
-        "Section 8 is severely underdeveloped at only 18 words",
-        "Section 10 uses table format inconsistently with rest of report",
-        "Multiple sections end with obvious statements that add no value"
-      ],
-      "suggestions": [
-        "Remove 'if anything' from Section 2 - just state 'What you choose to do is entirely your decision'",
-        "Section 3: Cut 'There are potential long-term considerations—' and start with 'Neighboring teeth may shift...'",
-        "Remove 'but these vary by individual and don't occur in every case' - this hedging is already clear from context",
-        "Expand Section 4 with concrete examples of what interpretation means in this context",
-        "Vary the structure in Section 5 to avoid repetitive headers",
-        "Expand Section 7 to actually discuss meaningful trade-offs between options",
-        "Section 8 needs substantial expansion - describe actual steps in each process",
-        "Make Section 10 format consistent with other sections",
-        "Cut obvious closing statements like 'Your dentist can provide information...' - this is assumed"
-      ]
-    },
-    "clinical_safety": {
-      "score": 7,
-      "confidence": 0.9,
-      "feedback": "Disclaimer is comprehensive and appropriately cautious. Language generally avoids guarantees. However, some statements could be more carefully hedged, and risk disclosures in Section 10 are somewhat superficial.",
-      "issues": [
-        "Section 5 states 'Long-term stability if healing is successful' - implies guaranteed stability after healing",
-        "Section 6 table presents 'Typical lifespan' as definitive ranges without hedging",
-        "Section 7 states 'Both options are designed to restore comfortable chewing' - too definitive about outcomes",
-        "Section 9 cost ranges presented without sufficient caveats about variability",
-        "Section 10 recovery times presented as facts rather than typical ranges"
-      ],
-      "suggestions": [
-        "Rephrase to 'May provide long-term stability when healing is successful'",
-        "Add qualifier to table: 'Typical lifespan (varies significantly by individual)'",
-        "Change to 'Both options aim to restore comfortable chewing, though outcomes vary'",
-        "Add stronger caveat to cost ranges: 'Costs vary significantly - these are rough estimates only'",
-        "Frame recovery times as 'commonly ranges from' rather than definitive statements"
-      ]
-    },
-    "tone_appropriateness": {
-      "score": 8,
-      "confidence": 0.88,
-      "feedback": "Tone is consistently autonomy-respecting throughout most sections. Language emphasizes choice and avoids directive statements. Minor lapses where language becomes slightly prescriptive.",
-      "issues": [
-        "Section 3 ends with 'There's no objectively correct timeline' - slightly preachy rather than neutral",
-        "Section 4 states 'A consultation allows you to explore' - implies what consultation does rather than what patient can do",
-        "Section 11 uses 'Options to consider:' followed by list - slightly directive framing"
-      ],
-      "suggestions": [
-        "Rephrase to 'The timeline that works varies by individual preference'",
-        "Change to 'During a consultation, you can explore options...'",
-        "Reframe as 'You might:' to maintain patient agency"
-      ]
-    },
-    "personalization": {
-      "score": 4,
-      "confidence": 0.82,
-      "feedback": "Content is largely generic and could apply to almost any patient with a missing tooth. Patient name Sarah is never used. Specific priorities mentioned in profile (durability-focused, premium budget, short timeline) are barely referenced. Feels cookie-cutter.",
-      "issues": [
-        "Patient name 'Sarah' never appears in report despite being provided",
-        "Profile indicates 'durability_focused' philosophy but this isn't emphasized in options presentation",
-        "Profile shows 'premium' budget preference but Section 9 treats this generically",
-        "Profile indicates 'short_term' time horizon (6 months) but Section 8 doesn't address this",
-        "'comfort' profile type not reflected in how options are framed",
-        "No reference to patient's specific situation: 'side_chewing' location, 'mostly_intact_enamel' condition",
-        "Generic language throughout: 'You're missing one tooth' could be anyone"
-      ],
-      "suggestions": [
-        "Use patient name at least once, preferably in Section 2 opening",
-        "Emphasize durability aspects more prominently given patient's stated philosophy",
-        "Frame premium budget discussion around patient's specific preference, not generic advice",
-        "Explicitly address 6-month timeline in context of treatment options",
-        "Tailor comfort-related language to profile type",
-        "Reference specific details: 'your back tooth used for chewing' and condition of adjacent teeth",
-        "Personalize opening to feel less generic"
-      ]
-    },
-    "patient_autonomy": {
-      "score": 7,
-      "confidence": 0.85,
-      "feedback": "Generally respects patient autonomy with non-directive language. However, some subtle framing issues and the 'You might choose this if...' structure creates implicit guidance toward certain options.",
-      "issues": [
-        "Section 5 'You might choose this if...' structure subtly guides patient toward matching their situation to options",
-        "Section 6 'may suit you if' language implies recommendation based on conditions",
-        "Section 3 states 'Treatment decisions can be made after reviewing' - implies a process rather than pure choice",
-        "Section 11 'Options to consider:' followed by specific actions feels mildly prescriptive"
-      ],
-      "suggestions": [
-        "Reframe 'You might choose this if...' to 'Some patients in similar situations choose this' to remove direct guidance",
-        "Change 'may suit you if' to 'patients often consider this when' to depersonalize",
-        "Remove process implication - just present information without suggesting when decisions should be made",
-        "Reframe Section 11 as 'Possible next steps include:' to reduce prescriptive tone"
-      ]
-    },
-    "structure_completeness": {
-      "score": 6,
-      "confidence": 0.9,
-      "feedback": "All required sections present but several are underdeveloped. Section lengths are inconsistent - some critical sections are too brief while less important ones are verbose. Logical flow is acceptable but some sections feel out of place.",
-      "issues": [
-        "Section 4 (Interpretation) is only 45 words - severely underdeveloped",
-        "Section 7 (Trade-offs) is only 28 words - should be more substantial",
-        "Section 8 (Process) is only 18 words - inadequate detail",
-        "Section 10 uses different formatting (bullet structure) than rest of report",
-        "Section 3 combines two different topics (first-time context and missing tooth context) awkwardly",
-        "Section 6 comparison table is helpful but comes before trade-offs discussion (illogical order)"
-      ],
-      "suggestions": [
-        "Expand Section 4 to at least 80-100 words with concrete interpretation examples",
-        "Develop Section 7 into meaningful trade-off discussion (100+ words)",
-        "Expand Section 8 with actual process steps for each option (100+ words)",
-        "Make Section 10 formatting consistent with other sections",
-        "Split Section 3 into clearer subsections or integrate first-time context more smoothly",
-        "Consider moving comparison table after trade-offs discussion for better flow"
-      ]
-    },
-    "content_issues": [
-      {
-        "section_number": 2,
-        "source_content": "content/scenarios/S03/en/TP-06.md",
-        "quote": "What you choose to do, if anything, is entirely your decision.",
-        "problem": "Filler phrase 'if anything' adds no value and weakens the statement",
-        "severity": "info",
-        "suggested_fix": "Remove 'if anything' - change to 'What you choose to do is entirely your decision.'"
-      },
-      {
-        "section_number": 3,
-        "source_content": "content/scenarios/S03/en/TP-06.md",
-        "quote": "There are potential long-term considerations—neighboring teeth may shift",
-        "problem": "Verbose transition phrase that delays the actual information",
-        "severity": "warning",
-        "suggested_fix": "Cut the transition and start directly: 'Neighboring teeth may shift over time...'"
-      },
-      {
-        "section_number": 3,
-        "source_content": "content/scenarios/S03/en/TP-06.md",
-        "quote": "but these vary by individual and don't occur in every case",
-        "problem": "Redundant hedging - variability is already implied by 'potential' and 'may'",
-        "severity": "info",
-        "suggested_fix": "Remove this phrase entirely - the hedging is already clear from 'may' language"
-      },
-      {
-        "section_number": 3,
-        "source_content": "content/modules/TM_CTX_FIRST_TIME/en/TP-06.md",
-        "quote": "Treatment decisions can be made after reviewing all information and consulting with your dentist.",
-        "problem": "Generic filler sentence that states the obvious and adds no value",
-        "severity": "warning",
-        "suggested_fix": "Remove entirely or replace with specific context about what first-time patients should know"
-      },
-      {
-        "section_number": 4,
-        "source_content": "content/b_blocks/B_INTERP_STANDARD/en/TP-06.md",
-        "quote": "A dentist would evaluate whether your situation fits common treatment patterns.",
-        "problem": "Vague statement that doesn't provide actionable interpretation",
-        "severity": "warning",
-        "suggested_fix": "Provide specific examples of what patterns might apply to this patient's situation"
-      },
-      {
-        "section_number": 4,
-        "source_content": "content/b_blocks/B_INTERP_STANDARD/en/TP-06.md",
-        "quote": "entire section",
-        "problem": "Section is severely underdeveloped at only 45 words - doesn't fulfill its purpose",
-        "severity": "critical",
-        "suggested_fix": "Expand to 80-100 words with concrete interpretation of patient's specific situation"
-      },
-      {
-        "section_number": 5,
-        "source_content": "content/scenarios/S03/en/TP-06.md",
-        "quote": "Long-term stability if healing is successful",
-        "problem": "Implies guaranteed stability after successful healing - needs hedging",
-        "severity": "warning",
-        "suggested_fix": "Change to 'May provide long-term stability when healing is successful'"
-      },
-      {
-        "section_number": 5,
-        "source_content": "content/scenarios/S03/en/TP-06.md",
-        "quote": "You might choose this if...",
-        "problem": "Repetitive structure becomes monotonous and subtly directive",
-        "severity": "info",
-        "suggested_fix": "Vary the phrasing or reframe as 'Patients often consider this when...'"
-      },
-      {
-        "section_number": 6,
-        "source_content": "content/b_blocks/B_COMPARE_IMPLANT_VS_BRIDGE/en/TP-06.md",
-        "quote": "Typical lifespan: 15-25+ years / 10-15 years",
-        "problem": "Presents lifespan as definitive without hedging about individual variation",
-        "severity": "warning",
-        "suggested_fix": "Add qualifier in table header or footnote: 'Typical lifespan (varies significantly)'"
-      },
-      {
-        "section_number": 7,
-        "source_content": "content/scenarios/S03/en/TP-06.md",
-        "quote": "entire section",
-        "problem": "Only 28 words for critical trade-offs section - severely underdeveloped",
-        "severity": "critical",
-        "suggested_fix": "Expand to 100+ words discussing meaningful trade-offs between permanence, process, cost, and impact on mouth"
-      },
-      {
-        "section_number": 7,
-        "source_content": "content/scenarios/S03/en/TP-06.md",
-        "quote": "Both options are designed to restore comfortable chewing",
-        "problem": "Too definitive about outcomes - implies guaranteed result",
-        "severity": "warning",
-        "suggested_fix": "Change to 'Both options aim to restore comfortable chewing, though individual outcomes vary'"
-      },
-      {
-        "section_number": 8,
-        "source_content": "content/scenarios/S03/en/TP-06.md",
-        "quote": "entire section",
-        "problem": "Only 18 words - completely inadequate for describing treatment processes",
-        "severity": "critical",
-        "suggested_fix": "Expand to 100+ words describing actual steps involved in each treatment process"
-      },
-      {
-        "section_number": 9,
-        "source_content": "content/modules/TM_BUDGET_PREMIUM/en/TP-06.md",
-        "quote": "You've indicated a preference for premium treatment options",
-        "problem": "Generic budget module doesn't personalize to patient's specific priorities",
-        "severity": "warning",
-        "suggested_fix": "Connect premium preference to patient's durability focus and long-term value"
-      },
-      {
-        "section_number": 9,
-        "source_content": "content/scenarios/S03/en/TP-06.md",
-        "quote": "approximately €2,200 – €2,500 / €2,100 – €2,700",
-        "problem": "Cost ranges presented without sufficient caveats about high variability",
-        "severity": "info",
-        "suggested_fix": "Add stronger disclaimer: 'Costs vary significantly by location and complexity - these are rough estimates only'"
-      },
-      {
-        "section_number": 10,
-        "source_content": "content/scenarios/S03/en/TP-06.md",
-        "quote": "Recovery time: typically 2–5 days",
-        "problem": "Presents recovery time as fact rather than typical range with variation",
-        "severity": "info",
-        "suggested_fix": "Rephrase as 'Recovery commonly ranges from 2-5 days, though individual experiences vary'"
-      },
-      {
-        "section_number": 11,
-        "source_content": "content/static/11/en.md",
-        "quote": "Your dentist can provide information and guidance based on clinical examination.",
-        "problem": "Obvious closing statement that adds no value - assumed by reader",
-        "severity": "info",
-        "suggested_fix": "Remove this sentence entirely"
-      },
-      {
-        "section_number": 0,
-        "source_content": "content/scenarios/S03/en/TP-06.md",
-        "quote": "entire report",
-        "problem": "Patient name 'Sarah' never used despite being provided - feels impersonal",
-        "severity": "warning",
-        "suggested_fix": "Use patient name at least once, preferably in opening of Section 2"
-      },
-      {
-        "section_number": 0,
-        "source_content": "content/scenarios/S03/en/TP-06.md",
-        "quote": "entire report",
-        "problem": "No reference to patient-specific details: side_chewing location, mostly_intact_enamel, durability focus",
-        "severity": "warning",
-        "suggested_fix": "Incorporate specific patient details throughout to increase personalization"
-      }
-    ],
-    "content_files_to_review": [
-      "content/scenarios/S03/en/TP-06.md",
-      "content/modules/TM_CTX_FIRST_TIME/en/TP-06.md",
-      "content/b_blocks/B_INTERP_STANDARD/en/TP-06.md",
-      "content/b_blocks/B_COMPARE_IMPLANT_VS_BRIDGE/en/TP-06.md",
-      "content/modules/TM_BUDGET_PREMIUM/en/TP-06.md",
-      "content/static/11/en.md"
-    ],
-    "overall_score": 6.4,
-    "overall_assessment": "This report is structurally complete but suffers from significant quality issues. The writing is verbose with filler language, several critical sections are severely underdeveloped (Sections 4, 7, 8), and personalization is minimal despite detailed patient information being available. Clinical safety is acceptable but could be stronger. The tone appropriately respects autonomy but some framing is subtly directive. Most critically, the report feels generic and cookie-cutter rather than tailored to Sarah's specific situation and priorities.",
-    "recommended_outcome": "BLOCK",
-    "outcome_reasoning": "3 critical content issue(s) found",
-    "metadata": {
-      "model_used": "claude-sonnet-4-5-20250929",
-      "evaluation_timestamp": "2026-01-13T19:36:52.906Z",
-      "duration_ms": 73953,
-      "token_usage": {
-        "input_tokens": 6391,
-        "output_tokens": 3364
-      }
-    }
-  },
   "decision_trace": {
     "session_id": "test-case-005",
-    "started_at": "2026-01-13T19:35:38.940Z",
-    "completed_at": "2026-01-13T19:36:52.906Z",
+    "started_at": "2026-01-19T15:34:37.937Z",
+    "completed_at": "2026-01-19T15:34:37.940Z",
     "events": [
       {
-        "timestamp": "2026-01-13T19:35:38.940Z",
+        "timestamp": "2026-01-19T15:34:37.937Z",
         "stage": "input_validation",
         "action": "validate_input",
         "input": {
@@ -1241,7 +992,7 @@
         "duration_ms": 0
       },
       {
-        "timestamp": "2026-01-13T19:35:38.942Z",
+        "timestamp": "2026-01-19T15:34:37.937Z",
         "stage": "tag_extraction",
         "action": "extract_tags",
         "input": {
@@ -1361,7 +1112,7 @@
         "duration_ms": 0
       },
       {
-        "timestamp": "2026-01-13T19:35:38.943Z",
+        "timestamp": "2026-01-19T15:34:37.937Z",
         "stage": "driver_derivation",
         "action": "derive_drivers",
         "input": {
@@ -1577,10 +1328,10 @@
           ],
           "fallbacks_applied": []
         },
-        "duration_ms": 1
+        "duration_ms": 0
       },
       {
-        "timestamp": "2026-01-13T19:35:38.943Z",
+        "timestamp": "2026-01-19T15:34:37.937Z",
         "stage": "scenario_scoring",
         "action": "score_scenarios",
         "input": {
@@ -1966,7 +1717,7 @@
         "duration_ms": 0
       },
       {
-        "timestamp": "2026-01-13T19:35:38.943Z",
+        "timestamp": "2026-01-19T15:34:37.937Z",
         "stage": "tone_selection",
         "action": "select_tone",
         "input": {
@@ -2021,19 +1772,19 @@
         "duration_ms": 0
       },
       {
-        "timestamp": "2026-01-13T19:35:38.943Z",
+        "timestamp": "2026-01-19T15:34:37.937Z",
         "stage": "content_selection",
         "action": "select_content",
         "input": {
           "scenario": "S03"
         },
         "output": {
-          "count": 11
+          "count": 16
         },
         "duration_ms": 0
       },
       {
-        "timestamp": "2026-01-13T19:35:38.946Z",
+        "timestamp": "2026-01-19T15:34:37.938Z",
         "stage": "scenario_load",
         "action": "load_scenario",
         "input": {
@@ -2043,37 +1794,61 @@
         "output": {
           "loaded": true
         },
-        "duration_ms": 3
+        "duration_ms": 1
       },
       {
-        "timestamp": "2026-01-13T19:35:38.951Z",
+        "timestamp": "2026-01-19T15:34:37.939Z",
         "stage": "composition",
         "action": "compose_report",
         "input": {
-          "selections": 11
+          "selections": 16
         },
         "output": {
           "sections": 11,
-          "words": 769
+          "words": 912
         },
-        "duration_ms": 5
+        "duration_ms": 1
       },
       {
-        "timestamp": "2026-01-13T19:36:52.906Z",
+        "timestamp": "2026-01-19T15:34:37.940Z",
         "stage": "qa_gate",
         "action": "qa_check",
         "input": {
           "report_id": "test-case-005"
         },
         "output": {
-          "_truncated": true,
-          "_size": 15470
+          "outcome": "PASS",
+          "validationResult": {
+            "valid": true,
+            "errors": [],
+            "warnings": [
+              "Section 2 has 31 words, minimum recommended is 100",
+              "Section 4 has 45 words, minimum recommended is 50",
+              "Section 10 has 35 words, minimum recommended is 50"
+            ],
+            "semantic_violations": []
+          },
+          "semanticResult": {
+            "violations": [],
+            "hasViolations": false,
+            "hasCriticalViolations": false,
+            "summary": {
+              "total": 0,
+              "critical": 0,
+              "warning": 0
+            }
+          },
+          "reasons": [
+            "All QA checks passed"
+          ],
+          "canDeliver": true,
+          "requiresReview": false
         },
-        "duration_ms": 73955
+        "duration_ms": 1
       }
     ],
-    "final_outcome": "FLAG"
+    "final_outcome": "PASS"
   },
-  "final_outcome": "FLAG",
+  "final_outcome": "PASS",
   "report_delivered": true
 }
