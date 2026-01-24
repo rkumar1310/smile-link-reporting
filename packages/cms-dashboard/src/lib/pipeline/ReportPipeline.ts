@@ -1,6 +1,7 @@
 /**
  * Report Pipeline
  * Orchestrates the full report generation process
+ * Adapted for Next.js from documents/src/pipeline/ReportPipeline.ts
  */
 
 import type {
@@ -9,21 +10,21 @@ import type {
   AuditRecord,
   QAOutcome,
   SupportedLanguage,
-  ComposedReport
-} from "../types/index.js";
-import { DEFAULT_LANGUAGE } from "../types/index.js";
+  ComposedReport,
+  DriverId,
+  DriverValue,
+  ScenarioSections
+} from "./types";
+import { DEFAULT_LANGUAGE } from "./types";
 
-import { intakeValidator } from "../validation/index.js";
-import { tagExtractor } from "../engine/TagExtractor.js";
-import { driverDeriver } from "../engine/DriverDeriver.js";
-import { scenarioScorer } from "../engine/ScenarioScorer.js";
-import { toneSelector } from "../engine/ToneSelector.js";
-import { contentSelector } from "../engine/ContentSelector.js";
-import { reportComposer, type ContentStore } from "../composition/ReportComposer.js";
-import { createTraceCollector, type TraceCollector } from "../qa/TraceCollector.js";
-import { qaGate } from "../qa/QAGate.js";
-import { ContentStoreAdapter } from "../content/ContentStoreAdapter.js";
-import { contentLoader } from "../content/ContentLoader.js";
+import { intakeValidator } from "./validation/IntakeValidator";
+import { tagExtractor } from "./engines/TagExtractor";
+import { driverDeriver } from "./engines/DriverDeriver";
+import { scenarioScorer } from "./engines/ScenarioScorer";
+import { toneSelector } from "./engines/ToneSelector";
+import { contentSelector } from "./engines/ContentSelector";
+import { reportComposer, type ContentStore } from "./composition/ReportComposer";
+import { qaGate } from "./qa/QAGate";
 
 /**
  * Progress event emitted during pipeline execution
@@ -42,7 +43,6 @@ export interface PipelineProgressEvent {
 export interface PipelineOptions {
   contentStore?: ContentStore;
   skipQA?: boolean;
-  traceEnabled?: boolean;
   /** Callback called after report composition but before LLM evaluation */
   onReportComposed?: (report: ComposedReport, audit: Partial<AuditRecord>) => Promise<void> | void;
   /** Callback for real-time progress updates during pipeline execution */
@@ -51,13 +51,11 @@ export interface PipelineOptions {
 
 export class ReportPipeline {
   private contentStore?: ContentStore;
-  private traceEnabled: boolean;
   private onReportComposed?: (report: ComposedReport, audit: Partial<AuditRecord>) => Promise<void> | void;
   private onProgress?: (event: PipelineProgressEvent) => void | Promise<void>;
 
   constructor(options?: PipelineOptions) {
     this.contentStore = options?.contentStore;
-    this.traceEnabled = options?.traceEnabled ?? true;
     this.onReportComposed = options?.onReportComposed;
     this.onProgress = options?.onProgress;
 
@@ -79,10 +77,6 @@ export class ReportPipeline {
    * Run the full pipeline
    */
   async run(intake: IntakeData): Promise<PipelineResult> {
-    const trace = this.traceEnabled
-      ? createTraceCollector(intake.session_id)
-      : null;
-
     try {
       // Phase 0: Input Validation
       await this.emitProgress({
@@ -95,13 +89,7 @@ export class ReportPipeline {
       });
 
       const validationStart = Date.now();
-      const validationTimer = trace?.startStage("input_validation");
       const validationResult = intakeValidator.safeValidate(intake);
-      validationTimer?.complete(
-        "validate_input",
-        { answers: intake.answers.length },
-        { valid: validationResult.valid, errors: validationResult.errors.length }
-      );
 
       await this.emitProgress({
         phase: 0,
@@ -118,60 +106,7 @@ export class ReportPipeline {
           .map(e => `${e.questionId ? `${e.questionId}: ` : ""}${e.message}`)
           .join("; ");
 
-        const failedAudit: AuditRecord = {
-          session_id: intake.session_id,
-          created_at: new Date().toISOString(),
-          intake,
-          driver_state: {
-            session_id: intake.session_id,
-            drivers: {} as AuditRecord["driver_state"]["drivers"],
-            conflicts: [],
-            fallbacks_applied: []
-          },
-          scenario_match: {
-            session_id: intake.session_id,
-            matched_scenario: "VALIDATION_ERROR",
-            confidence: "FALLBACK",
-            score: 0,
-            all_scores: [],
-            fallback_used: true,
-            fallback_reason: "Input validation failed"
-          },
-          content_selections: [],
-          tone_selection: {
-            selected_tone: "TP-01",
-            reason: "Validation error fallback",
-            evaluated_triggers: []
-          },
-          composed_report: {
-            session_id: intake.session_id,
-            scenario_id: "VALIDATION_ERROR",
-            tone: "TP-01",
-            language: intake.language ?? DEFAULT_LANGUAGE,
-            confidence: "FALLBACK",
-            sections: [],
-            total_word_count: 0,
-            warnings_included: false,
-            suppressed_sections: [],
-            placeholders_resolved: 0,
-            placeholders_unresolved: []
-          },
-          validation_result: {
-            valid: false,
-            errors: validationResult.errors.map(e => e.message),
-            warnings: validationResult.warnings.map(w => w.message),
-            semantic_violations: []
-          },
-          decision_trace: trace?.getTrace("BLOCK") ?? {
-            session_id: intake.session_id,
-            started_at: new Date().toISOString(),
-            completed_at: new Date().toISOString(),
-            events: [],
-            final_outcome: "BLOCK"
-          },
-          final_outcome: "BLOCK",
-          report_delivered: false
-        };
+        const failedAudit = this.createFailedAudit(intake, "VALIDATION_ERROR", `Input validation failed: ${errorMessages}`);
 
         return {
           success: false,
@@ -192,9 +127,7 @@ export class ReportPipeline {
       });
 
       const tagStart = Date.now();
-      const tagTimer = trace?.startStage("tag_extraction");
       const tagResult = tagExtractor.extract(intake);
-      tagTimer?.complete("extract_tags", { answers: intake.answers.length }, tagResult);
 
       await this.emitProgress({
         phase: 1,
@@ -217,9 +150,7 @@ export class ReportPipeline {
       });
 
       const driverStart = Date.now();
-      const driverTimer = trace?.startStage("driver_derivation");
       const driverState = driverDeriver.derive(tagResult);
-      driverTimer?.complete("derive_drivers", { tags: tagResult.tags.length }, driverState);
 
       await this.emitProgress({
         phase: 2,
@@ -245,9 +176,7 @@ export class ReportPipeline {
       });
 
       const scenarioStart = Date.now();
-      const scenarioTimer = trace?.startStage("scenario_scoring");
       const scenarioMatch = scenarioScorer.score(driverState);
-      scenarioTimer?.complete("score_scenarios", { session_id: intake.session_id }, scenarioMatch);
 
       await this.emitProgress({
         phase: 3,
@@ -274,9 +203,7 @@ export class ReportPipeline {
       });
 
       const toneStart = Date.now();
-      const toneTimer = trace?.startStage("tone_selection");
       const toneResult = toneSelector.select(driverState);
-      toneTimer?.complete("select_tone", { drivers: Object.keys(driverState.drivers) }, toneResult);
 
       await this.emitProgress({
         phase: 4,
@@ -303,18 +230,12 @@ export class ReportPipeline {
       });
 
       const contentStart = Date.now();
-      const contentTimer = trace?.startStage("content_selection");
       const tagSet = new Set(tagResult.tags.map(t => t.tag));
       const contentSelections = contentSelector.select(
         driverState,
         scenarioMatch,
         toneResult.selected_tone,
         tagSet
-      );
-      contentTimer?.complete(
-        "select_content",
-        { scenario: scenarioMatch.matched_scenario },
-        { count: contentSelections.length }
       );
 
       await this.emitProgress({
@@ -333,43 +254,40 @@ export class ReportPipeline {
       // Extract language from intake (defaults to English)
       const language: SupportedLanguage = intake.language ?? DEFAULT_LANGUAGE;
 
-      // Phase 6: Load Scenario Content for ordered assembly
+      // Phase 6: Load Scenario Sections (via ContentStore)
       await this.emitProgress({
         phase: 6,
         phaseName: "scenario_load",
         status: "started",
-        message: "Loading scenario content...",
+        message: "Loading scenario sections...",
         timestamp: new Date().toISOString(),
         metrics: { scenario: scenarioMatch.matched_scenario, language }
       });
 
       const loadStart = Date.now();
-      const scenarioLoadTimer = trace?.startStage("scenario_load");
-      let scenarioContent: string | undefined;
-      try {
-        const scenarioData = await contentLoader.loadContent(
-          scenarioMatch.matched_scenario,
-          toneResult.selected_tone,
-          language
-        );
-        scenarioContent = scenarioData?.raw_content;
-      } catch {
-        // Scenario content optional - continue without it
+      let scenarioSections: ScenarioSections | undefined;
+
+      // Try to load structured scenario sections from content store
+      if (this.contentStore?.getScenarioSections) {
+        try {
+          scenarioSections = await this.contentStore.getScenarioSections(
+            scenarioMatch.matched_scenario,
+            toneResult.selected_tone,
+            language
+          ) ?? undefined;
+        } catch {
+          // Scenario content is optional - continue without it
+        }
       }
-      scenarioLoadTimer?.complete(
-        "load_scenario",
-        { scenario_id: scenarioMatch.matched_scenario, language },
-        { loaded: !!scenarioContent }
-      );
 
       await this.emitProgress({
         phase: 6,
         phaseName: "scenario_load",
         status: "completed",
-        message: scenarioContent ? "Scenario content loaded" : "Using default content structure",
+        message: scenarioSections ? "Scenario sections loaded" : "Using default content structure",
         timestamp: new Date().toISOString(),
         metrics: {
-          loaded: !!scenarioContent,
+          loaded: !!scenarioSections,
           scenario: scenarioMatch.matched_scenario
         },
         duration_ms: Date.now() - loadStart
@@ -386,7 +304,6 @@ export class ReportPipeline {
       });
 
       const composeStart = Date.now();
-      const composeTimer = trace?.startStage("composition");
       const report = await reportComposer.compose(
         intake,
         driverState,
@@ -394,12 +311,7 @@ export class ReportPipeline {
         contentSelections,
         toneResult.selected_tone,
         language,
-        scenarioContent
-      );
-      composeTimer?.complete(
-        "compose_report",
-        { selections: contentSelections.length },
-        { sections: report.sections.length, words: report.total_word_count }
+        scenarioSections
       );
 
       await this.emitProgress({
@@ -417,7 +329,7 @@ export class ReportPipeline {
         duration_ms: Date.now() - composeStart
       });
 
-      // Call callback with composed report before LLM evaluation
+      // Call callback with composed report before QA
       if (this.onReportComposed) {
         const partialAudit: Partial<AuditRecord> = {
           session_id: intake.session_id,
@@ -432,24 +344,23 @@ export class ReportPipeline {
         await this.onReportComposed(report, partialAudit);
       }
 
-      // Phase 8: QA Gate (now async for LLM evaluation)
+      // Phase 8: QA Gate
       await this.emitProgress({
         phase: 8,
         phaseName: "qa_gate",
         status: "started",
-        message: "Running quality checks and LLM evaluation...",
+        message: "Running quality checks...",
         timestamp: new Date().toISOString(),
         metrics: { sections: report.sections.length }
       });
 
       const qaStart = Date.now();
-      const qaTimer = trace?.startStage("qa_gate");
       const qaResult = await qaGate.check(
         report,
         contentSelections,
         toneResult.selected_tone,
-        intake,      // Pass intake for LLM evaluation context
-        driverState, // Pass driver state for LLM evaluation context
+        intake,
+        driverState,
         // Forward QA progress events as pipeline events
         async (qaEvent) => {
           await this.emitProgress({
@@ -462,7 +373,6 @@ export class ReportPipeline {
           });
         }
       );
-      qaTimer?.complete("qa_check", { report_id: intake.session_id }, qaResult);
 
       await this.emitProgress({
         phase: 8,
@@ -477,19 +387,9 @@ export class ReportPipeline {
           canDeliver: qaResult.canDeliver,
           validationErrors: qaResult.validationResult.errors.length,
           validationWarnings: qaResult.validationResult.warnings.length,
-          llmEvaluation: qaResult.llmEvaluation ? {
-            overallScore: qaResult.llmEvaluation.overall_score,
-            recommendedOutcome: qaResult.llmEvaluation.recommended_outcome,
-            dimensions: {
-              professional_quality: qaResult.llmEvaluation.professional_quality.score,
-              clinical_safety: qaResult.llmEvaluation.clinical_safety.score,
-              tone_appropriateness: qaResult.llmEvaluation.tone_appropriateness.score,
-              personalization: qaResult.llmEvaluation.personalization.score,
-              patient_autonomy: qaResult.llmEvaluation.patient_autonomy.score,
-              structure_completeness: qaResult.llmEvaluation.structure_completeness.score
-            },
-            contentIssues: qaResult.llmEvaluation.content_issues.length
-          } : undefined
+          validationErrorDetails: qaResult.validationResult.errors,
+          validationWarningDetails: qaResult.validationResult.warnings,
+          semanticViolations: qaResult.semanticResult.violations
         },
         duration_ms: Date.now() - qaStart,
         error: qaResult.canDeliver ? undefined : qaResult.reasons.join("; ")
@@ -506,8 +406,8 @@ export class ReportPipeline {
         tone_selection: toneResult,
         composed_report: report,
         validation_result: qaResult.validationResult,
-        llm_evaluation: qaResult.llmEvaluation,  // Include LLM evaluation in audit
-        decision_trace: trace?.getTrace(qaResult.outcome) ?? {
+        llm_evaluation: qaResult.llmEvaluation,
+        decision_trace: {
           session_id: intake.session_id,
           started_at: new Date().toISOString(),
           completed_at: new Date().toISOString(),
@@ -530,61 +430,7 @@ export class ReportPipeline {
 
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : "Unknown error";
-
-      const failedAudit: AuditRecord = {
-        session_id: intake.session_id,
-        created_at: new Date().toISOString(),
-        intake,
-        driver_state: {
-          session_id: intake.session_id,
-          drivers: {} as AuditRecord["driver_state"]["drivers"],
-          conflicts: [],
-          fallbacks_applied: []
-        },
-        scenario_match: {
-          session_id: intake.session_id,
-          matched_scenario: "ERROR",
-          confidence: "FALLBACK",
-          score: 0,
-          all_scores: [],
-          fallback_used: true,
-          fallback_reason: errorMessage
-        },
-        content_selections: [],
-        tone_selection: {
-          selected_tone: "TP-01",
-          reason: "Error fallback",
-          evaluated_triggers: []
-        },
-        composed_report: {
-          session_id: intake.session_id,
-          scenario_id: "ERROR",
-          tone: "TP-01",
-          language: intake.language ?? DEFAULT_LANGUAGE,
-          confidence: "FALLBACK",
-          sections: [],
-          total_word_count: 0,
-          warnings_included: false,
-          suppressed_sections: [],
-          placeholders_resolved: 0,
-          placeholders_unresolved: []
-        },
-        validation_result: {
-          valid: false,
-          errors: [errorMessage],
-          warnings: [],
-          semantic_violations: []
-        },
-        decision_trace: trace?.getTrace("BLOCK") ?? {
-          session_id: intake.session_id,
-          started_at: new Date().toISOString(),
-          completed_at: new Date().toISOString(),
-          events: [],
-          final_outcome: "BLOCK"
-        },
-        final_outcome: "BLOCK",
-        report_delivered: false
-      };
+      const failedAudit = this.createFailedAudit(intake, "ERROR", errorMessage);
 
       return {
         success: false,
@@ -593,6 +439,66 @@ export class ReportPipeline {
         error: errorMessage
       };
     }
+  }
+
+  /**
+   * Create a failed audit record
+   */
+  private createFailedAudit(intake: IntakeData, scenarioId: string, reason: string): AuditRecord {
+    return {
+      session_id: intake.session_id,
+      created_at: new Date().toISOString(),
+      intake,
+      driver_state: {
+        session_id: intake.session_id,
+        drivers: {} as Record<DriverId, DriverValue>,
+        conflicts: [],
+        fallbacks_applied: []
+      },
+      scenario_match: {
+        session_id: intake.session_id,
+        matched_scenario: scenarioId,
+        confidence: "FALLBACK",
+        score: 0,
+        all_scores: [],
+        fallback_used: true,
+        fallback_reason: reason
+      },
+      content_selections: [],
+      tone_selection: {
+        selected_tone: "TP-01",
+        reason: "Error fallback",
+        evaluated_triggers: []
+      },
+      composed_report: {
+        session_id: intake.session_id,
+        scenario_id: scenarioId,
+        tone: "TP-01",
+        language: intake.language ?? DEFAULT_LANGUAGE,
+        confidence: "FALLBACK",
+        sections: [],
+        total_word_count: 0,
+        warnings_included: false,
+        suppressed_sections: [],
+        placeholders_resolved: 0,
+        placeholders_unresolved: []
+      },
+      validation_result: {
+        valid: false,
+        errors: [reason],
+        warnings: [],
+        semantic_violations: []
+      },
+      decision_trace: {
+        session_id: intake.session_id,
+        started_at: new Date().toISOString(),
+        completed_at: new Date().toISOString(),
+        events: [],
+        final_outcome: "BLOCK"
+      },
+      final_outcome: "BLOCK",
+      report_delivered: false
+    };
   }
 
   /**
@@ -621,16 +527,9 @@ export class ReportPipeline {
     this.contentStore = store;
     reportComposer.setContentStore(store);
   }
-
-  /**
-   * Enable/disable tracing
-   */
-  setTraceEnabled(enabled: boolean): void {
-    this.traceEnabled = enabled;
-  }
 }
 
-// Default pipeline instance with file-based content store
-export const reportPipeline = new ReportPipeline({
-  contentStore: new ContentStoreAdapter()
-});
+// Export a factory function instead of a singleton (content store must be provided)
+export function createReportPipeline(options?: PipelineOptions): ReportPipeline {
+  return new ReportPipeline(options);
+}

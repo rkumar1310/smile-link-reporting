@@ -124,6 +124,18 @@ export interface EvaluationContext {
   contentSelections?: ContentSelection[];  // For source tracing
 }
 
+/**
+ * Progress event emitted during LLM evaluation
+ */
+export interface LLMEvaluationProgressEvent {
+  status: "building_prompt" | "calling_llm" | "processing_response" | "evaluating_dimension";
+  message: string;
+  timestamp: string;
+  metrics?: Record<string, unknown>;
+}
+
+export type LLMEvaluationProgressCallback = (event: LLMEvaluationProgressEvent) => void | Promise<void>;
+
 // Default configuration with tighter thresholds
 const DEFAULT_CONFIG: LLMEvaluatorConfig = {
   enabled: true,  // Enabled by default - always evaluate reports
@@ -224,7 +236,10 @@ export class LLMReportEvaluator {
    * Evaluate a report using LLM with structured output
    * Throws an error if API key is not configured (required for quality assurance)
    */
-  async evaluate(context: EvaluationContext): Promise<LLMEvaluationResult | null> {
+  async evaluate(
+    context: EvaluationContext,
+    onProgress?: LLMEvaluationProgressCallback
+  ): Promise<LLMEvaluationResult | null> {
     // Load config if not already loaded
     await this.loadConfig();
 
@@ -254,10 +269,24 @@ export class LLMReportEvaluator {
 
     const startTime = Date.now();
 
+    // Helper to emit progress
+    const emitProgress = async (event: LLMEvaluationProgressEvent) => {
+      if (onProgress) {
+        await onProgress(event);
+      }
+    };
+
     try {
       const client = this.initClient();
 
       // Build prompts
+      await emitProgress({
+        status: "building_prompt",
+        message: "Building evaluation prompt...",
+        timestamp: new Date().toISOString(),
+        metrics: { reportSections: context.report.sections.length }
+      });
+
       const systemPrompt = this.promptBuilder.buildSystemPrompt();
       const userPrompt = this.promptBuilder.buildUserPrompt({
         report: context.report,
@@ -277,6 +306,13 @@ export class LLMReportEvaluator {
       });
 
       // Call LLM with structured output
+      await emitProgress({
+        status: "calling_llm",
+        message: `Calling ${this.config.model} for quality evaluation...`,
+        timestamp: new Date().toISOString(),
+        metrics: { model: this.config.model, promptTokens: Math.ceil((systemPrompt.length + userPrompt.length) / 4) }
+      });
+
       const response = await client.generateStructured(
         [
           { role: "system", content: systemPrompt },
@@ -286,7 +322,37 @@ export class LLMReportEvaluator {
       );
 
       // Extract evaluation from structured response
+      await emitProgress({
+        status: "processing_response",
+        message: "Processing LLM response...",
+        timestamp: new Date().toISOString()
+      });
+
       const evaluation = response.object;
+
+      // Emit dimension scores as they're processed
+      const dimensions = [
+        { name: "professional_quality", label: "Professional Quality", data: evaluation.professional_quality },
+        { name: "clinical_safety", label: "Clinical Safety", data: evaluation.clinical_safety },
+        { name: "tone_appropriateness", label: "Tone Appropriateness", data: evaluation.tone_appropriateness },
+        { name: "personalization", label: "Personalization", data: evaluation.personalization },
+        { name: "patient_autonomy", label: "Patient Autonomy", data: evaluation.patient_autonomy },
+        { name: "structure_completeness", label: "Structure & Completeness", data: evaluation.structure_completeness }
+      ];
+
+      for (const dim of dimensions) {
+        await emitProgress({
+          status: "evaluating_dimension",
+          message: `${dim.label}: ${dim.data.score}/10`,
+          timestamp: new Date().toISOString(),
+          metrics: {
+            dimension: dim.name,
+            score: dim.data.score,
+            confidence: dim.data.confidence,
+            issues: dim.data.issues.length
+          }
+        });
+      }
 
       // Calculate overall score
       const overall_score = this.calculateOverallScore(evaluation);

@@ -1,0 +1,250 @@
+{
+  "$schema": "./schemas/tag-extraction-rules.schema.json",
+  "version": "1.0.0",
+  "questions": {
+    "Q1": {
+      "name": "Main reason for smile improvement",
+      "required": false,
+      "answers": {
+        "insecure_confidence": ["motivation_confidence"],
+        "discoloured_damaged_worn": ["motivation_aesthetic_damage"],
+        "functional_issues": ["motivation_functional"],
+        "missing_teeth_long_term": ["motivation_missing_teeth"],
+        "beautiful_youthful": ["motivation_aesthetic_premium"],
+        "complete_transformation": ["motivation_full_transformation"],
+        "missing_teeth_improve_color_shape": ["motivation_combination"]
+      }
+    },
+    "Q2": {
+      "name": "Satisfaction score (1-10)",
+      "required": false,
+      "type": "numeric_range",
+      "ranges": {
+        "1-4": ["satisfaction_major_dissatisfaction"],
+        "5-7": ["satisfaction_moderate_dissatisfaction"],
+        "8-10": ["satisfaction_minor_concerns"]
+      }
+    },
+    "Q2a": {
+      "name": "What bothers you most (filter for score 1-4)",
+      "required": false,
+      "conditional_on": { "Q2": ["1", "2", "3", "4"] },
+      "answers": {
+        "esthetics": ["bother_aesthetic"],
+        "chewing_missing": ["bother_functional"],
+        "both": ["bother_combination"]
+      }
+    },
+    "Q3": {
+      "name": "What bothers you most about teeth",
+      "required": false,
+      "multi_select": true,
+      "answers": {
+        "discoloured_dull": ["issue_discoloration"],
+        "crooked_uneven": ["issue_alignment"],
+        "missing_damaged": ["issue_missing_damaged"],
+        "size_harmony": ["issue_size_harmony"],
+        "bite_problems": ["issue_bite"],
+        "gum_recession": ["issue_gum_recession"],
+        "loose_pain_chewing": ["issue_functional_pain"],
+        "missing_aesthetic": ["issue_combination"]
+      }
+    },
+    "Q4": {
+      "name": "Previous treatments",
+      "required": false,
+      "multi_select": true,
+      "answers": {
+        "no_never": ["history_none"],
+        "yes_implants": ["history_implants"],
+        "yes_veneers_crowns": ["history_veneers_crowns"],
+        "yes_orthodontics": ["history_orthodontics"],
+        "yes_periodontal": ["history_periodontal"]
+      }
+    },
+    "Q5": {
+      "name": "Pain/infection/loose teeth",
+      "required": true,
+      "critical": true,
+      "layer": "L1",
+      "answers": {
+        "yes_pain": ["acute_pain"],
+        "yes_infection": ["acute_infection"],
+        "yes_loose_missing": ["acute_loose_missing"],
+        "no_aesthetic_only": ["no_acute_issues"]
+      }
+    },
+    "Q6a": {
+      "name": "Current dental status",
+      "required": true,
+      "primary_selector": true,
+      "answers": {
+        "no_missing": ["status_no_missing"],
+        "one_missing": ["status_single_missing"],
+        "2_4_adjacent": ["status_2_4_adjacent"],
+        "2_4_non_adjacent": ["status_2_4_dispersed"],
+        "mix_adjacent_spread": ["status_mixed_pattern"],
+        "5_plus_one_jaw": ["status_5_plus_missing"],
+        "most_poor_unsaveable": ["status_full_mouth_compromised"]
+      }
+    },
+    "Q6b": {
+      "name": "Location",
+      "required": false,
+      "answers": {
+        "front_aesthetic_zone": ["location_anterior"],
+        "side_chewing": ["location_posterior"],
+        "both": ["location_both"]
+      }
+    },
+    "Q6c": {
+      "name": "Condition of neighbouring teeth",
+      "required": false,
+      "answers": {
+        "intact": ["adjacent_intact"],
+        "partially_restored": ["adjacent_partial_restored"],
+        "heavily_restored": ["adjacent_heavily_restored"]
+      }
+    },
+    "Q6d": {
+      "name": "Health of aesthetic teeth",
+      "required": false,
+      "multi_select": true,
+      "answers": {
+        "mostly_intact_enamel": ["tooth_health_good"],
+        "large_fillings_old_restorations": ["tooth_health_moderate"],
+        "cracks_wear": ["tooth_health_compromised"],
+        "root_canal": ["tooth_health_root_canal"],
+        "severe_discolouration": ["tooth_health_severe_discolor"],
+        "bruxism": ["tooth_health_bruxism"]
+      }
+    },
+    "Q7": {
+      "name": "Smile style preference",
+      "required": false,
+      "answers": {
+        "natural_subtle": ["style_natural"],
+        "hollywood": ["style_hollywood"],
+        "classic_elegant": ["style_classic"],
+        "functional_durable": ["style_functional"]
+      }
+    },
+    "Q8": {
+      "name": "Natural result importance",
+      "required": false,
+      "answers": {
+        "very_important_natural": ["natural_priority_high"],
+        "hollywood_bright_white": ["natural_priority_low"],
+        "best_price_quality_flexible": ["natural_priority_balanced"]
+      }
+    },
+    "Q9": {
+      "name": "Age",
+      "required": false,
+      "answers": {
+        "under_30": ["age_under_30"],
+        "30_45": ["age_30_45"],
+        "45_60": ["age_45_60"],
+        "60_plus": ["age_60_plus"]
+      }
+    },
+    "Q10": {
+      "name": "Budget",
+      "required": false,
+      "answers": {
+        "premium_best_result": ["budget_premium"],
+        "price_quality_flexible": ["budget_balanced"],
+        "affordable_durable": ["budget_conscious"],
+        "cost_estimate_first": ["budget_uncertain"]
+      }
+    },
+    "Q11": {
+      "name": "Specialist willingness",
+      "required": false,
+      "answers": {
+        "yes_for_best_result": ["intent_high"],
+        "maybe_need_info": ["intent_moderate"],
+        "ai_report_first": ["intent_exploratory"]
+      }
+    },
+    "Q12": {
+      "name": "Timeline",
+      "required": false,
+      "answers": {
+        "1_3_months": ["timeline_urgent"],
+        "6_months": ["timeline_medium"],
+        "1_year": ["timeline_relaxed"],
+        "still_exploring": ["timeline_exploratory"]
+      }
+    },
+    "Q13": {
+      "name": "Pregnancy",
+      "required": false,
+      "critical": true,
+      "layer": "L1",
+      "answers": {
+        "no": ["pregnancy_no"],
+        "yes_pregnant": ["pregnancy_yes"],
+        "possibly_within_6_months": ["pregnancy_planning"],
+        "prefer_not_to_say": ["pregnancy_unknown"]
+      }
+    },
+    "Q14": {
+      "name": "Smoking",
+      "required": false,
+      "answers": {
+        "no": ["smoking_no"],
+        "occasionally": ["smoking_occasional"],
+        "weekly": ["smoking_weekly"],
+        "daily": ["smoking_daily"]
+      }
+    },
+    "Q15": {
+      "name": "Oral hygiene",
+      "required": false,
+      "answers": {
+        "good": ["hygiene_good"],
+        "basic": ["hygiene_basic"],
+        "irregular": ["hygiene_irregular"],
+        "poor": ["hygiene_poor"]
+      }
+    },
+    "Q16a": {
+      "name": "Growth completed",
+      "required": false,
+      "critical": true,
+      "layer": "L1",
+      "answers": {
+        "yes_incomplete": ["growth_incomplete"],
+        "no_complete": ["growth_complete"]
+      }
+    },
+    "Q16b": {
+      "name": "Recent extraction",
+      "required": false,
+      "answers": {
+        "yes": ["recent_extraction_yes"],
+        "no": ["recent_extraction_no"]
+      }
+    },
+    "Q17": {
+      "name": "Medical contraindications",
+      "required": false,
+      "critical": true,
+      "layer": "L1",
+      "answers": {
+        "no": ["medical_clear"],
+        "yes": ["medical_contraindication"]
+      }
+    },
+    "Q18": {
+      "name": "Dental anxiety",
+      "required": false,
+      "answers": {
+        "no": ["anxiety_none"],
+        "yes_mild": ["anxiety_mild"],
+        "yes_severe": ["anxiety_severe"]
+      }
+    }
+  }
+}

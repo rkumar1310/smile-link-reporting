@@ -1,0 +1,58 @@
+{
+  "supported_languages": ["en", "nl"],
+  "default_language": "en",
+  "section_names": {
+    "en": {
+      "0": "Important Notices",
+      "1": "Disclaimer",
+      "2": "Your Personal Summary",
+      "3": "Context",
+      "4": "Interpretation",
+      "5": "Treatment Options",
+      "6": "Comparison",
+      "7": "Trade-offs to Consider",
+      "8": "Treatment Process",
+      "9": "Cost Considerations",
+      "10": "Risk Factors",
+      "11": "Next Steps"
+    },
+    "nl": {
+      "0": "Belangrijke Mededelingen",
+      "1": "Disclaimer",
+      "2": "Uw Persoonlijke Samenvatting",
+      "3": "Context",
+      "4": "Interpretatie",
+      "5": "Behandelopties",
+      "6": "Vergelijking",
+      "7": "Afwegingen",
+      "8": "Behandelproces",
+      "9": "Kostenindicatie",
+      "10": "Risicofactoren",
+      "11": "Volgende Stappen"
+    }
+  },
+  "confidence_language": {
+    "en": {
+      "MEDIUM": [],
+      "LOW": [
+        "With the limited information available...",
+        "A more complete picture would require..."
+      ],
+      "FALLBACK": [
+        "This general overview is based on typical situations...",
+        "Your specific circumstances may differ significantly..."
+      ]
+    },
+    "nl": {
+      "MEDIUM": [],
+      "LOW": [
+        "Met de beperkte beschikbare informatie...",
+        "Een vollediger beeld zou vereisen..."
+      ],
+      "FALLBACK": [
+        "Dit algemene overzicht is gebaseerd op typische situaties...",
+        "Uw specifieke omstandigheden kunnen aanzienlijk verschillen..."
+      ]
+    }
+  }
+}

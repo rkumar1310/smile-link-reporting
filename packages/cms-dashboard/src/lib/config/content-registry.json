@@ -1,0 +1,596 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-23",
+  "sections": [
+    {
+      "number": 0,
+      "name": "Warnings",
+      "description": "Safety alerts and important notices shown at the top of the report. Contains critical information about contraindications, risk factors, or urgent symptoms that the patient and dentist should be aware of before proceeding."
+    },
+    {
+      "number": 1,
+      "name": "Disclaimer",
+      "description": "Legal disclaimer explaining the informational nature of the report. Clarifies that the report is not a substitute for professional dental advice and that treatment decisions should be made in consultation with a qualified dentist."
+    },
+    {
+      "number": 2,
+      "name": "Personal Summary",
+      "description": "Personalized overview of the patient's situation based on their questionnaire responses. Provides context about their concerns, goals, and current dental status in an empathetic, patient-centered way."
+    },
+    {
+      "number": 3,
+      "name": "Context",
+      "description": "Background information explaining the clinical context of the patient's dental situation. Helps patients understand what their condition means, why it matters, and how it typically develops."
+    },
+    {
+      "number": 4,
+      "name": "Interpretation",
+      "description": "Clinical interpretation of the patient's profile and how it relates to treatment options. Bridges the gap between raw questionnaire data and actionable treatment considerations."
+    },
+    {
+      "number": 5,
+      "name": "Treatment Options",
+      "description": "Available treatment approaches relevant to the patient's situation. Describes each option's procedure, benefits, and considerations without making specific recommendations."
+    },
+    {
+      "number": 6,
+      "name": "Comparison",
+      "description": "Side-by-side comparison of treatment alternatives. Helps patients understand the key differences between options across factors like durability, aesthetics, cost, and recovery time."
+    },
+    {
+      "number": 7,
+      "name": "Trade-offs",
+      "description": "Honest discussion of pros and cons for different approaches. Acknowledges that every treatment involves compromises and helps set realistic expectations about outcomes."
+    },
+    {
+      "number": 8,
+      "name": "Process",
+      "description": "What to expect during treatment. Explains typical treatment timelines, number of appointments, healing periods, and what happens at each stage of the process."
+    },
+    {
+      "number": 9,
+      "name": "Costs",
+      "description": "Financial considerations and cost factors. Provides context about pricing ranges, what affects costs, and considerations for patients with different budgets."
+    },
+    {
+      "number": 10,
+      "name": "Risk Factors",
+      "description": "Potential risks and complications associated with treatment. Discusses patient-specific risk factors like smoking, medical conditions, or bone quality that may affect outcomes."
+    },
+    {
+      "number": 11,
+      "name": "Next Steps",
+      "description": "Recommended actions for the patient. Guides them on how to proceed, what questions to ask their dentist, and how to prepare for a consultation. Always uses the Autonomy-Respecting tone (TP-06)."
+    }
+  ],
+  "items": [
+    {
+      "id": "S00",
+      "type": "scenario",
+      "name": "Fallback - General dental consultation",
+      "description": "Default scenario used when no specific pattern matches the patient's situation. Provides general guidance about dental consultations and treatment considerations without making specific assumptions about the patient's condition. Serves as a safety net to ensure all patients receive a meaningful report.",
+      "layer": "L2",
+      "sections": [2, 3, 11]
+    },
+    {
+      "id": "S01",
+      "type": "scenario",
+      "name": "No missing teeth, discoloration",
+      "description": "For patients with all teeth present but experiencing aesthetic concerns like discoloration, staining, or color irregularities. Focuses on whitening options, veneers, and other cosmetic treatments. Addresses expectations about shade matching and maintenance requirements.",
+      "layer": "L2",
+      "sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    {
+      "id": "S02",
+      "type": "scenario",
+      "name": "Single tooth missing in visible zone",
+      "description": "For patients missing one tooth in the aesthetic front zone (incisors, canines). Emphasizes the importance of visible zone restoration for confidence and social interactions. Compares implants vs bridges with special attention to aesthetic outcomes and natural appearance.",
+      "layer": "L2",
+      "sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    {
+      "id": "S03",
+      "type": "scenario",
+      "name": "Single tooth missing in posterior chewing zone",
+      "description": "For patients missing one tooth in the back/side chewing area. Focuses primarily on functional restoration rather than aesthetics. Discusses impact on chewing efficiency, bite alignment, and potential shifting of adjacent teeth if left untreated.",
+      "layer": "L2",
+      "sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    {
+      "id": "S04",
+      "type": "scenario",
+      "name": "2-4 teeth missing adjacent",
+      "description": "For patients missing multiple teeth in a row (2-4 adjacent). Addresses the increased complexity of treating connected gaps, options for bridgework vs multiple implants, and considerations around bone preservation in larger gaps.",
+      "layer": "L2",
+      "sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    {
+      "id": "S05",
+      "type": "scenario",
+      "name": "2-4 teeth missing scattered",
+      "description": "For patients missing multiple teeth (2-4) in different locations across the mouth. Discusses treatment planning complexity when gaps are not adjacent, potential need for multiple separate treatments, and prioritization strategies.",
+      "layer": "L2",
+      "sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    {
+      "id": "S06",
+      "type": "scenario",
+      "name": "Missing teeth + aesthetic problem (mixed)",
+      "description": "For patients with both missing teeth AND aesthetic concerns with remaining teeth (discoloration, shape issues, wear). Addresses the complexity of treating both functional and aesthetic needs simultaneously, often requiring comprehensive treatment planning.",
+      "layer": "L2",
+      "sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    {
+      "id": "S07",
+      "type": "scenario",
+      "name": "More than 5 teeth missing adjacent (segmental loss)",
+      "description": "For patients with extensive tooth loss in one continuous segment (5+ teeth in a row). Discusses full-arch considerations, implant-supported bridges, and the significant impact on oral function. May involve bone grafting discussions.",
+      "layer": "L2",
+      "sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    {
+      "id": "S08",
+      "type": "scenario",
+      "name": "More than 5 teeth missing scattered",
+      "description": "For patients with extensive tooth loss scattered across multiple areas (5+ teeth in different locations). Addresses complex treatment planning, potential need for removable partial dentures, and strategies for prioritizing which areas to treat first.",
+      "layer": "L2",
+      "sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    {
+      "id": "S09",
+      "type": "scenario",
+      "name": "Complete jaw edentulous",
+      "description": "For patients who have lost all teeth in one or both jaws. Discusses full denture options, implant-supported overdentures, All-on-4/All-on-6 concepts, and the significant lifestyle adjustments involved. Addresses emotional aspects of complete tooth loss.",
+      "layer": "L2",
+      "sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    {
+      "id": "S10",
+      "type": "scenario",
+      "name": "Almost all teeth unsalvageable",
+      "description": "For patients facing the difficult reality that most remaining teeth cannot be saved. Addresses the emotional weight of this diagnosis, explains why extraction may be recommended, and discusses full-mouth rehabilitation options.",
+      "layer": "L2",
+      "sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    {
+      "id": "S11",
+      "type": "scenario",
+      "name": "No missing teeth, misalignment",
+      "description": "For patients with all teeth present but experiencing crowding, spacing, or alignment issues. Focuses on orthodontic options (braces, clear aligners), discusses treatment duration expectations, and addresses the cosmetic vs functional benefits of alignment correction.",
+      "layer": "L2",
+      "sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    {
+      "id": "S12",
+      "type": "scenario",
+      "name": "Loose teeth or pain (ACUTE)",
+      "description": "PRIORITY SCENARIO for patients with urgent symptoms - tooth mobility, active pain, or infection signs. Emphasizes the need for prompt professional evaluation, explains why these symptoms require immediate attention, and provides guidance on urgent vs emergency care.",
+      "layer": "L2",
+      "sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    {
+      "id": "S13",
+      "type": "scenario",
+      "name": "Young profile, light discoloration",
+      "description": "For younger patients (typically under 30) with mild aesthetic concerns like slight discoloration. Takes a conservative approach appropriate for younger patients, discusses whitening options, and emphasizes preserving natural tooth structure.",
+      "layer": "L2",
+      "sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    {
+      "id": "S14",
+      "type": "scenario",
+      "name": "Older profile, wear and discoloration",
+      "description": "For older patients (typically 55+) with age-related wear, discoloration, and tooth changes. Addresses realistic expectations for mature smiles, focuses on functional preservation alongside aesthetics, and discusses age-appropriate treatment intensity.",
+      "layer": "L2",
+      "sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    {
+      "id": "S15",
+      "type": "scenario",
+      "name": "Hollywood smile preference",
+      "description": "For patients seeking dramatic aesthetic transformation - bright white, perfectly aligned 'Hollywood' style results. Discusses veneers, full smile makeovers, and importantly helps calibrate expectations about what is achievable vs realistic for their specific situation.",
+      "layer": "L2",
+      "sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    {
+      "id": "S16",
+      "type": "scenario",
+      "name": "Old restorations visible/failing",
+      "description": "For patients with aging dental work - old fillings showing, metal margins visible, crowns looking dated or failing. Discusses replacement timing, upgrade options to modern materials, and how to assess whether existing work truly needs replacement.",
+      "layer": "L2",
+      "sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    {
+      "id": "S17",
+      "type": "scenario",
+      "name": "Purely aesthetic improvement",
+      "description": "For patients with healthy teeth seeking elective cosmetic enhancement. No functional issues - purely driven by desire for improved appearance. Discusses options from minimal (whitening) to comprehensive (veneers), with emphasis on informed consent for elective procedures.",
+      "layer": "L2",
+      "sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    {
+      "id": "A_WARN_ACTIVE_SYMPTOMS",
+      "type": "a_block",
+      "name": "Active Symptoms Warning",
+      "description": "Critical safety alert triggered when patient reports active pain, swelling, infection signs, or loose teeth. Appears prominently at report top to ensure patient understands these symptoms require immediate professional evaluation before any elective treatment planning.",
+      "layer": "L1",
+      "sections": [0]
+    },
+    {
+      "id": "A_WARN_PREGNANCY_OR_GROWTH",
+      "type": "a_block",
+      "name": "Pregnancy/Growth Warning",
+      "description": "Safety notice for pregnant patients or those with incomplete jaw growth (typically under 18). Explains why certain treatments like implants should be postponed, and what alternatives may be appropriate during this waiting period.",
+      "layer": "L1",
+      "sections": [0]
+    },
+    {
+      "id": "A_WARN_BIOLOGICAL_INSTABILITY",
+      "type": "a_block",
+      "name": "Biological Instability Warning",
+      "description": "Alert for patients showing signs of unstable oral health - active gum disease, ongoing bone loss, or uncontrolled conditions. Explains why underlying stability should be achieved before major restorative work begins.",
+      "layer": "L1",
+      "sections": [0]
+    },
+    {
+      "id": "A_BLOCK_TREATMENT_OPTIONS",
+      "type": "a_block",
+      "name": "Treatment Options Limitation",
+      "description": "Notice displayed when certain treatment options are contraindicated for this patient. Explains which options may not be suitable and why, helping set appropriate expectations before the treatment options section.",
+      "layer": "L1",
+      "sections": [0]
+    },
+    {
+      "id": "A_WARN_RISK_FACTORS",
+      "type": "a_block",
+      "name": "Risk Factors Warning",
+      "description": "Alert when patient has elevated risk factors that could affect treatment outcomes. May include smoking, diabetes, medications affecting healing, or other conditions. Ensures patient understands their specific risks upfront.",
+      "layer": "L1",
+      "sections": [0]
+    },
+    {
+      "id": "A_WARN_INCOMPLETE_ASSESSMENT",
+      "type": "a_block",
+      "name": "Incomplete Assessment Warning",
+      "description": "Notice when questionnaire responses were incomplete or unclear, limiting the report's specificity. Explains that more detailed guidance requires complete information and encourages thorough discussion with their dentist.",
+      "layer": "L1",
+      "sections": [0]
+    },
+    {
+      "id": "B_CTX_SINGLE_TOOTH",
+      "type": "b_block",
+      "name": "Single Tooth Context",
+      "description": "Contextual explanation for single missing tooth situations. Describes why a single gap matters - impact on neighboring teeth, bone preservation, bite changes over time. Helps patient understand the 'why' behind treatment recommendations.",
+      "layer": "L2",
+      "sections": [3]
+    },
+    {
+      "id": "B_CTX_MULTIPLE_TEETH",
+      "type": "b_block",
+      "name": "Multiple Teeth Context",
+      "description": "Contextual explanation for multiple missing teeth. Discusses cumulative effects of multiple gaps, how chewing function is affected, and why comprehensive planning matters more when multiple sites are involved.",
+      "layer": "L2",
+      "sections": [3]
+    },
+    {
+      "id": "B_CTX_GENERAL",
+      "type": "b_block",
+      "name": "General Context",
+      "description": "General contextual information for dental situations that don't fit specific patterns. Provides foundational understanding about dental health, treatment importance, and the consultation process.",
+      "layer": "L2",
+      "sections": [3]
+    },
+    {
+      "id": "B_INTERP_STANDARD",
+      "type": "b_block",
+      "name": "Standard Interpretation",
+      "description": "Standard clinical interpretation block explaining how the patient's profile translates to treatment considerations. Bridges questionnaire responses to clinical implications in accessible language.",
+      "layer": "L2",
+      "sections": [4]
+    },
+    {
+      "id": "B_OPT_IMPLANT",
+      "type": "b_block",
+      "name": "Implant Options",
+      "description": "Detailed explanation of dental implants as a treatment option. Covers what an implant is, the procedure process, success rates, who is a good candidate, and key considerations like healing time and bone requirements.",
+      "layer": "L2",
+      "sections": [5]
+    },
+    {
+      "id": "B_OPT_BRIDGE",
+      "type": "b_block",
+      "name": "Bridge Options",
+      "description": "Detailed explanation of dental bridges as a treatment option. Covers how bridges work, the procedure, lifespan expectations, and considerations like impact on adjacent teeth that serve as anchors.",
+      "layer": "L2",
+      "sections": [5]
+    },
+    {
+      "id": "B_COMPARE_IMPLANT_VS_BRIDGE",
+      "type": "b_block",
+      "name": "Implant vs Bridge Comparison",
+      "description": "Head-to-head comparison between implants and bridges for replacing missing teeth. Covers factors like longevity, bone preservation, impact on adjacent teeth, cost differences, and which situations favor each option.",
+      "layer": "L2",
+      "sections": [6]
+    },
+    {
+      "id": "B_RISKLANG_STANDARD",
+      "type": "b_block",
+      "name": "Standard Risk Language",
+      "description": "Standard risk communication for patients without elevated risk factors. Discusses general treatment risks in a balanced way that informs without alarming. Appropriate for healthy patients with good prognosis.",
+      "layer": "L2",
+      "sections": [10]
+    },
+    {
+      "id": "B_RISKLANG_ELEVATED",
+      "type": "b_block",
+      "name": "Elevated Risk Language",
+      "description": "Enhanced risk communication for patients with identified risk factors. More detailed discussion of potential complications, importance of compliance, and what can be done to mitigate elevated risks.",
+      "layer": "L2",
+      "sections": [10]
+    },
+    {
+      "id": "STATIC_DISCLAIMER",
+      "type": "static",
+      "name": "Standard Disclaimer",
+      "description": "Legal disclaimer required on all reports. Clarifies that the report provides general information, not specific medical advice, and that all treatment decisions should be made in consultation with a qualified dental professional.",
+      "layer": "L1",
+      "sections": [1]
+    },
+    {
+      "id": "STATIC_NEXT_STEPS",
+      "type": "static",
+      "name": "Next Steps Guidance",
+      "description": "Closing section guiding patients on how to proceed. Provides practical next steps like scheduling a consultation, preparing questions, and what to bring to their appointment. Always uses Autonomy-Respecting tone (TP-06) to empower patient decision-making.",
+      "layer": "L3",
+      "sections": [11]
+    },
+    {
+      "id": "TM_RISK_SMOKING",
+      "type": "module",
+      "name": "Smoking Risk Factor Module",
+      "description": "Inserted when patient indicates they smoke. Explains how smoking affects dental treatment outcomes - reduced healing, increased implant failure risk, gum disease progression. Encourages cessation discussion without being preachy.",
+      "layer": "L1",
+      "sections": [3, 10]
+    },
+    {
+      "id": "TM_CTX_FIRST_TIME",
+      "type": "module",
+      "name": "First-Time Patient Context",
+      "description": "Inserted for patients indicating this is their first significant dental treatment. Provides additional reassurance and explanation appropriate for those new to dental procedures, avoiding assumptions about prior knowledge.",
+      "layer": "L2",
+      "sections": [3]
+    },
+    {
+      "id": "TM_CTX_PREVIOUS_TREATMENT",
+      "type": "module",
+      "name": "Previous Treatment Context",
+      "description": "Inserted for patients with prior dental treatment experience. Acknowledges their familiarity with dental procedures and may reference how current options compare to their past experiences.",
+      "layer": "L2",
+      "sections": [3]
+    },
+    {
+      "id": "TM_BUDGET_LIMITED",
+      "type": "module",
+      "name": "Budget Limited Context",
+      "description": "Inserted for patients indicating budget constraints. Sensitively discusses cost-effective options, phased treatment approaches, and prioritization strategies without judgment. Emphasizes that good outcomes are possible within various budgets.",
+      "layer": "L2",
+      "sections": [9]
+    },
+    {
+      "id": "TM_BUDGET_FLEXIBLE",
+      "type": "module",
+      "name": "Budget Flexible Context",
+      "description": "Inserted for patients with moderate/flexible budgets. Discusses the range of options available at the mid-tier price point, helping patients understand what their budget enables without pushing toward premium options.",
+      "layer": "L2",
+      "sections": [9]
+    },
+    {
+      "id": "TM_BUDGET_PREMIUM",
+      "type": "module",
+      "name": "Premium Budget Context",
+      "description": "Inserted for patients indicating premium budget preferences. Discusses highest-quality materials, advanced techniques, and premium options while ensuring patient understands what they're paying for and that premium doesn't always mean 'better for everyone'.",
+      "layer": "L3",
+      "sections": [9]
+    },
+    {
+      "id": "A_DISCLAIMER",
+      "type": "a_block",
+      "name": "Header Disclaimer",
+      "description": "Brief disclaimer that appears in the header position, providing immediate context that this is an informational report. Shorter than the full disclaimer, serving as an upfront notice.",
+      "layer": "L1",
+      "sections": [0]
+    },
+    {
+      "id": "A_WARN_PAIN",
+      "type": "a_block",
+      "name": "Pain Present Warning",
+      "description": "Specific warning triggered when patient reports current pain. Differentiates between pain levels and urgency, advising appropriate response from monitoring to seeking immediate care.",
+      "layer": "L1",
+      "sections": [0]
+    },
+    {
+      "id": "A_WARN_ANXIETY",
+      "type": "a_block",
+      "name": "Dental Anxiety Warning",
+      "description": "Notice for patients who indicated dental anxiety. Acknowledges their concern, validates it as common, and suggests discussing anxiety management options with their dentist before treatment.",
+      "layer": "L1",
+      "sections": [0]
+    },
+    {
+      "id": "A_WARN_URGENCY",
+      "type": "a_block",
+      "name": "Urgency Flag Warning",
+      "description": "Alert triggered by urgency indicators in questionnaire. Emphasizes timely consultation while helping patient understand what constitutes true dental emergency vs urgent but not emergency situations.",
+      "layer": "L1",
+      "sections": [0]
+    },
+    {
+      "id": "A_WARN_SMOKING",
+      "type": "a_block",
+      "name": "Smoking Warning Block",
+      "description": "Warning block specifically about smoking's impact, separate from the module. More prominent placement in warnings section for heavy smokers or when smoking significantly affects treatment options.",
+      "layer": "L1",
+      "sections": [0]
+    },
+    {
+      "id": "A_WARN_MEDICAL",
+      "type": "a_block",
+      "name": "Medical Condition Warning",
+      "description": "Alert for patients with medical conditions that may affect dental treatment. Emphasizes importance of coordinating dental care with their physician and ensuring dentist has complete medical history.",
+      "layer": "L1",
+      "sections": [0]
+    },
+    {
+      "id": "A_WARN_BUDGET",
+      "type": "a_block",
+      "name": "Budget Constraint Notice",
+      "description": "Low-severity notice when budget constraints significantly limit options. Validates concern while encouraging honest discussion with dentist about realistic options within their means.",
+      "layer": "L1",
+      "sections": [0]
+    },
+    {
+      "id": "TM_PREGNANCY",
+      "type": "module",
+      "name": "Pregnancy Considerations",
+      "description": "Module for pregnant patients explaining dental care considerations during pregnancy. Discusses what treatments are safe, what should be postponed, and importance of maintaining oral health during pregnancy.",
+      "layer": "L1",
+      "sections": [3, 10]
+    },
+    {
+      "id": "TM_DIABETES",
+      "type": "module",
+      "name": "Diabetes Considerations",
+      "description": "Module for diabetic patients explaining the bidirectional relationship between oral health and blood sugar control. Discusses increased healing time and importance of blood sugar management before procedures.",
+      "layer": "L1",
+      "sections": [3, 10]
+    },
+    {
+      "id": "TM_SMOKING",
+      "type": "module",
+      "name": "Smoking Lifestyle Impact",
+      "description": "Module discussing smoking's lifestyle impact on dental health beyond just treatment risks. Covers staining, gum health, and long-term implications in a non-judgmental, informative tone.",
+      "layer": "L2",
+      "sections": [3, 10]
+    },
+    {
+      "id": "TM_BRUXISM",
+      "type": "module",
+      "name": "Bruxism Considerations",
+      "description": "Module for patients who grind or clench their teeth. Explains how bruxism affects treatment choices, importance of night guards, and special considerations for restorations in bruxers.",
+      "layer": "L2",
+      "sections": [3, 10]
+    },
+    {
+      "id": "TM_PERIODONTITIS",
+      "type": "module",
+      "name": "Gum Disease Considerations",
+      "description": "Module for patients with periodontal disease history or active gum disease. Explains importance of treating gum disease before or alongside restorative work and ongoing maintenance requirements.",
+      "layer": "L2",
+      "sections": [3, 10]
+    },
+    {
+      "id": "TM_INFLAMMATION",
+      "type": "module",
+      "name": "Inflammation Considerations",
+      "description": "Module addressing active oral inflammation. Explains why inflammation should be controlled before major treatment and what steps help reduce inflammatory conditions.",
+      "layer": "L2",
+      "sections": [3, 10]
+    },
+    {
+      "id": "TM_POOR_HYGIENE",
+      "type": "module",
+      "name": "Oral Hygiene Improvement",
+      "description": "Module for patients indicating below-average oral hygiene habits. Provides gentle guidance on improving home care without being condescending, emphasizing how good hygiene protects treatment investments.",
+      "layer": "L2",
+      "sections": [3, 10]
+    },
+    {
+      "id": "TM_BONE_LOSS",
+      "type": "module",
+      "name": "Bone Loss Considerations",
+      "description": "Module addressing jawbone loss which affects implant candidacy. Explains bone grafting options, why bone matters for implants, and what alternatives exist if bone is insufficient.",
+      "layer": "L2",
+      "sections": [3, 10]
+    },
+    {
+      "id": "TM_DENTAL_ANXIETY",
+      "type": "module",
+      "name": "Dental Anxiety Support",
+      "description": "Module providing additional support for anxious patients. Discusses sedation options, communication strategies with dentist, and techniques for managing anxiety. More detailed than the warning block.",
+      "layer": "L3",
+      "sections": [3, 8]
+    },
+    {
+      "id": "TM_AGE_FACTOR",
+      "type": "module",
+      "name": "Age-Related Considerations",
+      "description": "Module addressing age-related factors in treatment planning. Content varies based on whether patient is young (jaw still developing), middle-aged (peak treatment candidacy), or senior (additional considerations).",
+      "layer": "L2",
+      "sections": [3, 10]
+    },
+    {
+      "id": "TM_PREMIUM_AESTHETIC",
+      "type": "module",
+      "name": "Premium Aesthetic Options",
+      "description": "Module for patients indicating strong aesthetic preferences and premium budget. Discusses highest-end aesthetic options like premium ceramics, custom shade matching, and boutique dental services.",
+      "layer": "L3",
+      "sections": [5, 9]
+    },
+    {
+      "id": "TM_AESTHETIC_STYLE",
+      "type": "module",
+      "name": "Aesthetic Style Preferences",
+      "description": "Module addressing patient's stated aesthetic preferences (natural vs bright, conservative vs dramatic). Helps translate their vision into realistic treatment outcomes.",
+      "layer": "L3",
+      "sections": [5, 7]
+    },
+    {
+      "id": "TM_FUNCTIONAL_VS_AESTHETIC",
+      "type": "module",
+      "name": "Function vs Aesthetics Balance",
+      "description": "Module for patients with mixed functional and aesthetic priorities. Helps them understand how to balance both goals and where compromises might be needed.",
+      "layer": "L2",
+      "sections": [4, 5]
+    },
+    {
+      "id": "TM_BUDGET_LOW",
+      "type": "module",
+      "name": "Economy Budget Guidance",
+      "description": "Module for patients with significant budget constraints. Focuses on essential treatments, phasing strategies, and how to maximize value within limited means without compromising on safety.",
+      "layer": "L2",
+      "sections": [9]
+    },
+    {
+      "id": "TM_TOOTH_STATUS",
+      "type": "module",
+      "name": "Current Tooth Status",
+      "description": "Module providing context about the patient's current tooth condition based on questionnaire responses. Helps them understand their baseline before discussing treatment options.",
+      "layer": "L2",
+      "sections": [3, 4]
+    },
+    {
+      "id": "TM_ORAL_COMPLEXITY",
+      "type": "module",
+      "name": "Case Complexity Discussion",
+      "description": "Module for patients with complex cases involving multiple issues. Explains why their situation requires more comprehensive planning and potentially specialist involvement.",
+      "layer": "L2",
+      "sections": [3, 4]
+    },
+    {
+      "id": "TM_TREATMENT_HISTORY",
+      "type": "module",
+      "name": "Treatment History Context",
+      "description": "Module acknowledging patient's dental treatment history. Provides context about how past treatments inform current options and any special considerations from prior work.",
+      "layer": "L2",
+      "sections": [3]
+    },
+    {
+      "id": "TM_GENERAL_HEALTH",
+      "type": "module",
+      "name": "General Health Considerations",
+      "description": "Module addressing how general health status affects dental treatment. Covers medication interactions, systemic health conditions, and importance of whole-body health in dental outcomes.",
+      "layer": "L1",
+      "sections": [3, 10]
+    }
+  ]
+}

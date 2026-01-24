@@ -1,6 +1,7 @@
 /**
  * QA Gate
  * Orchestrates all QA checks and determines final outcome
+ * Adapted for Next.js from documents/src/qa/QAGate.ts
  */
 
 import type {
@@ -9,15 +10,13 @@ import type {
   ToneProfileId,
   QAOutcome,
   ValidationResult,
-  SemanticViolation,
   IntakeData,
   DriverState,
   LLMEvaluationResult
-} from "../types/index.js";
+} from "../types";
 
-import { SemanticLeakageDetector, type DetectionResult } from "./SemanticLeakageDetector.js";
-import { CompositionValidator } from "./CompositionValidator.js";
-import { llmReportEvaluator, type LLMEvaluationProgressEvent } from "./LLMReportEvaluator.js";
+import { SemanticLeakageDetector, type DetectionResult } from "./SemanticLeakageDetector";
+import { CompositionValidator } from "./CompositionValidator";
 
 /**
  * Progress callback for QA Gate operations
@@ -38,7 +37,7 @@ export interface QAGateResult {
   outcome: QAOutcome;
   validationResult: ValidationResult;
   semanticResult: DetectionResult;
-  llmEvaluation?: LLMEvaluationResult;  // Optional LLM evaluation result
+  llmEvaluation?: LLMEvaluationResult;
   reasons: string[];
   canDeliver: boolean;
   requiresReview: boolean;
@@ -50,9 +49,8 @@ export interface QAGateConfig {
   maxValidationErrors: number;
   maxValidationWarnings: number;
   blockOnUnresolvedPlaceholders: boolean;
-  // LLM evaluator config
   llmEvaluatorEnabled: boolean;
-  llmEvaluatorCanBlock: boolean;    // If false, LLM can only FLAG, not BLOCK
+  llmEvaluatorCanBlock: boolean;
 }
 
 const DEFAULT_CONFIG: QAGateConfig = {
@@ -61,7 +59,7 @@ const DEFAULT_CONFIG: QAGateConfig = {
   maxValidationErrors: 0,         // Any validation error blocks
   maxValidationWarnings: 10,      // More than 10 warnings flags
   blockOnUnresolvedPlaceholders: false,
-  llmEvaluatorEnabled: true,      // Always evaluate reports with LLM
+  llmEvaluatorEnabled: false,     // Disabled by default in CMS (uses separate fact-checking)
   llmEvaluatorCanBlock: false     // LLM can only FLAG by default (safety)
 };
 
@@ -77,7 +75,7 @@ export class QAGate {
   }
 
   /**
-   * Run all QA checks and determine outcome (async for LLM evaluation)
+   * Run all QA checks and determine outcome
    */
   async check(
     report: ComposedReport,
@@ -114,7 +112,9 @@ export class QAGate {
       timestamp: new Date().toISOString(),
       metrics: {
         errors: validationResult.errors.length,
-        warnings: validationResult.warnings.length
+        warnings: validationResult.warnings.length,
+        errorDetails: validationResult.errors,
+        warningDetails: validationResult.warnings
       },
       duration_ms: Date.now() - validationStart
     });
@@ -147,79 +147,12 @@ export class QAGate {
     validationResult.semantic_violations = semanticResult.violations;
 
     // Determine rule-based outcome
-    let outcome = this.determineRuleBasedOutcome(
+    const outcome = this.determineRuleBasedOutcome(
       semanticResult,
       validationResult,
       report,
       reasons
     );
-
-    // Run LLM evaluation if enabled and not already blocked
-    let llmEvaluation: LLMEvaluationResult | undefined;
-
-    if (
-      this.config.llmEvaluatorEnabled &&
-      outcome !== "BLOCK" &&
-      intake &&
-      driverState
-    ) {
-      // Note: llmReportEvaluator respects its own config file (config/llm-evaluator.json)
-      // The enabled state is controlled by that config, not overridden here
-
-      await emitProgress({
-        stage: "llm_evaluation",
-        status: "started",
-        message: "Starting LLM quality evaluation...",
-        timestamp: new Date().toISOString()
-      });
-
-      const llmStart = Date.now();
-
-      llmEvaluation = await llmReportEvaluator.evaluate(
-        {
-          report,
-          intake,
-          driverState,
-          tone,
-          scenarioId: report.scenario_id
-        },
-        // Forward progress events from LLM evaluator
-        async (llmEvent) => {
-          await emitProgress({
-            stage: "llm_evaluation",
-            status: "in_progress",
-            message: llmEvent.message,
-            timestamp: llmEvent.timestamp,
-            metrics: llmEvent.metrics
-          });
-        }
-      ) ?? undefined;
-
-      if (llmEvaluation) {
-        outcome = this.applyLLMOutcome(outcome, llmEvaluation, reasons);
-
-        await emitProgress({
-          stage: "llm_evaluation",
-          status: "completed",
-          message: `LLM evaluation: ${llmEvaluation.recommended_outcome} (score: ${llmEvaluation.overall_score.toFixed(1)})`,
-          timestamp: new Date().toISOString(),
-          metrics: {
-            overall_score: llmEvaluation.overall_score,
-            recommended_outcome: llmEvaluation.recommended_outcome,
-            dimensions: {
-              professional_quality: llmEvaluation.professional_quality.score,
-              clinical_safety: llmEvaluation.clinical_safety.score,
-              tone_appropriateness: llmEvaluation.tone_appropriateness.score,
-              personalization: llmEvaluation.personalization.score,
-              patient_autonomy: llmEvaluation.patient_autonomy.score,
-              structure_completeness: llmEvaluation.structure_completeness.score
-            },
-            content_issues: llmEvaluation.content_issues.length
-          },
-          duration_ms: Date.now() - llmStart
-        });
-      }
-    }
 
     // If still passing, add success reason
     if (outcome === "PASS" && reasons.length === 0) {
@@ -230,7 +163,6 @@ export class QAGate {
       outcome,
       validationResult,
       semanticResult,
-      llmEvaluation,
       reasons,
       canDeliver: outcome !== "BLOCK",
       requiresReview: outcome === "FLAG"
@@ -238,7 +170,7 @@ export class QAGate {
   }
 
   /**
-   * Synchronous check (legacy method for backward compatibility)
+   * Synchronous check (without LLM evaluation)
    */
   checkSync(
     report: ComposedReport,
@@ -342,44 +274,6 @@ export class QAGate {
   }
 
   /**
-   * Apply LLM evaluation outcome to the current outcome
-   */
-  private applyLLMOutcome(
-    currentOutcome: QAOutcome,
-    llmResult: LLMEvaluationResult,
-    reasons: string[]
-  ): QAOutcome {
-    const llmOutcome = llmResult.recommended_outcome;
-
-    // Handle BLOCK recommendation
-    if (llmOutcome === "BLOCK") {
-      if (this.config.llmEvaluatorCanBlock) {
-        reasons.push(`LLM evaluation BLOCKED: ${llmResult.outcome_reasoning}`);
-        return "BLOCK";
-      } else {
-        reasons.push(`LLM evaluation flagged (BLOCK downgraded): ${llmResult.outcome_reasoning}`);
-        return "FLAG";
-      }
-    }
-
-    // Handle FLAG recommendation
-    if (llmOutcome === "FLAG") {
-      reasons.push(`LLM evaluation flagged: ${llmResult.outcome_reasoning}`);
-      return "FLAG";
-    }
-
-    // Handle PASS recommendation
-    if (llmOutcome === "PASS") {
-      if (currentOutcome === "PASS") {
-        reasons.push(`LLM evaluation passed (score: ${llmResult.overall_score.toFixed(1)})`);
-      }
-      // Don't override a FLAG from rule-based checks
-    }
-
-    return currentOutcome;
-  }
-
-  /**
    * Quick check if a report would pass basic validation
    */
   quickCheck(report: ComposedReport): { pass: boolean; issues: string[] } {
@@ -414,63 +308,6 @@ export class QAGate {
   }
 
   /**
-   * Get detailed report on all violations
-   */
-  getViolationReport(result: QAGateResult): string {
-    const lines: string[] = [];
-
-    lines.push(`QA Gate Result: ${result.outcome}`);
-    lines.push(`Reasons: ${result.reasons.join("; ")}`);
-    lines.push("");
-
-    if (result.semanticResult.violations.length > 0) {
-      lines.push("Semantic Violations:");
-      for (const v of result.semanticResult.violations) {
-        lines.push(
-          `  [${v.severity}] "${v.phrase}" in section ${v.location.section} - ${v.rule}`
-        );
-      }
-      lines.push("");
-    }
-
-    if (result.validationResult.errors.length > 0) {
-      lines.push("Validation Errors:");
-      for (const e of result.validationResult.errors) {
-        lines.push(`  - ${e}`);
-      }
-      lines.push("");
-    }
-
-    if (result.validationResult.warnings.length > 0) {
-      lines.push("Validation Warnings:");
-      for (const w of result.validationResult.warnings) {
-        lines.push(`  - ${w}`);
-      }
-      lines.push("");
-    }
-
-    // Add LLM evaluation summary if present
-    if (result.llmEvaluation) {
-      const llm = result.llmEvaluation;
-      lines.push("LLM Evaluation:");
-      lines.push(`  Overall Score: ${llm.overall_score.toFixed(1)}/10`);
-      lines.push(`  Professional Quality: ${llm.professional_quality.score}/10`);
-      lines.push(`  Clinical Safety: ${llm.clinical_safety.score}/10`);
-      lines.push(`  Tone Appropriateness: ${llm.tone_appropriateness.score}/10`);
-      lines.push(`  Personalization: ${llm.personalization.score}/10`);
-      lines.push(`  Patient Autonomy: ${llm.patient_autonomy.score}/10`);
-      lines.push(`  Structure & Completeness: ${llm.structure_completeness.score}/10`);
-      lines.push(`  Recommended: ${llm.recommended_outcome}`);
-      lines.push(`  Assessment: ${llm.overall_assessment}`);
-      if (llm.content_issues.length > 0) {
-        lines.push(`  Content Issues: ${llm.content_issues.length}`);
-      }
-    }
-
-    return lines.join("\n");
-  }
-
-  /**
    * Update configuration
    */
   updateConfig(config: Partial<QAGateConfig>): void {
@@ -482,13 +319,6 @@ export class QAGate {
    */
   getConfig(): QAGateConfig {
     return { ...this.config };
-  }
-
-  /**
-   * Enable or disable LLM evaluation
-   */
-  setLLMEvaluatorEnabled(enabled: boolean): void {
-    this.config.llmEvaluatorEnabled = enabled;
   }
 }
 

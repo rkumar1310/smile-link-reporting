@@ -1,0 +1,753 @@
+{
+  "version": "1.1.0",
+  "lastUpdated": "2026-01-24",
+  "supportedLanguages": ["en", "nl"],
+  "sections": [
+    {
+      "number": 0,
+      "name": "Warnings",
+      "name_nl": "Waarschuwingen",
+      "description": "Safety alerts and important notices shown at the top of the report. Contains critical information about contraindications, risk factors, or urgent symptoms that the patient and dentist should be aware of before proceeding.",
+      "description_nl": "Veiligheidswaarschuwingen en belangrijke mededelingen bovenaan het rapport. Bevat kritieke informatie over contra-indicaties, risicofactoren of dringende symptomen waar de patiënt en tandarts van op de hoogte moeten zijn voordat ze verder gaan."
+    },
+    {
+      "number": 1,
+      "name": "Disclaimer",
+      "name_nl": "Disclaimer",
+      "description": "Legal disclaimer explaining the informational nature of the report. Clarifies that the report is not a substitute for professional dental advice and that treatment decisions should be made in consultation with a qualified dentist.",
+      "description_nl": "Juridische disclaimer die de informatieve aard van het rapport uitlegt. Verduidelijkt dat het rapport geen vervanging is voor professioneel tandheelkundig advies en dat behandelbeslissingen in overleg met een gekwalificeerde tandarts moeten worden genomen."
+    },
+    {
+      "number": 2,
+      "name": "Personal Summary",
+      "name_nl": "Persoonlijke Samenvatting",
+      "description": "Personalized overview of the patient's situation based on their questionnaire responses. Provides context about their concerns, goals, and current dental status in an empathetic, patient-centered way.",
+      "description_nl": "Gepersonaliseerd overzicht van de situatie van de patiënt op basis van hun vragenlijstantwoorden. Biedt context over hun zorgen, doelen en huidige tandheelkundige status op een empathische, patiëntgerichte manier."
+    },
+    {
+      "number": 3,
+      "name": "Context",
+      "name_nl": "Context",
+      "description": "Background information explaining the clinical context of the patient's dental situation. Helps patients understand what their condition means, why it matters, and how it typically develops.",
+      "description_nl": "Achtergrondinformatie die de klinische context van de tandheelkundige situatie van de patiënt uitlegt. Helpt patiënten begrijpen wat hun aandoening betekent, waarom het belangrijk is en hoe het zich typisch ontwikkelt."
+    },
+    {
+      "number": 4,
+      "name": "Interpretation",
+      "name_nl": "Interpretatie",
+      "description": "Clinical interpretation of the patient's profile and how it relates to treatment options. Bridges the gap between raw questionnaire data and actionable treatment considerations.",
+      "description_nl": "Klinische interpretatie van het profiel van de patiënt en hoe dit zich verhoudt tot behandelopties. Overbrugt de kloof tussen ruwe vragenlijstgegevens en uitvoerbare behandeloverwegingen."
+    },
+    {
+      "number": 5,
+      "name": "Treatment Options",
+      "name_nl": "Behandelopties",
+      "description": "Available treatment approaches relevant to the patient's situation. Describes each option's procedure, benefits, and considerations without making specific recommendations.",
+      "description_nl": "Beschikbare behandelmethoden relevant voor de situatie van de patiënt. Beschrijft de procedure, voordelen en overwegingen van elke optie zonder specifieke aanbevelingen te doen."
+    },
+    {
+      "number": 6,
+      "name": "Comparison",
+      "name_nl": "Vergelijking",
+      "description": "Side-by-side comparison of treatment alternatives. Helps patients understand the key differences between options across factors like durability, aesthetics, cost, and recovery time.",
+      "description_nl": "Vergelijking van behandelalternatieven naast elkaar. Helpt patiënten de belangrijkste verschillen tussen opties te begrijpen op het gebied van duurzaamheid, esthetiek, kosten en hersteltijd."
+    },
+    {
+      "number": 7,
+      "name": "Trade-offs",
+      "name_nl": "Afwegingen",
+      "description": "Honest discussion of pros and cons for different approaches. Acknowledges that every treatment involves compromises and helps set realistic expectations about outcomes.",
+      "description_nl": "Eerlijke bespreking van voor- en nadelen van verschillende benaderingen. Erkent dat elke behandeling compromissen met zich meebrengt en helpt realistische verwachtingen over resultaten te scheppen."
+    },
+    {
+      "number": 8,
+      "name": "Process",
+      "name_nl": "Proces",
+      "description": "What to expect during treatment. Explains typical treatment timelines, number of appointments, healing periods, and what happens at each stage of the process.",
+      "description_nl": "Wat te verwachten tijdens de behandeling. Legt typische behandeltijdlijnen, aantal afspraken, genezingsperiodes en wat er in elke fase van het proces gebeurt uit."
+    },
+    {
+      "number": 9,
+      "name": "Costs",
+      "name_nl": "Kosten",
+      "description": "Financial considerations and cost factors. Provides context about pricing ranges, what affects costs, and considerations for patients with different budgets.",
+      "description_nl": "Financiële overwegingen en kostenfactoren. Biedt context over prijsklassen, wat de kosten beïnvloedt en overwegingen voor patiënten met verschillende budgetten."
+    },
+    {
+      "number": 10,
+      "name": "Risk Factors",
+      "name_nl": "Risicofactoren",
+      "description": "Potential risks and complications associated with treatment. Discusses patient-specific risk factors like smoking, medical conditions, or bone quality that may affect outcomes.",
+      "description_nl": "Potentiële risico's en complicaties geassocieerd met behandeling. Bespreekt patiëntspecifieke risicofactoren zoals roken, medische aandoeningen of botkwaliteit die de resultaten kunnen beïnvloeden."
+    },
+    {
+      "number": 11,
+      "name": "Next Steps",
+      "name_nl": "Volgende Stappen",
+      "description": "Recommended actions for the patient. Guides them on how to proceed, what questions to ask their dentist, and how to prepare for a consultation. Always uses the Autonomy-Respecting tone (TP-06).",
+      "description_nl": "Aanbevolen acties voor de patiënt. Begeleidt hen over hoe verder te gaan, welke vragen ze hun tandarts moeten stellen en hoe ze zich kunnen voorbereiden op een consult. Gebruikt altijd de Autonomie-Respecterende toon (TP-06)."
+    }
+  ],
+  "items": [
+    {
+      "id": "S00",
+      "type": "scenario",
+      "name": "Fallback - General dental consultation",
+      "name_nl": "Terugval - Algemeen tandheelkundig consult",
+      "description": "Default scenario used when no specific pattern matches the patient's situation. Provides general guidance about dental consultations and treatment considerations without making specific assumptions about the patient's condition. Serves as a safety net to ensure all patients receive a meaningful report.",
+      "description_nl": "Standaardscenario dat wordt gebruikt wanneer geen specifiek patroon overeenkomt met de situatie van de patiënt. Biedt algemene begeleiding over tandheelkundige consulten en behandeloverwegingen zonder specifieke aannames over de aandoening van de patiënt. Dient als vangnet om ervoor te zorgen dat alle patiënten een zinvol rapport ontvangen.",
+      "layer": "L2",
+      "sections": [2, 3, 11]
+    },
+    {
+      "id": "S01",
+      "type": "scenario",
+      "name": "No missing teeth, discoloration",
+      "name_nl": "Geen ontbrekende tanden, verkleuring",
+      "description": "For patients with all teeth present but experiencing aesthetic concerns like discoloration, staining, or color irregularities. Focuses on whitening options, veneers, and other cosmetic treatments. Addresses expectations about shade matching and maintenance requirements.",
+      "description_nl": "Voor patiënten met alle tanden aanwezig maar met esthetische zorgen zoals verkleuring, vlekken of kleuronregelmatigheden. Richt zich op bleekopties, veneers en andere cosmetische behandelingen. Behandelt verwachtingen over kleurmatching en onderhoudsvereisten.",
+      "layer": "L2",
+      "sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    {
+      "id": "S02",
+      "type": "scenario",
+      "name": "Single tooth missing in visible zone",
+      "name_nl": "Enkele tand ontbrekend in zichtbare zone",
+      "description": "For patients missing one tooth in the aesthetic front zone (incisors, canines). Emphasizes the importance of visible zone restoration for confidence and social interactions. Compares implants vs bridges with special attention to aesthetic outcomes and natural appearance.",
+      "description_nl": "Voor patiënten die één tand missen in de esthetische frontzone (snijtanden, hoektanden). Benadrukt het belang van herstel van de zichtbare zone voor zelfvertrouwen en sociale interacties. Vergelijkt implantaten versus bruggen met speciale aandacht voor esthetische resultaten en natuurlijke uitstraling.",
+      "layer": "L2",
+      "sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    {
+      "id": "S03",
+      "type": "scenario",
+      "name": "Single tooth missing in posterior chewing zone",
+      "name_nl": "Enkele tand ontbrekend in achterste kauwzone",
+      "description": "For patients missing one tooth in the back/side chewing area. Focuses primarily on functional restoration rather than aesthetics. Discusses impact on chewing efficiency, bite alignment, and potential shifting of adjacent teeth if left untreated.",
+      "description_nl": "Voor patiënten die één tand missen in het achterste/zijdelingse kauwgebied. Richt zich voornamelijk op functioneel herstel in plaats van esthetiek. Bespreekt impact op kauwefficiëntie, beetuitlijning en mogelijke verschuiving van aangrenzende tanden indien onbehandeld.",
+      "layer": "L2",
+      "sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    {
+      "id": "S04",
+      "type": "scenario",
+      "name": "2-4 teeth missing adjacent",
+      "name_nl": "2-4 tanden ontbrekend aangrenzend",
+      "description": "For patients missing multiple teeth in a row (2-4 adjacent). Addresses the increased complexity of treating connected gaps, options for bridgework vs multiple implants, and considerations around bone preservation in larger gaps.",
+      "description_nl": "Voor patiënten die meerdere tanden op een rij missen (2-4 aangrenzend). Behandelt de toegenomen complexiteit van het behandelen van verbonden gaten, opties voor brugwerk versus meerdere implantaten, en overwegingen rond botbehoud bij grotere gaten.",
+      "layer": "L2",
+      "sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    {
+      "id": "S05",
+      "type": "scenario",
+      "name": "2-4 teeth missing scattered",
+      "name_nl": "2-4 tanden ontbrekend verspreid",
+      "description": "For patients missing multiple teeth (2-4) in different locations across the mouth. Discusses treatment planning complexity when gaps are not adjacent, potential need for multiple separate treatments, and prioritization strategies.",
+      "description_nl": "Voor patiënten die meerdere tanden (2-4) missen op verschillende locaties in de mond. Bespreekt complexiteit van behandelplanning wanneer gaten niet aangrenzend zijn, mogelijke behoefte aan meerdere afzonderlijke behandelingen, en prioriteringsstrategieën.",
+      "layer": "L2",
+      "sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    {
+      "id": "S06",
+      "type": "scenario",
+      "name": "Missing teeth + aesthetic problem (mixed)",
+      "name_nl": "Ontbrekende tanden + esthetisch probleem (gemengd)",
+      "description": "For patients with both missing teeth AND aesthetic concerns with remaining teeth (discoloration, shape issues, wear). Addresses the complexity of treating both functional and aesthetic needs simultaneously, often requiring comprehensive treatment planning.",
+      "description_nl": "Voor patiënten met zowel ontbrekende tanden ALS esthetische zorgen bij resterende tanden (verkleuring, vormproblemen, slijtage). Behandelt de complexiteit van het gelijktijdig behandelen van functionele en esthetische behoeften, wat vaak uitgebreide behandelplanning vereist.",
+      "layer": "L2",
+      "sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    {
+      "id": "S07",
+      "type": "scenario",
+      "name": "More than 5 teeth missing adjacent (segmental loss)",
+      "name_nl": "Meer dan 5 tanden ontbrekend aangrenzend (segmenteel verlies)",
+      "description": "For patients with extensive tooth loss in one continuous segment (5+ teeth in a row). Discusses full-arch considerations, implant-supported bridges, and the significant impact on oral function. May involve bone grafting discussions.",
+      "description_nl": "Voor patiënten met uitgebreid tandverlies in één doorlopend segment (5+ tanden op een rij). Bespreekt volledige boogoverweging, implantaatgedragen bruggen, en de significante impact op mondfunctie. Kan botopbouwbesprekingen omvatten.",
+      "layer": "L2",
+      "sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    {
+      "id": "S08",
+      "type": "scenario",
+      "name": "More than 5 teeth missing scattered",
+      "name_nl": "Meer dan 5 tanden ontbrekend verspreid",
+      "description": "For patients with extensive tooth loss scattered across multiple areas (5+ teeth in different locations). Addresses complex treatment planning, potential need for removable partial dentures, and strategies for prioritizing which areas to treat first.",
+      "description_nl": "Voor patiënten met uitgebreid tandverlies verspreid over meerdere gebieden (5+ tanden op verschillende locaties). Behandelt complexe behandelplanning, mogelijke behoefte aan uitneembare partiële prothesen, en strategieën voor het prioriteren van welke gebieden eerst te behandelen.",
+      "layer": "L2",
+      "sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    {
+      "id": "S09",
+      "type": "scenario",
+      "name": "Complete jaw edentulous",
+      "name_nl": "Volledige kaak tandeloos",
+      "description": "For patients who have lost all teeth in one or both jaws. Discusses full denture options, implant-supported overdentures, All-on-4/All-on-6 concepts, and the significant lifestyle adjustments involved. Addresses emotional aspects of complete tooth loss.",
+      "description_nl": "Voor patiënten die alle tanden in één of beide kaken hebben verloren. Bespreekt volledige gebitopties, implantaatgedragen overkappingsprothesen, All-on-4/All-on-6 concepten, en de significante levensstijlaanpassingen die hierbij komen kijken. Behandelt emotionele aspecten van volledig tandverlies.",
+      "layer": "L2",
+      "sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    {
+      "id": "S10",
+      "type": "scenario",
+      "name": "Almost all teeth unsalvageable",
+      "name_nl": "Bijna alle tanden niet meer te redden",
+      "description": "For patients facing the difficult reality that most remaining teeth cannot be saved. Addresses the emotional weight of this diagnosis, explains why extraction may be recommended, and discusses full-mouth rehabilitation options.",
+      "description_nl": "Voor patiënten die geconfronteerd worden met de moeilijke realiteit dat de meeste resterende tanden niet kunnen worden gered. Behandelt het emotionele gewicht van deze diagnose, legt uit waarom extractie kan worden aanbevolen, en bespreekt volledige mondrehabilitatieopties.",
+      "layer": "L2",
+      "sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    {
+      "id": "S11",
+      "type": "scenario",
+      "name": "No missing teeth, misalignment",
+      "name_nl": "Geen ontbrekende tanden, scheefstand",
+      "description": "For patients with all teeth present but experiencing crowding, spacing, or alignment issues. Focuses on orthodontic options (braces, clear aligners), discusses treatment duration expectations, and addresses the cosmetic vs functional benefits of alignment correction.",
+      "description_nl": "Voor patiënten met alle tanden aanwezig maar met crowding, spatiëring of uitlijningsproblemen. Richt zich op orthodontische opties (beugels, onzichtbare aligners), bespreekt verwachtingen over behandelingsduur, en behandelt de cosmetische versus functionele voordelen van uitlijningscorrectie.",
+      "layer": "L2",
+      "sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    {
+      "id": "S12",
+      "type": "scenario",
+      "name": "Loose teeth or pain (ACUTE)",
+      "name_nl": "Losse tanden of pijn (ACUUT)",
+      "description": "PRIORITY SCENARIO for patients with urgent symptoms - tooth mobility, active pain, or infection signs. Emphasizes the need for prompt professional evaluation, explains why these symptoms require immediate attention, and provides guidance on urgent vs emergency care.",
+      "description_nl": "PRIORITEITSSCENARIO voor patiënten met urgente symptomen - tandmobiliteit, actieve pijn of infectietekenen. Benadrukt de noodzaak van snelle professionele evaluatie, legt uit waarom deze symptomen onmiddellijke aandacht vereisen, en biedt begeleiding over urgente versus spoedeisende zorg.",
+      "layer": "L2",
+      "sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    {
+      "id": "S13",
+      "type": "scenario",
+      "name": "Young profile, light discoloration",
+      "name_nl": "Jong profiel, lichte verkleuring",
+      "description": "For younger patients (typically under 30) with mild aesthetic concerns like slight discoloration. Takes a conservative approach appropriate for younger patients, discusses whitening options, and emphasizes preserving natural tooth structure.",
+      "description_nl": "Voor jongere patiënten (doorgaans onder de 30) met milde esthetische zorgen zoals lichte verkleuring. Hanteert een conservatieve benadering geschikt voor jongere patiënten, bespreekt bleekopties, en benadrukt behoud van natuurlijke tandstructuur.",
+      "layer": "L2",
+      "sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    {
+      "id": "S14",
+      "type": "scenario",
+      "name": "Older profile, wear and discoloration",
+      "name_nl": "Ouder profiel, slijtage en verkleuring",
+      "description": "For older patients (typically 55+) with age-related wear, discoloration, and tooth changes. Addresses realistic expectations for mature smiles, focuses on functional preservation alongside aesthetics, and discusses age-appropriate treatment intensity.",
+      "description_nl": "Voor oudere patiënten (doorgaans 55+) met leeftijdsgerelateerde slijtage, verkleuring en tandveranderingen. Behandelt realistische verwachtingen voor volwassen glimlachen, richt zich op functioneel behoud naast esthetiek, en bespreekt leeftijdsgeschikte behandelintensiteit.",
+      "layer": "L2",
+      "sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    {
+      "id": "S15",
+      "type": "scenario",
+      "name": "Hollywood smile preference",
+      "name_nl": "Hollywood-glimlach voorkeur",
+      "description": "For patients seeking dramatic aesthetic transformation - bright white, perfectly aligned 'Hollywood' style results. Discusses veneers, full smile makeovers, and importantly helps calibrate expectations about what is achievable vs realistic for their specific situation.",
+      "description_nl": "Voor patiënten die een dramatische esthetische transformatie zoeken - helderwitte, perfect uitgelijnde 'Hollywood'-stijl resultaten. Bespreekt veneers, volledige glimlach-make-overs, en helpt belangrijk verwachtingen te kalibreren over wat haalbaar versus realistisch is voor hun specifieke situatie.",
+      "layer": "L2",
+      "sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    {
+      "id": "S16",
+      "type": "scenario",
+      "name": "Old restorations visible/failing",
+      "name_nl": "Oude restauraties zichtbaar/falend",
+      "description": "For patients with aging dental work - old fillings showing, metal margins visible, crowns looking dated or failing. Discusses replacement timing, upgrade options to modern materials, and how to assess whether existing work truly needs replacement.",
+      "description_nl": "Voor patiënten met verouderd tandheelkundig werk - oude vullingen zichtbaar, metalen randen zichtbaar, kronen die gedateerd of falend ogen. Bespreekt vervangingstiming, upgrade-opties naar moderne materialen, en hoe te beoordelen of bestaand werk daadwerkelijk vervanging nodig heeft.",
+      "layer": "L2",
+      "sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    {
+      "id": "S17",
+      "type": "scenario",
+      "name": "Purely aesthetic improvement",
+      "name_nl": "Puur esthetische verbetering",
+      "description": "For patients with healthy teeth seeking elective cosmetic enhancement. No functional issues - purely driven by desire for improved appearance. Discusses options from minimal (whitening) to comprehensive (veneers), with emphasis on informed consent for elective procedures.",
+      "description_nl": "Voor patiënten met gezonde tanden die elektieve cosmetische verbetering zoeken. Geen functionele problemen - puur gedreven door verlangen naar verbeterd uiterlijk. Bespreekt opties van minimaal (bleken) tot uitgebreid (veneers), met nadruk op geïnformeerde toestemming voor electieve procedures.",
+      "layer": "L2",
+      "sections": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    {
+      "id": "A_WARN_ACTIVE_SYMPTOMS",
+      "type": "a_block",
+      "name": "Active Symptoms Warning",
+      "name_nl": "Waarschuwing Actieve Symptomen",
+      "description": "Critical safety alert triggered when patient reports active pain, swelling, infection signs, or loose teeth. Appears prominently at report top to ensure patient understands these symptoms require immediate professional evaluation before any elective treatment planning.",
+      "description_nl": "Kritieke veiligheidswaarschuwing die wordt geactiveerd wanneer de patiënt actieve pijn, zwelling, infectietekenen of losse tanden meldt. Verschijnt prominent bovenaan het rapport om ervoor te zorgen dat de patiënt begrijpt dat deze symptomen onmiddellijke professionele evaluatie vereisen voordat enige electieve behandelplanning plaatsvindt.",
+      "layer": "L1",
+      "sections": [0]
+    },
+    {
+      "id": "A_WARN_PREGNANCY_OR_GROWTH",
+      "type": "a_block",
+      "name": "Pregnancy/Growth Warning",
+      "name_nl": "Waarschuwing Zwangerschap/Groei",
+      "description": "Safety notice for pregnant patients or those with incomplete jaw growth (typically under 18). Explains why certain treatments like implants should be postponed, and what alternatives may be appropriate during this waiting period.",
+      "description_nl": "Veiligheidsmelding voor zwangere patiënten of patiënten met onvolledige kaakgroei (doorgaans onder de 18). Legt uit waarom bepaalde behandelingen zoals implantaten moeten worden uitgesteld, en welke alternatieven geschikt kunnen zijn tijdens deze wachtperiode.",
+      "layer": "L1",
+      "sections": [0]
+    },
+    {
+      "id": "A_WARN_BIOLOGICAL_INSTABILITY",
+      "type": "a_block",
+      "name": "Biological Instability Warning",
+      "name_nl": "Waarschuwing Biologische Instabiliteit",
+      "description": "Alert for patients showing signs of unstable oral health - active gum disease, ongoing bone loss, or uncontrolled conditions. Explains why underlying stability should be achieved before major restorative work begins.",
+      "description_nl": "Waarschuwing voor patiënten met tekenen van instabiele mondgezondheid - actieve tandvleesziekte, voortdurend botverlies of ongecontroleerde aandoeningen. Legt uit waarom onderliggende stabiliteit moet worden bereikt voordat groot restauratief werk begint.",
+      "layer": "L1",
+      "sections": [0]
+    },
+    {
+      "id": "A_BLOCK_TREATMENT_OPTIONS",
+      "type": "a_block",
+      "name": "Treatment Options Limitation",
+      "name_nl": "Beperking Behandelopties",
+      "description": "Notice displayed when certain treatment options are contraindicated for this patient. Explains which options may not be suitable and why, helping set appropriate expectations before the treatment options section.",
+      "description_nl": "Melding die wordt weergegeven wanneer bepaalde behandelopties gecontra-indiceerd zijn voor deze patiënt. Legt uit welke opties mogelijk niet geschikt zijn en waarom, om passende verwachtingen te scheppen voor de sectie behandelopties.",
+      "layer": "L1",
+      "sections": [0]
+    },
+    {
+      "id": "A_WARN_RISK_FACTORS",
+      "type": "a_block",
+      "name": "Risk Factors Warning",
+      "name_nl": "Waarschuwing Risicofactoren",
+      "description": "Alert when patient has elevated risk factors that could affect treatment outcomes. May include smoking, diabetes, medications affecting healing, or other conditions. Ensures patient understands their specific risks upfront.",
+      "description_nl": "Waarschuwing wanneer de patiënt verhoogde risicofactoren heeft die behandelresultaten kunnen beïnvloeden. Kan roken, diabetes, medicijnen die genezing beïnvloeden of andere aandoeningen omvatten. Zorgt ervoor dat de patiënt hun specifieke risico's vooraf begrijpt.",
+      "layer": "L1",
+      "sections": [0]
+    },
+    {
+      "id": "A_WARN_INCOMPLETE_ASSESSMENT",
+      "type": "a_block",
+      "name": "Incomplete Assessment Warning",
+      "name_nl": "Waarschuwing Onvolledige Beoordeling",
+      "description": "Notice when questionnaire responses were incomplete or unclear, limiting the report's specificity. Explains that more detailed guidance requires complete information and encourages thorough discussion with their dentist.",
+      "description_nl": "Melding wanneer vragenlijstantwoorden onvolledig of onduidelijk waren, waardoor de specificiteit van het rapport beperkt is. Legt uit dat meer gedetailleerde begeleiding volledige informatie vereist en moedigt grondige bespreking met hun tandarts aan.",
+      "layer": "L1",
+      "sections": [0]
+    },
+    {
+      "id": "B_CTX_SINGLE_TOOTH",
+      "type": "b_block",
+      "name": "Single Tooth Context",
+      "name_nl": "Context Enkele Tand",
+      "description": "Contextual explanation for single missing tooth situations. Describes why a single gap matters - impact on neighboring teeth, bone preservation, bite changes over time. Helps patient understand the 'why' behind treatment recommendations.",
+      "description_nl": "Contextuele uitleg voor situaties met een enkele ontbrekende tand. Beschrijft waarom een enkel gat ertoe doet - impact op naburige tanden, botbehoud, beetveranderingen in de loop van de tijd. Helpt patiënt het 'waarom' achter behandelaanbevelingen te begrijpen.",
+      "layer": "L2",
+      "sections": [3]
+    },
+    {
+      "id": "B_CTX_MULTIPLE_TEETH",
+      "type": "b_block",
+      "name": "Multiple Teeth Context",
+      "name_nl": "Context Meerdere Tanden",
+      "description": "Contextual explanation for multiple missing teeth. Discusses cumulative effects of multiple gaps, how chewing function is affected, and why comprehensive planning matters more when multiple sites are involved.",
+      "description_nl": "Contextuele uitleg voor meerdere ontbrekende tanden. Bespreekt cumulatieve effecten van meerdere gaten, hoe de kauwfunctie wordt beïnvloed, en waarom uitgebreide planning belangrijker is wanneer meerdere locaties betrokken zijn.",
+      "layer": "L2",
+      "sections": [3]
+    },
+    {
+      "id": "B_CTX_GENERAL",
+      "type": "b_block",
+      "name": "General Context",
+      "name_nl": "Algemene Context",
+      "description": "General contextual information for dental situations that don't fit specific patterns. Provides foundational understanding about dental health, treatment importance, and the consultation process.",
+      "description_nl": "Algemene contextuele informatie voor tandheelkundige situaties die niet in specifieke patronen passen. Biedt fundamenteel begrip over tandheelkundige gezondheid, belang van behandeling en het consultatieproces.",
+      "layer": "L2",
+      "sections": [3]
+    },
+    {
+      "id": "B_INTERP_STANDARD",
+      "type": "b_block",
+      "name": "Standard Interpretation",
+      "name_nl": "Standaard Interpretatie",
+      "description": "Standard clinical interpretation block explaining how the patient's profile translates to treatment considerations. Bridges questionnaire responses to clinical implications in accessible language.",
+      "description_nl": "Standaard klinisch interpretatieblok dat uitlegt hoe het profiel van de patiënt zich vertaalt naar behandeloverwegingen. Overbrugt vragenlijstantwoorden naar klinische implicaties in toegankelijke taal.",
+      "layer": "L2",
+      "sections": [4]
+    },
+    {
+      "id": "B_OPT_IMPLANT",
+      "type": "b_block",
+      "name": "Implant Options",
+      "name_nl": "Implantaat Opties",
+      "description": "Detailed explanation of dental implants as a treatment option. Covers what an implant is, the procedure process, success rates, who is a good candidate, and key considerations like healing time and bone requirements.",
+      "description_nl": "Gedetailleerde uitleg over tandimplantaten als behandeloptie. Behandelt wat een implantaat is, het procedureproces, succespercentages, wie een goede kandidaat is, en belangrijke overwegingen zoals genezingstijd en botvereisten.",
+      "layer": "L2",
+      "sections": [5]
+    },
+    {
+      "id": "B_OPT_BRIDGE",
+      "type": "b_block",
+      "name": "Bridge Options",
+      "name_nl": "Brug Opties",
+      "description": "Detailed explanation of dental bridges as a treatment option. Covers how bridges work, the procedure, lifespan expectations, and considerations like impact on adjacent teeth that serve as anchors.",
+      "description_nl": "Gedetailleerde uitleg over tandbruggen als behandeloptie. Behandelt hoe bruggen werken, de procedure, verwachtingen over levensduur, en overwegingen zoals impact op aangrenzende tanden die als ankers dienen.",
+      "layer": "L2",
+      "sections": [5]
+    },
+    {
+      "id": "B_COMPARE_IMPLANT_VS_BRIDGE",
+      "type": "b_block",
+      "name": "Implant vs Bridge Comparison",
+      "name_nl": "Vergelijking Implantaat vs Brug",
+      "description": "Head-to-head comparison between implants and bridges for replacing missing teeth. Covers factors like longevity, bone preservation, impact on adjacent teeth, cost differences, and which situations favor each option.",
+      "description_nl": "Directe vergelijking tussen implantaten en bruggen voor het vervangen van ontbrekende tanden. Behandelt factoren zoals levensduur, botbehoud, impact op aangrenzende tanden, kostenverschillen, en welke situaties elke optie bevoordelen.",
+      "layer": "L2",
+      "sections": [6]
+    },
+    {
+      "id": "B_RISKLANG_STANDARD",
+      "type": "b_block",
+      "name": "Standard Risk Language",
+      "name_nl": "Standaard Risicotaal",
+      "description": "Standard risk communication for patients without elevated risk factors. Discusses general treatment risks in a balanced way that informs without alarming. Appropriate for healthy patients with good prognosis.",
+      "description_nl": "Standaard risicocommunicatie voor patiënten zonder verhoogde risicofactoren. Bespreekt algemene behandelrisico's op een evenwichtige manier die informeert zonder te alarmeren. Geschikt voor gezonde patiënten met goede prognose.",
+      "layer": "L2",
+      "sections": [10]
+    },
+    {
+      "id": "B_RISKLANG_ELEVATED",
+      "type": "b_block",
+      "name": "Elevated Risk Language",
+      "name_nl": "Verhoogd Risico Taal",
+      "description": "Enhanced risk communication for patients with identified risk factors. More detailed discussion of potential complications, importance of compliance, and what can be done to mitigate elevated risks.",
+      "description_nl": "Verbeterde risicocommunicatie voor patiënten met geïdentificeerde risicofactoren. Meer gedetailleerde bespreking van mogelijke complicaties, belang van therapietrouw, en wat kan worden gedaan om verhoogde risico's te verminderen.",
+      "layer": "L2",
+      "sections": [10]
+    },
+    {
+      "id": "STATIC_DISCLAIMER",
+      "type": "static",
+      "name": "Standard Disclaimer",
+      "name_nl": "Standaard Disclaimer",
+      "description": "Legal disclaimer required on all reports. Clarifies that the report provides general information, not specific medical advice, and that all treatment decisions should be made in consultation with a qualified dental professional.",
+      "description_nl": "Juridische disclaimer vereist op alle rapporten. Verduidelijkt dat het rapport algemene informatie biedt, geen specifiek medisch advies, en dat alle behandelbeslissingen in overleg met een gekwalificeerde tandheelkundige professional moeten worden genomen.",
+      "layer": "L1",
+      "sections": [1]
+    },
+    {
+      "id": "STATIC_NEXT_STEPS",
+      "type": "static",
+      "name": "Next Steps Guidance",
+      "name_nl": "Begeleiding Volgende Stappen",
+      "description": "Closing section guiding patients on how to proceed. Provides practical next steps like scheduling a consultation, preparing questions, and what to bring to their appointment. Always uses Autonomy-Respecting tone (TP-06) to empower patient decision-making.",
+      "description_nl": "Afsluitende sectie die patiënten begeleidt over hoe verder te gaan. Biedt praktische volgende stappen zoals het plannen van een consult, het voorbereiden van vragen, en wat mee te nemen naar hun afspraak. Gebruikt altijd de Autonomie-Respecterende toon (TP-06) om patiëntbesluitvorming te versterken.",
+      "layer": "L3",
+      "sections": [11]
+    },
+    {
+      "id": "TM_RISK_SMOKING",
+      "type": "module",
+      "name": "Smoking Risk Factor Module",
+      "name_nl": "Roken Risicofactor Module",
+      "description": "Inserted when patient indicates they smoke. Explains how smoking affects dental treatment outcomes - reduced healing, increased implant failure risk, gum disease progression. Encourages cessation discussion without being preachy.",
+      "description_nl": "Ingevoegd wanneer de patiënt aangeeft te roken. Legt uit hoe roken tandheelkundige behandelresultaten beïnvloedt - verminderde genezing, verhoogd risico op implantaatfalen, progressie van tandvleesziekte. Moedigt bespreking over stoppen aan zonder prekerig te zijn.",
+      "layer": "L1",
+      "sections": [3, 10]
+    },
+    {
+      "id": "TM_CTX_FIRST_TIME",
+      "type": "module",
+      "name": "First-Time Patient Context",
+      "name_nl": "Context Eerste Keer Patiënt",
+      "description": "Inserted for patients indicating this is their first significant dental treatment. Provides additional reassurance and explanation appropriate for those new to dental procedures, avoiding assumptions about prior knowledge.",
+      "description_nl": "Ingevoegd voor patiënten die aangeven dat dit hun eerste significante tandheelkundige behandeling is. Biedt extra geruststelling en uitleg geschikt voor degenen die nieuw zijn met tandheelkundige procedures, zonder aannames over voorkennis.",
+      "layer": "L2",
+      "sections": [3]
+    },
+    {
+      "id": "TM_CTX_PREVIOUS_TREATMENT",
+      "type": "module",
+      "name": "Previous Treatment Context",
+      "name_nl": "Context Eerdere Behandeling",
+      "description": "Inserted for patients with prior dental treatment experience. Acknowledges their familiarity with dental procedures and may reference how current options compare to their past experiences.",
+      "description_nl": "Ingevoegd voor patiënten met eerdere tandheelkundige behandelervaring. Erkent hun bekendheid met tandheelkundige procedures en kan verwijzen naar hoe huidige opties zich verhouden tot hun eerdere ervaringen.",
+      "layer": "L2",
+      "sections": [3]
+    },
+    {
+      "id": "TM_BUDGET_LIMITED",
+      "type": "module",
+      "name": "Budget Limited Context",
+      "name_nl": "Context Beperkt Budget",
+      "description": "Inserted for patients indicating budget constraints. Sensitively discusses cost-effective options, phased treatment approaches, and prioritization strategies without judgment. Emphasizes that good outcomes are possible within various budgets.",
+      "description_nl": "Ingevoegd voor patiënten die budgetbeperkingen aangeven. Bespreekt gevoelig kosteneffectieve opties, gefaseerde behandelmethoden en prioriteringsstrategieën zonder oordeel. Benadrukt dat goede resultaten mogelijk zijn binnen verschillende budgetten.",
+      "layer": "L2",
+      "sections": [9]
+    },
+    {
+      "id": "TM_BUDGET_FLEXIBLE",
+      "type": "module",
+      "name": "Budget Flexible Context",
+      "name_nl": "Context Flexibel Budget",
+      "description": "Inserted for patients with moderate/flexible budgets. Discusses the range of options available at the mid-tier price point, helping patients understand what their budget enables without pushing toward premium options.",
+      "description_nl": "Ingevoegd voor patiënten met matige/flexibele budgetten. Bespreekt het scala aan beschikbare opties in het middensegment, helpt patiënten begrijpen wat hun budget mogelijk maakt zonder naar premium opties te pushen.",
+      "layer": "L2",
+      "sections": [9]
+    },
+    {
+      "id": "TM_BUDGET_PREMIUM",
+      "type": "module",
+      "name": "Premium Budget Context",
+      "name_nl": "Context Premium Budget",
+      "description": "Inserted for patients indicating premium budget preferences. Discusses highest-quality materials, advanced techniques, and premium options while ensuring patient understands what they're paying for and that premium doesn't always mean 'better for everyone'.",
+      "description_nl": "Ingevoegd voor patiënten die premium budgetvoorkeuren aangeven. Bespreekt materialen van hoogste kwaliteit, geavanceerde technieken en premium opties terwijl ervoor wordt gezorgd dat de patiënt begrijpt waarvoor ze betalen en dat premium niet altijd 'beter voor iedereen' betekent.",
+      "layer": "L3",
+      "sections": [9]
+    },
+    {
+      "id": "A_DISCLAIMER",
+      "type": "a_block",
+      "name": "Header Disclaimer",
+      "name_nl": "Koptekst Disclaimer",
+      "description": "Brief disclaimer that appears in the header position, providing immediate context that this is an informational report. Shorter than the full disclaimer, serving as an upfront notice.",
+      "description_nl": "Korte disclaimer die in de koptekstpositie verschijnt, met onmiddellijke context dat dit een informatief rapport is. Korter dan de volledige disclaimer, dient als voorafgaande kennisgeving.",
+      "layer": "L1",
+      "sections": [0]
+    },
+    {
+      "id": "A_WARN_PAIN",
+      "type": "a_block",
+      "name": "Pain Present Warning",
+      "name_nl": "Waarschuwing Pijn Aanwezig",
+      "description": "Specific warning triggered when patient reports current pain. Differentiates between pain levels and urgency, advising appropriate response from monitoring to seeking immediate care.",
+      "description_nl": "Specifieke waarschuwing die wordt geactiveerd wanneer de patiënt huidige pijn meldt. Maakt onderscheid tussen pijnniveaus en urgentie, adviseert passende reactie van monitoring tot het zoeken van onmiddellijke zorg.",
+      "layer": "L1",
+      "sections": [0]
+    },
+    {
+      "id": "A_WARN_ANXIETY",
+      "type": "a_block",
+      "name": "Dental Anxiety Warning",
+      "name_nl": "Waarschuwing Tandheelkundige Angst",
+      "description": "Notice for patients who indicated dental anxiety. Acknowledges their concern, validates it as common, and suggests discussing anxiety management options with their dentist before treatment.",
+      "description_nl": "Kennisgeving voor patiënten die tandheelkundige angst aangaven. Erkent hun zorg, valideert het als gangbaar, en suggereert het bespreken van angstbeheersingsopties met hun tandarts voor de behandeling.",
+      "layer": "L1",
+      "sections": [0]
+    },
+    {
+      "id": "A_WARN_URGENCY",
+      "type": "a_block",
+      "name": "Urgency Flag Warning",
+      "name_nl": "Waarschuwing Urgentievlag",
+      "description": "Alert triggered by urgency indicators in questionnaire. Emphasizes timely consultation while helping patient understand what constitutes true dental emergency vs urgent but not emergency situations.",
+      "description_nl": "Waarschuwing geactiveerd door urgentie-indicatoren in vragenlijst. Benadrukt tijdig consult terwijl het de patiënt helpt begrijpen wat een echte tandheelkundige noodsituatie is versus urgente maar niet-noodsituaties.",
+      "layer": "L1",
+      "sections": [0]
+    },
+    {
+      "id": "A_WARN_SMOKING",
+      "type": "a_block",
+      "name": "Smoking Warning Block",
+      "name_nl": "Waarschuwingsblok Roken",
+      "description": "Warning block specifically about smoking's impact, separate from the module. More prominent placement in warnings section for heavy smokers or when smoking significantly affects treatment options.",
+      "description_nl": "Waarschuwingsblok specifiek over de impact van roken, gescheiden van de module. Meer prominente plaatsing in waarschuwingensectie voor zware rokers of wanneer roken behandelopties significant beïnvloedt.",
+      "layer": "L1",
+      "sections": [0]
+    },
+    {
+      "id": "A_WARN_MEDICAL",
+      "type": "a_block",
+      "name": "Medical Condition Warning",
+      "name_nl": "Waarschuwing Medische Aandoening",
+      "description": "Alert for patients with medical conditions that may affect dental treatment. Emphasizes importance of coordinating dental care with their physician and ensuring dentist has complete medical history.",
+      "description_nl": "Waarschuwing voor patiënten met medische aandoeningen die tandheelkundige behandeling kunnen beïnvloeden. Benadrukt het belang van coördinatie van tandheelkundige zorg met hun arts en ervoor zorgen dat de tandarts volledige medische geschiedenis heeft.",
+      "layer": "L1",
+      "sections": [0]
+    },
+    {
+      "id": "A_WARN_BUDGET",
+      "type": "a_block",
+      "name": "Budget Constraint Notice",
+      "name_nl": "Kennisgeving Budgetbeperking",
+      "description": "Low-severity notice when budget constraints significantly limit options. Validates concern while encouraging honest discussion with dentist about realistic options within their means.",
+      "description_nl": "Melding met lage ernst wanneer budgetbeperkingen opties significant beperken. Valideert bezorgdheid terwijl het eerlijke discussie met tandarts aanmoedigt over realistische opties binnen hun mogelijkheden.",
+      "layer": "L1",
+      "sections": [0]
+    },
+    {
+      "id": "TM_PREGNANCY",
+      "type": "module",
+      "name": "Pregnancy Considerations",
+      "name_nl": "Overwegingen Zwangerschap",
+      "description": "Module for pregnant patients explaining dental care considerations during pregnancy. Discusses what treatments are safe, what should be postponed, and importance of maintaining oral health during pregnancy.",
+      "description_nl": "Module voor zwangere patiënten die tandheelkundige zorgoverweging tijdens zwangerschap uitlegt. Bespreekt welke behandelingen veilig zijn, wat moet worden uitgesteld, en het belang van behoud van mondgezondheid tijdens zwangerschap.",
+      "layer": "L1",
+      "sections": [3, 10]
+    },
+    {
+      "id": "TM_DIABETES",
+      "type": "module",
+      "name": "Diabetes Considerations",
+      "name_nl": "Overwegingen Diabetes",
+      "description": "Module for diabetic patients explaining the bidirectional relationship between oral health and blood sugar control. Discusses increased healing time and importance of blood sugar management before procedures.",
+      "description_nl": "Module voor diabetische patiënten die de bidirectionele relatie tussen mondgezondheid en bloedsuikercontrole uitlegt. Bespreekt verhoogde genezingstijd en het belang van bloedsuikerbeheer voor procedures.",
+      "layer": "L1",
+      "sections": [3, 10]
+    },
+    {
+      "id": "TM_SMOKING",
+      "type": "module",
+      "name": "Smoking Lifestyle Impact",
+      "name_nl": "Impact Levensstijl Roken",
+      "description": "Module discussing smoking's lifestyle impact on dental health beyond just treatment risks. Covers staining, gum health, and long-term implications in a non-judgmental, informative tone.",
+      "description_nl": "Module die de levensstijlimpact van roken op tandheelkundige gezondheid bespreekt naast alleen behandelrisico's. Behandelt vlekken, tandvleesgezondheid en langetermijnimplicaties in een niet-oordelende, informatieve toon.",
+      "layer": "L2",
+      "sections": [3, 10]
+    },
+    {
+      "id": "TM_BRUXISM",
+      "type": "module",
+      "name": "Bruxism Considerations",
+      "name_nl": "Overwegingen Bruxisme",
+      "description": "Module for patients who grind or clench their teeth. Explains how bruxism affects treatment choices, importance of night guards, and special considerations for restorations in bruxers.",
+      "description_nl": "Module voor patiënten die knarsen of klemmen met hun tanden. Legt uit hoe bruxisme behandelkeuzes beïnvloedt, het belang van nachtbeschermers, en speciale overwegingen voor restauraties bij bruxers.",
+      "layer": "L2",
+      "sections": [3, 10]
+    },
+    {
+      "id": "TM_PERIODONTITIS",
+      "type": "module",
+      "name": "Gum Disease Considerations",
+      "name_nl": "Overwegingen Tandvleesziekte",
+      "description": "Module for patients with periodontal disease history or active gum disease. Explains importance of treating gum disease before or alongside restorative work and ongoing maintenance requirements.",
+      "description_nl": "Module voor patiënten met parodontale ziektegeschiedenis of actieve tandvleesziekte. Legt het belang uit van behandeling van tandvleesziekte voor of naast restauratief werk en doorlopende onderhoudsvereisten.",
+      "layer": "L2",
+      "sections": [3, 10]
+    },
+    {
+      "id": "TM_INFLAMMATION",
+      "type": "module",
+      "name": "Inflammation Considerations",
+      "name_nl": "Overwegingen Ontsteking",
+      "description": "Module addressing active oral inflammation. Explains why inflammation should be controlled before major treatment and what steps help reduce inflammatory conditions.",
+      "description_nl": "Module die actieve mondontsteking behandelt. Legt uit waarom ontsteking onder controle moet zijn voor grote behandelingen en welke stappen helpen ontstekingscondities te verminderen.",
+      "layer": "L2",
+      "sections": [3, 10]
+    },
+    {
+      "id": "TM_POOR_HYGIENE",
+      "type": "module",
+      "name": "Oral Hygiene Improvement",
+      "name_nl": "Verbetering Mondhygiëne",
+      "description": "Module for patients indicating below-average oral hygiene habits. Provides gentle guidance on improving home care without being condescending, emphasizing how good hygiene protects treatment investments.",
+      "description_nl": "Module voor patiënten die ondergemiddelde mondhygiënegewoonten aangeven. Biedt zachte begeleiding over het verbeteren van thuiszorg zonder neerbuigend te zijn, benadrukkend hoe goede hygiëne behandelinvesteringen beschermt.",
+      "layer": "L2",
+      "sections": [3, 10]
+    },
+    {
+      "id": "TM_BONE_LOSS",
+      "type": "module",
+      "name": "Bone Loss Considerations",
+      "name_nl": "Overwegingen Botverlies",
+      "description": "Module addressing jawbone loss which affects implant candidacy. Explains bone grafting options, why bone matters for implants, and what alternatives exist if bone is insufficient.",
+      "description_nl": "Module die kaakbotverlies behandelt dat implantaatkandidatuur beïnvloedt. Legt botopbouwopties uit, waarom bot belangrijk is voor implantaten, en welke alternatieven bestaan als bot onvoldoende is.",
+      "layer": "L2",
+      "sections": [3, 10]
+    },
+    {
+      "id": "TM_DENTAL_ANXIETY",
+      "type": "module",
+      "name": "Dental Anxiety Support",
+      "name_nl": "Ondersteuning Tandheelkundige Angst",
+      "description": "Module providing additional support for anxious patients. Discusses sedation options, communication strategies with dentist, and techniques for managing anxiety. More detailed than the warning block.",
+      "description_nl": "Module die extra ondersteuning biedt voor angstige patiënten. Bespreekt sedatie-opties, communicatiestrategieën met tandarts, en technieken voor angstbeheersing. Gedetailleerder dan het waarschuwingsblok.",
+      "layer": "L3",
+      "sections": [3, 8]
+    },
+    {
+      "id": "TM_AGE_FACTOR",
+      "type": "module",
+      "name": "Age-Related Considerations",
+      "name_nl": "Leeftijdsgerelateerde Overwegingen",
+      "description": "Module addressing age-related factors in treatment planning. Content varies based on whether patient is young (jaw still developing), middle-aged (peak treatment candidacy), or senior (additional considerations).",
+      "description_nl": "Module die leeftijdsgerelateerde factoren in behandelplanning behandelt. Inhoud varieert op basis van of de patiënt jong is (kaak nog in ontwikkeling), middelbare leeftijd (piek behandelkandidatuur), of senior (aanvullende overwegingen).",
+      "layer": "L2",
+      "sections": [3, 10]
+    },
+    {
+      "id": "TM_PREMIUM_AESTHETIC",
+      "type": "module",
+      "name": "Premium Aesthetic Options",
+      "name_nl": "Premium Esthetische Opties",
+      "description": "Module for patients indicating strong aesthetic preferences and premium budget. Discusses highest-end aesthetic options like premium ceramics, custom shade matching, and boutique dental services.",
+      "description_nl": "Module voor patiënten die sterke esthetische voorkeuren en premium budget aangeven. Bespreekt hoogwaardige esthetische opties zoals premium keramiek, aangepaste kleurmatching, en boutique tandheelkundige diensten.",
+      "layer": "L3",
+      "sections": [5, 9]
+    },
+    {
+      "id": "TM_AESTHETIC_STYLE",
+      "type": "module",
+      "name": "Aesthetic Style Preferences",
+      "name_nl": "Esthetische Stijlvoorkeuren",
+      "description": "Module addressing patient's stated aesthetic preferences (natural vs bright, conservative vs dramatic). Helps translate their vision into realistic treatment outcomes.",
+      "description_nl": "Module die de vermelde esthetische voorkeuren van de patiënt behandelt (natuurlijk vs helder, conservatief vs dramatisch). Helpt hun visie te vertalen naar realistische behandelresultaten.",
+      "layer": "L3",
+      "sections": [5, 7]
+    },
+    {
+      "id": "TM_FUNCTIONAL_VS_AESTHETIC",
+      "type": "module",
+      "name": "Function vs Aesthetics Balance",
+      "name_nl": "Balans Functie vs Esthetiek",
+      "description": "Module for patients with mixed functional and aesthetic priorities. Helps them understand how to balance both goals and where compromises might be needed.",
+      "description_nl": "Module voor patiënten met gemengde functionele en esthetische prioriteiten. Helpt hen begrijpen hoe beide doelen in balans te brengen en waar compromissen nodig kunnen zijn.",
+      "layer": "L2",
+      "sections": [4, 5]
+    },
+    {
+      "id": "TM_BUDGET_LOW",
+      "type": "module",
+      "name": "Economy Budget Guidance",
+      "name_nl": "Begeleiding Zuinig Budget",
+      "description": "Module for patients with significant budget constraints. Focuses on essential treatments, phasing strategies, and how to maximize value within limited means without compromising on safety.",
+      "description_nl": "Module voor patiënten met significante budgetbeperkingen. Richt zich op essentiële behandelingen, faseringsstrategieën, en hoe waarde te maximaliseren binnen beperkte middelen zonder concessies aan veiligheid.",
+      "layer": "L2",
+      "sections": [9]
+    },
+    {
+      "id": "TM_TOOTH_STATUS",
+      "type": "module",
+      "name": "Current Tooth Status",
+      "name_nl": "Huidige Tandstatus",
+      "description": "Module providing context about the patient's current tooth condition based on questionnaire responses. Helps them understand their baseline before discussing treatment options.",
+      "description_nl": "Module die context biedt over de huidige tandconditie van de patiënt op basis van vragenlijstantwoorden. Helpt hen hun uitgangspositie te begrijpen voordat behandelopties worden besproken.",
+      "layer": "L2",
+      "sections": [3, 4]
+    },
+    {
+      "id": "TM_ORAL_COMPLEXITY",
+      "type": "module",
+      "name": "Case Complexity Discussion",
+      "name_nl": "Bespreking Casuscomplexiteit",
+      "description": "Module for patients with complex cases involving multiple issues. Explains why their situation requires more comprehensive planning and potentially specialist involvement.",
+      "description_nl": "Module voor patiënten met complexe casussen met meerdere problemen. Legt uit waarom hun situatie uitgebreidere planning vereist en mogelijk specialistenbetrokkenheid.",
+      "layer": "L2",
+      "sections": [3, 4]
+    },
+    {
+      "id": "TM_TREATMENT_HISTORY",
+      "type": "module",
+      "name": "Treatment History Context",
+      "name_nl": "Context Behandelgeschiedenis",
+      "description": "Module acknowledging patient's dental treatment history. Provides context about how past treatments inform current options and any special considerations from prior work.",
+      "description_nl": "Module die de tandheelkundige behandelgeschiedenis van de patiënt erkent. Biedt context over hoe eerdere behandelingen huidige opties informeren en eventuele speciale overwegingen van eerder werk.",
+      "layer": "L2",
+      "sections": [3]
+    },
+    {
+      "id": "TM_GENERAL_HEALTH",
+      "type": "module",
+      "name": "General Health Considerations",
+      "name_nl": "Overwegingen Algemene Gezondheid",
+      "description": "Module addressing how general health status affects dental treatment. Covers medication interactions, systemic health conditions, and importance of whole-body health in dental outcomes.",
+      "description_nl": "Module die behandelt hoe algemene gezondheidsstatus tandheelkundige behandeling beïnvloedt. Behandelt medicijninteracties, systemische gezondheidsaandoeningen, en het belang van totale lichaamsgezondheid in tandheelkundige resultaten.",
+      "layer": "L1",
+      "sections": [3, 10]
+    }
+  ]
+}
