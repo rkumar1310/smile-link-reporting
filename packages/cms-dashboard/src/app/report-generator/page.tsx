@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import { ReportGenerationProgress } from "@/components/report/ReportGenerationProgress";
 import { ReportDisplay } from "@/components/report/ReportDisplay";
-import type { ReportPhase, ReportPhaseEvent, ComposedReport, IntakeAnswers } from "@/lib/types/types/report-generation";
+import type { ReportPhase, ReportPhaseEvent, ComposedReport, IntakeAnswers, LLMEvaluationData } from "@/lib/types/types/report-generation";
 
 // Question option types
 interface Option {
@@ -318,6 +318,7 @@ export default function ReportGeneratorPage() {
   const [phases, setPhases] = useState<PhaseState[]>([]);
   const [currentPhase, setCurrentPhase] = useState<ReportPhase | undefined>();
   const [report, setReport] = useState<ComposedReport | null>(null);
+  const [llmEvaluation, setLlmEvaluation] = useState<LLMEvaluationData | null>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
 
   // Initialize phases for progress display
@@ -362,6 +363,10 @@ export default function ReportGeneratorPage() {
     // Handle completion
     if (event.phase === "complete" && "data" in event && event.data?.report) {
       setReport(event.data.report as ComposedReport);
+      // Extract LLM evaluation if present
+      if (event.data.llmEvaluation) {
+        setLlmEvaluation(event.data.llmEvaluation as LLMEvaluationData);
+      }
       setViewState("complete");
     }
 
@@ -456,6 +461,7 @@ export default function ReportGeneratorPage() {
   const handleGenerateNew = useCallback(() => {
     setViewState("form");
     setReport(null);
+    setLlmEvaluation(null);
     setPhases([]);
     setCurrentPhase(undefined);
     setError(null);
@@ -591,7 +597,7 @@ export default function ReportGeneratorPage() {
           <div className="flex gap-6">
             {/* Report - 70% */}
             <div className="w-[70%]">
-              <ReportDisplay report={report} onGenerateNew={handleGenerateNew} />
+              <ReportDisplay report={report} llmEvaluation={llmEvaluation ?? undefined} onGenerateNew={handleGenerateNew} />
             </div>
             {/* Q&A Panel - 30% */}
             <div className="w-[30%]">

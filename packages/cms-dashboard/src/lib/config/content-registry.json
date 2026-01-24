@@ -369,6 +369,62 @@
       "sections": [3]
     },
     {
+      "id": "TM_CTX_AGE",
+      "type": "module",
+      "name": "Age Context Module",
+      "description": "Provides age-appropriate context for treatment discussions. Adapts messaging for young adults, middle-aged, or senior patients with relevant considerations for each life stage.",
+      "layer": "L2",
+      "sections": [3]
+    },
+    {
+      "id": "TM_CTX_PREMIUM_AESTHETIC",
+      "type": "module",
+      "name": "Premium Aesthetic Context",
+      "description": "Inserted for patients with high aesthetic expectations. Discusses premium aesthetic options, materials, and techniques for optimal visual outcomes.",
+      "layer": "L3",
+      "sections": [3]
+    },
+    {
+      "id": "TM_CTX_AESTHETIC_STYLE",
+      "type": "module",
+      "name": "Aesthetic Style Context",
+      "description": "Addresses patient's aesthetic tolerance and style preferences. Discusses natural vs. enhanced looks based on patient preferences.",
+      "layer": "L2",
+      "sections": [3]
+    },
+    {
+      "id": "TM_CTX_FUNCTIONAL_VS_AESTHETIC",
+      "type": "module",
+      "name": "Functional vs Aesthetic Balance",
+      "description": "For patients prioritizing function over aesthetics or seeking a balanced approach. Discusses how treatment options address both functional and aesthetic needs.",
+      "layer": "L2",
+      "sections": [3]
+    },
+    {
+      "id": "TM_CTX_TOOTH_STATUS",
+      "type": "module",
+      "name": "Tooth Status Context",
+      "description": "Contextualizes the patient's current tooth status - single missing tooth, multiple adjacent missing, or dispersed missing teeth. Explains how this affects treatment planning.",
+      "layer": "L2",
+      "sections": [3]
+    },
+    {
+      "id": "TM_CTX_ORAL_COMPLEXITY",
+      "type": "module",
+      "name": "Oral Complexity Context",
+      "description": "For patients with complex oral situations or mixed patterns. Explains how complexity affects treatment planning and options.",
+      "layer": "L2",
+      "sections": [3]
+    },
+    {
+      "id": "TM_CTX_GENERAL_HEALTH",
+      "type": "module",
+      "name": "General Health Context",
+      "description": "Inserted for patients with elevated biological risk profiles. Discusses how general health factors may influence treatment decisions and outcomes.",
+      "layer": "L1",
+      "sections": [3]
+    },
+    {
       "id": "TM_BUDGET_LIMITED",
       "type": "module",
       "name": "Budget Limited Context",
@@ -591,6 +647,486 @@
       "description": "Module addressing how general health status affects dental treatment. Covers medication interactions, systemic health conditions, and importance of whole-body health in dental outcomes.",
       "layer": "L1",
       "sections": [3, 10]
+    },
+    {
+      "id": "TM_PROFILE_COMFORT",
+      "type": "module",
+      "name": "Comfort-Focused Profile",
+      "description": "Module for patients prioritizing comfort and ease over other factors. Discusses minimally invasive approaches, sedation options, and treatment paths that prioritize patient comfort throughout the process.",
+      "layer": "L2",
+      "sections": [3]
+    },
+    {
+      "id": "TM_PROFILE_AESTHETIC",
+      "type": "module",
+      "name": "Aesthetic-Focused Profile",
+      "description": "Module for patients with primary focus on visual appearance. Discusses how aesthetic goals influence treatment selection and what to expect in terms of cosmetic outcomes.",
+      "layer": "L2",
+      "sections": [3]
+    },
+    {
+      "id": "TM_PROFILE_FUNCTIONAL",
+      "type": "module",
+      "name": "Function-Focused Profile",
+      "description": "Module for patients prioritizing functional restoration - chewing ability, bite alignment, and practical oral function over aesthetic considerations.",
+      "layer": "L2",
+      "sections": [3]
+    },
+    {
+      "id": "TM_PROFILE_BUDGET",
+      "type": "module",
+      "name": "Budget-Conscious Profile",
+      "description": "Module for patients where budget is a primary decision factor. Discusses cost-effective treatment paths and how to maximize value within financial constraints.",
+      "layer": "L2",
+      "sections": [9]
+    },
+    {
+      "id": "TM_PROFILE_PREMIUM",
+      "type": "module",
+      "name": "Premium Profile",
+      "description": "Module for patients with premium budget preferences seeking top-tier options. Discusses highest-quality materials, advanced techniques, and premium service options available for their situation.",
+      "layer": "L3",
+      "sections": [9]
+    },
+    {
+      "id": "TM_PROFILE_COMBINATION",
+      "type": "module",
+      "name": "Mixed Profile Considerations",
+      "description": "Module for patients with balanced or mixed priorities - combining aesthetic, functional, and practical considerations. Helps navigate trade-offs between different goals.",
+      "layer": "L2",
+      "sections": [3]
+    },
+    {
+      "id": "TM_ANXIETY_SEVERE",
+      "type": "module",
+      "name": "Severe Dental Anxiety Module",
+      "description": "Module for patients with severe dental anxiety. Discusses sedation options, anxiety management techniques, and approaches to make treatment more comfortable for highly anxious patients.",
+      "layer": "L1",
+      "sections": [3, 10]
+    },
+    {
+      "id": "TM_RISK_BONE_LOSS",
+      "type": "module",
+      "name": "Bone Loss Risk Module",
+      "description": "Module addressing bone loss considerations. Explains how bone loss affects treatment options, potential need for bone grafting, and long-term implications.",
+      "layer": "L1",
+      "sections": [3, 10]
+    },
+    {
+      "id": "TM_RISK_BRUXISM",
+      "type": "module",
+      "name": "Bruxism Risk Module",
+      "description": "Module for patients identified with bruxism risk. Discusses impact on treatment durability, protective measures, and special material considerations.",
+      "layer": "L2",
+      "sections": [3, 10]
+    },
+    {
+      "id": "TM_RISK_CHRONIC_INFLAMMATION",
+      "type": "module",
+      "name": "Chronic Inflammation Risk Module",
+      "description": "Module addressing chronic oral inflammation. Explains treatment implications and importance of managing inflammation before and during dental procedures.",
+      "layer": "L1",
+      "sections": [3, 10]
+    },
+    {
+      "id": "TM_RISK_DIABETES",
+      "type": "module",
+      "name": "Diabetes Risk Module",
+      "description": "Module for diabetic patients discussing treatment risks, healing considerations, and importance of blood sugar management for dental outcomes.",
+      "layer": "L1",
+      "sections": [3, 10]
+    },
+    {
+      "id": "TM_RISK_MEDICAL",
+      "type": "module",
+      "name": "Medical Risk Module",
+      "description": "Module for patients with medical conditions affecting dental treatment. Discusses coordination with physicians and special precautions needed.",
+      "layer": "L1",
+      "sections": [3, 10]
+    },
+    {
+      "id": "TM_RISK_PERIODONTITIS",
+      "type": "module",
+      "name": "Periodontitis Risk Module",
+      "description": "Module for patients with periodontal disease risk. Explains gum health importance, treatment sequencing, and ongoing maintenance requirements.",
+      "layer": "L1",
+      "sections": [3, 10]
+    },
+    {
+      "id": "TM_RISK_POOR_HYGIENE",
+      "type": "module",
+      "name": "Poor Hygiene Risk Module",
+      "description": "Module for patients with suboptimal oral hygiene. Discusses importance of improving hygiene habits and how hygiene affects treatment success.",
+      "layer": "L2",
+      "sections": [3, 10]
+    },
+    {
+      "id": "TM_RISK_PREGNANCY",
+      "type": "module",
+      "name": "Pregnancy Risk Module",
+      "description": "Module addressing pregnancy-related dental considerations. Discusses safe timing for treatments, procedures to avoid, and importance of oral health during pregnancy.",
+      "layer": "L1",
+      "sections": [3, 10]
+    },
+    {
+      "id": "A_CFB_BONE_LOSS",
+      "type": "a_block",
+      "name": "Bone Loss Clinical Finding",
+      "description": "Clinical finding block for bone loss. Explains significance of bone loss finding and its implications for treatment planning.",
+      "layer": "L1",
+      "sections": [0, 4]
+    },
+    {
+      "id": "A_CFB_BRUXISM",
+      "type": "a_block",
+      "name": "Bruxism Clinical Finding",
+      "description": "Clinical finding block for bruxism/grinding. Notes the finding and its relevance to treatment durability and material selection.",
+      "layer": "L1",
+      "sections": [0, 4]
+    },
+    {
+      "id": "A_CFB_DENTAL_ANXIETY",
+      "type": "a_block",
+      "name": "Dental Anxiety Clinical Finding",
+      "description": "Clinical finding block for dental anxiety. Documents anxiety level and suggests considering anxiety management approaches.",
+      "layer": "L1",
+      "sections": [0, 4]
+    },
+    {
+      "id": "A_CFB_GROWTH_INCOMPLETE",
+      "type": "a_block",
+      "name": "Growth Incomplete Finding",
+      "description": "Clinical finding for patients whose jaw/dental growth is not yet complete. Notes timing considerations for certain treatments.",
+      "layer": "L1",
+      "sections": [0, 4]
+    },
+    {
+      "id": "A_FB_CHRONIC_INFLAMMATION",
+      "type": "a_block",
+      "name": "Chronic Inflammation Finding",
+      "description": "Finding block for chronic oral inflammation. Documents presence and implications for treatment sequencing.",
+      "layer": "L1",
+      "sections": [0, 4]
+    },
+    {
+      "id": "A_FB_MEDICAL_DIABETES",
+      "type": "a_block",
+      "name": "Diabetes Medical Finding",
+      "description": "Finding block for diabetic patients. Notes diabetes status and its relevance to dental treatment planning.",
+      "layer": "L1",
+      "sections": [0, 4]
+    },
+    {
+      "id": "A_FB_PERIODONTITIS",
+      "type": "a_block",
+      "name": "Periodontitis Finding",
+      "description": "Finding block for periodontal disease. Documents gum disease status and treatment implications.",
+      "layer": "L1",
+      "sections": [0, 4]
+    },
+    {
+      "id": "A_FB_POOR_HYGIENE",
+      "type": "a_block",
+      "name": "Poor Hygiene Finding",
+      "description": "Finding block noting suboptimal oral hygiene. Suggests hygiene improvements before certain treatments.",
+      "layer": "L2",
+      "sections": [0, 4]
+    },
+    {
+      "id": "A_FB_PREGNANCY",
+      "type": "a_block",
+      "name": "Pregnancy Finding",
+      "description": "Finding block for pregnancy status. Documents pregnancy and its implications for treatment timing.",
+      "layer": "L1",
+      "sections": [0, 4]
+    },
+    {
+      "id": "A_FB_SMOKING",
+      "type": "a_block",
+      "name": "Smoking Finding Block",
+      "description": "Finding block for smoking status. Notes smoking habit and relevance to treatment outcomes.",
+      "layer": "L1",
+      "sections": [0, 4]
+    },
+    {
+      "id": "B_PROCESS_IMPLANT",
+      "type": "b_block",
+      "name": "Implant Process Overview",
+      "description": "B-block explaining the general implant treatment process - phases, timeline, and what to expect at each stage.",
+      "layer": "L2",
+      "sections": [6]
+    },
+    {
+      "id": "B_COST_S01",
+      "type": "b_block",
+      "name": "Cost Block Scenario 01",
+      "description": "Cost information block for scenario S01. Provides cost range and factors affecting price.",
+      "layer": "L3",
+      "sections": [9]
+    },
+    {
+      "id": "B_COST_S02",
+      "type": "b_block",
+      "name": "Cost Block Scenario 02",
+      "description": "Cost information block for scenario S02. Provides cost range and factors affecting price.",
+      "layer": "L3",
+      "sections": [9]
+    },
+    {
+      "id": "B_COST_S03",
+      "type": "b_block",
+      "name": "Cost Block Scenario 03",
+      "description": "Cost information block for scenario S03. Provides cost range and factors affecting price.",
+      "layer": "L3",
+      "sections": [9]
+    },
+    {
+      "id": "B_COST_S04",
+      "type": "b_block",
+      "name": "Cost Block Scenario 04",
+      "description": "Cost information block for scenario S04. Provides cost range and factors affecting price.",
+      "layer": "L3",
+      "sections": [9]
+    },
+    {
+      "id": "B_COST_S05",
+      "type": "b_block",
+      "name": "Cost Block Scenario 05",
+      "description": "Cost information block for scenario S05. Provides cost range and factors affecting price.",
+      "layer": "L3",
+      "sections": [9]
+    },
+    {
+      "id": "B_COST_S06",
+      "type": "b_block",
+      "name": "Cost Block Scenario 06",
+      "description": "Cost information block for scenario S06. Provides cost range and factors affecting price.",
+      "layer": "L3",
+      "sections": [9]
+    },
+    {
+      "id": "B_COST_S07",
+      "type": "b_block",
+      "name": "Cost Block Scenario 07",
+      "description": "Cost information block for scenario S07. Provides cost range and factors affecting price.",
+      "layer": "L3",
+      "sections": [9]
+    },
+    {
+      "id": "B_COST_S08",
+      "type": "b_block",
+      "name": "Cost Block Scenario 08",
+      "description": "Cost information block for scenario S08. Provides cost range and factors affecting price.",
+      "layer": "L3",
+      "sections": [9]
+    },
+    {
+      "id": "B_COST_S09",
+      "type": "b_block",
+      "name": "Cost Block Scenario 09",
+      "description": "Cost information block for scenario S09. Provides cost range and factors affecting price.",
+      "layer": "L3",
+      "sections": [9]
+    },
+    {
+      "id": "B_COST_S10",
+      "type": "b_block",
+      "name": "Cost Block Scenario 10",
+      "description": "Cost information block for scenario S10. Provides cost range and factors affecting price.",
+      "layer": "L3",
+      "sections": [9]
+    },
+    {
+      "id": "B_COST_S11",
+      "type": "b_block",
+      "name": "Cost Block Scenario 11",
+      "description": "Cost information block for scenario S11. Provides cost range and factors affecting price.",
+      "layer": "L3",
+      "sections": [9]
+    },
+    {
+      "id": "B_COST_S12",
+      "type": "b_block",
+      "name": "Cost Block Scenario 12",
+      "description": "Cost information block for scenario S12. Provides cost range and factors affecting price.",
+      "layer": "L3",
+      "sections": [9]
+    },
+    {
+      "id": "B_COST_S13",
+      "type": "b_block",
+      "name": "Cost Block Scenario 13",
+      "description": "Cost information block for scenario S13. Provides cost range and factors affecting price.",
+      "layer": "L3",
+      "sections": [9]
+    },
+    {
+      "id": "B_COST_S14",
+      "type": "b_block",
+      "name": "Cost Block Scenario 14",
+      "description": "Cost information block for scenario S14. Provides cost range and factors affecting price.",
+      "layer": "L3",
+      "sections": [9]
+    },
+    {
+      "id": "B_COST_S15",
+      "type": "b_block",
+      "name": "Cost Block Scenario 15",
+      "description": "Cost information block for scenario S15. Provides cost range and factors affecting price.",
+      "layer": "L3",
+      "sections": [9]
+    },
+    {
+      "id": "B_COST_S16",
+      "type": "b_block",
+      "name": "Cost Block Scenario 16",
+      "description": "Cost information block for scenario S16. Provides cost range and factors affecting price.",
+      "layer": "L3",
+      "sections": [9]
+    },
+    {
+      "id": "B_COST_S17",
+      "type": "b_block",
+      "name": "Cost Block Scenario 17",
+      "description": "Cost information block for scenario S17. Provides cost range and factors affecting price.",
+      "layer": "L3",
+      "sections": [9]
+    },
+    {
+      "id": "B_NUANCE_S01",
+      "type": "b_block",
+      "name": "Nuance Block Scenario 01",
+      "description": "Nuanced explanation block for scenario S01. Provides scenario-specific details and considerations.",
+      "layer": "L2",
+      "sections": [5, 6]
+    },
+    {
+      "id": "B_NUANCE_S02",
+      "type": "b_block",
+      "name": "Nuance Block Scenario 02",
+      "description": "Nuanced explanation block for scenario S02. Provides scenario-specific details and considerations.",
+      "layer": "L2",
+      "sections": [5, 6]
+    },
+    {
+      "id": "B_NUANCE_S03",
+      "type": "b_block",
+      "name": "Nuance Block Scenario 03",
+      "description": "Nuanced explanation block for scenario S03. Provides scenario-specific details and considerations.",
+      "layer": "L2",
+      "sections": [5, 6]
+    },
+    {
+      "id": "B_NUANCE_S04",
+      "type": "b_block",
+      "name": "Nuance Block Scenario 04",
+      "description": "Nuanced explanation block for scenario S04. Provides scenario-specific details and considerations.",
+      "layer": "L2",
+      "sections": [5, 6]
+    },
+    {
+      "id": "B_NUANCE_S05",
+      "type": "b_block",
+      "name": "Nuance Block Scenario 05",
+      "description": "Nuanced explanation block for scenario S05. Provides scenario-specific details and considerations.",
+      "layer": "L2",
+      "sections": [5, 6]
+    },
+    {
+      "id": "B_NUANCE_S06",
+      "type": "b_block",
+      "name": "Nuance Block Scenario 06",
+      "description": "Nuanced explanation block for scenario S06. Provides scenario-specific details and considerations.",
+      "layer": "L2",
+      "sections": [5, 6]
+    },
+    {
+      "id": "B_NUANCE_S07",
+      "type": "b_block",
+      "name": "Nuance Block Scenario 07",
+      "description": "Nuanced explanation block for scenario S07. Provides scenario-specific details and considerations.",
+      "layer": "L2",
+      "sections": [5, 6]
+    },
+    {
+      "id": "B_NUANCE_S08",
+      "type": "b_block",
+      "name": "Nuance Block Scenario 08",
+      "description": "Nuanced explanation block for scenario S08. Provides scenario-specific details and considerations.",
+      "layer": "L2",
+      "sections": [5, 6]
+    },
+    {
+      "id": "B_NUANCE_S09",
+      "type": "b_block",
+      "name": "Nuance Block Scenario 09",
+      "description": "Nuanced explanation block for scenario S09. Provides scenario-specific details and considerations.",
+      "layer": "L2",
+      "sections": [5, 6]
+    },
+    {
+      "id": "B_NUANCE_S10",
+      "type": "b_block",
+      "name": "Nuance Block Scenario 10",
+      "description": "Nuanced explanation block for scenario S10. Provides scenario-specific details and considerations.",
+      "layer": "L2",
+      "sections": [5, 6]
+    },
+    {
+      "id": "B_NUANCE_S11",
+      "type": "b_block",
+      "name": "Nuance Block Scenario 11",
+      "description": "Nuanced explanation block for scenario S11. Provides scenario-specific details and considerations.",
+      "layer": "L2",
+      "sections": [5, 6]
+    },
+    {
+      "id": "B_NUANCE_S12",
+      "type": "b_block",
+      "name": "Nuance Block Scenario 12",
+      "description": "Nuanced explanation block for scenario S12. Provides scenario-specific details and considerations.",
+      "layer": "L2",
+      "sections": [5, 6]
+    },
+    {
+      "id": "B_NUANCE_S13",
+      "type": "b_block",
+      "name": "Nuance Block Scenario 13",
+      "description": "Nuanced explanation block for scenario S13. Provides scenario-specific details and considerations.",
+      "layer": "L2",
+      "sections": [5, 6]
+    },
+    {
+      "id": "B_NUANCE_S14",
+      "type": "b_block",
+      "name": "Nuance Block Scenario 14",
+      "description": "Nuanced explanation block for scenario S14. Provides scenario-specific details and considerations.",
+      "layer": "L2",
+      "sections": [5, 6]
+    },
+    {
+      "id": "B_NUANCE_S15",
+      "type": "b_block",
+      "name": "Nuance Block Scenario 15",
+      "description": "Nuanced explanation block for scenario S15. Provides scenario-specific details and considerations.",
+      "layer": "L2",
+      "sections": [5, 6]
+    },
+    {
+      "id": "B_NUANCE_S16",
+      "type": "b_block",
+      "name": "Nuance Block Scenario 16",
+      "description": "Nuanced explanation block for scenario S16. Provides scenario-specific details and considerations.",
+      "layer": "L2",
+      "sections": [5, 6]
+    },
+    {
+      "id": "B_NUANCE_S17",
+      "type": "b_block",
+      "name": "Nuance Block Scenario 17",
+      "description": "Nuanced explanation block for scenario S17. Provides scenario-specific details and considerations.",
+      "layer": "L2",
+      "sections": [5, 6]
     }
   ]
 }

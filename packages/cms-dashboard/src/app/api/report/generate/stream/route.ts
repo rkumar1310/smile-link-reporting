@@ -454,7 +454,7 @@ export async function POST(request: NextRequest) {
             language: (language as "en" | "nl") ?? "en",
           });
 
-          // Send complete event with the final report
+          // Send complete event with the final report and LLM evaluation
           if (result.success && result.report) {
             await sendEvent({
               phase: "complete",
@@ -462,9 +462,15 @@ export async function POST(request: NextRequest) {
               timestamp: new Date().toISOString(),
               data: {
                 report: result.report,
+                llmEvaluation: result.audit?.llm_evaluation ?? undefined,
               },
             });
           } else if (!result.success) {
+            // Log validation details for debugging
+            if (result.audit?.validation_result) {
+              console.error("[Pipeline] Validation errors:", result.audit.validation_result.errors);
+              console.error("[Pipeline] Validation warnings:", result.audit.validation_result.warnings);
+            }
             await sendEvent({
               phase: "error",
               message: result.error ?? "Report generation failed",
@@ -473,10 +479,6 @@ export async function POST(request: NextRequest) {
                 error: result.error ?? "Unknown error",
                 recoverable: false,
                 phase: "analyzing" as ReportPhase,
-                // Include validation details for debugging
-                validationErrorDetails: result.audit?.validation_result?.errors,
-                validationWarningDetails: result.audit?.validation_result?.warnings,
-                semanticViolations: result.audit?.validation_result?.semantic_violations,
               },
             });
           }

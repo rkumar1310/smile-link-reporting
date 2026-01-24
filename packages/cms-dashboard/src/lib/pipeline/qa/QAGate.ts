@@ -17,6 +17,7 @@ import type {
 
 import { SemanticLeakageDetector, type DetectionResult } from "./SemanticLeakageDetector";
 import { CompositionValidator } from "./CompositionValidator";
+import { llmReportEvaluator } from "../../qa/LLMReportEvaluator";
 
 /**
  * Progress callback for QA Gate operations
@@ -59,8 +60,8 @@ const DEFAULT_CONFIG: QAGateConfig = {
   maxValidationErrors: 0,         // Any validation error blocks
   maxValidationWarnings: 10,      // More than 10 warnings flags
   blockOnUnresolvedPlaceholders: false,
-  llmEvaluatorEnabled: false,     // Disabled by default in CMS (uses separate fact-checking)
-  llmEvaluatorCanBlock: false     // LLM can only FLAG by default (safety)
+  llmEvaluatorEnabled: true,      // Enable LLM evaluation for quality scores
+  llmEvaluatorCanBlock: false     // LLM provides scores only, cannot block
 };
 
 export class QAGate {
@@ -154,6 +155,55 @@ export class QAGate {
       reasons
     );
 
+    // Run LLM evaluation if enabled (doesn't affect outcome - scores only)
+    let llmEvaluation: LLMEvaluationResult | undefined;
+    if (this.config.llmEvaluatorEnabled) {
+      await emitProgress({
+        stage: "llm_evaluation",
+        status: "started",
+        message: "Running LLM quality evaluation...",
+        timestamp: new Date().toISOString()
+      });
+
+      const llmStart = Date.now();
+      try {
+        const result = await llmReportEvaluator.evaluate(report);
+        llmEvaluation = result ?? undefined;
+
+        await emitProgress({
+          stage: "llm_evaluation",
+          status: "completed",
+          message: llmEvaluation
+            ? `LLM evaluation: ${llmEvaluation.overall_score}/10 (${llmEvaluation.recommended_outcome})`
+            : "LLM evaluation skipped",
+          timestamp: new Date().toISOString(),
+          metrics: llmEvaluation ? {
+            overall_score: llmEvaluation.overall_score,
+            outcome: llmEvaluation.recommended_outcome,
+            dimensions: {
+              professional_quality: llmEvaluation.professional_quality.score,
+              clinical_safety: llmEvaluation.clinical_safety.score,
+              tone_appropriateness: llmEvaluation.tone_appropriateness.score,
+              personalization: llmEvaluation.personalization.score,
+              patient_autonomy: llmEvaluation.patient_autonomy.score,
+              structure_completeness: llmEvaluation.structure_completeness.score
+            }
+          } : undefined,
+          duration_ms: Date.now() - llmStart
+        });
+      } catch (error) {
+        console.error("[QAGate] LLM evaluation failed:", error);
+        await emitProgress({
+          stage: "llm_evaluation",
+          status: "error",
+          message: "LLM evaluation failed (report still delivered)",
+          timestamp: new Date().toISOString(),
+          error: error instanceof Error ? error.message : "Unknown error",
+          duration_ms: Date.now() - llmStart
+        });
+      }
+    }
+
     // If still passing, add success reason
     if (outcome === "PASS" && reasons.length === 0) {
       reasons.push("All QA checks passed");
@@ -163,6 +213,7 @@ export class QAGate {
       outcome,
       validationResult,
       semanticResult,
+      llmEvaluation,
       reasons,
       canDeliver: outcome !== "BLOCK",
       requiresReview: outcome === "FLAG"

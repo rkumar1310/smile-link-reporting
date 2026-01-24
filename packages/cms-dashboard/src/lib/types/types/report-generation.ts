@@ -351,10 +351,25 @@ export interface EvaluatingPhaseEvent extends PhaseEventBase {
   };
 }
 
+// Simplified LLM evaluation data for the complete event
+export interface LLMEvaluationData {
+  overall_score: number;
+  recommended_outcome: string;
+  professional_quality: { score: number };
+  clinical_safety: { score: number };
+  tone_appropriateness: { score: number };
+  personalization: { score: number };
+  patient_autonomy: { score: number };
+  structure_completeness: { score: number };
+  content_issues?: Array<{ severity: string }>;
+  overall_assessment?: string;
+}
+
 export interface CompletePhaseEvent extends PhaseEventBase {
   phase: "complete";
   data: {
     report: ComposedReport;
+    llmEvaluation?: LLMEvaluationData;
   };
 }
 

@@ -3,20 +3,7 @@
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import type { ComposedReport, ReportSection, ReportFactCheckIssue } from "@/lib/types/types/report-generation";
-
-interface LLMEvaluationData {
-  overall_score: number;
-  recommended_outcome: string;
-  professional_quality: { score: number };
-  clinical_safety: { score: number };
-  tone_appropriateness: { score: number };
-  personalization: { score: number };
-  patient_autonomy: { score: number };
-  structure_completeness: { score: number };
-  content_issues: Array<{ severity: string }>;
-  overall_assessment?: string;
-}
+import type { ComposedReport, ReportSection, ReportFactCheckIssue, LLMEvaluationData } from "@/lib/types/types/report-generation";
 
 interface ReportDisplayProps {
   report: ComposedReport;
@@ -403,8 +390,8 @@ function LLMEvaluationSummary({ evaluation }: LLMEvaluationSummaryProps) {
     { key: "structure_completeness", label: "Structure", score: evaluation.structure_completeness.score }
   ];
 
-  const criticalIssues = evaluation.content_issues.filter(i => i.severity === "critical").length;
-  const warningIssues = evaluation.content_issues.filter(i => i.severity === "warning").length;
+  const criticalIssues = (evaluation.content_issues ?? []).filter(i => i.severity === "critical").length;
+  const warningIssues = (evaluation.content_issues ?? []).filter(i => i.severity === "warning").length;
 
   return (
     <div className={`mt-4 rounded-lg border ${outcomeColors[evaluation.recommended_outcome as keyof typeof outcomeColors] ?? outcomeColors.FLAG}`}>
@@ -466,7 +453,7 @@ function LLMEvaluationSummary({ evaluation }: LLMEvaluationSummaryProps) {
           </div>
 
           {/* Content issues */}
-          {evaluation.content_issues.length > 0 && (
+          {(evaluation.content_issues ?? []).length > 0 && (
             <div className="mt-3 text-xs opacity-70">
               Content issues: {criticalIssues > 0 && <span className="text-red-600 dark:text-red-400">{criticalIssues} critical</span>}
               {criticalIssues > 0 && warningIssues > 0 && ", "}
