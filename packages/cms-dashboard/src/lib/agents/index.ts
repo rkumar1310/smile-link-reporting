@@ -33,6 +33,7 @@ export {
   createSpan,
   scoreTrace,
   shutdownLangfuse,
+  flushLangfuse,
 } from "./shared/LangfuseTracer";
 
 // Embeddings

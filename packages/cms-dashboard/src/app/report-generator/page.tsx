@@ -558,7 +558,7 @@ export default function ReportGeneratorPage() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <header className="bg-white dark:bg-gray-800 shadow">
-        <div className="max-w-4xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
           <Link href="/" className="text-sm text-blue-600 hover:text-blue-800 mb-2 block">
             &larr; Back to Dashboard
           </Link>
@@ -571,7 +571,7 @@ export default function ReportGeneratorPage() {
         </div>
       </header>
 
-      <main className="max-w-4xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+      <main className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         {/* View: Generating - Show progress UI */}
         {viewState === "generating" && (
           <div className="space-y-6">
@@ -594,13 +594,13 @@ export default function ReportGeneratorPage() {
 
         {/* View: Complete - Show report with Q&A sidebar */}
         {viewState === "complete" && report && (
-          <div className="flex gap-6">
-            {/* Report - 70% */}
-            <div className="w-[70%]">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* Report - 2/3 on large screens */}
+            <div className="lg:col-span-2">
               <ReportDisplay report={report} llmEvaluation={llmEvaluation ?? undefined} onGenerateNew={handleGenerateNew} />
             </div>
-            {/* Q&A Panel - 30% */}
-            <div className="w-[30%]">
+            {/* Q&A Panel - 1/3 on large screens */}
+            <div className="lg:col-span-1">
               <IntakeAnswersPanel answers={answers} />
             </div>
           </div>

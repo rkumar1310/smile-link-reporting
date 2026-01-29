@@ -20,46 +20,71 @@ export interface TraceContext {
 }
 
 let langfuseInstance: Langfuse | null = null;
+let initAttempted = false;
 
 /**
  * Initialize Langfuse client
  * Call this once at application startup
  */
 export function initLangfuse(config?: LangfuseConfig): Langfuse | null {
+  // Don't re-initialize if already done
+  if (langfuseInstance) {
+    return langfuseInstance;
+  }
+
+  initAttempted = true;
+
   const secretKey = config?.secretKey ?? process.env.LANGFUSE_SECRET_KEY;
   const publicKey = config?.publicKey ?? process.env.LANGFUSE_PUBLIC_KEY;
-  const baseUrl = config?.baseUrl ?? process.env.LANGFUSE_BASEURL ?? "http://localhost:3001";
+  const baseUrl = config?.baseUrl ?? process.env.LANGFUSE_BASEURL ?? "https://cloud.langfuse.com";
   const enabled = config?.enabled ?? (secretKey && publicKey);
 
   if (!enabled || !secretKey || !publicKey) {
     console.log("[Langfuse] Tracing disabled - missing API keys");
+    console.log(`[Langfuse] secretKey: ${secretKey ? "SET" : "MISSING"}, publicKey: ${publicKey ? "SET" : "MISSING"}`);
     return null;
   }
 
-  langfuseInstance = new Langfuse({
-    secretKey,
-    publicKey,
-    baseUrl,
-  });
+  try {
+    langfuseInstance = new Langfuse({
+      secretKey,
+      publicKey,
+      baseUrl,
+    });
 
-  console.log(`[Langfuse] Tracing enabled at ${baseUrl}`);
+    console.log(`[Langfuse] Tracing enabled at ${baseUrl}`);
+    return langfuseInstance;
+  } catch (error) {
+    console.error("[Langfuse] Failed to initialize:", error);
+    return null;
+  }
+}
+
+/**
+ * Ensure Langfuse is initialized (lazy init if needed)
+ */
+function ensureLangfuse(): Langfuse | null {
+  if (!langfuseInstance && !initAttempted) {
+    return initLangfuse();
+  }
   return langfuseInstance;
 }
 
 /**
- * Get the Langfuse instance (or null if not initialized)
+ * Get the Langfuse instance (lazy init if not yet initialized)
  */
 export function getLangfuse(): Langfuse | null {
-  return langfuseInstance;
+  return ensureLangfuse();
 }
 
 /**
  * Create a new trace for an agent operation
  */
 export function createTrace(name: string, context?: Partial<TraceContext>) {
-  if (!langfuseInstance) return null;
+  const lf = ensureLangfuse();
+  if (!lf) return null;
 
-  return langfuseInstance.trace({
+  return lf.trace({
     name,
     id: context?.traceId,
     sessionId: context?.sessionId,
@@ -104,13 +129,31 @@ export async function traceGeneration<T>(
       },
     });
 
+    // Flush to ensure trace is sent to Langfuse
+    await flushLangfuse();
+
     return result;
   } catch (error) {
     generation.end({
       statusMessage: error instanceof Error ? error.message : "Unknown error",
       level: "ERROR",
     });
+    // Flush even on error
+    await flushLangfuse();
     throw error;
+  }
+}
+
+/**
+ * Flush pending events to Langfuse (non-blocking)
+ */
+export async function flushLangfuse(): Promise<void> {
+  if (langfuseInstance) {
+    try {
+      await langfuseInstance.flushAsync();
+    } catch (error) {
+      console.error("[Langfuse] Flush error:", error);
+    }
   }
 }
 

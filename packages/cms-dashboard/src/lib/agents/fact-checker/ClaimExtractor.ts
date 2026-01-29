@@ -33,14 +33,21 @@ export class ClaimExtractor {
   /**
    * Extract claims from content
    */
-  async extract(content: string): Promise<ClaimExtractionResult> {
+  async extract(content: string, contentId?: string): Promise<ClaimExtractionResult> {
     const response = await this.llm.generateStructured(
       [
         { role: "system", content: CLAIM_EXTRACTION_SYSTEM_PROMPT },
         { role: "user", content: buildClaimExtractionPrompt(content) },
       ],
       ExtractedClaimsSchema,
-      "claim_extraction"
+      "claim_extraction",
+      {
+        traceName: `claim-extraction${contentId ? `-${contentId}` : ""}`,
+        metadata: {
+          contentId,
+          contentLength: content.length,
+        },
+      }
     );
 
     const claims = response.object.claims.map((claim, index) => ({

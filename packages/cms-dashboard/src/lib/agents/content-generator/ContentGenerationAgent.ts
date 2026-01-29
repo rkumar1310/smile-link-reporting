@@ -115,7 +115,16 @@ export class ContentGenerationAgent {
         { role: "user", content: userPrompt },
       ],
       ScenarioResponseSchema,
-      "scenario_generation"
+      "scenario_generation",
+      {
+        traceName: `scenario-generation-${config.contentId}`,
+        metadata: {
+          contentId: config.contentId,
+          contentType: config.contentType,
+          language: config.language,
+          tone: config.tone,
+        },
+      }
     );
 
     // Validate all sections are present
@@ -195,7 +204,16 @@ export class ContentGenerationAgent {
         { role: "user", content: userPrompt },
       ],
       GenerationResponseSchema,
-      "block_generation"
+      "block_generation",
+      {
+        traceName: `block-generation-${config.contentId}`,
+        metadata: {
+          contentId: config.contentId,
+          contentType: config.contentType,
+          language: config.language,
+          tone: config.tone,
+        },
+      }
     );
 
     // Build source document lookup for enriching citations

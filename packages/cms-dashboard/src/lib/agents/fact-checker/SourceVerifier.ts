@@ -67,7 +67,16 @@ export class SourceVerifier {
         { role: "user", content: buildVerificationPrompt(claim.claimText, sourceContext) },
       ],
       VerificationResponseSchema,
-      "claim_verification"
+      "claim_verification",
+      {
+        traceName: `claim-verification-${claim.id}`,
+        metadata: {
+          claimId: claim.id,
+          claimText: claim.claimText.substring(0, 100),
+          strictMode,
+          sourceDocCount: sourceDocuments.length,
+        },
+      }
     );
 
     // Convert source matches
