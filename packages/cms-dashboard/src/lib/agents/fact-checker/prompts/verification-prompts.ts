@@ -2,6 +2,19 @@
  * Fact Check Verification Prompts
  */
 
+import { SYSTEM_GOAL } from "../../shared/system-goal";
+
+/**
+ * Content boundary violations to flag during verification
+ */
+const BOUNDARY_VIOLATIONS = `
+CONTENT BOUNDARY VIOLATIONS - Flag these as issues:
+${SYSTEM_GOAL.boundaries.map(b => `- ${b}`).join('\n')}
+
+If you encounter claims that violate these boundaries (e.g., specific treatment recommendations,
+diagnoses, exact prices, or outcome guarantees), flag them as BOUNDARY_VIOLATION in addition
+to the standard verification.`;
+
 export const CLAIM_EXTRACTION_SYSTEM_PROMPT = `You are an expert fact-checker analyzing dental health content. Your task is to extract factual claims that can be verified against source documents.
 
 WHAT COUNTS AS A CLAIM:
@@ -19,10 +32,16 @@ WHAT IS NOT A CLAIM:
 - Formatting or structural text
 - Questions
 
+ALSO FLAG AS POTENTIAL BOUNDARY VIOLATIONS:
+- Specific treatment recommendations ("you should get implants")
+- Diagnostic statements ("you have periodontitis")
+- Specific price quotes ("this will cost €2000")
+- Outcome guarantees ("this will definitely work")
+
 For each claim, identify:
 1. The exact text of the claim
 2. Its location in the content (section number)
-3. The type of claim (medical fact, statistic, process, outcome)`;
+3. The type of claim (medical fact, statistic, process, outcome, boundary_violation)`;
 
 export const VERIFICATION_SYSTEM_PROMPT = `You are an expert fact-checker verifying dental health claims against source documents.
 
@@ -33,17 +52,21 @@ For each claim, you must:
    - UNSUPPORTED: Not found in source material (but not contradicted)
    - CONTRADICTED: Directly contradicts source material
    - INCONCLUSIVE: Partially supported or ambiguous
+   - BOUNDARY_VIOLATION: Violates content boundaries (see below)
 
 3. Provide reasoning for your verdict
 4. Quote the relevant source excerpt(s)
 5. Rate your confidence (0-1)
+
+${BOUNDARY_VIOLATIONS}
 
 CRITICAL GUIDELINES:
 - Be strict about medical claims - require clear source support
 - Statistics must match exactly
 - Process descriptions should align with sources
 - Consider paraphrasing - meaning must match, not exact words
-- When unsure, lean toward UNSUPPORTED rather than VERIFIED`;
+- When unsure, lean toward UNSUPPORTED rather than VERIFIED
+- Flag any content that makes specific recommendations, diagnoses, price quotes, or outcome guarantees`;
 
 export function buildClaimExtractionPrompt(content: string): string {
   return `Analyze the following dental content and extract all verifiable factual claims.

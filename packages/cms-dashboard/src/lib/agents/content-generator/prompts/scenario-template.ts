@@ -11,6 +11,7 @@ import {
   formatScenarioSectionRequirements
 } from './report-structure';
 import { TONE_INSTRUCTIONS } from './generation-system';
+import { getSystemGoalCondensed } from '../../shared/system-goal';
 
 export interface ScenarioGenerationConfig {
   scenarioId: string;
@@ -44,6 +45,8 @@ export function buildScenarioSystemPrompt(config: ScenarioGenerationConfig): str
   const toneInstructions = TONE_INSTRUCTIONS[config.tone] || TONE_INSTRUCTIONS['TP-01'];
 
   return `You are a specialized dental content writer for Smile-Link patient reports.
+
+${getSystemGoalCondensed()}
 
 ## REPORT STRUCTURE
 The final patient report has 12 sections. Your scenario document provides the main content for sections 2-10:

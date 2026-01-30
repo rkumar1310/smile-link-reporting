@@ -1,6 +1,11 @@
 /**
  * Report Generation Service
- * Orchestrates the 6-phase report generation workflow with progress events
+ * Orchestrates the report generation workflow with progress events
+ *
+ * DERIVATIVE CONTENT SUPPORT:
+ * The service now supports derivative content generation, which synthesizes
+ * multiple content blocks into cohesive content during report composition.
+ * This is enabled by default but can be disabled via configuration.
  */
 
 import type { ToneProfileId, SupportedLanguage } from "@/lib/types";
@@ -16,14 +21,19 @@ import type {
   ComposedReport,
   ReportPhaseEvent,
   ContentGap,
+  ContentBlockProgress,
+  ContentBlockStatus,
 } from "@/lib/types/types/report-generation";
 import { createContentService, ContentService } from "./ContentService";
 import { createToneService, ToneService } from "./ToneService";
+import { createDerivativeContentService, DerivativeContentService } from "./DerivativeContentService";
 import { createContentGenerationAgent } from "@/lib/agents/content-generator";
 import { createFactCheckAgent } from "@/lib/agents/fact-checker";
+import { createDerivativeFactChecker } from "@/lib/agents/derivative-generator";
 import { createSemanticSearchService, SemanticSearchService } from "@/lib/agents/search";
 import { getDb, COLLECTIONS } from "@/lib/db/mongodb";
 import { ObjectId } from "mongodb";
+import { generateReportPdf } from "./PdfGenerationService";
 
 export type ProgressCallback = (event: ReportPhaseEvent) => void;
 
@@ -32,19 +42,24 @@ export interface ReportGenerationConfig {
   language?: SupportedLanguage;
   maxFactCheckAttempts?: number;
   factCheckThreshold?: number;
+  enableDerivatives?: boolean;  // Enable derivative content synthesis (default: true)
 }
 
 export class ReportGenerationService {
   private contentService: ContentService;
   private toneService: ToneService;
   private searchService: SemanticSearchService;
+  private derivativeService: DerivativeContentService;
   private onProgress: ProgressCallback;
+  private enableDerivatives: boolean;
 
-  constructor(onProgress: ProgressCallback) {
+  constructor(onProgress: ProgressCallback, enableDerivatives: boolean = true) {
     this.contentService = createContentService();
     this.toneService = createToneService();
     this.searchService = createSemanticSearchService();
+    this.derivativeService = createDerivativeContentService();
     this.onProgress = onProgress;
+    this.enableDerivatives = enableDerivatives;
   }
 
   /**
@@ -107,6 +122,12 @@ export class ReportGenerationService {
           available: contentCheck.available,
           missing: contentCheck.missing.length,
           scenarios: scenarios.map((s) => s.scenarioId),
+          // Include the list of blocks that need to be generated
+          missingBlocks: contentCheck.missing.map((gap) => ({
+            id: gap.contentId,
+            name: gap.name,
+            contentType: gap.contentType,
+          })),
         },
       });
 
@@ -309,6 +330,49 @@ export class ReportGenerationService {
     const factCheckAgent = createFactCheckAgent();
     let generated = 0;
 
+    // Initialize content blocks progress tracking
+    const contentBlocks: ContentBlockProgress[] = missing.map((gap) => ({
+      id: gap.contentId,
+      name: gap.name,
+      contentType: gap.contentType,
+      status: "pending" as ContentBlockStatus,
+    }));
+
+    // Helper to emit progress with full block list
+    const emitBlockProgress = (
+      index: number,
+      status: ContentBlockStatus,
+      message: string,
+      factCheckData?: { status: string; attempt: number; maxAttempts: number; score?: number }
+    ) => {
+      // Update the block status
+      contentBlocks[index].status = status;
+      if (factCheckData?.attempt) {
+        contentBlocks[index].factCheckAttempt = factCheckData.attempt;
+      }
+      if (factCheckData?.score !== undefined) {
+        contentBlocks[index].factCheckScore = factCheckData.score;
+      }
+
+      this.emitProgress({
+        phase: "generating",
+        message,
+        timestamp: new Date().toISOString(),
+        data: {
+          current: index + 1,
+          total: missing.length,
+          currentContent: missing[index].name,
+          factCheck: factCheckData ? {
+            status: factCheckData.status as "pending" | "checking" | "passed" | "failed" | "retrying",
+            attempt: factCheckData.attempt,
+            maxAttempts: factCheckData.maxAttempts,
+            score: factCheckData.score,
+          } : undefined,
+          contentBlocks: [...contentBlocks], // Send a copy of the current state
+        },
+      });
+    };
+
     for (let i = 0; i < missing.length; i++) {
       const gap = missing[i];
       let attempt = 0;
@@ -318,22 +382,13 @@ export class ReportGenerationService {
       while (attempt < maxFactCheckAttempts && !passed) {
         attempt++;
 
-        // Emit generating status
-        this.emitProgress({
-          phase: "generating",
-          message: attempt === 1 ? `Generating content: ${gap.name}` : `Regenerating content: ${gap.name}`,
-          timestamp: new Date().toISOString(),
-          data: {
-            current: i + 1,
-            total: missing.length,
-            currentContent: gap.name,
-            factCheck: {
-              status: attempt === 1 ? "pending" : "retrying",
-              attempt,
-              maxAttempts: maxFactCheckAttempts,
-            },
-          },
-        });
+        // Emit generating status with full block list
+        emitBlockProgress(
+          i,
+          "generating",
+          attempt === 1 ? `Generating content: ${gap.name}` : `Regenerating content: ${gap.name}`,
+          { status: attempt === 1 ? "pending" : "retrying", attempt, maxAttempts: maxFactCheckAttempts }
+        );
 
       try {
         // Find relevant source documents using semantic search
@@ -341,6 +396,13 @@ export class ReportGenerationService {
 
         if (rawSourceDocs.length === 0) {
           console.warn(`No relevant sources found for ${gap.contentId}`);
+          // Mark the block as failed due to no sources
+          emitBlockProgress(
+            i,
+            "failed",
+            `No source documents found for: ${gap.name}`,
+            { status: "failed", attempt, maxAttempts: maxFactCheckAttempts }
+          );
           break; // Exit retry loop for this content
         }
 
@@ -365,21 +427,12 @@ export class ReportGenerationService {
         generatedContent = result.content;
 
         // Emit fact-checking status
-        this.emitProgress({
-          phase: "generating",
-          message: `Verifying content: ${gap.name}`,
-          timestamp: new Date().toISOString(),
-          data: {
-            current: i + 1,
-            total: missing.length,
-            currentContent: gap.name,
-            factCheck: {
-              status: "checking",
-              attempt,
-              maxAttempts: maxFactCheckAttempts,
-            },
-          },
-        });
+        emitBlockProgress(
+          i,
+          "verifying",
+          `Verifying content: ${gap.name}`,
+          { status: "checking", attempt, maxAttempts: maxFactCheckAttempts }
+        );
 
         // Fact-check the generated content using raw docs (with full SourceSection structure)
         const factCheckResult = await factCheckAgent.check({
@@ -398,22 +451,12 @@ export class ReportGenerationService {
 
         if (passed) {
           // Emit passed status
-          this.emitProgress({
-            phase: "generating",
-            message: `Content verified: ${gap.name}`,
-            timestamp: new Date().toISOString(),
-            data: {
-              current: i + 1,
-              total: missing.length,
-              currentContent: gap.name,
-              factCheck: {
-                status: "passed",
-                attempt,
-                maxAttempts: maxFactCheckAttempts,
-                score,
-              },
-            },
-          });
+          emitBlockProgress(
+            i,
+            "done",
+            `Content verified: ${gap.name}`,
+            { status: "passed", attempt, maxAttempts: maxFactCheckAttempts, score }
+          );
 
           // Save to database
           await this.contentService.updateContentVariant(
@@ -430,26 +473,17 @@ export class ReportGenerationService {
 
           generated++;
         } else {
-          // Emit failed status
-          this.emitProgress({
-            phase: "generating",
-            message: `Accuracy below threshold (${(score * 100).toFixed(0)}%), ${attempt < maxFactCheckAttempts ? "regenerating..." : "using with warnings"}`,
-            timestamp: new Date().toISOString(),
-            data: {
-              current: i + 1,
-              total: missing.length,
-              currentContent: gap.name,
-              factCheck: {
-                status: "failed",
-                attempt,
-                maxAttempts: maxFactCheckAttempts,
-                score,
-              },
-            },
-          });
+          // Emit failed status - mark as done if last attempt, otherwise keep as verifying (will retry)
+          const isLastAttempt = attempt >= maxFactCheckAttempts;
+          emitBlockProgress(
+            i,
+            isLastAttempt ? "done" : "verifying",
+            `Accuracy below threshold (${(score * 100).toFixed(0)}%), ${!isLastAttempt ? "regenerating..." : "using with warnings"}`,
+            { status: "failed", attempt, maxAttempts: maxFactCheckAttempts, score }
+          );
 
           // If this is the last attempt, save anyway with warnings
-          if (attempt >= maxFactCheckAttempts) {
+          if (isLastAttempt) {
             await this.contentService.updateContentVariant(
               gap.contentId,
               lang,
@@ -466,6 +500,13 @@ export class ReportGenerationService {
         }
       } catch (error) {
         console.error(`Failed to generate content for ${gap.contentId}:`, error);
+        // Mark the block as failed
+        emitBlockProgress(
+          i,
+          "failed",
+          `Failed to generate: ${gap.name}`,
+          { status: "failed", attempt, maxAttempts: maxFactCheckAttempts }
+        );
         break; // Exit retry loop for this content
       }
     } // end while retry loop
@@ -643,7 +684,17 @@ export class ReportGenerationService {
       warnings: factCheckResult.issues,
       contentGenerated: generatedCount,
       totalContentUsed: sections.length,
+      intakeAnswers: intake.answers,
     };
+
+    // Generate PDF
+    try {
+      const pdfBuffer = await generateReportPdf(report);
+      report.pdfBase64 = pdfBuffer.toString("base64");
+    } catch (error) {
+      console.error("PDF generation failed:", error);
+      // Continue without PDF - it's not critical
+    }
 
     return report;
   }
@@ -726,13 +777,82 @@ export class ReportGenerationService {
   private emitProgress(event: ReportPhaseEvent): void {
     this.onProgress(event);
   }
+
+  /**
+   * Fact-check derivatives used in the report
+   * This verifies that derivative content accurately represents its source blocks
+   */
+  async factCheckDerivatives(derivativeIds: string[]): Promise<{
+    passed: boolean;
+    results: Array<{ derivativeId: string; status: string; confidence: number }>;
+  }> {
+    if (!this.enableDerivatives || derivativeIds.length === 0) {
+      return { passed: true, results: [] };
+    }
+
+    const factChecker = createDerivativeFactChecker();
+    const results: Array<{ derivativeId: string; status: string; confidence: number }> = [];
+
+    for (const derivativeId of derivativeIds) {
+      const derivative = await this.derivativeService.findDerivative(derivativeId);
+      if (!derivative) continue;
+
+      // Get source blocks for verification
+      const sourceBlocks = await this.derivativeService.getSourceBlocksContent(
+        derivative.sourceBlockIds,
+        derivative.language,
+        derivative.tone
+      );
+
+      if (sourceBlocks.length === 0) continue;
+
+      // Quick check using existing claim sources
+      const { status, confidence } = await factChecker.quickCheck({
+        derivativeContent: derivative.content,
+        sourceBlocks,
+        claimSources: derivative.factCheckResult?.claimSources || [],
+      });
+
+      results.push({ derivativeId, status, confidence });
+
+      // Update derivative status
+      await this.derivativeService.updateFactCheckStatus(
+        derivativeId,
+        status,
+        derivative.factCheckResult
+      );
+    }
+
+    const allPassed = results.every((r) => r.status === "verified" || r.status === "pending");
+    return { passed: allPassed, results };
+  }
+
+  /**
+   * Get derivative statistics
+   */
+  async getDerivativeStats(): Promise<{
+    total: number;
+    byStatus: Record<string, number>;
+    avgUsageCount: number;
+    staleCount: number;
+  }> {
+    return this.derivativeService.getStats();
+  }
+
+  /**
+   * Check if derivatives are enabled
+   */
+  isDerivativesEnabled(): boolean {
+    return this.enableDerivatives;
+  }
 }
 
 /**
  * Create a ReportGenerationService instance
  */
 export function createReportGenerationService(
-  onProgress: ProgressCallback
+  onProgress: ProgressCallback,
+  enableDerivatives: boolean = true
 ): ReportGenerationService {
-  return new ReportGenerationService(onProgress);
+  return new ReportGenerationService(onProgress, enableDerivatives);
 }

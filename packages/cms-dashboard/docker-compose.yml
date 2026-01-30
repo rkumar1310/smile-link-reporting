@@ -1,4 +1,35 @@
 services:
+  cms-dashboard:
+    build:
+      context: ../..
+      dockerfile: packages/cms-dashboard/Dockerfile
+    container_name: smilelink-cms-dashboard
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - MONGODB_URI=mongodb://mongodb:27017
+      - MONGODB_DB=smilelink_cms
+      - QDRANT_URL=http://qdrant:6333
+      # Add your API keys via .env file or docker-compose override
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - LANGFUSE_SECRET_KEY=${LANGFUSE_SECRET_KEY:-}
+      - LANGFUSE_PUBLIC_KEY=${LANGFUSE_PUBLIC_KEY:-}
+      - LANGFUSE_BASEURL=${LANGFUSE_BASEURL:-https://cloud.langfuse.com}
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      qdrant:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
   mongodb:
     image: mongo:7
     container_name: smilelink-cms-mongodb

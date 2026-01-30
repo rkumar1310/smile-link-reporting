@@ -174,3 +174,22 @@ export {
   IntakeAnswersSchema,
   GenerateReportRequestSchema,
 } from "./report-generation";
+
+// Derivative content types
+export type {
+  ClaimSource,
+  DerivativeFactCheckResult,
+  DerivativeContent,
+  SourceBlockContent,
+  DerivativeGenerationConfig,
+  DerivativeGenerationResult,
+  GetOrCreateDerivativeOptions,
+} from "./derivative";
+
+export {
+  ClaimSourceSchema,
+  DerivativeFactCheckResultSchema,
+  DerivativeContentSchema,
+  generateDerivativeId,
+  isDerivativeValid,
+} from "./derivative";

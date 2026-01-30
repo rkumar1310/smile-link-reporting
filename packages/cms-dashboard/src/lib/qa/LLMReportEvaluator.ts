@@ -7,6 +7,7 @@
 import { z } from "zod";
 import { createLLMProvider, type LLMProvider } from "../agents/shared/LLMProvider";
 import type { ComposedReport, LLMEvaluationResult, QAOutcome } from "../pipeline/types";
+import { getSystemGoalCondensed, EVALUATION_CRITERIA } from "../agents/shared/system-goal";
 
 // Simplified evaluation schema - scores + assessment only
 const SimplifiedEvaluationSchema = z.object({
@@ -21,10 +22,12 @@ const SimplifiedEvaluationSchema = z.object({
 
 type SimplifiedEvaluation = z.infer<typeof SimplifiedEvaluationSchema>;
 
-// Simplified system prompt - focused on scoring
+// Build system prompt with system goal context
 const SYSTEM_PROMPT = `You are an expert evaluator of dental health reports.
 
-Evaluate the report across 6 dimensions (score 1-10 each):
+${getSystemGoalCondensed()}
+
+## EVALUATION DIMENSIONS (score 1-10 each)
 
 1. PROFESSIONAL QUALITY (15% weight)
    - Writing clarity, flow, no filler or redundant phrases
@@ -32,32 +35,39 @@ Evaluate the report across 6 dimensions (score 1-10 each):
 
 2. CLINICAL SAFETY (25% weight) - MOST IMPORTANT
    - Appropriate disclaimers present
-   - No guaranteed outcomes or overpromising
+   - No guaranteed outcomes or overpromising (HARD BOUNDARY)
+   - No specific diagnoses made (HARD BOUNDARY)
+   - No specific prices quoted (HARD BOUNDARY)
    - Risk factors mentioned appropriately
+   - Score 1-3 if ANY hard boundary is violated
 
 3. TONE APPROPRIATENESS (20% weight)
+   - Empathy First: Acknowledges emotional weight of decisions
    - Consistent tone throughout
    - Matches the stated tone profile
 
 4. PERSONALIZATION (15% weight)
    - Content feels specific to the patient's situation
    - Not generic/cookie-cutter language
+   - References patient's context appropriately
 
 5. PATIENT AUTONOMY (15% weight)
-   - Non-directive language
+   - Non-directive language (no "you should" or "you must")
    - Presents options without pushing one choice
    - Respects patient's right to decide
+   - Informs without directing
 
 6. STRUCTURE & COMPLETENESS (10% weight)
    - Logical flow between sections
    - All expected information present
+   - Honest about trade-offs and uncertainties
 
 SCORING GUIDE:
 - 9-10: Excellent - minor improvements only
 - 7-8: Good - solid quality with small issues
 - 5-6: Acceptable - noticeable issues but usable
-- 3-4: Poor - significant problems
-- 1-2: Unacceptable
+- 3-4: Poor - significant problems (or minor boundary violations)
+- 1-2: Unacceptable (or serious boundary violations)
 
 Provide a brief overall assessment (2-3 sentences) summarizing the report quality.`;
 

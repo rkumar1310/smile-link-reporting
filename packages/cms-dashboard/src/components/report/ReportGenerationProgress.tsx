@@ -1,7 +1,11 @@
 "use client";
 
 import { useMemo } from "react";
-import type { ReportPhase, ReportPhaseEvent, ComposedReport } from "@/lib/types/types/report-generation";
+import type {
+  ReportPhase,
+  ContentBlockProgress,
+  DerivativeProgress,
+} from "@/lib/types/types/report-generation";
 
 interface PhaseConfig {
   id: ReportPhase;
@@ -189,7 +193,7 @@ function PhaseItem({ config, status, message, data, isLast }: PhaseItemProps) {
 
       {/* Icon */}
       <div
-        className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${statusColors[status]} transition-colors duration-300`}
+        className={`shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${statusColors[status]} transition-colors duration-300`}
       >
         {status === "active" ? (
           <div className="animate-spin">
@@ -240,9 +244,9 @@ function PhaseItem({ config, status, message, data, isLast }: PhaseItemProps) {
           </p>
         )}
 
-        {/* Phase-specific data display */}
-        {data && status === "complete" && (
-          <PhaseDataDisplay phase={config.id} data={data} />
+        {/* Phase-specific data display - show during active and complete states */}
+        {data && (status === "complete" || status === "active") && (
+          <PhaseDataDisplay phase={config.id} data={data} isActive={status === "active"} />
         )}
       </div>
     </div>
@@ -252,9 +256,10 @@ function PhaseItem({ config, status, message, data, isLast }: PhaseItemProps) {
 interface PhaseDataDisplayProps {
   phase: ReportPhase;
   data: Record<string, unknown>;
+  isActive?: boolean;
 }
 
-function PhaseDataDisplay({ phase, data }: PhaseDataDisplayProps) {
+function PhaseDataDisplay({ phase, data, isActive }: PhaseDataDisplayProps) {
   if (phase === "tone" && data.toneName) {
     return (
       <div className="mt-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300">
@@ -265,15 +270,36 @@ function PhaseDataDisplay({ phase, data }: PhaseDataDisplayProps) {
 
   if (phase === "content-check" && typeof data.available === "number") {
     const missing = (data.missing as number) || 0;
+    const missingBlocks = data.missingBlocks as Array<{ id: string; name: string; contentType: string }> | undefined;
+
     return (
-      <div className="mt-2 flex items-center gap-3 text-xs">
-        <span className="text-green-600 dark:text-green-400">
-          {data.available} available
-        </span>
-        {missing > 0 && (
-          <span className="text-amber-600 dark:text-amber-400">
-            {missing} to generate
+      <div className="mt-2 space-y-2">
+        <div className="flex items-center gap-3 text-xs">
+          <span className="text-green-600 dark:text-green-400">
+            {data.available} available
           </span>
+          {missing > 0 && (
+            <span className="text-amber-600 dark:text-amber-400">
+              {missing} to generate
+            </span>
+          )}
+        </div>
+        {/* Show list of blocks to generate */}
+        {missingBlocks && missingBlocks.length > 0 && (
+          <div className="mt-1 pl-2 border-l-2 border-gray-200 dark:border-gray-600 space-y-1">
+            {missingBlocks.slice(0, 5).map((block) => (
+              <div key={block.id} className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                <span className="w-2 h-2 rounded-full bg-amber-400 shrink-0" />
+                <span className="truncate">{block.name}</span>
+                <span className="text-gray-400 text-[10px]">({block.contentType})</span>
+              </div>
+            ))}
+            {missingBlocks.length > 5 && (
+              <div className="text-xs text-gray-400">
+                +{missingBlocks.length - 5} more
+              </div>
+            )}
+          </div>
         )}
       </div>
     );
@@ -281,8 +307,10 @@ function PhaseDataDisplay({ phase, data }: PhaseDataDisplayProps) {
 
   if (phase === "generating" && typeof data.current === "number") {
     const factCheck = data.factCheck as { status: string; attempt: number; maxAttempts: number; score?: number } | undefined;
+    const contentBlocks = data.contentBlocks as ContentBlockProgress[] | undefined;
+
     return (
-      <div className="mt-2 space-y-2">
+      <div className="mt-2 space-y-3">
         {/* Progress bar */}
         <div>
           <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 mb-1">
@@ -296,6 +324,7 @@ function PhaseDataDisplay({ phase, data }: PhaseDataDisplayProps) {
             />
           </div>
         </div>
+
         {/* Fact-check status */}
         {factCheck && (
           <div className="flex items-center gap-2 text-xs">
@@ -313,9 +342,9 @@ function PhaseDataDisplay({ phase, data }: PhaseDataDisplayProps) {
                 )}
               </>
             )}
-            {factCheck.status === "failed" && (
+            {factCheck.status === "failed" && factCheck.score !== undefined && (
               <span className="text-amber-600 dark:text-amber-400">
-                Failed ({(factCheck.score! * 100).toFixed(0)}%) - will retry
+                Failed ({(factCheck.score * 100).toFixed(0)}%) - will retry
               </span>
             )}
             {factCheck.status === "retrying" && (
@@ -323,6 +352,54 @@ function PhaseDataDisplay({ phase, data }: PhaseDataDisplayProps) {
                 Regenerating (attempt {factCheck.attempt}/{factCheck.maxAttempts})...
               </span>
             )}
+          </div>
+        )}
+
+        {/* Content blocks list */}
+        {contentBlocks && contentBlocks.length > 0 && (
+          <div className="pl-2 border-l-2 border-gray-200 dark:border-gray-600 space-y-1 max-h-32 overflow-y-auto">
+            {contentBlocks.map((block) => (
+              <ContentBlockItem key={block.id} block={block} />
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  if (phase === "composing") {
+    const derivatives = data.derivatives as DerivativeProgress[] | undefined;
+    const currentDerivative = data.currentDerivative as number | undefined;
+    const totalDerivatives = data.totalDerivatives as number | undefined;
+    const currentSection = data.currentSection as string | undefined;
+
+    return (
+      <div className="mt-2 space-y-2">
+        {/* Section progress */}
+        {typeof data.sectionsProcessed === "number" && typeof data.totalSections === "number" && (
+          <div className="text-xs text-gray-500 dark:text-gray-400">
+            Sections: {data.sectionsProcessed}/{data.totalSections}
+          </div>
+        )}
+
+        {/* Current section */}
+        {currentSection && isActive && (
+          <div className="text-xs text-blue-500 dark:text-blue-400 animate-pulse">
+            Composing: {currentSection}
+          </div>
+        )}
+
+        {/* Derivatives list */}
+        {derivatives && derivatives.length > 0 && (
+          <div className="space-y-1">
+            <div className="text-xs text-gray-500 dark:text-gray-400">
+              Derivatives: {currentDerivative || 0}/{totalDerivatives || derivatives.length}
+            </div>
+            <div className="pl-2 border-l-2 border-gray-200 dark:border-gray-600 space-y-1">
+              {derivatives.map((deriv) => (
+                <DerivativeItem key={deriv.sectionNumber} derivative={deriv} />
+              ))}
+            </div>
           </div>
         )}
       </div>
@@ -383,6 +460,96 @@ function PhaseDataDisplay({ phase, data }: PhaseDataDisplayProps) {
   }
 
   return null;
+}
+
+/**
+ * Component to display individual content block progress
+ */
+function ContentBlockItem({ block }: { block: ContentBlockProgress }) {
+  const statusConfig = {
+    pending: {
+      color: "bg-gray-400",
+      text: "text-gray-500 dark:text-gray-400",
+      label: "",
+    },
+    generating: {
+      color: "bg-blue-500 animate-pulse",
+      text: "text-blue-600 dark:text-blue-400",
+      label: "Generating...",
+    },
+    verifying: {
+      color: "bg-amber-500 animate-pulse",
+      text: "text-amber-600 dark:text-amber-400",
+      label: "Verifying...",
+    },
+    done: {
+      color: "bg-green-500",
+      text: "text-green-600 dark:text-green-400",
+      label: block.factCheckScore ? `${(block.factCheckScore * 100).toFixed(0)}%` : "Done",
+    },
+    failed: {
+      color: "bg-red-500",
+      text: "text-red-600 dark:text-red-400",
+      label: "Failed",
+    },
+  };
+
+  const config = statusConfig[block.status] || statusConfig.pending;
+
+  return (
+    <div className="flex items-center gap-2 text-xs">
+      <span className={`w-2 h-2 rounded-full shrink-0 ${config.color}`} />
+      <span className={`truncate ${config.text}`}>{block.name}</span>
+      {config.label && (
+        <span className={`text-[10px] ${config.text}`}>({config.label})</span>
+      )}
+    </div>
+  );
+}
+
+/**
+ * Component to display individual derivative progress
+ */
+function DerivativeItem({ derivative }: { derivative: DerivativeProgress }) {
+  const statusConfig = {
+    pending: {
+      color: "bg-gray-400",
+      text: "text-gray-500 dark:text-gray-400",
+      label: `${derivative.sourceBlockCount} blocks`,
+    },
+    generating: {
+      color: "bg-blue-500 animate-pulse",
+      text: "text-blue-600 dark:text-blue-400",
+      label: "Synthesizing...",
+    },
+    cached: {
+      color: "bg-purple-500",
+      text: "text-purple-600 dark:text-purple-400",
+      label: "Cached",
+    },
+    done: {
+      color: "bg-green-500",
+      text: "text-green-600 dark:text-green-400",
+      label: "Done",
+    },
+    failed: {
+      color: "bg-amber-500",
+      text: "text-amber-600 dark:text-amber-400",
+      label: "Fallback",
+    },
+  };
+
+  const config = statusConfig[derivative.status] || statusConfig.pending;
+
+  return (
+    <div className="flex items-center gap-2 text-xs">
+      <span className={`w-2 h-2 rounded-full shrink-0 ${config.color}`} />
+      <span className={`truncate ${config.text}`}>
+        Section {derivative.sectionNumber}: {derivative.sectionName}
+      </span>
+      <span className={`text-[10px] ${config.text}`}>({config.label})</span>
+    </div>
+  );
 }
 
 export default ReportGenerationProgress;

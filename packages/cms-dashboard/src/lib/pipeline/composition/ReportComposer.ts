@@ -3,6 +3,14 @@
  * Assembles the final report from selected content blocks
  * Implements ordered assembly per section as defined in Composition_Contract_v1.md
  * Adapted for Next.js from documents/src/composition/ReportComposer.ts
+ *
+ * DERIVATIVE CONTENT SUPPORT:
+ * When multiple content blocks contribute to a section, the composer can
+ * use DerivativeContentService to generate synthesized content instead of
+ * simple concatenation. This provides:
+ * - Intelligent content synthesis
+ * - Cached derivatives for reuse
+ * - Fact-checking against source blocks
  */
 
 import type {
@@ -17,12 +25,26 @@ import type {
   IntakeData,
   SupportedLanguage,
   ScenarioSections,
-  ScenarioSectionKey
+  ScenarioSectionKey,
 } from "../types";
 import { DEFAULT_LANGUAGE } from "../types";
+import type { DerivativeContent, SourceBlockContent } from "@/lib/types";
+import type { DerivativeProgress, DerivativeStatus } from "@/lib/types/types/report-generation";
+
+/**
+ * Callback for reporting derivative generation progress
+ */
+export type DerivativeProgressCallback = (progress: {
+  derivatives: DerivativeProgress[];
+  current: number;
+  total: number;
+  currentSection?: string;
+}) => void;
 
 import { PlaceholderResolver, type PlaceholderContext } from "./PlaceholderResolver";
 import { toneSelector } from "../engines/ToneSelector";
+import { createDerivativeContentService, type DerivativeContentService } from "../../services/DerivativeContentService";
+import { createDerivativeGenerationAgent } from "../../agents/derivative-generator";
 
 import sectionCompositionRules from "../config/section-composition-rules.json";
 import languagesConfig from "../config/languages.json";
@@ -115,17 +137,41 @@ class MockContentStore implements ContentStore {
   }
 }
 
+export interface ReportComposerConfig {
+  contentStore?: ContentStore;
+  enableDerivatives?: boolean;  // Enable derivative content synthesis (default: true)
+  onDerivativeProgress?: DerivativeProgressCallback;  // Progress callback for derivative generation
+}
+
 export class ReportComposer {
   private placeholderResolver: PlaceholderResolver;
   private contentStore: ContentStore;
   private rules: CompositionRules;
   private languageConfig: LanguageConfig | null;
+  private derivativeService: DerivativeContentService | null;
+  private enableDerivatives: boolean;
+  private onDerivativeProgress: DerivativeProgressCallback | null;
 
-  constructor(contentStore?: ContentStore) {
+  constructor(config?: ContentStore | ReportComposerConfig) {
     this.placeholderResolver = new PlaceholderResolver();
-    this.contentStore = contentStore ?? new MockContentStore();
+
+    // Handle both old API (ContentStore) and new API (ReportComposerConfig)
+    if (config && typeof config === "object" && "contentStore" in config) {
+      const typedConfig = config as ReportComposerConfig;
+      this.contentStore = typedConfig.contentStore ?? new MockContentStore();
+      this.enableDerivatives = typedConfig.enableDerivatives ?? true;
+      this.onDerivativeProgress = typedConfig.onDerivativeProgress ?? null;
+    } else {
+      this.contentStore = (config as ContentStore) ?? new MockContentStore();
+      this.enableDerivatives = true;
+      this.onDerivativeProgress = null;
+    }
+
     this.rules = sectionCompositionRules as CompositionRules;
     this.languageConfig = languagesConfig as LanguageConfig;
+
+    // Initialize derivative service if enabled
+    this.derivativeService = this.enableDerivatives ? createDerivativeContentService() : null;
   }
 
   /**
@@ -196,6 +242,47 @@ export class ReportComposer {
       custom: {}
     };
 
+    // Pre-analyze which sections may need derivatives for progress tracking
+    const derivativeProgress: DerivativeProgress[] = [];
+    if (this.enableDerivatives && this.derivativeService) {
+      for (let sectionNum = 0; sectionNum <= 11; sectionNum++) {
+        if (l1SuppressedSections.has(sectionNum)) continue;
+        const sectionSelections = selectionsBySection.get(sectionNum) || [];
+        const activeSelections = sectionSelections.filter(s => !s.suppressed);
+        const sectionRule = rules.sections[sectionNum.toString()] || DEFAULT_RULES.sections[sectionNum.toString()];
+
+        // Check if this section might need a derivative (multiple block content types)
+        const blockSelections = activeSelections.filter(s =>
+          s.type === "a_block" || s.type === "b_block" || s.type === "module"
+        );
+        if (blockSelections.length >= 2) {
+          derivativeProgress.push({
+            sectionNumber: sectionNum,
+            sectionName: sectionRule?.name || this.getSectionName(sectionNum, language),
+            sourceBlockCount: blockSelections.length,
+            status: "pending" as DerivativeStatus,
+          });
+        }
+      }
+    }
+    let derivativeIndex = 0;
+
+    // Helper to emit derivative progress
+    const emitDerivativeProgress = () => {
+      if (this.onDerivativeProgress && derivativeProgress.length > 0) {
+        const currentSection = derivativeProgress.find(d => d.status === "generating")?.sectionName;
+        this.onDerivativeProgress({
+          derivatives: [...derivativeProgress],
+          current: derivativeIndex,
+          total: derivativeProgress.length,
+          currentSection,
+        });
+      }
+    };
+
+    // Emit initial derivative progress if we have any potential derivatives
+    emitDerivativeProgress();
+
     // Process each section in order
     for (let sectionNum = 0; sectionNum <= 11; sectionNum++) {
       // Check if section is suppressed by L1 rules (A_BLOCK_TREATMENT_OPTIONS)
@@ -223,6 +310,14 @@ export class ReportComposer {
       const sectionTone = sectionRule?.toneOverride ??
         toneSelector.getToneForSection(selectedTone, sectionNum);
 
+      // Check if this section has a potential derivative and update progress
+      const derivativeEntry = derivativeProgress.find(d => d.sectionNumber === sectionNum);
+      if (derivativeEntry) {
+        derivativeEntry.status = "generating";
+        derivativeIndex++;
+        emitDerivativeProgress();
+      }
+
       // Compose section content using ordered assembly
       const sectionContent = await this.composeSectionOrdered(
         sectionNum,
@@ -232,8 +327,23 @@ export class ReportComposer {
         scenarioMatch.confidence,
         scenarioSections,  // Now typed as ScenarioSections | undefined
         sectionRule || DEFAULT_RULES.sections[sectionNum.toString()],
-        language
+        language,
+        derivativeEntry // Pass the derivative entry for status updates
       );
+
+      // Update derivative status based on result
+      if (derivativeEntry) {
+        if (sectionContent?.sources.some(s => s.startsWith("DERIVATIVE:"))) {
+          derivativeEntry.status = "done";
+          derivativeEntry.derivativeId = sectionContent.sources
+            .find(s => s.startsWith("DERIVATIVE:"))
+            ?.replace("DERIVATIVE:", "");
+        } else {
+          // Derivative was skipped or failed - mark as done (fallback used)
+          derivativeEntry.status = "done";
+        }
+        emitDerivativeProgress();
+      }
 
       if (sectionContent && sectionContent.content.trim().length > 0) {
         // Track warnings
@@ -298,6 +408,7 @@ export class ReportComposer {
   /**
    * Compose a single section using ordered assembly rules
    * @param scenarioSections - Typed scenario sections (direct property access, no Map lookup)
+   * @param derivativeEntry - Optional derivative progress entry for status updates
    */
   private async composeSectionOrdered(
     sectionNum: number,
@@ -307,7 +418,8 @@ export class ReportComposer {
     confidence: ConfidenceLevel,
     scenarioSections: ScenarioSections | undefined,
     rule: SectionRule,
-    language: SupportedLanguage = DEFAULT_LANGUAGE
+    language: SupportedLanguage = DEFAULT_LANGUAGE,
+    derivativeEntry?: DerivativeProgress
   ): Promise<{
     content: string;
     sources: string[];
@@ -318,6 +430,9 @@ export class ReportComposer {
     const sources: string[] = [];
     let totalResolved = 0;
     const allUnresolved: string[] = [];
+
+    // Log incoming selections for debugging
+    console.log(`📋 [ReportComposer] Section ${sectionNum} received ${selections.length} selections: [${selections.map(s => `${s.content_id}(${s.type})`).join(", ")}]`);
 
     // Add uncertainty language if needed (for certain sections)
     if ([2, 3, 4].includes(sectionNum) && confidence !== "HIGH") {
@@ -401,12 +516,108 @@ export class ReportComposer {
       return null;
     }
 
+    // Log section composition info
+    console.log(`📝 [ReportComposer] Section ${sectionNum} (${rule.name}): ${contentParts.length} content parts, sources: [${sources.join(", ")}]`);
+
+    // If we have multiple content parts and derivatives are enabled, use derivative synthesis
+    if (contentParts.length > 1 && this.derivativeService && sources.length > 1) {
+      console.log(`🔄 [ReportComposer] Section ${sectionNum}: Attempting derivative synthesis...`);
+      try {
+        const derivativeContent = await this.getOrCreateDerivative(
+          sources,
+          language,
+          tone,
+          sectionNum,
+          rule.name
+        );
+
+        if (derivativeContent) {
+          console.log(`✅ [ReportComposer] Section ${sectionNum}: Using derivative ${derivativeContent.derivativeId}`);
+          // Apply placeholder resolution to derivative content
+          const resolved = this.placeholderResolver.resolve(derivativeContent.content, context);
+          return {
+            content: resolved.content,
+            sources: [...sources, `DERIVATIVE:${derivativeContent.derivativeId}`],
+            placeholdersResolved: totalResolved + resolved.resolved.length,
+            placeholdersUnresolved: [...allUnresolved, ...resolved.unresolved],
+          };
+        } else {
+          console.log(`⚠️ [ReportComposer] Section ${sectionNum}: Derivative returned null (likely < 2 valid blocks)`);
+        }
+      } catch (error) {
+        // Log error but fall back to concatenation
+        console.warn(`❌ [ReportComposer] Section ${sectionNum}: Derivative generation failed, falling back to concatenation:`, error);
+      }
+    } else {
+      console.log(`➡️ [ReportComposer] Section ${sectionNum}: Skipping derivatives (parts=${contentParts.length}, derivativeService=${!!this.derivativeService}, sources=${sources.length})`);
+    }
+
+    // Fallback: simple concatenation (single part or derivative disabled/failed)
     return {
       content: contentParts.join("\n\n"),
       sources,
       placeholdersResolved: totalResolved,
       placeholdersUnresolved: allUnresolved
     };
+  }
+
+  /**
+   * Get or create a derivative for the given source block IDs
+   */
+  private async getOrCreateDerivative(
+    sourceBlockIds: string[],
+    language: SupportedLanguage,
+    tone: ToneProfileId,
+    sectionNumber: number,
+    sectionName: string
+  ): Promise<DerivativeContent | null> {
+    if (!this.derivativeService) {
+      console.log(`⚠️ [Derivative] No derivative service available`);
+      return null;
+    }
+
+    // Filter out non-block sources (STATIC_*, SCENARIO:*)
+    const blockIds = sourceBlockIds.filter(
+      (id) => !id.startsWith("STATIC_") && !id.startsWith("SCENARIO:")
+    );
+
+    console.log(`🔍 [Derivative] Filtered blocks for section ${sectionNumber}: [${blockIds.join(", ")}] (from [${sourceBlockIds.join(", ")}])`);
+
+    // Need at least 2 blocks to warrant derivative synthesis
+    if (blockIds.length < 2) {
+      console.log(`⚠️ [Derivative] Section ${sectionNumber}: Only ${blockIds.length} valid blocks, need at least 2`);
+      return null;
+    }
+
+    console.log(`🚀 [Derivative] Generating derivative for section ${sectionNumber} with blocks: [${blockIds.join(", ")}]`);
+
+    const agent = createDerivativeGenerationAgent();
+
+    return await this.derivativeService.getOrCreateDerivative(
+      {
+        sourceBlockIds: blockIds,
+        language,
+        tone,
+        sectionContext: {
+          sectionNumber,
+          sectionName,
+        },
+        targetWordCount: 400,
+      },
+      async (blocks: SourceBlockContent[]) => {
+        // Generate derivative using the agent
+        return await agent.generate({
+          sourceBlocks: blocks,
+          language,
+          tone,
+          sectionContext: {
+            sectionNumber,
+            sectionName,
+          },
+          targetWordCount: 400,
+        });
+      }
+    );
   }
 
   /**
@@ -590,6 +801,32 @@ The choice of how to proceed is yours. Your dentist is there to provide informat
    */
   setContentStore(store: ContentStore): void {
     this.contentStore = store;
+  }
+
+  /**
+   * Enable or disable derivative content synthesis
+   */
+  setDerivativesEnabled(enabled: boolean): void {
+    this.enableDerivatives = enabled;
+    if (enabled && !this.derivativeService) {
+      this.derivativeService = createDerivativeContentService();
+    } else if (!enabled) {
+      this.derivativeService = null;
+    }
+  }
+
+  /**
+   * Check if derivatives are enabled
+   */
+  isDerivativesEnabled(): boolean {
+    return this.enableDerivatives;
+  }
+
+  /**
+   * Set callback for derivative progress updates
+   */
+  setDerivativeProgressCallback(callback: DerivativeProgressCallback | null): void {
+    this.onDerivativeProgress = callback;
   }
 }
 

@@ -18,7 +18,7 @@ const ExtractedClaimsSchema = z.object({
       claim_text: z.string().describe("The exact text of the factual claim"),
       section: z.number().describe("Section number where claim appears"),
       start_offset: z.number().describe("Approximate character position"),
-      claim_type: z.enum(["medical_fact", "statistic", "process", "outcome", "general"]),
+      claim_type: z.enum(["medical_fact", "statistic", "process", "outcome", "general", "boundary_violation"]),
     })
   ),
 });

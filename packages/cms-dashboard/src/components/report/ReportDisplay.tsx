@@ -4,6 +4,7 @@ import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import type { ComposedReport, ReportSection, ReportFactCheckIssue, LLMEvaluationData } from "@/lib/types/types/report-generation";
+import { PDFDownloadButton } from "./PDFDownloadButton";
 
 interface ReportDisplayProps {
   report: ComposedReport;
@@ -48,14 +49,17 @@ export function ReportDisplay({ report, llmEvaluation, onGenerateNew }: ReportDi
               {new Date(report.generatedAt).toLocaleTimeString()}
             </p>
           </div>
-          {onGenerateNew && (
-            <button
-              onClick={onGenerateNew}
-              className="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              Generate New Report
-            </button>
-          )}
+          <div className="flex items-center gap-3">
+            <PDFDownloadButton report={report} />
+            {onGenerateNew && (
+              <button
+                onClick={onGenerateNew}
+                className="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Generate New Report
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Report metadata */}

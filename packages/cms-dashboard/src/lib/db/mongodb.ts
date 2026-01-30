@@ -64,4 +64,5 @@ export const COLLECTIONS = {
   FACT_CHECK_RECORDS: "factCheckRecords",
   GENERATION_JOBS: "generationJobs",
   CONTENT_USAGE: "contentUsage",
+  DERIVATIVE_CONTENT: "derivativeContent",
 } as const;

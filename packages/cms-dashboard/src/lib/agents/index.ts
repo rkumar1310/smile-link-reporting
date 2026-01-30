@@ -52,6 +52,15 @@ export {
   createSemanticSearchService,
 } from "./search/index";
 
+// Derivative Generator
+export {
+  DerivativeGenerationAgent,
+  createDerivativeGenerationAgent,
+  DerivativeFactChecker,
+  createDerivativeFactChecker,
+  TONE_DESCRIPTIONS,
+} from "./derivative-generator/index";
+
 // Types
 export type { ParseOptions, ParseResult } from "./content-generator/index";
 export type { FactCheckConfig } from "./fact-checker/index";
@@ -59,3 +68,4 @@ export type { LLMConfig, LLMMessage, LLMResponse, TraceOptions } from "./shared/
 export type { LangfuseConfig, TraceContext } from "./shared/LangfuseTracer";
 export type { EmbeddingConfig } from "./embeddings/index";
 export type { ChunkingConfig } from "./embeddings/index";
+export type { DerivativeAgentConfig, DerivativeFactCheckConfig } from "./derivative-generator/index";

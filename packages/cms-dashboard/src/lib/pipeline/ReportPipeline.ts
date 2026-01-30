@@ -23,7 +23,7 @@ import { driverDeriver } from "./engines/DriverDeriver";
 import { scenarioScorer } from "./engines/ScenarioScorer";
 import { toneSelector } from "./engines/ToneSelector";
 import { contentSelector } from "./engines/ContentSelector";
-import { reportComposer, type ContentStore } from "./composition/ReportComposer";
+import { reportComposer, type ContentStore, type DerivativeProgressCallback } from "./composition/ReportComposer";
 import { qaGate } from "./qa/QAGate";
 
 /**
@@ -47,20 +47,29 @@ export interface PipelineOptions {
   onReportComposed?: (report: ComposedReport, audit: Partial<AuditRecord>) => Promise<void> | void;
   /** Callback for real-time progress updates during pipeline execution */
   onProgress?: (event: PipelineProgressEvent) => void | Promise<void>;
+  /** Callback for derivative content generation progress during composition */
+  onDerivativeProgress?: DerivativeProgressCallback;
 }
 
 export class ReportPipeline {
   private contentStore?: ContentStore;
   private onReportComposed?: (report: ComposedReport, audit: Partial<AuditRecord>) => Promise<void> | void;
   private onProgress?: (event: PipelineProgressEvent) => void | Promise<void>;
+  private onDerivativeProgress?: DerivativeProgressCallback;
 
   constructor(options?: PipelineOptions) {
     this.contentStore = options?.contentStore;
     this.onReportComposed = options?.onReportComposed;
     this.onProgress = options?.onProgress;
+    this.onDerivativeProgress = options?.onDerivativeProgress;
 
     if (this.contentStore) {
       reportComposer.setContentStore(this.contentStore);
+    }
+
+    // Set derivative progress callback on the composer
+    if (this.onDerivativeProgress) {
+      reportComposer.setDerivativeProgressCallback(this.onDerivativeProgress);
     }
   }
 

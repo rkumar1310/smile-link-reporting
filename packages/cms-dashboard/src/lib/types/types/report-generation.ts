@@ -258,6 +258,49 @@ export interface ComposedReport {
   // Generation metadata
   contentGenerated: number;            // How many content items were generated
   totalContentUsed: number;
+
+  // Intake questionnaire answers (for PDF export)
+  intakeAnswers?: IntakeAnswer[];
+
+  // PDF export (base64 encoded)
+  pdfBase64?: string;
+}
+
+// =============================================================================
+// PROGRESS TRACKING
+// =============================================================================
+
+/**
+ * Progress status for individual content blocks
+ */
+export type ContentBlockStatus = "pending" | "generating" | "verifying" | "done" | "failed";
+
+/**
+ * Progress tracking for a single content block
+ */
+export interface ContentBlockProgress {
+  id: string;                        // Content ID
+  name: string;                      // Display name
+  contentType: string;               // a_block, b_block, module, scenario, static
+  status: ContentBlockStatus;
+  factCheckAttempt?: number;         // Current attempt number
+  factCheckScore?: number;           // Score if verified
+}
+
+/**
+ * Progress status for derivative content
+ */
+export type DerivativeStatus = "pending" | "generating" | "cached" | "done" | "failed";
+
+/**
+ * Progress tracking for derivative content synthesis
+ */
+export interface DerivativeProgress {
+  sectionNumber: number;             // Section being composed
+  sectionName: string;               // Display name
+  sourceBlockCount: number;          // Number of blocks being synthesized
+  status: DerivativeStatus;
+  derivativeId?: string;             // ID if cached/done
 }
 
 // =============================================================================
@@ -304,6 +347,12 @@ export interface ContentCheckPhaseEvent extends PhaseEventBase {
     available: number;
     missing: number;
     scenarios: string[];
+    /** List of content blocks that need to be generated */
+    missingBlocks?: Array<{
+      id: string;
+      name: string;
+      contentType: string;
+    }>;
   };
 }
 
@@ -320,6 +369,8 @@ export interface GeneratingPhaseEvent extends PhaseEventBase {
       maxAttempts: number;
       score?: number;
     };
+    /** Full list of content blocks with their current status */
+    contentBlocks?: ContentBlockProgress[];
   };
 }
 
@@ -328,6 +379,14 @@ export interface ComposingPhaseEvent extends PhaseEventBase {
   data?: {
     sectionsProcessed: number;
     totalSections: number;
+    /** Current section being composed */
+    currentSection?: string;
+    /** Full list of derivatives with their current status */
+    derivatives?: DerivativeProgress[];
+    /** Current derivative index (1-based) */
+    currentDerivative?: number;
+    /** Total derivatives to generate */
+    totalDerivatives?: number;
   };
 }
 

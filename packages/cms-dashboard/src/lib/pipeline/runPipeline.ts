@@ -4,12 +4,21 @@
  * Maps 8 pipeline phases to 6 UI phases
  */
 
-import type { ReportPhaseEvent, ReportPhase, IntakeAnswers, ComposedReport as CMSComposedReport } from "@/lib/types/types/report-generation";
+import type {
+  ReportPhaseEvent,
+  ReportPhase,
+  IntakeAnswers,
+  ComposedReport as CMSComposedReport,
+  ContentBlockProgress,
+  ContentBlockStatus,
+  DerivativeProgress,
+} from "@/lib/types/types/report-generation";
 import type { ToneProfileId } from "@/lib/types";
 
 import { createReportPipeline, type PipelineProgressEvent } from "./ReportPipeline";
 import { createDynamicContentStore, type ContentGenerationProgress } from "./content/DynamicContentStore";
 import type { IntakeData, ComposedReport, AuditRecord, PipelineResult, SupportedLanguage, QuestionId } from "./types";
+import { generateReportPdf } from "@/lib/services/PdfGenerationService";
 
 /**
  * Map pipeline phases to UI phases
@@ -145,10 +154,34 @@ export function mapPipelineEventToSSE(event: PipelineProgressEvent): ReportPhase
 }
 
 /**
+ * Map content generation phase to ContentBlockStatus
+ */
+function mapPhaseToBlockStatus(phase: ContentGenerationProgress["phase"]): ContentBlockStatus {
+  switch (phase) {
+    case "searching":
+    case "generating":
+      return "generating";
+    case "fact-checking":
+      return "verifying";
+    case "completed":
+      return "done";
+    case "error":
+      return "failed";
+    default:
+      return "pending";
+  }
+}
+
+/**
  * Map content generation progress to SSE event
  * Maps DynamicContentStore progress to GeneratingPhaseEvent format
  */
-function mapContentGenerationToSSE(progress: ContentGenerationProgress, current: number = 1, total: number = 1): ReportPhaseEvent {
+function mapContentGenerationToSSE(
+  progress: ContentGenerationProgress,
+  current: number = 1,
+  total: number = 1,
+  contentBlocks?: ContentBlockProgress[]
+): ReportPhaseEvent {
   // Map content generation phase to factCheck status
   const statusMap: Record<string, "pending" | "checking" | "passed" | "failed" | "retrying"> = {
     "searching": "pending",
@@ -171,7 +204,9 @@ function mapContentGenerationToSSE(progress: ContentGenerationProgress, current:
         attempt: progress.attempt ?? 1,
         maxAttempts: progress.maxAttempts ?? 2,
         score: progress.score
-      }
+      },
+      // Include all content blocks for full progress visibility
+      contentBlocks: contentBlocks ? [...contentBlocks] : undefined
     }
   };
 }
@@ -219,7 +254,11 @@ export function transformReport(
       suggestion: issue.suggested_fix
     })) ?? [],
     contentGenerated: 0,
-    totalContentUsed: coreReport.sections.length
+    totalContentUsed: coreReport.sections.length,
+    intakeAnswers: audit.intake.answers.map(a => ({
+      question_id: a.question_id,
+      answer: a.answer
+    }))
   };
 }
 
@@ -273,21 +312,82 @@ export async function runPipelineWithSSE(
   // Track content generation for "generating" phase events
   let contentGenerationCount = 0;
 
+  // Track all content blocks and their statuses for progress display
+  const contentBlocksMap = new Map<string, ContentBlockProgress>();
+
+  // Helper to get all content blocks as array
+  const getContentBlocks = (): ContentBlockProgress[] => {
+    return Array.from(contentBlocksMap.values());
+  };
+
+  // Helper to update or create a content block entry
+  const updateContentBlock = (progress: ContentGenerationProgress) => {
+    const existing = contentBlocksMap.get(progress.contentId);
+    const status = mapPhaseToBlockStatus(progress.phase);
+
+    if (existing) {
+      existing.status = status;
+      if (progress.attempt) existing.factCheckAttempt = progress.attempt;
+      if (progress.score !== undefined) existing.factCheckScore = progress.score;
+    } else {
+      // First time seeing this content - add it
+      contentBlocksMap.set(progress.contentId, {
+        id: progress.contentId,
+        name: progress.contentId, // Will use contentId as name since we don't have metadata here
+        contentType: "scenario", // Default to scenario since that's the main use case
+        status,
+        factCheckAttempt: progress.attempt,
+        factCheckScore: progress.score,
+      });
+    }
+  };
+
   // Create content store with progress callback
   const contentStore = createDynamicContentStore({
     maxFactCheckAttempts,
     factCheckThreshold,
     onProgress: async (progress) => {
-      contentGenerationCount++;
-      await onEvent(mapContentGenerationToSSE(progress));
+      // Update tracking
+      updateContentBlock(progress);
+
+      // Only count completed items
+      if (progress.phase === "completed") {
+        contentGenerationCount++;
+      }
+
+      // Emit progress with full content blocks list
+      await onEvent(mapContentGenerationToSSE(
+        progress,
+        contentGenerationCount + 1,
+        contentBlocksMap.size,
+        getContentBlocks()
+      ));
     }
   });
 
-  // Create pipeline with progress callback
+  // Create pipeline with progress callbacks
   const pipeline = createReportPipeline({
     contentStore,
     onProgress: async (event) => {
       await onEvent(mapPipelineEventToSSE(event));
+    },
+    // Derivative progress callback for composition phase
+    onDerivativeProgress: async (progress) => {
+      await onEvent({
+        phase: "composing",
+        message: progress.currentSection
+          ? `Synthesizing: ${progress.currentSection}`
+          : `Composing sections (${progress.current}/${progress.total})`,
+        timestamp: new Date().toISOString(),
+        data: {
+          sectionsProcessed: progress.current,
+          totalSections: progress.total,
+          currentSection: progress.currentSection,
+          derivatives: progress.derivatives,
+          currentDerivative: progress.current,
+          totalDerivatives: progress.total,
+        }
+      });
     }
   });
 
@@ -306,6 +406,15 @@ export async function runPipelineWithSSE(
     // Include content generation count in result
     if (cmsReport) {
       cmsReport.contentGenerated = contentGenerationCount;
+
+      // Generate PDF
+      try {
+        const pdfBuffer = await generateReportPdf(cmsReport);
+        cmsReport.pdfBase64 = pdfBuffer.toString("base64");
+      } catch (error) {
+        console.error("PDF generation failed:", error);
+        // Continue without PDF - it's not critical
+      }
     }
 
     return {

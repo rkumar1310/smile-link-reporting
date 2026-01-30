@@ -14,6 +14,7 @@
     "ai": "^6.0.31",
     "langfuse": "^3.38.6",
     "mammoth": "^1.8.0",
+    "md-to-pdf": "^5.2.5",
     "mongodb": "^6.12.0",
     "next": "16.1.4",
     "openai": "^4.77.0",
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/marked": "^5.0.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

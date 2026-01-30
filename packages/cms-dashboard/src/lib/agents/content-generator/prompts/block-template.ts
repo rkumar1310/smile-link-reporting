@@ -11,6 +11,7 @@ import {
   CONTENT_TYPE_SECTIONS
 } from './report-structure';
 import { TONE_INSTRUCTIONS } from './generation-system';
+import { getSystemGoalCondensed } from '../../shared/system-goal';
 
 export interface BlockGenerationConfig {
   contentId: string;
@@ -70,6 +71,8 @@ export function buildBlockSystemPrompt(config: BlockGenerationConfig): string {
   const toneInstructions = TONE_INSTRUCTIONS[config.tone] || TONE_INSTRUCTIONS['TP-01'];
 
   return `You are a specialized dental content writer for Smile-Link patient reports.
+
+${getSystemGoalCondensed()}
 
 ## REPORT STRUCTURE CONTEXT
 The final patient report has 12 sections:
