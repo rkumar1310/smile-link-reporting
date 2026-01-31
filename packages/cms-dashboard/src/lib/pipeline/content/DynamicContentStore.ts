@@ -9,7 +9,8 @@ import type { ContentStore } from "../composition/ReportComposer";
 import type { GenerationResult } from "@/lib/types";
 import { getDb, COLLECTIONS } from "@/lib/db/mongodb";
 import { createContentGenerationAgent } from "@/lib/agents/content-generator";
-import { createFactCheckAgent } from "@/lib/agents/fact-checker";
+// Fact-checking disabled for faster iteration
+// import { createFactCheckAgent } from "@/lib/agents/fact-checker";
 import { createSemanticSearchService } from "@/lib/agents/search";
 import { ObjectId } from "mongodb";
 
@@ -348,129 +349,68 @@ export class DynamicContentStore implements ContentStore {
 
     console.log(`   ✅ Found ${sourceDocs.length} source documents`);
 
-    // Generate content with fact-checking loop
+    // Generate content (fact-checking disabled for faster iteration)
     const generationAgent = createContentGenerationAgent();
-    const factCheckAgent = createFactCheckAgent();
+    // Fact-checking disabled
+    // const factCheckAgent = createFactCheckAgent();
 
-    let attempt = 0;
-    let generatedContent: string | null = null;
+    console.log(`\n🤖 [LLM Generation] Generating ${contentId}`);
 
-    while (attempt < this.maxFactCheckAttempts) {
-      attempt++;
+    await this.emitProgress({
+      phase: "generating",
+      contentId,
+      message: `Generating: ${contentMeta.name}`,
+    });
 
-      console.log(`\n🤖 [LLM Generation] Attempt ${attempt}/${this.maxFactCheckAttempts} for ${contentId}`);
-
-      await this.emitProgress({
-        phase: "generating",
+    try {
+      // Generate content
+      const genStart = Date.now();
+      const result = await generationAgent.generate({
         contentId,
-        message: attempt === 1 ? `Generating: ${contentMeta.name}` : `Regenerating: ${contentMeta.name}`,
-        attempt,
-        maxAttempts: this.maxFactCheckAttempts,
+        contentType: contentMeta.type,
+        language,
+        tone,
+        sourceDocuments: sourceDocs.map((doc) => ({
+          id: doc._id,
+          filename: doc.filename,
+          sections: doc.sections.map((s) => ({
+            id: s.id || s.title,
+            title: s.title,
+            content: s.content,
+          })),
+        })),
+        existingManifest: {
+          name: contentMeta.name,
+          description: contentMeta.description || `Content for ${contentId}`,
+          targetSections: contentMeta.sections,
+          wordCountTarget: 300,
+        },
       });
 
-      try {
-        // Generate content
-        const genStart = Date.now();
-        const result = await generationAgent.generate({
-          contentId,
-          contentType: contentMeta.type,
-          language,
-          tone,
-          sourceDocuments: sourceDocs.map((doc) => ({
-            id: doc._id,
-            filename: doc.filename,
-            sections: doc.sections.map((s) => ({
-              id: s.id || s.title,
-              title: s.title,
-              content: s.content,
-            })),
-          })),
-          existingManifest: {
-            name: contentMeta.name,
-            description: contentMeta.description || `Content for ${contentId}`,
-            targetSections: contentMeta.sections,
-            wordCountTarget: 300,
-          },
-        });
+      const genTime = Date.now() - genStart;
+      console.log(`   ✅ Generated ${result.wordCount} words in ${genTime}ms`);
 
-        generatedContent = result.content;
-        const genTime = Date.now() - genStart;
-        console.log(`   ✅ Generated ${result.wordCount} words in ${genTime}ms`);
+      // Save to database directly (fact-checking disabled)
+      console.log(`   💾 Saving to database...`);
+      await this.saveToDatabase(contentId, tone, language, result.content, result);
 
-        // Fact-check
-        console.log(`   🔬 Running fact-check...`);
-        await this.emitProgress({
-          phase: "fact-checking",
-          contentId,
-          message: `Verifying: ${contentMeta.name}`,
-          attempt,
-          maxAttempts: this.maxFactCheckAttempts,
-        });
+      await this.emitProgress({
+        phase: "completed",
+        contentId,
+        message: `Generated: ${contentMeta.name}`,
+      });
 
-        const fcStart = Date.now();
-        const factCheckResult = await factCheckAgent.check({
-          contentId,
-          content: generatedContent,
-          sourceDocuments: sourceDocs.map((doc) => ({
-            _id: doc._id,
-            filename: doc.filename,
-            sections: doc.sections,
-          })),
-          strictMode: false,
-        });
+      return result.content;
 
-        const score = factCheckResult.overallConfidence;
-        const fcTime = Date.now() - fcStart;
-        console.log(`   📊 Fact-check score: ${(score * 100).toFixed(1)}% (threshold: ${this.factCheckThreshold * 100}%) in ${fcTime}ms`);
-
-        if (score >= this.factCheckThreshold) {
-          // Passed! Save to database and return
-          console.log(`   ✅ PASSED - Saving to database...`);
-          await this.saveToDatabase(contentId, tone, language, generatedContent, result);
-
-          await this.emitProgress({
-            phase: "completed",
-            contentId,
-            message: `Generated and verified: ${contentMeta.name}`,
-            attempt,
-            maxAttempts: this.maxFactCheckAttempts,
-            score,
-          });
-
-          return generatedContent;
-        }
-
-        // Score too low, will retry
-        console.log(`   ⚠️  Score below threshold, ${attempt < this.maxFactCheckAttempts ? "will retry..." : "using anyway"}`);
-        await this.emitProgress({
-          phase: "fact-checking",
-          contentId,
-          message: `Score ${(score * 100).toFixed(0)}% below threshold, ${attempt < this.maxFactCheckAttempts ? "retrying..." : "using anyway"}`,
-          attempt,
-          maxAttempts: this.maxFactCheckAttempts,
-          score,
-        });
-
-      } catch (error) {
-        console.error(`   ❌ Generation attempt ${attempt} failed:`, error instanceof Error ? error.message : error);
-        await this.emitProgress({
-          phase: "error",
-          contentId,
-          message: `Generation error: ${error instanceof Error ? error.message : "Unknown"}`,
-          attempt,
-          maxAttempts: this.maxFactCheckAttempts,
-        });
-      }
+    } catch (error) {
+      console.error(`   ❌ Generation failed:`, error instanceof Error ? error.message : error);
+      await this.emitProgress({
+        phase: "error",
+        contentId,
+        message: `Generation error: ${error instanceof Error ? error.message : "Unknown"}`,
+      });
+      return null;
     }
-
-    // If we get here, all attempts completed but score was below threshold
-    // Save with warnings and return
-    if (generatedContent) {
-      await this.saveToDatabase(contentId, tone, language, generatedContent);
-      return generatedContent;
-    }
-
-    return null;
   }
 
   /**

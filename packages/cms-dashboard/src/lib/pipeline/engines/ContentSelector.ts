@@ -145,6 +145,8 @@ const MODULE_TRIGGERS: Record<string, { sections: number[]; driver?: DriverId; v
   "TM_CTX_TOOTH_STATUS": { sections: [3], driver: "mouth_situation", values: ["single_missing_tooth", "multiple_adjacent", "multiple_dispersed"] },
   "TM_CTX_ORAL_COMPLEXITY": { sections: [3], driver: "mouth_situation", values: ["complex", "mixed_pattern"] },
   "TM_CTX_GENERAL_HEALTH": { sections: [3], driver: "risk_profile_biological", values: ["elevated"] },
+  "TM_TREATMENT_HISTORY": { sections: [3], driver: "experience_history", values: ["experienced"] },
+  "TM_CTX_RESTORATION_STATUS": { sections: [3], tag: "tooth_health_moderate" },
 
   // New Profile Modules
   "TM_PROFILE_COMFORT": { sections: [3], driver: "profile_type", values: ["comfort"] },
@@ -152,7 +154,19 @@ const MODULE_TRIGGERS: Record<string, { sections: number[]; driver?: DriverId; v
   "TM_PROFILE_FUNCTIONAL": { sections: [3], driver: "profile_type", values: ["functional"] },
   "TM_PROFILE_BUDGET": { sections: [9], driver: "budget_type", values: ["economy"] },
   "TM_PROFILE_PREMIUM": { sections: [9], driver: "budget_type", values: ["premium"] },
-  "TM_PROFILE_COMBINATION": { sections: [3], driver: "profile_type", values: ["mixed"] }
+  "TM_PROFILE_COMBINATION": { sections: [3], driver: "profile_type", values: ["mixed"] },
+
+  // Timeline Context Modules
+  "TM_CTX_TIMELINE_URGENT": { sections: [3, 7], driver: "time_horizon", values: ["immediate"] },
+  "TM_CTX_TIMELINE_MEDIUM": { sections: [3, 7], driver: "time_horizon", values: ["short_term"] },
+  "TM_CTX_TIMELINE_RELAXED": { sections: [3, 7], driver: "time_horizon", values: ["long_term"] },
+  "TM_CTX_TIMELINE_EXPLORATORY": { sections: [3], driver: "time_horizon", values: ["undefined"] },
+
+  // Smile Style Context Modules (tag-based for explicit user preference)
+  "TM_CTX_STYLE_HOLLYWOOD": { sections: [3, 5], tag: "style_hollywood" },
+  "TM_CTX_STYLE_NATURAL": { sections: [3, 5], tag: "style_natural" },
+  "TM_CTX_STYLE_CLASSIC": { sections: [3, 5], tag: "style_classic" },
+  "TM_CTX_STYLE_FUNCTIONAL": { sections: [3, 5], tag: "style_functional" }
 };
 
 export class ContentSelector {

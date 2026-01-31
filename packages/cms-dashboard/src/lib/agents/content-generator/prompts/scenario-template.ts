@@ -77,10 +77,13 @@ ${toneInstructions}
    - Build on context established in earlier sections
    - Avoid repeating the same points across sections
 
-3. SOURCE FIDELITY
+3. SOURCE FIDELITY (CRITICAL)
    - Generate ONLY from provided source material
-   - Never invent medical facts, statistics, or claims
+   - Never invent medical facts, statistics, treatment options, or claims
+   - If information is not in the source, DO NOT include it
+   - Do NOT add treatment options not explicitly mentioned in the source
    - Include citations for each section
+   - When in doubt, omit rather than invent
 
 4. PATIENT-CENTERED
    - Address the patient directly using "you/your"
@@ -181,11 +184,11 @@ function getSectionGuidelines(sectionKey: string): string {
 - Include: {{TOOTH_ZONE}}, {{TOOTH_ZONE_DESCRIPTION}} where relevant`;
 
     case 'options':
-      return `- Present each treatment option objectively
-- Describe what each option involves
-- Highlight key benefits without overselling
-- Include relevant considerations for each
-- Use bullet points or structured format for clarity`;
+      return `- ONLY include treatment options explicitly mentioned in the source material
+- Do NOT invent or suggest options not in the source
+- Present each option exactly as described in the source
+- Use bullet points or structured format for clarity
+- If source has limited options, present only those - do not pad with extras`;
 
     case 'comparison':
       return `- Side-by-side comparison format works well

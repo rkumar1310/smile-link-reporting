@@ -167,7 +167,7 @@ export class QAGate {
 
       const llmStart = Date.now();
       try {
-        const result = await llmReportEvaluator.evaluate(report);
+        const result = await llmReportEvaluator.evaluate(report, intake);
         llmEvaluation = result ?? undefined;
 
         await emitProgress({

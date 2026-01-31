@@ -31,6 +31,7 @@ interface ScoringConfig {
   required_must_match: boolean;
   strong_weight: number;
   supporting_weight: number;
+  preferred_tag_weight: number;
   excluding_disqualifies: boolean;
 }
 
@@ -60,8 +61,10 @@ export class ScenarioScorer {
 
   /**
    * Score all scenarios and find the best match
+   * @param driverState - The derived driver state
+   * @param tags - Optional set of extracted tags for preferred_tags scoring
    */
-  score(driverState: DriverState): ScenarioMatchResult {
+  score(driverState: DriverState, tags?: Set<string>): ScenarioMatchResult {
     const allScores: ScenarioScore[] = [];
 
     // Check for safety override (L1 priority)
@@ -75,7 +78,7 @@ export class ScenarioScorer {
       // Skip fallback scenario in normal scoring
       if (scenarioConfig.is_fallback) continue;
 
-      const score = this.scoreScenario(scenarioId, scenarioConfig, driverState);
+      const score = this.scoreScenario(scenarioId, scenarioConfig, driverState, tags);
       allScores.push(score);
     }
 
@@ -114,13 +117,15 @@ export class ScenarioScorer {
   private scoreScenario(
     scenarioId: string,
     scenarioConfig: ScenarioConfig,
-    driverState: DriverState
+    driverState: DriverState,
+    tags?: Set<string>
   ): ScenarioScore {
     const breakdown: ScenarioScore["breakdown"] = [];
     let score = 0;
     let matchedRequired = 0;
     let matchedStrong = 0;
     let matchedSupporting = 0;
+    let matchedPreferredTags = 0;
     let excluded = false;
 
     // Check REQUIRED drivers (must ALL match)
@@ -203,6 +208,26 @@ export class ScenarioScorer {
           score += points;
         }
       }
+
+      // PREFERRED_TAGS matches (weight = 4) - score explicit user intent
+      if (tags && scenarioConfig.preferred_tags) {
+        for (const preferredTag of scenarioConfig.preferred_tags) {
+          const matched = tags.has(preferredTag);
+          const points = matched ? this.config.scoring.preferred_tag_weight : 0;
+
+          breakdown.push({
+            driver_id: `tag:${preferredTag}` as DriverId,
+            criterion: "preferred_tag",
+            matched,
+            points
+          });
+
+          if (matched) {
+            matchedPreferredTags++;
+            score += points;
+          }
+        }
+      }
     }
 
     return {
@@ -211,6 +236,7 @@ export class ScenarioScorer {
       matched_required: matchedRequired,
       matched_strong: matchedStrong,
       matched_supporting: matchedSupporting,
+      matched_preferred_tags: matchedPreferredTags,
       excluded,
       breakdown
     };

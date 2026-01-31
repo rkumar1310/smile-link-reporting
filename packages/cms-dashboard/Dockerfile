@@ -61,6 +61,11 @@ COPY --from=builder /app/packages/cms-dashboard/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/packages/cms-dashboard/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/packages/cms-dashboard/.next/static ./packages/cms-dashboard/.next/static
 
+# Copy data directories for API endpoints
+COPY --chown=nextjs:nodejs test_reports ./test_reports
+COPY --chown=nextjs:nodejs config ./config
+COPY --chown=nextjs:nodejs reference-docs ./reference-docs
+
 USER nextjs
 
 EXPOSE 3000

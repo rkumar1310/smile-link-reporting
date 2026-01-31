@@ -444,7 +444,7 @@ export default function ReportGeneratorPage() {
       }
       setError(err instanceof Error ? err.message : "Unknown error");
     }
-  }, [answers, initializePhases, handlePhaseEvent, useMockMode]);
+  }, [answers, initializePhases, handlePhaseEvent, useMockMode, language]);
 
   // Cancel generation
   const cancelGeneration = useCallback(() => {

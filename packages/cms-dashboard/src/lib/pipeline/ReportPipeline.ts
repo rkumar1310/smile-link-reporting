@@ -185,7 +185,9 @@ export class ReportPipeline {
       });
 
       const scenarioStart = Date.now();
-      const scenarioMatch = scenarioScorer.score(driverState);
+      // Pass extracted tags to scorer for preferred_tags matching
+      const tagSet = new Set(tagResult.tags.map(t => t.tag));
+      const scenarioMatch = scenarioScorer.score(driverState, tagSet);
 
       await this.emitProgress({
         phase: 3,
@@ -239,7 +241,6 @@ export class ReportPipeline {
       });
 
       const contentStart = Date.now();
-      const tagSet = new Set(tagResult.tags.map(t => t.tag));
       const contentSelections = contentSelector.select(
         driverState,
         scenarioMatch,

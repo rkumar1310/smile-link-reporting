@@ -89,10 +89,12 @@ ${toneInstructions}
 
 ## CRITICAL REQUIREMENTS
 
-1. SOURCE FIDELITY
+1. SOURCE FIDELITY (CRITICAL)
    - Generate ONLY from provided source material
-   - Never invent medical facts or statistics
-   - If information is not in sources, do not include it
+   - Never invent medical facts, statistics, treatment options, or claims
+   - If information is not in the source, DO NOT include it
+   - Do NOT add treatment options not explicitly mentioned in the source
+   - When in doubt, omit rather than invent
 
 2. SECTION AWARENESS
    - Your content will be placed in ${config.targetSections.length === 1 ? 'Section ' + config.targetSections[0] : 'multiple sections'}

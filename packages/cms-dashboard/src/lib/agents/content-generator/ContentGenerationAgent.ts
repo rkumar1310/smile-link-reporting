@@ -73,7 +73,7 @@ export class ContentGenerationAgent {
   constructor(config?: AgentConfig) {
     this.llm = createLLMProvider({
       model: config?.model ?? "claude-3-5-haiku-20241022",
-      temperature: config?.temperature ?? 0.3,
+      temperature: config?.temperature ?? 0.1, // Low temperature for source fidelity
     });
   }
 

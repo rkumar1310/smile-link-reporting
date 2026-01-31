@@ -5,6 +5,7 @@
     "required_must_match": true,
     "strong_weight": 3,
     "supporting_weight": 1,
+    "preferred_tag_weight": 4,
     "excluding_disqualifies": true
   },
   "confidence_thresholds": {
@@ -41,7 +42,8 @@
       "excluding_drivers": {
         "clinical_priority": ["urgent", "semi_urgent"],
         "mouth_situation": ["single_missing_tooth", "multiple_adjacent", "multiple_dispersed", "mixed_pattern", "extensive_missing", "full_mouth_compromised"]
-      }
+      },
+      "preferred_tags": ["issue_discoloration"]
     },
     "S02": {
       "name": "Single tooth missing, visible zone",

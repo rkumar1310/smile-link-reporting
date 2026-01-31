@@ -425,6 +425,78 @@
       "sections": [3]
     },
     {
+      "id": "TM_CTX_RESTORATION_STATUS",
+      "type": "module",
+      "name": "Existing Restoration Context",
+      "description": "Inserted for patients with existing dental work such as large fillings or old restorations. Explains how current dental work will be evaluated as part of treatment planning, potential need for replacement with materials matching aesthetic goals, and how existing restorations factor into the overall treatment approach.",
+      "layer": "L2",
+      "sections": [3]
+    },
+    {
+      "id": "TM_CTX_TIMELINE_URGENT",
+      "type": "module",
+      "name": "Urgent Timeline Context",
+      "description": "Inserted for patients seeking treatment within 1-3 months. Addresses what can realistically be achieved in this timeframe, discusses scheduling considerations, and manages expectations about the treatment process while respecting their urgency.",
+      "layer": "L2",
+      "sections": [3, 7]
+    },
+    {
+      "id": "TM_CTX_TIMELINE_MEDIUM",
+      "type": "module",
+      "name": "Medium Timeline Context (6 Months)",
+      "description": "Inserted for patients planning treatment within approximately 6 months. Discusses this balanced timeframe, how it allows for proper planning and any preparatory treatments, and what milestones they can expect along the way.",
+      "layer": "L2",
+      "sections": [3, 7]
+    },
+    {
+      "id": "TM_CTX_TIMELINE_RELAXED",
+      "type": "module",
+      "name": "Relaxed Timeline Context",
+      "description": "Inserted for patients with a longer-term horizon (1 year or more). Discusses how this allows for comprehensive planning, phased approaches if beneficial, and ensures no unnecessary pressure while maintaining engagement.",
+      "layer": "L2",
+      "sections": [3, 7]
+    },
+    {
+      "id": "TM_CTX_TIMELINE_EXPLORATORY",
+      "type": "module",
+      "name": "Exploratory Timeline Context",
+      "description": "Inserted for patients still exploring options with no fixed timeline. Emphasizes the value of gathering information, encourages questions, and provides a no-pressure educational approach without pushing toward immediate decisions.",
+      "layer": "L2",
+      "sections": [3]
+    },
+    {
+      "id": "TM_CTX_STYLE_HOLLYWOOD",
+      "type": "module",
+      "name": "Hollywood Smile Context",
+      "description": "Inserted when patient explicitly selects Hollywood smile style. Addresses their desire for a bright, striking transformation, discusses what makes a Hollywood smile distinctive, premium material options (e.g., high-translucency zirconia), and what to realistically expect in terms of appearance change.",
+      "layer": "L2",
+      "sections": [3, 5]
+    },
+    {
+      "id": "TM_CTX_STYLE_NATURAL",
+      "type": "module",
+      "name": "Natural Smile Context",
+      "description": "Inserted when patient explicitly selects natural/subtle style. Emphasizes preservation of individual character, discusses how natural results are achieved through careful shade matching and subtle enhancements that blend seamlessly with existing teeth.",
+      "layer": "L2",
+      "sections": [3, 5]
+    },
+    {
+      "id": "TM_CTX_STYLE_CLASSIC",
+      "type": "module",
+      "name": "Classic Elegant Style Context",
+      "description": "Inserted when patient selects classic elegant style. Discusses timeless aesthetic approaches, balanced proportions, and how to achieve an elegant result that remains sophisticated over time.",
+      "layer": "L2",
+      "sections": [3, 5]
+    },
+    {
+      "id": "TM_CTX_STYLE_FUNCTIONAL",
+      "type": "module",
+      "name": "Functional Priority Context",
+      "description": "Inserted when patient prioritizes function and durability over aesthetics. Focuses on bite function, chewing efficiency, longevity of materials, and practical considerations while noting that functional solutions can still look good.",
+      "layer": "L2",
+      "sections": [3, 5]
+    },
+    {
       "id": "TM_BUDGET_LIMITED",
       "type": "module",
       "name": "Budget Limited Context",

@@ -651,7 +651,7 @@ The information presented here is general in nature and may not apply to your in
   /**
    * Get fallback next steps content
    */
-  private getNextStepsContent(tone: ToneProfileId): string {
+  private getNextStepsContent(_tone: ToneProfileId): string {
     return `**Your next steps are entirely up to you.** Here are some options to consider:
 
 - Review this report at your own pace

@@ -41,13 +41,22 @@
       "multi_select": true,
       "answers": {
         "discoloured_dull": ["issue_discoloration"],
+        "discoloureddull": ["issue_discoloration"],
+        "discolored_dull": ["issue_discoloration"],
         "crooked_uneven": ["issue_alignment"],
+        "crookeduneven": ["issue_alignment"],
         "missing_damaged": ["issue_missing_damaged"],
+        "missingdamaged": ["issue_missing_damaged"],
         "size_harmony": ["issue_size_harmony"],
+        "sizeharmony": ["issue_size_harmony"],
         "bite_problems": ["issue_bite"],
+        "biteproblems": ["issue_bite"],
         "gum_recession": ["issue_gum_recession"],
+        "gumrecession": ["issue_gum_recession"],
         "loose_pain_chewing": ["issue_functional_pain"],
-        "missing_aesthetic": ["issue_combination"]
+        "loosepainchewing": ["issue_functional_pain"],
+        "missing_aesthetic": ["issue_combination"],
+        "missingaesthetic": ["issue_combination"]
       }
     },
     "Q4": {
@@ -56,8 +65,10 @@
       "multi_select": true,
       "answers": {
         "no_never": ["history_none"],
+        "nonever": ["history_none"],
         "yes_implants": ["history_implants"],
         "yes_veneers_crowns": ["history_veneers_crowns"],
+        "yes_veneerscrowns": ["history_veneers_crowns"],
         "yes_orthodontics": ["history_orthodontics"],
         "yes_periodontal": ["history_periodontal"]
       }
@@ -113,9 +124,12 @@
       "answers": {
         "mostly_intact_enamel": ["tooth_health_good"],
         "large_fillings_old_restorations": ["tooth_health_moderate"],
+        "large_fillings_or_old_restorations": ["tooth_health_moderate"],
         "cracks_wear": ["tooth_health_compromised"],
+        "crackswear": ["tooth_health_compromised"],
         "root_canal": ["tooth_health_root_canal"],
         "severe_discolouration": ["tooth_health_severe_discolor"],
+        "severe_discoloration": ["tooth_health_severe_discolor"],
         "bruxism": ["tooth_health_bruxism"]
       }
     },
@@ -124,9 +138,12 @@
       "required": false,
       "answers": {
         "natural_subtle": ["style_natural"],
+        "naturalsubtle": ["style_natural"],
         "hollywood": ["style_hollywood"],
+        "hollywood_smile": ["style_hollywood"],
         "classic_elegant": ["style_classic"],
-        "functional_durable": ["style_functional"]
+        "functional_durable": ["style_functional"],
+        "functionaldurable": ["style_functional"]
       }
     },
     "Q8": {
@@ -172,6 +189,7 @@
       "required": false,
       "answers": {
         "1_3_months": ["timeline_urgent"],
+        "13_months": ["timeline_urgent"],
         "6_months": ["timeline_medium"],
         "1_year": ["timeline_relaxed"],
         "still_exploring": ["timeline_exploratory"]

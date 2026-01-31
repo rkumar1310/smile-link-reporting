@@ -194,10 +194,11 @@ export interface ScenarioScore {
   matched_required: number;
   matched_strong: number;
   matched_supporting: number;
+  matched_preferred_tags?: number;
   excluded: boolean;
   breakdown: {
-    driver_id: DriverId;
-    criterion: "required" | "strong" | "supporting" | "excluding";
+    driver_id: DriverId | `tag:${string}`;
+    criterion: "required" | "strong" | "supporting" | "excluding" | "preferred_tag";
     matched: boolean;
     points: number;
   }[];

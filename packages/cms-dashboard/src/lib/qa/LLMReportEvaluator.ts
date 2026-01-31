@@ -6,7 +6,7 @@
 
 import { z } from "zod";
 import { createLLMProvider, type LLMProvider } from "../agents/shared/LLMProvider";
-import type { ComposedReport, LLMEvaluationResult, QAOutcome } from "../pipeline/types";
+import type { ComposedReport, LLMEvaluationResult, QAOutcome, IntakeData } from "../pipeline/types";
 import { getSystemGoalCondensed, EVALUATION_CRITERIA } from "../agents/shared/system-goal";
 
 // Simplified evaluation schema - scores + assessment only
@@ -23,51 +23,57 @@ const SimplifiedEvaluationSchema = z.object({
 type SimplifiedEvaluation = z.infer<typeof SimplifiedEvaluationSchema>;
 
 // Build system prompt with system goal context
-const SYSTEM_PROMPT = `You are an expert evaluator of dental health reports.
+const SYSTEM_PROMPT = `You are a critical evaluator of dental health reports. Carefully analyze each dimension for problems. When you find a problem, deduct points based on severity. When you genuinely find no issues in a dimension, score it 10.
 
 ${getSystemGoalCondensed()}
 
+## REPORT STRUCTURE
+
+Reports may include some or all of these sections depending on the patient's scenario:
+
+- **Important Notices** (Section 0) - Treatment limitations or special alerts when applicable
+- **Disclaimer** - Legal disclaimers about the informational nature of the report
+- **Your Personal Summary** - Brief overview addressing the patient directly
+- **Context** - Background on the patient's dental journey and considerations
+- **Interpretation** - Clinical interpretation of the patient's dental profile
+- **Treatment Options** - Available treatment options (when multiple options exist)
+- **Comparison** - Side-by-side comparison of options (when comparing treatments)
+- **Trade-offs to Consider** - Pros and cons of approaches (when relevant)
+- **Treatment Process** - What to expect during treatment (when applicable)
+- **Cost Considerations** - General cost factors (without specific prices)
+- **Risk Factors** - Potential risks and mitigation strategies
+- **Next Steps** - Guidance for the patient's next actions
+
+Not all sections are required for every report. The sections included should be appropriate for the patient's specific situation. Do NOT penalize reports for omitting sections that aren't relevant to the patient's scenario.
+
 ## EVALUATION DIMENSIONS (score 1-10 each)
 
-1. PROFESSIONAL QUALITY (15% weight)
-   - Writing clarity, flow, no filler or redundant phrases
-   - Professional language appropriate for patient communication
+SCORING RULE: Start at 10 for each dimension. Deduct points when you identify specific problems:
+- Minor issue: deduct 1 point (score 9)
+- Moderate issue: deduct 2-3 points (score 7-8)
+- Significant issue: deduct 4+ points (score 6 or below)
 
-2. CLINICAL SAFETY (25% weight) - MOST IMPORTANT
-   - Appropriate disclaimers present
-   - No guaranteed outcomes or overpromising (HARD BOUNDARY)
-   - No specific diagnoses made (HARD BOUNDARY)
-   - No specific prices quoted (HARD BOUNDARY)
-   - Risk factors mentioned appropriately
-   - Score 1-3 if ANY hard boundary is violated
+1. PROFESSIONAL QUALITY (15% weight)
+   Start at 10. Deduct only for: grammar errors, unclear writing, unprofessional language
+
+2. CLINICAL SAFETY (25% weight)
+   Start at 10. Deduct only for: missing disclaimers, specific price quotes, diagnosis claims, outcome guarantees
 
 3. TONE APPROPRIATENESS (20% weight)
-   - Empathy First: Acknowledges emotional weight of decisions
-   - Consistent tone throughout
-   - Matches the stated tone profile
+   Start at 10. Deduct only for: dismissive language, inappropriate tone, inconsistent voice
 
 4. PERSONALIZATION (15% weight)
-   - Content feels specific to the patient's situation
-   - Not generic/cookie-cutter language
-   - References patient's context appropriately
+   Start at 10. Deduct for:
+   - Content completely unrelated to patient's concern
+   - Missed opportunities: if intake answers mention specific issues (e.g., "loose teeth", "5+ teeth need replacing") that the report fails to address
+   The report should contain information relevant to the patient's intake answers. Exact quotes not required - general relevance is sufficient.
 
 5. PATIENT AUTONOMY (15% weight)
-   - Non-directive language (no "you should" or "you must")
-   - Presents options without pushing one choice
-   - Respects patient's right to decide
-   - Informs without directing
+   Start at 10. Deduct only for: pushy language, pressuring toward specific treatment choices
 
 6. STRUCTURE & COMPLETENESS (10% weight)
-   - Logical flow between sections
-   - All expected information present
-   - Honest about trade-offs and uncertainties
-
-SCORING GUIDE:
-- 9-10: Excellent - minor improvements only
-- 7-8: Good - solid quality with small issues
-- 5-6: Acceptable - noticeable issues but usable
-- 3-4: Poor - significant problems (or minor boundary violations)
-- 1-2: Unacceptable (or serious boundary violations)
+   Start at 10. Deduct only for: illogical section order, missing critical information
+   (Not all sections required - evaluate what IS present, not what's absent)
 
 Provide a brief overall assessment (2-3 sentences) summarizing the report quality.`;
 
@@ -89,7 +95,7 @@ export interface LLMEvaluatorConfig {
 
 const DEFAULT_CONFIG: LLMEvaluatorConfig = {
   enabled: true,
-  model: "claude-sonnet-4-20250514",
+  model: "claude-opus-4-5-20251101",
   temperature: 0.1  // Low temperature for consistent evaluations
 };
 
@@ -115,12 +121,35 @@ export class LLMReportEvaluator {
   }
 
   /**
-   * Build user prompt with ONLY the report (no audit trail)
+   * Build user prompt with report and optional intake answers
    */
-  private buildUserPrompt(report: ComposedReport): string {
+  private buildUserPrompt(report: ComposedReport, intake?: IntakeData): string {
     const reportContent = report.sections
       .map(s => `## ${s.section_name} (Section ${s.section_number})\n${s.content}`)
       .join("\n\n");
+
+    // Format intake answers if provided
+    let intakeSection = "";
+    if (intake?.answers && intake.answers.length > 0) {
+      const answersFormatted = intake.answers
+        .filter(a => !a.skipped)
+        .map(a => {
+          const answerText = Array.isArray(a.answer) ? a.answer.join(", ") : a.answer;
+          return `- ${a.question_id}: ${answerText}`;
+        })
+        .join("\n");
+
+      intakeSection = `
+--- PATIENT INTAKE ANSWERS ---
+
+These are the patient's responses to the intake questionnaire. The report should accurately reflect and address the patient's specific situation based on these answers:
+
+${answersFormatted}
+
+--- END OF INTAKE ANSWERS ---
+
+`;
+    }
 
     return `Evaluate this dental report:
 
@@ -128,14 +157,14 @@ LANGUAGE: ${report.language === "nl" ? "Dutch (Nederlands)" : "English"}
 TONE PROFILE: ${report.tone}
 SCENARIO: ${report.scenario_id}
 TOTAL WORDS: ${report.total_word_count}
-
+${intakeSection}
 --- REPORT CONTENT ---
 
 ${reportContent}
 
 --- END OF REPORT ---
 
-Evaluate all 6 dimensions and provide your assessment.`;
+Evaluate all 6 dimensions and provide your assessment.${intake ? " Consider whether the report appropriately addresses the patient's intake answers." : ""}`;
   }
 
   /**
@@ -169,8 +198,10 @@ Evaluate all 6 dimensions and provide your assessment.`;
   /**
    * Evaluate a report using LLM
    * Returns simplified evaluation with scores + assessment
+   * @param report The composed report to evaluate
+   * @param intake Optional patient intake data to include in evaluation context
    */
-  async evaluate(report: ComposedReport): Promise<LLMEvaluationResult | null> {
+  async evaluate(report: ComposedReport, intake?: IntakeData): Promise<LLMEvaluationResult | null> {
     if (!this.config.enabled) {
       return null;
     }
@@ -179,7 +210,7 @@ Evaluate all 6 dimensions and provide your assessment.`;
 
     try {
       const provider = this.getProvider();
-      const userPrompt = this.buildUserPrompt(report);
+      const userPrompt = this.buildUserPrompt(report, intake);
 
       console.log(`🔍 [LLMEvaluator] Evaluating report ${report.session_id}...`);
 
