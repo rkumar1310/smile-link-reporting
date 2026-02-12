@@ -106,9 +106,15 @@ export default function ContentListPage() {
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <div>
             <Link href="/" className="text-sm text-blue-600 hover:text-blue-800 mb-2 block">
-              ← Back to Dashboard
+              &larr; Back to Dashboard
             </Link>
             <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Content</h1>
+            <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+              A-blocks, B-blocks, modules, and static content.{" "}
+              <Link href="/content/scenarios" className="text-purple-600 hover:text-purple-800 dark:text-purple-400">
+                View Scenarios &rarr;
+              </Link>
+            </p>
           </div>
           <Link
             href="/content/new"
@@ -146,7 +152,6 @@ export default function ContentListPage() {
                   onChange={(e) => setFilters({ ...filters, type: e.target.value as ContentType || undefined })}
                 >
                   <option value="">All Types</option>
-                  <option value="scenario">Scenario</option>
                   <option value="a_block">A Block</option>
                   <option value="b_block">B Block</option>
                   <option value="module">Module</option>

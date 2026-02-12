@@ -50,3 +50,5 @@ dist/
 # temp files
 *.tmp
 *.temp
+
+packages/*

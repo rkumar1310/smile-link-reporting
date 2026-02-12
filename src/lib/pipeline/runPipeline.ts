@@ -9,16 +9,15 @@ import type {
   ReportPhase,
   IntakeAnswers,
   ComposedReport as CMSComposedReport,
-  ContentBlockProgress,
-  ContentBlockStatus,
   DerivativeProgress,
 } from "@/lib/types/types/report-generation";
 import type { ToneProfileId } from "@/lib/types";
 
 import { createReportPipeline, type PipelineProgressEvent } from "./ReportPipeline";
-import { createDynamicContentStore, type ContentGenerationProgress } from "./content/DynamicContentStore";
-import type { IntakeData, ComposedReport, AuditRecord, PipelineResult, SupportedLanguage, QuestionId } from "./types";
+import { createDynamicContentStore } from "./content/DynamicContentStore";
+import type { IntakeData, ComposedReport, AuditRecord, SupportedLanguage, QuestionId } from "./types";
 import { generateReportPdf } from "@/lib/services/PdfGenerationService";
+import { MissingContentError } from "@/lib/errors/MissingContentError";
 
 /**
  * Map pipeline phases to UI phases
@@ -153,63 +152,6 @@ export function mapPipelineEventToSSE(event: PipelineProgressEvent): ReportPhase
   }
 }
 
-/**
- * Map content generation phase to ContentBlockStatus
- */
-function mapPhaseToBlockStatus(phase: ContentGenerationProgress["phase"]): ContentBlockStatus {
-  switch (phase) {
-    case "searching":
-    case "generating":
-      return "generating";
-    case "fact-checking":
-      return "verifying";
-    case "completed":
-      return "done";
-    case "error":
-      return "failed";
-    default:
-      return "pending";
-  }
-}
-
-/**
- * Map content generation progress to SSE event
- * Maps DynamicContentStore progress to GeneratingPhaseEvent format
- */
-function mapContentGenerationToSSE(
-  progress: ContentGenerationProgress,
-  current: number = 1,
-  total: number = 1,
-  contentBlocks?: ContentBlockProgress[]
-): ReportPhaseEvent {
-  // Map content generation phase to factCheck status
-  const statusMap: Record<string, "pending" | "checking" | "passed" | "failed" | "retrying"> = {
-    "searching": "pending",
-    "generating": "pending",
-    "fact-checking": "checking",
-    "completed": "passed",
-    "error": "failed"
-  };
-
-  return {
-    phase: "generating",
-    message: progress.message,
-    timestamp: new Date().toISOString(),
-    data: {
-      current,
-      total,
-      currentContent: progress.contentId,
-      factCheck: {
-        status: statusMap[progress.phase] ?? "pending",
-        attempt: progress.attempt ?? 1,
-        maxAttempts: progress.maxAttempts ?? 2,
-        score: progress.score
-      },
-      // Include all content blocks for full progress visibility
-      contentBlocks: contentBlocks ? [...contentBlocks] : undefined
-    }
-  };
-}
 
 /**
  * Transform core ComposedReport to CMS ComposedReport format
@@ -265,8 +207,6 @@ export function transformReport(
 export interface PipelineSSEOptions {
   onEvent: (event: ReportPhaseEvent) => Promise<void>;
   language?: SupportedLanguage;
-  maxFactCheckAttempts?: number;
-  factCheckThreshold?: number;
 }
 
 export interface PipelineSSEResult {
@@ -307,63 +247,10 @@ export async function runPipelineWithSSE(
   intake: IntakeAnswers,
   options: PipelineSSEOptions
 ): Promise<PipelineSSEResult> {
-  const { onEvent, language = "en", maxFactCheckAttempts = 2, factCheckThreshold = 0.7 } = options;
+  const { onEvent, language = "en" } = options;
 
-  // Track content generation for "generating" phase events
-  let contentGenerationCount = 0;
-
-  // Track all content blocks and their statuses for progress display
-  const contentBlocksMap = new Map<string, ContentBlockProgress>();
-
-  // Helper to get all content blocks as array
-  const getContentBlocks = (): ContentBlockProgress[] => {
-    return Array.from(contentBlocksMap.values());
-  };
-
-  // Helper to update or create a content block entry
-  const updateContentBlock = (progress: ContentGenerationProgress) => {
-    const existing = contentBlocksMap.get(progress.contentId);
-    const status = mapPhaseToBlockStatus(progress.phase);
-
-    if (existing) {
-      existing.status = status;
-      if (progress.attempt) existing.factCheckAttempt = progress.attempt;
-      if (progress.score !== undefined) existing.factCheckScore = progress.score;
-    } else {
-      // First time seeing this content - add it
-      contentBlocksMap.set(progress.contentId, {
-        id: progress.contentId,
-        name: progress.contentId, // Will use contentId as name since we don't have metadata here
-        contentType: "scenario", // Default to scenario since that's the main use case
-        status,
-        factCheckAttempt: progress.attempt,
-        factCheckScore: progress.score,
-      });
-    }
-  };
-
-  // Create content store with progress callback
-  const contentStore = createDynamicContentStore({
-    maxFactCheckAttempts,
-    factCheckThreshold,
-    onProgress: async (progress) => {
-      // Update tracking
-      updateContentBlock(progress);
-
-      // Only count completed items
-      if (progress.phase === "completed") {
-        contentGenerationCount++;
-      }
-
-      // Emit progress with full content blocks list
-      await onEvent(mapContentGenerationToSSE(
-        progress,
-        contentGenerationCount + 1,
-        contentBlocksMap.size,
-        getContentBlocks()
-      ));
-    }
-  });
+  // Create content store (no longer generates content - just fetches from DB)
+  const contentStore = createDynamicContentStore();
 
   // Create pipeline with progress callbacks
   const pipeline = createReportPipeline({
@@ -398,16 +285,28 @@ export async function runPipelineWithSSE(
     // Run the pipeline
     const result = await pipeline.run(pipelineIntake);
 
+    // Check if any content was missing during composition
+    if (contentStore.hasMissingContent()) {
+      const missingContent = contentStore.getMissingContent();
+      throw new MissingContentError(
+        `Report generation failed: ${missingContent.length} content item(s) missing from database`,
+        missingContent.map(item => ({
+          contentId: item.contentId,
+          language: item.language,
+          tone: item.tone,
+        }))
+      );
+    }
+
     // Transform report for CMS format
     const cmsReport = result.report
       ? transformReport(result.report, result.audit)
       : undefined;
 
-    // Include content generation count in result
+    // Generate PDF if we have a report
     if (cmsReport) {
-      cmsReport.contentGenerated = contentGenerationCount;
+      cmsReport.contentGenerated = 0; // No longer generating content
 
-      // Generate PDF
       try {
         const pdfBuffer = await generateReportPdf(cmsReport);
         cmsReport.pdfBase64 = pdfBuffer.toString("base64");
@@ -426,6 +325,82 @@ export async function runPipelineWithSSE(
     };
 
   } catch (error) {
+    // Handle MissingContentError specially
+    if (error instanceof MissingContentError) {
+      await onEvent({
+        phase: "error",
+        message: error.message,
+        timestamp: new Date().toISOString(),
+        data: {
+          error: error.message,
+          recoverable: false,
+          phase: "content-check" as ReportPhase,
+        }
+      } as ReportPhaseEvent);
+
+      // Create minimal error audit
+      const errorAudit: AuditRecord = {
+        session_id: intake.session_id,
+        created_at: new Date().toISOString(),
+        intake: convertIntakeAnswers(intake),
+        driver_state: {
+          session_id: intake.session_id,
+          drivers: {} as AuditRecord["driver_state"]["drivers"],
+          conflicts: [],
+          fallbacks_applied: []
+        },
+        scenario_match: {
+          session_id: intake.session_id,
+          matched_scenario: "MISSING_CONTENT",
+          confidence: "FALLBACK",
+          score: 0,
+          all_scores: [],
+          fallback_used: true,
+          fallback_reason: error.message
+        },
+        content_selections: [],
+        tone_selection: {
+          selected_tone: "TP-01",
+          reason: "Error fallback",
+          evaluated_triggers: []
+        },
+        composed_report: {
+          session_id: intake.session_id,
+          scenario_id: "MISSING_CONTENT",
+          tone: "TP-01",
+          language,
+          confidence: "FALLBACK",
+          sections: [],
+          total_word_count: 0,
+          warnings_included: false,
+          suppressed_sections: [],
+          placeholders_resolved: 0,
+          placeholders_unresolved: []
+        },
+        validation_result: {
+          valid: false,
+          errors: [error.message],
+          warnings: [],
+          semantic_violations: []
+        },
+        decision_trace: {
+          session_id: intake.session_id,
+          started_at: new Date().toISOString(),
+          completed_at: new Date().toISOString(),
+          events: [],
+          final_outcome: "BLOCK"
+        },
+        final_outcome: "BLOCK",
+        report_delivered: false
+      };
+
+      return {
+        success: false,
+        outcome: "BLOCK",
+        audit: errorAudit,
+        error: error.message
+      };
+    }
     const errorMessage = error instanceof Error ? error.message : "Unknown error";
 
     // Send error event

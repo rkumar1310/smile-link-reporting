@@ -3,17 +3,10 @@
 import { useState, useEffect, use } from "react";
 import Link from "next/link";
 import type { ContentDocument, ToneProfileId, SupportedLanguage } from "@/lib/types";
+import { MarkdownEditor, MarkdownPreview } from "@/components/content/MarkdownEditor";
 
 const TONES: ToneProfileId[] = ["TP-01", "TP-02", "TP-03", "TP-04", "TP-05", "TP-06"];
 const LANGUAGES: SupportedLanguage[] = ["en", "nl"];
-
-interface SourceDocument {
-  _id: string;
-  filename: string;
-  documentType?: string;
-  scenarios?: Array<{ scenarioId: string }>;
-  sections: Array<unknown>;
-}
 
 export default function ContentDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
@@ -24,17 +17,13 @@ export default function ContentDetailPage({ params }: { params: Promise<{ id: st
   const [selectedTone, setSelectedTone] = useState<ToneProfileId>("TP-01");
   const [workflowLoading, setWorkflowLoading] = useState(false);
 
-  // Generation state
-  const [showGeneratePanel, setShowGeneratePanel] = useState(false);
-  const [sources, setSources] = useState<SourceDocument[]>([]);
-  const [selectedSources, setSelectedSources] = useState<string[]>([]);
-  const [generating, setGenerating] = useState(false);
-  const [generateTones, setGenerateTones] = useState<ToneProfileId[]>([]);
-  const [generateLangs, setGenerateLangs] = useState<SupportedLanguage[]>([]);
+  // Editing state
+  const [isEditing, setIsEditing] = useState(false);
+  const [editContent, setEditContent] = useState("");
+  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     fetchContent();
-    fetchSources();
   }, [id]);
 
   async function fetchContent() {
@@ -52,76 +41,43 @@ export default function ContentDetailPage({ params }: { params: Promise<{ id: st
     }
   }
 
-  async function fetchSources() {
+  async function handleSave() {
+    if (!content) return;
+
+    setIsSaving(true);
     try {
-      const res = await fetch("/api/sources");
-      if (res.ok) {
-        const data = await res.json();
-        setSources(data.items || []);
-      }
-    } catch (err) {
-      console.error("Failed to fetch sources:", err);
-    }
-  }
-
-  function openGeneratePanel() {
-    setGenerateTones([selectedTone]);
-    setGenerateLangs([selectedLang]);
-    setShowGeneratePanel(true);
-  }
-
-  function toggleGenerateTone(tone: ToneProfileId) {
-    setGenerateTones((prev) =>
-      prev.includes(tone) ? prev.filter((t) => t !== tone) : [...prev, tone]
-    );
-  }
-
-  function toggleGenerateLang(lang: SupportedLanguage) {
-    setGenerateLangs((prev) =>
-      prev.includes(lang) ? prev.filter((l) => l !== lang) : [...prev, lang]
-    );
-  }
-
-  function toggleSource(sourceId: string) {
-    setSelectedSources((prev) =>
-      prev.includes(sourceId) ? prev.filter((s) => s !== sourceId) : [...prev, sourceId]
-    );
-  }
-
-  async function handleGenerate() {
-    if (!content || generateTones.length === 0 || generateLangs.length === 0) {
-      alert("Please select at least one tone and one language");
-      return;
-    }
-
-    setGenerating(true);
-    try {
-      const res = await fetch("/api/generation", {
-        method: "POST",
+      const res = await fetch(`/api/content/${id}/variant/${selectedLang}/${selectedTone}`, {
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          contentId: content.contentId,
-          tones: generateTones,
-          languages: generateLangs,
-          sourceDocIds: selectedSources,
+          content: editContent,
+          citations: [],
         }),
       });
 
       if (!res.ok) {
         const data = await res.json();
-        throw new Error(data.error || "Failed to start generation");
+        throw new Error(data.error || "Failed to save content");
       }
 
-      alert("Generation job started! Content will be available soon.");
-      setShowGeneratePanel(false);
-      setSelectedSources([]);
-      // Refresh content after a short delay
-      setTimeout(fetchContent, 2000);
+      // Refresh content and exit edit mode
+      await fetchContent();
+      setIsEditing(false);
     } catch (err) {
       alert(err instanceof Error ? err.message : "Unknown error");
     } finally {
-      setGenerating(false);
+      setIsSaving(false);
     }
+  }
+
+  function startEditing(initialContent: string = "") {
+    setEditContent(initialContent);
+    setIsEditing(true);
+  }
+
+  function cancelEditing() {
+    setIsEditing(false);
+    setEditContent("");
   }
 
   async function handleWorkflowAction(action: string) {
@@ -295,6 +251,7 @@ export default function ContentDetailPage({ params }: { params: Promise<{ id: st
                     className="px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                     value={selectedLang}
                     onChange={(e) => setSelectedLang(e.target.value as SupportedLanguage)}
+                    disabled={isEditing}
                   >
                     {LANGUAGES.map((lang) => (
                       <option key={lang} value={lang}>
@@ -311,6 +268,7 @@ export default function ContentDetailPage({ params }: { params: Promise<{ id: st
                     className="px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                     value={selectedTone}
                     onChange={(e) => setSelectedTone(e.target.value as ToneProfileId)}
+                    disabled={isEditing}
                   >
                     {TONES.map((tone) => (
                       <option key={tone} value={tone}>
@@ -347,16 +305,19 @@ export default function ContentDetailPage({ params }: { params: Promise<{ id: st
                             <td key={tone} className="text-center py-2 px-2">
                               <button
                                 onClick={() => {
-                                  setSelectedLang(lang);
-                                  setSelectedTone(tone);
+                                  if (!isEditing) {
+                                    setSelectedLang(lang);
+                                    setSelectedTone(tone);
+                                  }
                                 }}
+                                disabled={isEditing}
                                 className={`w-8 h-8 rounded-full ${
                                   variant
                                     ? isSelected
                                       ? "bg-blue-600 text-white"
                                       : "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
                                     : "bg-gray-100 text-gray-400 dark:bg-gray-700"
-                                }`}
+                                } ${isEditing ? "cursor-not-allowed opacity-50" : ""}`}
                               >
                                 {variant ? "✓" : "−"}
                               </button>
@@ -376,28 +337,32 @@ export default function ContentDetailPage({ params }: { params: Promise<{ id: st
                 <h2 className="text-lg font-medium text-gray-900 dark:text-white">
                   Content: {selectedLang.toUpperCase()} / {selectedTone}
                 </h2>
-                <div className="flex items-center gap-3">
-                  {currentVariant && (
+                {!isEditing && currentVariant && (
+                  <div className="flex items-center gap-3">
                     <span className="text-sm text-gray-500 dark:text-gray-400">
                       {currentVariant.wordCount} words
                     </span>
-                  )}
-                  {!showGeneratePanel && (
                     <button
-                      onClick={openGeneratePanel}
+                      onClick={() => startEditing(currentVariant.content)}
                       className="px-3 py-1 text-sm bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300 rounded-lg hover:bg-blue-200 dark:hover:bg-blue-800"
                     >
-                      {currentVariant ? "Regenerate" : "Generate"}
+                      Edit
                     </button>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
 
-              {currentVariant ? (
-                <div className="prose dark:prose-invert max-w-none">
-                  <pre className="whitespace-pre-wrap bg-gray-50 dark:bg-gray-900 p-4 rounded-lg text-sm overflow-auto max-h-96">
-                    {currentVariant.content}
-                  </pre>
+              {isEditing ? (
+                <MarkdownEditor
+                  value={editContent}
+                  onChange={setEditContent}
+                  onSave={handleSave}
+                  onCancel={cancelEditing}
+                  isSaving={isSaving}
+                />
+              ) : currentVariant ? (
+                <div>
+                  <MarkdownPreview content={currentVariant.content} />
                   {currentVariant.citations && currentVariant.citations.length > 0 && (
                     <div className="mt-4">
                       <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -413,122 +378,16 @@ export default function ContentDetailPage({ params }: { params: Promise<{ id: st
                     </div>
                   )}
                 </div>
-              ) : showGeneratePanel ? (
-                /* Inline Generation Panel */
-                <div className="border-2 border-dashed border-blue-300 dark:border-blue-700 rounded-lg p-6">
-                  <div className="flex justify-between items-center mb-4">
-                    <h3 className="text-lg font-medium text-gray-900 dark:text-white">
-                      Generate Content
-                    </h3>
-                    <button
-                      onClick={() => setShowGeneratePanel(false)}
-                      className="text-gray-400 hover:text-gray-600"
-                    >
-                      ✕
-                    </button>
-                  </div>
-
-                  {/* Tones */}
-                  <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Tones to Generate
-                    </label>
-                    <div className="flex flex-wrap gap-2">
-                      {TONES.map((tone) => (
-                        <button
-                          key={tone}
-                          type="button"
-                          onClick={() => toggleGenerateTone(tone)}
-                          className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
-                            generateTones.includes(tone)
-                              ? "bg-blue-600 text-white"
-                              : "bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
-                          }`}
-                        >
-                          {tone}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Languages */}
-                  <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Languages
-                    </label>
-                    <div className="flex gap-2">
-                      {LANGUAGES.map((lang) => (
-                        <button
-                          key={lang}
-                          type="button"
-                          onClick={() => toggleGenerateLang(lang)}
-                          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                            generateLangs.includes(lang)
-                              ? "bg-blue-600 text-white"
-                              : "bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
-                          }`}
-                        >
-                          {lang === "en" ? "English" : "Dutch"}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Source Documents */}
-                  <div className="mb-6">
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Source Documents
-                    </label>
-                    {sources.length === 0 ? (
-                      <p className="text-sm text-gray-500 dark:text-gray-400">
-                        No source documents available.{" "}
-                        <Link href="/sources" className="text-blue-600 hover:underline">
-                          Parse some documents first →
-                        </Link>
-                      </p>
-                    ) : (
-                      <div className="space-y-2 max-h-40 overflow-y-auto">
-                        {sources.map((source) => (
-                          <label
-                            key={source._id}
-                            className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer"
-                          >
-                            <input
-                              type="checkbox"
-                              checked={selectedSources.includes(source._id)}
-                              onChange={() => toggleSource(source._id)}
-                              className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                            />
-                            <span className="text-sm text-gray-900 dark:text-white">
-                              {source.filename}
-                            </span>
-                            <span className="text-xs text-gray-500 dark:text-gray-400">
-                              ({source.scenarios?.length || source.sections.length} items)
-                            </span>
-                          </label>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Generate Button */}
-                  <button
-                    onClick={handleGenerate}
-                    disabled={generating || generateTones.length === 0 || generateLangs.length === 0}
-                    className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {generating ? "Starting Generation..." : `Generate ${generateTones.length * generateLangs.length} Variant(s)`}
-                  </button>
-                </div>
               ) : (
-                /* Empty State with Generate Button */
-                <div className="text-center py-8 text-gray-500 dark:text-gray-400">
-                  <p className="mb-4">No content for this variant yet.</p>
+                <div className="text-center py-8 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-lg">
+                  <p className="text-gray-500 dark:text-gray-400 mb-4">
+                    No content for this variant yet.
+                  </p>
                   <button
-                    onClick={openGeneratePanel}
+                    onClick={() => startEditing("")}
                     className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
                   >
-                    Generate Content
+                    Create Variant
                   </button>
                 </div>
               )}

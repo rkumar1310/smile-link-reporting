@@ -1,0 +1,352 @@
+{
+  "session_id": "test-case-002",
+  "case_id": "case_02_urgent_pain_multiple_teeth",
+  "evaluation_timestamp": "2026-01-17T20:43:33.036Z",
+  "outcome": "BLOCK",
+  "overall_score": 4.4,
+  "dimensions": {
+    "professional_quality": {
+      "score": 5,
+      "feedback": "Writing is generally clear but suffers from significant verbosity and filler language. Multiple sections contain padding that doesn't add value, and there are repetitive statements across sections. Sentences often say in many words what could be said in few. The report reads like it's trying to fill space rather than communicate efficiently."
+    },
+    "clinical_safety": {
+      "score": 4,
+      "feedback": "Multiple critical safety issues. While disclaimers exist, they are insufficient and language contains problematic guarantees and overly optimistic framing. Success rates are presented without adequate hedging, and risk disclosures lack specificity. The tone minimizes uncertainty in ways that could mislead anxious patients."
+    },
+    "tone_appropriateness": {
+      "score": 5,
+      "feedback": "Tone is inconsistent and doesn't fully match the TP-04 Stability-Frame profile for severe anxiety. While reassuring language is present, it alternates with clinical language that may increase anxiety. The tone shifts between overly warm/empathetic and clinical/detached. Some sections feel patronizing rather than genuinely reassuring."
+    },
+    "personalization": {
+      "score": 3,
+      "feedback": "Severely lacking personalization. Patient name (Maria) appears only once in the entire report (Section 4). Content is entirely generic and could apply to any patient with missing adjacent teeth. No reference to Maria's specific priorities (functional focus, budget constraints, anxiety level, first-time status). Treatment options are not tailored to her stated preferences. The report reads like a template with minimal customization."
+    },
+    "patient_autonomy": {
+      "score": 4,
+      "feedback": "Patient autonomy is compromised by subtle directive language and framing that makes one option appear preferable. While the report attempts to present both options, language choices and emphasis patterns bias toward implants. The report uses 'consider' language and frames options in ways that suggest one is 'better' without explicitly stating this. Autonomy language is repetitive rather than genuinely empowering."
+    },
+    "structure_completeness": {
+      "score": 6,
+      "feedback": "Structure is mostly complete with all major sections present, but organization has issues. Section numbering is inconsistent (Section 5 appears twice, Section 6 is missing/suppressed). Logical flow is reasonable but some sections could be reordered. Content distribution is uneven - some sections are too brief while others are verbose. The suppression of Section 6 is not explained to the patient."
+    }
+  },
+  "content_issues": [
+    {
+      "section_number": 2,
+      "source_content": "content/modules/TM_ANXIETY_SEVERE/en/TP-04.md",
+      "quote": "Both treatment approaches are proven and reliable, and your dentist will support you through whichever process you choose.",
+      "problem": "Repetitive autonomy language that appears multiple times throughout report. Feels like padding rather than genuine reassurance. For severe anxiety patient, this repeated statement may feel patronizing.",
+      "severity": "warning",
+      "suggested_fix": "Use once in report, not multiple times. Replace with specific reassurance: 'Both options have strong track records. Your dentist will explain each step before it happens.'"
+    },
+    {
+      "section_number": 2,
+      "source_content": "content/modules/TM_ANXIETY_SEVERE/en/TP-04.md",
+      "quote": "The treatment approach for this type of case is well-established and predictable, with the goal of restoring comfortable, reliable chewing.",
+      "problem": "Use of 'predictable' is inappropriate for anxious patients - implies guaranteed outcomes. TP-04 should minimize uncertainty language, but this maximizes false certainty.",
+      "severity": "critical",
+      "suggested_fix": "Replace 'predictable' with 'well-established' or 'proven'. Revise to: 'The treatment approach for this type of case is well-established, with the goal of restoring comfortable, reliable chewing.'"
+    },
+    {
+      "section_number": 3,
+      "source_content": "content/modules/TM_CTX_FIRST_TIME/en/TP-04.md",
+      "quote": "When multiple adjacent teeth are missing, chewing can feel different. You might notice that you favor one side of your mouth or that certain foods require more effort. This is a normal response to the changed situation.",
+      "problem": "Redundant explanation - makes same point three times. Verbose for no added value. Takes 3 sentences to say what could be 1.",
+      "severity": "warning",
+      "suggested_fix": "Condense to: 'When multiple adjacent teeth are missing, chewing feels different - you might favor one side or find certain foods require more effort. This is normal.'"
+    },
+    {
+      "section_number": 3,
+      "source_content": "content/modules/TM_CTX_FIRST_TIME/en/TP-04.md",
+      "quote": "With proper treatment, the situation typically stabilizes rather than worsening.",
+      "problem": "Implies guarantee of stabilization. Weak hedging ('typically') doesn't adequately convey individual variation. Clinically imprecise.",
+      "severity": "critical",
+      "suggested_fix": "Revise to: 'Treatment aims to stabilize the situation and restore function, though individual outcomes vary based on several factors.'"
+    },
+    {
+      "section_number": 4,
+      "source_content": "content/b_blocks/B_INTERP_STANDARD/en/TP-04.md",
+      "quote": "Maria, your situation has established treatment options. Both approaches are suitable for you. Your priorities (your dental situation) will help determine which option feels right.",
+      "problem": "Section is too brief (39 words) and vague. 'Your priorities (your dental situation)' is confusing - doesn't clarify what priorities mean. Doesn't actually help patient understand their situation.",
+      "severity": "warning",
+      "suggested_fix": "Expand to 60-80 words: 'Maria, your situation has two well-established treatment options, and both can work for you. Your choice should reflect what matters most: timeline, cost, surgical vs non-surgical approach, or long-term durability. Your dentist will confirm clinical suitability.'"
+    },
+    {
+      "section_number": 5,
+      "source_content": "content/b_blocks/B_OPT_IMPLANT/en/TP-04.md",
+      "quote": "Success rates are typically 90-95% over 10 years when bone quality is adequate, though individual results vary",
+      "problem": "Success rates presented without adequate context. Doesn't explain what 'success' means, what factors affect individual variation, or that rates vary significantly by bone quality, surgeon experience, and patient compliance.",
+      "severity": "critical",
+      "suggested_fix": "Revise to: 'Studies show success rates around 90-95% in ideal conditions with adequate bone quality and good oral hygiene. Individual results vary significantly based on bone density, smoking status, diabetes control, and other factors. Your dentist can assess your specific situation.'"
+    },
+    {
+      "section_number": 5,
+      "source_content": "content/b_blocks/B_OPT_IMPLANT/en/TP-04.md",
+      "quote": "Success is linked to bone quality and oral health—both assessable factors",
+      "problem": "Implies that assessing these factors guarantees success. Clinically misleading - assessment doesn't guarantee outcome. Biases toward implants by suggesting they're more controllable.",
+      "severity": "critical",
+      "suggested_fix": "Revise to: 'Success depends on bone quality and oral health, which your dentist can assess. However, other factors also affect outcomes, and results vary between patients.'"
+    },
+    {
+      "section_number": 5,
+      "source_content": "content/b_blocks/B_OPT_IMPLANT/en/TP-04.md",
+      "quote": "They don't require modifying adjacent teeth",
+      "problem": "Frames preservation of adjacent teeth as inherently positive, biasing toward implants. Doesn't acknowledge that bridges' approach (using adjacent teeth as anchors) is also valid.",
+      "severity": "warning",
+      "suggested_fix": "Revise to: 'Implants preserve adjacent teeth. Bridges use adjacent teeth as anchors. Each approach has different implications for your remaining teeth.'"
+    },
+    {
+      "section_number": 5,
+      "source_content": "content/b_blocks/B_OPT_BRIDGE/en/TP-04.md",
+      "quote": "A dental bridge is a proven solution that has served patients well for decades.",
+      "problem": "Verbose opening that adds no clinical value. 'Proven solution' and 'served patients well' are filler phrases.",
+      "severity": "info",
+      "suggested_fix": "Simplify to: 'A dental bridge replaces missing teeth by attaching artificial teeth to crowns on adjacent teeth.'"
+    },
+    {
+      "section_number": 5,
+      "source_content": "content/b_blocks/B_OPT_BRIDGE/en/TP-04.md",
+      "quote": "With proper care, bridges typically last 10-15 years, after which they may need replacement. Some last longer, some shorter depending on individual factors",
+      "problem": "Weak hedging with 'typically' and 'may need'. Doesn't explain what factors affect longevity or what 'proper care' means. Vague about individual variation.",
+      "severity": "warning",
+      "suggested_fix": "Revise to: 'Bridges typically last 10-15 years, though longevity depends on the health of supporting teeth, your oral hygiene, and other factors. Some last longer, some shorter.'"
+    },
+    {
+      "section_number": 7,
+      "source_content": "content/scenarios/S04/en/TP-04.md",
+      "quote": "Implant-supported bridges require 3-7 months for healing but provide a long-term solution (15-25+ years typical). Traditional bridges complete faster (2-4 weeks) but may need replacement sooner (10-15 years typical).",
+      "problem": "Frames implants as 'long-term solution' vs bridges as 'may need replacement' - subtle bias toward implants. Timelines presented as definitive without acknowledging individual variation.",
+      "severity": "warning",
+      "suggested_fix": "Revise to: 'Implants take 3-7 months but may last 15-25+ years. Bridges complete in 2-4 weeks but typically last 10-15 years. Neither is objectively better - it depends on what matters to you.'"
+    },
+    {
+      "section_number": 8,
+      "source_content": "content/scenarios/S04/en/TP-04.md",
+      "quote": "Implant placement surgery: 1 appointment",
+      "problem": "Minimizes surgical aspect by listing as single appointment. For severe anxiety patient, this understates the significance of surgery. Should acknowledge this is a surgical procedure.",
+      "severity": "warning",
+      "suggested_fix": "Revise to: 'Implant placement surgery: 1 appointment (surgical procedure)' or add note: 'The implant placement involves a surgical procedure, though it's routine for experienced dentists.'"
+    },
+    {
+      "section_number": 9,
+      "source_content": "content/modules/TM_BUDGET_LIMITED/en/TP-04.md",
+      "quote": "We understand that budget is an important consideration for you, and we want to help you find solutions that work within your means. Rest assured that effective treatment options exist at various price points.",
+      "problem": "Excessive empathy padding. Takes 3 sentences to say what could be 1. 'Rest assured' is patronizing. Doesn't provide actual budget information.",
+      "severity": "warning",
+      "suggested_fix": "Condense to: 'Budget matters. Effective options exist at various price points. Your dentist can discuss which fits your needs.'"
+    },
+    {
+      "section_number": 9,
+      "source_content": "content/modules/TM_BUDGET_LIMITED/en/TP-04.md",
+      "quote": "Let's work together to find the right fit.",
+      "problem": "Overly warm, collaborative language that contrasts sharply with clinical tone elsewhere. Feels forced and patronizing.",
+      "severity": "info",
+      "suggested_fix": "Remove or replace with: 'Your dentist can help you find the right option for your situation.'"
+    },
+    {
+      "section_number": 9,
+      "source_content": "content/modules/TM_BUDGET_LIMITED/en/TP-04.md",
+      "quote": "- Bridge on implants: approximately €4,500 – €6,000",
+      "problem": "Only one cost option provided. Report discusses both implants and bridges but only gives cost for 'bridge on implants'. Missing cost for traditional bridge and implant-only options. Incomplete cost information.",
+      "severity": "critical",
+      "suggested_fix": "Provide complete cost breakdown: 'Traditional bridge: approximately €2,000-€3,500. Implant-supported bridge: approximately €4,500-€6,000. Individual costs vary based on complexity and materials.'"
+    },
+    {
+      "section_number": 10,
+      "source_content": "content/scenarios/S04/en/TP-04.md",
+      "quote": "Individual risk varies. Population studies show implant failure rates of 5-10% over 10 years, infection risk of 2-5%.",
+      "problem": "Vague about what factors cause individual variation. Doesn't explain what 'failure' means. Doesn't specify which factors (smoking, bone quality, etc.) affect these rates. For anxious patient, this is insufficient context.",
+      "severity": "critical",
+      "suggested_fix": "Revise to: 'Risk varies based on bone quality, smoking status, oral hygiene, and surgeon experience. Population studies show implant failure rates of 5-10% over 10 years, with infection risk of 2-5%. Smoking significantly increases both risks. Your dentist can assess your individual risk factors.'"
+    },
+    {
+      "section_number": 10,
+      "source_content": "content/scenarios/S04/en/TP-04.md",
+      "quote": "Recovery: 3-7 days of swelling and discomfort after surgery",
+      "problem": "Minimizes post-surgical experience. 'Discomfort' is vague - doesn't specify pain level, medication needs, or activity restrictions. For severe anxiety patient, this is insufficient detail.",
+      "severity": "warning",
+      "suggested_fix": "Revise to: 'Recovery: 3-7 days of swelling and discomfort after surgery. Pain is typically managed with prescribed medication. Most patients resume normal activities within a few days, though strenuous activity should be avoided for 1-2 weeks.'"
+    },
+    {
+      "section_number": 1,
+      "source_content": "content/static/1/en.md",
+      "quote": "This report is generated based on your questionnaire responses and is for informational purposes only. It does not constitute medical advice, diagnosis, or treatment recommendations.",
+      "problem": "Generic disclaimer doesn't specifically address the treatment options discussed (implants and bridges). Doesn't clarify that neither option is appropriate for all patients or that clinical examination is required to determine suitability.",
+      "severity": "warning",
+      "suggested_fix": "Expand to: 'This report discusses implants and bridges based on your questionnaire responses. It is for informational purposes only and does not constitute medical advice. Neither option is appropriate for all patients. Clinical examination is required to determine which option is suitable for you.'"
+    },
+    {
+      "section_number": 2,
+      "source_content": "content/scenarios/S04/en/TP-04.md",
+      "quote": "You're missing several teeth next to each other. This is a common situation that dentists handle regularly.",
+      "problem": "Generic statement that could apply to any patient. Doesn't reference Maria's specific situation (lower back teeth, functional priority). 'Common situation' doesn't add value for anxious patient.",
+      "severity": "info",
+      "suggested_fix": "Revise to: 'You're missing several teeth in your lower back, which affects your chewing comfort. This is a situation dentists handle regularly with proven solutions.'"
+    },
+    {
+      "section_number": 11,
+      "source_content": "content/static/11/en.md",
+      "quote": "Options to consider: Review this report, Prepare questions for your dental consultation, Schedule an appointment when ready, Request additional information on specific topics",
+      "problem": "Generic next steps that don't reference specific content from report. Doesn't help patient identify what matters most to them or what questions to ask.",
+      "severity": "warning",
+      "suggested_fix": "Revise to: 'Before your consultation: Review the trade-offs section (Section 7) and identify which factors matter most to you - timeline, cost, surgical approach, or long-term durability. Prepare questions about your specific situation. Consider your budget and timeline preferences to discuss with your dentist.'"
+    },
+    {
+      "section_number": 0,
+      "source_content": "A_WARN_ACTIVE_SYMPTOMS",
+      "quote": "You've mentioned experiencing some pain or discomfort. This is something your dentist can help with, and it's good that you're seeking guidance.",
+      "problem": "Important Notices section uses overly warm, reassuring tone that may not match clinical severity. Doesn't specify what 'active symptoms' means or what priority they take in treatment planning.",
+      "severity": "warning",
+      "suggested_fix": "Revise to: 'You've mentioned experiencing pain or discomfort. Your dentist will evaluate the cause and address any acute issues before proceeding with treatment planning. This is standard practice.'"
+    },
+    {
+      "section_number": 2,
+      "source_content": "content/modules/TM_ANXIETY_SEVERE/en/TP-04.md",
+      "quote": "This report gives you the information you need to make a confident choice.",
+      "problem": "Overstates what report provides. Report doesn't give patient enough information to make confident choice - it requires clinical examination. Sets unrealistic expectations.",
+      "severity": "warning",
+      "suggested_fix": "Revise to: 'This report provides information to help you prepare for your consultation. Your dentist will provide personalized recommendations based on clinical examination.'"
+    },
+    {
+      "section_number": 5,
+      "source_content": "content/b_blocks/B_OPT_IMPLANT/en/TP-04.md",
+      "quote": "The treatment takes time but follows a predictable path",
+      "problem": "Use of 'predictable' is inappropriate for anxious patients. Implies guaranteed timeline and outcomes. TP-04 should minimize uncertainty language.",
+      "severity": "critical",
+      "suggested_fix": "Replace with: 'The treatment takes time but follows an established process that your dentist will explain at each step.'"
+    },
+    {
+      "section_number": 3,
+      "source_content": "content/scenarios/S04/en/TP-04.md",
+      "quote": "Your remaining teeth are stable, and your mouth can support a reliable restoration.",
+      "problem": "Stated as fact without clinical examination. Assumes stability without assessment. Clinically inappropriate to make this claim without examination.",
+      "severity": "critical",
+      "suggested_fix": "Revise to: 'Your dentist will assess whether your remaining teeth are stable and whether your mouth can support a reliable restoration. This assessment is part of the clinical examination.'"
+    },
+    {
+      "section_number": 7,
+      "source_content": "content/scenarios/S04/en/TP-04.md",
+      "quote": "Surgery vs. tooth modification: Implants require a surgical procedure but preserve neighboring teeth. Traditional bridges avoid surgery but require preparing adjacent teeth as anchors.",
+      "problem": "Frames 'avoid surgery' as positive, biasing against implants. Doesn't acknowledge that both approaches have valid trade-offs.",
+      "severity": "warning",
+      "suggested_fix": "Revise to: 'Implants involve surgical placement but preserve adjacent teeth. Bridges avoid surgery but require preparing adjacent teeth as anchors. Each approach has different implications.'"
+    },
+    {
+      "section_number": 9,
+      "source_content": "content/scenarios/S04/en/TP-04.md",
+      "quote": "- Possible payment plans or phased approaches",
+      "problem": "Mentions 'phased approaches' without explanation. Unclear what this means for patient decision-making.",
+      "severity": "info",
+      "suggested_fix": "Expand to: 'Possible payment plans or phased approaches (such as treating one tooth at a time)'"
+    },
+    {
+      "section_number": 4,
+      "source_content": "content/b_blocks/B_INTERP_STANDARD/en/TP-04.md",
+      "quote": "Your dentist will examine your specific situation to confirm clinical suitability.",
+      "problem": "Passive language that doesn't empower patient. Implies dentist decides, not patient. Doesn't emphasize patient's role in decision-making.",
+      "severity": "warning",
+      "suggested_fix": "Revise to: 'Your dentist will examine your specific situation to confirm both options are clinically suitable. Your preference will guide the final choice.'"
+    },
+    {
+      "section_number": 8,
+      "source_content": "content/scenarios/S04/en/TP-04.md",
+      "quote": "Healing/osseointegration: 3-6 months",
+      "problem": "Uses technical term 'osseointegration' without explanation. For first-time patient, this is jargon. Should use plain language.",
+      "severity": "info",
+      "suggested_fix": "Revise to: 'Healing (bone integration): 3-6 months' or add explanation: 'Healing/osseointegration (bone integration): 3-6 months'"
+    },
+    {
+      "section_number": 5,
+      "source_content": "content/b_blocks/B_OPT_BRIDGE/en/TP-04.md",
+      "quote": "Bridges work well when you prefer a non-surgical approach or want faster completion.",
+      "problem": "Subtle directive language - 'when you prefer' implies patient should prefer non-surgical. Biases against implants.",
+      "severity": "warning",
+      "suggested_fix": "Revise to: 'Bridges are an option if you prefer to avoid surgery or want faster completion. Implants are an option if you prefer to preserve adjacent teeth or want longer-term durability.'"
+    },
+    {
+      "section_number": 2,
+      "source_content": "content/modules/TM_ANXIETY_SEVERE/en/TP-04.md",
+      "quote": "By addressing symptoms first, the foundation is set for stable, lasting results.",
+      "problem": "Implies guarantee of 'lasting results'. Overly optimistic language for anxious patient. Should be more cautious.",
+      "severity": "warning",
+      "suggested_fix": "Revise to: 'By addressing symptoms first, your dentist can plan treatment on a stable foundation.'"
+    },
+    {
+      "section_number": 0,
+      "source_content": "A_WARN_ACTIVE_SYMPTOMS",
+      "quote": "This approach has helped many patients.",
+      "problem": "Vague appeal to authority. Doesn't explain why addressing symptoms first is important or what it means for Maria's treatment.",
+      "severity": "info",
+      "suggested_fix": "Revise to: 'This is standard practice because treating acute symptoms first ensures a stable foundation for longer-term treatment.'"
+    },
+    {
+      "section_number": 3,
+      "source_content": "content/modules/TM_CTX_FIRST_TIME/en/TP-04.md",
+      "quote": "This type of scenario has clear, proven solutions.",
+      "problem": "Overstates certainty. 'Clear, proven solutions' implies guaranteed success. Inappropriate for anxious patient.",
+      "severity": "warning",
+      "suggested_fix": "Revise to: 'This type of situation has well-established treatment approaches with good track records.'"
+    },
+    {
+      "section_number": 10,
+      "source_content": "content/scenarios/S04/en/TP-04.md",
+      "quote": "Smoking affects healing and long-term success.",
+      "problem": "Mentioned only in passing. For patient with severe anxiety, this is critical information that should be emphasized more clearly.",
+      "severity": "warning",
+      "suggested_fix": "Expand to: 'Smoking significantly increases infection risk and implant failure rates. If you smoke, discuss this with your dentist before treatment.'"
+    },
+    {
+      "section_number": 5,
+      "source_content": "content/b_blocks/B_OPT_IMPLANT/en/TP-04.md",
+      "quote": "A placement procedure is involved, though it's routine for experienced dentists",
+      "problem": "Minimizes surgical aspect by calling it 'routine'. For severe anxiety patient, this is insufficient acknowledgment of the surgical nature.",
+      "severity": "warning",
+      "suggested_fix": "Revise to: 'A surgical procedure is involved. While it's routine for experienced dentists, it's important to understand this is surgery and discuss any concerns with your dentist.'"
+    },
+    {
+      "section_number": 9,
+      "source_content": "content/modules/TM_BUDGET_LIMITED/en/TP-04.md",
+      "quote": "You don't need to compromise on quality to find something affordable.",
+      "problem": "Overstates what's possible. Implies all affordable options have equal quality. Clinically misleading.",
+      "severity": "warning",
+      "suggested_fix": "Revise to: 'Both options can provide good results at various price points. Your dentist can discuss which offers the best value for your situation.'"
+    },
+    {
+      "section_number": 2,
+      "source_content": "content/scenarios/S04/en/TP-04.md",
+      "quote": "The goal is to restore comfortable, reliable chewing.",
+      "problem": "Stated as guaranteed outcome. Should be 'aim' or 'goal is to work toward' rather than definitive statement.",
+      "severity": "info",
+      "suggested_fix": "Revise to: 'The goal is to work toward restoring comfortable, reliable chewing.'"
+    },
+    {
+      "section_number": 4,
+      "source_content": "content/b_blocks/B_INTERP_STANDARD/en/TP-04.md",
+      "quote": "Maria, your situation has established treatment options.",
+      "problem": "Only use of patient name in entire report. Should appear multiple times throughout for personalization.",
+      "severity": "warning",
+      "suggested_fix": "Add patient name to opening of each major section: Section 2, Section 5, Section 7, Section 9, Section 10"
+    }
+  ],
+  "content_files_to_review": [
+    "content/modules/TM_ANXIETY_SEVERE/en/TP-04.md",
+    "content/modules/TM_CTX_FIRST_TIME/en/TP-04.md",
+    "content/b_blocks/B_INTERP_STANDARD/en/TP-04.md",
+    "content/b_blocks/B_OPT_IMPLANT/en/TP-04.md",
+    "content/b_blocks/B_OPT_BRIDGE/en/TP-04.md",
+    "content/scenarios/S04/en/TP-04.md",
+    "content/modules/TM_BUDGET_LIMITED/en/TP-04.md",
+    "content/static/1/en.md",
+    "content/static/11/en.md",
+    "A_WARN_ACTIVE_SYMPTOMS"
+  ],
+  "overall_assessment": "This report has significant quality issues across multiple dimensions. While structurally complete, it suffers from excessive verbosity, insufficient personalization, and critical clinical safety problems including overstated success rates and inappropriate certainty language for an anxious patient. The report contains multiple instances of subtle bias toward implants, weak autonomy language, and generic content that could apply to any patient. Most critically, clinical claims lack adequate hedging and the tone doesn't consistently match the TP-04 Stability-Frame profile. Substantial revision is needed before this report is suitable for patient use.",
+  "metadata": {
+    "model_used": "claude-haiku-4-5-20251001",
+    "duration_ms": 94060,
+    "token_usage": {
+      "input_tokens": 6855,
+      "output_tokens": 9280
+    }
+  }
+}

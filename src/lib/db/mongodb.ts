@@ -65,4 +65,5 @@ export const COLLECTIONS = {
   GENERATION_JOBS: "generationJobs",
   CONTENT_USAGE: "contentUsage",
   DERIVATIVE_CONTENT: "derivativeContent",
+  SCENARIOS: "scenarios",
 } as const;

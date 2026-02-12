@@ -16,40 +16,27 @@ import type {
   ContentCheckResult,
   ScoredScenario,
   ReportFactCheckResult,
-  ReportFactCheckIssue,
   ReportSection,
   ComposedReport,
   ReportPhaseEvent,
-  ContentGap,
-  ContentBlockProgress,
-  ContentBlockStatus,
 } from "@/lib/types/types/report-generation";
 import { createContentService, ContentService } from "./ContentService";
 import { createToneService, ToneService } from "./ToneService";
 import { createDerivativeContentService, DerivativeContentService } from "./DerivativeContentService";
-import { createContentGenerationAgent } from "@/lib/agents/content-generator";
-// Fact-checking disabled for now
-// import { createFactCheckAgent } from "@/lib/agents/fact-checker";
-// import { createDerivativeFactChecker } from "@/lib/agents/derivative-generator";
-import { createSemanticSearchService, SemanticSearchService } from "@/lib/agents/search";
-import { getDb, COLLECTIONS } from "@/lib/db/mongodb";
-import { ObjectId } from "mongodb";
 import { generateReportPdf } from "./PdfGenerationService";
+import { MissingContentError } from "@/lib/errors/MissingContentError";
 
 export type ProgressCallback = (event: ReportPhaseEvent) => void;
 
 export interface ReportGenerationConfig {
   intake: IntakeAnswers;
   language?: SupportedLanguage;
-  maxFactCheckAttempts?: number;
-  factCheckThreshold?: number;
   enableDerivatives?: boolean;  // Enable derivative content synthesis (default: true)
 }
 
 export class ReportGenerationService {
   private contentService: ContentService;
   private toneService: ToneService;
-  private searchService: SemanticSearchService;
   private derivativeService: DerivativeContentService;
   private onProgress: ProgressCallback;
   private enableDerivatives: boolean;
@@ -57,7 +44,6 @@ export class ReportGenerationService {
   constructor(onProgress: ProgressCallback, enableDerivatives: boolean = true) {
     this.contentService = createContentService();
     this.toneService = createToneService();
-    this.searchService = createSemanticSearchService();
     this.derivativeService = createDerivativeContentService();
     this.onProgress = onProgress;
     this.enableDerivatives = enableDerivatives;
@@ -68,8 +54,6 @@ export class ReportGenerationService {
    */
   async generateReport(config: ReportGenerationConfig): Promise<ComposedReport> {
     const language = config.language ?? "en";
-    const maxFactCheckAttempts = config.maxFactCheckAttempts ?? 2;
-    const factCheckThreshold = config.factCheckThreshold ?? 0.7;
 
     try {
       // Phase 1: Analyze answers and derive drivers
@@ -123,7 +107,7 @@ export class ReportGenerationService {
           available: contentCheck.available,
           missing: contentCheck.missing.length,
           scenarios: scenarios.map((s) => s.scenarioId),
-          // Include the list of blocks that need to be generated
+          // Include the list of blocks that are missing
           missingBlocks: contentCheck.missing.map((gap) => ({
             id: gap.contentId,
             name: gap.name,
@@ -132,29 +116,27 @@ export class ReportGenerationService {
         },
       });
 
-      // Phase 4: Generate missing content (if needed)
-      let generatedCount = 0;
+      // If content is missing, fail with descriptive error
       if (contentCheck.missing.length > 0) {
-        generatedCount = await this.generateMissingContent(
-          contentCheck.missing,
-          language,
-          toneProfile.id,
-          maxFactCheckAttempts,
-          factCheckThreshold
+        throw new MissingContentError(
+          `Report generation failed: ${contentCheck.missing.length} content item(s) missing from database. Please create these content blocks via the content management UI.`,
+          contentCheck.missing.map((gap) => ({
+            contentId: gap.contentId,
+            language,
+            tone: toneProfile.id,
+          }))
         );
       }
 
-      // Fact-checking is now integrated into generateMissingContent
-      // Get fact-check results from generated content
-      const factCheckResult = await this.factCheckContent(
-        scenarios,
-        language,
-        toneProfile.id,
-        maxFactCheckAttempts,
-        factCheckThreshold
-      );
+      // No fact-checking needed since content must exist in DB
+      const factCheckResult: ReportFactCheckResult = {
+        passed: true,
+        score: 1.0,
+        issues: [],
+        attempts: 0,
+      };
 
-      // Phase 5: Compose final report
+      // Phase 4: Compose final report
       this.emitProgress({
         phase: "composing",
         message: "Composing your report...",
@@ -167,7 +149,7 @@ export class ReportGenerationService {
         language,
         toneProfile,
         factCheckResult,
-        generatedCount
+        0 // No content generated - all content comes from DB
       );
 
       // Emit completion
@@ -251,279 +233,6 @@ export class ReportGenerationService {
     };
   }
 
-  /**
-   * Source document format for generation (simplified)
-   */
-  private mapToGenerationFormat(docs: Array<{ _id: { toString(): string }; filename: string; sections?: Array<{ id?: string; title: string; content: string }> }>): Array<{
-    id: string;
-    filename: string;
-    sections: Array<{ id: string; title: string; content: string }>;
-  }> {
-    return docs.map((doc) => ({
-      id: doc._id.toString(),
-      filename: doc.filename,
-      sections:
-        doc.sections?.map((s) => ({
-          id: s.id || s.title,
-          title: s.title,
-          content: s.content,
-        })) || [],
-    }));
-  }
-
-  /**
-   * Get scenario source document directly by scenarioId
-   * For scenario content, we fetch directly from parsed scenario documents
-   * instead of using semantic search - the source is already structured by ID
-   */
-  private async getScenarioSourceDirect(
-    scenarioId: string
-  ): Promise<{
-    _id: { toString(): string };
-    filename: string;
-    sections: Array<{
-      id: string;
-      title: string;
-      content: string;
-      pageStart: number;
-      pageEnd: number;
-      level: number;
-      path: string[];
-    }>;
-  } | null> {
-    const db = await getDb();
-
-    // Find document with documentType === "scenarios" that contains this scenarioId
-    const doc = await db
-      .collection(COLLECTIONS.SOURCE_DOCUMENTS)
-      .findOne({
-        documentType: "scenarios",
-        "scenarios.scenarioId": scenarioId,
-      });
-
-    if (!doc || !doc.scenarios) {
-      console.warn(`No scenario document found for scenarioId: ${scenarioId}`);
-      return null;
-    }
-
-    // Extract the specific scenario from the document
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const scenario = (doc.scenarios as any[]).find(
-      (s: { scenarioId: string }) => s.scenarioId === scenarioId
-    );
-
-    if (!scenario) {
-      console.warn(`Scenario ${scenarioId} not found in document ${doc.filename}`);
-      return null;
-    }
-
-    // Convert scenario sections to the format expected by ContentGenerationAgent
-    return {
-      _id: doc._id,
-      filename: doc.filename,
-      sections: scenario.sections.map((s: { number: number; title: string; content: string }) => ({
-        id: `${scenarioId}_section_${s.number}`,
-        title: s.title,
-        content: s.content,
-        pageStart: scenario.pageStart,
-        pageEnd: scenario.pageEnd,
-        level: 2,
-        path: [scenario.title, s.title],
-      })),
-    };
-  }
-
-  /**
-   * Find relevant source documents using semantic search
-   * Returns raw MongoDB documents for use with both generation and fact-checking
-   */
-  private async findRelevantSourceDocs(
-    gap: ContentGap
-  ): Promise<Array<{
-    _id: { toString(): string };
-    filename: string;
-    sections: Array<{
-      id: string;
-      title: string;
-      content: string;
-      pageStart: number;
-      pageEnd: number;
-      level: number;
-      path: string[];
-    }>;
-  }>> {
-    // Build search query from content gap metadata
-    const query = `${gap.name} ${gap.contentType} ${gap.description || ""}`.trim();
-
-    // Search Qdrant for relevant source chunks
-    const results = await this.searchService.getRelevantSources(query, {
-      limit: 15,
-      scoreThreshold: 0.1,
-    });
-
-    if (results.length === 0) {
-      console.warn(`No semantic search results for query: "${query}"`);
-      return [];
-    }
-
-    // Group results by mongoDocId and fetch full documents from MongoDB
-    const docIds = [...new Set(results.map((r) => r.mongoDocId))];
-    const db = await getDb();
-
-    const docs = await db
-      .collection(COLLECTIONS.SOURCE_DOCUMENTS)
-      .find({ _id: { $in: docIds.map((id) => new ObjectId(id)) } })
-      .toArray();
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return docs as any;
-  }
-
-  /**
-   * Phase 4: Generate missing content
-   * NOTE: Fact-checking is currently disabled for faster iteration
-   */
-  async generateMissingContent(
-    missing: ContentGap[],
-    lang: SupportedLanguage,
-    tone: ToneProfileId,
-    _maxFactCheckAttempts: number = 2,
-    _factCheckThreshold: number = 0.7
-  ): Promise<number> {
-    const generationAgent = createContentGenerationAgent();
-    // Fact-checking disabled for now
-    // const factCheckAgent = createFactCheckAgent();
-    let generated = 0;
-
-    // Initialize content blocks progress tracking
-    const contentBlocks: ContentBlockProgress[] = missing.map((gap) => ({
-      id: gap.contentId,
-      name: gap.name,
-      contentType: gap.contentType,
-      status: "pending" as ContentBlockStatus,
-    }));
-
-    // Helper to emit progress with full block list
-    const emitBlockProgress = (
-      index: number,
-      status: ContentBlockStatus,
-      message: string
-    ) => {
-      // Update the block status
-      contentBlocks[index].status = status;
-
-      this.emitProgress({
-        phase: "generating",
-        message,
-        timestamp: new Date().toISOString(),
-        data: {
-          current: index + 1,
-          total: missing.length,
-          currentContent: missing[index].name,
-          contentBlocks: [...contentBlocks],
-        },
-      });
-    };
-
-    for (let i = 0; i < missing.length; i++) {
-      const gap = missing[i];
-
-      // Emit generating status
-      emitBlockProgress(i, "generating", `Generating content: ${gap.name}`);
-
-      try {
-        // Get source documents - use direct fetch for scenarios, semantic search for others
-        let rawSourceDocs: Array<{
-          _id: { toString(): string };
-          filename: string;
-          sections: Array<{
-            id: string;
-            title: string;
-            content: string;
-            pageStart: number;
-            pageEnd: number;
-            level: number;
-            path: string[];
-          }>;
-        }>;
-
-        if (gap.contentType === "scenario") {
-          // Direct fetch for scenarios - no RAG search needed
-          // The scenario content is already parsed and structured by scenarioId
-          const scenarioSource = await this.getScenarioSourceDirect(gap.contentId);
-          rawSourceDocs = scenarioSource ? [scenarioSource] : [];
-        } else {
-          // Use semantic search for other content types (a_block, b_block, module, static)
-          rawSourceDocs = await this.findRelevantSourceDocs(gap);
-        }
-
-        if (rawSourceDocs.length === 0) {
-          console.warn(`No relevant sources found for ${gap.contentId}`);
-          emitBlockProgress(i, "failed", `No source documents found for: ${gap.name}`);
-          continue;
-        }
-
-        // Convert to generation format (simplified sections)
-        const generationSourceDocs = this.mapToGenerationFormat(rawSourceDocs);
-
-        // Generate content with source documents
-        const result = await generationAgent.generate({
-          contentId: gap.contentId,
-          contentType: gap.contentType as "scenario" | "a_block" | "b_block" | "module" | "static",
-          language: lang,
-          tone: tone,
-          sourceDocuments: generationSourceDocs,
-          existingManifest: {
-            name: gap.name,
-            description: gap.description || `Generated content for ${gap.contentId}`,
-            targetSections: gap.sections,
-            wordCountTarget: 300,
-          },
-        });
-
-        // Save to database directly (fact-checking disabled)
-        await this.contentService.updateContentVariant(
-          gap.contentId,
-          lang,
-          tone,
-          {
-            content: result.content,
-            wordCount: result.wordCount,
-            citations: result.citations,
-            generatedBy: "agent",
-          }
-        );
-
-        emitBlockProgress(i, "done", `Generated: ${gap.name}`);
-        generated++;
-      } catch (error) {
-        console.error(`Failed to generate content for ${gap.contentId}:`, error);
-        emitBlockProgress(i, "failed", `Failed to generate: ${gap.name}`);
-      }
-    }
-
-    return generated;
-  }
-
-  /**
-   * Phase 5: Fact-check content with retry
-   * NOTE: Fact-checking is currently disabled for faster iteration
-   */
-  async factCheckContent(
-    _scenarios: ScoredScenario[],
-    _lang: SupportedLanguage,
-    _tone: ToneProfileId,
-    _maxAttempts: number,
-    _threshold: number
-  ): Promise<ReportFactCheckResult> {
-    // Fact-checking disabled - return passing result
-    return {
-      passed: true,
-      score: 1.0,
-      issues: [],
-      attempts: 0,
-    };
-  }
 
   /**
    * Phase 6: Compose final report

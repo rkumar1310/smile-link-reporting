@@ -10,7 +10,7 @@ export { ReportPipeline, createReportPipeline, type PipelineProgressEvent, type 
 export { runPipelineWithSSE, mapPipelineEventToSSE, transformReport, type PipelineSSEOptions, type PipelineSSEResult } from "./runPipeline";
 
 // Content store
-export { DynamicContentStore, createDynamicContentStore, type DynamicContentStoreOptions, type ContentGenerationProgress } from "./content/DynamicContentStore";
+export { DynamicContentStore, createDynamicContentStore } from "./content/DynamicContentStore";
 
 // Types
 export * from "./types";

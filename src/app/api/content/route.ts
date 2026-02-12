@@ -6,6 +6,8 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import { promises as fs } from "fs";
+import path from "path";
 import { getDb, COLLECTIONS } from "@/lib/db/mongodb";
 import type {
   ContentDocument,
@@ -17,6 +19,24 @@ import {
   ContentStatuses,
   DriverLayers,
 } from "@/lib/types";
+import type { ContentRegistry } from "@/lib/types/content-registry";
+
+// Cache the registry in memory
+let registryCache: ContentRegistry | null = null;
+let cacheTime: number = 0;
+const CACHE_TTL = 60000; // 1 minute cache
+
+async function loadRegistry(): Promise<ContentRegistry> {
+  const now = Date.now();
+  if (registryCache && (now - cacheTime) < CACHE_TTL) {
+    return registryCache;
+  }
+  const registryPath = path.join(process.cwd(), "config/content-registry.json");
+  const content = await fs.readFile(registryPath, "utf-8");
+  registryCache = JSON.parse(content) as ContentRegistry;
+  cacheTime = now;
+  return registryCache;
+}
 
 // Query schema for listing content
 const ContentQuerySchema = z.object({
@@ -111,6 +131,25 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const input = CreateContentSchema.parse(body) as CreateContentInput;
+
+    // Validate contentId against registry (excluding scenarios)
+    const registry = await loadRegistry();
+    const registryItem = registry.items.find(item => item.id === input.contentId);
+
+    if (!registryItem) {
+      return NextResponse.json(
+        { error: `Invalid content ID "${input.contentId}". Must be a predefined content ID from the registry.` },
+        { status: 400 }
+      );
+    }
+
+    // Scenarios are managed separately via seed scripts
+    if (registryItem.type === "scenario") {
+      return NextResponse.json(
+        { error: `Scenarios cannot be created via this API. They are managed via seed scripts and stored in the scenarios collection.` },
+        { status: 400 }
+      );
+    }
 
     const db = await getDb();
 

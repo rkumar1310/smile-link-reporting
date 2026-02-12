@@ -1,0 +1,196 @@
+{
+  "session_id": "test-case-007",
+  "case_id": "case_07_smoker_risk_factors",
+  "evaluation_timestamp": "2026-01-17T20:49:10.053Z",
+  "outcome": "BLOCK",
+  "overall_score": 4.7,
+  "dimensions": {
+    "professional_quality": {
+      "score": 5,
+      "feedback": "Writing is generally clear but suffers from significant verbosity and filler language. Multiple sections contain redundant phrasing, unnecessary transitions, and padding that dilutes impact. Sentences often say the same thing multiple times across different sections. The report could be 30-40% shorter without losing essential information."
+    },
+    "clinical_safety": {
+      "score": 6,
+      "feedback": "Disclaimer is present and appropriately cautious. However, clinical safety messaging is undermined by weak hedging in some areas and insufficient emphasis on smoking's impact. The report appropriately avoids guarantees but could be more explicit about outcome variability and the limitations of population-level statistics."
+    },
+    "tone_appropriateness": {
+      "score": 4,
+      "feedback": "Tone is inconsistent and often shifts between clinical detachment and forced empathy. The autonomy-respecting tone (TP-06) is attempted but executed poorly through repetitive, heavy-handed autonomy messaging that feels patronizing rather than genuinely respectful. Clinical sections feel cold and impersonal, while personalization attempts feel generic and disconnected."
+    },
+    "personalization": {
+      "score": 3,
+      "feedback": "Personalization is severely lacking. While the report references James by name once, it fails to meaningfully incorporate his specific profile, priorities, or situation. Content reads as generic template text that could apply to any patient with multiple missing teeth. Patient's specific characteristics (first-timer, functional priority, smoking, balanced budget, durability focus, short-term horizon) are barely reflected in treatment recommendations or framing."
+    },
+    "patient_autonomy": {
+      "score": 4,
+      "feedback": "Patient autonomy is theoretically emphasized but executed through repetitive, heavy-handed messaging that paradoxically undermines genuine autonomy. The constant reminders that 'these are personal decisions' and 'the choice remains yours' feel patronizing and suggest the patient needs repeated reassurance. Subtle directive language appears in option framing ('You might choose this if...'), and some sections present information in ways that could bias toward certain options."
+    },
+    "structure_completeness": {
+      "score": 6,
+      "feedback": "Report includes required sections and follows logical flow from disclaimer through next steps. However, several sections are inadequately developed (Section 4 is only 45 words, Section 7 is only 29 words) and some content is redundantly placed. Section 6 (Expectations) appears to be missing entirely. The structure is present but execution is uneven, with critical sections underdeveloped."
+    }
+  },
+  "content_issues": [
+    {
+      "section_number": 3,
+      "source_content": "content/modules/TM_RISK_SMOKING/en/TP-06.md",
+      "quote": "You've indicated regular smoking. This is clinically relevant. **Key points:** - Healing typically takes longer - Implant success rates may be 10-20% lower than for non-smokers in population studies - Your dentist will assess how this affects your options",
+      "problem": "Identical text appears verbatim in both Section 3 and Section 10 - complete duplication that wastes space and suggests poor content organization",
+      "severity": "warning",
+      "suggested_fix": "Remove this section from Section 3 entirely. Keep only in Section 10 (Risk Factors) where it belongs logically. In Section 3, reference smoking briefly and direct reader to Section 10 for details."
+    },
+    {
+      "section_number": 10,
+      "source_content": "content/modules/TM_RISK_SMOKING/en/TP-06.md",
+      "quote": "You've indicated regular smoking. This is clinically relevant. **Key points:** - Healing typically takes longer - Implant success rates may be 10-20% lower than for non-smokers in population studies - Your dentist will assess how this affects your options",
+      "problem": "Population-level statistics (10-20% lower success rates) presented without sufficient context that individual outcomes vary significantly and cannot be predicted from population data",
+      "severity": "warning",
+      "suggested_fix": "Add disclaimer: 'These are population-level statistics. Your individual outcome depends on many factors that only clinical examination can assess. Your dentist will discuss how smoking specifically affects your situation.'"
+    },
+    {
+      "section_number": 2,
+      "source_content": "content/scenarios/S05/en/TP-06.md",
+      "quote": "You're missing several teeth in different areas of your mouth, a situation that affects how you chew and may influence how you feel about your smile. This scattered pattern of tooth loss is common and can be addressed in different ways.",
+      "problem": "Generic filler language ('This scattered pattern of tooth loss is common') that doesn't personalize to James's specific situation. Should reference his specific tooth loss pattern (2-4 non-adjacent teeth in both arches, partially restored).",
+      "severity": "info",
+      "suggested_fix": "Replace with: 'You're missing 2-4 non-adjacent teeth across both upper and lower arches, with some teeth partially restored. This affects your chewing function and may influence how you feel about your smile.'"
+    },
+    {
+      "section_number": 2,
+      "source_content": "content/scenarios/S05/en/TP-06.md",
+      "quote": "What you choose to do, how you prioritize different areas, and whether to address everything at once or in stages—these are all personal decisions that depend on your circumstances, preferences, and goals.",
+      "problem": "Repetitive autonomy messaging that appears multiple times throughout report. This specific statement is heavy-handed and patronizing - assumes patient needs reassurance about autonomy.",
+      "severity": "info",
+      "suggested_fix": "Remove this sentence. Trust that autonomy message has been established. If autonomy messaging is needed, state once clearly and concisely without repetition."
+    },
+    {
+      "section_number": 3,
+      "source_content": "content/modules/TM_CTX_FIRST_TIME/en/TP-06.md",
+      "quote": "This is your first dental treatment of this type. The information below covers what each option involves and typical experiences.",
+      "problem": "Meta-commentary about what information will be provided. Just provide the information without announcing it.",
+      "severity": "info",
+      "suggested_fix": "Remove this sentence. Begin directly with: 'As a first-time patient, here's what to expect from each treatment option...'"
+    },
+    {
+      "section_number": 3,
+      "source_content": "content/modules/TM_CTX_FIRST_TIME/en/TP-06.md",
+      "quote": "Scattered tooth loss affects chewing in multiple areas simultaneously. You may have adapted to this situation, or you may find it limiting. Both experiences are valid.",
+      "problem": "Patronizing language ('Both experiences are valid') that feels like forced empathy rather than genuine respect. Generic statement that doesn't address James's specific situation.",
+      "severity": "info",
+      "suggested_fix": "Replace with: 'Scattered tooth loss affects chewing in multiple areas. Your dentist will assess how this impacts your function and discuss options accordingly.'"
+    },
+    {
+      "section_number": 3,
+      "source_content": "content/modules/TM_CTX_FIRST_TIME/en/TP-06.md",
+      "quote": "The complexity of multiple gaps means there's no single obvious solution. Treatment typically involves decisions about which areas to address and in what order. These are personal decisions that depend on your priorities.",
+      "problem": "Repetitive autonomy messaging (appears 4+ times in report). Overemphasis on autonomy becomes patronizing rather than respectful.",
+      "severity": "info",
+      "suggested_fix": "Consolidate autonomy messaging. State once: 'Treatment decisions depend on your priorities and timeline.' Remove from other sections."
+    },
+    {
+      "section_number": 4,
+      "source_content": "content/b_blocks/B_INTERP_STANDARD/en/TP-06.md",
+      "quote": "A dentist would evaluate whether your situation fits common treatment patterns. Only clinical examination determines specific recommendations. Your priorities help identify options that align with what matters to you. A consultation allows you to explore options and decide what direction feels right.",
+      "problem": "Section is only 45 words and provides minimal value. Generic statements that could apply to any patient. Doesn't meaningfully interpret James's specific situation or profile.",
+      "severity": "warning",
+      "suggested_fix": "Expand to 150-200 words. Provide actual interpretation: 'Your situation involves multiple non-adjacent teeth across both arches. As a first-time patient focused on durability and function, here's what this means for your options...'"
+    },
+    {
+      "section_number": 5,
+      "source_content": "content/scenarios/S05/en/TP-06.md",
+      "quote": "**You might choose this if...** You want individualized treatment and can accommodate the time and cost involved. ... **You might choose this if...** You prefer a more streamlined approach to restoring each area.",
+      "problem": "Conditional framing ('You might choose this if...') is subtly directive - frames conditions that make each option seem appropriate, potentially biasing patient toward one option.",
+      "severity": "warning",
+      "suggested_fix": "Use neutral framing: 'This option is characterized by...' or 'This approach offers...' without conditional language that suggests when it's appropriate."
+    },
+    {
+      "section_number": 7,
+      "source_content": "content/scenarios/S05/en/TP-06.md",
+      "quote": "Both approaches are designed to restore functional chewing, though outcomes vary by individual. The goal is improvement over your current situation. Results differ from natural teeth in some ways.",
+      "problem": "Section is only 29 words and inadequately addresses trade-offs. Doesn't discuss meaningful differences between options (cost per tooth vs. total cost, flexibility vs. efficiency, treatment duration, maintenance).",
+      "severity": "critical",
+      "suggested_fix": "Expand to 150+ words. Discuss actual trade-offs: 'Individual implants offer flexibility but require more procedures and higher total cost. Bridges are more efficient but less flexible for future changes. Consider: timeline, total cost, maintenance requirements, and how each affects your priorities.'"
+    },
+    {
+      "section_number": 8,
+      "source_content": "content/scenarios/S05/en/TP-06.md",
+      "quote": "- Multiple implants with crowns: 4–7 months\n- Bridges on implants: similar timeframe",
+      "problem": "Section is only 11 words. Doesn't describe actual treatment process, what happens during procedures, recovery expectations, or what 'similar timeframe' means specifically.",
+      "severity": "warning",
+      "suggested_fix": "Expand to describe: 'Individual implants: Initial consultation → implant placement (1-2 hours per tooth) → 3-6 month healing → crown placement. Bridges: Similar timeline but fewer procedures overall. Recovery: 2-5 days per surgical phase with gradual return to normal activities.'"
+    },
+    {
+      "section_number": 9,
+      "source_content": "content/modules/TM_BUDGET_FLEXIBLE/en/TP-06.md",
+      "quote": "You indicated flexibility when quality matters. Both options are available at different price points. Your dentist can provide specific costs based on your clinical situation.",
+      "problem": "Generic statement that doesn't meaningfully address James's balanced budget profile. Doesn't discuss cost-benefit analysis or help patient understand value proposition of each option.",
+      "severity": "info",
+      "suggested_fix": "Expand: 'You indicated flexibility when quality matters. Here's how to think about cost: Individual implants cost more per tooth but offer flexibility. Bridges cost more upfront but may be more efficient per zone. Your dentist can discuss which approach offers better value for your priorities.'"
+    },
+    {
+      "section_number": 10,
+      "source_content": "content/modules/TM_RISK_SMOKING/en/TP-06.md",
+      "quote": "**Recovery considerations:** - Extended healing periods are common - More frequent follow-up is typically recommended - Individual outcomes vary significantly",
+      "problem": "Vague language ('extended healing periods are common', 'individual outcomes vary significantly') without specific information about what this means for James's timeline or what to expect.",
+      "severity": "warning",
+      "suggested_fix": "Be specific: 'Smoking may extend healing by 1-2 weeks per phase. More frequent follow-up appointments (every 2-3 weeks vs. monthly) are typically recommended. Your dentist will monitor healing closely and adjust timeline as needed.'"
+    },
+    {
+      "section_number": 10,
+      "source_content": "content/scenarios/S05/en/TP-06.md",
+      "quote": "- Recovery: 2–5 days per surgical phase\n- Daily life: limited, spread impact over time",
+      "problem": "Vague language ('limited', 'spread impact over time') doesn't clearly explain what limitations mean or how long they last. Doesn't address smoking's impact on recovery timeline.",
+      "severity": "warning",
+      "suggested_fix": "Be specific: 'Recovery per surgical phase: 2-5 days before returning to normal activities. Smoking may extend this by 1-2 weeks. Avoid strenuous activity and smoking for 1-2 weeks post-surgery. Full bone integration takes 3-6 months but doesn't restrict daily activities after initial recovery.'"
+    },
+    {
+      "section_number": 1,
+      "source_content": "content/static/1/en.md",
+      "quote": "Treatment outcomes cannot be predicted with certainty. Results vary between patients and depend on factors that can only be assessed through clinical examination.",
+      "problem": "Appropriate disclaimer but could be stronger. Doesn't explicitly state that implants can fail or that complications can occur.",
+      "severity": "info",
+      "suggested_fix": "Strengthen: 'Treatment outcomes cannot be predicted with certainty. Implants may fail, complications can occur, and results vary significantly between patients. Only clinical examination can assess your specific risks and likelihood of success.'"
+    },
+    {
+      "section_number": 5,
+      "source_content": "content/scenarios/S05/en/TP-06.md",
+      "quote": "**What this involves** Each missing tooth is replaced individually with an implant and crown. ... **What this involves** Multiple missing teeth in a zone are replaced with a bridge on implants.",
+      "problem": "Options presented without reference to James's specific tooth loss pattern (2-4 non-adjacent teeth in both arches). Should explain how each option applies to his specific situation.",
+      "severity": "info",
+      "suggested_fix": "Personalize: 'For your situation with 2-4 non-adjacent teeth: Option 1 would involve individual implants for each missing tooth. Option 2 would involve bridges for each zone (upper and lower).'"
+    },
+    {
+      "section_number": 2,
+      "source_content": "content/scenarios/S05/en/TP-06.md",
+      "quote": "You're missing several teeth in different areas of your mouth, a situation that affects how you chew and may influence how you feel about your smile.",
+      "problem": "Patient name (James) not used in personalization. Should use name to increase personalization and engagement.",
+      "severity": "info",
+      "suggested_fix": "Begin: 'James, you're missing several teeth in different areas of your mouth...'"
+    },
+    {
+      "section_number": 3,
+      "source_content": "content/modules/TM_CTX_FIRST_TIME/en/TP-06.md",
+      "quote": "A dental professional can help you understand the implications of different approaches, but the choice of what to pursue remains yours.",
+      "problem": "Another instance of repetitive autonomy messaging. This statement appears multiple times throughout report with same message.",
+      "severity": "info",
+      "suggested_fix": "Remove. Consolidate autonomy messaging to single clear statement early in report."
+    }
+  ],
+  "content_files_to_review": [
+    "content/modules/TM_RISK_SMOKING/en/TP-06.md",
+    "content/scenarios/S05/en/TP-06.md",
+    "content/modules/TM_CTX_FIRST_TIME/en/TP-06.md",
+    "content/b_blocks/B_INTERP_STANDARD/en/TP-06.md",
+    "content/modules/TM_BUDGET_FLEXIBLE/en/TP-06.md",
+    "content/static/1/en.md"
+  ],
+  "overall_assessment": "This report is mediocre (5-6 range) with significant structural and content issues that undermine its effectiveness. The most critical problems are: severe verbosity with repetitive autonomy messaging that becomes patronizing, complete duplication of smoking section, inadequately developed critical sections (Trade-offs is only 29 words, Interpretation is 45 words), and poor personalization despite having detailed patient profile data. Clinical safety is adequate but could be stronger on complications and outcome variability. The autonomy-respecting tone is attempted but executed poorly through heavy-handed repetition rather than genuine respect. Immediate priorities: eliminate duplication, expand underdeveloped sections, reduce repetitive messaging, and meaningfully personalize content to James's specific profile and priorities.",
+  "metadata": {
+    "model_used": "claude-haiku-4-5-20251001",
+    "duration_ms": 61374,
+    "token_usage": {
+      "input_tokens": 6266,
+      "output_tokens": 6061
+    }
+  }
+}

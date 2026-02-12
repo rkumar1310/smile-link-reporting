@@ -1,0 +1,97 @@
+{
+  "description": "Patient with severe dental anxiety, needs empathic approach",
+  "intake": {
+    "session_id": "test-case-008",
+    "timestamp": "2026-01-08T07:09:41.236Z",
+    "answers": [
+      {
+        "question_id": "Q1",
+        "answer": "missing_teeth_long_term"
+      },
+      {
+        "question_id": "Q2",
+        "answer": "8"
+      },
+      {
+        "question_id": "Q3",
+        "answer": [
+          "missing_damaged"
+        ]
+      },
+      {
+        "question_id": "Q4",
+        "answer": [
+          "no_never"
+        ]
+      },
+      {
+        "question_id": "Q5",
+        "answer": "no_aesthetic_only"
+      },
+      {
+        "question_id": "Q6a",
+        "answer": "one_missing"
+      },
+      {
+        "question_id": "Q6b",
+        "answer": "side_chewing"
+      },
+      {
+        "question_id": "Q6c",
+        "answer": "intact"
+      },
+      {
+        "question_id": "Q7",
+        "answer": "natural_subtle"
+      },
+      {
+        "question_id": "Q8",
+        "answer": "very_important_natural"
+      },
+      {
+        "question_id": "Q9",
+        "answer": "30_45"
+      },
+      {
+        "question_id": "Q10",
+        "answer": "price_quality_flexible"
+      },
+      {
+        "question_id": "Q11",
+        "answer": "ai_report_first"
+      },
+      {
+        "question_id": "Q12",
+        "answer": "still_exploring"
+      },
+      {
+        "question_id": "Q13",
+        "answer": "no"
+      },
+      {
+        "question_id": "Q14",
+        "answer": "no"
+      },
+      {
+        "question_id": "Q15",
+        "answer": "good"
+      },
+      {
+        "question_id": "Q16a",
+        "answer": "no_complete"
+      },
+      {
+        "question_id": "Q17",
+        "answer": "no"
+      },
+      {
+        "question_id": "Q18",
+        "answer": "yes_severe"
+      }
+    ],
+    "metadata": {
+      "patient_name": "Lisa",
+      "previous_negative_experience": true
+    }
+  }
+}

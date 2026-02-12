@@ -307,8 +307,6 @@ export async function runPipelineWithSSE(
     const report = await service.generateReport({
       intake,
       language: "en",
-      maxFactCheckAttempts: 2,
-      factCheckThreshold: 0.7,
     });
 
     // Build the result

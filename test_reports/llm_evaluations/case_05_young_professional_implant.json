@@ -1,0 +1,172 @@
+{
+  "session_id": "test-case-005",
+  "case_id": "case_05_young_professional_implant",
+  "evaluation_timestamp": "2026-01-17T20:46:55.904Z",
+  "outcome": "BLOCK",
+  "overall_score": 4.9,
+  "dimensions": {
+    "professional_quality": {
+      "score": 5,
+      "feedback": "Writing is generally clear but suffers from verbosity, repetition, and filler phrases that dilute impact. Multiple sections contain padding that could be eliminated without loss of meaning. Sentence structure is often awkward with unnecessary qualifications."
+    },
+    "clinical_safety": {
+      "score": 6,
+      "feedback": "Disclaimer is present and adequate, but clinical safety language is inconsistent. Some sections use appropriate hedging while others make claims that are too definitive. Risk disclosure is minimal and vague. Missing specific safety warnings about implant surgery complications."
+    },
+    "tone_appropriateness": {
+      "score": 4,
+      "feedback": "Tone is inconsistent and frequently shifts from autonomy-respecting to subtly directive. Multiple sections contain language that guides toward implants or away from bridges, violating the TP-06 autonomy-respecting tone. Conversational elements feel forced and undermine clinical credibility."
+    },
+    "personalization": {
+      "score": 3,
+      "feedback": "Report is largely generic and could apply to any patient with a single missing back tooth. Patient name (Sarah) is never used. Specific patient priorities (durability-focused, premium budget, first-timer, comfort-oriented) are barely reflected. Content reads like a template with minimal customization."
+    },
+    "patient_autonomy": {
+      "score": 5,
+      "feedback": "Report attempts to respect autonomy but undermines it through subtle directive framing, comparison table bias, and 'you might choose if' language that implies certain patient types should select certain options. Autonomy statements are repetitive rather than genuinely empowering. Missing genuine exploration of patient's actual decision-making process."
+    },
+    "structure_completeness": {
+      "score": 6,
+      "feedback": "Report includes all required sections in logical order, but several sections are underdeveloped or redundant. Section 4 (Interpretation) is largely redundant with Section 2. Section 7 (Trade-offs) is too brief and vague. Section 8 (Treatment Process) lacks detail. Overall structure is sound but execution is weak."
+    }
+  },
+  "content_issues": [
+    {
+      "section_number": 2,
+      "source_content": "content/scenarios/S03/en/TP-06.md",
+      "quote": "You're missing one tooth in the back of your mouth—the chewing zone. The options available to you are described below. What you choose to do, if anything, is entirely your decision.",
+      "problem": "Generic opening that could apply to any patient; patient name (Sarah) is never used; 'if anything' suggests doing nothing is an option but this is never explored in report",
+      "severity": "warning",
+      "suggested_fix": "Personalize: 'Sarah, you're missing one tooth in the back of your mouth. You have several options to consider, and the choice is entirely yours—including the option to monitor the situation without treatment.'"
+    },
+    {
+      "section_number": 3,
+      "source_content": "content/modules/TM_CTX_FIRST_TIME/en/TP-06.md",
+      "quote": "This is your first dental treatment of this type. The information below covers what each option involves and typical experiences.",
+      "problem": "Filler sentence that states the obvious - readers already know they're reading about treatment options",
+      "severity": "info",
+      "suggested_fix": "Remove this sentence entirely. Start with: 'A missing back tooth primarily affects chewing.'"
+    },
+    {
+      "section_number": 3,
+      "source_content": "content/modules/TM_CTX_FIRST_TIME/en/TP-06.md",
+      "quote": "You may have noticed changes in how you eat, or you may have adapted without much difficulty.",
+      "problem": "Conversational filler that's too casual for clinical report and doesn't add clinical value",
+      "severity": "info",
+      "suggested_fix": "Replace with clinical statement: 'A missing back tooth can affect chewing efficiency, though some patients adapt without difficulty.'"
+    },
+    {
+      "section_number": 3,
+      "source_content": "content/modules/TM_CTX_FIRST_TIME/en/TP-06.md",
+      "quote": "Some people want to address it promptly; others prefer to wait and see. There's no objectively correct timeline.",
+      "problem": "Opinion statement ('no objectively correct timeline') undermines clinical authority and is imprecise",
+      "severity": "warning",
+      "suggested_fix": "Replace with: 'Treatment timing depends on your priorities and comfort level. Your dentist can discuss how delaying treatment may affect bone health and neighboring teeth.'"
+    },
+    {
+      "section_number": 4,
+      "source_content": "content/b_blocks/B_INTERP_STANDARD/en/TP-06.md",
+      "quote": "A dentist would evaluate whether your situation fits common treatment patterns. Only clinical examination determines specific recommendations. Your priorities help identify options that align with what matters to you. A consultation allows you to explore options and decide what direction feels right.",
+      "problem": "Entire section is redundant with Section 2 and adds no new information; vague language ('fits common treatment patterns', 'feels right') lacks clinical precision",
+      "severity": "warning",
+      "suggested_fix": "Remove Section 4 entirely. If clinical interpretation is needed, merge into Section 3 with specific clinical criteria."
+    },
+    {
+      "section_number": 5,
+      "source_content": "content/scenarios/S03/en/TP-06.md",
+      "quote": "You might choose this if... You prefer a long-term, fixed solution and are comfortable with the process involved.",
+      "problem": "Directive framing that implies certain patient types should choose implants; violates autonomy-respecting tone",
+      "severity": "warning",
+      "suggested_fix": "Replace with: 'Some patients prioritize long-term durability and are comfortable with surgical procedures. Others prefer faster, non-surgical approaches.'"
+    },
+    {
+      "section_number": 6,
+      "source_content": "content/b_blocks/B_COMPARE_IMPLANT_VS_BRIDGE/en/TP-06.md",
+      "quote": "Implants may suit you if: Your adjacent teeth are healthy. You have adequate bone. Long-term durability is a priority. Bridges may suit you if: Adjacent teeth already need work. You prefer to avoid surgery. Faster completion matters.",
+      "problem": "Subtle bias toward implants - framing healthy teeth as implant candidates and bridges as fallback option; directive language violates autonomy tone",
+      "severity": "critical",
+      "suggested_fix": "Revise to neutral framing: 'Factors to consider for implants: surgical approach, healing time, long-term durability, bone preservation. Factors to consider for bridges: non-surgical approach, faster completion, reliance on adjacent teeth, potential future replacement.'"
+    },
+    {
+      "section_number": 6,
+      "source_content": "content/b_blocks/B_COMPARE_IMPLANT_VS_BRIDGE/en/TP-06.md",
+      "quote": "Typical lifespan: 15-25+ years",
+      "problem": "Stated as fact without hedging; implants can fail and this range is not guaranteed; lacks mention of failure rates",
+      "severity": "critical",
+      "suggested_fix": "Revise to: 'Typical lifespan if successful: 15-25+ years; however, some implants fail within 5 years and require revision or removal. Discuss implant success rates with your dentist.'"
+    },
+    {
+      "section_number": 7,
+      "source_content": "content/scenarios/S03/en/TP-06.md",
+      "quote": "Both options are designed to restore comfortable chewing, though individual outcomes vary. The difference lies in permanence, process, and how they interact with the rest of your mouth.",
+      "problem": "Vague and too brief (28 words); 'how they interact with the rest of your mouth' is unclear and uninformative",
+      "severity": "warning",
+      "suggested_fix": "Expand to: 'Implants preserve bone and are permanent, but require surgery and healing. Bridges are faster and non-surgical, but may affect adjacent teeth over time and typically need replacement after 10-15 years. Both restore chewing function, but the experience and long-term impact differ significantly.'"
+    },
+    {
+      "section_number": 8,
+      "source_content": "content/scenarios/S03/en/TP-06.md",
+      "quote": "Implant + crown: 3–7 months. Bridge: typically a few weeks. You choose the pace that works for your situation.",
+      "problem": "Too brief; lacks description of actual treatment steps; 'You choose the pace' is repetitive autonomy messaging",
+      "severity": "warning",
+      "suggested_fix": "Expand: 'Implant timeline: extraction (if needed) → bone assessment → implant placement → 3-6 month healing → crown placement. Bridge timeline: tooth preparation → impression → temporary bridge → permanent bridge placement (typically 2-4 weeks). Your dentist can discuss which timeline fits your situation.'"
+    },
+    {
+      "section_number": 9,
+      "source_content": "content/modules/TM_BUDGET_PREMIUM/en/TP-06.md",
+      "quote": "A premium approach often means access to the best available solutions, with materials and techniques that can maximize both function and appearance.",
+      "problem": "Circular reasoning and marketing language; doesn't explain what 'premium' means or how it applies to this patient's choices",
+      "severity": "warning",
+      "suggested_fix": "Replace with: 'Premium treatment typically uses advanced materials and techniques. For implants, this might include computer-guided placement or premium crown materials. For bridges, premium materials offer enhanced durability and aesthetics. Your dentist can discuss premium options for each choice.'"
+    },
+    {
+      "section_number": 9,
+      "source_content": "content/modules/TM_BUDGET_PREMIUM/en/TP-06.md",
+      "quote": "Costs vary by practice, location, and case complexity. These ranges are illustrative: Implant with crown: approximately €2,200 – €2,500. Bridge: approximately €2,100 – €2,700.",
+      "problem": "Cost ranges lack context about what's included/excluded; no mention that actual costs may vary significantly; doesn't address that bone grafting, extraction, or revision could increase costs substantially",
+      "severity": "warning",
+      "suggested_fix": "Revise to: 'Costs vary significantly by practice, location, and case complexity. These ranges are approximate and may not include: tooth extraction, bone grafting (if needed), or revision procedures. Implant with crown: approximately €2,200–€2,500. Bridge: approximately €2,100–€2,700. Request itemized quotes from your dentist.'"
+    },
+    {
+      "section_number": 10,
+      "source_content": "content/scenarios/S03/en/TP-06.md",
+      "quote": "Implant with crown: Recovery time: typically 2–5 days (varies by individual). Possible impact: mild discomfort. Daily functioning: gradual return to normal. Bridge: Recovery time: minimal to none. Possible impact: brief adjustment. Daily functioning: no interruption.",
+      "problem": "Dangerously minimal risk disclosure; only mentions 'mild discomfort' without discussing serious implant complications (infection, nerve damage, bone loss, implant failure); understates bridge risks",
+      "severity": "critical",
+      "suggested_fix": "Expand to: 'Implant: Recovery typically 2-5 days, but full osseointegration takes 3-6 months. Possible complications: infection, nerve damage, bone loss, implant failure (requiring removal/revision). Some patients experience prolonged swelling or pain. Bridge: Minimal recovery, but adjustment period may involve sensitivity or bite issues. Discuss specific risks with your dentist based on your health history.'"
+    },
+    {
+      "section_number": 11,
+      "source_content": "content/static/11/en.md",
+      "quote": "Options to consider: Review this report. Prepare questions for your dental consultation. Schedule an appointment when ready. Request additional information on specific topics.",
+      "problem": "Prescriptive list that doesn't acknowledge patient may choose not to proceed; doesn't include 'do nothing' as legitimate option despite Section 2 mentioning it",
+      "severity": "warning",
+      "suggested_fix": "Revise to: 'Your next steps depend on your decision: If you want to explore treatment, review this report and prepare questions for your dentist. If you prefer to monitor the situation without treatment, discuss this option with your dentist. If you need more information before deciding, request specific topics to explore.'"
+    },
+    {
+      "section_number": 2,
+      "source_content": "content/scenarios/S03/en/TP-06.md",
+      "quote": "What you choose to do, if anything, is entirely your decision.",
+      "problem": "Autonomy statement is repeated multiple times throughout report (Sections 2, 4, 8) - repetition weakens impact and feels performative rather than genuine",
+      "severity": "info",
+      "suggested_fix": "Use autonomy statement once in opening section only. Remove repetitions from Sections 4 and 8 to strengthen genuine autonomy messaging."
+    }
+  ],
+  "content_files_to_review": [
+    "content/scenarios/S03/en/TP-06.md",
+    "content/modules/TM_CTX_FIRST_TIME/en/TP-06.md",
+    "content/b_blocks/B_INTERP_STANDARD/en/TP-06.md",
+    "content/b_blocks/B_COMPARE_IMPLANT_VS_BRIDGE/en/TP-06.md",
+    "content/modules/TM_BUDGET_PREMIUM/en/TP-06.md",
+    "content/static/11/en.md"
+  ],
+  "overall_assessment": "This report is mediocre and requires significant revision. While it includes required sections and attempts an autonomy-respecting tone, it suffers from verbosity, redundancy, subtle directive bias, and dangerously minimal risk disclosure. Section 4 is redundant and should be removed. Clinical safety language is weak, particularly regarding implant complications and failure rates. The report is generic and barely personalized to Sarah's specific priorities (durability, premium, first-timer, comfort). Multiple sections contain filler phrases and repetitive autonomy statements that undermine credibility. Section 6's comparison table subtly favors implants through framing bias. Sections 7, 8, and 10 are too brief and lack necessary detail. The report needs substantial tightening, personalization, and safety enhancement before it meets professional standards.",
+  "metadata": {
+    "model_used": "claude-haiku-4-5-20251001",
+    "duration_ms": 58817,
+    "token_usage": {
+      "input_tokens": 6381,
+      "output_tokens": 5805
+    }
+  }
+}

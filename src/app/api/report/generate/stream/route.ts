@@ -15,6 +15,7 @@ import { createReportGenerationService } from "@/lib/services/ReportGenerationSe
 import { runPipelineWithSSE as runPipelineAdapterWithSSE } from "@/lib/services/PipelineAdapter";
 // New real pipeline implementation
 import { runPipelineWithSSE } from "@/lib/pipeline";
+import { MissingContentError } from "@/lib/errors/MissingContentError";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -483,17 +484,31 @@ export async function POST(request: NextRequest) {
             });
           }
         } catch (error) {
-          const errorMessage = error instanceof Error ? error.message : "Unknown error";
-          await sendEvent({
-            phase: "error",
-            message: errorMessage,
-            timestamp: new Date().toISOString(),
-            data: {
-              error: errorMessage,
-              recoverable: false,
-              phase: "analyzing" as ReportPhase,
-            },
-          });
+          // Handle MissingContentError specially
+          if (error instanceof MissingContentError) {
+            await sendEvent({
+              phase: "error",
+              message: error.message,
+              timestamp: new Date().toISOString(),
+              data: {
+                error: error.message,
+                recoverable: false,
+                phase: "content-check" as ReportPhase,
+              },
+            });
+          } else {
+            const errorMessage = error instanceof Error ? error.message : "Unknown error";
+            await sendEvent({
+              phase: "error",
+              message: errorMessage,
+              timestamp: new Date().toISOString(),
+              data: {
+                error: errorMessage,
+                recoverable: false,
+                phase: "analyzing" as ReportPhase,
+              },
+            });
+          }
         } finally {
           await writer.close();
         }
