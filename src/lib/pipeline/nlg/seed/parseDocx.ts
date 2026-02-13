@@ -222,7 +222,7 @@ function parseScenarioSections(text: string) {
       // Use type assertion for dynamic property assignment
       const sectionKey = key as keyof typeof sections;
       if (sectionKey !== 'options') {
-        (sections as Record<string, string | undefined>)[sectionKey] = match[1].trim();
+        (sections as unknown as Record<string, string | undefined>)[sectionKey] = match[1].trim();
       }
     }
   }

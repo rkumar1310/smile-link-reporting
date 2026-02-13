@@ -4,7 +4,12 @@
  */
 
 import { getDb, COLLECTIONS } from "@/lib/db/mongodb";
-import type { Filter } from "mongodb";
+import type { Filter, ObjectId, Document as MongoDocument } from "mongodb";
+
+/** Scenarios use string _ids (e.g. "S01"), not ObjectIds. This helper satisfies the MongoDB driver types. */
+function idFilter(id: string) {
+  return { _id: id as unknown as ObjectId };
+}
 import {
   type Scenario,
   type ScenarioCreateInput,
@@ -20,7 +25,7 @@ export class ScenarioService {
    */
   async getById(scenarioId: string): Promise<Scenario | null> {
     const db = await getDb();
-    const doc = await db.collection(COLLECTIONS.SCENARIOS).findOne({ _id: scenarioId });
+    const doc = await db.collection(COLLECTIONS.SCENARIOS).findOne(idFilter(scenarioId));
 
     if (!doc) return null;
 
@@ -60,7 +65,7 @@ export class ScenarioService {
     const db = await getDb();
     const docs = await db
       .collection(COLLECTIONS.SCENARIOS)
-      .find(filter as Filter<Document>)
+      .find(filter as Filter<MongoDocument>)
       .sort({ priority: 1 })
       .toArray();
 
@@ -146,7 +151,7 @@ export class ScenarioService {
     // Validate
     const parsed = ScenarioSchema.parse(doc);
 
-    await db.collection(COLLECTIONS.SCENARIOS).insertOne(parsed as unknown as Document);
+    await db.collection(COLLECTIONS.SCENARIOS).insertOne(parsed as unknown as MongoDocument);
 
     return parsed;
   }
@@ -163,7 +168,7 @@ export class ScenarioService {
     };
 
     const result = await db.collection(COLLECTIONS.SCENARIOS).findOneAndUpdate(
-      { _id: scenarioId },
+      idFilter(scenarioId),
       { $set: updateDoc },
       { returnDocument: "after" }
     );
@@ -190,8 +195,8 @@ export class ScenarioService {
     const parsed = ScenarioSchema.parse(doc);
 
     await db.collection(COLLECTIONS.SCENARIOS).updateOne(
-      { _id: parsed._id },
-      { $set: parsed as unknown as Document },
+      idFilter(parsed._id),
+      { $set: parsed as unknown as MongoDocument },
       { upsert: true }
     );
 
@@ -203,7 +208,7 @@ export class ScenarioService {
    */
   async delete(scenarioId: string): Promise<boolean> {
     const db = await getDb();
-    const result = await db.collection(COLLECTIONS.SCENARIOS).deleteOne({ _id: scenarioId });
+    const result = await db.collection(COLLECTIONS.SCENARIOS).deleteOne(idFilter(scenarioId));
     return result.deletedCount > 0;
   }
 

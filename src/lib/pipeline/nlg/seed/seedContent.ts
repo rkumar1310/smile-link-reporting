@@ -118,7 +118,7 @@ Title: ${title}`;
       },
     ],
     temperature: 0.2,
-    maxTokens: 4096,
+    maxOutputTokens: 4096,
   });
 
   return {
@@ -218,7 +218,7 @@ async function upsertContent(db: Db, doc: ContentDocument): Promise<'inserted' |
           updatedBy: doc.updatedBy,
         },
         $push: {
-          versionHistory: doc.versionHistory[0],
+          versionHistory: doc.versionHistory[0] as never,
         },
       }
     );

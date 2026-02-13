@@ -26,7 +26,7 @@ export async function GET(
 
     const scenario = await db
       .collection(COLLECTIONS.SCENARIOS)
-      .findOne({ _id: id });
+      .findOne({ _id: id as unknown as import("mongodb").ObjectId });
 
     if (!scenario) {
       return NextResponse.json(
@@ -61,7 +61,7 @@ export async function PUT(
     // Check if scenario exists
     const existing = await db
       .collection(COLLECTIONS.SCENARIOS)
-      .findOne({ _id: id });
+      .findOne({ _id: id as unknown as import("mongodb").ObjectId });
 
     if (!existing) {
       return NextResponse.json(
@@ -85,7 +85,7 @@ export async function PUT(
 
     const result = await db
       .collection(COLLECTIONS.SCENARIOS)
-      .updateOne({ _id: id }, { $set: allowedUpdates });
+      .updateOne({ _id: id as unknown as import("mongodb").ObjectId }, { $set: allowedUpdates });
 
     if (result.matchedCount === 0) {
       return NextResponse.json(
@@ -97,7 +97,7 @@ export async function PUT(
     // Fetch and return the updated scenario
     const updated = await db
       .collection(COLLECTIONS.SCENARIOS)
-      .findOne({ _id: id });
+      .findOne({ _id: id as unknown as import("mongodb").ObjectId });
 
     return NextResponse.json({
       success: true,

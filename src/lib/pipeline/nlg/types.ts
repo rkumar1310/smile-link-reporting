@@ -172,39 +172,6 @@ export interface DriverTextMapping {
 }
 
 // =============================================================================
-// TREATMENT OPTIONS (FLAGGED - NEEDS DATA)
-// =============================================================================
-
-/**
- * @FLAG: MISSING_DATA
- * Treatment option structured data does not exist in current system.
- * This interface defines what's needed but data must be created.
- */
-export interface TreatmentOption {
-  id: string;
-  name: { en: string; nl: string };
-  shortDescription: { en: string; nl: string };
-  indication: { en: string; nl: string };
-  complexity: "low" | "medium" | "high";
-  advantages: { en: string[]; nl: string[] };
-  disadvantages: { en: string[]; nl: string[] };
-  resultDescription: { en: string; nl: string };
-  comfortExperience: { en: string; nl: string };
-  aestheticResult: { en: string; nl: string };
-  duration: { en: string; nl: string };
-  phases: { en: string[]; nl: string[] };
-  recoveryDuration: { en: string; nl: string };
-  recoveryDiscomfort: { en: string; nl: string };
-  alarmSignal: { en: string; nl: string };
-  generalRisk: { en: string; nl: string };
-  // Eligibility criteria
-  eligibleMouthSituations: string[];
-  contraindications: string[];
-  // Priority for recommendation
-  basePriority: number;
-}
-
-// =============================================================================
 // PRICING DATA (FLAGGED - NEEDS DATA)
 // =============================================================================
 
