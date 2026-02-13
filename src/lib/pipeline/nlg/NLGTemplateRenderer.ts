@@ -383,6 +383,8 @@ export class NLGTemplateRenderer {
           variable: variableName as NLGVariable,
           severity: "info"
         });
+        // Return raw {VARIABLE_NAME} so ReportDisplay's preprocessor picks it up and styles it red
+        return `{${variableName}}`;
       }
 
       if (resolved.status === "missing_data") {
@@ -392,6 +394,12 @@ export class NLGTemplateRenderer {
           variable: variableName as NLGVariable,
           severity: "warning"
         });
+        return `{${variableName}}`;
+      }
+
+      // Wrap [... required/vereist] fallback placeholders so ReportDisplay styles them red
+      if (/^\[.+(required|vereist)\]$/i.test(resolved.value)) {
+        return `{${variableName}}`;
       }
 
       return resolved.value;
