@@ -41,104 +41,6 @@ export {
   WORKFLOW_TRANSITIONS,
 } from "./content";
 
-// Source document types
-export type {
-  ScenarioSection,
-  ParsedScenario,
-  SourceSection,
-  DocumentType,
-  SourceDocument,
-  SourceDocumentListResponse,
-  ParseSourceRequest,
-  ParseSourceResponse,
-  SearchSourcesRequest,
-  SearchSourceResult,
-  SearchSourcesResponse,
-} from "./source";
-
-export {
-  DocumentTypes,
-  ScenarioSectionSchema,
-  ParsedScenarioSchema,
-  SourceSectionSchema,
-  SourceDocumentSchema,
-} from "./source";
-
-// Fact-check types
-export type {
-  ClaimVerdict,
-  OverallVerdict,
-  MatchType,
-  SourceMatch,
-  ClaimLocation,
-  ExtractedClaim,
-  FactCheckRecord,
-  StartFactCheckRequest,
-  StartFactCheckResponse,
-  FactCheckResultResponse,
-  SubmitHumanReviewRequest,
-  SubmitHumanReviewResponse,
-  ClaimExtractionResult,
-  VerificationResult,
-  FactCheckResult,
-} from "./factcheck";
-
-export {
-  ClaimVerdicts,
-  OverallVerdicts,
-  MatchTypes,
-  SourceMatchSchema,
-  ExtractedClaimSchema,
-  FactCheckRecordSchema,
-} from "./factcheck";
-
-// Generation types
-export type {
-  JobStatus,
-  GenerationParameters,
-  GeneratedVariant,
-  JobProgress,
-  GenerationJob,
-  StartGenerationRequest,
-  StartGenerationResponse,
-  GenerationJobResponse,
-  ListGenerationJobsQuery,
-  ListGenerationJobsResponse,
-  AcceptGenerationRequest,
-  AcceptGenerationResponse,
-  GenerationConfig,
-  GenerationResult,
-} from "./generation";
-
-export {
-  JobStatuses,
-  GenerationParametersSchema,
-  GeneratedVariantSchema,
-  GenerationJobSchema,
-} from "./generation";
-
-// Embedding and vector search types
-export type {
-  EmbeddingChunk,
-  QdrantPointPayload,
-  VectorSyncStatus,
-  VectorSyncResult,
-  EmbedSourcesRequest,
-  EmbedSourcesResponse,
-  SemanticSearchRequest,
-  SemanticSearchResult,
-  SemanticSearchResponse,
-} from "./embedding";
-
-export {
-  VectorSyncStatuses,
-  EmbeddingChunkSchema,
-  VectorSyncResultSchema,
-  EmbedSourcesRequestSchema,
-  SemanticSearchRequestSchema,
-  SemanticSearchResultSchema,
-} from "./embedding";
-
 // Report generation types
 export type {
   IntakeAnswer,
@@ -160,12 +62,19 @@ export type {
   AnalyzingPhaseEvent,
   TonePhaseEvent,
   ContentCheckPhaseEvent,
-  GeneratingPhaseEvent,
   ComposingPhaseEvent,
   CompletePhaseEvent,
   ErrorPhaseEvent,
   GenerateReportRequest,
   ReportGenerationUIState,
+  // Audit types
+  ReportAuditData,
+  AuditDriverValue,
+  AuditDriverConflict,
+  AuditScenarioScore,
+  AuditContentSelection,
+  AuditToneTrigger,
+  AuditTraceEvent,
 } from "./report-generation";
 
 export {
@@ -175,21 +84,3 @@ export {
   GenerateReportRequestSchema,
 } from "./report-generation";
 
-// Derivative content types
-export type {
-  ClaimSource,
-  DerivativeFactCheckResult,
-  DerivativeContent,
-  SourceBlockContent,
-  DerivativeGenerationConfig,
-  DerivativeGenerationResult,
-  GetOrCreateDerivativeOptions,
-} from "./derivative";
-
-export {
-  ClaimSourceSchema,
-  DerivativeFactCheckResultSchema,
-  DerivativeContentSchema,
-  generateDerivativeId,
-  isDerivativeValid,
-} from "./derivative";

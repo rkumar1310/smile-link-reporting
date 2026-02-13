@@ -7,10 +7,11 @@
 export { ReportPipeline, createReportPipeline, type PipelineProgressEvent, type PipelineOptions } from "./ReportPipeline";
 
 // Pipeline runner with SSE
-export { runPipelineWithSSE, mapPipelineEventToSSE, transformReport, type PipelineSSEOptions, type PipelineSSEResult } from "./runPipeline";
+export { runPipelineWithSSE, mapPipelineEventToSSE, transformReport, transformAudit, type PipelineSSEOptions, type PipelineSSEResult } from "./runPipeline";
 
-// Content store
-export { DynamicContentStore, createDynamicContentStore } from "./content/DynamicContentStore";
+// NLG system
+export { generateNLGReport } from "./nlg";
+export type { NLGInput, NLGOutput } from "./nlg";
 
 // Types
 export * from "./types";
@@ -22,14 +23,9 @@ export { ScenarioScorer, scenarioScorer } from "./engines/ScenarioScorer";
 export { ToneSelector, toneSelector } from "./engines/ToneSelector";
 export { ContentSelector, contentSelector } from "./engines/ContentSelector";
 
-// Composition
+// Composition (kept for reference, no longer used by pipeline)
 export { ReportComposer, reportComposer, type ContentStore } from "./composition/ReportComposer";
 export { PlaceholderResolver, placeholderResolver, type PlaceholderContext } from "./composition/PlaceholderResolver";
 
 // Validation
 export { IntakeValidator, intakeValidator } from "./validation/IntakeValidator";
-
-// QA
-export { QAGate, qaGate, type QAGateResult, type QAProgressEvent } from "./qa/QAGate";
-export { SemanticLeakageDetector, semanticLeakageDetector, type DetectionResult } from "./qa/SemanticLeakageDetector";
-export { CompositionValidator, compositionValidator } from "./qa/CompositionValidator";

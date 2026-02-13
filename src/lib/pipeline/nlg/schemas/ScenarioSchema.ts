@@ -74,6 +74,14 @@ export const ScenarioNLGVariablesSchema = z.object({
 
   // Block 9 - Next steps
   RECOMMENDED_NEXT_STEPS: BilingualTextSchema.optional(),
+
+  // Recommendation & direction variables
+  RECOMMENDED_DIRECTION: BilingualTextSchema.optional(),
+  SELECTED_OPTION: BilingualTextSchema.optional(),
+  TAG_NUANCE_DIRECTION: BilingualTextSchema.optional(),
+  SITUATION_SPECIFIC_CONSIDERATIONS: BilingualTextSchema.optional(),
+  OPTIONAL_ADDITIONAL_OPTIONS: BilingualTextSchema.optional(),
+  OPTIONAL_ADDITIONAL_OPTION_PRO_CON_BLOCKS: BilingualTextSchema.optional(),
 });
 
 export type ScenarioNLGVariables = z.infer<typeof ScenarioNLGVariablesSchema>;
@@ -117,6 +125,13 @@ export const TreatmentOptionSchema = z.object({
     days: z.number(),
     description: BilingualTextSchema.optional(),
   }).optional(),
+
+  // NLG variable fields (resolve to template placeholders)
+  complexity: BilingualTextSchema.optional(),
+  result_description: BilingualTextSchema.optional(),
+  comfort_experience: BilingualTextSchema.optional(),
+  aesthetic_result: BilingualTextSchema.optional(),
+  phases: z.array(BilingualTextSchema).optional(),
 });
 
 export type TreatmentOption = z.infer<typeof TreatmentOptionSchema>;
@@ -241,6 +256,9 @@ export function flattenScenarioVariables(
     if (option.considerations?.length) {
       result[`OPTION_${n}_CONSIDERATIONS`] = option.considerations.map(c => c[language]).join("\n- ");
     }
+    if (option.complexity) {
+      result[`OPTION_${n}_COMPLEXITY`] = option.complexity[language];
+    }
     if (option.pricing) {
       result[`OPTION_${n}_PRICE_MIN`] = option.pricing.min.toString();
       result[`OPTION_${n}_PRICE_MAX`] = option.pricing.max.toString();
@@ -249,6 +267,25 @@ export function flattenScenarioVariables(
       result[`OPTION_${n}_DURATION`] = `${option.duration.min_months}-${option.duration.max_months} months`;
     }
   });
+
+  // Primary option fields (index 0) for global variables
+  const primaryOption = scenario.treatment_options[0];
+  if (primaryOption) {
+    if (primaryOption.result_description) {
+      result["RESULT_DESCRIPTION"] = primaryOption.result_description[language];
+    }
+    if (primaryOption.comfort_experience) {
+      result["COMFORT_EXPERIENCE"] = primaryOption.comfort_experience[language];
+    }
+    if (primaryOption.aesthetic_result) {
+      result["AESTHETIC_RESULT"] = primaryOption.aesthetic_result[language];
+    }
+    if (primaryOption.phases?.length) {
+      primaryOption.phases.forEach((phase, i) => {
+        result[`PHASE_${i + 1}`] = phase[language];
+      });
+    }
+  }
 
   // Aggregate pricing
   if (scenario.pricing) {

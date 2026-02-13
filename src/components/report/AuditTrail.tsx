@@ -1,110 +1,28 @@
 "use client";
 
 import { useState } from "react";
-
-/**
- * Driver State from the pipeline
- */
-interface DriverState {
-  session_id: string;
-  drivers: {
-    LIFESTYLE?: string;
-    MEDICAL?: string;
-    BUDGET?: string;
-    TIMELINE?: string;
-    ANXIETY?: string;
-    MOTIVATION?: string;
-    [key: string]: string | undefined;
-  };
-  conflicts: Array<{
-    driver: string;
-    conflictWith: string;
-    resolution: string;
-  }>;
-  fallbacks_applied: string[];
-}
-
-/**
- * Scenario Match Result from the pipeline
- */
-interface ScenarioMatchResult {
-  session_id: string;
-  matched_scenario: string;
-  confidence: "HIGH" | "MEDIUM" | "LOW" | "FALLBACK";
-  score: number;
-  all_scores: Array<{
-    scenario_id: string;
-    score: number;
-    matched_criteria: string[];
-  }>;
-  fallback_used: boolean;
-  fallback_reason?: string;
-}
-
-/**
- * Content Selection from the pipeline
- */
-interface ContentSelection {
-  slot: string;
-  content_id: string;
-  reason: string;
-  priority: number;
-}
-
-/**
- * Tone Selection Result from the pipeline
- */
-interface ToneSelectionResult {
-  selected_tone: string;
-  reason: string;
-  evaluated_triggers: Array<{
-    trigger: string;
-    matched: boolean;
-    tone: string;
-  }>;
-}
-
-/**
- * Decision Trace Event
- */
-interface DecisionTraceEvent {
-  timestamp: string;
-  stage: string;
-  action: string;
-  input: unknown;
-  output: unknown;
-  duration_ms: number;
-}
-
-/**
- * Full Audit Record
- */
-interface AuditRecord {
-  session_id: string;
-  created_at: string;
-  driver_state: DriverState;
-  scenario_match: ScenarioMatchResult;
-  content_selections: ContentSelection[];
-  tone_selection: ToneSelectionResult;
-  validation_result: {
-    valid: boolean;
-    errors: string[];
-    warnings: string[];
-  };
-  decision_trace: {
-    session_id: string;
-    started_at: string;
-    completed_at: string;
-    events: DecisionTraceEvent[];
-    final_outcome: string;
-  };
-  final_outcome: string;
-  report_delivered: boolean;
-}
+import type {
+  ReportAuditData,
+  AuditDriverValue,
+  AuditScenarioScore,
+  AuditContentSelection,
+  AuditToneTrigger,
+  AuditTraceEvent,
+  AuditDriverConflict,
+} from "@/lib/types/types/report-generation";
 
 interface AuditTrailProps {
-  audit: AuditRecord;
+  audit: ReportAuditData;
 }
+
+const TONE_NAMES: Record<string, string> = {
+  "TP-01": "Neutral-Informative",
+  "TP-02": "Empathic-Neutral",
+  "TP-03": "Reflective-Contextual",
+  "TP-04": "Stability-Frame",
+  "TP-05": "Expectation-Calibration",
+  "TP-06": "Autonomy-Respecting",
+};
 
 export function AuditTrail({ audit }: AuditTrailProps) {
   const [activeTab, setActiveTab] = useState<"summary" | "drivers" | "scenario" | "content" | "trace">("summary");
@@ -115,7 +33,7 @@ export function AuditTrail({ audit }: AuditTrailProps) {
       <div className="border-b border-gray-200 dark:border-gray-700 p-4">
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-            Audit Trail
+            Pipeline Audit
           </h3>
           <span className={`px-2 py-1 text-xs font-medium rounded ${
             audit.final_outcome === "PASS" ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300" :
@@ -126,7 +44,7 @@ export function AuditTrail({ audit }: AuditTrailProps) {
           </span>
         </div>
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-          Session: {audit.session_id} | Created: {new Date(audit.created_at).toLocaleString()}
+          Session: {audit.session_id} | {new Date(audit.created_at).toLocaleString()}
         </p>
       </div>
 
@@ -134,15 +52,15 @@ export function AuditTrail({ audit }: AuditTrailProps) {
       <div className="border-b border-gray-200 dark:border-gray-700 px-4">
         <nav className="flex gap-4 -mb-px">
           {[
-            { id: "summary", label: "Summary" },
-            { id: "drivers", label: "Drivers" },
-            { id: "scenario", label: "Scenario" },
-            { id: "content", label: "Content" },
-            { id: "trace", label: "Trace" }
+            { id: "summary" as const, label: "Summary" },
+            { id: "drivers" as const, label: "Drivers" },
+            { id: "scenario" as const, label: "Scenario" },
+            { id: "content" as const, label: "Content" },
+            { id: "trace" as const, label: "Trace" },
           ].map(tab => (
             <button
               key={tab.id}
-              onClick={() => setActiveTab(tab.id as typeof activeTab)}
+              onClick={() => setActiveTab(tab.id)}
               className={`py-3 text-sm font-medium border-b-2 transition-colors ${
                 activeTab === tab.id
                   ? "border-blue-500 text-blue-600 dark:text-blue-400"
@@ -158,105 +76,154 @@ export function AuditTrail({ audit }: AuditTrailProps) {
       {/* Tab content */}
       <div className="p-4">
         {activeTab === "summary" && <SummaryTab audit={audit} />}
-        {activeTab === "drivers" && <DriversTab driverState={audit.driver_state} />}
-        {activeTab === "scenario" && <ScenarioTab scenarioMatch={audit.scenario_match} />}
-        {activeTab === "content" && <ContentTab selections={audit.content_selections} toneSelection={audit.tone_selection} />}
-        {activeTab === "trace" && <TraceTab trace={audit.decision_trace} />}
+        {activeTab === "drivers" && (
+          <DriversTab
+            drivers={audit.drivers}
+            conflicts={audit.driver_conflicts}
+            fallbacks={audit.fallbacks_applied}
+          />
+        )}
+        {activeTab === "scenario" && (
+          <ScenarioTab
+            matched={audit.matched_scenario}
+            confidence={audit.scenario_confidence}
+            score={audit.scenario_score}
+            allScores={audit.all_scenario_scores}
+            fallbackUsed={audit.fallback_used}
+            fallbackReason={audit.fallback_reason}
+          />
+        )}
+        {activeTab === "content" && (
+          <ContentTab
+            selections={audit.content_selections}
+            tone={audit.tone}
+            toneReason={audit.tone_reason}
+            toneTriggers={audit.tone_triggers}
+          />
+        )}
+        {activeTab === "trace" && (
+          <TraceTab
+            events={audit.trace_events}
+            startedAt={audit.trace_started_at}
+            completedAt={audit.trace_completed_at}
+          />
+        )}
       </div>
     </div>
   );
 }
 
-function SummaryTab({ audit }: { audit: AuditRecord }) {
+function SummaryTab({ audit }: { audit: ReportAuditData }) {
+  const driverCount = Object.keys(audit.drivers).length;
+  const activeSelections = audit.content_selections.filter(s => !s.suppressed);
+
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3">
-          <div className="text-xs text-gray-500 dark:text-gray-400">Scenario</div>
-          <div className="text-sm font-medium text-gray-900 dark:text-white mt-1">
-            {audit.scenario_match.matched_scenario}
-          </div>
-        </div>
-        <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3">
-          <div className="text-xs text-gray-500 dark:text-gray-400">Confidence</div>
-          <div className={`text-sm font-medium mt-1 ${
-            audit.scenario_match.confidence === "HIGH" ? "text-green-600 dark:text-green-400" :
-            audit.scenario_match.confidence === "MEDIUM" ? "text-amber-600 dark:text-amber-400" :
+        <SummaryCard label="Scenario" value={audit.matched_scenario} />
+        <SummaryCard
+          label="Confidence"
+          value={audit.scenario_confidence}
+          colorClass={
+            audit.scenario_confidence === "HIGH" ? "text-green-600 dark:text-green-400" :
+            audit.scenario_confidence === "MEDIUM" ? "text-amber-600 dark:text-amber-400" :
             "text-red-600 dark:text-red-400"
-          }`}>
-            {audit.scenario_match.confidence}
-          </div>
-        </div>
-        <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3">
-          <div className="text-xs text-gray-500 dark:text-gray-400">Tone</div>
-          <div className="text-sm font-medium text-gray-900 dark:text-white mt-1">
-            {audit.tone_selection.selected_tone}
-          </div>
-        </div>
-        <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3">
-          <div className="text-xs text-gray-500 dark:text-gray-400">Content Items</div>
-          <div className="text-sm font-medium text-gray-900 dark:text-white mt-1">
-            {audit.content_selections.length}
-          </div>
-        </div>
+          }
+        />
+        <SummaryCard label="Tone" value={TONE_NAMES[audit.tone] ?? audit.tone} />
+        <SummaryCard label="Score" value={`${(audit.scenario_score * 100).toFixed(0)}%`} />
       </div>
-
-      {/* Validation results */}
-      <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3">
-        <div className="text-xs text-gray-500 dark:text-gray-400 mb-2">Validation</div>
-        <div className="flex items-center gap-2">
-          <span className={`px-2 py-0.5 text-xs rounded ${
-            audit.validation_result.valid
-              ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300"
-              : "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300"
-          }`}>
-            {audit.validation_result.valid ? "Valid" : "Invalid"}
-          </span>
-          {audit.validation_result.errors.length > 0 && (
-            <span className="text-xs text-red-600 dark:text-red-400">
-              {audit.validation_result.errors.length} errors
-            </span>
-          )}
-          {audit.validation_result.warnings.length > 0 && (
-            <span className="text-xs text-amber-600 dark:text-amber-400">
-              {audit.validation_result.warnings.length} warnings
-            </span>
-          )}
-        </div>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <SummaryCard label="Drivers" value={driverCount.toString()} />
+        <SummaryCard label="Fallbacks" value={audit.fallbacks_applied.length.toString()} />
+        <SummaryCard label="Content Used" value={activeSelections.length.toString()} />
+        <SummaryCard label="Scenarios Scored" value={audit.all_scenario_scores.length.toString()} />
       </div>
     </div>
   );
 }
 
-function DriversTab({ driverState }: { driverState: DriverState }) {
-  const drivers = Object.entries(driverState.drivers).filter(([_, v]) => v !== undefined);
+function SummaryCard({ label, value, colorClass }: { label: string; value: string; colorClass?: string }) {
+  return (
+    <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3">
+      <div className="text-xs text-gray-500 dark:text-gray-400">{label}</div>
+      <div className={`text-sm font-medium mt-1 ${colorClass ?? "text-gray-900 dark:text-white"}`}>
+        {value}
+      </div>
+    </div>
+  );
+}
+
+function DriversTab({
+  drivers,
+  conflicts,
+  fallbacks,
+}: {
+  drivers: Record<string, AuditDriverValue>;
+  conflicts: AuditDriverConflict[];
+  fallbacks: string[];
+}) {
+  const driverEntries = Object.entries(drivers);
+
+  // Group by layer
+  const l1 = driverEntries.filter(([, d]) => d.layer === "L1");
+  const l2 = driverEntries.filter(([, d]) => d.layer === "L2");
+  const l3 = driverEntries.filter(([, d]) => d.layer === "L3");
 
   return (
     <div className="space-y-4">
-      {/* Driver values */}
-      <div>
-        <h4 className="text-sm font-medium text-gray-900 dark:text-white mb-2">Derived Drivers</h4>
-        <div className="grid grid-cols-2 gap-2">
-          {drivers.map(([key, value]) => (
-            <div key={key} className="bg-gray-50 dark:bg-gray-700/50 rounded px-3 py-2 flex justify-between">
-              <span className="text-xs text-gray-500 dark:text-gray-400">{key}</span>
-              <span className="text-xs font-medium text-gray-900 dark:text-white">{value}</span>
-            </div>
-          ))}
+      {[
+        { label: "L1 - Safety", drivers: l1, color: "red" },
+        { label: "L2 - Personalization", drivers: l2, color: "blue" },
+        { label: "L3 - Narrative", drivers: l3, color: "purple" },
+      ].map(group => group.drivers.length > 0 && (
+        <div key={group.label}>
+          <h4 className="text-sm font-medium text-gray-900 dark:text-white mb-2">{group.label}</h4>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+            {group.drivers.map(([key, dv]) => (
+              <div key={key} className="bg-gray-50 dark:bg-gray-700/50 rounded px-3 py-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-gray-500 dark:text-gray-400">{key}</span>
+                  <span className={`text-[10px] px-1.5 py-0.5 rounded ${
+                    dv.source === "derived"
+                      ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300"
+                      : "bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300"
+                  }`}>
+                    {dv.source}
+                  </span>
+                </div>
+                <div className="text-sm font-medium text-gray-900 dark:text-white mt-1">
+                  {dv.value}
+                </div>
+                <div className="flex items-center gap-2 mt-1">
+                  <div className="flex-1 h-1 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-blue-500 rounded-full"
+                      style={{ width: `${dv.confidence * 100}%` }}
+                    />
+                  </div>
+                  <span className="text-[10px] text-gray-400">{(dv.confidence * 100).toFixed(0)}%</span>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      ))}
 
       {/* Conflicts */}
-      {driverState.conflicts.length > 0 && (
+      {conflicts.length > 0 && (
         <div>
           <h4 className="text-sm font-medium text-amber-700 dark:text-amber-300 mb-2">
-            Conflicts Resolved
+            Conflicts Resolved ({conflicts.length})
           </h4>
           <div className="space-y-2">
-            {driverState.conflicts.map((conflict, idx) => (
+            {conflicts.map((conflict, idx) => (
               <div key={idx} className="bg-amber-50 dark:bg-amber-900/20 rounded p-2 text-xs">
-                <div className="font-medium">{conflict.driver} vs {conflict.conflictWith}</div>
-                <div className="text-amber-600 dark:text-amber-400 mt-1">{conflict.resolution}</div>
+                <div className="font-medium text-amber-900 dark:text-amber-100">{conflict.driver_id}</div>
+                <div className="text-amber-700 dark:text-amber-300 mt-1">
+                  Values: {conflict.conflicting_values.join(" vs ")} → {conflict.resolved_value}
+                </div>
+                <div className="text-amber-600 dark:text-amber-400 mt-0.5 italic">{conflict.resolution_reason}</div>
               </div>
             ))}
           </div>
@@ -264,14 +231,14 @@ function DriversTab({ driverState }: { driverState: DriverState }) {
       )}
 
       {/* Fallbacks */}
-      {driverState.fallbacks_applied.length > 0 && (
+      {fallbacks.length > 0 && (
         <div>
           <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            Fallbacks Applied
+            Fallbacks Applied ({fallbacks.length})
           </h4>
           <div className="flex flex-wrap gap-2">
-            {driverState.fallbacks_applied.map((fb, idx) => (
-              <span key={idx} className="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-xs">
+            {fallbacks.map((fb, idx) => (
+              <span key={idx} className="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-xs text-gray-700 dark:text-gray-300">
                 {fb}
               </span>
             ))}
@@ -282,29 +249,45 @@ function DriversTab({ driverState }: { driverState: DriverState }) {
   );
 }
 
-function ScenarioTab({ scenarioMatch }: { scenarioMatch: ScenarioMatchResult }) {
+function ScenarioTab({
+  matched,
+  confidence,
+  score,
+  allScores,
+  fallbackUsed,
+  fallbackReason,
+}: {
+  matched: string;
+  confidence: string;
+  score: number;
+  allScores: AuditScenarioScore[];
+  fallbackUsed: boolean;
+  fallbackReason?: string;
+}) {
+  const sorted = [...allScores].sort((a, b) => b.score - a.score);
+
   return (
     <div className="space-y-4">
-      {/* Matched scenario */}
+      {/* Matched scenario highlight */}
       <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4">
         <div className="flex items-center justify-between">
           <div>
             <div className="text-sm font-medium text-blue-900 dark:text-blue-100">
-              {scenarioMatch.matched_scenario}
+              {matched}
             </div>
             <div className="text-xs text-blue-700 dark:text-blue-300 mt-1">
-              Score: {(scenarioMatch.score * 100).toFixed(1)}% | Confidence: {scenarioMatch.confidence}
+              Score: {(score * 100).toFixed(1)}% | Confidence: {confidence}
             </div>
           </div>
-          {scenarioMatch.fallback_used && (
+          {fallbackUsed && (
             <span className="px-2 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 rounded text-xs">
               Fallback
             </span>
           )}
         </div>
-        {scenarioMatch.fallback_reason && (
+        {fallbackReason && (
           <div className="mt-2 text-xs text-blue-600 dark:text-blue-400">
-            Reason: {scenarioMatch.fallback_reason}
+            Reason: {fallbackReason}
           </div>
         )}
       </div>
@@ -312,150 +295,196 @@ function ScenarioTab({ scenarioMatch }: { scenarioMatch: ScenarioMatchResult }) 
       {/* All scores */}
       <div>
         <h4 className="text-sm font-medium text-gray-900 dark:text-white mb-2">
-          All Scenario Scores
+          All Scenario Scores ({sorted.length})
         </h4>
-        <div className="space-y-2 max-h-64 overflow-y-auto">
-          {scenarioMatch.all_scores
-            .sort((a, b) => b.score - a.score)
-            .map((score, idx) => (
-              <div
-                key={idx}
-                className={`flex items-center justify-between p-2 rounded ${
-                  score.scenario_id === scenarioMatch.matched_scenario
-                    ? "bg-blue-50 dark:bg-blue-900/20"
-                    : "bg-gray-50 dark:bg-gray-700/50"
-                }`}
-              >
-                <div>
+        <div className="space-y-2 max-h-72 overflow-y-auto">
+          {sorted.map((s) => (
+            <div
+              key={s.scenario_id}
+              className={`p-2 rounded ${
+                s.scenario_id === matched
+                  ? "bg-blue-50 dark:bg-blue-900/20 ring-1 ring-blue-300 dark:ring-blue-700"
+                  : s.excluded
+                  ? "bg-red-50/50 dark:bg-red-900/10 opacity-60"
+                  : "bg-gray-50 dark:bg-gray-700/50"
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
                   <span className="text-sm font-medium text-gray-900 dark:text-white">
-                    {score.scenario_id}
+                    {s.scenario_id}
                   </span>
-                  {score.matched_criteria.length > 0 && (
-                    <span className="ml-2 text-xs text-gray-500 dark:text-gray-400">
-                      ({score.matched_criteria.slice(0, 3).join(", ")}{score.matched_criteria.length > 3 ? "..." : ""})
+                  {s.excluded && (
+                    <span className="text-[10px] px-1.5 py-0.5 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded">
+                      excluded
                     </span>
                   )}
                 </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-20 h-1.5 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-blue-500 rounded-full"
-                      style={{ width: `${score.score * 100}%` }}
-                    />
-                  </div>
-                  <span className="text-xs text-gray-600 dark:text-gray-400 w-10 text-right">
-                    {(score.score * 100).toFixed(0)}%
-                  </span>
+                <span className="text-xs text-gray-600 dark:text-gray-400 tabular-nums">
+                  {(s.score * 100).toFixed(0)}%
+                </span>
+              </div>
+              <div className="mt-1.5 flex items-center gap-2">
+                <div className="flex-1 h-1.5 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden">
+                  <div
+                    className={`h-full rounded-full ${s.scenario_id === matched ? "bg-blue-500" : "bg-gray-400 dark:bg-gray-500"}`}
+                    style={{ width: `${s.score * 100}%` }}
+                  />
                 </div>
               </div>
-            ))}
+              <div className="mt-1 flex gap-3 text-[10px] text-gray-500 dark:text-gray-400">
+                <span>Req: {s.matched_required}</span>
+                <span>Strong: {s.matched_strong}</span>
+                <span>Support: {s.matched_supporting}</span>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
   );
 }
 
-function ContentTab({ selections, toneSelection }: { selections: ContentSelection[]; toneSelection: ToneSelectionResult }) {
+function ContentTab({
+  selections,
+  tone,
+  toneReason,
+  toneTriggers,
+}: {
+  selections: AuditContentSelection[];
+  tone: string;
+  toneReason: string;
+  toneTriggers: AuditToneTrigger[];
+}) {
+  const active = selections.filter(s => !s.suppressed);
+  const suppressed = selections.filter(s => s.suppressed);
+
   return (
     <div className="space-y-4">
       {/* Tone selection */}
       <div className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-3">
         <div className="text-sm font-medium text-purple-900 dark:text-purple-100">
-          Tone: {toneSelection.selected_tone}
+          Tone: {TONE_NAMES[tone] ?? tone} ({tone})
         </div>
         <div className="text-xs text-purple-700 dark:text-purple-300 mt-1">
-          {toneSelection.reason}
+          {toneReason}
         </div>
-        {toneSelection.evaluated_triggers.some(t => t.matched) && (
+        {toneTriggers.some(t => t.matched) && (
           <div className="mt-2 flex flex-wrap gap-1">
-            {toneSelection.evaluated_triggers.filter(t => t.matched).map((trigger, idx) => (
+            {toneTriggers.filter(t => t.matched).map((trigger, idx) => (
               <span key={idx} className="px-2 py-0.5 bg-purple-100 dark:bg-purple-900/30 rounded text-xs text-purple-700 dark:text-purple-300">
-                {trigger.trigger}
+                {trigger.tone}{trigger.trigger_driver ? ` (${trigger.trigger_driver})` : ""}
               </span>
             ))}
           </div>
         )}
       </div>
 
-      {/* Content selections */}
+      {/* Active content selections */}
       <div>
         <h4 className="text-sm font-medium text-gray-900 dark:text-white mb-2">
-          Content Selections ({selections.length})
+          Active Content ({active.length})
         </h4>
         <div className="space-y-2 max-h-64 overflow-y-auto">
-          {selections.map((selection, idx) => (
+          {active.map((sel, idx) => (
             <div key={idx} className="bg-gray-50 dark:bg-gray-700/50 rounded p-2">
               <div className="flex items-center justify-between">
                 <span className="text-sm font-medium text-gray-900 dark:text-white">
-                  {selection.slot}
+                  {sel.content_id}
                 </span>
-                <span className="text-xs text-gray-500 dark:text-gray-400">
-                  Priority: {selection.priority}
-                </span>
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] px-1.5 py-0.5 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded">
+                    {sel.type}
+                  </span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">
+                    S{sel.target_section}
+                  </span>
+                </div>
               </div>
-              <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
-                {selection.content_id}
-              </div>
-              <div className="text-xs text-gray-500 dark:text-gray-500 mt-1 italic">
-                {selection.reason}
+              <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                Tone: {sel.tone} | Priority: {sel.priority}
               </div>
             </div>
           ))}
         </div>
       </div>
+
+      {/* Suppressed content */}
+      {suppressed.length > 0 && (
+        <div>
+          <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">
+            Suppressed ({suppressed.length})
+          </h4>
+          <div className="space-y-1">
+            {suppressed.map((sel, idx) => (
+              <div key={idx} className="bg-gray-50 dark:bg-gray-700/50 rounded p-2 opacity-60">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-gray-700 dark:text-gray-300">{sel.content_id}</span>
+                  <span className="text-[10px] text-gray-500 dark:text-gray-400">{sel.suppression_reason}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
 
-function TraceTab({ trace }: { trace: AuditRecord["decision_trace"] }) {
-  const totalDuration = trace.events.reduce((sum, e) => sum + e.duration_ms, 0);
+function TraceTab({
+  events,
+  startedAt,
+  completedAt,
+}: {
+  events: AuditTraceEvent[];
+  startedAt: string;
+  completedAt: string;
+}) {
+  const totalDuration = events.reduce((sum, e) => sum + e.duration_ms, 0);
 
   return (
     <div className="space-y-4">
       {/* Timing summary */}
       <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
-        <span>Started: {new Date(trace.started_at).toLocaleTimeString()}</span>
-        <span>Total: {totalDuration}ms</span>
-        <span>Completed: {new Date(trace.completed_at).toLocaleTimeString()}</span>
+        <span>Started: {new Date(startedAt).toLocaleTimeString()}</span>
+        <span className="font-medium">Total: {totalDuration}ms</span>
+        <span>Completed: {new Date(completedAt).toLocaleTimeString()}</span>
       </div>
 
       {/* Timeline */}
-      <div className="relative">
-        <div className="absolute left-3 top-0 bottom-0 w-0.5 bg-gray-200 dark:bg-gray-700" />
-        <div className="space-y-3">
-          {trace.events.map((event, idx) => (
-            <div key={idx} className="relative flex items-start gap-3 pl-8">
-              <div className={`absolute left-2 w-2 h-2 rounded-full mt-1.5 ${
-                event.stage === "error" ? "bg-red-500" :
-                event.stage === "qa_gate" ? "bg-purple-500" :
-                "bg-blue-500"
-              }`} />
-              <div className="flex-1 bg-gray-50 dark:bg-gray-700/50 rounded p-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-medium text-gray-900 dark:text-white">
-                    {event.stage}: {event.action}
-                  </span>
-                  <span className="text-xs text-gray-500 dark:text-gray-400">
-                    {event.duration_ms}ms
-                  </span>
-                </div>
-                <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                  {new Date(event.timestamp).toLocaleTimeString()}
+      {events.length > 0 ? (
+        <div className="relative">
+          <div className="absolute left-3 top-0 bottom-0 w-0.5 bg-gray-200 dark:bg-gray-700" />
+          <div className="space-y-3">
+            {events.map((event, idx) => (
+              <div key={idx} className="relative flex items-start gap-3 pl-8">
+                <div className={`absolute left-2 w-2 h-2 rounded-full mt-1.5 ${
+                  event.stage === "error" ? "bg-red-500" :
+                  event.stage.includes("tone") ? "bg-purple-500" :
+                  event.stage.includes("scenario") ? "bg-blue-500" :
+                  event.stage.includes("content") ? "bg-green-500" :
+                  event.stage.includes("compos") ? "bg-indigo-500" :
+                  "bg-gray-400"
+                }`} />
+                <div className="flex-1 bg-gray-50 dark:bg-gray-700/50 rounded p-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-medium text-gray-900 dark:text-white">
+                      {event.stage}: {event.action}
+                    </span>
+                    <span className="text-xs text-gray-500 dark:text-gray-400 tabular-nums">
+                      {event.duration_ms}ms
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-
-      {/* Final outcome */}
-      <div className={`text-center py-2 rounded ${
-        trace.final_outcome === "PASS" ? "bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300" :
-        trace.final_outcome === "FLAG" ? "bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300" :
-        "bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300"
-      }`}>
-        Final Outcome: {trace.final_outcome}
-      </div>
+      ) : (
+        <div className="text-xs text-gray-500 dark:text-gray-400 text-center py-4">
+          No trace events recorded
+        </div>
+      )}
     </div>
   );
 }

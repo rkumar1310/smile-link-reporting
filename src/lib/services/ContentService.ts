@@ -15,7 +15,6 @@ import type {
   ContentCheckResult,
   ScoredScenario,
 } from "@/lib/types/types/report-generation";
-import { createSemanticSearchService } from "@/lib/agents/search";
 
 export class ContentService {
   /**
@@ -207,44 +206,6 @@ export class ContentService {
       .find({
         contentId: { $in: contentIds },
         [`variants.${lang}.${tone}`]: { $exists: true },
-      })
-      .toArray();
-
-    return docs as unknown as ContentDocument[];
-  }
-
-  /**
-   * Search content using vector similarity
-   * Useful for finding relevant content based on description or context
-   */
-  async searchByContext(
-    query: string,
-    options: {
-      limit?: number;
-      scoreThreshold?: number;
-    } = {}
-  ): Promise<ContentDocument[]> {
-    const searchService = createSemanticSearchService();
-
-    const results = await searchService.getRelevantSources(query, {
-      limit: options.limit ?? 10,
-      scoreThreshold: options.scoreThreshold ?? 0.6,
-    });
-
-    // Get the content documents for the matching source documents
-    const db = await getDb();
-    const mongoDocIds = results.map((r) => r.mongoDocId);
-
-    if (mongoDocIds.length === 0) {
-      return [];
-    }
-
-    // Note: The search results are from sourceDocuments, not content
-    // We need to map them back to content documents if applicable
-    const docs = await db
-      .collection(COLLECTIONS.CONTENT)
-      .find({
-        contentId: { $in: mongoDocIds },
       })
       .toArray();
 

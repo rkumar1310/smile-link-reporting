@@ -1,7 +1,7 @@
 /**
  * Pipeline Runner
  * Bridges the core ReportPipeline with the CMS Dashboard's SSE streaming
- * Maps 8 pipeline phases to 6 UI phases
+ * Maps 7 pipeline phases to 5 UI phases
  */
 
 import type {
@@ -9,19 +9,17 @@ import type {
   ReportPhase,
   IntakeAnswers,
   ComposedReport as CMSComposedReport,
-  DerivativeProgress,
+  ReportAuditData,
 } from "@/lib/types/types/report-generation";
 import type { ToneProfileId } from "@/lib/types";
 
 import { createReportPipeline, type PipelineProgressEvent } from "./ReportPipeline";
-import { createDynamicContentStore } from "./content/DynamicContentStore";
 import type { IntakeData, ComposedReport, AuditRecord, SupportedLanguage, QuestionId } from "./types";
 import { generateReportPdf } from "@/lib/services/PdfGenerationService";
-import { MissingContentError } from "@/lib/errors/MissingContentError";
 
 /**
  * Map pipeline phases to UI phases
- * Pipeline has 9 phases (0-8), UI has 6 phases + generating
+ * Pipeline has 7 phases (0-6), UI has 5 phases
  */
 const PHASE_MAPPING: Record<number, ReportPhase> = {
   0: "analyzing",     // input_validation
@@ -30,9 +28,7 @@ const PHASE_MAPPING: Record<number, ReportPhase> = {
   3: "analyzing",     // scenario_scoring
   4: "tone",          // tone_selection
   5: "content-check", // content_selection
-  6: "content-check", // scenario_load
-  7: "composing",     // composition
-  8: "evaluating",    // qa_gate
+  6: "composing",     // nlg_rendering
 };
 
 /**
@@ -55,23 +51,6 @@ function getToneName(toneId: string): string {
  */
 export function mapPipelineEventToSSE(event: PipelineProgressEvent): ReportPhaseEvent {
   const uiPhase = PHASE_MAPPING[event.phase] ?? "analyzing";
-
-  // Handle sub-phases within QA gate
-  if (event.phaseName.startsWith("qa_gate.")) {
-    const subPhase = event.phaseName.replace("qa_gate.", "");
-
-    if (subPhase === "llm_evaluation") {
-      return {
-        phase: "evaluating" as ReportPhase,
-        message: event.message,
-        timestamp: event.timestamp,
-        data: {
-          status: event.status,
-          metrics: event.metrics
-        }
-      } as ReportPhaseEvent;
-    }
-  }
 
   // Map based on phase
   switch (uiPhase) {
@@ -124,25 +103,6 @@ export function mapPipelineEventToSSE(event: PipelineProgressEvent): ReportPhase
         }
       };
 
-    case "evaluating":
-      return {
-        phase: "evaluating" as ReportPhase,
-        message: event.message,
-        timestamp: event.timestamp,
-        data: {
-          status: event.status,
-          outcome: event.metrics?.outcome,
-          canDeliver: event.metrics?.canDeliver,
-          validationErrors: event.metrics?.validationErrors,
-          validationWarnings: event.metrics?.validationWarnings,
-          validationErrorDetails: event.metrics?.validationErrorDetails,
-          validationWarningDetails: event.metrics?.validationWarningDetails,
-          semanticViolations: event.metrics?.semanticViolations,
-          // Pass through all metrics for QA sub-phases
-          ...event.metrics
-        }
-      } as ReportPhaseEvent;
-
     default:
       return {
         phase: uiPhase,
@@ -183,24 +143,95 @@ export function transformReport(
       hasWarning: false,
       warnings: []
     })),
-    factCheckPassed: audit.llm_evaluation
-      ? audit.llm_evaluation.recommended_outcome !== "BLOCK"
-      : true,
-    factCheckScore: audit.llm_evaluation?.overall_score ?? 1.0,
-    warnings: audit.llm_evaluation?.content_issues.map(issue => ({
-      contentId: issue.source_content,
-      section: `Section ${issue.section_number}`,
-      severity: issue.severity as "low" | "medium" | "high",
-      description: issue.problem,
-      claimText: issue.quote,
-      suggestion: issue.suggested_fix
-    })) ?? [],
+    factCheckPassed: true,
+    factCheckScore: 1.0,
+    warnings: [],
     contentGenerated: 0,
     totalContentUsed: coreReport.sections.length,
+    unresolvedPlaceholders: coreReport.placeholders_unresolved.length > 0
+      ? coreReport.placeholders_unresolved
+      : undefined,
     intakeAnswers: audit.intake.answers.map(a => ({
       question_id: a.question_id,
       answer: a.answer
     }))
+  };
+}
+
+/**
+ * Transform core AuditRecord to UI-friendly ReportAuditData
+ */
+export function transformAudit(audit: AuditRecord): ReportAuditData {
+  return {
+    session_id: audit.session_id,
+    created_at: audit.created_at,
+    final_outcome: audit.final_outcome,
+
+    // Driver state
+    drivers: Object.fromEntries(
+      Object.entries(audit.driver_state.drivers).map(([key, dv]) => [
+        key,
+        {
+          driver_id: dv.driver_id,
+          layer: dv.layer,
+          value: dv.value,
+          source: dv.source,
+          confidence: dv.confidence,
+        },
+      ])
+    ),
+    driver_conflicts: audit.driver_state.conflicts.map((c) => ({
+      driver_id: c.driver_id,
+      conflicting_values: c.conflicting_values,
+      resolved_value: c.resolved_value,
+      resolution_reason: c.resolution_reason,
+    })),
+    fallbacks_applied: [...audit.driver_state.fallbacks_applied],
+
+    // Scenario matching
+    matched_scenario: audit.scenario_match.matched_scenario,
+    scenario_confidence: audit.scenario_match.confidence,
+    scenario_score: audit.scenario_match.score,
+    all_scenario_scores: audit.scenario_match.all_scores.map((s) => ({
+      scenario_id: s.scenario_id,
+      score: s.score,
+      matched_required: s.matched_required,
+      matched_strong: s.matched_strong,
+      matched_supporting: s.matched_supporting,
+      excluded: s.excluded,
+    })),
+    fallback_used: audit.scenario_match.fallback_used,
+    fallback_reason: audit.scenario_match.fallback_reason,
+
+    // Content selections
+    content_selections: audit.content_selections.map((cs) => ({
+      content_id: cs.content_id,
+      type: cs.type,
+      target_section: cs.target_section,
+      tone: cs.tone,
+      priority: cs.priority,
+      suppressed: cs.suppressed,
+      suppression_reason: cs.suppression_reason,
+    })),
+
+    // Tone selection
+    tone: audit.tone_selection.selected_tone,
+    tone_reason: audit.tone_selection.reason,
+    tone_triggers: audit.tone_selection.evaluated_triggers.map((t) => ({
+      tone: t.tone,
+      matched: t.matched,
+      trigger_driver: t.trigger_driver,
+    })),
+
+    // Decision trace (omit input/output to keep payload small)
+    trace_events: audit.decision_trace.events.map((e) => ({
+      timestamp: e.timestamp,
+      stage: e.stage,
+      action: e.action,
+      duration_ms: e.duration_ms,
+    })),
+    trace_started_at: audit.decision_trace.started_at,
+    trace_completed_at: audit.decision_trace.completed_at,
   };
 }
 
@@ -214,6 +245,7 @@ export interface PipelineSSEResult {
   outcome: string;
   report?: CMSComposedReport;
   audit: AuditRecord;
+  auditData: ReportAuditData;
   error?: string;
 }
 
@@ -237,11 +269,11 @@ function convertIntakeAnswers(intake: IntakeAnswers, language: SupportedLanguage
 /**
  * Run the pipeline with SSE streaming
  *
- * This uses the real ReportPipeline with DynamicContentStore:
- * - 8-phase pipeline matching the original documents/src/pipeline
+ * This uses the real ReportPipeline with NLG Template Renderer:
+ * - 7-phase pipeline (0-6) matching the original documents/src/pipeline
  * - Config-driven engines using JSON config files
- * - Dynamic content generation with semantic search + LLM
- * - Fact-checking with retry loop
+ * - NLG template rendering with scenario data from MongoDB
+ * - Rule-based QA validation
  */
 export async function runPipelineWithSSE(
   intake: IntakeAnswers,
@@ -249,33 +281,11 @@ export async function runPipelineWithSSE(
 ): Promise<PipelineSSEResult> {
   const { onEvent, language = "en" } = options;
 
-  // Create content store (no longer generates content - just fetches from DB)
-  const contentStore = createDynamicContentStore();
-
   // Create pipeline with progress callbacks
   const pipeline = createReportPipeline({
-    contentStore,
     onProgress: async (event) => {
       await onEvent(mapPipelineEventToSSE(event));
     },
-    // Derivative progress callback for composition phase
-    onDerivativeProgress: async (progress) => {
-      await onEvent({
-        phase: "composing",
-        message: progress.currentSection
-          ? `Synthesizing: ${progress.currentSection}`
-          : `Composing sections (${progress.current}/${progress.total})`,
-        timestamp: new Date().toISOString(),
-        data: {
-          sectionsProcessed: progress.current,
-          totalSections: progress.total,
-          currentSection: progress.currentSection,
-          derivatives: progress.derivatives,
-          currentDerivative: progress.current,
-          totalDerivatives: progress.total,
-        }
-      });
-    }
   });
 
   try {
@@ -284,19 +294,6 @@ export async function runPipelineWithSSE(
 
     // Run the pipeline
     const result = await pipeline.run(pipelineIntake);
-
-    // Check if any content was missing during composition
-    if (contentStore.hasMissingContent()) {
-      const missingContent = contentStore.getMissingContent();
-      throw new MissingContentError(
-        `Report generation failed: ${missingContent.length} content item(s) missing from database`,
-        missingContent.map(item => ({
-          contentId: item.contentId,
-          language: item.language,
-          tone: item.tone,
-        }))
-      );
-    }
 
     // Transform report for CMS format
     const cmsReport = result.report
@@ -321,86 +318,11 @@ export async function runPipelineWithSSE(
       outcome: result.outcome,
       report: cmsReport,
       audit: result.audit,
+      auditData: transformAudit(result.audit),
       error: result.error
     };
 
   } catch (error) {
-    // Handle MissingContentError specially
-    if (error instanceof MissingContentError) {
-      await onEvent({
-        phase: "error",
-        message: error.message,
-        timestamp: new Date().toISOString(),
-        data: {
-          error: error.message,
-          recoverable: false,
-          phase: "content-check" as ReportPhase,
-        }
-      } as ReportPhaseEvent);
-
-      // Create minimal error audit
-      const errorAudit: AuditRecord = {
-        session_id: intake.session_id,
-        created_at: new Date().toISOString(),
-        intake: convertIntakeAnswers(intake),
-        driver_state: {
-          session_id: intake.session_id,
-          drivers: {} as AuditRecord["driver_state"]["drivers"],
-          conflicts: [],
-          fallbacks_applied: []
-        },
-        scenario_match: {
-          session_id: intake.session_id,
-          matched_scenario: "MISSING_CONTENT",
-          confidence: "FALLBACK",
-          score: 0,
-          all_scores: [],
-          fallback_used: true,
-          fallback_reason: error.message
-        },
-        content_selections: [],
-        tone_selection: {
-          selected_tone: "TP-01",
-          reason: "Error fallback",
-          evaluated_triggers: []
-        },
-        composed_report: {
-          session_id: intake.session_id,
-          scenario_id: "MISSING_CONTENT",
-          tone: "TP-01",
-          language,
-          confidence: "FALLBACK",
-          sections: [],
-          total_word_count: 0,
-          warnings_included: false,
-          suppressed_sections: [],
-          placeholders_resolved: 0,
-          placeholders_unresolved: []
-        },
-        validation_result: {
-          valid: false,
-          errors: [error.message],
-          warnings: [],
-          semantic_violations: []
-        },
-        decision_trace: {
-          session_id: intake.session_id,
-          started_at: new Date().toISOString(),
-          completed_at: new Date().toISOString(),
-          events: [],
-          final_outcome: "BLOCK"
-        },
-        final_outcome: "BLOCK",
-        report_delivered: false
-      };
-
-      return {
-        success: false,
-        outcome: "BLOCK",
-        audit: errorAudit,
-        error: error.message
-      };
-    }
     const errorMessage = error instanceof Error ? error.message : "Unknown error";
 
     // Send error event
@@ -470,6 +392,7 @@ export async function runPipelineWithSSE(
       success: false,
       outcome: "BLOCK",
       audit: errorAudit,
+      auditData: transformAudit(errorAudit),
       error: errorMessage
     };
   }

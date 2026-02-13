@@ -3,19 +3,39 @@
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import type { ComposedReport, ReportSection, ReportFactCheckIssue, LLMEvaluationData } from "@/lib/types/types/report-generation";
+import type { ComposedReport, ReportSection, ReportFactCheckIssue } from "@/lib/types/types/report-generation";
 import { PDFDownloadButton } from "./PDFDownloadButton";
 
 interface ReportDisplayProps {
   report: ComposedReport;
-  llmEvaluation?: LLMEvaluationData;
   onGenerateNew?: () => void;
 }
 
-export function ReportDisplay({ report, llmEvaluation, onGenerateNew }: ReportDisplayProps) {
+/**
+ * Scan report sections for unresolved {VARIABLE_NAME} placeholders.
+ * Combines any variables from the pipeline with those found in rendered content.
+ */
+function detectUnresolvedVariables(report: ComposedReport): string[] {
+  const found = new Set<string>(report.unresolvedPlaceholders ?? []);
+
+  // Also scan section content for {UPPER_CASE_VAR} patterns
+  for (const section of report.sections) {
+    const matches = section.content.matchAll(/\{([A-Z][A-Z0-9_]+)\}/g);
+    for (const match of matches) {
+      found.add(match[1]);
+    }
+  }
+
+  return Array.from(found).sort();
+}
+
+export function ReportDisplay({ report, onGenerateNew }: ReportDisplayProps) {
   const [expandedSections, setExpandedSections] = useState<Set<number>>(
     new Set(report.sections.map((_, i) => i))
   );
+
+  const unresolvedVars = detectUnresolvedVariables(report);
+  const isBlocked = unresolvedVars.length > 0;
 
   const toggleSection = (index: number) => {
     const newExpanded = new Set(expandedSections);
@@ -88,6 +108,36 @@ export function ReportDisplay({ report, llmEvaluation, onGenerateNew }: ReportDi
           )}
         </div>
 
+        {/* Blocked disclaimer — unresolved variables */}
+        {isBlocked && (
+          <div className="mt-4 p-4 bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-300 dark:border-red-800">
+            <div className="flex items-start gap-3">
+              <svg className="w-6 h-6 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+              </svg>
+              <div className="flex-1">
+                <h3 className="text-sm font-bold text-red-800 dark:text-red-300 uppercase tracking-wide">
+                  Report Blocked — {unresolvedVars.length} Unresolved Variable{unresolvedVars.length === 1 ? "" : "s"}
+                </h3>
+                <p className="text-sm text-red-700 dark:text-red-400 mt-1">
+                  This report cannot be delivered to the patient because the following NLG variables
+                  could not be resolved. They appear as red placeholders in the content below.
+                </p>
+                <div className="mt-3 flex flex-wrap gap-1.5">
+                  {unresolvedVars.map((v) => (
+                    <code
+                      key={v}
+                      className="px-2 py-0.5 bg-red-100 dark:bg-red-900/40 border border-red-200 dark:border-red-700 rounded text-xs font-mono text-red-700 dark:text-red-300"
+                    >
+                      {`{${v}}`}
+                    </code>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Warnings summary */}
         {report.warnings.length > 0 && (
           <div className="mt-4 p-3 bg-amber-50 dark:bg-amber-900/20 rounded-lg border border-amber-200 dark:border-amber-800">
@@ -103,10 +153,6 @@ export function ReportDisplay({ report, llmEvaluation, onGenerateNew }: ReportDi
           </div>
         )}
 
-        {/* LLM Evaluation Summary */}
-        {llmEvaluation && (
-          <LLMEvaluationSummary evaluation={llmEvaluation} />
-        )}
       </div>
 
       {/* Section controls */}
@@ -290,7 +336,19 @@ interface MarkdownContentProps {
   content: string;
 }
 
+/**
+ * Preprocess markdown to wrap {VARIABLE_NAME} patterns in backticks
+ * so ReactMarkdown renders them as <code> elements we can style.
+ * Uses a marker prefix so the code renderer can distinguish them.
+ */
+function preprocessVariablePlaceholders(content: string): string {
+  // Match {UPPER_CASE_VARIABLE} patterns (NLG variable placeholders)
+  return content.replace(/\{([A-Z][A-Z0-9_]+)\}/g, '`__NLG_VAR__$1`');
+}
+
 function MarkdownContent({ content }: MarkdownContentProps) {
+  const processed = preprocessVariablePlaceholders(content);
+
   return (
     <ReactMarkdown
       remarkPlugins={[remarkGfm]}
@@ -353,12 +411,23 @@ function MarkdownContent({ content }: MarkdownContentProps) {
             {children}
           </td>
         ),
-        // Code
-        code: ({ children }) => (
-          <code className="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded text-sm font-mono">
-            {children}
-          </code>
-        ),
+        // Code — detect NLG variable placeholders and style them red
+        code: ({ children }) => {
+          const text = String(children);
+          if (text.startsWith("__NLG_VAR__")) {
+            const varName = text.replace("__NLG_VAR__", "");
+            return (
+              <code className="px-1.5 py-0.5 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded text-sm font-mono text-red-600 dark:text-red-400">
+                {`{${varName}}`}
+              </code>
+            );
+          }
+          return (
+            <code className="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded text-sm font-mono">
+              {children}
+            </code>
+          );
+        },
         // Blockquote
         blockquote: ({ children }) => (
           <blockquote className="border-l-4 border-gray-300 dark:border-gray-600 pl-4 italic text-gray-600 dark:text-gray-400 my-2">
@@ -367,113 +436,8 @@ function MarkdownContent({ content }: MarkdownContentProps) {
         ),
       }}
     >
-      {content}
+      {processed}
     </ReactMarkdown>
-  );
-}
-
-interface LLMEvaluationSummaryProps {
-  evaluation: LLMEvaluationData;
-}
-
-function LLMEvaluationSummary({ evaluation }: LLMEvaluationSummaryProps) {
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const outcomeColors = {
-    PASS: "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-green-200 dark:border-green-800",
-    FLAG: "bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800",
-    BLOCK: "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 border-red-200 dark:border-red-800"
-  };
-
-  const dimensions = [
-    { key: "professional_quality", label: "Professional Quality", score: evaluation.professional_quality.score },
-    { key: "clinical_safety", label: "Clinical Safety", score: evaluation.clinical_safety.score },
-    { key: "tone_appropriateness", label: "Tone Appropriateness", score: evaluation.tone_appropriateness.score },
-    { key: "personalization", label: "Personalization", score: evaluation.personalization.score },
-    { key: "patient_autonomy", label: "Patient Autonomy", score: evaluation.patient_autonomy.score },
-    { key: "structure_completeness", label: "Structure", score: evaluation.structure_completeness.score }
-  ];
-
-  const criticalIssues = (evaluation.content_issues ?? []).filter(i => i.severity === "critical").length;
-  const warningIssues = (evaluation.content_issues ?? []).filter(i => i.severity === "warning").length;
-
-  return (
-    <div className={`mt-4 rounded-lg border ${outcomeColors[evaluation.recommended_outcome as keyof typeof outcomeColors] ?? outcomeColors.FLAG}`}>
-      {/* Header */}
-      <button
-        onClick={() => setIsExpanded(!isExpanded)}
-        className="w-full p-3 flex items-center justify-between"
-      >
-        <div className="flex items-center gap-3">
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-          </svg>
-          <span className="text-sm font-medium">
-            LLM Quality Evaluation: {evaluation.recommended_outcome}
-          </span>
-          <span className="text-sm opacity-80">
-            ({evaluation.overall_score.toFixed(1)}/10)
-          </span>
-        </div>
-        <svg
-          className={`w-4 h-4 transition-transform ${isExpanded ? "rotate-180" : ""}`}
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
-
-      {/* Expanded content */}
-      {isExpanded && (
-        <div className="px-3 pb-3 border-t border-current/10">
-          {/* Dimension scores */}
-          <div className="mt-3 grid grid-cols-2 md:grid-cols-3 gap-3">
-            {dimensions.map(dim => (
-              <div key={dim.key} className="bg-white/50 dark:bg-gray-800/50 rounded p-2">
-                <div className="text-xs opacity-70">{dim.label}</div>
-                <div className="flex items-center gap-2 mt-1">
-                  <div className="flex-1 h-1.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                    <div
-                      className={`h-full rounded-full ${
-                        dim.score >= 8 ? "bg-green-500" :
-                        dim.score >= 6 ? "bg-amber-500" :
-                        "bg-red-500"
-                      }`}
-                      style={{ width: `${(dim.score / 10) * 100}%` }}
-                    />
-                  </div>
-                  <span className={`text-sm font-medium ${
-                    dim.score >= 8 ? "text-green-600 dark:text-green-400" :
-                    dim.score >= 6 ? "text-amber-600 dark:text-amber-400" :
-                    "text-red-600 dark:text-red-400"
-                  }`}>
-                    {dim.score}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Content issues */}
-          {(evaluation.content_issues ?? []).length > 0 && (
-            <div className="mt-3 text-xs opacity-70">
-              Content issues: {criticalIssues > 0 && <span className="text-red-600 dark:text-red-400">{criticalIssues} critical</span>}
-              {criticalIssues > 0 && warningIssues > 0 && ", "}
-              {warningIssues > 0 && <span className="text-amber-600 dark:text-amber-400">{warningIssues} warnings</span>}
-            </div>
-          )}
-
-          {/* Overall assessment */}
-          {evaluation.overall_assessment && (
-            <div className="mt-3 text-sm opacity-80 italic">
-              &ldquo;{evaluation.overall_assessment}&rdquo;
-            </div>
-          )}
-        </div>
-      )}
-    </div>
   );
 }
 

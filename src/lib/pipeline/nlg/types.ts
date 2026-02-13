@@ -142,6 +142,7 @@ export interface ResolvedVariable {
   value: string;
   status: VariableResolutionStatus;
   source?: string; // Where the value came from (driver, tag, collection, etc.)
+  sourceId?: string; // ID of the source entity (e.g., scenario ID)
   fallbackUsed?: boolean;
 }
 
@@ -328,9 +329,9 @@ export const NLGImplementationStatus = {
     note: "Loads from existing A_DISCLAIMER content"
   },
 
-  // FLAGGED: Needs new data/logic
-  TREATMENT_OPTIONS: {
-    status: "flagged" as const,
+  // IMPLEMENTED: Resolved from scenario treatment options & NLG variables
+  SCENARIO_TREATMENT_DATA: {
+    status: "implemented" as const,
     variables: [
       "OPTION_1_NAME", "OPTION_1_SHORT_DESCRIPTION", "OPTION_1_INDICATION",
       "OPTION_1_COMPLEXITY", "OPTION_1_ADVANTAGES", "OPTION_1_DISADVANTAGES",
@@ -340,10 +341,19 @@ export const NLGImplementationStatus = {
       "RECOMMENDED_DIRECTION", "TAG_NUANCE_DIRECTION",
       "SELECTED_OPTION", "RESULT_DESCRIPTION", "COMFORT_EXPERIENCE",
       "AESTHETIC_RESULT", "TREATMENT_DURATION", "PHASE_1", "PHASE_2", "PHASE_3",
-      "GENERAL_RISK", "SITUATION_SPECIFIC_CONSIDERATIONS",
-      "RECOVERY_DURATION", "RECOVERY_DISCOMFORT", "ALARM_SIGNAL"
+      "SITUATION_SPECIFIC_CONSIDERATIONS",
+      "RECOVERY_DURATION", "RECOVERY_DISCOMFORT"
     ] as NLGVariable[],
-    note: "Requires: treatmentOptions collection + priority matrix + recommendation engine"
+    note: "Resolved from scenario treatment option fields and scenario NLG variables in MongoDB"
+  },
+
+  // PARTIAL: Has fallback content but not scenario-specific
+  TREATMENT_FALLBACKS: {
+    status: "partial" as const,
+    variables: [
+      "GENERAL_RISK", "ALARM_SIGNAL"
+    ] as NLGVariable[],
+    note: "Generic fallback content; can be overridden by scenario NLG variables"
   },
 
   PRICING: {

@@ -5,7 +5,6 @@
 
 import { z } from "zod";
 import type { ToneProfileId, SupportedLanguage, ContentDocument } from "./content";
-import type { FactCheckRecord, ExtractedClaim } from "./factcheck";
 
 // =============================================================================
 // INTAKE ANSWERS (from questionnaire)
@@ -211,7 +210,7 @@ export interface ReportFactCheckResult {
   score: number;                       // 0-1, passes if >= 0.7
   issues: ReportFactCheckIssue[];
   attempts: number;
-  fullRecord?: FactCheckRecord;
+  fullRecord?: Record<string, unknown>;
 }
 
 // =============================================================================
@@ -259,6 +258,9 @@ export interface ComposedReport {
   contentGenerated: number;            // How many content items were generated
   totalContentUsed: number;
 
+  // Unresolved NLG variable placeholders (e.g., {OPTION_1_NAME})
+  unresolvedPlaceholders?: string[];
+
   // Intake questionnaire answers (for PDF export)
   intakeAnswers?: IntakeAnswer[];
 
@@ -267,41 +269,91 @@ export interface ComposedReport {
 }
 
 // =============================================================================
-// PROGRESS TRACKING
+// AUDIT DATA (pipeline decision trace for UI display)
 // =============================================================================
 
-/**
- * Progress status for individual content blocks
- */
-export type ContentBlockStatus = "pending" | "generating" | "verifying" | "done" | "failed";
-
-/**
- * Progress tracking for a single content block
- */
-export interface ContentBlockProgress {
-  id: string;                        // Content ID
-  name: string;                      // Display name
-  contentType: string;               // a_block, b_block, module, scenario, static
-  status: ContentBlockStatus;
-  factCheckAttempt?: number;         // Current attempt number
-  factCheckScore?: number;           // Score if verified
+export interface AuditDriverValue {
+  driver_id: string;
+  layer: string;
+  value: string;
+  source: "derived" | "fallback";
+  confidence: number;
 }
 
-/**
- * Progress status for derivative content
- */
-export type DerivativeStatus = "pending" | "generating" | "cached" | "done" | "failed";
-
-/**
- * Progress tracking for derivative content synthesis
- */
-export interface DerivativeProgress {
-  sectionNumber: number;             // Section being composed
-  sectionName: string;               // Display name
-  sourceBlockCount: number;          // Number of blocks being synthesized
-  status: DerivativeStatus;
-  derivativeId?: string;             // ID if cached/done
+export interface AuditDriverConflict {
+  driver_id: string;
+  conflicting_values: string[];
+  resolved_value: string;
+  resolution_reason: string;
 }
+
+export interface AuditScenarioScore {
+  scenario_id: string;
+  score: number;
+  matched_required: number;
+  matched_strong: number;
+  matched_supporting: number;
+  excluded: boolean;
+}
+
+export interface AuditContentSelection {
+  content_id: string;
+  type: string;
+  target_section: number;
+  tone: string;
+  priority: number;
+  suppressed: boolean;
+  suppression_reason?: string;
+}
+
+export interface AuditToneTrigger {
+  tone: string;
+  matched: boolean;
+  trigger_driver?: string;
+}
+
+export interface AuditTraceEvent {
+  timestamp: string;
+  stage: string;
+  action: string;
+  duration_ms: number;
+}
+
+export interface ReportAuditData {
+  session_id: string;
+  created_at: string;
+  final_outcome: string;
+
+  // Driver state
+  drivers: Record<string, AuditDriverValue>;
+  driver_conflicts: AuditDriverConflict[];
+  fallbacks_applied: string[];
+
+  // Scenario matching
+  matched_scenario: string;
+  scenario_confidence: string;
+  scenario_score: number;
+  all_scenario_scores: AuditScenarioScore[];
+  fallback_used: boolean;
+  fallback_reason?: string;
+
+  // Content selections
+  content_selections: AuditContentSelection[];
+
+  // Tone selection
+  tone: string;
+  tone_reason: string;
+  tone_triggers: AuditToneTrigger[];
+
+  // Decision trace
+  trace_events: AuditTraceEvent[];
+  trace_started_at: string;
+  trace_completed_at: string;
+}
+
+// =============================================================================
+// PROGRESS TRACKING
+// =============================================================================
 
 // =============================================================================
 // SSE PHASE EVENTS
@@ -311,9 +363,7 @@ export type ReportPhase =
   | "analyzing"
   | "tone"
   | "content-check"
-  | "generating"
   | "composing"
-  | "evaluating"
   | "complete"
   | "error";
 
@@ -356,79 +406,20 @@ export interface ContentCheckPhaseEvent extends PhaseEventBase {
   };
 }
 
-export interface GeneratingPhaseEvent extends PhaseEventBase {
-  phase: "generating";
-  data: {
-    current: number;
-    total: number;
-    currentContent: string;
-    // Fact-check status for the current content being generated
-    factCheck?: {
-      status: "pending" | "checking" | "passed" | "failed" | "retrying";
-      attempt: number;
-      maxAttempts: number;
-      score?: number;
-    };
-    /** Full list of content blocks with their current status */
-    contentBlocks?: ContentBlockProgress[];
-  };
-}
-
 export interface ComposingPhaseEvent extends PhaseEventBase {
   phase: "composing";
   data?: {
     sectionsProcessed: number;
     totalSections: number;
-    /** Current section being composed */
     currentSection?: string;
-    /** Full list of derivatives with their current status */
-    derivatives?: DerivativeProgress[];
-    /** Current derivative index (1-based) */
-    currentDerivative?: number;
-    /** Total derivatives to generate */
-    totalDerivatives?: number;
   };
-}
-
-export interface EvaluatingPhaseEvent extends PhaseEventBase {
-  phase: "evaluating";
-  data?: {
-    status: string;
-    outcome?: string;
-    overallScore?: number;
-    dimensions?: {
-      professional_quality?: number;
-      clinical_safety?: number;
-      tone_appropriateness?: number;
-      personalization?: number;
-      patient_autonomy?: number;
-      structure_completeness?: number;
-    };
-    contentIssues?: number;
-    currentDimension?: string;
-    metrics?: Record<string, unknown>;
-  };
-}
-
-// Simplified LLM evaluation data for the complete event
-export interface LLMEvaluationData {
-  overall_score: number;
-  recommended_outcome: string;
-  professional_quality: { score: number };
-  clinical_safety: { score: number };
-  tone_appropriateness: { score: number };
-  personalization: { score: number };
-  patient_autonomy: { score: number };
-  structure_completeness: { score: number };
-  content_issues?: Array<{ severity: string }>;
-  overall_assessment?: string;
 }
 
 export interface CompletePhaseEvent extends PhaseEventBase {
   phase: "complete";
   data: {
     report: ComposedReport;
-    llmEvaluation?: LLMEvaluationData;
+    audit?: ReportAuditData;
   };
 }
 
@@ -445,9 +436,7 @@ export type ReportPhaseEvent =
   | AnalyzingPhaseEvent
   | TonePhaseEvent
   | ContentCheckPhaseEvent
-  | GeneratingPhaseEvent
   | ComposingPhaseEvent
-  | EvaluatingPhaseEvent
   | CompletePhaseEvent
   | ErrorPhaseEvent;
 

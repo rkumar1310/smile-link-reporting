@@ -70,7 +70,7 @@ export async function PUT(
       );
     }
 
-    // Only allow updating certain fields (protect matching criteria and core identity)
+    // Only allow updating certain fields (protect core identity like _id, version)
     const allowedUpdates: Partial<Scenario> = {};
 
     if (body.name) allowedUpdates.name = body.name;
@@ -78,6 +78,7 @@ export async function PUT(
     if (body.nlg_variables) allowedUpdates.nlg_variables = body.nlg_variables;
     if (body.treatment_options) allowedUpdates.treatment_options = body.treatment_options;
     if (body.pricing) allowedUpdates.pricing = body.pricing;
+    if (body.matching) allowedUpdates.matching = body.matching;
 
     // Always update the timestamp
     allowedUpdates.updated_at = new Date();

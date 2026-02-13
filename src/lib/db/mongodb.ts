@@ -60,10 +60,6 @@ export async function getDb(): Promise<Db> {
 // Collection names
 export const COLLECTIONS = {
   CONTENT: "content",
-  SOURCE_DOCUMENTS: "sourceDocuments",
-  FACT_CHECK_RECORDS: "factCheckRecords",
-  GENERATION_JOBS: "generationJobs",
   CONTENT_USAGE: "contentUsage",
-  DERIVATIVE_CONTENT: "derivativeContent",
   SCENARIOS: "scenarios",
 } as const;

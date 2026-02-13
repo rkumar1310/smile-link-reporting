@@ -12,8 +12,6 @@ interface ContentStats {
 export default function Home() {
   const [stats, setStats] = useState<ContentStats | null>(null);
   const [loading, setLoading] = useState(true);
-  const [resetting, setResetting] = useState(false);
-
   useEffect(() => {
     fetchStats();
   }, []);
@@ -45,30 +43,6 @@ export default function Home() {
       console.error("Failed to fetch stats:", err);
     } finally {
       setLoading(false);
-    }
-  }
-
-  async function handleReset() {
-    if (!confirm("Are you sure you want to delete ALL content from the database? This action cannot be undone.")) {
-      return;
-    }
-
-    setResetting(true);
-    try {
-      const res = await fetch("/api/reset", {
-        method: "DELETE",
-      });
-      const data = await res.json();
-      if (data.success) {
-        alert(`Database reset! Deleted: ${data.deleted.content} content items, ${data.deleted.generationJobs} jobs, ${data.deleted.factCheckRecords} fact-check records`);
-        await fetchStats();
-      } else {
-        alert(data.error || "Reset failed");
-      }
-    } catch (err) {
-      alert("Failed to reset database");
-    } finally {
-      setResetting(false);
     }
   }
 
@@ -106,30 +80,6 @@ export default function Home() {
               icon={
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                </svg>
-              }
-            />
-
-            {/* Generation Card */}
-            <DashboardCard
-              title="Generate"
-              description="Create content from source documents"
-              href="/generation"
-              icon={
-                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              }
-            />
-
-            {/* Sources Card */}
-            <DashboardCard
-              title="Sources"
-              description="View and parse source documents"
-              href="/sources"
-              icon={
-                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
                 </svg>
               }
             />
@@ -178,20 +128,11 @@ export default function Home() {
                       ))}
                     </div>
                   </div>
-                  <div className="pt-4 border-t dark:border-gray-700">
-                    <button
-                      onClick={handleReset}
-                      disabled={resetting}
-                      className="px-4 py-2 text-sm bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded-lg hover:bg-red-200 dark:hover:bg-red-900/50 disabled:opacity-50"
-                    >
-                      {resetting ? "Resetting..." : "Reset Database"}
-                    </button>
-                  </div>
                 </div>
               ) : (
                 <div className="text-center py-4">
                   <p className="text-gray-500 dark:text-gray-400">
-                    No content yet. Generate content using the Report Generator or Generate page.
+                    No content yet.
                   </p>
                 </div>
               )}

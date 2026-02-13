@@ -62,82 +62,26 @@ De verstrekte informatie vervangt geen professioneel tandheelkundig onderzoek en
 // =============================================================================
 
 /**
- * Placeholder values for flagged (not implemented) variables
- * These clearly indicate what's missing
+ * Placeholder values for flagged (not implemented) variables.
+ * Variables with actual fallback content keep their text.
+ * Variables without data show {VARIABLE_NAME} so the missing variable is visible.
  */
 const FLAGGED_PLACEHOLDERS: Record<string, { en: string; nl: string }> = {
-  // Treatment Options (FLAGGED)
-  OPTION_1_NAME: {
-    en: "[FLAGGED: Treatment option data not available - requires treatmentOptions collection]",
-    nl: "[FLAGGED: Behandeloptie gegevens niet beschikbaar - vereist treatmentOptions collectie]"
-  },
-  OPTION_1_SHORT_DESCRIPTION: { en: "", nl: "" },
-  OPTION_1_INDICATION: { en: "", nl: "" },
-  OPTION_1_COMPLEXITY: { en: "", nl: "" },
-  OPTION_1_ADVANTAGES: { en: "", nl: "" },
-  OPTION_1_DISADVANTAGES: { en: "", nl: "" },
-  OPTION_2_NAME: {
-    en: "[FLAGGED: Treatment option data not available - requires treatmentOptions collection]",
-    nl: "[FLAGGED: Behandeloptie gegevens niet beschikbaar - vereist treatmentOptions collectie]"
-  },
-  OPTION_2_SHORT_DESCRIPTION: { en: "", nl: "" },
-  OPTION_2_INDICATION: { en: "", nl: "" },
-  OPTION_2_COMPLEXITY: { en: "", nl: "" },
-  OPTION_2_ADVANTAGES: { en: "", nl: "" },
-  OPTION_2_DISADVANTAGES: { en: "", nl: "" },
-  OPTIONAL_ADDITIONAL_OPTIONS: { en: "", nl: "" },
-  OPTIONAL_ADDITIONAL_OPTION_PRO_CON_BLOCKS: { en: "", nl: "" },
-
-  // Recommendation (FLAGGED)
-  RECOMMENDED_DIRECTION: {
-    en: "[FLAGGED: Recommendation engine not implemented - requires priority matrix]",
-    nl: "[FLAGGED: Aanbevelingsengine niet geïmplementeerd - vereist prioriteitsmatrix]"
-  },
-  TAG_NUANCE_DIRECTION: { en: "", nl: "" },
-  SELECTED_OPTION: {
-    en: "[FLAGGED: Treatment selection not implemented]",
-    nl: "[FLAGGED: Behandelselectie niet geïmplementeerd]"
-  },
-
-  // Results (FLAGGED)
-  RESULT_DESCRIPTION: { en: "", nl: "" },
-  COMFORT_EXPERIENCE: { en: "", nl: "" },
-  AESTHETIC_RESULT: { en: "", nl: "" },
-
-  // Duration (FLAGGED)
-  TREATMENT_DURATION: {
-    en: "[FLAGGED: Duration data not available - requires treatmentOptions collection]",
-    nl: "[FLAGGED: Duurgegevens niet beschikbaar - vereist treatmentOptions collectie]"
-  },
-  PHASE_1: { en: "", nl: "" },
-  PHASE_2: { en: "", nl: "" },
-  PHASE_3: { en: "", nl: "" },
-
-  // Risks (FLAGGED - partial)
+  // Risks (partial — has fallback content)
   GENERAL_RISK: {
     en: "temporary discomfort, swelling, and individual healing variations",
     nl: "tijdelijk ongemak, zwelling en individuele genezingsvariaties"
   },
-  SITUATION_SPECIFIC_CONSIDERATIONS: { en: "", nl: "" },
 
-  // Pricing (FLAGGED)
-  PRICE_MIN: {
-    en: "[FLAGGED: Pricing data not available - requires pricingData collection]",
-    nl: "[FLAGGED: Prijsgegevens niet beschikbaar - vereist pricingData collectie]"
-  },
-  PRICE_MAX: {
-    en: "[FLAGGED: Pricing data not available]",
-    nl: "[FLAGGED: Prijsgegevens niet beschikbaar]"
-  },
+  // Pricing (FLAGGED — no data yet)
+  PRICE_MIN: { en: "{PRICE_MIN}", nl: "{PRICE_MIN}" },
+  PRICE_MAX: { en: "{PRICE_MAX}", nl: "{PRICE_MAX}" },
   FACTOR_1: { en: "complexity of your individual case", nl: "complexiteit van uw individuele geval" },
   FACTOR_2: { en: "materials and techniques used", nl: "gebruikte materialen en technieken" },
   FACTOR_3: { en: "regional pricing variations", nl: "regionale prijsvariaties" },
 
-  // Recovery (FLAGGED - partial)
-  RECOVERY_DURATION: {
-    en: "[FLAGGED: Recovery data not available - requires treatmentOptions collection]",
-    nl: "[FLAGGED: Herstelgegevens niet beschikbaar - vereist treatmentOptions collectie]"
-  },
+  // Recovery (partial — has fallback content)
+  RECOVERY_DURATION: { en: "{RECOVERY_DURATION}", nl: "{RECOVERY_DURATION}" },
   RECOVERY_DISCOMFORT: {
     en: "mild swelling and sensitivity that typically resolves within a few days",
     nl: "milde zwelling en gevoeligheid die meestal binnen enkele dagen verdwijnt"
@@ -147,7 +91,7 @@ const FLAGGED_PLACEHOLDERS: Record<string, { en: string; nl: string }> = {
     nl: "ernstige pijn, aanhoudende bloeding, hoge koorts of tekenen van infectie"
   },
 
-  // Questions (FLAGGED)
+  // Questions (has fallback content)
   QUESTION_1: {
     en: "What are the specific treatment options for my situation?",
     nl: "Wat zijn de specifieke behandelopties voor mijn situatie?"
@@ -349,6 +293,16 @@ export class VariableCalculator {
             sourceId: scenarioId
           };
         }
+
+        if (option.complexity) {
+          resolved[`${prefix}_COMPLEXITY`] = {
+            variable: `${prefix}_COMPLEXITY` as NLGVariable,
+            value: option.complexity[language],
+            status: "resolved",
+            source: "scenario",
+            sourceId: scenarioId
+          };
+        }
       });
 
       // Map pricing
@@ -369,8 +323,51 @@ export class VariableCalculator {
         };
       }
 
-      // Map duration from first treatment option (as primary)
+      // Map fields from first treatment option (as primary)
       const primaryOption = scenario.treatment_options[0];
+
+      if (primaryOption?.result_description) {
+        resolved.RESULT_DESCRIPTION = {
+          variable: "RESULT_DESCRIPTION" as NLGVariable,
+          value: primaryOption.result_description[language],
+          status: "resolved",
+          source: "scenario",
+          sourceId: scenarioId
+        };
+      }
+
+      if (primaryOption?.comfort_experience) {
+        resolved.COMFORT_EXPERIENCE = {
+          variable: "COMFORT_EXPERIENCE" as NLGVariable,
+          value: primaryOption.comfort_experience[language],
+          status: "resolved",
+          source: "scenario",
+          sourceId: scenarioId
+        };
+      }
+
+      if (primaryOption?.aesthetic_result) {
+        resolved.AESTHETIC_RESULT = {
+          variable: "AESTHETIC_RESULT" as NLGVariable,
+          value: primaryOption.aesthetic_result[language],
+          status: "resolved",
+          source: "scenario",
+          sourceId: scenarioId
+        };
+      }
+
+      if (primaryOption?.phases?.length) {
+        primaryOption.phases.forEach((phase, i) => {
+          resolved[`PHASE_${i + 1}`] = {
+            variable: `PHASE_${i + 1}` as NLGVariable,
+            value: phase[language],
+            status: "resolved",
+            source: "scenario",
+            sourceId: scenarioId
+          };
+        });
+      }
+
       if (primaryOption?.duration) {
         resolved.TREATMENT_DURATION = {
           variable: "TREATMENT_DURATION" as NLGVariable,
@@ -419,34 +416,6 @@ export class VariableCalculator {
   generateFlags(): NLGFlag[] {
     const flags: NLGFlag[] = [];
 
-    // Treatment Options Flag
-    flags.push({
-      component: "TreatmentOptionService",
-      reason: "Treatment option structured data (names, descriptions, pros/cons, phases) does not exist. Requires: treatmentOptions MongoDB collection with ~12 treatment records.",
-      affectedVariables: [
-        "OPTION_1_NAME", "OPTION_1_SHORT_DESCRIPTION", "OPTION_1_INDICATION",
-        "OPTION_1_COMPLEXITY", "OPTION_1_ADVANTAGES", "OPTION_1_DISADVANTAGES",
-        "OPTION_2_NAME", "OPTION_2_SHORT_DESCRIPTION", "OPTION_2_INDICATION",
-        "OPTION_2_COMPLEXITY", "OPTION_2_ADVANTAGES", "OPTION_2_DISADVANTAGES",
-        "OPTIONAL_ADDITIONAL_OPTIONS", "OPTIONAL_ADDITIONAL_OPTION_PRO_CON_BLOCKS",
-        "RESULT_DESCRIPTION", "COMFORT_EXPERIENCE", "AESTHETIC_RESULT",
-        "TREATMENT_DURATION", "PHASE_1", "PHASE_2", "PHASE_3",
-        "GENERAL_RISK", "RECOVERY_DURATION", "RECOVERY_DISCOMFORT", "ALARM_SIGNAL"
-      ],
-      workaround: "Variables show placeholder text indicating missing data"
-    });
-
-    // Recommendation Engine Flag
-    flags.push({
-      component: "RecommendationEngine",
-      reason: "Treatment recommendation logic (priority matrix, option ranking) not implemented. Requires: driver-to-treatment priority rules + recommendation algorithm.",
-      affectedVariables: [
-        "RECOMMENDED_DIRECTION", "TAG_NUANCE_DIRECTION", "SELECTED_OPTION",
-        "SITUATION_SPECIFIC_CONSIDERATIONS"
-      ],
-      workaround: "Variables show placeholder text indicating missing logic"
-    });
-
     // Pricing Flag
     flags.push({
       component: "PricingService",
@@ -477,7 +446,16 @@ export class VariableCalculator {
     return {
       implemented: [
         "DISCLAIMER_TEXT (static content)",
-        "OPTIONAL_*_TAG_BLOCK (6 variables - uses existing ContentSelector)"
+        "OPTIONAL_*_TAG_BLOCK (6 variables - uses existing ContentSelector)",
+        "OPTION_N_NAME, OPTION_N_SHORT_DESCRIPTION, OPTION_N_INDICATION (scenario treatment options)",
+        "OPTION_N_COMPLEXITY, OPTION_N_ADVANTAGES, OPTION_N_DISADVANTAGES (scenario treatment options)",
+        "RESULT_DESCRIPTION, COMFORT_EXPERIENCE, AESTHETIC_RESULT (primary treatment option)",
+        "PHASE_1, PHASE_2, PHASE_3 (primary treatment option phases)",
+        "TREATMENT_DURATION, RECOVERY_DURATION, RECOVERY_DISCOMFORT (primary treatment option)",
+        "RECOMMENDED_DIRECTION, SELECTED_OPTION, TAG_NUANCE_DIRECTION (scenario NLG variables)",
+        "SITUATION_SPECIFIC_CONSIDERATIONS (scenario NLG variables)",
+        "OPTIONAL_ADDITIONAL_OPTIONS, OPTIONAL_ADDITIONAL_OPTION_PRO_CON_BLOCKS (scenario NLG variables)",
+        "PRICE_MIN, PRICE_MAX (scenario aggregate pricing)"
       ],
       partial: [
         "AGE_CATEGORY, MAIN_CONCERN, SHORT_SITUATION_DESCRIPTION (driver mappings)",
@@ -487,13 +465,7 @@ export class VariableCalculator {
         "FACTOR_1, FACTOR_2, FACTOR_3 (generic fallbacks)",
         "QUESTION_1, QUESTION_2, QUESTION_3 (generic fallbacks)"
       ],
-      flagged: [
-        "OPTION_1_*, OPTION_2_* (12 vars - needs treatmentOptions collection)",
-        "RECOMMENDED_DIRECTION, SELECTED_OPTION (needs recommendation engine)",
-        "RESULT_DESCRIPTION, COMFORT_EXPERIENCE, AESTHETIC_RESULT (needs treatment data)",
-        "TREATMENT_DURATION, PHASE_1-3 (needs treatment data)",
-        "PRICE_MIN, PRICE_MAX (needs pricingData collection)"
-      ]
+      flagged: []
     };
   }
 }

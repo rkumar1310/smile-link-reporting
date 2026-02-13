@@ -3,8 +3,6 @@
 import { useMemo } from "react";
 import type {
   ReportPhase,
-  ContentBlockProgress,
-  DerivativeProgress,
 } from "@/lib/types/types/report-generation";
 
 interface PhaseConfig {
@@ -46,32 +44,12 @@ const PHASE_CONFIG: PhaseConfig[] = [
     ),
   },
   {
-    id: "generating",
-    label: "Generate & Verify",
-    activeLabel: "Generating & verifying content...",
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-      </svg>
-    ),
-  },
-  {
     id: "composing",
     label: "Compose Report",
     activeLabel: "Composing your report...",
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-      </svg>
-    ),
-  },
-  {
-    id: "evaluating",
-    label: "Quality Evaluation",
-    activeLabel: "Running LLM quality evaluation...",
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
       </svg>
     ),
   },
@@ -305,72 +283,7 @@ function PhaseDataDisplay({ phase, data, isActive }: PhaseDataDisplayProps) {
     );
   }
 
-  if (phase === "generating" && typeof data.current === "number") {
-    const factCheck = data.factCheck as { status: string; attempt: number; maxAttempts: number; score?: number } | undefined;
-    const contentBlocks = data.contentBlocks as ContentBlockProgress[] | undefined;
-
-    return (
-      <div className="mt-2 space-y-3">
-        {/* Progress bar */}
-        <div>
-          <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 mb-1">
-            <span>Content {String(data.current)}/{String(data.total)}</span>
-            <span className="text-gray-400">{data.currentContent as string}</span>
-          </div>
-          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5">
-            <div
-              className="bg-blue-600 h-1.5 rounded-full transition-all duration-300"
-              style={{ width: `${((data.current as number) / (data.total as number)) * 100}%` }}
-            />
-          </div>
-        </div>
-
-        {/* Fact-check status */}
-        {factCheck && (
-          <div className="flex items-center gap-2 text-xs">
-            {factCheck.status === "checking" && (
-              <>
-                <span className="text-blue-500 dark:text-blue-400 animate-pulse">Verifying...</span>
-                <span className="text-gray-400">attempt {factCheck.attempt}/{factCheck.maxAttempts}</span>
-              </>
-            )}
-            {factCheck.status === "passed" && (
-              <>
-                <span className="text-green-600 dark:text-green-400">Verified</span>
-                {factCheck.score !== undefined && (
-                  <span className="text-gray-400">({(factCheck.score * 100).toFixed(0)}%)</span>
-                )}
-              </>
-            )}
-            {factCheck.status === "failed" && factCheck.score !== undefined && (
-              <span className="text-amber-600 dark:text-amber-400">
-                Failed ({(factCheck.score * 100).toFixed(0)}%) - will retry
-              </span>
-            )}
-            {factCheck.status === "retrying" && (
-              <span className="text-amber-500 dark:text-amber-400 animate-pulse">
-                Regenerating (attempt {factCheck.attempt}/{factCheck.maxAttempts})...
-              </span>
-            )}
-          </div>
-        )}
-
-        {/* Content blocks list */}
-        {contentBlocks && contentBlocks.length > 0 && (
-          <div className="pl-2 border-l-2 border-gray-200 dark:border-gray-600 space-y-1 max-h-32 overflow-y-auto">
-            {contentBlocks.map((block) => (
-              <ContentBlockItem key={block.id} block={block} />
-            ))}
-          </div>
-        )}
-      </div>
-    );
-  }
-
   if (phase === "composing") {
-    const derivatives = data.derivatives as DerivativeProgress[] | undefined;
-    const currentDerivative = data.currentDerivative as number | undefined;
-    const totalDerivatives = data.totalDerivatives as number | undefined;
     const currentSection = data.currentSection as string | undefined;
 
     return (
@@ -388,168 +301,11 @@ function PhaseDataDisplay({ phase, data, isActive }: PhaseDataDisplayProps) {
             Composing: {currentSection}
           </div>
         )}
-
-        {/* Derivatives list */}
-        {derivatives && derivatives.length > 0 && (
-          <div className="space-y-1">
-            <div className="text-xs text-gray-500 dark:text-gray-400">
-              Derivatives: {currentDerivative || 0}/{totalDerivatives || derivatives.length}
-            </div>
-            <div className="pl-2 border-l-2 border-gray-200 dark:border-gray-600 space-y-1">
-              {derivatives.map((deriv) => (
-                <DerivativeItem key={deriv.sectionNumber} derivative={deriv} />
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-    );
-  }
-
-  if (phase === "evaluating") {
-    const dimensions = data.dimensions as Record<string, number> | undefined;
-    const overallScore = data.overallScore as number | undefined;
-    const outcome = data.outcome as string | undefined;
-
-    return (
-      <div className="mt-2 space-y-2">
-        {/* Overall score */}
-        {overallScore !== undefined && (
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-gray-500 dark:text-gray-400">Overall:</span>
-            <span className={`text-sm font-medium ${
-              overallScore >= 8 ? "text-green-600 dark:text-green-400" :
-              overallScore >= 6 ? "text-amber-600 dark:text-amber-400" :
-              "text-red-600 dark:text-red-400"
-            }`}>
-              {overallScore.toFixed(1)}/10
-            </span>
-            {outcome && (
-              <span className={`text-xs px-1.5 py-0.5 rounded ${
-                outcome === "PASS" ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300" :
-                outcome === "FLAG" ? "bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300" :
-                "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300"
-              }`}>
-                {outcome}
-              </span>
-            )}
-          </div>
-        )}
-
-        {/* Dimension scores */}
-        {dimensions && (
-          <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs">
-            {Object.entries(dimensions).map(([key, score]) => (
-              <div key={key} className="flex items-center justify-between">
-                <span className="text-gray-500 dark:text-gray-400 capitalize">
-                  {key.replace(/_/g, " ")}
-                </span>
-                <span className={`font-medium ${
-                  score >= 8 ? "text-green-600 dark:text-green-400" :
-                  score >= 6 ? "text-amber-600 dark:text-amber-400" :
-                  "text-red-600 dark:text-red-400"
-                }`}>
-                  {score}/10
-                </span>
-              </div>
-            ))}
-          </div>
-        )}
       </div>
     );
   }
 
   return null;
-}
-
-/**
- * Component to display individual content block progress
- */
-function ContentBlockItem({ block }: { block: ContentBlockProgress }) {
-  const statusConfig = {
-    pending: {
-      color: "bg-gray-400",
-      text: "text-gray-500 dark:text-gray-400",
-      label: "",
-    },
-    generating: {
-      color: "bg-blue-500 animate-pulse",
-      text: "text-blue-600 dark:text-blue-400",
-      label: "Generating...",
-    },
-    verifying: {
-      color: "bg-amber-500 animate-pulse",
-      text: "text-amber-600 dark:text-amber-400",
-      label: "Verifying...",
-    },
-    done: {
-      color: "bg-green-500",
-      text: "text-green-600 dark:text-green-400",
-      label: block.factCheckScore ? `${(block.factCheckScore * 100).toFixed(0)}%` : "Done",
-    },
-    failed: {
-      color: "bg-red-500",
-      text: "text-red-600 dark:text-red-400",
-      label: "Failed",
-    },
-  };
-
-  const config = statusConfig[block.status] || statusConfig.pending;
-
-  return (
-    <div className="flex items-center gap-2 text-xs">
-      <span className={`w-2 h-2 rounded-full shrink-0 ${config.color}`} />
-      <span className={`truncate ${config.text}`}>{block.name}</span>
-      {config.label && (
-        <span className={`text-[10px] ${config.text}`}>({config.label})</span>
-      )}
-    </div>
-  );
-}
-
-/**
- * Component to display individual derivative progress
- */
-function DerivativeItem({ derivative }: { derivative: DerivativeProgress }) {
-  const statusConfig = {
-    pending: {
-      color: "bg-gray-400",
-      text: "text-gray-500 dark:text-gray-400",
-      label: `${derivative.sourceBlockCount} blocks`,
-    },
-    generating: {
-      color: "bg-blue-500 animate-pulse",
-      text: "text-blue-600 dark:text-blue-400",
-      label: "Synthesizing...",
-    },
-    cached: {
-      color: "bg-purple-500",
-      text: "text-purple-600 dark:text-purple-400",
-      label: "Cached",
-    },
-    done: {
-      color: "bg-green-500",
-      text: "text-green-600 dark:text-green-400",
-      label: "Done",
-    },
-    failed: {
-      color: "bg-amber-500",
-      text: "text-amber-600 dark:text-amber-400",
-      label: "Fallback",
-    },
-  };
-
-  const config = statusConfig[derivative.status] || statusConfig.pending;
-
-  return (
-    <div className="flex items-center gap-2 text-xs">
-      <span className={`w-2 h-2 rounded-full shrink-0 ${config.color}`} />
-      <span className={`truncate ${config.text}`}>
-        Section {derivative.sectionNumber}: {derivative.sectionName}
-      </span>
-      <span className={`text-[10px] ${config.text}`}>({config.label})</span>
-    </div>
-  );
 }
 
 export default ReportGenerationProgress;

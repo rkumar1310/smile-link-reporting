@@ -4,7 +4,8 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import { ReportGenerationProgress } from "@/components/report/ReportGenerationProgress";
 import { ReportDisplay } from "@/components/report/ReportDisplay";
-import type { ReportPhase, ReportPhaseEvent, ComposedReport, IntakeAnswers, LLMEvaluationData } from "@/lib/types/types/report-generation";
+import { AuditTrail } from "@/components/report/AuditTrail";
+import type { ReportPhase, ReportPhaseEvent, ComposedReport, IntakeAnswers, ReportAuditData } from "@/lib/types/types/report-generation";
 
 // Question option types
 interface Option {
@@ -318,7 +319,7 @@ export default function ReportGeneratorPage() {
   const [phases, setPhases] = useState<PhaseState[]>([]);
   const [currentPhase, setCurrentPhase] = useState<ReportPhase | undefined>();
   const [report, setReport] = useState<ComposedReport | null>(null);
-  const [llmEvaluation, setLlmEvaluation] = useState<LLMEvaluationData | null>(null);
+  const [auditData, setAuditData] = useState<ReportAuditData | null>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
 
   // Initialize phases for progress display
@@ -327,7 +328,6 @@ export default function ReportGeneratorPage() {
       { phase: "analyzing", status: "pending" },
       { phase: "tone", status: "pending" },
       { phase: "content-check", status: "pending" },
-      { phase: "generating", status: "pending" },
       { phase: "composing", status: "pending" },
     ]);
   }, []);
@@ -363,9 +363,8 @@ export default function ReportGeneratorPage() {
     // Handle completion
     if (event.phase === "complete" && "data" in event && event.data?.report) {
       setReport(event.data.report as ComposedReport);
-      // Extract LLM evaluation if present
-      if (event.data.llmEvaluation) {
-        setLlmEvaluation(event.data.llmEvaluation as LLMEvaluationData);
+      if (event.data.audit) {
+        setAuditData(event.data.audit as ReportAuditData);
       }
       setViewState("complete");
     }
@@ -392,7 +391,7 @@ export default function ReportGeneratorPage() {
 
       const url = useMockMode
         ? "/api/report/generate/stream?mock=true"
-        : "/api/report/generate/stream?pipeline=true";  // Use new core pipeline
+        : "/api/report/generate/stream";
 
       const response = await fetch(url, {
         method: "POST",
@@ -461,7 +460,7 @@ export default function ReportGeneratorPage() {
   const handleGenerateNew = useCallback(() => {
     setViewState("form");
     setReport(null);
-    setLlmEvaluation(null);
+    setAuditData(null);
     setPhases([]);
     setCurrentPhase(undefined);
     setError(null);
@@ -592,16 +591,23 @@ export default function ReportGeneratorPage() {
           </div>
         )}
 
-        {/* View: Complete - Show report with Q&A sidebar */}
+        {/* View: Complete - Show audit + report with Q&A sidebar */}
         {viewState === "complete" && report && (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Report - 2/3 on large screens */}
-            <div className="lg:col-span-2">
-              <ReportDisplay report={report} llmEvaluation={llmEvaluation ?? undefined} onGenerateNew={handleGenerateNew} />
-            </div>
-            {/* Q&A Panel - 1/3 on large screens */}
-            <div className="lg:col-span-1">
-              <IntakeAnswersPanel answers={answers} />
+          <div className="space-y-6">
+            {/* Audit Trail - full width above report */}
+            {auditData && (
+              <AuditTrail audit={auditData} />
+            )}
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {/* Report - 2/3 on large screens */}
+              <div className="lg:col-span-2">
+                <ReportDisplay report={report} onGenerateNew={handleGenerateNew} />
+              </div>
+              {/* Q&A Panel - 1/3 on large screens */}
+              <div className="lg:col-span-1">
+                <IntakeAnswersPanel answers={answers} />
+              </div>
             </div>
           </div>
         )}
@@ -681,7 +687,7 @@ export default function ReportGeneratorPage() {
                     Mock Mode
                   </label>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    Use simulated data for UI testing (no LLM calls)
+                    Use simulated data for UI testing
                   </p>
                 </div>
                 <button
