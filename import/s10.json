@@ -1,0 +1,163 @@
+{
+  "scenario_id": "S10",
+  "name": {
+    "en": "Full-mouth rebuild: fixed bridges vs click dentures (upper and lower)",
+    "nl": "Volledige heropbouw: vaste bruggen vs klikgebit (boven en onder)"
+  },
+  "block_0_personal_summary": {
+    "CONTEXT_DESCRIPTION": {
+      "en": "a situation in which most teeth are described as no longer maintainable, with a need to rebuild comfort and function",
+      "nl": "een situatie waarbij het merendeel van de tanden als niet meer behoudbaar wordt beschreven, met nood aan heropbouw van comfort en functie"
+    },
+    "PRIMARY_GOAL": {
+      "en": "regaining comfort, stability, and everyday confidence when eating, speaking, and smiling",
+      "nl": "opnieuw comfort, stabiliteit en dagelijkse zekerheid bij eten, spreken en lachen"
+    },
+    "MAIN_CONSTRAINT": {
+      "en": "the desired level of “fixedness,” the feasibility of a multi-month trajectory, manageable maintenance routines, and financial reach",
+      "nl": "de gewenste mate van vastheid, de haalbaarheid van een traject over meerdere maanden, uitvoerbare onderhoudsgewoonten en financiële draagkracht"
+    }
+  },
+  "block_1_situation": {
+    "CORE_SITUATION_DESCRIPTION": {
+      "en": "most teeth being described as not realistically preservable, which may affect chewing comfort, bite stability, and appearance",
+      "nl": "het gegeven dat de meeste tanden als niet realistisch te behouden worden beschreven, wat kauwcomfort, beetstabiliteit en uitstraling kan beïnvloeden"
+    },
+    "NUANCE_FACTOR": {
+      "en": "the emotional weight of reaching a “turning point,” shifting from small repairs to full rebuilding",
+      "nl": "het kantelpunt waarbij de focus verschuift van kleine herstellingen naar volledige heropbouw, met emotionele impact"
+    },
+    "SECONDARY_FACTOR": {
+      "en": "the difference in daily experience between fully fixed solutions and removable (implant-retained) directions",
+      "nl": "het verschil in dagelijkse beleving tussen een volledig vaste oplossing en een (deels) uitneembare richting op implantaten"
+    }
+  },
+  "block_2_treatment_directions": {
+    "DIRECTION_1_CORE": {
+      "en": "both upper and lower arches being restored with fixed bridges supported by implants to maximize stability and a “tooth-like” feel",
+      "nl": "boven- en onderkaak met vaste bruggen op implantaten worden hersteld om maximale stabiliteit en een “tandachtig” gevoel na te streven"
+    },
+    "DIRECTION_2_CORE": {
+      "en": "upper and lower implant-retained overdentures (“click dentures”) to improve stability while remaining removable for cleaning",
+      "nl": "klikgebitten boven en onder op implantaten om stabiliteit te vergroten met behoud van uitneembaarheid voor reiniging"
+    },
+    "DIRECTION_3_CORE": {
+      "en": "one arch being restored with a fixed bridge while the other uses an implant-retained overdenture to balance comfort with feasibility",
+      "nl": "één kaak vast wordt hersteld en de andere met een klikgebit, om comfort en haalbaarheid te combineren"
+    }
+  },
+  "block_3_options": [
+    {
+      "OPTION_TITLE": {
+        "en": "Option 1: Fixed teeth upper and lower (fixed bridges on implants)",
+        "nl": "Optie 1: Vast gebit boven en onder (vaste bruggen op implantaten)"
+      },
+      "OPTION_DESCRIPTION": {
+        "en": "placing multiple implants in both arches and attaching non-removable bridges (often described within All-on-4 / All-on-6 concepts)",
+        "nl": "het plaatsen van meerdere implantaten in beide kaken en het aanbrengen van niet-uitneembare bruggen (vaak beschreven als All-on-4 / All-on-6)"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "planning and diagnostics, implant placement (sometimes in phases), a healing period, and then fitting and fine-tuning the final fixed bridges; overall commonly ~4–9 months, with ~5–10 days of recovery after each surgical phase",
+        "nl": "uitgebreide planning en diagnostiek, implantatie (soms gefaseerd), een genezingsperiode en daarna het plaatsen en verfijnen van de definitieve vaste bruggen; totaal vaak ~4–9 maanden, met ~5–10 dagen herstel na elke chirurgische fase"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "higher overall cost and a longer, staged timeline, plus the need for consistent hygiene routines and professional follow-up",
+        "nl": "een hogere kost, een langer en gefaseerd verloop, en het belang van vaste hygiëneroutines en professionele opvolging"
+      },
+      "PROFILE_MATCH": {
+        "en": "prioritize maximum stability and comfort and are open to a multi-step trajectory",
+        "nl": "maximale vastheid en comfort belangrijk vinden en een meerstaps traject aanvaardbaar vinden"
+      },
+      "pricing": {
+        "min": 20000,
+        "max": 50000,
+        "currency": "EUR"
+      },
+      "duration": {
+        "min_months": 4,
+        "max_months": 9
+      },
+      "recovery_days": 10
+    },
+    {
+      "OPTION_TITLE": {
+        "en": "Option 2: Click dentures upper and lower (implant-retained overdentures)",
+        "nl": "Optie 2: Klikgebit boven en onder (overkappingsprotheses op implantaten)"
+      },
+      "OPTION_DESCRIPTION": {
+        "en": "placing implants in both arches and using a retention system so removable dentures “click” into place for improved stability",
+        "nl": "implantaten in beide kaken met een bevestigingssysteem waarop uitneembare protheses vastklikken voor meer stabiliteit"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "implant placement, a healing period, then fabrication/adjustment of the overdentures and attachment system; overall commonly ~4–9 months, with ~5–10 days of recovery after each surgical phase",
+        "nl": "implantatie, een genezingsperiode en daarna het vervaardigen/afstellen van protheses en het kliksysteem; totaal vaak ~4–9 maanden, met ~5–10 dagen herstel na elke chirurgische fase"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "the solution remaining removable, typically requiring daily removal, and potentially feeling less “natural-tooth-like” than fixed bridges depending on expectations and adaptation",
+        "nl": "de oplossing uitneembaar blijft, dagelijks uitnemen doorgaans nodig is, en het gevoel minder “natuurlijk” kan zijn dan bij vaste bruggen afhankelijk van verwachting en gewenning"
+      },
+      "PROFILE_MATCH": {
+        "en": "want a meaningful stability improvement with lower complexity and cost than fully fixed bridges",
+        "nl": "duidelijke stabiliteitswinst zoeken met minder complexiteit en lagere kost dan volledig vast"
+      },
+      "pricing": {
+        "min": 8000,
+        "max": 15000,
+        "currency": "EUR"
+      },
+      "duration": {
+        "min_months": 4,
+        "max_months": 9
+      },
+      "recovery_days": 10
+    },
+    {
+      "OPTION_TITLE": {
+        "en": "Option 3: Fixed upper + click denture lower (hybrid full-mouth approach)",
+        "nl": "Optie 3: Vast boven + klikgebit onder (hybride full-mouth aanpak)"
+      },
+      "OPTION_DESCRIPTION": {
+        "en": "a fixed bridge on implants in one arch combined with an implant-retained removable overdenture in the other arch",
+        "nl": "een vaste brug op implantaten in één kaak gecombineerd met een uitneembaar klikgebit op implantaten in de andere kaak"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "planning for bite balance across two systems, implant placement and healing (often staged), then fitting the fixed bridge and the overdenture and adjusting them together; overall commonly ~4–9 months, with ~5–10 days of recovery after each surgical phase",
+        "nl": "planning met focus op beetbalans tussen twee systemen, implantatie en genezing (vaak in fases), gevolgd door plaatsing van de vaste brug en het klikgebit en gezamenlijke afstelling; totaal vaak ~4–9 maanden, met ~5–10 dagen herstel na elke chirurgische fase"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "a different day-to-day feel between upper and lower, plus maintenance across two systems and the need for careful force/bite balancing",
+        "nl": "een verschil in beleving tussen boven en onder, onderhoud over twee systemen en de nood aan zorgvuldige kracht-/beetafstemming"
+      },
+      "PROFILE_MATCH": {
+        "en": "seek a middle ground between maximum fixedness and practical feasibility",
+        "nl": "een evenwicht zoeken tussen maximale vastheid en praktische haalbaarheid"
+      },
+      "pricing": {
+        "min": 20000,
+        "max": 30000,
+        "currency": "EUR"
+      },
+      "duration": {
+        "min_months": 4,
+        "max_months": 9
+      },
+      "recovery_days": 10
+    }
+  ],
+  "block_4_expected_results": {
+    "en": "Across directions, the intended outcome may be improved confidence when eating, speaking, and smiling, with a more stable sense of function. Fixed bridges typically emphasize a more consistently “fixed” feel, while click dentures emphasize practical stability combined with removability for cleaning. A hybrid approach may aim to balance stability and feasibility per arch. How results are experienced can vary with bone and gum conditions, implant distribution and number, bite forces, material choices, adaptation over time, and long-term maintenance habits.",
+    "nl": "In alle richtingen kan het doel zijn dat u opnieuw met meer zekerheid eet, spreekt en lacht, met een stabieler gevoel in functie. Vaste bruggen leggen doorgaans de nadruk op een consequenter “vast” gevoel, terwijl klikgebitten vooral praktische stabiliteit combineren met uitneembaarheid voor reiniging. Een hybride aanpak kan proberen comfort en haalbaarheid per kaak in balans te brengen. Hoe het resultaat wordt ervaren, kan variëren door bot- en tandvleesconditie, verdeling en aantal implantaten, beetkrachten, materiaalkeuze, gewenning en onderhoud op langere termijn."
+  },
+  "block_5_duration": {
+    "en": "A full-mouth pathway is typically built from multiple steps rather than one single appointment. In many cases, an overall timeframe of roughly four to nine months may be discussed, though this can vary widely. The total duration may be influenced by whether surgery happens in one or multiple phases, how healing progresses, planning complexity, laboratory turnaround times, and the sequence of steps chosen by the treating team.",
+    "nl": "Een full-mouth traject verloopt meestal in meerdere stappen in plaats van één afspraak. Vaak wordt een globale doorlooptijd van ongeveer vier tot negen maanden besproken, al kan dit sterk verschillen. De totale duur kan beïnvloed worden door het aantal chirurgische fases, de genezingsreactie, de complexiteit van de planning, laboratoriumtijd en de volgorde waarin stappen worden uitgevoerd."
+  },
+  "block_6_recovery": {
+    "en": "After surgical phases, swelling, tenderness, or pressure can occur, and some people describe needing roughly five to ten days to feel more comfortable again after each surgical step. Daily activities can often be resumed gradually, but the experience may feel “spread out” when multiple phases are planned over months. If pain, swelling, instability, or difficulties with speaking/biting persist or worsen, it may be appropriate to seek further professional evaluation because healing and adaptation differ per person.",
+    "nl": "Na chirurgische fases kan zwelling, napijn of drukgevoel optreden, en sommige mensen rekenen op ongeveer vijf tot tien dagen om na elke chirurgische stap weer comfortabeler te functioneren. Dagelijkse activiteiten kunnen doorgaans geleidelijk worden hervat, maar wanneer meerdere fases nodig zijn kan het herstel als gespreid over maanden aanvoelen. Bij aanhoudende of toenemende pijn, zwelling, instabiliteit of hinder bij spreken/bijten kan verdere professionele evaluatie passend zijn, omdat genezing en gewenning per persoon verschillen."
+  },
+  "block_7_cost": {
+    "en": "Costs can vary substantially based on the number of implants, material selection, technical complexity, diagnostics and planning, and how challenging the starting situation is. In this scenario, indicative ranges were described as roughly €20,000–€50,000 for fixed upper and lower, €8,000–€15,000 for click dentures upper and lower, and €20,000–€30,000 for a fixed-plus-click combination. Additional phases, refinements, follow-up care, and maintenance components can also influence the final total.",
+    "nl": "De kosten kunnen sterk variëren afhankelijk van het aantal implantaten, materiaalkeuze, technische uitvoering, diagnostiek en planning, en de complexiteit van de startsituatie. In dit scenario werden indicatieve ranges genoemd van ongeveer €20.000–€50.000 voor vast boven en onder, €8.000–€15.000 voor klikgebitten boven en onder, en €20.000–€30.000 voor een combinatie van vast en klikgebit. Eventuele extra fases, verfijningen, opvolgzorg en onderhoud kunnen het totaalbedrag mee beïnvloeden."
+  }
+}

@@ -21,8 +21,6 @@ import { intakeValidator } from "./validation/IntakeValidator";
 import { tagExtractor } from "./engines/TagExtractor";
 import { driverDeriver } from "./engines/DriverDeriver";
 import { scenarioScorer } from "./engines/ScenarioScorer";
-import { toneSelector } from "./engines/ToneSelector";
-import { contentSelector } from "./engines/ContentSelector";
 import { generateNLGReport } from "./nlg";
 
 /**
@@ -182,69 +180,12 @@ export class ReportPipeline {
         duration_ms: Date.now() - scenarioStart
       });
 
-      // Phase 4: Tone Selection
-      await this.emitProgress({
-        phase: 4,
-        phaseName: "tone_selection",
-        status: "started",
-        message: "Selecting communication tone...",
-        timestamp: new Date().toISOString()
-      });
-
-      const toneStart = Date.now();
-      const toneResult = toneSelector.select(driverState);
-
-      await this.emitProgress({
-        phase: 4,
-        phaseName: "tone_selection",
-        status: "completed",
-        message: `Selected tone: ${toneResult.selected_tone}`,
-        timestamp: new Date().toISOString(),
-        metrics: {
-          tone: toneResult.selected_tone,
-          reason: toneResult.reason,
-          triggersEvaluated: toneResult.evaluated_triggers.length
-        },
-        duration_ms: Date.now() - toneStart
-      });
-
-      // Phase 5: Content Selection (kept for audit data)
-      await this.emitProgress({
-        phase: 5,
-        phaseName: "content_selection",
-        status: "started",
-        message: "Selecting content for report...",
-        timestamp: new Date().toISOString(),
-        metrics: { scenario: scenarioMatch.matched_scenario }
-      });
-
-      const contentStart = Date.now();
-      const contentSelections = contentSelector.select(
-        driverState,
-        scenarioMatch,
-        toneResult.selected_tone,
-        tagSet
-      );
-
-      await this.emitProgress({
-        phase: 5,
-        phaseName: "content_selection",
-        status: "completed",
-        message: `Selected ${contentSelections.length} content blocks`,
-        timestamp: new Date().toISOString(),
-        metrics: {
-          contentCount: contentSelections.length,
-          scenario: scenarioMatch.matched_scenario
-        },
-        duration_ms: Date.now() - contentStart
-      });
-
       // Extract language from intake (defaults to English)
       const language: SupportedLanguage = intake.language ?? DEFAULT_LANGUAGE;
 
-      // Phase 6: NLG Template Rendering (replaces old Phase 6 scenario load + Phase 7 composition)
+      // Phase 4: NLG Template Rendering
       await this.emitProgress({
-        phase: 6,
+        phase: 4,
         phaseName: "nlg_rendering",
         status: "started",
         message: "Rendering report via NLG template...",
@@ -258,7 +199,7 @@ export class ReportPipeline {
         driverState,
         tags: tagSet,
         language,
-        tone: toneResult.selected_tone,
+        tone: "TP-01",
         scenarioId: scenarioMatch.matched_scenario,
         metadata: intake.metadata ? {
           patientName: intake.metadata.patient_name,
@@ -275,14 +216,14 @@ export class ReportPipeline {
         resolved: Object.values(nlgOutput.variableResolution.variables)
           .filter(v => v.status === "resolved").length,
         flagged: Object.values(nlgOutput.variableResolution.variables)
-          .filter(v => v.status === "not_implemented" || v.status === "missing_data").length,
+          .filter(v => v.status === "missing_data").length,
         fallback: nlgOutput.variableResolution.fallbackCount,
       };
 
       const nlgWarnings = nlgOutput.warnings.map(w => `[${w.severity}] ${w.code}: ${w.message}`);
 
       await this.emitProgress({
-        phase: 6,
+        phase: 4,
         phaseName: "nlg_rendering",
         status: "completed",
         message: `Report rendered: ${sections.length} sections, ${totalWordCount} words`,
@@ -302,12 +243,12 @@ export class ReportPipeline {
       const report: ComposedReport = {
         session_id: intake.session_id,
         scenario_id: scenarioMatch.matched_scenario,
-        tone: toneResult.selected_tone,
+        tone: "TP-01",
         language,
         confidence: scenarioMatch.confidence,
         sections,
         total_word_count: totalWordCount,
-        warnings_included: sections.some(s => s.section_name === "Disclaimer" || s.section_name === "Disclaimer"),
+        warnings_included: false,
         suppressed_sections: [],
         placeholders_resolved: variableStats.resolved,
         placeholders_unresolved: nlgOutput.variableResolution.missingDataVariables,
@@ -322,8 +263,12 @@ export class ReportPipeline {
         intake,
         driver_state: driverState,
         scenario_match: scenarioMatch,
-        content_selections: contentSelections,
-        tone_selection: toneResult,
+        content_selections: [],
+        tone_selection: {
+          selected_tone: "TP-01",
+          reason: "Fixed default (tone system removed)",
+          evaluated_triggers: []
+        },
         composed_report: report,
         validation_result: {
           valid: true,
@@ -446,7 +391,9 @@ export class ReportPipeline {
  * Parse NLG rendered markdown into ReportSection[]
  *
  * The NLG template uses `---` dividers between sections.
- * Each section starts with `## Title` (except the first which is the disclaimer).
+ * Each section starts with `## Title`.
+ * Blocks 0-8 map to: Personal Summary, Your Situation, Treatment Directions,
+ * Option Overview, Expected Results, Duration, Recovery, Cost, Next Steps.
  */
 function parseNLGSections(renderedReport: string): ReportSection[] {
   const sections: ReportSection[] = [];
@@ -459,7 +406,7 @@ function parseNLGSections(renderedReport: string): ReportSection[] {
 
     // Extract title from ## heading
     const titleMatch = chunk.match(/^##\s+(.+)$/m);
-    const title = titleMatch ? titleMatch[1].trim() : (i === 0 ? "Disclaimer" : `Section ${i}`);
+    const title = titleMatch ? titleMatch[1].trim() : `Block ${i}`;
 
     // Content is the full chunk (including the title for markdown rendering)
     const content = chunk;

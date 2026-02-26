@@ -1,0 +1,108 @@
+{
+  "scenario_id": "S__17",
+  "name": { "en": "Single missing tooth between restored neighboring teeth", "nl": "Eén ontbrekende tand tussen reeds herstelde buurtanden" },
+  "block_0_personal_summary": {
+    "CONTEXT_DESCRIPTION": {
+      "en": "a single missing tooth between two already restored neighboring teeth, where integration with existing work matters aesthetically and functionally",
+      "nl": "één ontbrekende tand tussen twee reeds herstelde buurtanden, waarbij aansluiting op bestaand werk esthetisch en functioneel meespeelt"
+    },
+    "PRIMARY_GOAL": {
+      "en": "a solution that feels stable for chewing while blending naturally in color, shape, and finish",
+      "nl": "een oplossing die stevig aanvoelt bij het kauwen én natuurlijk aansluit in kleur, vorm en afwerking"
+    },
+    "MAIN_CONSTRAINT": {
+      "en": "the condition of the neighboring teeth, preference for a faster integrated vs. more independent approach, and your comfort with surgery, time, and cost",
+      "nl": "de sterkte/conditie van de buurtanden, een voorkeur voor sneller geïntegreerd versus zelfstandiger per tand, en uw houding tegenover chirurgie, duur en kost"
+    }
+  },
+  "block_1_situation": {
+    "CORE_SITUATION_DESCRIPTION": {
+      "en": "a missing tooth in an area where both adjacent teeth already have restorations, making the “fit” with existing dental work part of the starting point",
+      "nl": "een ontbrekende tand in een zone waar beide aangrenzende tanden al restauraties hebben, waardoor de bestaande werken deel uitmaken van het vertrekpunt"
+    },
+    "NUANCE_FACTOR": {
+      "en": "seeking an efficient closure of the space with a result that looks cohesive and minimally noticeable",
+      "nl": "het efficiënt sluiten van de ruimte met een esthetische aansluiting die zo weinig mogelijk opvalt"
+    },
+    "SECONDARY_FACTOR": {
+      "en": "valuing either shared support between teeth or independence per tooth, along with long-term coherence in function and maintenance",
+      "nl": "het belang dat u hecht aan integratie via de buurtanden of juist zelfstandigheid per tand, met aandacht voor langetermijncoherentie en onderhoud"
+    }
+  },
+  "block_2_treatment_directions": {
+    "DIRECTION_1_CORE": {
+      "en": "the space is replaced using a short fixed bridge supported by the already restored neighboring teeth",
+      "nl": "de ruimte wordt vervangen via een korte vaste brug die steunt op de reeds herstelde buurtanden"
+    },
+    "DIRECTION_2_CORE": {
+      "en": "replacing the missing tooth independently using an implant and crown without relying on adjacent teeth",
+      "nl": "een zelfstandige vervanging met implantaat en kroon, zonder steun op de aangrenzende tanden"
+    },
+    "DIRECTION_3_CORE": {
+      "en": "esthetic planning is prioritized first, aligning shade, contours, and margins with existing restorations before committing to a definitive fixed solution",
+      "nl": "eerst esthetische planning centraal staat, met afstemming van kleur, contour en overgangsranden op bestaande restauraties vóór een definitieve vaste keuze"
+    }
+  },
+  "block_3_options": [
+    {
+      "OPTION_TITLE": { "en": "Three-unit fixed bridge (supported by two restored neighboring teeth)", "nl": "Brug van drie elementen (steun op twee herstelde buurtanden)" },
+      "OPTION_DESCRIPTION": {
+        "en": "replacing the missing tooth with a bridge that uses the two adjacent restored teeth as support",
+        "nl": "het vervangen van de ontbrekende tand met een brug die op de twee aangrenzende herstelde tanden steunt"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "assessing whether those teeth are stable enough as abutments, preparing/adapting them as needed, taking scans/impressions, fabricating the bridge, and fitting it with careful shade/shape matching",
+        "nl": "het beoordelen van de stabiliteit van de steunpijlers, eventuele preparatie/aanpassing, digitale scan of afdruk, vervaardiging en plaatsing met aandacht voor kleur- en vormmatching"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "dependence on the neighboring teeth, the need to modify them, and long-term maintenance factors such as fit, load distribution, and hygiene access",
+        "nl": "afhankelijkheid van de buurtanden, de nood aan aanpassing ervan, en langetermijnfactoren zoals pasvorm, belasting en hygiënetoegang"
+      },
+      "PROFILE_MATCH": {
+        "en": "want an integrated, relatively time-efficient fixed solution that can be designed to blend with existing restorations",
+        "nl": "een overzichtelijke, geïntegreerde vaste oplossing zoeken die esthetisch coherent kan aansluiten bij bestaande restauraties"
+      },
+      "pricing": { "min": 4500, "max": 6000, "currency": "EUR" },
+      "duration": { "min_months": 1, "max_months": 2 },
+      "recovery_days": 2
+    },
+    {
+      "OPTION_TITLE": { "en": "Single implant with crown (independent replacement)", "nl": "Enkelvoudig implantaat met kroon (zelfstandige vervanging)" },
+      "OPTION_DESCRIPTION": {
+        "en": "placing an implant in the missing-tooth area and restoring it with a crown as a stand-alone solution",
+        "nl": "het plaatsen van een implantaat met daarop een kroon als onafhankelijke vervanging van de ontbrekende tand"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "evaluating bone and space, placing the implant, allowing healing, and then fitting the crown with attention to translucency, contour, and shade",
+        "nl": "het beoordelen van bot en ruimte, het plaatsen van het implantaat, een genezingsfase en daarna het plaatsen van de kroon met aandacht voor translucentie, contour en kleur"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "a surgical phase, a longer overall timeline, and cost variability depending on healing and any additional steps",
+        "nl": "een chirurgische fase, een langere doorlooptijd en kostvariatie afhankelijk van genezing en eventuele extra stappen"
+      },
+      "PROFILE_MATCH": {
+        "en": "prefer each tooth to remain as independent as possible and are comfortable with a longer path to avoid altering adjacent teeth",
+        "nl": "zelfstandigheid per tand belangrijk vinden en bereid zijn tot een langer traject om de buurtanden niet aan te passen"
+      },
+      "pricing": { "min": 2200, "max": 2500, "currency": "EUR" },
+      "duration": { "min_months": 3, "max_months": 7 },
+      "recovery_days": 5
+    }
+  ],
+  "block_4_expected_results": {
+    "en": "Both directions may lead to a stable and visually harmonious result, but they often emphasize different priorities. A bridge may feel like a faster “integrated” solution that ties into existing restorations, while an implant route may emphasize independence of the replacement tooth. In many cases, the practical experience relates to chewing comfort, perceived stability, and how seamlessly the new tooth blends in shade, translucency, and contour. Outcomes can vary depending on the condition of existing restorations, bite forces, oral hygiene access, available bone volume, and the precision of esthetic planning and execution.",
+    "nl": "Beide richtingen kunnen in veel gevallen leiden tot een stabiel en esthetisch passend resultaat, maar ze leggen vaak een ander accent. Een brug wordt vaak ervaren als een sneller geïntegreerde oplossing die mee “leunt” op bestaande restauraties, terwijl een implantaat eerder de zelfstandigheid van de vervangende tand benadrukt. Wat u uiteindelijk merkt, gaat vaak over kauwcomfort, ervaren stabiliteit en hoe natuurlijk de nieuwe tand aansluit in kleur, lichtdoorlaatbaarheid en vorm. Resultaten kunnen variëren door de toestand van de bestaande restauraties, beetkrachten, hygiënetoegang, beschikbaar botvolume en de nauwkeurigheid van de esthetische afstemming."
+  },
+  "block_5_duration": {
+    "en": "Timeframes can differ substantially between approaches. A three-unit bridge is often achievable within weeks, influenced by appointment availability, lab production, and how much modification of adjacent teeth is needed. An implant-with-crown pathway commonly spans several months, largely shaped by healing time, staging of steps, and whether additional measures are required to optimize the site. If detailed esthetic coordination with existing restorations is a priority, extra planning and try-in steps can extend either pathway.",
+    "nl": "De duur kan sterk verschillen per aanpak. Een brugtraject is vaak binnen enkele weken te realiseren, afhankelijk van planning, labo-doorlooptijd en de mate waarin de steunpijlers moeten worden aangepast. Bij een implantaat met kroon is het traject doorgaans langer en vaak verspreid over maanden, vooral door genezing en het stapsgewijs opbouwen van de restauratie. Als er extra tijd nodig is voor esthetische afstemming met bestaande restauraties (kleur, contour, overgang), kan dat bij beide opties de totale doorlooptijd verlengen."
+  },
+  "block_6_recovery": {
+    "en": "A bridge approach typically involves little “recovery” in the surgical sense, but some people notice short-term sensitivity or an adjustment period as the bite and feel settle. An implant pathway includes a surgical phase, and it’s common for mild soreness or tenderness to affect a few days of daily comfort. Most routine activities can often be resumed quickly, depending on individual response and the procedure specifics. If ongoing sensitivity, bite interference, or instability is noticed after placement, follow-up is commonly used to fine-tune fit and comfort.",
+    "nl": "Bij een brug is er meestal geen herstel zoals bij chirurgie, maar er kan wel een korte periode van gevoeligheid of gewenning zijn terwijl het gevoel en de beet stabiliseren. Bij een implantaat hoort doorgaans een chirurgische fase, waarbij milde napijn of gevoeligheid enkele dagen kan voorkomen. Dagelijkse activiteiten kunnen vaak snel worden hervat, afhankelijk van comfort en het verloop. Wanneer er aanhoudende gevoeligheid, bijthinder of een instabiel gevoel optreedt, wordt opvolging vaak gebruikt om de pasvorm en het contact met de beet te optimaliseren."
+  },
+  "block_7_cost": {
+    "en": "Costs can vary depending on materials, technique, lab complexity, and how challenging it is to harmonize the new tooth with existing restorations (shade transitions, margin design, and contour). An implant pathway may include additional phases that shift pricing, such as imaging, site preparation, or staged components. A bridge can be more cost-intensive when multiple units and precision integration are involved. Because pricing differs by provider and individual plan, estimates are typically refined after clinical assessment and a finalized treatment design.",
+    "nl": "Kosten hangen meestal samen met materiaalkeuze, technische uitvoering en de complexiteit van de aansluiting op bestaand werk (bijvoorbeeld kleur- en randovergangen). Bij een implantaattraject kunnen extra fases of onderzoeken de totale prijs beïnvloeden, zoals beeldvorming of aanvullende site-optimalisatie. Bij een brug kan de prijs stijgen door het aantal elementen en de precisie die nodig is om bestaand werk esthetisch te integreren. Omdat tarieven verschillen per behandelaar en per individueel plan, worden richtprijzen doorgaans verfijnd na klinische beoordeling en een definitief behandelvoorstel."
+  }
+}

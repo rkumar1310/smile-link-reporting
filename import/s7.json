@@ -1,0 +1,131 @@
+{
+  "scenario_id": "S07",
+  "name": {
+    "en": "Large segment of missing teeth (more than five adjacent teeth) – implant-supported bridge options",
+    "nl": "Groot aaneengesloten tandtekort (meer dan vijf tanden naast elkaar) – opties met implantaatgedragen brug"
+  },
+  "block_0_personal_summary": {
+    "CONTEXT_DESCRIPTION": {
+      "en": "a larger continuous segment of missing teeth (more than five adjacent teeth)",
+      "nl": "een groter aaneengesloten ontbrekend tandsegment (meer dan vijf tanden naast elkaar)"
+    },
+    "PRIMARY_GOAL": {
+      "en": "being able to eat confidently again without constantly compensating or thinking about where you bite",
+      "nl": "opnieuw met vertrouwen kunnen eten zonder voortdurend te compenseren of na te denken waar u bijt"
+    },
+    "MAIN_CONSTRAINT": {
+      "en": "the segment size, the level of support needed, willingness for a surgical pathway, and the overall cost",
+      "nl": "de omvang van het segment, de nodige ondersteuning, de bereidheid tot een chirurgisch traject en de totale kost"
+    }
+  },
+  "block_1_situation": {
+    "CORE_SITUATION_DESCRIPTION": {
+      "en": "a long span where multiple adjacent teeth are missing, affecting chewing stability and load distribution",
+      "nl": "een langere zone waarin meerdere tanden naast elkaar ontbreken, met invloed op kauwstabiliteit en krachtverdeling"
+    },
+    "NUANCE_FACTOR": {
+      "en": "chewing reliability and daily confidence when eating",
+      "nl": "kauwzekerheid en dagelijks vertrouwen bij het eten"
+    },
+    "SECONDARY_FACTOR": {
+      "en": "the fact that a large segment places higher demands on force distribution and long-term stability",
+      "nl": "de grotere belasting die bij een lang segment op stabiliteit en krachtverdeling komt te liggen"
+    }
+  },
+  "block_2_treatment_directions": {
+    "DIRECTION_1_CORE": {
+      "en": "a fixed, implant-supported reconstruction restores stable force distribution for chewing",
+      "nl": "een vaste, implantaatgedragen reconstructie de kauwkrachten opnieuw over een stabiele basis verdeelt"
+    },
+    "DIRECTION_2_CORE": {
+      "en": "matching the number and placement of implants to the length of the missing segment and the intended bridge design",
+      "nl": "het afstemmen van het aantal en de positie van implantaten op de lengte van het ontbrekende segment en het brugontwerp"
+    },
+    "DIRECTION_3_CORE": {
+      "en": "treatment is staged so that planning, healing, and day-to-day feasibility align more smoothly",
+      "nl": "een gefaseerd traject planning, genezing en dagelijkse haalbaarheid beter op elkaar laat aansluiten"
+    }
+  },
+  "block_3_options": [
+    {
+      "OPTION_TITLE": {
+        "en": "6-tooth bridge supported by 3 implants (fixed bridge)",
+        "nl": "Brug van 6 tanden op 3 implantaten (vaste brug)"
+      },
+      "OPTION_DESCRIPTION": {
+        "en": "placing three implants to support a fixed bridge that replaces around six teeth within one missing segment",
+        "nl": "het plaatsen van drie implantaten als steunpunten voor een vaste brug die ongeveer zes tanden binnen één segment vervangt"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "assessment of bone volume and bite forces, surgical implant placement, a healing/integration phase, and then fitting and adjusting the final bridge",
+        "nl": "evaluatie van botvolume en beetbelasting, chirurgische plaatsing, een genezings-/integratiefase en daarna het plaatsen en bijstellen van de brug"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "adequate bone support, a multi-step timeline over several months, and higher overall costs compared with smaller solutions",
+        "nl": "voldoende botondersteuning, een meerstaps traject over meerdere maanden en een hogere totale kost dan bij kleinere oplossingen"
+      },
+      "PROFILE_MATCH": {
+        "en": "want a stable fixed solution for a larger segment without making the design more complex than necessary",
+        "nl": "een stabiele vaste oplossing willen voor een groter segment zonder het ontwerp complexer te maken dan nodig"
+      },
+      "pricing": {
+        "min": 6500,
+        "max": 9000,
+        "currency": "EUR"
+      },
+      "duration": {
+        "min_months": 4,
+        "max_months": 7
+      },
+      "recovery_days": 7
+    },
+    {
+      "OPTION_TITLE": {
+        "en": "10-tooth bridge supported by 4 implants (fixed extended bridge)",
+        "nl": "Brug van 10 tanden op 4 implantaten (vaste langere brug)"
+      },
+      "OPTION_DESCRIPTION": {
+        "en": "placing four implants to support a longer fixed bridge that can replace up to around ten teeth within one segment",
+        "nl": "het plaatsen van vier implantaten die een langere vaste brug kunnen dragen, tot ongeveer tien tanden binnen één segment"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "detailed planning for implant position and force distribution, surgical placement, a healing phase, then placement of the longer bridge with follow-up adjustments",
+        "nl": "zorgvuldige planning van implantaatpositie en krachtverdeling, chirurgische plaatsing, genezing en daarna plaatsing van de langere brug met controles en eventuele bijsturing"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "higher total cost, higher planning precision needs, dependence on bone volume/anatomy, and potentially less flexibility for modifications within a very long bridge",
+        "nl": "een hogere totale kost, meer precisie in planning, afhankelijkheid van botvolume/anatomie en mogelijk minder flexibiliteit bij aanpassingen binnen een lange brug"
+      },
+      "PROFILE_MATCH": {
+        "en": "prioritize maximum stability and a durable, extended restoration of a large missing segment",
+        "nl": "maximale stabiliteit en een duurzaam herstel van een uitgebreid segment belangrijk vinden"
+      },
+      "pricing": {
+        "min": 10000,
+        "max": 15000,
+        "currency": "EUR"
+      },
+      "duration": {
+        "min_months": 4,
+        "max_months": 7
+      },
+      "recovery_days": 7
+    }
+  ],
+  "block_4_expected_results": {
+    "en": "These directions are typically aimed at restoring more stable, confident chewing with a more even distribution of forces across the restored area. In situations like this, day-to-day reliability often becomes the main goal. Aesthetic improvement may also play a role, especially if the area is visible when smiling, but functional comfort is usually central. After placement, some people experience a short adaptation period before chewing feels fully natural again. Outcomes can vary and may depend on bone support, gum condition, bite forces, bridge design, material choice, and long-term maintenance.",
+    "nl": "Beide richtingen zijn doorgaans bedoeld om opnieuw stabiel en zelfverzekerd te kunnen kauwen, met een gelijkmatigere verdeling van krachten in het herstelde gebied. In een groter segment staat betrouwbaarheid in dagelijks gebruik vaak centraal. Esthetiek kan meewegen als de zone zichtbaar is bij lachen, maar functioneel comfort is meestal leidend. Na plaatsing kan een korte gewenningsperiode voorkomen vooraleer het kauwen volledig vertrouwd aanvoelt. Het resultaat kan variëren en hangt vaak samen met botondersteuning, tandvleesconditie, beetkrachten, brugontwerp, materiaalkeuze en onderhoud op lange termijn."
+  },
+  "block_5_duration": {
+    "en": "Implant-supported bridges usually involve multiple steps spread over several months. A commonly referenced range for scenarios like this is roughly four to seven months, though timing can vary. Factors that may influence total duration include individual healing response, the number of implants, planning complexity, laboratory turnaround times, and how the surgical and restorative steps are sequenced. In some cases, staged planning is used to align healing and practicality with everyday life.",
+    "nl": "Een implantaatgedragen brug verloopt meestal in meerdere stappen verspreid over enkele maanden. In dit type scenario wordt vaak een bandbreedte van ongeveer vier tot zeven maanden aangehouden, al kan dit verschillen per persoon. De totale duur kan beïnvloed worden door de genezingsreactie, het aantal implantaten, de complexiteit van de planning, de laboratoriumtijd en de volgorde waarin de chirurgische en prothetische stappen worden uitgevoerd. Soms helpt een gefaseerde aanpak om het traject praktisch beter in te passen."
+  },
+  "block_6_recovery": {
+    "en": "After the surgical phase, it is common to have tenderness and/or swelling for a few days, often around three to seven days, and chewing may be adjusted temporarily. Many people can resume normal daily activities fairly quickly, but eating comfort may require short-term modifications. Once the bridge is placed, an adaptation period can occur; some describe one to two weeks before it feels fully familiar, though this varies. If pain, swelling, instability, or bite problems persist, further evaluation may be considered.",
+    "nl": "Na de chirurgische fase kan er gedurende enkele dagen napijn en/of zwelling zijn, vaak rond drie tot zeven dagen, en wordt het kauwen tijdelijk aangepast. Dagelijkse activiteiten kunnen vaak vrij snel hervat worden, maar eten vraagt soms kortdurende aanpassingen. Na plaatsing van de brug kan gewenning optreden; sommigen beschrijven één tot twee weken voordat het volledig natuurlijk aanvoelt, al verschilt dit. Bij aanhoudende pijn, zwelling, instabiliteit of bijtproblemen kan verdere evaluatie overwogen worden."
+  },
+  "block_7_cost": {
+    "en": "Costs can vary depending on bridge length, number of implants, material selection, technical complexity, and individual anatomical factors. A larger segment typically increases both surgical and technical scope. In this scenario, indicative ranges are about €6,500–€9,000 for a 6-tooth bridge on 3 implants and about €10,000–€15,000 for a 10-tooth bridge on 4 implants. Additional steps (such as imaging, provisional solutions, or preparatory procedures) may change the final total depending on the clinical plan.",
+    "nl": "De kostprijs kan variëren afhankelijk van de lengte van de brug, het aantal implantaten, materiaalkeuze, technische uitvoering en individuele anatomische factoren. Een groter segment betekent doorgaans een ruimere chirurgische en technische omvang. In dit scenario worden richtprijzen genoemd van ongeveer €6.500–€9.000 voor een brug van 6 tanden op 3 implantaten en ongeveer €10.000–€15.000 voor een brug van 10 tanden op 4 implantaten. Eventuele bijkomende stappen (zoals beeldvorming, tijdelijke oplossingen of voorbereidende ingrepen) kunnen de totale kost mee beïnvloeden."
+  }
+}

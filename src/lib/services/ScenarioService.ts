@@ -213,6 +213,15 @@ export class ScenarioService {
   }
 
   /**
+   * Delete all scenarios
+   */
+  async deleteAll(): Promise<number> {
+    const db = await getDb();
+    const result = await db.collection(COLLECTIONS.SCENARIOS).deleteMany({});
+    return result.deletedCount;
+  }
+
+  /**
    * Bulk upsert scenarios (for seeding/migration)
    */
   async bulkUpsert(scenarios: ScenarioCreateInput[]): Promise<{ inserted: number; updated: number }> {

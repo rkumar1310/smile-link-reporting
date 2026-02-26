@@ -1,0 +1,163 @@
+{
+  "scenario_id": "S__04",
+  "name": {
+    "en": "Replacing two to four adjacent missing teeth (wider gap)",
+    "nl": "Vervanging van twee tot vier aangrenzende ontbrekende tanden (grotere ruimte)"
+  },
+  "block_0_personal_summary": {
+    "CONTEXT_DESCRIPTION": {
+      "en": "a larger continuous gap caused by two to four adjacent missing teeth",
+      "nl": "een grotere aaneengesloten ruimte door twee tot vier ontbrekende tanden naast elkaar"
+    },
+    "PRIMARY_GOAL": {
+      "en": "regaining a stable bite for more comfortable eating and day-to-day reliability",
+      "nl": "opnieuw een stabiele beet ervaren zodat eten comfortabeler en betrouwbaarder aanvoelt"
+    },
+    "MAIN_CONSTRAINT": {
+      "en": "the required sturdiness of the solution, willingness to undergo a surgical pathway, and available budget",
+      "nl": "hoe stevig de oplossing moet zijn, of u een chirurgisch traject ziet zitten en welke financiële ruimte beschikbaar is"
+    }
+  },
+  "block_1_situation": {
+    "CORE_SITUATION_DESCRIPTION": {
+      "en": "two to four adjacent missing teeth creating a broader unsupported chewing zone",
+      "nl": "twee tot vier aangrenzende ontbrekende tanden die samen een bredere, niet-ondersteunde kauwzone vormen"
+    },
+    "NUANCE_FACTOR": {
+      "en": "chewing imbalance and subtle shifting toward one side",
+      "nl": "een minder gelijk verdeelde belasting en ongemerkt meer naar één zijde kauwen"
+    },
+    "SECONDARY_FACTOR": {
+      "en": "concerns about longer-term stability of neighboring teeth taking extra load",
+      "nl": "de mogelijke extra belasting op naburige tanden en vragen rond stabiliteit op langere termijn"
+    }
+  },
+  "block_2_treatment_directions": {
+    "DIRECTION_1_CORE": {
+      "en": "a fixed replacement restores chewing support across the wider gap",
+      "nl": "een vaste vervanging de kauwondersteuning over de bredere ruimte herstelt"
+    },
+    "DIRECTION_2_CORE": {
+      "en": "implant-supported reconstruction to replace multiple teeth without relying on natural teeth as supports",
+      "nl": "een implantaatgedragen reconstructie om meerdere tanden te vervangen zonder steun op natuurlijke tanden"
+    },
+    "DIRECTION_3_CORE": {
+      "en": "a staged evaluation of bone availability and technical feasibility guides the final design",
+      "nl": "een gefaseerde beoordeling van botbeschikbaarheid en technische haalbaarheid de uiteindelijke keuze stuurt"
+    }
+  },
+  "block_3_options": [
+    {
+      "OPTION_TITLE": {
+        "en": "Implant-supported bridge (typically on two implants)",
+        "nl": "Brug op implantaten (meestal op twee implantaten)"
+      },
+      "OPTION_DESCRIPTION": {
+        "en": "placing two implants in the jawbone to support a fixed bridge that replaces the missing teeth",
+        "nl": "het plaatsen van twee implantaten in het kaakbot als steunpunten voor een vaste brug die de ontbrekende tanden vervangt"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "planning and imaging, surgical placement, a healing/integration phase, and then fitting and attaching a custom bridge",
+        "nl": "planning en beeldvorming, de chirurgische plaatsing, een genezings- en integratiefase en daarna het aanmeten en bevestigen van een op maat gemaakte brug"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "adequate bone volume, a surgical phase, and a longer timeline with higher costs",
+        "nl": "voldoende botvolume, een chirurgische fase en een langere doorlooptijd met hogere kosten"
+      },
+      "PROFILE_MATCH": {
+        "en": "prioritize long-term stability and accept a multi-step pathway",
+        "nl": "vooral stabiliteit op langere termijn zoeken en een meerstaps-traject aanvaardbaar vinden"
+      },
+      "pricing": {
+        "min": 4500,
+        "max": 6000,
+        "currency": "EUR"
+      },
+      "duration": {
+        "min_months": 3,
+        "max_months": 7
+      },
+      "recovery_days": 7
+    },
+    {
+      "OPTION_TITLE": {
+        "en": "Tooth-supported bridge (if suitable adjacent teeth are available)",
+        "nl": "Conventionele brug op eigen tanden (als de pijlers geschikt zijn)"
+      },
+      "OPTION_DESCRIPTION": {
+        "en": "using neighboring teeth as supports for a fixed bridge spanning the gap",
+        "nl": "het gebruiken van naburige tanden als steunpijlers voor een vaste brug over de ruimte"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "assessment, preparation of support teeth, impressions or scanning, a temporary phase, and final cementation",
+        "nl": "onderzoek, preparatie van pijlers, afdruk of scan, tijdelijke fase en definitieve plaatsing"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "alteration of support teeth and load distribution limits over a longer span",
+        "nl": "het aanpassen van pijlers en beperkingen in belasting bij een langere overspanning"
+      },
+      "PROFILE_MATCH": {
+        "en": "prefer a fixed solution without implant surgery when conditions allow",
+        "nl": "een vaste oplossing willen zonder implantaatchirurgie, wanneer de omstandigheden dat toelaten"
+      },
+      "pricing": {
+        "min": 1500,
+        "max": 3500,
+        "currency": "EUR"
+      },
+      "duration": {
+        "min_months": 1,
+        "max_months": 2
+      },
+      "recovery_days": 2
+    },
+    {
+      "OPTION_TITLE": {
+        "en": "Removable partial denture (temporary or definitive in some cases)",
+        "nl": "Partiële uitneembare prothese (tijdelijk of soms definitief)"
+      },
+      "OPTION_DESCRIPTION": {
+        "en": "a removable appliance that replaces the missing teeth and restores some chewing function",
+        "nl": "een uitneembare voorziening die de ontbrekende tanden vervangt en een deel van de kauwfunctie herstelt"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "impressions or scanning, try-ins, delivery, and adjustment visits",
+        "nl": "afdruk of scan, pasmomenten, plaatsing en nacontroles voor bijslijpen of aanpassen"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "bulk and retention, adaptation time, and potentially lower chewing stability than fixed options",
+        "nl": "draagcomfort, retentie, gewenning en vaak minder vaste kauwstabiliteit dan bij vaste opties"
+      },
+      "PROFILE_MATCH": {
+        "en": "want a non-surgical pathway or a cost-conscious interim step",
+        "nl": "een niet-chirurgische route willen of een budgetvriendelijke tussenstap zoeken"
+      },
+      "pricing": {
+        "min": 800,
+        "max": 2000,
+        "currency": "EUR"
+      },
+      "duration": {
+        "min_months": 0,
+        "max_months": 2
+      },
+      "recovery_days": 0
+    }
+  ],
+  "block_4_expected_results": {
+    "en": "The intended outcome is usually to re-establish chewing support across a wider area and reduce the feeling that the bite “drops into” an empty zone. In many cases, this can make daily eating feel more balanced and predictable. Results may vary depending on bone support, gum condition, bite forces, material selection, and how the restoration is maintained over time. In posterior areas, the goal is often functional reliability first, with aesthetics being secondary—though appearance can still improve depending on the design.",
+    "nl": "Het beoogde resultaat is meestal om het kauwevenwicht over een groter gebied te herstellen en het gevoel te verminderen dat de beet “wegzakt” in een lege zone. In veel gevallen kan dit eten in het dagelijks leven stabieler en voorspelbaarder laten aanvoelen. Het uiteindelijke gevoel en de duurzaamheid kunnen variëren door botondersteuning, tandvleesconditie, bijtkrachten, materiaalkeuze en onderhoud. In een achterste zone ligt de nadruk vaak op functionele betrouwbaarheid, terwijl esthetiek meestal secundair is—al kan het uitzicht wel verbeteren afhankelijk van het ontwerp."
+  },
+  "block_5_duration": {
+    "en": "Timelines often range from weeks to several months depending on the chosen direction. Implant-based solutions typically take longer because they include healing and integration time, and sometimes additional steps if bone volume needs support. Fixed non-implant bridges may be completed faster, but still require planning, laboratory work, and several visits. Scheduling, complexity, and individual healing response can all shift the overall duration.",
+    "nl": "De totale duur kan variëren van enkele weken tot meerdere maanden, afhankelijk van de gekozen richting. Implantaattrajecten nemen doorgaans langer omdat er genezing en botintegratie nodig is, en soms extra stappen als botopbouw aangewezen is. Niet-implantaat vaste oplossingen kunnen sneller klaar zijn, maar vragen nog steeds planning, labo-werk en meerdere afspraken. Agenda, complexiteit en individuele genezing spelen mee in de uiteindelijke timing."
+  },
+  "block_6_recovery": {
+    "en": "Recovery depends strongly on whether surgery is involved. After implant placement, temporary swelling, tenderness, or bruising can occur for several days, and chewing may need to be adjusted until the final bridge is fitted. Non-surgical options often have little “recovery,” but may involve an adaptation period (pressure spots, speech changes, or sensitivity). If discomfort persists or function feels unstable, further evaluation is typically recommended because responses differ between individuals.",
+    "nl": "Het herstel hangt sterk af van de vraag of er chirurgie plaatsvindt. Na implantaatplaatsing kunnen zwelling, gevoeligheid of blauwe plekken enkele dagen voorkomen, en kan het nodig zijn om het kauwen tijdelijk aan te passen tot de definitieve brug geplaatst is. Bij niet-chirurgische opties is er vaak weinig “herstel,” maar wel een gewenningstraject (drukplekjes, spraak, of tijdelijke gevoeligheid). Als ongemak aanhoudt of het functioneel instabiel blijft aanvoelen, wordt doorgaans verdere evaluatie aangeraden omdat reacties per persoon verschillen."
+  },
+  "block_7_cost": {
+    "en": "Costs vary with the number of implants (if any), bridge design, material choice, surgical complexity, imaging/planning needs, and laboratory work. Some pathways include additional phases such as temporary restorations, bone augmentation, or multiple adjustment visits, which can change the final total. Because a larger continuous gap can require more design and support than a single-tooth replacement, price ranges can be broad, and a clinician’s assessment is usually needed to clarify what is realistically included.",
+    "nl": "De kostprijs varieert met het aantal implantaten (indien van toepassing), het brugontwerp, materiaalkeuze, chirurgische complexiteit, nood aan beeldvorming/planning en labo-kosten. Sommige trajecten bevatten bijkomende fases zoals een tijdelijke voorziening, botopbouw of extra controle- en aanpassingsbezoeken, wat de totaalprijs kan beïnvloeden. Omdat een grotere aaneengesloten ruimte vaak meer ondersteuning en ontwerpkeuzes vraagt dan één ontbrekende tand, zijn prijsranges breder en is een klinische inschatting meestal nodig om scherp te stellen wat precies inbegrepen is."
+  }
+}

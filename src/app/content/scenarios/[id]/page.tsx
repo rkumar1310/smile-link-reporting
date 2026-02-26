@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, use } from "react";
 import Link from "next/link";
-import type { Scenario, BilingualText, TreatmentOption } from "@/lib/pipeline/nlg/schemas/ScenarioSchema";
+import type { Scenario, BilingualText, Block3Option, ScenarioNLGVariables } from "@/lib/pipeline/nlg/schemas/ScenarioSchema";
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -42,6 +42,8 @@ export default function ScenarioDetailPage({ params }: PageProps) {
     fetchScenario();
   }, [fetchScenario]);
 
+  // ---- Save ----
+
   async function handleSave() {
     if (!scenario) return;
     setSaving(true);
@@ -51,11 +53,11 @@ export default function ScenarioDetailPage({ params }: PageProps) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: scenario.name,
-          description: scenario.description,
           nlg_variables: scenario.nlg_variables,
-          treatment_options: scenario.treatment_options,
-          pricing: scenario.pricing,
           matching: scenario.matching,
+          is_fallback: scenario.is_fallback,
+          is_safety_scenario: scenario.is_safety_scenario,
+          priority: scenario.priority,
         }),
       });
 
@@ -72,77 +74,127 @@ export default function ScenarioDetailPage({ params }: PageProps) {
     }
   }
 
-  function updateBilingualField(
-    field: keyof Scenario,
-    value: string
-  ) {
+  // ---- Name helper ----
+
+  function updateName(value: string) {
     if (!scenario) return;
     setScenario({
       ...scenario,
-      [field]: {
-        ...(scenario[field] as BilingualText),
-        [language]: value,
+      name: { ...scenario.name, [language]: value },
+    });
+  }
+
+  // ---- NLG Block Variable helpers ----
+
+  type StructuredBlockKey = "block_0_personal_summary" | "block_1_situation" | "block_2_treatment_directions";
+
+  function updateBlockVariable(
+    blockKey: StructuredBlockKey,
+    variableKey: string,
+    value: string
+  ) {
+    if (!scenario) return;
+    const block = scenario.nlg_variables[blockKey] as Record<string, BilingualText>;
+    setScenario({
+      ...scenario,
+      nlg_variables: {
+        ...scenario.nlg_variables,
+        [blockKey]: {
+          ...block,
+          [variableKey]: {
+            ...block[variableKey],
+            [language]: value,
+          },
+        },
       },
     });
   }
 
-  function updateNLGVariable(key: string, value: string) {
+  type FullTextBlockKey = "block_4_expected_results" | "block_5_duration" | "block_6_recovery" | "block_7_cost";
+
+  function updateFullTextBlock(blockKey: FullTextBlockKey, value: string) {
     if (!scenario) return;
     setScenario({
       ...scenario,
       nlg_variables: {
         ...scenario.nlg_variables,
-        [key]: {
-          ...(scenario.nlg_variables[key as keyof typeof scenario.nlg_variables] || { en: "", nl: "" }),
+        [blockKey]: {
+          ...scenario.nlg_variables[blockKey],
           [language]: value,
         },
       },
     });
   }
 
-  function updateTreatmentOption(index: number, updates: Partial<TreatmentOption>) {
+  // ---- Block 3 Option helpers ----
+
+  function updateOption(index: number, updates: Partial<Block3Option>) {
     if (!scenario) return;
-    const newOptions = [...(scenario.treatment_options || [])];
-    newOptions[index] = { ...newOptions[index], ...updates };
+    const options = [...scenario.nlg_variables.block_3_options];
+    options[index] = { ...options[index], ...updates };
     setScenario({
       ...scenario,
-      treatment_options: newOptions,
+      nlg_variables: {
+        ...scenario.nlg_variables,
+        block_3_options: options,
+      },
     });
   }
 
-  function addTreatmentOption() {
+  function updateOptionBilingualField(
+    index: number,
+    field: "OPTION_TITLE" | "OPTION_DESCRIPTION" | "PROCESS_OVERVIEW" | "OPTION_LIMITATIONS" | "PROFILE_MATCH",
+    value: string
+  ) {
     if (!scenario) return;
-    const options = scenario.treatment_options || [];
-    const newIndex = options.length;
-    const newId = `option_${Date.now()}`;
-    const newOption: TreatmentOption = {
-      id: newId,
-      name: { en: "", nl: "" },
-      rank: newIndex + 1,
-      category: "other",
-      description: { en: "", nl: "" },
-      benefits: [],
-      considerations: [],
-      ideal_for: { en: "", nl: "" },
-      pricing: { min: 0, max: 0, currency: "EUR" },
-      duration: { min_months: 0, max_months: 0 },
-      recovery: { days: 0 },
+    const options = [...scenario.nlg_variables.block_3_options];
+    options[index] = {
+      ...options[index],
+      [field]: { ...options[index][field], [language]: value },
     };
     setScenario({
       ...scenario,
-      treatment_options: [...options, newOption],
+      nlg_variables: {
+        ...scenario.nlg_variables,
+        block_3_options: options,
+      },
     });
-    setExpandedOptions((prev) => new Set(prev).add(newIndex));
   }
 
-  function removeTreatmentOption(index: number) {
+  function addOption() {
     if (!scenario) return;
-    const options = [...(scenario.treatment_options || [])];
-    options.splice(index, 1);
-    // Recalculate ranks
-    options.forEach((opt, i) => { opt.rank = i + 1; });
-    setScenario({ ...scenario, treatment_options: options });
-    // Update expanded set
+    const newOption: Block3Option = {
+      OPTION_TITLE: { en: "", nl: "" },
+      OPTION_DESCRIPTION: { en: "", nl: "" },
+      PROCESS_OVERVIEW: { en: "", nl: "" },
+      OPTION_LIMITATIONS: { en: "", nl: "" },
+      PROFILE_MATCH: { en: "", nl: "" },
+      pricing: { min: 0, max: 0, currency: "EUR" },
+      duration: { min_months: 0, max_months: 0 },
+      recovery_days: 0,
+    };
+    const options = [...scenario.nlg_variables.block_3_options, newOption];
+    setScenario({
+      ...scenario,
+      nlg_variables: {
+        ...scenario.nlg_variables,
+        block_3_options: options,
+      },
+    });
+    setExpandedOptions((prev) => new Set(prev).add(options.length - 1));
+  }
+
+  function removeOption(index: number) {
+    if (!scenario) return;
+    if (scenario.nlg_variables.block_3_options.length <= 1) return;
+    const options = scenario.nlg_variables.block_3_options.filter((_, i) => i !== index);
+    setScenario({
+      ...scenario,
+      nlg_variables: {
+        ...scenario.nlg_variables,
+        block_3_options: options,
+      },
+    });
     setExpandedOptions((prev) => {
       const next = new Set<number>();
       prev.forEach((i) => {
@@ -153,21 +205,24 @@ export default function ScenarioDetailPage({ params }: PageProps) {
     });
   }
 
-  function moveTreatmentOption(index: number, direction: "up" | "down") {
+  function moveOption(index: number, direction: "up" | "down") {
     if (!scenario) return;
-    const options = [...(scenario.treatment_options || [])];
-    const targetIndex = direction === "up" ? index - 1 : index + 1;
-    if (targetIndex < 0 || targetIndex >= options.length) return;
-    [options[index], options[targetIndex]] = [options[targetIndex], options[index]];
-    // Recalculate ranks
-    options.forEach((opt, i) => { opt.rank = i + 1; });
-    setScenario({ ...scenario, treatment_options: options });
-    // Update expanded set to follow the moved item
+    const options = [...scenario.nlg_variables.block_3_options];
+    const target = direction === "up" ? index - 1 : index + 1;
+    if (target < 0 || target >= options.length) return;
+    [options[index], options[target]] = [options[target], options[index]];
+    setScenario({
+      ...scenario,
+      nlg_variables: {
+        ...scenario.nlg_variables,
+        block_3_options: options,
+      },
+    });
     setExpandedOptions((prev) => {
       const next = new Set<number>();
       prev.forEach((i) => {
-        if (i === index) next.add(targetIndex);
-        else if (i === targetIndex) next.add(index);
+        if (i === index) next.add(target);
+        else if (i === target) next.add(index);
         else next.add(i);
       });
       return next;
@@ -181,101 +236,6 @@ export default function ScenarioDetailPage({ params }: PageProps) {
       else next.add(index);
       return next;
     });
-  }
-
-  function addBenefit(optionIndex: number) {
-    if (!scenario) return;
-    const options = [...(scenario.treatment_options || [])];
-    const option = { ...options[optionIndex] };
-    option.benefits = [...(option.benefits || []), { en: "", nl: "" }];
-    options[optionIndex] = option;
-    setScenario({ ...scenario, treatment_options: options });
-  }
-
-  function removeBenefit(optionIndex: number, benefitIndex: number) {
-    if (!scenario) return;
-    const options = [...(scenario.treatment_options || [])];
-    const option = { ...options[optionIndex] };
-    const benefits = [...(option.benefits || [])];
-    benefits.splice(benefitIndex, 1);
-    option.benefits = benefits;
-    options[optionIndex] = option;
-    setScenario({ ...scenario, treatment_options: options });
-  }
-
-  function updateBenefit(optionIndex: number, benefitIndex: number, value: string) {
-    if (!scenario) return;
-    const options = [...(scenario.treatment_options || [])];
-    const option = { ...options[optionIndex] };
-    const benefits = [...(option.benefits || [])];
-    benefits[benefitIndex] = { ...benefits[benefitIndex], [language]: value };
-    option.benefits = benefits;
-    options[optionIndex] = option;
-    setScenario({ ...scenario, treatment_options: options });
-  }
-
-  function addConsideration(optionIndex: number) {
-    if (!scenario) return;
-    const options = [...(scenario.treatment_options || [])];
-    const option = { ...options[optionIndex] };
-    option.considerations = [...(option.considerations || []), { en: "", nl: "" }];
-    options[optionIndex] = option;
-    setScenario({ ...scenario, treatment_options: options });
-  }
-
-  function removeConsideration(optionIndex: number, considerationIndex: number) {
-    if (!scenario) return;
-    const options = [...(scenario.treatment_options || [])];
-    const option = { ...options[optionIndex] };
-    const considerations = [...(option.considerations || [])];
-    considerations.splice(considerationIndex, 1);
-    option.considerations = considerations;
-    options[optionIndex] = option;
-    setScenario({ ...scenario, treatment_options: options });
-  }
-
-  function addPhase(optionIndex: number) {
-    if (!scenario) return;
-    const options = [...(scenario.treatment_options || [])];
-    const option = { ...options[optionIndex] };
-    const phases = [...(option.phases || [])];
-    if (phases.length >= 3) return; // max 3 phases
-    option.phases = [...phases, { en: "", nl: "" }];
-    options[optionIndex] = option;
-    setScenario({ ...scenario, treatment_options: options });
-  }
-
-  function removePhase(optionIndex: number, phaseIndex: number) {
-    if (!scenario) return;
-    const options = [...(scenario.treatment_options || [])];
-    const option = { ...options[optionIndex] };
-    const phases = [...(option.phases || [])];
-    phases.splice(phaseIndex, 1);
-    option.phases = phases;
-    options[optionIndex] = option;
-    setScenario({ ...scenario, treatment_options: options });
-  }
-
-  function updatePhase(optionIndex: number, phaseIndex: number, value: string) {
-    if (!scenario) return;
-    const options = [...(scenario.treatment_options || [])];
-    const option = { ...options[optionIndex] };
-    const phases = [...(option.phases || [])];
-    phases[phaseIndex] = { ...phases[phaseIndex], [language]: value };
-    option.phases = phases;
-    options[optionIndex] = option;
-    setScenario({ ...scenario, treatment_options: options });
-  }
-
-  function updateConsideration(optionIndex: number, considerationIndex: number, value: string) {
-    if (!scenario) return;
-    const options = [...(scenario.treatment_options || [])];
-    const option = { ...options[optionIndex] };
-    const considerations = [...(option.considerations || [])];
-    considerations[considerationIndex] = { ...considerations[considerationIndex], [language]: value };
-    option.considerations = considerations;
-    options[optionIndex] = option;
-    setScenario({ ...scenario, treatment_options: options });
   }
 
   // ---- Matching Criteria Helpers ----
@@ -401,6 +361,11 @@ export default function ScenarioDetailPage({ params }: PageProps) {
 
   if (!scenario) return null;
 
+  const options = scenario.nlg_variables.block_3_options;
+  const minPrice = Math.min(...options.map((o) => o.pricing.min));
+  const maxPrice = Math.max(...options.map((o) => o.pricing.max));
+  const currency = options[0]?.pricing.currency || "EUR";
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <header className="bg-white dark:bg-gray-800 shadow">
@@ -509,7 +474,7 @@ export default function ScenarioDetailPage({ params }: PageProps) {
                     <input
                       type="text"
                       value={scenario.name[language]}
-                      onChange={(e) => updateBilingualField("name", e.target.value)}
+                      onChange={(e) => updateName(e.target.value)}
                       className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                     />
                   </div>
@@ -526,55 +491,44 @@ export default function ScenarioDetailPage({ params }: PageProps) {
                     />
                     <p className="mt-1 text-xs text-gray-500">Set via seed scripts</p>
                   </div>
-
-                  <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      Description ({language.toUpperCase()})
-                    </label>
-                    <textarea
-                      rows={3}
-                      value={scenario.description[language]}
-                      onChange={(e) => updateBilingualField("description", e.target.value)}
-                      className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                    />
-                  </div>
                 </div>
               </div>
 
-              {/* Pricing */}
-              {scenario.pricing && (
-                <div className="bg-white dark:bg-gray-800 shadow rounded-lg p-6">
-                  <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
-                    Pricing Range
-                  </h2>
-                  <div className="grid grid-cols-3 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                        Minimum
-                      </label>
-                      <p className="text-lg font-semibold text-gray-900 dark:text-white">
-                        {scenario.pricing.currency || "EUR"} {scenario.pricing.min.toLocaleString()}
-                      </p>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                        Maximum
-                      </label>
-                      <p className="text-lg font-semibold text-gray-900 dark:text-white">
-                        {scenario.pricing.currency || "EUR"} {scenario.pricing.max.toLocaleString()}
-                      </p>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                        Currency
-                      </label>
-                      <p className="text-lg font-semibold text-gray-900 dark:text-white">
-                        {scenario.pricing.currency || "EUR"}
-                      </p>
-                    </div>
+              {/* Pricing Summary (computed from options) */}
+              <div className="bg-white dark:bg-gray-800 shadow rounded-lg p-6">
+                <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
+                  Pricing Summary
+                </h2>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
+                  Computed from treatment options
+                </p>
+                <div className="grid grid-cols-3 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                      Minimum
+                    </label>
+                    <p className="text-lg font-semibold text-gray-900 dark:text-white">
+                      {currency} {minPrice.toLocaleString()}
+                    </p>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                      Maximum
+                    </label>
+                    <p className="text-lg font-semibold text-gray-900 dark:text-white">
+                      {currency} {maxPrice.toLocaleString()}
+                    </p>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                      Options
+                    </label>
+                    <p className="text-lg font-semibold text-gray-900 dark:text-white">
+                      {options.length}
+                    </p>
                   </div>
                 </div>
-              )}
+              </div>
 
               {/* Metadata */}
               <div className="bg-white dark:bg-gray-800 shadow rounded-lg p-6">
@@ -589,7 +543,7 @@ export default function ScenarioDetailPage({ params }: PageProps) {
                   <div>
                     <span className="text-gray-500 dark:text-gray-400">Treatment Options</span>
                     <p className="font-medium text-gray-900 dark:text-white">
-                      {scenario.treatment_options?.length || 0}
+                      {options.length}
                     </p>
                   </div>
                   <div>
@@ -615,550 +569,366 @@ export default function ScenarioDetailPage({ params }: PageProps) {
 
           {/* NLG Variables Tab */}
           {activeTab === "nlg" && (
-            <div className="bg-white dark:bg-gray-800 shadow rounded-lg p-6">
-              <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
-                NLG Variables ({language.toUpperCase()})
-              </h2>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
-                These variables are used in template rendering. Edit the text for each variable below.
-              </p>
-
-              <div className="space-y-6">
-                {Object.entries(scenario.nlg_variables || {}).map(([key, value]) => {
-                  if (!value) return null;
-                  const bilingualValue = value as BilingualText;
-                  return (
+            <div className="space-y-6">
+              {/* Block 0: Personal Summary */}
+              <div className="bg-white dark:bg-gray-800 shadow rounded-lg p-6">
+                <h3 className="text-md font-medium text-gray-900 dark:text-white mb-1">
+                  Block 0 &mdash; Personal Summary
+                </h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                  Sentence fragments used in the personal summary section ({language.toUpperCase()})
+                </p>
+                <div className="space-y-4">
+                  {(["CONTEXT_DESCRIPTION", "PRIMARY_GOAL", "MAIN_CONSTRAINT"] as const).map((key) => (
                     <div key={key}>
                       <label className="block text-sm font-mono font-medium text-purple-600 dark:text-purple-400 mb-1">
                         {`{${key}}`}
                       </label>
                       <textarea
                         rows={2}
-                        value={bilingualValue[language] || ""}
-                        onChange={(e) => updateNLGVariable(key, e.target.value)}
+                        value={scenario.nlg_variables.block_0_personal_summary[key][language]}
+                        onChange={(e) => updateBlockVariable("block_0_personal_summary", key, e.target.value)}
                         className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white font-mono text-sm"
                       />
                     </div>
-                  );
-                })}
-
-                {Object.keys(scenario.nlg_variables || {}).filter(
-                  (k) => scenario.nlg_variables[k as keyof typeof scenario.nlg_variables]
-                ).length === 0 && (
-                  <p className="text-gray-500 dark:text-gray-400 text-center py-8">
-                    No NLG variables defined for this scenario.
-                  </p>
-                )}
+                  ))}
+                </div>
               </div>
+
+              {/* Block 1: Your Situation */}
+              <div className="bg-white dark:bg-gray-800 shadow rounded-lg p-6">
+                <h3 className="text-md font-medium text-gray-900 dark:text-white mb-1">
+                  Block 1 &mdash; Your Situation
+                </h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                  Sentence fragments for the situation description ({language.toUpperCase()})
+                </p>
+                <div className="space-y-4">
+                  {(["CORE_SITUATION_DESCRIPTION", "NUANCE_FACTOR", "SECONDARY_FACTOR"] as const).map((key) => (
+                    <div key={key}>
+                      <label className="block text-sm font-mono font-medium text-purple-600 dark:text-purple-400 mb-1">
+                        {`{${key}}`}
+                      </label>
+                      <textarea
+                        rows={2}
+                        value={scenario.nlg_variables.block_1_situation[key][language]}
+                        onChange={(e) => updateBlockVariable("block_1_situation", key, e.target.value)}
+                        className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white font-mono text-sm"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Block 2: Treatment Directions */}
+              <div className="bg-white dark:bg-gray-800 shadow rounded-lg p-6">
+                <h3 className="text-md font-medium text-gray-900 dark:text-white mb-1">
+                  Block 2 &mdash; Treatment Directions
+                </h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                  Sentence fragments for treatment direction overview ({language.toUpperCase()})
+                </p>
+                <div className="space-y-4">
+                  {(["DIRECTION_1_CORE", "DIRECTION_2_CORE", "DIRECTION_3_CORE"] as const).map((key) => (
+                    <div key={key}>
+                      <label className="block text-sm font-mono font-medium text-purple-600 dark:text-purple-400 mb-1">
+                        {`{${key}}`}
+                      </label>
+                      <textarea
+                        rows={2}
+                        value={scenario.nlg_variables.block_2_treatment_directions[key][language]}
+                        onChange={(e) => updateBlockVariable("block_2_treatment_directions", key, e.target.value)}
+                        className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white font-mono text-sm"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Block 3 note */}
+              <div className="bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg p-4">
+                <p className="text-sm text-purple-700 dark:text-purple-300">
+                  <strong>Block 3 (Options)</strong> &mdash; Edit treatment options in the{" "}
+                  <button
+                    onClick={() => setActiveTab("options")}
+                    className="underline font-medium hover:text-purple-900 dark:hover:text-purple-100"
+                  >
+                    Treatment Options
+                  </button>{" "}
+                  tab.
+                </p>
+              </div>
+
+              {/* Blocks 4-7: Full text paragraphs */}
+              {([
+                { key: "block_4_expected_results" as FullTextBlockKey, label: "Block 4 — Expected Results", desc: "Full paragraph describing expected treatment outcomes" },
+                { key: "block_5_duration" as FullTextBlockKey, label: "Block 5 — Duration", desc: "Full paragraph about treatment duration" },
+                { key: "block_6_recovery" as FullTextBlockKey, label: "Block 6 — Recovery", desc: "Full paragraph about recovery expectations" },
+                { key: "block_7_cost" as FullTextBlockKey, label: "Block 7 — Cost", desc: "Full paragraph about cost information" },
+              ]).map(({ key, label, desc }) => (
+                <div key={key} className="bg-white dark:bg-gray-800 shadow rounded-lg p-6">
+                  <h3 className="text-md font-medium text-gray-900 dark:text-white mb-1">
+                    {label}
+                  </h3>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                    {desc} ({language.toUpperCase()})
+                  </p>
+                  <textarea
+                    rows={4}
+                    value={scenario.nlg_variables[key][language]}
+                    onChange={(e) => updateFullTextBlock(key, e.target.value)}
+                    className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white text-sm"
+                  />
+                </div>
+              ))}
             </div>
           )}
 
           {/* Treatment Options Tab */}
           {activeTab === "options" && (
             <div className="space-y-4">
-              {scenario.treatment_options && scenario.treatment_options.length > 0 ? (
-                scenario.treatment_options.map((option, idx) => {
-                  const isExpanded = expandedOptions.has(idx);
-                  return (
-                    <div key={option.id || idx} className="bg-white dark:bg-gray-800 shadow rounded-lg overflow-hidden">
-                      {/* Collapsible Header */}
-                      <div
-                        className="flex items-center justify-between px-6 py-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-750 select-none"
-                        onClick={() => toggleOptionExpanded(idx)}
-                      >
-                        <div className="flex items-center gap-3">
-                          <svg
-                            className={`w-5 h-5 text-gray-400 transition-transform ${isExpanded ? "rotate-90" : ""}`}
-                            fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                          >
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              {options.map((option, idx) => {
+                const isExpanded = expandedOptions.has(idx);
+                return (
+                  <div key={idx} className="bg-white dark:bg-gray-800 shadow rounded-lg overflow-hidden">
+                    {/* Collapsible Header */}
+                    <div
+                      className="flex items-center justify-between px-6 py-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-750 select-none"
+                      onClick={() => toggleOptionExpanded(idx)}
+                    >
+                      <div className="flex items-center gap-3">
+                        <svg
+                          className={`w-5 h-5 text-gray-400 transition-transform ${isExpanded ? "rotate-90" : ""}`}
+                          fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                        <span className="text-sm font-mono text-purple-600 dark:text-purple-400">
+                          #{idx + 1}
+                        </span>
+                        <h3 className="text-lg font-medium text-gray-900 dark:text-white">
+                          {option.OPTION_TITLE[language] || <span className="italic text-gray-400">Untitled</span>}
+                        </h3>
+                        <span className="text-sm text-gray-500 dark:text-gray-400">
+                          {option.pricing.currency} {option.pricing.min.toLocaleString()}-{option.pricing.max.toLocaleString()}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-1" onClick={(e) => e.stopPropagation()}>
+                        {/* Move Up */}
+                        <button
+                          onClick={() => moveOption(idx, "up")}
+                          disabled={idx === 0}
+                          className="p-1.5 rounded hover:bg-gray-200 dark:hover:bg-gray-700 disabled:opacity-30 disabled:cursor-not-allowed"
+                          title="Move up"
+                        >
+                          <svg className="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
                           </svg>
-                          <span className="text-sm font-mono text-purple-600 dark:text-purple-400">#{option.rank}</span>
-                          <h3 className="text-lg font-medium text-gray-900 dark:text-white">
-                            {option.name[language] || <span className="italic text-gray-400">Untitled</span>}
-                          </h3>
-                          <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
-                            {option.category}
-                          </span>
+                        </button>
+                        {/* Move Down */}
+                        <button
+                          onClick={() => moveOption(idx, "down")}
+                          disabled={idx === options.length - 1}
+                          className="p-1.5 rounded hover:bg-gray-200 dark:hover:bg-gray-700 disabled:opacity-30 disabled:cursor-not-allowed"
+                          title="Move down"
+                        >
+                          <svg className="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </button>
+                        {/* Delete */}
+                        <button
+                          onClick={() => {
+                            if (options.length <= 1) return;
+                            if (confirm(`Delete treatment option "${option.OPTION_TITLE[language] || "Untitled"}"?`)) {
+                              removeOption(idx);
+                            }
+                          }}
+                          disabled={options.length <= 1}
+                          className="p-1.5 rounded hover:bg-red-100 dark:hover:bg-red-900/30 text-red-500 ml-2 disabled:opacity-30 disabled:cursor-not-allowed"
+                          title={options.length <= 1 ? "Cannot remove last option" : "Delete option"}
+                        >
+                          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Expanded Content */}
+                    {isExpanded && (
+                      <div className="px-6 pb-6 border-t border-gray-200 dark:border-gray-700 pt-4 space-y-6">
+                        {/* Option Title */}
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                            Option Title ({language.toUpperCase()})
+                          </label>
+                          <input
+                            type="text"
+                            value={option.OPTION_TITLE[language]}
+                            onChange={(e) => updateOptionBilingualField(idx, "OPTION_TITLE", e.target.value)}
+                            className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                          />
                         </div>
-                        <div className="flex items-center gap-1" onClick={(e) => e.stopPropagation()}>
-                          {/* Move Up */}
-                          <button
-                            onClick={() => moveTreatmentOption(idx, "up")}
-                            disabled={idx === 0}
-                            className="p-1.5 rounded hover:bg-gray-200 dark:hover:bg-gray-700 disabled:opacity-30 disabled:cursor-not-allowed"
-                            title="Move up"
-                          >
-                            <svg className="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
-                            </svg>
-                          </button>
-                          {/* Move Down */}
-                          <button
-                            onClick={() => moveTreatmentOption(idx, "down")}
-                            disabled={idx === (scenario.treatment_options?.length || 0) - 1}
-                            className="p-1.5 rounded hover:bg-gray-200 dark:hover:bg-gray-700 disabled:opacity-30 disabled:cursor-not-allowed"
-                            title="Move down"
-                          >
-                            <svg className="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                            </svg>
-                          </button>
-                          {/* Delete */}
-                          <button
-                            onClick={() => {
-                              if (confirm(`Delete treatment option "${option.name[language] || "Untitled"}"?`)) {
-                                removeTreatmentOption(idx);
+
+                        {/* Option Description */}
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                            Option Description ({language.toUpperCase()})
+                          </label>
+                          <textarea
+                            rows={3}
+                            value={option.OPTION_DESCRIPTION[language]}
+                            onChange={(e) => updateOptionBilingualField(idx, "OPTION_DESCRIPTION", e.target.value)}
+                            className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                          />
+                        </div>
+
+                        {/* Process Overview */}
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                            Process Overview ({language.toUpperCase()})
+                          </label>
+                          <textarea
+                            rows={3}
+                            value={option.PROCESS_OVERVIEW[language]}
+                            onChange={(e) => updateOptionBilingualField(idx, "PROCESS_OVERVIEW", e.target.value)}
+                            className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                          />
+                        </div>
+
+                        {/* Limitations + Profile Match */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                              Limitations ({language.toUpperCase()})
+                            </label>
+                            <textarea
+                              rows={2}
+                              value={option.OPTION_LIMITATIONS[language]}
+                              onChange={(e) => updateOptionBilingualField(idx, "OPTION_LIMITATIONS", e.target.value)}
+                              className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                              Profile Match ({language.toUpperCase()})
+                            </label>
+                            <textarea
+                              rows={2}
+                              value={option.PROFILE_MATCH[language]}
+                              onChange={(e) => updateOptionBilingualField(idx, "PROFILE_MATCH", e.target.value)}
+                              className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                            />
+                          </div>
+                        </div>
+
+                        {/* Numeric fields: Pricing + Duration */}
+                        <div className="grid grid-cols-2 md:grid-cols-7 gap-4">
+                          <div className="md:col-span-2">
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                              Price Min
+                            </label>
+                            <input
+                              type="number"
+                              value={option.pricing.min}
+                              onChange={(e) =>
+                                updateOption(idx, {
+                                  pricing: { ...option.pricing, min: Number(e.target.value) },
+                                })
                               }
-                            }}
-                            className="p-1.5 rounded hover:bg-red-100 dark:hover:bg-red-900/30 text-red-500 ml-2"
-                            title="Delete option"
-                          >
-                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                            </svg>
-                          </button>
+                              className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                            />
+                          </div>
+                          <div className="md:col-span-2">
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                              Price Max
+                            </label>
+                            <input
+                              type="number"
+                              value={option.pricing.max}
+                              onChange={(e) =>
+                                updateOption(idx, {
+                                  pricing: { ...option.pricing, max: Number(e.target.value) },
+                                })
+                              }
+                              className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                              Currency
+                            </label>
+                            <input
+                              type="text"
+                              value={option.pricing.currency}
+                              onChange={(e) =>
+                                updateOption(idx, {
+                                  pricing: { ...option.pricing, currency: e.target.value },
+                                })
+                              }
+                              className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                              Duration Min (mo)
+                            </label>
+                            <input
+                              type="number"
+                              value={option.duration.min_months}
+                              onChange={(e) =>
+                                updateOption(idx, {
+                                  duration: { ...option.duration, min_months: Number(e.target.value) },
+                                })
+                              }
+                              className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                              Duration Max (mo)
+                            </label>
+                            <input
+                              type="number"
+                              value={option.duration.max_months}
+                              onChange={(e) =>
+                                updateOption(idx, {
+                                  duration: { ...option.duration, max_months: Number(e.target.value) },
+                                })
+                              }
+                              className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                            />
+                          </div>
+                        </div>
+
+                        {/* Recovery days */}
+                        <div className="grid grid-cols-2 md:grid-cols-7 gap-4">
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                              Recovery (days)
+                            </label>
+                            <input
+                              type="number"
+                              value={option.recovery_days}
+                              onChange={(e) =>
+                                updateOption(idx, {
+                                  recovery_days: Number(e.target.value),
+                                })
+                              }
+                              className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                            />
+                          </div>
                         </div>
                       </div>
-
-                      {/* Expanded Content */}
-                      {isExpanded && (
-                        <div className="px-6 pb-6 border-t border-gray-200 dark:border-gray-700 pt-4 space-y-6">
-                          {/* Row 1: Name + Category */}
-                          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div className="md:col-span-2">
-                              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                Name ({language.toUpperCase()})
-                              </label>
-                              <input
-                                type="text"
-                                value={option.name[language]}
-                                onChange={(e) =>
-                                  updateTreatmentOption(idx, {
-                                    name: { ...option.name, [language]: e.target.value },
-                                  })
-                                }
-                                className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                              />
-                            </div>
-                            <div>
-                              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                Category
-                              </label>
-                              <select
-                                value={option.category}
-                                onChange={(e) =>
-                                  updateTreatmentOption(idx, {
-                                    category: e.target.value as TreatmentOption["category"],
-                                  })
-                                }
-                                className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                              >
-                                {["implant", "bridge", "denture", "crown", "veneer", "whitening", "orthodontic", "other"].map((cat) => (
-                                  <option key={cat} value={cat}>{cat.charAt(0).toUpperCase() + cat.slice(1)}</option>
-                                ))}
-                              </select>
-                            </div>
-                          </div>
-
-                          {/* Row 2: Description */}
-                          <div>
-                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                              Description ({language.toUpperCase()})
-                            </label>
-                            <textarea
-                              rows={2}
-                              value={option.description?.[language] || ""}
-                              onChange={(e) =>
-                                updateTreatmentOption(idx, {
-                                  description: { ...(option.description || { en: "", nl: "" }), [language]: e.target.value },
-                                })
-                              }
-                              className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                            />
-                          </div>
-
-                          {/* Row 3: Benefits + Considerations */}
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            {/* Benefits */}
-                            <div>
-                              <div className="flex items-center justify-between mb-2">
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                                  Benefits ({language.toUpperCase()})
-                                </label>
-                                <button
-                                  onClick={() => addBenefit(idx)}
-                                  className="text-xs px-2 py-1 text-purple-600 hover:bg-purple-50 dark:text-purple-400 dark:hover:bg-purple-900/20 rounded"
-                                >
-                                  + Add
-                                </button>
-                              </div>
-                              <div className="space-y-2">
-                                {(option.benefits || []).map((benefit, bIdx) => (
-                                  <div key={bIdx} className="flex gap-2">
-                                    <input
-                                      type="text"
-                                      value={benefit[language] || ""}
-                                      onChange={(e) => updateBenefit(idx, bIdx, e.target.value)}
-                                      placeholder={`Benefit ${bIdx + 1}`}
-                                      className="flex-1 px-3 py-1.5 text-sm border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                                    />
-                                    <button
-                                      onClick={() => removeBenefit(idx, bIdx)}
-                                      className="p-1.5 text-red-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded"
-                                      title="Remove benefit"
-                                    >
-                                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                      </svg>
-                                    </button>
-                                  </div>
-                                ))}
-                                {(option.benefits || []).length === 0 && (
-                                  <p className="text-xs text-gray-400 italic">No benefits added</p>
-                                )}
-                              </div>
-                            </div>
-
-                            {/* Considerations */}
-                            <div>
-                              <div className="flex items-center justify-between mb-2">
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                                  Considerations ({language.toUpperCase()})
-                                </label>
-                                <button
-                                  onClick={() => addConsideration(idx)}
-                                  className="text-xs px-2 py-1 text-purple-600 hover:bg-purple-50 dark:text-purple-400 dark:hover:bg-purple-900/20 rounded"
-                                >
-                                  + Add
-                                </button>
-                              </div>
-                              <div className="space-y-2">
-                                {(option.considerations || []).map((consideration, cIdx) => (
-                                  <div key={cIdx} className="flex gap-2">
-                                    <input
-                                      type="text"
-                                      value={consideration[language] || ""}
-                                      onChange={(e) => updateConsideration(idx, cIdx, e.target.value)}
-                                      placeholder={`Consideration ${cIdx + 1}`}
-                                      className="flex-1 px-3 py-1.5 text-sm border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                                    />
-                                    <button
-                                      onClick={() => removeConsideration(idx, cIdx)}
-                                      className="p-1.5 text-red-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded"
-                                      title="Remove consideration"
-                                    >
-                                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                      </svg>
-                                    </button>
-                                  </div>
-                                ))}
-                                {(option.considerations || []).length === 0 && (
-                                  <p className="text-xs text-gray-400 italic">No considerations added</p>
-                                )}
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* Row 4: Ideal For */}
-                          <div>
-                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                              Ideal For ({language.toUpperCase()})
-                            </label>
-                            <textarea
-                              rows={2}
-                              value={option.ideal_for?.[language] || ""}
-                              onChange={(e) =>
-                                updateTreatmentOption(idx, {
-                                  ideal_for: { ...(option.ideal_for || { en: "", nl: "" }), [language]: e.target.value },
-                                })
-                              }
-                              className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                            />
-                          </div>
-
-                          {/* Row 5: NLG Variable Fields */}
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                Complexity ({language.toUpperCase()})
-                              </label>
-                              <textarea
-                                rows={2}
-                                value={option.complexity?.[language] || ""}
-                                onChange={(e) =>
-                                  updateTreatmentOption(idx, {
-                                    complexity: { ...(option.complexity || { en: "", nl: "" }), [language]: e.target.value },
-                                  })
-                                }
-                                placeholder="e.g. Medium complexity, requires multiple visits"
-                                className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                              />
-                            </div>
-                            <div>
-                              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                Result Description ({language.toUpperCase()})
-                              </label>
-                              <textarea
-                                rows={2}
-                                value={option.result_description?.[language] || ""}
-                                onChange={(e) =>
-                                  updateTreatmentOption(idx, {
-                                    result_description: { ...(option.result_description || { en: "", nl: "" }), [language]: e.target.value },
-                                  })
-                                }
-                                placeholder="Expected result of this treatment"
-                                className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                              />
-                            </div>
-                            <div>
-                              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                Comfort Experience ({language.toUpperCase()})
-                              </label>
-                              <textarea
-                                rows={2}
-                                value={option.comfort_experience?.[language] || ""}
-                                onChange={(e) =>
-                                  updateTreatmentOption(idx, {
-                                    comfort_experience: { ...(option.comfort_experience || { en: "", nl: "" }), [language]: e.target.value },
-                                  })
-                                }
-                                placeholder="What the patient can expect comfort-wise"
-                                className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                              />
-                            </div>
-                            <div>
-                              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                Aesthetic Result ({language.toUpperCase()})
-                              </label>
-                              <textarea
-                                rows={2}
-                                value={option.aesthetic_result?.[language] || ""}
-                                onChange={(e) =>
-                                  updateTreatmentOption(idx, {
-                                    aesthetic_result: { ...(option.aesthetic_result || { en: "", nl: "" }), [language]: e.target.value },
-                                  })
-                                }
-                                placeholder="Expected aesthetic outcome"
-                                className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                              />
-                            </div>
-                          </div>
-
-                          {/* Phases */}
-                          <div>
-                            <div className="flex items-center justify-between mb-2">
-                              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                                Phases ({language.toUpperCase()}) — max 3
-                              </label>
-                              <button
-                                onClick={() => addPhase(idx)}
-                                disabled={(option.phases || []).length >= 3}
-                                className="text-xs px-2 py-1 text-purple-600 hover:bg-purple-50 dark:text-purple-400 dark:hover:bg-purple-900/20 rounded disabled:opacity-30 disabled:cursor-not-allowed"
-                              >
-                                + Add Phase
-                              </button>
-                            </div>
-                            <div className="space-y-2">
-                              {(option.phases || []).map((phase, pIdx) => (
-                                <div key={pIdx} className="flex gap-2">
-                                  <span className="flex items-center text-xs font-medium text-gray-500 dark:text-gray-400 w-16 shrink-0">
-                                    Phase {pIdx + 1}
-                                  </span>
-                                  <input
-                                    type="text"
-                                    value={phase[language] || ""}
-                                    onChange={(e) => updatePhase(idx, pIdx, e.target.value)}
-                                    placeholder={`Phase ${pIdx + 1} description`}
-                                    className="flex-1 px-3 py-1.5 text-sm border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                                  />
-                                  <button
-                                    onClick={() => removePhase(idx, pIdx)}
-                                    className="p-1.5 text-red-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded"
-                                    title="Remove phase"
-                                  >
-                                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                    </svg>
-                                  </button>
-                                </div>
-                              ))}
-                              {(option.phases || []).length === 0 && (
-                                <p className="text-xs text-gray-400 italic">No phases added</p>
-                              )}
-                            </div>
-                          </div>
-
-                          {/* Row 6: Pricing + Duration + Recovery numbers */}
-                          <div className="grid grid-cols-2 md:grid-cols-7 gap-4">
-                            <div className="md:col-span-2">
-                              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                Price Min
-                              </label>
-                              <input
-                                type="number"
-                                value={option.pricing?.min ?? ""}
-                                onChange={(e) =>
-                                  updateTreatmentOption(idx, {
-                                    pricing: { ...(option.pricing || { min: 0, max: 0, currency: "EUR" }), min: Number(e.target.value) },
-                                  })
-                                }
-                                className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                              />
-                            </div>
-                            <div className="md:col-span-2">
-                              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                Price Max
-                              </label>
-                              <input
-                                type="number"
-                                value={option.pricing?.max ?? ""}
-                                onChange={(e) =>
-                                  updateTreatmentOption(idx, {
-                                    pricing: { ...(option.pricing || { min: 0, max: 0, currency: "EUR" }), max: Number(e.target.value) },
-                                  })
-                                }
-                                className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                              />
-                            </div>
-                            <div>
-                              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                Currency
-                              </label>
-                              <input
-                                type="text"
-                                value={option.pricing?.currency ?? "EUR"}
-                                onChange={(e) =>
-                                  updateTreatmentOption(idx, {
-                                    pricing: { ...(option.pricing || { min: 0, max: 0, currency: "EUR" }), currency: e.target.value },
-                                  })
-                                }
-                                className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                              />
-                            </div>
-                            <div>
-                              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                Duration Min (mo)
-                              </label>
-                              <input
-                                type="number"
-                                value={option.duration?.min_months ?? ""}
-                                onChange={(e) =>
-                                  updateTreatmentOption(idx, {
-                                    duration: { ...(option.duration || { min_months: 0, max_months: 0 }), min_months: Number(e.target.value) },
-                                  })
-                                }
-                                className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                              />
-                            </div>
-                            <div>
-                              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                Duration Max (mo)
-                              </label>
-                              <input
-                                type="number"
-                                value={option.duration?.max_months ?? ""}
-                                onChange={(e) =>
-                                  updateTreatmentOption(idx, {
-                                    duration: { ...(option.duration || { min_months: 0, max_months: 0 }), max_months: Number(e.target.value) },
-                                  })
-                                }
-                                className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                              />
-                            </div>
-                          </div>
-
-                          {/* Recovery days on its own row for clarity */}
-                          <div className="grid grid-cols-2 md:grid-cols-7 gap-4">
-                            <div>
-                              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                Recovery (days)
-                              </label>
-                              <input
-                                type="number"
-                                value={option.recovery?.days ?? ""}
-                                onChange={(e) =>
-                                  updateTreatmentOption(idx, {
-                                    recovery: { ...(option.recovery || { days: 0 }), days: Number(e.target.value) },
-                                  })
-                                }
-                                className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                              />
-                            </div>
-                          </div>
-
-                          {/* Row 6: Notes — Pricing note, Duration note, Recovery description */}
-                          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div>
-                              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                Pricing Note ({language.toUpperCase()})
-                              </label>
-                              <input
-                                type="text"
-                                value={option.pricing?.note?.[language] ?? ""}
-                                onChange={(e) =>
-                                  updateTreatmentOption(idx, {
-                                    pricing: {
-                                      ...(option.pricing || { min: 0, max: 0, currency: "EUR" }),
-                                      note: { ...(option.pricing?.note || { en: "", nl: "" }), [language]: e.target.value },
-                                    },
-                                  })
-                                }
-                                className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                              />
-                            </div>
-                            <div>
-                              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                Duration Note ({language.toUpperCase()})
-                              </label>
-                              <input
-                                type="text"
-                                value={option.duration?.note?.[language] ?? ""}
-                                onChange={(e) =>
-                                  updateTreatmentOption(idx, {
-                                    duration: {
-                                      ...(option.duration || { min_months: 0, max_months: 0 }),
-                                      note: { ...(option.duration?.note || { en: "", nl: "" }), [language]: e.target.value },
-                                    },
-                                  })
-                                }
-                                className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                              />
-                            </div>
-                            <div>
-                              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                Recovery Description ({language.toUpperCase()})
-                              </label>
-                              <input
-                                type="text"
-                                value={option.recovery?.description?.[language] ?? ""}
-                                onChange={(e) =>
-                                  updateTreatmentOption(idx, {
-                                    recovery: {
-                                      ...(option.recovery || { days: 0 }),
-                                      description: { ...(option.recovery?.description || { en: "", nl: "" }), [language]: e.target.value },
-                                    },
-                                  })
-                                }
-                                className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  );
-                })
-              ) : (
-                <div className="bg-white dark:bg-gray-800 shadow rounded-lg p-6 text-center text-gray-500 dark:text-gray-400">
-                  No treatment options defined for this scenario.
-                </div>
-              )}
+                    )}
+                  </div>
+                );
+              })}
 
               {/* Add Treatment Option Button */}
               <button
-                onClick={addTreatmentOption}
+                onClick={addOption}
                 className="w-full py-3 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg text-gray-500 dark:text-gray-400 hover:border-purple-400 hover:text-purple-600 dark:hover:border-purple-500 dark:hover:text-purple-400 transition-colors flex items-center justify-center gap-2"
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

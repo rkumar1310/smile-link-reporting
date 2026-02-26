@@ -32,8 +32,6 @@ export async function GET(request: NextRequest) {
         { _id: { $regex: search, $options: "i" } },
         { "name.en": { $regex: search, $options: "i" } },
         { "name.nl": { $regex: search, $options: "i" } },
-        { "description.en": { $regex: search, $options: "i" } },
-        { "description.nl": { $regex: search, $options: "i" } },
       ];
     }
 

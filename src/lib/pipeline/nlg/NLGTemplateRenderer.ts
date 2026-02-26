@@ -1,6 +1,13 @@
 /**
  * NLG Template Renderer
- * Loads templates and substitutes variables
+ * Loads templates and substitutes variables.
+ *
+ * New structure (blocks 0-8):
+ * - Blocks 0-3: Template text with scenario sentence fragments + dynamic options
+ * - Block 1 includes {CONTEXT_MODULES_BLOCK} for injected text modules
+ * - Block 3 uses {OPTIONS_BLOCK} rendered dynamically from block_3_options array
+ * - Blocks 4-7: Single variable per block (full paragraph from scenario)
+ * - Block 8: Fully fixed text (no variables)
  */
 
 import type { SupportedLanguage } from "../types";
@@ -18,323 +25,166 @@ import { variableCalculator } from "./VariableCalculator";
 // =============================================================================
 
 /**
- * English NLG Template
- * Based on target_nlg.md - deterministic, zero drift
+ * English NLG Template — based on target_nlg.md
  */
-const NLG_TEMPLATE_EN = `{DISCLAIMER_TEXT}
+const NLG_TEMPLATE_EN = `## Personal Summary
 
----
+Based on the information you have provided, you are currently in a situation where {CONTEXT_DESCRIPTION} is relevant to your smile and oral condition.
 
-## Your Personal Summary
+You indicate that {PRIMARY_GOAL} is particularly important to you when considering possible treatment directions.
 
-Based on your answers ({AGE_CATEGORY}, {MAIN_CONCERN}), it appears that you are currently primarily dealing with {SHORT_SITUATION_DESCRIPTION}.
+At the same time, you are taking {MAIN_CONSTRAINT} into account, which may influence how you evaluate different options.
 
-You are in a phase in which {DECISION_STAGE_DESCRIPTION}.
-
-In this context, this report provides you with an overview of the possible options, what you can realistically expect, and which aspects in your situation deserve additional attention.
+This report helps you review your situation and possible directions in a structured way, without making a choice on your behalf.
 
 ---
 
 ## Your Situation
 
-Your answers indicate {SITUATION_BASE}.
+Your current situation is characterized by {CORE_SITUATION_DESCRIPTION}. This may influence both the functional and aesthetic aspects of your smile.
 
-This means that {SITUATION_RELEVANCE}.
+Your answers also indicate that {NUANCE_FACTOR} plays an additional role.
 
-{OPTIONAL_SITUATION_TAG_BLOCK}
+In addition, {SECONDARY_FACTOR} may further shape how treatment options are considered.
 
-From this situation, it is relevant to objectively review the possible treatment options side by side.
+{CONTEXT_MODULES_BLOCK}
 
----
-
-## Treatment Options
-
-### Overview of Treatment Options
-
-Below you will find a clear overview of the possible treatment options for your situation:
-
-**{OPTION_1_NAME}**: {OPTION_1_SHORT_DESCRIPTION}
-- Indication: {OPTION_1_INDICATION}
-- Complexity: {OPTION_1_COMPLEXITY}
-
-**{OPTION_2_NAME}**: {OPTION_2_SHORT_DESCRIPTION}
-- Indication: {OPTION_2_INDICATION}
-- Complexity: {OPTION_2_COMPLEXITY}
-
-{OPTIONAL_ADDITIONAL_OPTIONS}
-
-### Pros and Cons
-
-**{OPTION_1_NAME}**
-- Advantages: {OPTION_1_ADVANTAGES}
-- Disadvantages: {OPTION_1_DISADVANTAGES}
-
-**{OPTION_2_NAME}**
-- Advantages: {OPTION_2_ADVANTAGES}
-- Disadvantages: {OPTION_2_DISADVANTAGES}
-
-{OPTIONAL_ADDITIONAL_OPTION_PRO_CON_BLOCKS}
+A careful assessment of your starting situation typically forms the basis for further decision-making.
 
 ---
 
-## Recommended Direction
+## Treatment Directions
 
-Based on your answers, {RECOMMENDED_DIRECTION} appears to be a logical direction to consider in your situation.
+Within your profile, multiple treatment directions may be considered.
 
-This direction aligns with what is currently important to you, namely {PRIORITY_CONTEXT}.
+- A direction in which {DIRECTION_1_CORE}.
+- An approach that focuses on {DIRECTION_2_CORE}.
+- A possibility in which {DIRECTION_3_CORE}.
 
-This is not medical advice, but a neutral clarification of which option is often considered appropriate in comparable situations.
-
-{TAG_NUANCE_DIRECTION}
-
----
-
-## Expected Results & Comfort
-
-When choosing {SELECTED_OPTION}, the aim is generally to achieve {RESULT_DESCRIPTION}.
-
-Many people experience {COMFORT_EXPERIENCE} after the treatment.
-
-From an aesthetic perspective, you may expect that {AESTHETIC_RESULT}.
-
-{OPTIONAL_RESULT_TAG_BLOCK}
+Which direction may be appropriate depends on your personal priorities and the clinical assessment of a practitioner.
 
 ---
 
-## Treatment Duration
+## Option Overview
 
-The average treatment duration for {SELECTED_OPTION} is approximately {TREATMENT_DURATION}.
-
-This process usually consists of the following steps:
-1. {PHASE_1}
-2. {PHASE_2}
-3. {PHASE_3}
-
-The exact timeline depends, among other factors, on {DURATION_VARIATION_FACTOR}.
-
-{OPTIONAL_DURATION_TAG_BLOCK}
+{OPTIONS_BLOCK}
 
 ---
 
-## Risks & Points of Attention
+## Expected Results
 
-Every dental treatment involves general risks, such as {GENERAL_RISK}.
-
-In your situation, the following aspects are important to take into account:
-{SITUATION_SPECIFIC_CONSIDERATIONS}
-
-This information is provided solely to support your decision-making process.
+{EXPECTED_RESULTS_BLOCK}
 
 ---
 
-## Costs & Price Factors
+## Duration
 
-### Cost Estimate
-
-The cost of {SELECTED_OPTION} may vary depending on individual factors.
-
-In your region, the typical cost range usually falls between {PRICE_MIN} and {PRICE_MAX}.
-
-This is an indicative estimate and not a formal price quotation.
-
-### Price Factors
-
-The final cost may vary due to:
-- {FACTOR_1}
-- {FACTOR_2}
-- {FACTOR_3}
-
-{OPTIONAL_PRICE_TAG_BLOCK}
+{DURATION_BLOCK}
 
 ---
 
-## Recovery & Practical Instructions
+## Recovery
 
-Recovery after {SELECTED_OPTION} usually takes {RECOVERY_DURATION}.
+{RECOVERY_BLOCK}
 
-Possible discomfort may include {RECOVERY_DISCOMFORT}.
+---
 
-You should seek professional assistance if you experience {ALARM_SIGNAL}.
+## Cost
 
-{OPTIONAL_RECOVERY_TAG_BLOCK}
+{COST_BLOCK}
 
 ---
 
 ## Next Steps
 
-You now have a clear overview of your situation, the possible options, and what you can expect.
+You may use this report as a structured guide for further conversations or reflection.
 
-For someone in your current phase, it is particularly important to {PROGRESSION_FOCUS}.
+- Consider which aspects weigh most heavily for you.
+- Note any questions you would like to explore further.
+- Reflect on timing and practical feasibility.
 
-If you would like more in-depth guidance, you can consult our decision guides. There, you will discover how to save time and money, avoid common mistakes, and recognize realistic and predictable outcomes.
-
-When preparing for a follow-up consultation, you may wish to consider the following questions:
-- {QUESTION_1}
-- {QUESTION_2}
-- {QUESTION_3}
-
-{OPTIONAL_NEXT_STEPS_TAG_BLOCK}
-
-You do not need to make a final decision today; this overview is intended to help you reflect in a more informed and prepared way.`;
+Final decisions are always made in consultation with a qualified healthcare professional.`;
 
 /**
  * Dutch NLG Template
  */
-const NLG_TEMPLATE_NL = `{DISCLAIMER_TEXT}
+const NLG_TEMPLATE_NL = `## Persoonlijke Samenvatting
 
----
+Op basis van de informatie die u heeft ingevuld, bevindt u zich in een situatie waarin {CONTEXT_DESCRIPTION} relevant is voor uw glimlach en mondsituatie.
 
-## Uw Persoonlijke Samenvatting
+U geeft aan dat voor u vooral {PRIMARY_GOAL} belangrijk is bij het overwegen van mogelijke behandelrichtingen.
 
-Op basis van uw antwoorden ({AGE_CATEGORY}, {MAIN_CONCERN}) blijkt dat u momenteel vooral te maken hebt met {SHORT_SITUATION_DESCRIPTION}.
+Tegelijk houdt u rekening met {MAIN_CONSTRAINT}, wat invloed kan hebben op hoe u opties beoordeelt.
 
-U bevindt zich in een fase waarin {DECISION_STAGE_DESCRIPTION}.
-
-In dat kader geeft dit rapport u een overzicht van de mogelijke opties, wat u realistisch kunt verwachten en welke aspecten in uw situatie extra aandacht verdienen.
+Dit rapport helpt u om uw situatie en mogelijke richtingen gestructureerd te bekijken, zonder een keuze voor u te maken.
 
 ---
 
 ## Uw Situatie
 
-Uw antwoorden wijzen op {SITUATION_BASE}.
+Uw huidige situatie wordt gekenmerkt door {CORE_SITUATION_DESCRIPTION}. Dit kan invloed hebben op zowel de functionele als esthetische aspecten van uw glimlach.
 
-Dit betekent dat {SITUATION_RELEVANCE}.
+In uw antwoorden komt ook naar voren dat {NUANCE_FACTOR} een bijkomende rol speelt.
 
-{OPTIONAL_SITUATION_TAG_BLOCK}
+Daarnaast kan {SECONDARY_FACTOR} mee bepalen hoe behandelopties worden overwogen.
 
-Vanuit deze situatie is het relevant om de mogelijke behandelopties objectief naast elkaar te bekijken.
+{CONTEXT_MODULES_BLOCK}
 
----
-
-## Behandelopties
-
-### Overzicht Behandelingsopties
-
-Hieronder vindt u een duidelijk overzicht van de mogelijke behandelingsopties voor uw situatie:
-
-**{OPTION_1_NAME}**: {OPTION_1_SHORT_DESCRIPTION}
-- Indicatie: {OPTION_1_INDICATION}
-- Complexiteit: {OPTION_1_COMPLEXITY}
-
-**{OPTION_2_NAME}**: {OPTION_2_SHORT_DESCRIPTION}
-- Indicatie: {OPTION_2_INDICATION}
-- Complexiteit: {OPTION_2_COMPLEXITY}
-
-{OPTIONAL_ADDITIONAL_OPTIONS}
-
-### Voor- en Nadelen
-
-**{OPTION_1_NAME}**
-- Voordelen: {OPTION_1_ADVANTAGES}
-- Nadelen: {OPTION_1_DISADVANTAGES}
-
-**{OPTION_2_NAME}**
-- Voordelen: {OPTION_2_ADVANTAGES}
-- Nadelen: {OPTION_2_DISADVANTAGES}
-
-{OPTIONAL_ADDITIONAL_OPTION_PRO_CON_BLOCKS}
+Een zorgvuldige beoordeling van uw uitgangssituatie vormt doorgaans het startpunt van verdere besluitvorming.
 
 ---
 
-## Aanbevolen Richting
+## Behandelrichtingen
 
-Op basis van uw antwoorden lijkt {RECOMMENDED_DIRECTION} in uw situatie een logische richting om te overwegen.
+Binnen uw profiel kunnen meerdere behandelrichtingen in overweging worden genomen.
 
-Deze richting sluit aan bij wat voor u momenteel belangrijk is, namelijk {PRIORITY_CONTEXT}.
+- Een richting waarbij {DIRECTION_1_CORE}.
+- Een benadering die zich richt op {DIRECTION_2_CORE}.
+- Een mogelijkheid waarbij {DIRECTION_3_CORE}.
 
-Dit is geen medisch advies, maar een neutrale duiding van welke optie in vergelijkbare situaties vaak als passend wordt gezien.
-
-{TAG_NUANCE_DIRECTION}
-
----
-
-## Verwachte Resultaten & Comfort
-
-Wanneer u kiest voor {SELECTED_OPTION}, wordt doorgaans gestreefd naar {RESULT_DESCRIPTION}.
-
-Veel mensen ervaren na de behandeling {COMFORT_EXPERIENCE}.
-
-Op esthetisch vlak mag u verwachten dat {AESTHETIC_RESULT}.
-
-{OPTIONAL_RESULT_TAG_BLOCK}
+Welke richting passend is, hangt af van uw persoonlijke prioriteiten en de klinische beoordeling door een behandelaar.
 
 ---
 
-## Duur van de Behandeling
+## Optieoverzicht
 
-De gemiddelde doorlooptijd voor {SELECTED_OPTION} bedraagt ongeveer {TREATMENT_DURATION}.
-
-Dit traject verloopt meestal in de volgende stappen:
-1. {PHASE_1}
-2. {PHASE_2}
-3. {PHASE_3}
-
-De exacte tijd hangt onder meer af van {DURATION_VARIATION_FACTOR}.
-
-{OPTIONAL_DURATION_TAG_BLOCK}
+{OPTIONS_BLOCK}
 
 ---
 
-## Risico's & Aandachtspunten
+## Verwachte Resultaten
 
-Elke tandheelkundige behandeling houdt algemene risico's in, zoals {GENERAL_RISK}.
-
-In uw situatie zijn onderstaande punten belangrijk om mee te nemen:
-{SITUATION_SPECIFIC_CONSIDERATIONS}
-
-Deze informatie dient enkel ter ondersteuning van uw besluitvorming.
+{EXPECTED_RESULTS_BLOCK}
 
 ---
 
-## Kosten & Prijsfactoren
+## Duur
 
-### Kostenschatting
-
-De kostprijs van {SELECTED_OPTION} kan variëren afhankelijk van individuele factoren.
-
-In uw regio ligt de gebruikelijke kostenrange meestal tussen {PRICE_MIN} en {PRICE_MAX}.
-
-Dit betreft een indicatieve schatting en geen prijsofferte.
-
-### Prijsfactoren
-
-De uiteindelijke prijs kan variëren door:
-- {FACTOR_1}
-- {FACTOR_2}
-- {FACTOR_3}
-
-{OPTIONAL_PRICE_TAG_BLOCK}
+{DURATION_BLOCK}
 
 ---
 
-## Herstel & Praktische Instructies
+## Herstel
 
-Het herstel na {SELECTED_OPTION} duurt meestal {RECOVERY_DURATION}.
+{RECOVERY_BLOCK}
 
-Mogelijke ongemakken zijn {RECOVERY_DISCOMFORT}.
+---
 
-U mag hulp zoeken wanneer u {ALARM_SIGNAL}.
+## Kosten
 
-{OPTIONAL_RECOVERY_TAG_BLOCK}
+{COST_BLOCK}
 
 ---
 
 ## Volgende Stappen
 
-U hebt nu een helder overzicht van uw situatie, de mogelijke opties en wat u kunt verwachten.
+U kan dit rapport gebruiken als gestructureerde leidraad bij verdere gesprekken of reflectie.
 
-Voor iemand in uw fase is het vooral belangrijk om {PROGRESSION_FOCUS}.
+- Overweeg welke aspecten voor u het zwaarst doorwegen.
+- Noteer vragen die u graag verder verduidelijkt ziet.
+- Denk na over timing en praktische haalbaarheid.
 
-Als u graag meer diepgang wilt, kunt u terecht in onze beslissingsgidsen. Daarin ontdekt u hoe u tijd en geld kunt besparen, veelvoorkomende fouten kunt vermijden en hoe u realistische en voorspelbare resultaten herkent.
-
-Overweeg bij een vervolgconsult zeker de volgende vragen:
-- {QUESTION_1}
-- {QUESTION_2}
-- {QUESTION_3}
-
-{OPTIONAL_NEXT_STEPS_TAG_BLOCK}
-
-U hoeft vandaag geen definitieve beslissing te nemen; dit overzicht is bedoeld om u beter voorbereid te laten nadenken.`;
+Definitieve beslissingen worden steeds genomen in overleg met een gekwalificeerde zorgverlener.`;
 
 // =============================================================================
 // TEMPLATE RENDERER CLASS
@@ -353,7 +203,7 @@ export class NLGTemplateRenderer {
     const { sessionId, language } = input;
     const warnings: NLGWarning[] = [];
 
-    // 1. Calculate all variables
+    // 1. Calculate all variables (including OPTIONS_BLOCK and CONTEXT_MODULES_BLOCK)
     const variableResolution = await variableCalculator.calculate(input);
 
     // 2. Get the template
@@ -373,18 +223,7 @@ export class NLGTemplateRenderer {
           variable: variableName as NLGVariable,
           severity: "warning"
         });
-        return match; // Keep original placeholder
-      }
-
-      if (resolved.status === "not_implemented") {
-        warnings.push({
-          code: "NOT_IMPLEMENTED",
-          message: `Variable not implemented: ${variableName}`,
-          variable: variableName as NLGVariable,
-          severity: "info"
-        });
-        // Return raw {VARIABLE_NAME} so ReportDisplay's preprocessor picks it up and styles it red
-        return `{${variableName}}`;
+        return match;
       }
 
       if (resolved.status === "missing_data") {
@@ -397,55 +236,44 @@ export class NLGTemplateRenderer {
         return `{${variableName}}`;
       }
 
-      // Wrap [... required/vereist] fallback placeholders so ReportDisplay styles them red
-      if (/^\[.+(required|vereist)\]$/i.test(resolved.value)) {
-        return `{${variableName}}`;
+      if (resolved.status === "fallback" && resolved.fallbackUsed) {
+        warnings.push({
+          code: "FALLBACK_USED",
+          message: `Using fallback for: ${variableName}`,
+          variable: variableName as NLGVariable,
+          severity: "info"
+        });
       }
 
       return resolved.value;
     });
 
-    // 4. Clean up empty sections and extra whitespace
+    // 4. Clean up
     renderedReport = this.cleanupReport(renderedReport);
-
-    // 5. Generate flags
-    const flags = variableCalculator.generateFlags();
-
-    // 6. Add summary warning if many variables are flagged
-    if (variableResolution.notImplementedVariables.length > 10) {
-      warnings.push({
-        code: "PARTIAL_IMPLEMENTATION",
-        message: `${variableResolution.notImplementedVariables.length} variables are not yet implemented. See flags for details.`,
-        severity: "info"
-      });
-    }
 
     return {
       sessionId,
       language,
+      scenarioId: input.scenarioId,
       renderedReport,
       variableResolution,
-      warnings,
-      flags
+      warnings
     };
   }
 
   /**
    * Clean up the rendered report
-   * - Remove empty optional blocks
-   * - Normalize whitespace
-   * - Remove orphaned list items
    */
   private cleanupReport(report: string): string {
     let cleaned = report;
 
-    // Remove empty list items (e.g., "- \n")
+    // Remove empty list items
     cleaned = cleaned.replace(/^-\s*$/gm, "");
 
     // Remove lines that are just whitespace
     cleaned = cleaned.replace(/^\s+$/gm, "");
 
-    // Collapse multiple blank lines into two (for section spacing)
+    // Collapse multiple blank lines
     cleaned = cleaned.replace(/\n{4,}/g, "\n\n\n");
 
     // Remove trailing whitespace on lines
@@ -479,5 +307,8 @@ export class NLGTemplateRenderer {
     return variables;
   }
 }
+
+// Re-export for API compatibility (moved to optionBlockBuilder.ts to break circular import)
+export { buildOptionsBlock } from "./optionBlockBuilder";
 
 export const nlgTemplateRenderer = new NLGTemplateRenderer();

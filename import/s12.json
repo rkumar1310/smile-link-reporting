@@ -1,0 +1,108 @@
+{
+  "scenario_id": "S12",
+  "name": { "en": "Tooth looseness or pain with consideration of implant or bridge solutions", "nl": "Losse tanden of pijn met overweging van implantaat- of brugoplossingen" },
+  "block_0_personal_summary": {
+    "CONTEXT_DESCRIPTION": {
+      "en": "tooth looseness and/or dental pain that affects day-to-day confidence in chewing and oral comfort",
+      "nl": "losheid van tanden en/of pijn die het vertrouwen bij kauwen en mondcomfort beïnvloedt"
+    },
+    "PRIMARY_GOAL": {
+      "en": "feeling stable, comfortable, and safe when eating and going through daily routines",
+      "nl": "comfort, stabiliteit en een gevoel van zekerheid in dagelijkse routines zoals eten"
+    },
+    "MAIN_CONSTRAINT": {
+      "en": "how many teeth may still be reliably maintainable after assessment, how bite forces are currently distributed, and whether you prefer a predictable long-term solution versus a more limited intervention",
+      "nl": "hoeveel tanden na beoordeling nog betrouwbaar behoudbaar zijn, hoe de krachten momenteel verdeeld zijn en of u eerder kiest voor een voorspelbare langetermijnoplossing of een beperktere ingreep"
+    }
+  },
+  "block_1_situation": {
+    "CORE_SITUATION_DESCRIPTION": {
+      "en": "teeth that feel loose and/or painful, with uncertainty about stability during chewing or even at rest",
+      "nl": "tanden die los aanvoelen en/of pijn geven, met onzekerheid over stabiliteit bij kauwen of soms zelfs in rust"
+    },
+    "NUANCE_FACTOR": {
+      "en": "functional security and reliability (rather than appearance)",
+      "nl": "functionele veiligheid en betrouwbaarheid (meer dan uiterlijk)"
+    },
+    "SECONDARY_FACTOR": {
+      "en": "the possibility that the complaints involve one area versus multiple teeth or zones, and that different underlying causes may exist",
+      "nl": "of de klachten beperkt zijn tot één zone of verspreid zijn over meerdere tanden/zones, en dat verschillende oorzaken mogelijk zijn"
+    }
+  },
+  "block_2_treatment_directions": {
+    "DIRECTION_1_CORE": {
+      "en": "non-maintainable teeth are replaced with implants and crowns per tooth or per zone to restore stability",
+      "nl": "niet-behoudbare tanden worden vervangen met implantaten en kronen per tand of per zone om stabiliteit te herstellen"
+    },
+    "DIRECTION_2_CORE": {
+      "en": "a structured bridge solution that distributes forces across a wider area using stable support points (remaining teeth and/or implants)",
+      "nl": "een brugoplossing die krachten over een groter gebied verdeelt via stabiele steunpunten (resterende tanden en/of implantaten)"
+    },
+    "DIRECTION_3_CORE": {
+      "en": "a phased approach first improves comfort and stability, with definitive choices refined later based on clinical findings and response to early steps",
+      "nl": "een gefaseerde aanpak eerst comfort en stabiliteit verbetert, waarna definitieve keuzes later worden verfijnd op basis van bevindingen en reactie op de eerste stappen"
+    }
+  },
+  "block_3_options": [
+    {
+      "OPTION_TITLE": { "en": "Implants with crowns (per tooth or per zone)", "nl": "Implantaten met kronen (per tand of per zone)" },
+      "OPTION_DESCRIPTION": {
+        "en": "replacing teeth that cannot be predictably maintained with implants and individual crowns, placed per tooth or per region",
+        "nl": "het vervangen van tanden die niet betrouwbaar behoudbaar zijn door implantaten met individuele kronen, per tand of per regio"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "assessment of maintainable teeth, staged implant placement, a healing phase, and then crown fabrication and placement",
+        "nl": "beoordeling van behoudbare elementen, (gefaseerde) plaatsing van implantaten, een genezingsfase en vervolgens vervaardiging en plaatsing van kronen"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "surgery and healing time, rising cost with more teeth involved, and suitability depending on bone and gum condition and individual healing",
+        "nl": "chirurgie en genezing, oplopende kost bij meer betrokken tanden, en geschiktheid afhankelijk van bot- en tandvleesconditie en individuele genezing"
+      },
+      "PROFILE_MATCH": {
+        "en": "want a predictable, stable solution built step-by-step, especially when certain teeth are not salvageable",
+        "nl": "een voorspelbare, stabiele oplossing stap voor stap willen opbouwen, vooral wanneer sommige tanden niet te behouden zijn"
+      },
+      "pricing": { "min": 2200, "max": 9000, "currency": "EUR" },
+      "duration": { "min_months": 4, "max_months": 7 },
+      "recovery_days": 7
+    },
+    {
+      "OPTION_TITLE": { "en": "Bridge solution with stable support points", "nl": "Brugoplossing met stabiele steunpunten" },
+      "OPTION_DESCRIPTION": {
+        "en": "replacing multiple teeth together with a bridge supported by implants and/or remaining stable teeth",
+        "nl": "het vervangen van meerdere tanden samen met een brug die steunt op implantaten en/of resterende stabiele tanden"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "identifying suitable support points, placing implants if needed, healing time, bridge design and fabrication, placement, and bite adjustments",
+        "nl": "bepalen van geschikte steunpunten, zo nodig implantaatplaatsing, genezing, ontwerp en vervaardiging, plaatsing en beet- en comfortafstellingen"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "less flexibility for later changes within the same bridge zone, and the need for sufficiently stable support points and a design matched to anatomy and load",
+        "nl": "minder flexibiliteit bij latere wijzigingen binnen dezelfde brugzone, en de nood aan voldoende stabiele steunpunten en een ontwerp dat past bij anatomie en belasting"
+      },
+      "PROFILE_MATCH": {
+        "en": "have multiple teeth or zones involved and prefer a cohesive restoration across a broader area",
+        "nl": "meerdere tanden of zones betrokken hebben en een samenhangende oplossing over een groter gebied verkiezen"
+      },
+      "pricing": { "min": 4500, "max": 6000, "currency": "EUR" },
+      "duration": { "min_months": 4, "max_months": 7 },
+      "recovery_days": 7
+    }
+  ],
+  "block_4_expected_results": {
+    "en": "In many cases, the aim of either direction is a clearer sense of stability and comfort during chewing and speaking, so that looseness or pain becomes less dominant in daily life. Results can vary widely depending on the underlying cause of looseness or pain, how many teeth or zones are involved, gum and bone condition, bite forces, and long-term maintenance. Some people mainly notice functional relief (confidence while eating), while others may notice only partial improvement until all planned phases are completed. No option can be described as guaranteed; outcomes are typically assessed and refined over time.",
+    "nl": "In veel gevallen is het doel dat stabiliteit en comfort bij kauwen en spreken toenemen, zodat losheid of pijn minder sturend wordt in het dagelijks functioneren. De ervaren uitkomst kan sterk variëren en hangt onder meer samen met de onderliggende oorzaak, het aantal betrokken tanden of zones, bot- en tandvleesconditie, beetkrachten en onderhoud op langere termijn. Sommige mensen ervaren vooral functionele rust (meer vertrouwen bij eten), terwijl bij anderen pas een duidelijker effect merkbaar is nadat alle fases zijn afgerond. Er zijn geen garanties; evaluatie en bijsturing gebeuren doorgaans gaandeweg."
+  },
+  "block_5_duration": {
+    "en": "Implant- and bridge-based trajectories are typically completed in steps and can take several months. A commonly cited range for this scenario is roughly four to seven months, though this can shift depending on the number of areas treated, whether implants are placed in one or multiple phases, healing response, laboratory timelines, and how appointments are scheduled. A phased plan may shorten discomfort early (by improving stability sooner) while extending the overall timeline until the final restorations are placed.",
+    "nl": "Trajecten met implantaten en/of bruggen verlopen meestal in stappen en nemen vaak meerdere maanden in beslag. Voor dit scenario wordt vaak een bandbreedte van ongeveer vier tot zeven maanden genoemd, maar dit kan verschuiven door het aantal behandelzones, plaatsing in één of meerdere fases, individuele genezingsreactie, laboratoriumtijd en agenda/planning. Een gefaseerde aanpak kan sneller comfort geven in het begin, terwijl de totale doorlooptijd tot aan de definitieve restauraties langer kan zijn."
+  },
+  "block_6_recovery": {
+    "en": "After surgical steps, temporary soreness, swelling, or sensitivity may occur for a few days, and chewing may need to be adjusted briefly. In this scenario, recovery is often described as about three to seven days for the immediate post-procedure period, but comfort can fluctuate as treatment progresses. Most daily activities can usually be resumed relatively quickly, while the “real” feeling of stability is often more noticeable after healing and final restorations. If symptoms intensify, persist, or interfere with sleep or eating, professional reassessment is typically considered.",
+    "nl": "Na chirurgische stappen kan er enkele dagen napijn, zwelling of gevoeligheid zijn, met tijdelijk aanpassen van het kauwen. In dit scenario wordt het directe herstel vaak beschreven als ongeveer drie tot zeven dagen, al kan comfort per fase verschillen. Dagelijkse activiteiten kunnen meestal relatief snel worden hervat, terwijl het gevoel van “echte” stabiliteit vaak duidelijker wordt na genezing en plaatsing van definitieve restauraties. Als klachten verergeren, aanhouden of het eten/slapen hinderen, wordt doorgaans aangeraden dit professioneel te laten beoordelen."
+  },
+  "block_7_cost": {
+    "en": "Costs can vary substantially depending on the number of teeth or zones involved, whether the plan is individual crowns or a bridge, the number of implants, materials, technical complexity, and how many phases are needed (including potential provisional solutions). In this scenario, indicative ranges were approximately €2,200–€9,000 for implants with crowns (depending on how many teeth) and about €4,500–€6,000 for implant-supported bridge approaches. Final totals can differ by clinic, diagnostics, and any additional preparatory or follow-up procedures.",
+    "nl": "De kosten kunnen sterk variëren door het aantal betrokken tanden/zones, de keuze voor kronen per tand versus een brug, het aantal implantaten, materiaalkeuze, technische complexiteit en eventuele extra fases (zoals tijdelijke voorzieningen). In dit scenario werden indicatieve richtprijzen genoemd van ongeveer €2.200–€9.000 voor implantaten met kronen (afhankelijk van aantal tanden) en ongeveer €4.500–€6.000 voor brugoplossingen op implantaten. Het totaalbedrag kan per praktijk verschillen en kan beïnvloed worden door diagnostiek en aanvullende voorbereidingen of nazorg."
+  }
+}

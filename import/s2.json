@@ -1,0 +1,108 @@
+{
+  "scenario_id": "S02",
+  "name": { "en": "Missing tooth replacement in a visible zone", "nl": "Vervanging van een ontbrekende tand in een zichtbare zone" },
+  "block_0_personal_summary": {
+    "CONTEXT_DESCRIPTION": {
+      "en": "a missing tooth in a visible part of your smile",
+      "nl": "een ontbrekende tand in een zichtbare zone van uw glimlach"
+    },
+    "PRIMARY_GOAL": {
+      "en": "restoring the gap in a durable way so appearance and chewing comfort feel balanced again",
+      "nl": "het duurzaam herstellen van de opening zodat zowel uitstraling als kauwcomfort opnieuw in balans komen"
+    },
+    "MAIN_CONSTRAINT": {
+      "en": "how definitive the solution should be, whether neighboring teeth should remain untouched, and how much time you want to allocate to healing",
+      "nl": "hoe definitief de oplossing mag zijn, of omliggende tanden onaangetast moeten blijven en hoeveel tijd u wilt voorzien voor herstel"
+    }
+  },
+  "block_1_situation": {
+    "CORE_SITUATION_DESCRIPTION": {
+      "en": "one missing tooth in a smile-visible zone, with a gap that may be noticeable when speaking or laughing",
+      "nl": "één ontbrekende tand in een zone die zichtbaar is bij spreken of lachen, met een opening die kan opvallen"
+    },
+    "NUANCE_FACTOR": {
+      "en": "social comfort and self-confidence around visibility of the gap",
+      "nl": "sociaal comfort en zelfvertrouwen rond de zichtbaarheid van de opening"
+    },
+    "SECONDARY_FACTOR": {
+      "en": "questions about chewing balance, possible shifting of adjacent teeth, and long-term stability",
+      "nl": "vragen over kauwevenwicht, mogelijke verschuiving van naburige tanden en stabiliteit op langere termijn"
+    }
+  },
+  "block_2_treatment_directions": {
+    "DIRECTION_1_CORE": {
+      "en": "the missing tooth is replaced with a fixed solution that also replaces the root, keeping adjacent teeth independent",
+      "nl": "de ontbrekende tand vast wordt vervangen mét wortelvervanging, zodat de buurttanden onafhankelijk blijven"
+    },
+    "DIRECTION_2_CORE": {
+      "en": "a minimally invasive, non-surgical bridge solution that restores the visible tooth portion",
+      "nl": "een minimaal invasieve, niet-chirurgische brugoplossing die het zichtbare deel vervangt"
+    },
+    "DIRECTION_3_CORE": {
+      "en": "a phased approach is used—starting with a less invasive solution and reconsidering a more definitive option later",
+      "nl": "gefaseerd wordt gewerkt—eerst een minder ingrijpende oplossing en later herbekijken of een definitieve aanpak wenselijk is"
+    }
+  },
+  "block_3_options": [
+    {
+      "OPTION_TITLE": { "en": "Single implant with crown", "nl": "Enkelvoudig implantaat met kroon" },
+      "OPTION_DESCRIPTION": {
+        "en": "placing an artificial root in the jawbone and later attaching a custom crown to replace the visible tooth",
+        "nl": "het plaatsen van een kunstwortel in het kaakbot en later het bevestigen van een op maat gemaakte kroon"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "a surgical placement phase, a healing/integration period, and then crown fabrication and placement",
+        "nl": "een chirurgische plaatsing, een genezings-/integratieperiode en vervolgens vervaardiging en plaatsing van de kroon"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "a surgical step, a longer timeline, higher overall cost, and suitability depending on bone volume/quality and individual healing",
+        "nl": "een chirurgische fase, een langere doorlooptijd, hogere kost en geschiktheid afhankelijk van botvolume/-kwaliteit en individuele genezing"
+      },
+      "PROFILE_MATCH": {
+        "en": "want an independent, structurally durable solution and are comfortable with a longer multi-step trajectory",
+        "nl": "een zelfstandige en structureel duurzame oplossing willen en een langer traject aanvaardbaar vinden"
+      },
+      "pricing": { "min": 2200, "max": 2500, "currency": "EUR" },
+      "duration": { "min_months": 3, "max_months": 7 },
+      "recovery_days": 5
+    },
+    {
+      "OPTION_TITLE": { "en": "Adhesive (Maryland) bridge", "nl": "Adhesieve (Maryland) brug" },
+      "OPTION_DESCRIPTION": {
+        "en": "bonding an artificial tooth to the back of adjacent teeth using a thin support structure, without implant surgery",
+        "nl": "het vastkleven van een kunsttand aan de achterzijde van de buurttanden via een dunne steunstructuur, zonder implantatie"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "limited preparation in some cases, impressions/scan, lab fabrication, and bonding—often in fewer visits",
+        "nl": "beperkte voorbereiding in sommige gevallen, afdruk/scan, labo-werk en vastkleven—vaak met minder afspraken"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "potentially lower long-term durability than an implant, risk of debonding in some cases, and dependence on getting a stable bond in your bite",
+        "nl": "mogelijk beperktere duurzaamheid op lange termijn dan een implantaat, kans op loskomen in sommige gevallen en afhankelijkheid van een stabiele hechting in uw beet"
+      },
+      "PROFILE_MATCH": {
+        "en": "prefer to avoid surgery, want a shorter treatment timeline, or are considering a temporary/transition solution",
+        "nl": "chirurgie willen vermijden, sneller klaar willen zijn, of een tijdelijke/overgangsoplossing overwegen"
+      },
+      "pricing": { "min": 1500, "max": 2500, "currency": "EUR" },
+      "duration": { "min_months": 0, "max_months": 1 },
+      "recovery_days": 1
+    }
+  ],
+  "block_4_expected_results": {
+    "en": "Both directions may restore the harmony of your smile and reduce the visual impact of the gap, while also helping chewing feel more balanced. In many cases, the goal is a natural match to neighboring teeth in shape and shade, though exact aesthetics can vary. How stable and seamless the result feels typically depends on gum condition, bite forces, the condition of adjacent teeth, and (for implants) bone volume and healing response. Long-term satisfaction is often linked to maintenance habits and regular professional follow-up.",
+    "nl": "Beide richtingen kunnen de harmonie van uw glimlach verbeteren en de zichtbaarheid van de opening verminderen, terwijl het kauwgevoel vaak evenwichtiger kan aanvoelen. Doorgaans wordt gestreefd naar een natuurlijke aansluiting qua vorm en kleur, al kan de exacte esthetiek verschillen per persoon en per materiaalkeuze. Het uiteindelijke resultaat hangt vaak samen met tandvleesconditie, beetbelasting, de toestand van de buurttanden en (bij implantaten) botvolume en genezingsrespons. Tevredenheid op langere termijn is meestal gekoppeld aan onderhoud en regelmatige opvolging."
+  },
+  "block_5_duration": {
+    "en": "A bonded (Maryland) bridge can often be completed within weeks, depending on planning, lab time, and appointment availability. An implant-and-crown pathway typically takes several months because it usually includes a healing/integration period between the surgical placement and the final crown. Total duration may also be influenced by any preparatory steps, how quickly tissues heal, and how the phases are scheduled.",
+    "nl": "Een adhesieve brug kan vaak binnen enkele weken gerealiseerd worden, afhankelijk van planning en labo-doorlooptijd. Een implantaat met kroon vraagt doorgaans meerdere maanden, omdat er meestal een genezings-/integratieperiode zit tussen de plaatsing en de definitieve kroon. De totale duur kan ook beïnvloed worden door eventuele voorbereidende stappen, individuele genezing en de timing tussen de verschillende fasen."
+  },
+  "block_6_recovery": {
+    "en": "After implant placement, it is common to have a few days of tenderness or swelling, and some people temporarily adjust chewing on that side. Recovery experiences vary, and follow-up visits are typically used to monitor healing. With an adhesive bridge, there is often little to no “recovery time,” though a short adaptation period—especially for bite feel—can occur. If persistent pain, swelling, mobility, or functional difficulty occurs, it is typically a reason to seek clinical review, since responses differ per person.",
+    "nl": "Na het plaatsen van een implantaat kunnen gedurende enkele dagen napijn of zwelling voorkomen en past men het kauwen soms tijdelijk aan. Het herstel verschilt per persoon en wordt vaak opgevolgd via controle-afspraken. Bij een adhesieve brug is er meestal weinig tot geen echte hersteltijd, al kan een korte gewenning aan het gevoel of de beet optreden. Bij aanhoudende pijn, zwelling, loszitten of functionele hinder is verdere evaluatie doorgaans aangewezen, omdat genezing en aanpassing individueel variëren."
+  },
+  "block_7_cost": {
+    "en": "Costs can vary widely based on materials, lab work, imaging, surgical components (if applicable), anatomy, and whether additional preparatory steps are needed. In this scenario, commonly discussed guide ranges were approximately €2,200–€2,500 for a single implant with crown and €1,500–€2,500 for an adhesive bridge. Some treatment plans may include separate phases (diagnostics, temporary solutions, follow-ups), which can change the overall total depending on what is clinically appropriate.",
+    "nl": "Kosten variëren onder meer door materiaalkeuze, labo- en techniekwerk, beeldvorming, chirurgische componenten (indien van toepassing), anatomie en eventuele extra stappen in het behandelplan. In dit scenario werden vaak besproken richtwaarden genoemd van ongeveer €2.200–€2.500 voor een enkelvoudig implantaat met kroon en €1.500–€2.500 voor een adhesieve brug. Soms worden bijkomende fases apart voorzien (diagnostiek, tijdelijke oplossingen, opvolging), wat het totaalbedrag kan beïnvloeden afhankelijk van wat klinisch passend is."
+  }
+}

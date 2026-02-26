@@ -1,0 +1,131 @@
+{
+  "scenario_id": "S__09",
+  "name": {
+    "en": "Edentulous jaw: considering full-arch implant solutions",
+    "nl": "Tandeloze kaak: full-arch implantaatoplossingen overwegen"
+  },
+  "block_0_personal_summary": {
+    "CONTEXT_DESCRIPTION": {
+      "en": "being fully toothless in one jaw and considering a full rebuild of that jaw",
+      "nl": "volledig tandeloos zijn in één kaak en nadenken over een volledige heropbouw van die kaak"
+    },
+    "PRIMARY_GOAL": {
+      "en": "greater comfort, stability, and renewed confidence when eating, speaking, and smiling",
+      "nl": "meer comfort, stevigheid en herwonnen vertrouwen bij eten, praten en lachen"
+    },
+    "MAIN_CONSTRAINT": {
+      "en": "the desired level of fixedness, the step-by-step nature of an implant pathway, preferred maintenance habits, and budget feasibility",
+      "nl": "de gewenste vastheid, het meerstappige karakter van een implantaattraject, uw voorkeur voor onderhoud en wat financieel haalbaar is"
+    }
+  },
+  "block_1_situation": {
+    "CORE_SITUATION_DESCRIPTION": {
+      "en": "complete tooth loss in one jaw, with potential impacts on chewing force, speech confidence, and day-to-day stability",
+      "nl": "het volledig ontbreken van tanden in één kaak, met mogelijke invloed op kauwkracht, spraakzekerheid en dagelijkse stabiliteit"
+    },
+    "NUANCE_FACTOR": {
+      "en": "the balance between comfort and a secure hold during daily use",
+      "nl": "de afweging tussen comfort en een betrouwbaar vast gevoel in het dagelijks gebruik"
+    },
+    "SECONDARY_FACTOR": {
+      "en": "the choice between a fixed solution and a removable construction for cleaning and handling",
+      "nl": "de keuze tussen een vaste oplossing of een uitneembare constructie voor reiniging en hanteerbaarheid"
+    }
+  },
+  "block_2_treatment_directions": {
+    "DIRECTION_1_CORE": {
+      "en": "a full-arch bridge anchored on 4–6 implants to create a fixed, non-removable result",
+      "nl": "een full-arch brug op 4–6 implantaten wordt verankerd om een vaste, niet-uitneembare oplossing te benaderen"
+    },
+    "DIRECTION_2_CORE": {
+      "en": "a removable overdenture that clicks onto 2–4 implants to improve stability while remaining removable for cleaning",
+      "nl": "een overkappingsprothese (klikgebit) op 2–4 implantaten om de stabiliteit te verhogen, met behoud van uitneembaarheid voor reiniging"
+    },
+    "DIRECTION_3_CORE": {
+      "en": "your priorities around fixedness, cleaning routine, comfort, and budget being clarified first to help guide the design choice",
+      "nl": "eerst helder wordt wat voor u het zwaarst weegt qua vastheid, onderhoud, comfort en budget, zodat de ontwerpkeuze beter aansluit"
+    }
+  },
+  "block_3_options": [
+    {
+      "OPTION_TITLE": {
+        "en": "All-on-4 / All-on-6 fixed full-arch bridge",
+        "nl": "All-on-4 / All-on-6 vaste full-arch brug"
+      },
+      "OPTION_DESCRIPTION": {
+        "en": "placing four to six implants and attaching a full-arch bridge that you typically cannot remove yourself",
+        "nl": "het plaatsen van vier tot zes implantaten en het bevestigen van een volledige brug die u doorgaans niet zelf uitneemt"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "clinical and imaging assessment, surgical implant placement, a healing phase, and then a definitive bridge, often spread over several months",
+        "nl": "onderzoek en beeldvorming, chirurgische plaatsing, een genezingsfase en vervolgens de definitieve brug, vaak gespreid over meerdere maanden"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "higher overall complexity and cost, multiple steps, and suitability depending on bone volume, anatomy, and healing response",
+        "nl": "hogere kost, meerdere stappen, en geschiktheid afhankelijk van botvolume, anatomie en individuele genezing"
+      },
+      "PROFILE_MATCH": {
+        "en": "prioritize a maximally stable, tooth-like daily feel and accept a longer, more involved trajectory",
+        "nl": "een zo vast mogelijk, tandachtig dagelijks gevoel nastreven en een langer traject met hogere investering aanvaardbaar vinden"
+      },
+      "pricing": {
+        "min": 10000,
+        "max": 20000,
+        "currency": "EUR"
+      },
+      "duration": {
+        "min_months": 4,
+        "max_months": 9
+      },
+      "recovery_days": 10
+    },
+    {
+      "OPTION_TITLE": {
+        "en": "Implant-retained overdenture (click denture) on 2–4 implants",
+        "nl": "Klikgebit op 2–4 implantaten"
+      },
+      "OPTION_DESCRIPTION": {
+        "en": "placing two to four implants and adapting a denture that clicks into attachments for improved hold",
+        "nl": "het plaatsen van twee tot vier implantaten en het aanpassen van een prothese die vastklikt op attachments voor extra houvast"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "assessment, implant placement, healing, then adding attachment components and fine-tuning comfort and retention",
+        "nl": "onderzoek, implantaatplaatsing, genezing, daarna het plaatsen van bevestigingen en het bijregelen van comfort en retentie"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "the solution remains removable, daily removal is needed for cleaning, and the feel may be less fixed than a bridge depending on expectations and adaptation",
+        "nl": "het blijft uitneembaar, dagelijks uitnemen voor reiniging is nodig, en het gevoel kan minder vast zijn dan bij een brug afhankelijk van verwachtingen en gewenning"
+      },
+      "PROFILE_MATCH": {
+        "en": "want a clear stability upgrade over a loose denture with a generally lower cost and simpler pathway than a fixed bridge, and are comfortable with removability",
+        "nl": "duidelijk meer stabiliteit willen dan bij een los kunstgebit, met doorgaans lagere kost en minder complex traject dan een vaste brug, en die uitneembaarheid oké of zelfs wenselijk vinden"
+      },
+      "pricing": {
+        "min": 4000,
+        "max": 9000,
+        "currency": "EUR"
+      },
+      "duration": {
+        "min_months": 3,
+        "max_months": 6
+      },
+      "recovery_days": 7
+    }
+  ],
+  "block_4_expected_results": {
+    "en": "Both directions may lead to more confidence with eating, speaking, and smiling, but they can feel different in everyday use. A fixed full-arch bridge typically emphasizes a stable, more tooth-like experience, while an implant-retained overdenture often emphasizes practical grip and easier handling for cleaning. Outcomes can vary based on bone and gum conditions, implant number and distribution, bite forces, material choices, adaptation time, and long-term maintenance. For many people, the most meaningful changes relate to comfort, reliability while chewing, and reduced worry in social situations—though the exact feel can differ from person to person.",
+    "nl": "In beide richtingen kan er meer zekerheid ontstaan bij eten, spreken en lachen, maar het dagelijkse gevoel kan verschillen. Een vaste full-arch brug legt meestal de nadruk op een stabiel, meer tandachtig gevoel, terwijl een klikgebit vaak vooral praktische houvast en hanteerbaarheid benadrukt. Het ervaren resultaat kan variëren door bot- en tandvleessituatie, het aantal en de spreiding van implantaten, bijtkrachten, materiaalkeuze, gewenning en onderhoud op lange termijn. Voor veel mensen zit de winst vooral in comfort, betrouwbaarheid bij het kauwen en minder onzekerheid in sociale momenten."
+  },
+  "block_5_duration": {
+    "en": "Timeframes can vary widely because planning, healing response, implant integration, lab work, and appointment scheduling all influence the overall path. Fixed full-arch treatments are often described as a multi-step trajectory that can span several months, especially if healing phases are built in. Implant-retained overdentures may sometimes be completed faster, though they still involve surgical healing and adjustment visits. Individual anatomy, any need for preparatory procedures, and how quickly comfort and bite balance are optimized can all shift the timeline.",
+    "nl": "De duur kan sterk uiteenlopen doordat planning, genezing, integratie van implantaten, laboratoriumwerk en afsprakenritme allemaal meespelen. Een vaste full-arch oplossing wordt vaak als een meerstaps-traject beschreven dat meerdere maanden kan beslaan, zeker wanneer genezingsfases worden ingebouwd. Een klikgebit kan soms sneller afgerond worden, maar ook daar zijn chirurgie, genezing en meerdere bijregelmomenten gebruikelijk. Anatomie, eventuele voorbereidende ingrepen en hoe snel beet en comfort optimaal worden, kunnen de timing verschuiven."
+  },
+  "block_6_recovery": {
+    "en": "After implant surgery, it is common to experience temporary soreness, swelling, or pressure for several days. Many people can resume lighter daily activities relatively quickly, while comfort with chewing and speaking may take longer to settle as tissues heal and the prosthesis is fine-tuned. Recovery experiences differ: some notice only mild disruption, while others find the first week more impactful. Follow-up visits are typically used to adjust fit, bite, and comfort. If pain, swelling, instability, or functional issues persist, further professional evaluation may be considered.",
+    "nl": "Na implantaatchirurgie komen napijn, zwelling of een drukkend gevoel geregeld voor gedurende enkele dagen. Veel mensen hervatten lichte dagelijkse activiteiten relatief vlot, terwijl kauwen en spreken soms wat langer nodig hebben om stabiel aan te voelen door genezing en bijstellingen. Herstel verschilt per persoon: sommigen ervaren beperkte hinder, anderen vinden vooral de eerste week duidelijk voelbaar. Controles worden vaak gebruikt om pasvorm, beet en comfort te verfijnen. Bij aanhoudende pijn, zwelling, instabiliteit of functionele problemen kan verdere professionele evaluatie worden overwogen."
+  },
+  "block_7_cost": {
+    "en": "Costs can differ substantially across providers and plans because they depend on implant number, surgical complexity, materials, lab work, and how many adjustment or maintenance visits are included. A fixed full-arch bridge generally sits in a higher cost bracket than an implant-retained overdenture, partly because of the prosthetic construction and technical steps involved. Additional phases—such as diagnostics, imaging, temporary solutions, or longer-term maintenance—may also affect the total investment. A personalized quote is usually the only reliable way to understand the full cost picture for your anatomy and priorities.",
+    "nl": "Kosten variëren doorgaans sterk per behandelaar en plan, omdat ze afhangen van het aantal implantaten, chirurgische complexiteit, materiaalkeuze, labo- en techniekwerk en het aantal inbegrepen controles. Een vaste full-arch brug valt meestal in een hogere kostencategorie dan een klikgebit, onder andere door de constructie en technische stappen. Ook extra fases—zoals diagnostiek, beeldvorming, tijdelijke oplossingen of latere onderhoudscomponenten—kunnen het totaal beïnvloeden. Een persoonlijke begroting is meestal nodig om een realistisch totaalbeeld te krijgen voor uw situatie en prioriteiten."
+  }
+}

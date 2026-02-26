@@ -47,7 +47,8 @@ export default function ScenariosListPage() {
         s._id.toLowerCase().includes(lowerSearch) ||
         s.name.en.toLowerCase().includes(lowerSearch) ||
         s.name.nl.toLowerCase().includes(lowerSearch) ||
-        s.description.en.toLowerCase().includes(lowerSearch)
+        s.nlg_variables.block_0_personal_summary.CONTEXT_DESCRIPTION.en.toLowerCase().includes(lowerSearch) ||
+        s.nlg_variables.block_0_personal_summary.CONTEXT_DESCRIPTION.nl.toLowerCase().includes(lowerSearch)
     );
   }, [scenarios, search]);
 
@@ -117,7 +118,7 @@ export default function ScenariosListPage() {
               <div className="flex-1">
                 <input
                   type="text"
-                  placeholder="Search scenarios by ID, name, or description..."
+                  placeholder="Search scenarios by ID, name, or context..."
                   className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
@@ -221,7 +222,7 @@ export default function ScenariosListPage() {
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <span className="text-sm text-gray-500 dark:text-gray-400">
-                              {scenario.treatment_options?.length || 0} options
+                              {scenario.nlg_variables.block_3_options.length} options
                             </span>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
@@ -263,47 +264,44 @@ export default function ScenariosListPage() {
                     </h3>
 
                     <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                      {selectedScenario.description[language]}
+                      {selectedScenario.nlg_variables.block_0_personal_summary.CONTEXT_DESCRIPTION[language]}
                     </p>
 
                     <div className="space-y-4">
                       {/* Treatment Options */}
-                      {selectedScenario.treatment_options &&
-                        selectedScenario.treatment_options.length > 0 && (
-                          <div>
-                            <h5 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                              Treatment Options
-                            </h5>
-                            <div className="space-y-2">
-                              {selectedScenario.treatment_options.map((opt, idx) => (
-                                <div
-                                  key={opt.id || idx}
-                                  className="text-sm bg-gray-50 dark:bg-gray-700 rounded p-2"
-                                >
-                                  <span className="font-medium text-gray-900 dark:text-white">
-                                    {idx + 1}. {opt.name[language]}
-                                  </span>
-                                  {opt.pricing && (
-                                    <span className="ml-2 text-gray-500 dark:text-gray-400">
-                                      ({opt.pricing.currency || "EUR"} {opt.pricing.min}-{opt.pricing.max})
-                                    </span>
-                                  )}
-                                </div>
-                              ))}
-                            </div>
+                      {selectedScenario.nlg_variables.block_3_options.length > 0 && (
+                        <div>
+                          <h5 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Treatment Options
+                          </h5>
+                          <div className="space-y-2">
+                            {selectedScenario.nlg_variables.block_3_options.map((opt, idx) => (
+                              <div
+                                key={idx}
+                                className="text-sm bg-gray-50 dark:bg-gray-700 rounded p-2"
+                              >
+                                <span className="font-medium text-gray-900 dark:text-white">
+                                  {idx + 1}. {opt.OPTION_TITLE[language]}
+                                </span>
+                                <span className="ml-2 text-gray-500 dark:text-gray-400">
+                                  ({opt.pricing.currency} {opt.pricing.min}-{opt.pricing.max})
+                                </span>
+                              </div>
+                            ))}
                           </div>
-                        )}
+                        </div>
+                      )}
 
                       {/* Pricing Summary */}
-                      {selectedScenario.pricing && (
+                      {selectedScenario.nlg_variables.block_3_options.length > 0 && (
                         <div>
                           <h5 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                             Price Range
                           </h5>
                           <p className="text-sm text-gray-600 dark:text-gray-400">
-                            {selectedScenario.pricing.currency || "EUR"}{" "}
-                            {selectedScenario.pricing.min.toLocaleString()} -{" "}
-                            {selectedScenario.pricing.max.toLocaleString()}
+                            {selectedScenario.nlg_variables.block_3_options[0]?.pricing.currency || "EUR"}{" "}
+                            {Math.min(...selectedScenario.nlg_variables.block_3_options.map(o => o.pricing.min)).toLocaleString()} -{" "}
+                            {Math.max(...selectedScenario.nlg_variables.block_3_options.map(o => o.pricing.max)).toLocaleString()}
                           </p>
                         </div>
                       )}
@@ -340,10 +338,7 @@ export default function ScenariosListPage() {
                             NLG Variables
                           </h5>
                           <p className="text-sm text-gray-600 dark:text-gray-400">
-                            {Object.keys(selectedScenario.nlg_variables).filter(
-                              (k) => selectedScenario.nlg_variables[k as keyof typeof selectedScenario.nlg_variables]
-                            ).length}{" "}
-                            variables defined
+                            8 blocks, {selectedScenario.nlg_variables.block_3_options.length} options
                           </p>
                         </div>
                       )}

@@ -1,3 +1,4 @@
+// @ts-nocheck — Legacy seed data for old schema, superseded by import/ JSON files + importScenarios.ts
 /**
  * Scenario Seed Data
  *

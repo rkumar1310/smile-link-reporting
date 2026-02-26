@@ -1,0 +1,108 @@
+{
+  "scenario_id": "S15",
+  "name": { "en": "Aesthetic-focused smile upgrade with premium finishing", "nl": "Esthetische glimlachverbetering met premium afwerking" },
+  "block_0_personal_summary": {
+    "CONTEXT_DESCRIPTION": {
+      "en": "a strongly aesthetics-driven smile profile focused on detail, harmony, and refined appearance rather than clear functional complaints",
+      "nl": "een uitgesproken esthetisch profiel met focus op detail, harmonie en verfijnde uitstraling, eerder dan duidelijke functionele klachten"
+    },
+    "PRIMARY_GOAL": {
+      "en": "a polished, natural-looking, high-quality smile upgrade with attention to materials, finishing, and durability",
+      "nl": "een verzorgde, natuurlijk ogende kwaliteitsverbetering met aandacht voor materiaalkeuze, afwerking en duurzaamheid"
+    },
+    "MAIN_CONSTRAINT": {
+      "en": "how extensive the change may be, how much tooth adjustment feels acceptable, and the value you place on long-term quality and meticulous finishing",
+      "nl": "hoe uitgebreid de verandering mag zijn, hoeveel tandaanpassing aanvaardbaar aanvoelt en hoe belangrijk langdurige kwaliteit en detailafwerking voor u zijn"
+    }
+  },
+  "block_1_situation": {
+    "CORE_SITUATION_DESCRIPTION": {
+      "en": "an aesthetic refinement need where small differences in shade, shape, or symmetry may be noticeable and feel distracting when aiming for a more harmonious look",
+      "nl": "een esthetische verfijningsvraag waarbij kleine verschillen in tint, vorm of symmetrie sterker kunnen opvallen en storend kunnen aanvoelen bij het streven naar meer harmonie"
+    },
+    "NUANCE_FACTOR": {
+      "en": "preferring a natural result over an overly white or artificial effect",
+      "nl": "een voorkeur voor een natuurlijk resultaat boven een overdreven wit of kunstmatig effect"
+    },
+    "SECONDARY_FACTOR": {
+      "en": "the importance you attach to premium materials, craftsmanship, and surface finishing quality",
+      "nl": "het belang dat u hecht aan premium materiaal, vakmanschap en afwerkingskwaliteit"
+    }
+  },
+  "block_2_treatment_directions": {
+    "DIRECTION_1_CORE": {
+      "en": "refining color, shape, and symmetry with detail-focused porcelain veneers while maintaining a natural appearance",
+      "nl": "kleur, vorm en symmetrie detailgericht verfijnen met porseleinen facings, met behoud van een natuurlijke uitstraling"
+    },
+    "DIRECTION_2_CORE": {
+      "en": "a broader aesthetic restoration across multiple teeth to achieve consistent harmony in the visible zone",
+      "nl": "een bredere esthetische restauratie over meerdere tanden om consistentie in de zichtzone te creëren"
+    },
+    "DIRECTION_3_CORE": {
+      "en": "starting with a design-led planning phase to define proportions, shade, and finishing level before deciding the restoration scope",
+      "nl": "eerst een design- en planningsfase doorlopen om verhoudingen, kleur en afwerkingsniveau vast te leggen vóór de omvang van de restauratie wordt bepaald"
+    }
+  },
+  "block_3_options": [
+    {
+      "OPTION_TITLE": { "en": "Porcelain veneers (facings)", "nl": "Porseleinen facings" },
+      "OPTION_DESCRIPTION": {
+        "en": "placing thin porcelain shells on the front surfaces to refine shade, shape, and symmetry with high-end finishing",
+        "nl": "het plaatsen van dunne porseleinen schildjes op de voorzijde om tint, vorm en symmetrie te verfijnen met hoogwaardige afwerking"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "aesthetic planning (sometimes with a preview), tooth preparation that may be minimal or more extensive, laboratory fabrication, bonding/placement, and bite/comfort checks",
+        "nl": "esthetische bespreking (soms met preview/ontwerp), voorbereiding die beperkt of uitgebreider kan zijn, labo-vervaardiging, plaatsing/hechting en controle van comfort en beetbalans"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "limited reversibility, per-tooth cost, and potential long-term maintenance such as reviews and occasional repair or replacement under wear or heavy bite forces",
+        "nl": "beperkte omkeerbaarheid, kostprijs per tand en mogelijke langetermijnopvolging zoals controles en soms herstelling of vervanging bij slijtage of hoge belasting"
+      },
+      "PROFILE_MATCH": {
+        "en": "want a refined, premium improvement with strong attention to detail without needing a complete smile rebuild",
+        "nl": "een verfijnde, luxueuze verbetering wensen met veel aandacht voor detail, zonder een volledige heropbouw van de glimlach"
+      },
+      "pricing": { "min": 900, "max": 1300, "currency": "EUR" },
+      "duration": { "min_months": 0, "max_months": 1 },
+      "recovery_days": 2
+    },
+    {
+      "OPTION_TITLE": { "en": "Full aesthetic restoration (all-ceramic crowns and/or veneers)", "nl": "Volledige esthetische restauratie (volkeramische kronen en/of facings)" },
+      "OPTION_DESCRIPTION": {
+        "en": "restoring multiple teeth with all-ceramic crowns and/or veneers to achieve consistent harmony across the visible zone",
+        "nl": "het herstellen van meerdere tanden met volkeramische kronen en/of facings om harmonie over de volledige zichtzone te bekomen"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "a full plan aligning shape, shade, and proportions, preparation depending on corrections needed, laboratory fabrication emphasizing consistency, placement, and bite/comfort balancing",
+        "nl": "een totaalplan voor vorm, kleur en verhoudingen, voorbereiding afhankelijk van gewenste correcties, labo-vervaardiging met nadruk op consistentie en afwerking, plaatsing en afstemming van comfort en beetbalans"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "greater invasiveness, lower reversibility, higher overall investment, careful staging, and long-term maintenance influenced by bite forces and habits like clenching/grinding",
+        "nl": "ingrijpender karakter, minder omkeerbaarheid, grotere investering, fasering en langetermijnonderhoud beïnvloed door beetkrachten en gewoonten zoals klemmen of slijpen"
+      },
+      "PROFILE_MATCH": {
+        "en": "seek full-zone aesthetic optimization where uniformity, durability, and premium finishing across multiple teeth are central",
+        "nl": "een volledige esthetische optimalisatie wensen waarbij uniformiteit, duurzaamheid en premium afwerking over meerdere tanden centraal staan"
+      },
+      "pricing": { "min": 700, "max": 1000, "currency": "EUR" },
+      "duration": { "min_months": 0, "max_months": 2 },
+      "recovery_days": 2
+    }
+  ],
+  "block_4_expected_results": {
+    "en": "In both directions, the emphasis is typically on a natural-looking, high-quality outcome, with an overly white or artificial effect usually avoided. Veneers may support targeted refinement of shade, shape, and symmetry with a strong impact on the overall smile impression. A broader restoration can offer more control over proportions and consistency across multiple teeth in the visible zone. Comfort after placement is often reported as good, sometimes with a short adaptation period. Outcomes may vary based on enamel condition, existing restorations, bite forces, habits such as clenching or grinding, and long-term maintenance.",
+    "nl": "In beide richtingen ligt de nadruk doorgaans op een natuurlijk ogend en kwalitatief hoogwaardig eindbeeld, waarbij een overdreven wit of kunstmatig effect meestal wordt vermeden. Facings kunnen gerichte verfijningen ondersteunen in kleur, vorm en symmetrie, met een duidelijke impact op het totaalbeeld. Een volledige restauratie kan meer controle geven over proporties en consistentie over meerdere tanden in de zichtzone. Comfort na plaatsing wordt vaak als goed ervaren, soms met een korte gewenningsperiode. Resultaten kunnen variëren door glazuurconditie, bestaande restauraties, beetkrachten, gewoonten zoals klemmen/slijpen en onderhoud op lange termijn."
+  },
+  "block_5_duration": {
+    "en": "Porcelain veneers are often described as a relatively compact trajectory, commonly around a few weeks, though the timeline can shift depending on planning and lab steps. More extensive aesthetic restorations can take a similar time range or longer depending on the number of teeth involved and the complexity of coordination. Overall duration may be influenced by design iterations, shade matching, laboratory turnaround, and how many try-in and adjustment moments are needed.",
+    "nl": "Porseleinen facings worden vaak beschreven als een traject van enkele weken, maar de totale timing kan verschuiven door planning, kleurafstemming en labo-doorlooptijd. Uitgebreidere esthetische restauraties kunnen een gelijkaardige tijd vragen of langer duren, afhankelijk van het aantal tanden en de complexiteit van de afstemming. De totale duur wordt vaak beïnvloed door ontwerp-iteraties, pasmomenten en eventuele bijsturingen."
+  },
+  "block_6_recovery": {
+    "en": "Recovery is often described as short, commonly one to two days, with possible mild sensitivity. Many people can continue normal daily activities depending on comfort. Minor bite or contact adjustments may sometimes be performed to refine the feel after placement. If sensitivity persists, the bite feels clearly “off,” or chewing feels uneven, follow-up is commonly considered—adaptation can differ between individuals.",
+    "nl": "Herstel wordt vaak omschreven als kort, meestal één tot twee dagen, met mogelijk lichte gevoeligheid. Dagelijkse activiteiten kunnen doorgaans worden voortgezet, afhankelijk van comfort. Soms zijn kleine bijt- of contactaanpassingen nuttig om het beetgevoel te verfijnen. Bij aanhoudende gevoeligheid, duidelijke bijthinder of een ongelijk kauwgevoel kan opvolging worden overwogen, omdat gewenning individueel kan verschillen."
+  },
+  "block_7_cost": {
+    "en": "Costs can vary depending on the number of teeth treated, material selection, the design and finishing level, technical complexity, and how much planning and try-in work is included. Veneers are often priced per tooth and may sit at a premium level when the aim is high-end detail and aesthetics. Broader all-ceramic restoration can involve a higher total investment because more units may be included and preparation can be more extensive. A practitioner typically confirms final fees after clinical assessment and defining the scope.",
+    "nl": "De kost kan variëren door het aantal behandelde tanden, materiaalkeuze, ontwerp- en afwerkingsniveau, technische complexiteit en hoeveel plan- en paswerk nodig is. Facings worden vaak per tand berekend en kunnen hoger uitvallen wanneer detail en topafwerking belangrijk zijn. Een bredere volkeramische restauratie kan in totaal meer kosten omdat meer elementen betrokken kunnen zijn en de voorbereiding vaak uitgebreider is. Een behandelaar kan de definitieve prijs doorgaans pas bevestigen na klinische evaluatie en afbakening van de scope."
+  }
+}

@@ -1,7 +1,7 @@
 /**
  * Pipeline Runner
  * Bridges the core ReportPipeline with the CMS Dashboard's SSE streaming
- * Maps 7 pipeline phases to 5 UI phases
+ * Maps 5 pipeline phases to UI phases
  */
 
 import type {
@@ -19,32 +19,15 @@ import { generateReportPdf } from "@/lib/services/PdfGenerationService";
 
 /**
  * Map pipeline phases to UI phases
- * Pipeline has 7 phases (0-6), UI has 5 phases
+ * Pipeline has 5 phases (0-4)
  */
 const PHASE_MAPPING: Record<number, ReportPhase> = {
   0: "analyzing",     // input_validation
   1: "analyzing",     // tag_extraction
   2: "analyzing",     // driver_derivation
   3: "analyzing",     // scenario_scoring
-  4: "tone",          // tone_selection
-  5: "content-check", // content_selection
-  6: "composing",     // nlg_rendering
+  4: "composing",     // nlg_rendering
 };
-
-/**
- * Get tone display name
- */
-function getToneName(toneId: string): string {
-  const toneNames: Record<string, string> = {
-    "TP-01": "Neutral-Informative",
-    "TP-02": "Empathic-Neutral",
-    "TP-03": "Reflective-Contextual",
-    "TP-04": "Stability-Frame",
-    "TP-05": "Expectation-Calibration",
-    "TP-06": "Autonomy-Respecting"
-  };
-  return toneNames[toneId] ?? toneId;
-}
 
 /**
  * Map a pipeline progress event to an SSE ReportPhaseEvent
@@ -64,31 +47,6 @@ export function mapPipelineEventToSSE(event: PipelineProgressEvent): ReportPhase
           processedQuestions: event.status === "completed"
             ? (event.metrics?.answers as number) ?? 0
             : 0
-        }
-      };
-
-    case "tone":
-      return {
-        phase: "tone",
-        message: event.message,
-        timestamp: event.timestamp,
-        data: {
-          tone: ((event.metrics?.tone as string) ?? "TP-01") as ToneProfileId,
-          toneName: getToneName((event.metrics?.tone as string) ?? "TP-01"),
-          reason: (event.metrics?.reason as string) ?? ""
-        }
-      };
-
-    case "content-check":
-      return {
-        phase: "content-check",
-        message: event.message,
-        timestamp: event.timestamp,
-        data: {
-          total: (event.metrics?.contentCount as number) ?? 0,
-          available: (event.metrics?.contentCount as number) ?? 0,
-          missing: 0,
-          scenarios: [(event.metrics?.scenario as string) ?? ""]
         }
       };
 
@@ -127,7 +85,7 @@ export function transformReport(
     sessionId: coreReport.session_id,
     language: coreReport.language as "en" | "nl",
     tone: coreReport.tone as ToneProfileId,
-    toneName: getToneName(coreReport.tone),
+    toneName: "Neutral-Informative",
     scenarios: audit.scenario_match ? [{
       scenarioId: audit.scenario_match.matched_scenario,
       name: audit.scenario_match.matched_scenario,

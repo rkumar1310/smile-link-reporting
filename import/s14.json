@@ -1,0 +1,130 @@
+{
+  "scenario_id": "S14",
+  "name": { "en": "Budget-conscious tooth replacement at older age", "nl": "Budgetbewuste tandvervanging op latere leeftijd" },
+  "block_0_personal_summary": {
+    "CONTEXT_DESCRIPTION": {
+      "en": "an older-age oral situation in which budget-conscious tooth replacement decisions",
+      "nl": "een mondsituatie op latere leeftijd waarbij budgetbewuste keuzes rond tandvervanging"
+    },
+    "PRIMARY_GOAL": {
+      "en": "comfortable eating and speaking with a solution that feels reliable in daily life",
+      "nl": "comfortabel kunnen eten en spreken met een oplossing die in het dagelijks leven betrouwbaar aanvoelt"
+    },
+    "MAIN_CONSTRAINT": {
+      "en": "clear budget limits and a preference for keeping the approach practical and not overly complex",
+      "nl": "duidelijke budgetgrenzen en de wens om het traject praktisch en niet onnodig complex te houden"
+    }
+  },
+  "block_1_situation": {
+    "CORE_SITUATION_DESCRIPTION": {
+      "en": "a need for a functional, comfortable tooth-replacement solution where affordability and day-to-day manageability are central",
+      "nl": "de nood aan een functionele, comfortabele oplossing voor tandvervanging waarbij betaalbaarheid en dagelijkse hanteerbaarheid centraal staan"
+    },
+    "NUANCE_FACTOR": {
+      "en": "ease of maintenance and the acceptability of a removable solution",
+      "nl": "praktisch onderhoud en het aanvaardbaar vinden van een uitneembare oplossing"
+    },
+    "SECONDARY_FACTOR": {
+      "en": "the balance between extra stability versus willingness to undergo surgery or a higher investment",
+      "nl": "de afweging tussen extra stabiliteit enerzijds en bereidheid tot chirurgie of een hogere investering anderzijds"
+    }
+  },
+  "block_2_treatment_directions": {
+    "DIRECTION_1_CORE": {
+      "en": "a removable denture gaining improved retention by clicking onto 2–4 implants to increase stability",
+      "nl": "een uitneembare prothese extra houvast krijgen door vast te klikken op 2–4 implantaten"
+    },
+    "DIRECTION_2_CORE": {
+      "en": "a straightforward, non-surgical removable denture to restore basic function within a lower budget range",
+      "nl": "een eenvoudige, niet-chirurgische uitneembare prothese om basisfunctie te herstellen binnen een lager budgetkader"
+    },
+    "DIRECTION_3_CORE": {
+      "en": "a stepwise pathway improving comfort and function first, with a later reassessment of added stability options",
+      "nl": "een stapsgewijs traject eerst comfort en functie verbeteren en later opnieuw bekijken of extra stabiliteit wenselijk of haalbaar is"
+    }
+  },
+  "block_3_options": [
+    {
+      "OPTION_TITLE": { "en": "Implant-retained overdenture (click denture) on 2–4 implants", "nl": "Klikprothese op 2–4 implantaten" },
+      "OPTION_DESCRIPTION": {
+        "en": "a removable denture that attaches to two to four implants using an attachment system to improve retention while staying removable for cleaning",
+        "nl": "een uitneembare prothese die via attachments vastklikt op twee tot vier implantaten om retentie te verbeteren en toch uitneembaar te blijven voor reiniging"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "assessment, implant placement where indicated, a healing period, and then adapting or making the denture to connect to attachments with follow-up adjustments",
+        "nl": "beoordeling, implantaatplaatsing indien aangewezen, een genezingsfase en daarna het aanpassen of vervaardigen van de prothese op attachments met nazorgafstellingen"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "a surgical phase, healing variability, ongoing attachment maintenance, and the fact that it is typically not a fully fixed solution",
+        "nl": "een chirurgische fase, variatie in genezing, onderhoud van attachments en het feit dat het doorgaans geen volledig vaste oplossing is"
+      },
+      "PROFILE_MATCH": {
+        "en": "want more stability for eating and speaking while still preferring a removable option and keeping choices budget-aware",
+        "nl": "meer stabiliteit willen bij eten en spreken maar een uitneembare optie verkiezen en tegelijk budgetbewust willen blijven"
+      },
+      "pricing": { "min": 4500, "max": 9500, "currency": "EUR" },
+      "duration": { "min_months": 3, "max_months": 9 },
+      "recovery_days": 7
+    },
+    {
+      "OPTION_TITLE": { "en": "Conventional removable full denture (no implants)", "nl": "Klassiek uitneembaar kunstgebit zonder implantaten" },
+      "OPTION_DESCRIPTION": {
+        "en": "a fully removable denture made without implants, aiming to restore basic function in a simpler, more cost-controlled way",
+        "nl": "een volledig uitneembare prothese zonder implantaten, gericht op basisfunctionaliteit via een eenvoudiger en kostenbewust traject"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "impressions, bite registration, try-ins, placement, and follow-up visits for pressure spots and fit adjustments",
+        "nl": "afdrukken, beetregistratie, pasmomenten, plaatsing en controles voor drukplekken en pasvormafstellingen"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "lower stability than implant retention, an adaptation period, possible movement during eating or speaking, and fit changes over time that may require relines",
+        "nl": "minder stabiliteit dan bij implantaatretentie, een gewenningsperiode, mogelijk verschuiven bij eten of spreken en pasvormveranderingen die rebasen kunnen vragen"
+      },
+      "PROFILE_MATCH": {
+        "en": "prioritize accessibility, prefer to avoid surgery, and mainly want a practical baseline improvement within a lower budget bracket",
+        "nl": "toegankelijkheid vooropstellen, liever geen chirurgie willen en vooral een praktische basisverbetering zoeken binnen een lager budgetkader"
+      },
+      "pricing": { "min": 1500, "max": 3200, "currency": "EUR" },
+      "duration": { "min_months": 1, "max_months": 3 },
+      "recovery_days": 0
+    },
+    {
+      "OPTION_TITLE": { "en": "Stepwise comfort-first approach (optimize now, reassess stability later)", "nl": "Stapsgewijze aanpak: eerst comfort, later eventueel extra stabiliteit" },
+      "OPTION_DESCRIPTION": {
+        "en": "starting with fit and comfort optimization and revisiting implant retention only if it later becomes desirable and feasible",
+        "nl": "starten met pasvorm- en comfortoptimalisatie en implantaatretentie pas opnieuw bekijken als dat later wenselijk en haalbaar wordt"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "an initial phase focusing on adjustments or relines to improve daily comfort, followed by a later review of stability needs and implant suitability if priorities change",
+        "nl": "een eerste fase met afstellingen of rebase om dagelijks comfort te verbeteren, gevolgd door een latere evaluatie van stabiliteitsnood en implantaatgeschiktheid als prioriteiten wijzigen"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "stability may remain limited in the first phase, and later steps can still involve additional planning, costs, and potentially surgery",
+        "nl": "stabiliteit kan in de eerste fase beperkt blijven en vervolgstappen kunnen later alsnog extra planning, kosten en eventueel chirurgie meebrengen"
+      },
+      "PROFILE_MATCH": {
+        "en": "want to reduce immediate financial and practical strain while keeping future options open",
+        "nl": "nu financiële en praktische druk willen beperken en toch opties voor de toekomst willen openhouden"
+      },
+      "pricing": { "min": 200, "max": 3000, "currency": "EUR" },
+      "duration": { "min_months": 0, "max_months": 2 },
+      "recovery_days": 0
+    }
+  ],
+  "block_4_expected_results": {
+    "en": "These directions are typically aimed at improving everyday comfort and baseline function, especially for eating and speaking. An implant-retained overdenture may offer a more secure feeling and reduced movement compared with a conventional denture, while a conventional denture often emphasizes simplicity and cost control. How results are experienced can vary and may depend on jaw anatomy, gum condition, adaptation time, and the number of follow-up adjustments needed. Some people value maximum stability, while others prefer the least complex routine. Maintenance and cleaning habits can also influence long-term satisfaction.",
+    "nl": "Deze richtingen zijn doorgaans bedoeld om dagelijks comfort en basisfunctionaliteit te verbeteren, vooral bij eten en spreken. Een klikprothese kan bij sommige mensen een zekerder gevoel en minder beweging geven dan een klassiek kunstgebit, terwijl een klassiek kunstgebit vaak de nadruk legt op eenvoud en betaalbaarheid. Hoe het resultaat wordt ervaren verschilt en hangt onder meer samen met kaakanatomie, conditie van tandvlees/kaak, gewenning en het aantal noodzakelijke afstellingen. Voor sommigen weegt maximale stabiliteit het zwaarst; anderen kiezen liever voor de meest eenvoudige routine. Onderhoud en reiniging spelen vaak mee in de tevredenheid op langere termijn."
+  },
+  "block_5_duration": {
+    "en": "Timelines vary with scheduling, the number of try-ins and adjustments, and how quickly comfort is achieved. A conventional denture pathway is often completed sooner (commonly weeks to a few months), though refinement visits may continue during adaptation. Implant-retained overdentures generally take longer because healing time may be needed after implant placement; many plans fall roughly in the three-to-nine-month range. A stepwise pathway can shorten the start phase while leaving later decisions open.",
+    "nl": "De doorlooptijd varieert door planning, het aantal pasmomenten en hoeveel afstellingen nodig zijn om comfort te bereiken. Een klassiek kunstgebit is vaak sneller klaar (meestal weken tot enkele maanden), al kan finetuning tijdens de gewenning doorlopen. Een klikprothese duurt meestal langer doordat na implantaatplaatsing een genezingsperiode nodig kan zijn; veel trajecten vallen ruwweg tussen drie en negen maanden. Een stapsgewijze aanpak kan de start versnellen en laat ruimte om later bij te sturen."
+  },
+  "block_6_recovery": {
+    "en": "Recovery depends strongly on whether surgery is involved. With implant placement, some people experience several days of tenderness or swelling, and daily activities are often resumed relatively quickly, though healing differs per person. With conventional dentures there is typically no surgical recovery, but an adaptation period is common, with temporary challenges in speaking, chewing, or sore spots that may require adjustments. Follow-up is usually part of the process because fit and tolerance can change over time.",
+    "nl": "Herstel hangt sterk af van het al dan niet plaatsvinden van chirurgie. Na implantaatplaatsing hebben sommige mensen enkele dagen gevoeligheid of zwelling, en dagelijkse activiteiten worden vaak relatief snel hervat, al verschilt genezing per persoon. Bij een klassiek kunstgebit is er doorgaans geen chirurgisch herstel, maar wel vaak een gewenningsperiode met tijdelijke hinder bij spreken of eten en mogelijk drukplekken waarvoor aanpassingen nodig kunnen zijn. Opvolging maakt meestal deel uit van het traject omdat pasvorm en tolerantie in de tijd kunnen veranderen."
+  },
+  "block_7_cost": {
+    "en": "Costs vary by material choices, technical complexity, the number of implants (if used), and how many follow-up refinements are needed. Conventional removable dentures are typically positioned in a lower cost range, while implant-retained overdentures involve higher costs due to surgery, components, and longer planning. A phased approach can help manage expenses by focusing first on practical comfort and function, with optional later investment if stability becomes a higher priority. Exact estimates are usually confirmed after clinical assessment and treatment planning.",
+    "nl": "Kosten variëren door materiaalkeuze, technische uitvoering, het aantal implantaten (indien van toepassing) en het aantal noodzakelijke nazorgafspraken. Een klassiek uitneembaar kunstgebit valt doorgaans in een lager kostenkader, terwijl een klikprothese duurder is door chirurgie, onderdelen en langere planning. Een gefaseerde aanpak kan helpen om uitgaven te spreiden door eerst in te zetten op comfort en basisfunctie, met een optionele latere investering als stabiliteit belangrijker wordt. Concrete ramingen worden meestal pas definitief na klinische beoordeling en behandelplanning."
+  }
+}

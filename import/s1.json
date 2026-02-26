@@ -1,0 +1,108 @@
+{
+  "scenario_id": "S__",
+  "name": { "en": "Tooth discoloration with intact teeth", "nl": "Tandverkleuring bij intacte tanden" },
+  "block_0_personal_summary": {
+    "CONTEXT_DESCRIPTION": {
+      "en": "teeth that feel structurally intact but whose shade has gradually changed over time",
+      "nl": "tanden die structureel intact aanvoelen maar waarvan de kleur geleidelijk is veranderd"
+    },
+    "PRIMARY_GOAL": {
+      "en": "a fresher, natural-looking appearance",
+      "nl": "een frissere, natuurlijk ogende uitstraling"
+    },
+    "MAIN_CONSTRAINT": {
+      "en": "the level of long-term maintenance and durability of any treatment",
+      "nl": "de mate van onderhoud en de duurzaamheid van een eventuele behandeling"
+    }
+  },
+  "block_1_situation": {
+    "CORE_SITUATION_DESCRIPTION": {
+      "en": "intact teeth without missing elements, with discoloration being the main concern",
+      "nl": "intacte tanden zonder ontbrekende elementen, waarbij verkleuring centraal staat"
+    },
+    "NUANCE_FACTOR": {
+      "en": "preferring a natural shade over a very bright “white” result",
+      "nl": "het streven naar een natuurlijke tint eerder dan uitgesproken wit"
+    },
+    "SECONDARY_FACTOR": {
+      "en": "being open to periodic upkeep if needed",
+      "nl": "de bereidheid om eventueel periodiek onderhoud te aanvaarden"
+    }
+  },
+  "block_2_treatment_directions": {
+    "DIRECTION_1_CORE": {
+      "en": "lightening the natural tooth shade in a controlled way without changing tooth structure",
+      "nl": "de natuurlijke tandkleur gecontroleerd lichter maken zonder de tandstructuur te wijzigen"
+    },
+    "DIRECTION_2_CORE": {
+      "en": "refining visible surfaces when discoloration is deeper or when a more stable aesthetic effect is desired",
+      "nl": "het esthetisch verfijnen van zichtbare oppervlakken wanneer verkleuring dieper zit of wanneer een stabieler effect wordt nagestreefd"
+    },
+    "DIRECTION_3_CORE": {
+      "en": "taking a conservative, reversible first step before reassessing whether more extensive options are needed",
+      "nl": "eerst een beperkte en omkeerbare stap zetten en daarna opnieuw evalueren of verdere stappen nodig zijn"
+    }
+  },
+  "block_3_options": [
+    {
+      "OPTION_TITLE": { "en": "Professional tooth whitening", "nl": "Professioneel tandenbleken" },
+      "OPTION_DESCRIPTION": {
+        "en": "lightening the natural tooth shade under professional guidance, either in-office and/or with a short supervised home phase",
+        "nl": "het onder professionele begeleiding lichter maken van de natuurlijke tandkleur, via een praktijkbehandeling en/of een kort begeleid thuistraject"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "shade assessment, protective steps, the whitening sessions or tray-based plan, and a follow-up evaluation",
+        "nl": "kleurregistratie, beschermingsstappen, uitvoering van het bleekprotocol en een controle of evaluatie nadien"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "temporary sensitivity, the need for periodic touch-ups, and limited effect with deep internal discoloration or when fillings/crowns do not change shade",
+        "nl": "tijdelijke gevoeligheid, mogelijke nood aan opfrissing, en een beperkter effect bij diepe interne verkleuring of wanneer vullingen of kronen niet mee verkleuren"
+      },
+      "PROFILE_MATCH": {
+        "en": "want a reversible aesthetic improvement while keeping healthy tooth structure unchanged",
+        "nl": "een omkeerbare esthetische verbetering wensen zonder gezonde tandstructuur te wijzigen"
+      },
+      "pricing": { "min": 250, "max": 600, "currency": "EUR" },
+      "duration": { "min_months": 0, "max_months": 1 },
+      "recovery_days": 1
+    },
+    {
+      "OPTION_TITLE": { "en": "Veneers for deeper discoloration", "nl": "Facings bij diepere verkleuring" },
+      "OPTION_DESCRIPTION": {
+        "en": "placing thin porcelain or composite coverings on the front surfaces to adjust shade and appearance",
+        "nl": "het plaatsen van dunne schildjes in porselein of composiet op de voorzijde om kleur en uitstraling te sturen"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "aesthetic planning, possible minimal surface preparation, trial fitting, and final bonding",
+        "nl": "esthetische planning, eventueel minimale voorbereiding, proefpassen en definitieve hechting"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "a more definitive change, higher costs per tooth, and the possibility of repairs or replacement over time",
+        "nl": "het meer definitieve karakter, hogere kost per tand, en mogelijke herstelling of vervanging op langere termijn"
+      },
+      "PROFILE_MATCH": {
+        "en": "expect whitening to be insufficient or prioritize a more stable long-term shade outcome",
+        "nl": "verwachten dat bleken onvoldoende is of prioriteit geven aan een stabielere, langdurigere tint"
+      },
+      "pricing": { "min": 700, "max": 1100, "currency": "EUR" },
+      "duration": { "min_months": 1, "max_months": 2 },
+      "recovery_days": 3
+    }
+  ],
+  "block_4_expected_results": {
+    "en": "Expected outcomes may include a fresher and brighter tooth shade while still aiming for a natural look, depending on your starting shade and the direction chosen. Individual factors—such as the type and depth of discoloration, enamel characteristics, and whether restorations are present—may influence how noticeable the change is and how stable it remains over time. Results vary from person to person and can usually only be estimated more specifically after a professional assessment.",
+    "nl": "De verwachte uitkomst kan gaan over een frissere en helderdere tandkleur met behoud van een natuurlijke uitstraling, afhankelijk van uw startkleur en de gekozen aanpak. Factoren zoals type en diepte van de verkleuring, glazuureigenschappen en de aanwezigheid van bestaande restauraties kunnen mee bepalen hoe zichtbaar de verandering is en hoe stabiel ze blijft. Resultaten verschillen per persoon en kunnen doorgaans pas concreter worden ingeschat na een professionele beoordeling."
+  },
+  "block_5_duration": {
+    "en": "The overall timeline may range from a single appointment or a 10–14 day supervised course (for many whitening approaches) to several appointments spread over weeks (for veneer-based approaches). The number of teeth involved, the degree of shade change desired, sensitivity, lab time, and scheduling can all affect timing. A clinician typically refines the estimate after evaluating your starting condition and matching it to your priorities.",
+    "nl": "De totale duur kan variëren van één afspraak of een traject van ongeveer 10–14 dagen (bij veel bleektrajecten) tot meerdere afspraken verspreid over weken (bij facings). Het aantal tanden, de gewenste kleurverandering, mogelijke gevoeligheid, labowerk en planning beïnvloeden het tijdsverloop. Een behandelaar kan de timing meestal preciezer inschatten na klinische evaluatie."
+  },
+  "block_6_recovery": {
+    "en": "Recovery experiences vary by approach. Whitening may involve temporary sensitivity or short-lived sensations, sometimes affecting comfort with hot/cold foods for a few days. Veneers may come with a brief adjustment period for bite feel or surface texture, and in some cases mild gum irritation. If discomfort persists or unexpected symptoms appear, follow-up is typically part of safe care planning.",
+    "nl": "Het herstel verschilt per aanpak. Na bleken kan tijdelijk gevoeligheid optreden, waardoor warm of koud eten en drinken enkele dagen wat minder comfortabel kan zijn. Bij facings kan er een korte gewenning zijn aan beetgevoel of oppervlak, en soms lichte irritatie van het tandvlees. Als klachten aanhouden of onverwacht zijn, is opvolging doorgaans onderdeel van een veilige zorgaanpak."
+  },
+  "block_7_cost": {
+    "en": "Costs can vary substantially depending on the chosen direction, the number of teeth treated, materials, and how much planning is involved. Whitening is often priced as a package, while veneers are commonly priced per tooth and can include additional steps such as mock-ups, temporaries, or replacement planning later on. A transparent quote discussion with a clinician usually helps align financial expectations with your aesthetic goals and maintenance preferences.",
+    "nl": "De kosten variëren afhankelijk van gekozen richting, het aantal tanden, materiaalkeuze en de mate van planning. Bleken wordt vaak als pakketprijs aangeboden, terwijl facings meestal per tand worden gerekend en soms extra stappen omvatten zoals een mock-up, tijdelijke voorzieningen of latere vervangingsplanning. Een transparante kostenbespreking helpt om financiële verwachtingen af te stemmen op uw esthetische doelen en onderhoudsvoorkeuren."
+  }
+}

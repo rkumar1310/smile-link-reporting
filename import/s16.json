@@ -1,0 +1,130 @@
+{
+  "scenario_id": "S16",
+  "name": { "en": "Wear and/or fracture with all teeth still present", "nl": "Slijtage en/of breuk terwijl alle tanden nog aanwezig zijn" },
+  "block_0_personal_summary": {
+    "CONTEXT_DESCRIPTION": {
+      "en": "teeth that are fully present but affected by wear and/or a fracture (sometimes feeling shorter, flatter, sensitive, or partially broken)",
+      "nl": "tanden die nog volledig aanwezig zijn maar slijtage en/of een breuk vertonen (soms korter, platter, gevoeliger of deels afgebroken aanvoelend)"
+    },
+    "PRIMARY_GOAL": {
+      "en": "restoring shape and comfort so chewing feels natural again and your smile looks more cared for",
+      "nl": "het herstellen van vorm en comfort zodat kauwen opnieuw natuurlijk aanvoelt en uw glimlach er verzorgder uitziet"
+    },
+    "MAIN_CONSTRAINT": {
+      "en": "the severity of the damage, possible sensitivity or bite changes, visibility of the involved teeth, and the balance between tooth preservation, durability, and aesthetics",
+      "nl": "de ernst van de schade, eventuele gevoeligheid of beetverandering, de zichtbaarheid van de betrokken tanden en de balans tussen tandbehoud, duurzaamheid en esthetiek"
+    }
+  },
+  "block_1_situation": {
+    "CORE_SITUATION_DESCRIPTION": {
+      "en": "noticeable tooth wear and/or a localized fracture without tooth loss, potentially affecting chewing comfort and appearance",
+      "nl": "slijtage en/of een lokale breuk zonder tandverlies, met mogelijke invloed op kauwcomfort en uitstraling"
+    },
+    "NUANCE_FACTOR": {
+      "en": "changes in how the bite feels and/or sensitivity to hot or cold stimuli",
+      "nl": "een veranderend beetgevoel en/of gevoeligheid voor warm en koud"
+    },
+    "SECONDARY_FACTOR": {
+      "en": "how visible the affected teeth are and how much refinement you want in the final look",
+      "nl": "de mate waarin de betrokken tanden zichtbaar zijn en het gewenste afwerkingsniveau"
+    }
+  },
+  "block_2_treatment_directions": {
+    "DIRECTION_1_CORE": {
+      "en": "strengthening and structurally protecting a tooth when wear or fracture is more pronounced",
+      "nl": "structurele versterking en bescherming wordt nagestreefd wanneer slijtage of breuk duidelijk uitgesproken is"
+    },
+    "DIRECTION_2_CORE": {
+      "en": "conservative rebuilding of worn or broken areas while preserving as much natural tooth structure as possible",
+      "nl": "een behoudende heropbouw van versleten of afgebroken zones met maximaal behoud van natuurlijke tandstructuur"
+    },
+    "DIRECTION_3_CORE": {
+      "en": "refining the visible zone for improved harmony and a more natural aesthetic",
+      "nl": "esthetische verfijning van de zichtzone voor meer harmonie en een natuurlijke uitstraling"
+    }
+  },
+  "block_3_options": [
+    {
+      "OPTION_TITLE": { "en": "Full-ceramic crowns (all-ceramic)", "nl": "Keramische kronen (volkeramisch)" },
+      "OPTION_DESCRIPTION": {
+        "en": "placing a full-ceramic crown to restore strength, form, and aesthetics",
+        "nl": "het plaatsen van een volkeramische kroon om sterkte, vorm en esthetiek te herstellen"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "assessment of build-up needs and bite forces, preparation, digital scan/impression, a temporary phase if needed, and final placement across two visits",
+        "nl": "inschatting van opbouw en beetkrachten, preparatie, scan/afdruk, indien nodig een tijdelijke fase en daarna plaatsing, meestal in twee afspraken"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "tooth reduction, limited reversibility, higher per-tooth cost, and short-term sensitivity",
+        "nl": "tandreductie, beperkte omkeerbaarheid, hogere kost per tand en korte termijn gevoeligheid"
+      },
+      "PROFILE_MATCH": {
+        "en": "want a robust, longer-term structural restoration when damage and functional load are significant",
+        "nl": "een stevig en duurzaam structureel herstel wensen bij grotere schade of hogere functionele belasting"
+      },
+      "pricing": { "min": 700, "max": 1000, "currency": "EUR" },
+      "duration": { "min_months": 0, "max_months": 1 },
+      "recovery_days": 3
+    },
+    {
+      "OPTION_TITLE": { "en": "Composite build-up", "nl": "Opbouw in composiet" },
+      "OPTION_DESCRIPTION": {
+        "en": "directly rebuilding worn or chipped areas with composite resin to restore shape and function",
+        "nl": "het direct opbouwen van versleten of afgebroken delen met composiet om vorm en functie te herstellen"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "chairside layering and shaping in one appointment per area, with immediate bite adjustment and possible small refinements later",
+        "nl": "laagjes opbouw en vormgeving tijdens een stoelafspraak per zone, met onmiddellijke beetafstemming en eventueel later kleine bijsturingen"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "more maintenance over time than ceramics, possible wear or staining, and limits in larger defects",
+        "nl": "meer onderhoud op langere termijn dan keramiek, mogelijke slijtage of verkleuring en beperkingen bij grotere defecten"
+      },
+      "PROFILE_MATCH": {
+        "en": "prefer a practical, accessible, tooth-preserving solution when damage is limited",
+        "nl": "een praktische, toegankelijke en tandbehoudende oplossing zoeken bij beperkte schade"
+      },
+      "pricing": { "min": 150, "max": 350, "currency": "EUR" },
+      "duration": { "min_months": 0, "max_months": 0 },
+      "recovery_days": 0
+    },
+    {
+      "OPTION_TITLE": { "en": "Porcelain veneers for mild wear in the visible zone", "nl": "Porseleinen facings bij lichte slijtage in de zichtzone" },
+      "OPTION_DESCRIPTION": {
+        "en": "placing thin porcelain veneers to improve the look and edge form of front teeth",
+        "nl": "het plaatsen van dunne porseleinen facings om vorm en uitstraling van fronttanden te verbeteren"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "aesthetic planning, minimal to moderate preparation, lab fabrication, and bonding over multiple visits",
+        "nl": "esthetische planning, beperkte tot matige voorbereiding, labofase en bonding over meerdere afspraken"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "limited reversibility, suitability depending on functional load, and short-term sensitivity",
+        "nl": "niet volledig omkeerbaar, geschiktheid afhankelijk van functionele belasting en korte termijn gevoeligheid"
+      },
+      "PROFILE_MATCH": {
+        "en": "are mainly concerned with appearance while functional complaints are limited",
+        "nl": "vooral hun uitstraling willen verbeteren en weinig functionele klachten ervaren"
+      },
+      "pricing": { "min": 900, "max": 1300, "currency": "EUR" },
+      "duration": { "min_months": 0, "max_months": 1 },
+      "recovery_days": 2
+    }
+  ],
+  "block_4_expected_results": {
+    "en": "Across the different directions, the aim may be for teeth to feel more comfortable and balanced again, with restored shape and more confidence when biting. The aesthetic outcome is typically tailored to facial features and natural tooth color rather than an unnaturally white result. Crowns may support stronger structural rehabilitation, composite may offer a conservative correction, and veneers may refine the visible zone. Short-term sensitivity can occur. Final outcomes can vary depending on wear patterns, bite forces, habits such as clenching or grinding, and longer-term maintenance.",
+    "nl": "In alle richtingen kan het doel zijn dat tanden opnieuw comfortabeler en evenwichtiger aanvoelen, met herstelde vorm en meer zekerheid bij het bijten. Het esthetische resultaat wordt doorgaans afgestemd op gelaat en natuurlijke tandkleur, eerder dan op een opvallend wit effect. Kronen kunnen meer structurele zekerheid ondersteunen, composiet kan een behoudende correctie bieden en facings kunnen de zichtzone verfijnen. Korte gevoeligheid kan voorkomen. Het uiteindelijke resultaat kan variëren afhankelijk van slijtagepatroon, beetkrachten, gewoonten zoals klemmen of knarsen en het onderhoud op langere termijn."
+  },
+  "block_5_duration": {
+    "en": "Smaller composite build-ups may often be completed relatively quickly, especially if only a limited number of teeth are involved. Crowns or veneers more commonly follow a multi-step process that can take roughly two to three weeks, depending on scheduling and laboratory steps. Overall duration may vary with the number of teeth treated, design and try-in moments, appointment planning, and whether different areas need to be coordinated.",
+    "nl": "Beperkte composietopbouwen kunnen vaak relatief snel worden afgerond, zeker wanneer het om een beperkt aantal tanden gaat. Kronen of facings volgen vaker een traject in meerdere stappen dat ongeveer twee tot drie weken kan duren, afhankelijk van planning en laboratoriumstappen. De totale duur kan variëren door het aantal behandelde tanden, ontwerp- en pasmomenten, afsprakenplanning en eventuele coördinatie over meerdere zones."
+  },
+  "block_6_recovery": {
+    "en": "With crowns, mild sensitivity can occur for one to three days, and chewing comfort may improve gradually as you adapt. Composite build-ups often involve little to no true recovery time, and normal function can frequently resume right away. With veneers, mild sensitivity for one to two days can happen. If sensitivity persists, the bite feels “high,” or chewing discomfort develops, follow-up may be considered because adjustment and bite settling can differ from person to person.",
+    "nl": "Bij kronen kan gedurende één tot drie dagen lichte gevoeligheid voorkomen en kan het kauwcomfort geleidelijk verbeteren na gewenning. Bij composietopbouw is er meestal weinig tot geen hersteltijd en kan normaal functioneren vaak meteen worden hervat. Bij facings kan één tot twee dagen lichte gevoeligheid optreden. Bij aanhoudende gevoeligheid, een “hoge” beet of nieuwe kauwhinder kan opvolging worden overwogen, omdat gewenning en beetafstelling per persoon verschillen."
+  },
+  "block_7_cost": {
+    "en": "Costs can vary based on how many teeth are treated, the materials chosen, technical and laboratory steps, and the level of finishing desired. Indicative ranges are often around €700–€1,000 per tooth for full-ceramic crowns, €150–€350 per tooth for composite build-ups, and €900–€1,300 per tooth for porcelain veneers. The final cost can differ by provider and by individual clinical needs, and additional phases (such as bite analysis or protective measures) may sometimes add to the total.",
+    "nl": "De kosten kunnen variëren afhankelijk van het aantal behandelde tanden, materiaalkeuze, technische en laboratoriumstappen en het gewenste afwerkingsniveau. Richtprijzen liggen vaak rond €700–€1.000 per tand voor volkeramische kronen, €150–€350 per tand voor composietopbouw en €900–€1.300 per tand voor porseleinen facings. De uiteindelijke kost kan verschillen per behandelaar en per individuele situatie, en bijkomende fases (zoals beetanalyse of beschermende maatregelen) kunnen soms extra impact hebben."
+  }
+}

@@ -1,3 +1,4 @@
+// @ts-nocheck — Legacy migration script, superseded by importScenarios.ts
 /**
  * Scenario Migration Script
  *

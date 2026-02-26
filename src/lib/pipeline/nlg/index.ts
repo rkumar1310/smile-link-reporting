@@ -4,9 +4,9 @@
  *
  * Flow:
  * 1. Tags → Drivers → Scenario Match (ScenarioScorer)
- * 2. Scenario → Base NLG Variables (from MongoDB)
- * 3. Drivers → Personalization Overrides
- * 4. Tags → Optional Content Blocks
+ * 2. Scenario → NLG Variables (blocks 0-7 from MongoDB)
+ * 3. Drivers/Tags → Text Module Selection (CONTEXT_MODULES_BLOCK)
+ * 4. Options Array → Dynamic OPTIONS_BLOCK rendering
  * 5. Template → Rendered Report
  */
 
@@ -17,10 +17,10 @@ export * from "./types";
 export * from "./schemas/ScenarioSchema";
 
 // Services
-export { driverTextMapper, DriverTextMapper } from "./DriverTextMapper";
-export { optionalBlockResolver, OptionalBlockResolver } from "./OptionalBlockResolver";
+export { textModuleResolver, TextModuleResolver } from "./TextModuleResolver";
 export { variableCalculator, VariableCalculator } from "./VariableCalculator";
 export { nlgTemplateRenderer, NLGTemplateRenderer } from "./NLGTemplateRenderer";
+export { buildOptionsBlock } from "./optionBlockBuilder";
 
 // Main entry point
 import type { NLGInput, NLGOutput } from "./types";

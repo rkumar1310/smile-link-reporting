@@ -1,0 +1,108 @@
+{
+  "scenario_id": "S05",
+  "name": { "en": "Multiple missing teeth in separate zones (2–4 teeth)", "nl": "Meerdere ontbrekende tanden in verschillende zones (2–4 tanden)" },
+  "block_0_personal_summary": {
+    "CONTEXT_DESCRIPTION": {
+      "en": "having two to four missing teeth spread across different areas of the mouth rather than one continuous gap",
+      "nl": "het ontbreken van twee tot vier tanden, verspreid over verschillende zones en niet als één aaneengesloten ruimte"
+    },
+    "PRIMARY_GOAL": {
+      "en": "regaining a stable, comfortable bite so eating feels more natural and requires less adjustment",
+      "nl": "opnieuw een stabiele en comfortabele beet ervaren zodat eten natuurlijker aanvoelt en minder aanpassing vraagt"
+    },
+    "MAIN_CONSTRAINT": {
+      "en": "the fact that multiple zones may need support, together with how durable you want each zone’s restoration to be and how extensive the overall trajectory may become",
+      "nl": "hoeveel zones ondersteuning nodig hebben, hoe duurzaam u het herstel per zone wenst en hoe uitgebreid het totale traject mag worden"
+    }
+  },
+  "block_1_situation": {
+    "CORE_SITUATION_DESCRIPTION": {
+      "en": "multiple missing teeth located in separate areas, which may make chewing feel less automatic and the bite less evenly balanced",
+      "nl": "meerdere ontbrekende tanden die verspreid liggen, waardoor kauwen minder vanzelfsprekend kan aanvoelen en de beet minder evenwichtig kan zijn"
+    },
+    "NUANCE_FACTOR": {
+      "en": "the absence of one single “main problem zone,” since each area may feel different and require its own planning",
+      "nl": "het ontbreken van één duidelijke probleemzone, doordat elke zone anders kan aanvoelen en apart gepland moet worden"
+    },
+    "SECONDARY_FACTOR": {
+      "en": "the need to restore overall balance across the mouth rather than simply filling individual spaces",
+      "nl": "het herstellen van een totaal evenwicht in de mond in plaats van enkel losse ruimtes opvullen"
+    }
+  },
+  "block_2_treatment_directions": {
+    "DIRECTION_1_CORE": {
+      "en": "each missing tooth is replaced individually to aim for a natural load per tooth position",
+      "nl": "elke ontbrekende tand afzonderlijk wordt vervangen om per tandpositie een natuurlijke belasting na te streven"
+    },
+    "DIRECTION_2_CORE": {
+      "en": "restoring each zone as a functional unit, for example with an implant-supported bridge per area",
+      "nl": "herstel per zone als functioneel geheel, bijvoorbeeld met een brug op implantaten per gebied"
+    },
+    "DIRECTION_3_CORE": {
+      "en": "treatment is phased, addressing the most chewing-critical zones first while leaving later steps flexible",
+      "nl": "gefaseerd wordt gewerkt, met eerst de zones die het kauwen het meest beïnvloeden en later eventueel vervolgstappen"
+    }
+  },
+  "block_3_options": [
+    {
+      "OPTION_TITLE": { "en": "Multiple implants with crowns (per missing tooth)", "nl": "Meerdere implantaten met kronen (per ontbrekende tand)" },
+      "OPTION_DESCRIPTION": {
+        "en": "placing one implant for each missing tooth position, followed by an individual crown per implant",
+        "nl": "het plaatsen van een implantaat per ontbrekende tandpositie met daarop een afzonderlijke kroon"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "planning per zone, surgical placement in one or more phases, a healing period, and then crown placement; total duration is often about 4–7 months per treated phase and can feel longer when several zones are staged",
+        "nl": "planning per zone, plaatsing in één of meerdere chirurgische fasen, een genezingsperiode en daarna het plaatsen van de kronen; de totale duur wordt vaak rond 4–7 maanden per fase besproken en kan langer aanvoelen wanneer zones gespreid worden behandeld"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "multiple surgical appointments across the mouth and a cost that increases with the number of teeth replaced, with staging sometimes used to spread the trajectory over time",
+        "nl": "meerdere ingrepen verspreid over de mond en een totale kost die doorgaans stijgt naarmate meer tanden worden vervangen, waarbij fasering het traject in tijd kan spreiden"
+      },
+      "PROFILE_MATCH": {
+        "en": "want tooth-by-tooth support and are comfortable with a more extensive, stepwise process to approximate a natural force distribution",
+        "nl": "zo individueel mogelijke ondersteuning per tand wensen en een uitgebreider, stap-voor-stap traject aanvaardbaar vinden"
+      },
+      "pricing": { "min": 2200, "max": 2500, "currency": "EUR" },
+      "duration": { "min_months": 4, "max_months": 7 },
+      "recovery_days": 7
+    },
+    {
+      "OPTION_TITLE": { "en": "Implant-supported bridge per zone", "nl": "Brug op implantaten per zone" },
+      "OPTION_DESCRIPTION": {
+        "en": "placing implants as support pillars and restoring several missing teeth in that zone with one bridge",
+        "nl": "het plaatsen van implantaten als steunpunten en het vervangen van meerdere tanden in die zone met één brug"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "evaluating each area separately, implant placement, healing, and then fitting the definitive bridge; overall timing depends on how many zones are treated and whether they are combined or staged",
+        "nl": "een beoordeling per zone, plaatsing van de implantaten, genezing en daarna de definitieve brug; de totale duur wordt sterk beïnvloed door het aantal zones en of u combineert of spreidt"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "less flexibility for later changes within a zone, plus the need for sufficient bone volume and location-specific suitability",
+        "nl": "minder flexibiliteit voor latere aanpassingen binnen dezelfde zone, plus de vereiste van voldoende botvolume en locatie-afhankelijke geschiktheid"
+      },
+      "PROFILE_MATCH": {
+        "en": "prefer a structured, zone-based plan that balances stability with overall treatment complexity",
+        "nl": "een overzichtelijke zonegerichte aanpak zoeken met een evenwicht tussen stabiliteit en behandelcomplexiteit"
+      },
+      "pricing": { "min": 4500, "max": 6000, "currency": "EUR" },
+      "duration": { "min_months": 4, "max_months": 7 },
+      "recovery_days": 7
+    }
+  ],
+  "block_4_expected_results": {
+    "en": "In both directions, the focus is typically on restoring comfort and a more even distribution of chewing forces across the mouth. The intention is that you may need to compensate less while eating and that your bite may feel steadier in daily use. In this scenario, visibility is often a smaller driver than reliability and function, though aesthetics can still matter depending on the locations involved. Outcomes can vary based on how many zones are treated, local bone and gum conditions, bite forces, material choices, and how the restorations are maintained over time.",
+    "nl": "Bij beide richtingen ligt de nadruk meestal op het herstellen van comfort en een meer evenwichtige verdeling van kauwkrachten. Het idee is dat u tijdens het eten minder hoeft te compenseren en dat de beet stabieler kan aanvoelen in het dagelijks gebruik. In dit scenario speelt zichtbaarheid vaak een kleinere rol dan betrouwbaarheid en functie, al kan esthetiek per locatie verschillen. Het uiteindelijke resultaat kan variëren door het aantal zones, bot- en tandvleessituatie per gebied, beetkrachten, materiaalkeuze en hoe het herstel nadien wordt onderhouden."
+  },
+  "block_5_duration": {
+    "en": "Treatment duration often varies with the number of areas involved and whether care is combined or staged. Implant-with-crown routes are frequently discussed in ranges around several months per phase (often roughly 4–7 months), while zone-based implant bridges may follow a broadly similar timeline. The overall trajectory can feel longer when multiple zones are planned sequentially. Healing responses, laboratory steps, appointment intervals, and any preparatory work can all influence the final schedule.",
+    "nl": "De duur hangt vaak samen met het aantal zones en of de behandeling gecombineerd of gespreid wordt uitgevoerd. Een implantaat met kroon wordt in veel trajecten besproken binnen een range van meerdere maanden per fase (vaak ongeveer 4–7 maanden), terwijl bruggen op implantaten per zone een vergelijkbare tijdslijn kunnen hebben. Wanneer meerdere zones na elkaar gepland worden, kan het totale traject langer aanvoelen. Genezing per zone, laboratoriumtijd, afsprakenintervallen en eventuele voorbereidende stappen beïnvloeden de uiteindelijke planning."
+  },
+  "block_6_recovery": {
+    "en": "After surgical steps, it is common for some people to experience short-term soreness, sensitivity, or mild swelling in the treated area for a few days, with everyday activities often resuming relatively soon. If several areas are treated in separate phases, recovery may feel more spread out over time rather than concentrated into one period. Recovery experiences can differ by person and by location in the mouth. If pain, swelling, or functional limitations feel unusual or persistent, further evaluation is typically considered.",
+    "nl": "Na chirurgische stappen kunnen gedurende enkele dagen napijn, gevoeligheid of lichte zwelling optreden in de behandelde zone, terwijl dagelijkse activiteiten vaak relatief snel hervat worden. Als meerdere zones in aparte fasen worden behandeld, kan het herstel meer gespreid aanvoelen in plaats van één aaneengesloten periode. Herstel verschilt per persoon en per locatie in de mond. Bij pijn, zwelling of functionele hinder die ongewoon of aanhoudend voelt, wordt doorgaans verdere evaluatie overwogen."
+  },
+  "block_7_cost": {
+    "en": "Costs can vary with how many teeth are missing, how many separate zones require support, material choices, surgical complexity, and technical/laboratory components. Some approaches scale more directly with the number of teeth restored (for example, an implant and crown per tooth), while others are priced per zone (for example, an implant-supported bridge per area). Additional steps—such as imaging, preparatory procedures, temporary solutions, or staged scheduling—may influence the total. Final figures depend on the provider and the individual clinical situation.",
+    "nl": "De kostprijs kan variëren afhankelijk van het aantal ontbrekende tanden, het aantal zones, materiaalkeuze, chirurgische complexiteit en technische/laboratoriumcomponenten. Sommige trajecten schalen vooral per tand (bijvoorbeeld implantaat met kroon), terwijl andere vaker per zone worden bekeken (bijvoorbeeld een brug op implantaten per gebied). Bijkomende stappen—zoals beeldvorming, voorbereidende ingrepen, tijdelijke oplossingen of fasering—kunnen de totale kost beïnvloeden. De uiteindelijke prijs verschilt per behandelaar en per individuele situatie."
+  }
+}

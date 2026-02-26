@@ -20,12 +20,6 @@ export * from "./types";
 export { TagExtractor, tagExtractor } from "./engines/TagExtractor";
 export { DriverDeriver, driverDeriver } from "./engines/DriverDeriver";
 export { ScenarioScorer, scenarioScorer } from "./engines/ScenarioScorer";
-export { ToneSelector, toneSelector } from "./engines/ToneSelector";
-export { ContentSelector, contentSelector } from "./engines/ContentSelector";
-
-// Composition (kept for reference, no longer used by pipeline)
-export { ReportComposer, reportComposer, type ContentStore } from "./composition/ReportComposer";
-export { PlaceholderResolver, placeholderResolver, type PlaceholderContext } from "./composition/PlaceholderResolver";
 
 // Validation
 export { IntakeValidator, intakeValidator } from "./validation/IntakeValidator";

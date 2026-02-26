@@ -1,0 +1,108 @@
+{
+  "scenario_id": "S__06",
+  "name": { "en": "Missing teeth with coordinated functional and aesthetic restoration", "nl": "Ontbrekende tanden met gecombineerde functionele en esthetische restauratie" },
+  "block_0_personal_summary": {
+    "CONTEXT_DESCRIPTION": {
+      "en": "a combination of missing teeth and visible aesthetic concerns such as shade differences, wear, shape variation, or asymmetry",
+      "nl": "een combinatie van ontbrekende tanden en zichtbare esthetische aandachtspunten zoals kleurverschil, slijtage, vormvariatie of asymmetrie"
+    },
+    "PRIMARY_GOAL": {
+      "en": "restoring a balanced, comfortable feel when eating while also achieving a more harmonious-looking smile",
+      "nl": "opnieuw een evenwichtig geheel ervaren: comfortabel bij het eten en tegelijk harmonieuzer wanneer u lacht"
+    },
+    "MAIN_CONSTRAINT": {
+      "en": "the practical feasibility of phased treatment, coordination between different mouth areas, and the wish for a natural-looking outcome",
+      "nl": "de praktische haalbaarheid van een gefaseerd traject, de afstemming tussen verschillende zones en de wens voor een natuurlijk ogend resultaat"
+    }
+  },
+  "block_1_situation": {
+    "CORE_SITUATION_DESCRIPTION": {
+      "en": "missing one or more teeth alongside aesthetic irregularities that are noticeable when smiling",
+      "nl": "het ontbreken van één of meerdere tanden naast esthetische onregelmatigheden die zichtbaar zijn bij het glimlachen"
+    },
+    "NUANCE_FACTOR": {
+      "en": "the experience of the whole picture feeling off, rather than one single dominant complaint",
+      "nl": "het gevoel dat het totaalbeeld niet meer klopt, eerder dan één duidelijke hoofdklacht"
+    },
+    "SECONDARY_FACTOR": {
+      "en": "the way function becomes more noticeable during eating while appearance may stand out more in social moments",
+      "nl": "het verschil tussen wat vooral opvalt tijdens het eten (functie) en wat vooral opvalt in sociale momenten (uitstraling)"
+    }
+  },
+  "block_2_treatment_directions": {
+    "DIRECTION_1_CORE": {
+      "en": "missing teeth are functionally replaced while visible teeth are cosmetically refined for better overall harmony",
+      "nl": "ontbrekende tanden functioneel worden vervangen en zichtbare tanden esthetisch worden verfijnd voor meer samenhang"
+    },
+    "DIRECTION_2_CORE": {
+      "en": "working by zones, prioritizing comfort-impacting areas first and aligning aesthetic steps afterward",
+      "nl": "werken per zone, waarbij comfort-bepalende zones eerst worden aangepakt en esthetische stappen daarop worden afgestemd"
+    },
+    "DIRECTION_3_CORE": {
+      "en": "a phased sequence is planned so surgical and aesthetic steps follow a logical order with healing time built in",
+      "nl": "een gefaseerde volgorde wordt gepland zodat chirurgische en esthetische stappen logisch opvolgen met voldoende genezingstijd"
+    }
+  },
+  "block_3_options": [
+    {
+      "OPTION_TITLE": { "en": "Implants combined with crowns and/or veneers", "nl": "Implantaten gecombineerd met kronen en/of facings" },
+      "OPTION_DESCRIPTION": {
+        "en": "replacing missing teeth with implants and crowns, while improving visible teeth with porcelain veneers or crowns for better shade and shape consistency",
+        "nl": "het vervangen van ontbrekende tanden met implantaten en kronen, gecombineerd met porseleinen facings of kronen om zichtbare tanden beter te laten aansluiten qua kleur en vorm"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "planning across zones, implant placement in one or more phases, a healing period, crown placement, and coordinated aesthetic restorations to match the implant work",
+        "nl": "een plan per zone, implantatie in één of meerdere fasen, een genezingsperiode, kroonplaatsing en esthetische restauraties die qua kleur en vorm aansluiten op het implantaatwerk"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "a multi-step trajectory, higher overall complexity, and the need to coordinate bite forces, materials, and aesthetics across several teeth",
+        "nl": "meerdere stappen, hogere totale complexiteit en de nood om beetkrachten, materiaalkeuze en esthetische harmonie zorgvuldig op elkaar af te stemmen"
+      },
+      "PROFILE_MATCH": {
+        "en": "feel that separate small fixes would not restore the overall balance of function and appearance",
+        "nl": "het gevoel hebben dat losse ingrepen het totaalbeeld niet opnieuw in balans brengen"
+      },
+      "pricing": { "min": 900, "max": 2500, "currency": "EUR" },
+      "duration": { "min_months": 4, "max_months": 7 },
+      "recovery_days": 7
+    },
+    {
+      "OPTION_TITLE": { "en": "Phased zone-based approach (function first, aesthetics aligned later)", "nl": "Gefaseerde zone-aanpak (functie eerst, esthetiek daarop afgestemd)" },
+      "OPTION_DESCRIPTION": {
+        "en": "stabilizing function in the areas that affect chewing most, followed by cosmetic refinements to harmonize the visible zone",
+        "nl": "eerst het verbeteren van stabiliteit en kauwcomfort in de meest bepalende zones, gevolgd door esthetische stappen om het zichtbare gebied te harmoniseren"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "a staged plan with interim steps, reassessment between phases, and timing that respects healing and lab turnaround",
+        "nl": "een stapsgewijs plan met tussentijdse evaluaties, tijdelijke oplossingen waar nodig en timing die rekening houdt met genezing en labowerk"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "a longer total timeline, temporary differences between phases, and the need for careful sequencing so later aesthetic work matches earlier functional restoration",
+        "nl": "een langere totale doorlooptijd, tijdelijke verschillen tussen zones en de nood om de volgorde zo te plannen dat latere esthetiek goed aansluit op eerdere functionele restauraties"
+      },
+      "PROFILE_MATCH": {
+        "en": "prefer a practical stepwise path and want to spread treatment intensity, scheduling, or budget over time",
+        "nl": "een praktische stap-voor-stap route verkiezen en intensiteit, planning of budget willen spreiden"
+      },
+      "pricing": { "min": 900, "max": 2500, "currency": "EUR" },
+      "duration": { "min_months": 5, "max_months": 9 },
+      "recovery_days": 7
+    }
+  ],
+  "block_4_expected_results": {
+    "en": "Treatment in scenarios like this is typically aimed at making the smile feel more “in balance” again—both during chewing and in how the teeth look when you laugh. People may notice improvements in stability, comfort, shade consistency, and overall harmony. A natural-looking result is often a central goal, meaning changes are usually designed to blend with your face and features rather than look overly “done.” Outcomes can vary based on how many areas are involved, the condition of bone and gum tissues, bite forces, existing restorations, and how well materials and shades can be matched across different teeth.",
+    "nl": "Het doel is meestal dat de glimlach opnieuw “in balans” aanvoelt, zowel bij het kauwen als bij het lachen. Mensen kunnen verbetering merken in stabiliteit, comfort, kleurconsistentie en algemene harmonie. Vaak staat een natuurlijk resultaat centraal: veranderingen zijn dan bedoeld om aan te sluiten bij uw gelaat en uitstraling, zonder dat het overdreven zichtbaar wordt. Het uiteindelijke resultaat kan variëren afhankelijk van het aantal betrokken zones, de conditie van bot en tandvlees, beetkrachten, bestaande restauraties en de mate waarin materialen en kleuren onderling passend kunnen worden afgestemd."
+  },
+  "block_5_duration": {
+    "en": "A combined functional-and-aesthetic trajectory often takes several months. In many cases, a rough range of about four to seven months is discussed when implants are combined with aesthetic corrections, but the actual timeline can shift. Factors include how many teeth or zones are treated, whether implant placement is done in one phase or several, healing speed, laboratory turnaround for veneers/crowns, and how appointments can be scheduled. If treatment is staged by zones, the overall duration may extend, even if each individual step feels manageable.",
+    "nl": "Een traject waarin functie en esthetiek gecombineerd worden, neemt vaak meerdere maanden in beslag. In veel gevallen wordt een globale range van ongeveer vier tot zeven maanden genoemd wanneer implantaten worden gecombineerd met esthetische correcties, maar dit kan verschillen. De doorlooptijd hangt onder andere samen met het aantal zones, het aantal chirurgische fases, genezing, laboratoriumtijd voor facings/kronen en de planning van afspraken. Wanneer er bewust per zone gefaseerd wordt gewerkt, kan de totale duur langer worden, ook al blijft elke stap afzonderlijk overzichtelijk."
+  },
+  "block_6_recovery": {
+    "en": "Recovery can differ by procedure and by person. After an implant placement phase, swelling or soreness for a few days is common, and chewing may need temporary adjustments until the next steps are completed. After veneers or crowns, there may be a short adaptation period (often a day or two), sometimes with mild sensitivity. Many daily activities can usually continue, but comfort can vary depending on which area was treated and how your bite feels during that stage. If symptoms persist or bite contact feels off, follow-up is typically considered.",
+    "nl": "Herstel verschilt per ingreep en per persoon. Na een implantatiefase kan er enkele dagen zwelling of napijn zijn, en kan het nodig zijn om tijdelijk anders te kauwen tot de volgende stap. Na facings of kronen is er vaak een korte gewenning (meestal één tot twee dagen), soms met lichte gevoeligheid. Dagelijkse activiteiten kunnen doorgaans doorgaan, maar het comfort kan per fase verschillen afhankelijk van de behandelde zone en hoe de beet aanvoelt. Als klachten aanhouden of het contact “niet klopt”, wordt vaak een controle of bijsturing overwogen."
+  },
+  "block_7_cost": {
+    "en": "Costs vary with the number of teeth involved, the number of zones, material choices, technical complexity, and how much planning and coordination is needed between functional and aesthetic work. In this scenario, indicative ranges often referenced include roughly €2,200–€2,500 per tooth for an implant with crown, and roughly €900–€1,300 per tooth for porcelain veneers or crowns. The total budget can change significantly if additional preparatory steps are needed (for example, temporary solutions, repairs of older restorations, or additional diagnostics), or if treatment is spread across phases.",
+    "nl": "De totale kost hangt samen met het aantal tanden en zones, materiaalkeuze, technische uitvoering en de complexiteit van de afstemming tussen functie en esthetiek. In dit type scenario worden vaak indicatieve richtprijzen genoemd zoals ongeveer €2.200–€2.500 per tand voor een implantaat met kroon, en ongeveer €900–€1.300 per tand voor porseleinen facings of kronen. Het totaalbedrag kan hoger of lager uitvallen als er extra stappen nodig zijn (bijvoorbeeld tijdelijke oplossingen, herstel van oudere restauraties, of extra diagnostiek) of wanneer het traject over meerdere fases wordt gespreid."
+  }
+}

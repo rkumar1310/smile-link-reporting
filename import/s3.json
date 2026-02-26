@@ -1,0 +1,131 @@
+{
+  "scenario_id": "S03",
+  "name": {
+    "en": "Missing back tooth: implant vs bridge decision profile",
+    "nl": "Ontbrekende achterste kies: afweging implantaat vs brug"
+  },
+  "block_0_personal_summary": {
+    "CONTEXT_DESCRIPTION": {
+      "en": "a missing back tooth in the chewing area that is noticeable mainly during eating",
+      "nl": "een ontbrekende achterste kies in de kauwzone die vooral tijdens het eten merkbaar is"
+    },
+    "PRIMARY_GOAL": {
+      "en": "being able to chew comfortably and evenly again without the gap drawing attention",
+      "nl": "opnieuw comfortabel en evenwichtig kunnen kauwen zonder dat de lege ruimte uw aandacht trekt"
+    },
+    "MAIN_CONSTRAINT": {
+      "en": "durability, willingness for a surgical step, total treatment time, and overall cost",
+      "nl": "duurzaamheid, bereidheid tot een chirurgische ingreep, de totale behandelduur en de kost"
+    }
+  },
+  "block_1_situation": {
+    "CORE_SITUATION_DESCRIPTION": {
+      "en": "one missing tooth in the posterior chewing zone with potential changes in bite balance and chewing preference",
+      "nl": "één ontbrekende tand achteraan met mogelijke impact op kauwpatroon en beetbalans"
+    },
+    "NUANCE_FACTOR": {
+      "en": "functional confidence during daily eating and pressure distribution",
+      "nl": "functioneel vertrouwen tijdens het eten en een gelijkmatige drukverdeling"
+    },
+    "SECONDARY_FACTOR": {
+      "en": "concerns about longer-term shifting, bite changes, or the space increasing",
+      "nl": "vragen over verschuiving, veranderend bijtevenwicht of het groter worden van de ruimte op langere termijn"
+    }
+  },
+  "block_2_treatment_directions": {
+    "DIRECTION_1_CORE": {
+      "en": "the missing tooth is replaced including the root support to restore independent function",
+      "nl": "de ontbrekende tand inclusief wortelondersteuning wordt vervangen om zelfstandige kauwfunctie te herstellen"
+    },
+    "DIRECTION_2_CORE": {
+      "en": "restoring chewing function with a fixed bridge supported by neighboring teeth",
+      "nl": "het herstellen van kauwfunctie met een vaste brug die steunt op naburige tanden"
+    },
+    "DIRECTION_3_CORE": {
+      "en": "options are first weighed calmly against durability, invasiveness, timing, and budget before committing",
+      "nl": "eerst rustig wordt afgewogen tussen duurzaamheid, ingreep, timing en budget vóór een definitieve keuze"
+    }
+  },
+  "block_3_options": [
+    {
+      "OPTION_TITLE": {
+        "en": "Single implant with crown",
+        "nl": "Enkelvoudig implantaat met kroon"
+      },
+      "OPTION_DESCRIPTION": {
+        "en": "placing a dental implant as an artificial root in the jawbone and later attaching a custom crown to replace the missing tooth",
+        "nl": "het plaatsen van een implantaat als kunstwortel in het kaakbot en later het bevestigen van een kroon op maat"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "a surgical placement appointment, a healing/integration phase, and then crown design and placement over multiple visits",
+        "nl": "een chirurgische plaatsing, een genezings-/ingroeifase en daarna het vervaardigen en plaatsen van de kroon in meerdere stappen"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "a surgical phase, healing time, higher overall cost, and suitability depending on bone conditions and health factors",
+        "nl": "een chirurgische fase, tijd voor genezing, doorgaans hogere totale kost en geschiktheid afhankelijk van botconditie en algemene factoren"
+      },
+      "PROFILE_MATCH": {
+        "en": "value long-term stability and an independent chewing unit and can accept a longer timeline",
+        "nl": "veel belang hechten aan langdurige stabiliteit en een zelfstandige kauweenheid en een langere behandelduur aanvaardbaar vinden"
+      },
+      "pricing": {
+        "min": 2200,
+        "max": 2500,
+        "currency": "EUR"
+      },
+      "duration": {
+        "min_months": 3,
+        "max_months": 7
+      },
+      "recovery_days": 7
+    },
+    {
+      "OPTION_TITLE": {
+        "en": "Bridge",
+        "nl": "Brug"
+      },
+      "OPTION_DESCRIPTION": {
+        "en": "replacing the missing tooth with a fixed bridge that is supported by adjacent teeth",
+        "nl": "het vervangen van de ontbrekende tand met een vaste brug die steunt op aangrenzende tanden"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "preparing the supporting teeth, taking impressions or scans, and fitting/placing the bridge in fewer steps than an implant pathway",
+        "nl": "het voorbereiden van de steunpunten, afdrukken of scannen en het plaatsen van de brug in doorgaans minder stappen dan bij een implantaattraject"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "dependence on the condition of the supporting teeth and long-term maintenance needs",
+        "nl": "afhankelijkheid van de conditie van de steunpunten en mogelijke onderhoudsbehoefte op langere termijn"
+      },
+      "PROFILE_MATCH": {
+        "en": "prioritize functional restoration through a more practical or time-efficient route within a defined budget",
+        "nl": "functioneel herstel vooropstellen via een praktischer of tijdsefficiënter traject binnen een bepaald budget"
+      },
+      "pricing": {
+        "min": 2100,
+        "max": 2700,
+        "currency": "EUR"
+      },
+      "duration": {
+        "min_months": 1,
+        "max_months": 2
+      },
+      "recovery_days": 2
+    }
+  ],
+  "block_4_expected_results": {
+    "en": "Both an implant and a bridge may help restore chewing balance and distribute pressure more evenly. In this scenario, the outcome is typically evaluated more on functional reliability than on visibility, because the missing tooth is in the back. How “natural” the result feels can vary based on bone support, the condition of neighboring teeth, bite forces, material choice, and how the restoration is maintained over time. Results are therefore individual, and a clinical evaluation is usually needed to predict what is most realistic in your specific case.",
+    "nl": "Zowel een implantaat als een brug kan het kauwevenwicht ondersteunen en de drukverdeling verbeteren. Omdat het om een tand achteraan gaat, krijgt het functionele aspect vaak meer aandacht dan zichtbaarheid. Hoe natuurlijk het uiteindelijk aanvoelt, kan verschillen per persoon en hangt samen met botondersteuning, de conditie van naburige tanden, bijtkrachten, materiaalkeuze en het onderhoud nadien. Daarom wordt doorgaans een klinische beoordeling gebruikt om in te schatten wat in uw situatie realistisch is."
+  },
+  "block_5_duration": {
+    "en": "A bridge can often be completed faster, because it usually involves fewer staged healing intervals. An implant-with-crown pathway commonly takes multiple months, often roughly in the range of 3–7 months, depending on healing, scheduling, and whether extra steps are needed. Overall timing can also be influenced by lab production time, spacing between appointments, and any preparatory procedures that might be considered appropriate after clinical assessment.",
+    "nl": "Een brug kan vaak sneller worden afgerond, omdat er meestal minder gefaseerde genezingsmomenten zijn. Een implantaat met kroon neemt doorgaans meerdere maanden in beslag, vaak ongeveer 3–7 maanden, afhankelijk van genezing, planning en eventuele bijkomende stappen. De totale duur kan ook worden beïnvloed door laboratoriumtijd, de tijd tussen afspraken en eventuele voorbereidende ingrepen die na klinische evaluatie passend worden geacht."
+  },
+  "block_6_recovery": {
+    "en": "After implant placement, some people experience mild soreness or sensitivity for a few days, and chewing comfort often returns gradually over about one to two weeks, while the deeper integration phase continues in the background. With a bridge, there is often no pronounced “recovery period,” though a short adjustment phase can occur as you get used to the new bite feel. If pain, swelling, or functional limitation persists or worsens, further evaluation may be considered, since responses differ per person.",
+    "nl": "Na het plaatsen van een implantaat kan enkele dagen lichte napijn of gevoeligheid optreden, en het kauwen normaliseert vaak geleidelijk binnen één tot twee weken, terwijl de verdere ingroei tijd blijft vragen. Bij een brug is er meestal geen uitgesproken hersteltijd, al kan een korte gewenningsperiode voorkomen. Als pijn, zwelling of functionele hinder aanhoudt of toeneemt, kan verdere evaluatie zinvol zijn, omdat reacties per persoon verschillen."
+  },
+  "block_7_cost": {
+    "en": "Costs can vary depending on materials, technical complexity, the surgical component (if applicable), and anatomical factors. In this scenario, indicative ranges that are sometimes discussed are €2,200–€2,500 for an implant with crown and €2,100–€2,700 for a bridge. Additional diagnostics, preparatory steps, or follow-up care can influence the total. A clinician typically confirms a tailored estimate after examining bone, bite forces, and the condition of adjacent teeth.",
+    "nl": "De totale kost kan variëren door materiaalkeuze, technische uitvoering, de chirurgische component (indien van toepassing) en individuele anatomische factoren. In dit scenario worden soms richtwaarden besproken van €2.200–€2.500 voor een implantaat met kroon en €2.100–€2.700 voor een brug. Extra diagnostiek, voorbereidende stappen of opvolging kunnen het totaal beïnvloeden. Een behandelaar bevestigt meestal een persoonlijke raming na beoordeling van bot, bijtkrachten en de toestand van de naburige tanden."
+  }
+}

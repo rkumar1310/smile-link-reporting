@@ -74,11 +74,11 @@ export async function PUT(
     const allowedUpdates: Partial<Scenario> = {};
 
     if (body.name) allowedUpdates.name = body.name;
-    if (body.description) allowedUpdates.description = body.description;
     if (body.nlg_variables) allowedUpdates.nlg_variables = body.nlg_variables;
-    if (body.treatment_options) allowedUpdates.treatment_options = body.treatment_options;
-    if (body.pricing) allowedUpdates.pricing = body.pricing;
     if (body.matching) allowedUpdates.matching = body.matching;
+    if (body.is_fallback !== undefined) allowedUpdates.is_fallback = body.is_fallback;
+    if (body.is_safety_scenario !== undefined) allowedUpdates.is_safety_scenario = body.is_safety_scenario;
+    if (body.priority !== undefined) allowedUpdates.priority = body.priority;
 
     // Always update the timestamp
     allowedUpdates.updated_at = new Date();

@@ -1,0 +1,131 @@
+{
+  "scenario_id": "S__11",
+  "name": {
+    "en": "Aesthetic straightening options for mild misalignment",
+    "nl": "Esthetische opties voor lichte scheefstand"
+  },
+  "block_0_personal_summary": {
+    "CONTEXT_DESCRIPTION": {
+      "en": "mild crowding, slight rotations, or an uneven smile line with all teeth present",
+      "nl": "lichte scheefstand, kleine rotaties of een onregelmatige glimlachlijn terwijl alle tanden aanwezig zijn"
+    },
+    "PRIMARY_GOAL": {
+      "en": "a more straight-looking, harmonious smile with a natural appearance",
+      "nl": "een rechter ogende, harmonieuze glimlach met een natuurlijk resultaat"
+    },
+    "MAIN_CONSTRAINT": {
+      "en": "the choice between moving teeth versus mainly improving the visual appearance, as well as the time and discipline you can invest and how definitive a change may be",
+      "nl": "de afweging tussen tanden effectief verplaatsen versus vooral het uitzicht optimaliseren, samen met de tijd en discipline die u kunt investeren en hoe definitief een aanpassing mag zijn"
+    }
+  },
+  "block_1_situation": {
+    "CORE_SITUATION_DESCRIPTION": {
+      "en": "an aesthetic misalignment without tooth loss, mainly affecting how the smile looks rather than causing clear pain or major functional limits",
+      "nl": "een esthetische afwijking in tandstand zonder tandverlies, waarbij uitstraling doorgaans zwaarder weegt dan duidelijke pijn of uitgesproken functionele beperkingen"
+    },
+    "NUANCE_FACTOR": {
+      "en": "the personal impact on confidence, especially in photos or social situations",
+      "nl": "de impact op zelfvertrouwen, vooral op foto’s of in sociale situaties"
+    },
+    "SECONDARY_FACTOR": {
+      "en": "possible cleaning difficulty in overlapping areas, even without acute complaints",
+      "nl": "mogelijke moeilijkere reiniging bij overlappende tanden, ook zonder acute klachten"
+    }
+  },
+  "block_2_treatment_directions": {
+    "DIRECTION_1_CORE": {
+      "en": "teeth are gradually and structurally repositioned to improve alignment",
+      "nl": "tanden geleidelijk en structureel worden verplaatst om de stand te verbeteren"
+    },
+    "DIRECTION_2_CORE": {
+      "en": "visually refining shape and symmetry to create the impression of straighter teeth",
+      "nl": "het visueel verfijnen van vorm en symmetrie om de indruk van rechte tanden te creëren"
+    },
+    "DIRECTION_3_CORE": {
+      "en": "the underlying cause and extent of the misalignment are mapped first to guide the most suitable approach",
+      "nl": "eerst de oorzaak en de mate van de scheefstand duidelijk in kaart worden gebracht om de aanpak beter te sturen"
+    }
+  },
+  "block_3_options": [
+    {
+      "OPTION_TITLE": {
+        "en": "Clear aligners (nearly invisible orthodontics)",
+        "nl": "Transparante aligners (onzichtbare beugel)"
+      },
+      "OPTION_DESCRIPTION": {
+        "en": "a series of transparent aligners that move teeth step by step based on a digital plan",
+        "nl": "een reeks doorzichtige aligners die tanden stap voor stap verplaatsen volgens een digitaal plan"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "a scan or impressions, a staged digital treatment plan, wearing aligners daily and switching them on schedule, and periodic reviews; an estimated duration of about 6–18 months; typically no true “downtime,” though brief pressure or adjustment can occur after each new aligner",
+        "nl": "een scan of afdrukken, een gefaseerd digitaal behandelplan, dagelijks dragen en wisselen volgens schema, en tussentijdse controles; een geschatte duur van ongeveer 6–18 maanden; meestal geen echte “hersteltijd,” maar wel soms kortdurende druk of gewenning bij elke nieuwe aligner"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "consistent wear, the longer timeline compared with cosmetic covering, and suitability depending on the type and severity of crowding/rotation; indicative total costs often around €2,000–€4,000",
+        "nl": "consequent dragen, een langere doorlooptijd dan een esthetische bedekking, en geschiktheid afhankelijk van type en ernst van de scheefstand/rotaties; indicatieve totaalkost vaak rond €2.000–€4.000"
+      },
+      "PROFILE_MATCH": {
+        "en": "want a structural correction while keeping the natural teeth intact and can commit to daily wear and follow-up",
+        "nl": "een structurele correctie willen met behoud van de natuurlijke tanden en die dagelijkse discipline en opvolging kunnen aanhouden"
+      },
+      "pricing": {
+        "min": 2000,
+        "max": 4000,
+        "currency": "EUR"
+      },
+      "duration": {
+        "min_months": 6,
+        "max_months": 18
+      },
+      "recovery_days": 0
+    },
+    {
+      "OPTION_TITLE": {
+        "en": "Porcelain veneers (aesthetic surface restorations)",
+        "nl": "Porseleinen facings (esthetische schildjes)"
+      },
+      "OPTION_DESCRIPTION": {
+        "en": "placing custom porcelain shells on the visible surfaces to improve shape, symmetry, and the visual impression of alignment",
+        "nl": "op maat gemaakte porseleinen schildjes op de zichtzijde om vorm, symmetrie en de indruk van rechte tanden te verbeteren"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "aesthetic planning (shape/colour/proportions), possible minimal-to-moderate tooth preparation depending on the case, fabrication by a lab, placement and bite/comfort checks; often completed within a few weeks; a short adjustment period with possible mild sensitivity for 1–2 days",
+        "nl": "esthetische planning (vorm/kleur/verhoudingen), afhankelijk van de situatie minimale tot meer uitgebreide voorbereiding, vervaardiging door het labo, plaatsing en controle van comfort en beet; vaak realiseerbaar binnen enkele weken; een korte gewenning met soms lichte gevoeligheid gedurende 1–2 dagen"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "the more definitive nature of changing healthy tooth structure, long-term maintenance or replacement needs, and pricing typically calculated per tooth (often around €900–€1,300 per tooth)",
+        "nl": "het meer definitieve karakter door mogelijke aanpassing van gezond tandweefsel, onderhoud of vervanging op langere termijn, en een prijs meestal per tand (vaak rond €900–€1.300 per tand)"
+      },
+      "PROFILE_MATCH": {
+        "en": "prioritize a fast, highly controlled aesthetic end result and prefer not to undergo months of tooth movement",
+        "nl": "vooral het eindbeeld snel en gecontroleerd willen bereiken en liever geen maandenlange tandverplaatsing doorlopen"
+      },
+      "pricing": {
+        "min": 1800,
+        "max": 7800,
+        "currency": "EUR"
+      },
+      "duration": {
+        "min_months": 1,
+        "max_months": 2
+      },
+      "recovery_days": 2
+    }
+  ],
+  "block_4_expected_results": {
+    "en": "Both directions may lead to a smile that looks straighter and more balanced, but the “type” of change differs. Aligners typically aim for natural correction by moving teeth into a new position over time, while veneers typically aim for visual harmony by reshaping and covering visible surfaces. Results can vary based on starting alignment, bite forces, enamel condition, existing restorations, and long-term maintenance habits. A clinician’s assessment usually helps clarify what outcome is realistically achievable and what trade-offs (time, invasiveness, durability) may come with each route.",
+    "nl": "Beide richtingen kunnen leiden tot een rechter ogende en evenwichtiger glimlach, maar het “soort” verandering verschilt. Aligners richten zich doorgaans op een natuurlijke correctie door tanden echt te verplaatsen, terwijl facings doorgaans inzetten op visuele harmonie door vorm en zichtvlakken te optimaliseren. Hoe het resultaat wordt ervaren kan variëren door de beginsituatie, beetkrachten, glazuurconditie, bestaande vullingen of kronen en onderhoud op langere termijn. Een klinische beoordeling helpt meestal om verwachtingen en haalbaarheid realistischer af te stemmen."
+  },
+  "block_5_duration": {
+    "en": "Time frames can vary widely. Veneers are often planned and completed within several weeks, depending on the number of teeth, laboratory timelines, and appointment availability. Aligner treatment more often spans months, commonly around 6–18 months, influenced by complexity, the number of stages, and whether refinements are needed. Wear consistency is a major driver of timeline with aligners, while design decisions and lab production capacity can influence veneer scheduling.",
+    "nl": "De doorlooptijd kan sterk verschillen. Facings worden vaak binnen enkele weken gepland en geplaatst, afhankelijk van het aantal betrokken tanden, labotijd en agenda. Alignertrajecten lopen vaker over maanden, vaak rond 6–18 maanden, beïnvloed door complexiteit, het aantal fasen en eventuele verfijningen. Bij aligners weegt draagdiscipline zwaar op de duur, terwijl bij facings vooral ontwerpkeuzes, labo-uitvoering en planning van afspraken bepalend kunnen zijn."
+  },
+  "block_6_recovery": {
+    "en": "Recovery experiences are typically mild but individual. With aligners, there is usually no true recovery period, though short-lived pressure or tenderness can occur when switching to a new set (often a few days). With veneers, some people notice brief sensitivity or an “adjustment feeling” after placement, often settling within days, especially once the bite feels natural. If pain persists, chewing feels off, or sensitivity becomes significant, follow-up is usually considered to check fit and bite balance.",
+    "nl": "Herstel en gewenning zijn doorgaans beperkt, maar persoonlijk verschillend. Bij aligners is er meestal geen echte hersteltijd, al kan bij het wisselen naar een nieuwe aligner kortdurende druk of gevoeligheid optreden (vaak enkele dagen). Bij facings kan een korte aanpassingsperiode voorkomen, soms met lichte gevoeligheid, die vaak binnen enkele dagen afneemt zodra de beet natuurlijk aanvoelt. Bij aanhoudende pijn, duidelijke bijthinder of onverwachte gevoeligheid wordt doorgaans opvolging overwogen om pasvorm en beetbalans te controleren."
+  },
+  "block_7_cost": {
+    "en": "Costs can depend on how many teeth are involved, how complex planning is, and material or technical choices. For aligners, total fees often reflect diagnostics, digital planning, the number of aligners, and follow-up visits. For veneers, pricing is commonly per tooth and can vary with the ceramic type, aesthetic layering, and preparation needs. In many cases, additional phases (e.g., refinements, retainers after aligners, or later maintenance/replacement of veneers) can influence long-term cost planning.",
+    "nl": "Kosten hangen vaak samen met het aantal tanden, de complexiteit van de planning en materiaal- of techniekkeuzes. Bij aligners weerspiegelt de totaalprijs meestal diagnostiek, digitale planning, het aantal aligners en opvolgconsulten. Bij facings wordt vaak per tand gerekend en kunnen keramiektype, esthetische afwerking en de mate van voorbereiding de prijs beïnvloeden. Ook mogelijke extra fases (zoals refinements, retentie na aligners, of later onderhoud/vervanging van facings) kunnen meespelen in de totale kost op langere termijn."
+  }
+}

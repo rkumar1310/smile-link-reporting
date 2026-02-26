@@ -1,3 +1,4 @@
+// @ts-nocheck — Legacy seed runner for old schema, use importScenarios.ts instead
 /**
  * Scenario Seed Runner
  *

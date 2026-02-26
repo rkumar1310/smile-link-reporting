@@ -1,3 +1,4 @@
+// @ts-nocheck — Legacy parser, superseded by importScenarios.ts
 /**
  * Markdown Parser for Scenario Files
  *

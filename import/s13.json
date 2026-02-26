@@ -1,0 +1,108 @@
+{
+  "scenario_id": "S__13",
+  "name": { "en": "Subtle discoloration with interest in whitening vs veneers", "nl": "Lichte verkleuring met interesse in bleken versus facings" },
+  "block_0_personal_summary": {
+    "CONTEXT_DESCRIPTION": {
+      "en": "a young profile with all teeth present and no functional complaints, alongside mild discoloration that can stand out in photos or bright light",
+      "nl": "een jong profiel met alle tanden aanwezig en zonder functionele klachten, met lichte verkleuring die vooral kan opvallen op foto’s of bij fel licht"
+    },
+    "PRIMARY_GOAL": {
+      "en": "a fresher, brighter-looking smile that still appears natural",
+      "nl": "een frissere, helderdere uitstraling met behoud van een natuurlijke glimlach"
+    },
+    "MAIN_CONSTRAINT": {
+      "en": "the desire for reversibility, comfort with a more definitive aesthetic change, and how long the effect is expected to last",
+      "nl": "de wens tot omkeerbaarheid, de vraag hoe lang het effect zichtbaar blijft en het comfort bij een meer definitieve esthetische correctie"
+    }
+  },
+  "block_1_situation": {
+    "CORE_SITUATION_DESCRIPTION": {
+      "en": "healthy-feeling teeth with subtle shade differences rather than pronounced defects, with discoloration mainly noticed in certain lighting or social/photo contexts",
+      "nl": "gezond aanvoelende tanden met subtiele kleurverschillen, waarbij de verkleuring vooral in specifieke omstandigheden (licht/foto’s) meer opvalt dan gewenst"
+    },
+    "NUANCE_FACTOR": {
+      "en": "a preference for minimal intervention on otherwise healthy teeth",
+      "nl": "een voorkeur voor een minimale ingreep bij verder gezonde tanden"
+    },
+    "SECONDARY_FACTOR": {
+      "en": "confidence and how your smile is perceived in photos or social moments",
+      "nl": "zelfvertrouwen en hoe uw glimlach overkomt in sociale situaties of op foto’s"
+    }
+  },
+  "block_2_treatment_directions": {
+    "DIRECTION_1_CORE": {
+      "en": "refreshing natural tooth shade conservatively without changing tooth structure",
+      "nl": "de natuurlijke tandkleur conservatief opfrissen zonder structurele wijziging van de tanden"
+    },
+    "DIRECTION_2_CORE": {
+      "en": "a longer-lasting aesthetic correction with more controlled shade outcomes, potentially involving restorations",
+      "nl": "een meer langdurige esthetische correctie met meer controle over kleur en uitstraling, eventueel via restauraties"
+    },
+    "DIRECTION_3_CORE": {
+      "en": "using a planning or try-out trajectory first to clarify goals and likely bleaching response before a more definitive step",
+      "nl": "eerst een planning- of testtraject gebruiken om doelen en vermoedelijke bleekrespons te verduidelijken vóór een definitievere stap"
+    }
+  },
+  "block_3_options": [
+    {
+      "OPTION_TITLE": { "en": "Professional tooth whitening (controlled bleaching)", "nl": "Professioneel tandenbleken (gecontroleerde bleekbehandeling)" },
+      "OPTION_DESCRIPTION": {
+        "en": "a professionally supervised bleaching protocol to lighten natural tooth color, typically delivered in one to two sessions and/or with a short home-use phase",
+        "nl": "een professioneel begeleid bleekprotocol om de natuurlijke tandkleur lichter te maken, meestal in één tot twee sessies en/of met een korte thuisfase"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "a suitability check, shade assessment, one or more whitening appointments, and guidance on comfort and maintenance",
+        "nl": "een geschiktheidscheck, kleurmeting, één of meerdere bleekafspraken, en advies rond comfort en onderhoud"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "temporary sensitivity, gradual fading over time, and variable response depending on discoloration type or existing restorations",
+        "nl": "tijdelijke gevoeligheid, het geleidelijk verminderen van het effect in de tijd, en wisselende respons afhankelijk van type verkleuring of bestaande restauraties"
+      },
+      "PROFILE_MATCH": {
+        "en": "want a simple, reversible first step to refresh appearance while keeping healthy tooth structure unchanged",
+        "nl": "een eenvoudige, omkeerbare eerste stap wensen met minimale ingreep aan gezonde tanden"
+      },
+      "pricing": { "min": 250, "max": 450, "currency": "EUR" },
+      "duration": { "min_months": 0, "max_months": 1 },
+      "recovery_days": 2
+    },
+    {
+      "OPTION_TITLE": { "en": "Veneers for higher aesthetic expectations (composite or porcelain)", "nl": "Facings bij hogere esthetische verwachtingen (composiet of porselein)" },
+      "OPTION_DESCRIPTION": {
+        "en": "placing thin shells on the front surfaces to correct shade and overall appearance, planned over several weeks and priced per tooth",
+        "nl": "het plaatsen van dunne schildjes op de voorzijde om kleur en uitstraling te corrigeren, gepland over enkele weken en doorgaans per tand geprijsd"
+      },
+      "PROCESS_OVERVIEW": {
+        "en": "goal setting for color and proportions, possible mock-up planning, preparation depending on design, placement, and bite/comfort checks",
+        "nl": "doelen bepalen voor kleur en verhoudingen, eventueel plannen met mock-up, voorbereiding afhankelijk van ontwerp, plaatsing en controle van beet en comfort"
+      },
+      "OPTION_LIMITATIONS": {
+        "en": "the more definitive nature of the change, possible alteration of healthy tooth surfaces, long-term maintenance, and higher costs per tooth",
+        "nl": "het meer definitieve karakter, mogelijke aanpassing van gezonde tandoppervlakken, onderhoud op langere termijn en hogere kosten per tand"
+      },
+      "PROFILE_MATCH": {
+        "en": "expect whitening to be insufficient or intentionally want a more stable, controlled, longer-term aesthetic outcome",
+        "nl": "verwachten dat bleken onvoldoende effect geeft of bewust kiezen voor een stabielere, langdurigere esthetische correctie met gecontroleerde kleurafstemming"
+      },
+      "pricing": { "min": 200, "max": 1300, "currency": "EUR" },
+      "duration": { "min_months": 1, "max_months": 2 },
+      "recovery_days": 2
+    }
+  ],
+  "block_4_expected_results": {
+    "en": "In this scenario, the goal is typically a natural-looking, subtle improvement rather than an extremely white result. Whitening may provide a visible refresh while keeping your natural teeth unchanged, although the degree of change can vary from person to person. Veneers may support a more pronounced and often more stable aesthetic result, with greater control over shade and overall harmony. Comfort is often reported as good, though temporary sensitivity can occur. Final outcomes commonly depend on discoloration type and depth, enamel condition, existing restorations, bite forces, and maintenance habits.",
+    "nl": "In dit scenario ligt de nadruk meestal op een natuurlijke, subtiele verbetering en niet op een extreem witte uitstraling. Bleken kan een zichtbare opfrissing geven met behoud van de eigen tanden, al kan de mate van verandering per persoon verschillen. Facings kunnen een meer uitgesproken en vaak stabieler esthetisch resultaat ondersteunen, met meer controle over kleur en harmonie. Comfort wordt vaak als goed ervaren, maar tijdelijke gevoeligheid kan voorkomen. Het eindresultaat hangt vaak samen met type en diepte van verkleuring, glazuurconditie, bestaande restauraties, beetkrachten en onderhoud."
+  },
+  "block_5_duration": {
+    "en": "Professional whitening is often completed in one to two sessions, sometimes combined with a brief home phase depending on the protocol. Veneers typically take several weeks from planning to placement, influenced by the number of teeth involved, material choice, lab steps, appointment scheduling, and whether refinements are needed after seeing an initial result. Timelines can vary substantially based on clinical findings and personal aesthetic goals.",
+    "nl": "Professioneel bleken gebeurt vaak in één tot twee sessies, soms aangevuld met een korte thuisfase afhankelijk van het protocol. Facings nemen doorgaans enkele weken in beslag, beïnvloed door het aantal betrokken tanden, materiaalkeuze, laboratoriumstappen, agenda/afspraken en eventuele verfijningen na een eerste resultaat. De totale duur kan dus variëren op basis van klinische bevindingen en esthetische doelstellingen."
+  },
+  "block_6_recovery": {
+    "en": "Whitening usually has little to no true recovery time, though mild sensitivity can occur for 24–48 hours and may temporarily affect comfort with cold foods or drinks. Veneers may involve a short adaptation period—often one to two days—where minor sensitivity or “getting used to” the new surfaces can occur. If sensitivity persists, pain increases, or the bite feels clearly off after aesthetic steps, follow-up is commonly considered because individual adaptation and bite dynamics can vary.",
+    "nl": "Bij bleken is meestal geen echte hersteltijd nodig, maar lichte gevoeligheid kan 24–48 uur aanwezig zijn en tijdelijk invloed hebben op comfort bij koude prikkels. Bij facings kan een korte aanpassingsperiode voorkomen—vaak één tot twee dagen—met eventuele lichte gevoeligheid of gewenning aan nieuwe oppervlakken. Bij aanhoudende gevoeligheid, toenemende pijn of duidelijke bijthinder wordt opvolging vaak overwogen, omdat gewenning en beetdynamiek per persoon kunnen verschillen."
+  },
+  "block_7_cost": {
+    "en": "Costs may vary based on the number of treated teeth, the chosen protocol or material, planning steps (such as mock-ups), and lab involvement. In this scenario, indicative ranges are approximately €250–€450 for professional whitening and about €200–€1,300 per tooth for veneers, depending on whether composite or porcelain is used. Additional costs can sometimes arise from future maintenance, repairs, replacement, or combining phases (for example, whitening first and then selective aesthetic refinements).",
+    "nl": "De kosten kunnen variëren door het aantal behandelde tanden, het gekozen protocol of materiaal, planningsstappen (zoals een mock-up) en eventuele labo-inbreng. In dit scenario worden richtwaarden genoemd van ongeveer €250–€450 voor professioneel bleken en ongeveer €200–€1.300 per tand voor facings, afhankelijk van composiet of porselein. Soms komen er bijkomende kosten bij door onderhoud op langere termijn, herstellingen/vervangingen, of door het combineren van fases (bijvoorbeeld eerst bleken en daarna gerichte esthetische verfijning)."
+  }
+}
