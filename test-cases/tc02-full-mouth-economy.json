@@ -1,0 +1,45 @@
+{
+  "description": "TEST CASE 2: Full mouth + economy budget",
+  "intake": {
+    "session_id": "tc-02-full-mouth-economy",
+    "timestamp": "2026-02-28T10:00:00.000Z",
+    "language": "en",
+    "answers": [
+      { "question_id": "Q1", "answer": "functional_issues" },
+      { "question_id": "Q2", "answer": "5" },
+      { "question_id": "Q3", "answer": ["missing_damaged"] },
+      { "question_id": "Q4", "answer": ["no_never"] },
+      { "question_id": "Q5", "answer": "no_aesthetic_only" },
+      { "question_id": "Q6a", "answer": "most_poor_unsaveable" },
+      { "question_id": "Q6b", "answer": "both" },
+      { "question_id": "Q6c", "answer": "heavily_restored" },
+      { "question_id": "Q6d", "answer": ["large_fillings_old_restorations"] },
+      { "question_id": "Q7", "answer": "functional_durable" },
+      { "question_id": "Q8", "answer": "best_price_quality_flexible" },
+      { "question_id": "Q9", "answer": "45_60" },
+      { "question_id": "Q10", "answer": "affordable_durable" },
+      { "question_id": "Q11", "answer": "maybe_need_info" },
+      { "question_id": "Q12", "answer": "1_year" },
+      { "question_id": "Q13", "answer": "no" },
+      { "question_id": "Q14", "answer": "no" },
+      { "question_id": "Q15", "answer": "basic" },
+      { "question_id": "Q16a", "answer": "no_complete" },
+      { "question_id": "Q17", "answer": "no" },
+      { "question_id": "Q18", "answer": "no" }
+    ]
+  },
+  "expected_tags": [
+    "status_full_mouth_compromised",
+    "budget_conscious"
+  ],
+  "expected_drivers": {
+    "budget_complexity_tension": "high",
+    "information_depth": "detailed",
+    "autonomy_level": "collaborative"
+  },
+  "expected_interaction_rules": [
+    "P3.8: high budget-complexity → info=detailed",
+    "P3.9: high budget-complexity → autonomy=collaborative",
+    "P3.10: high budget-complexity → expectation_risk>=moderate"
+  ]
+}

@@ -38,7 +38,7 @@ const BANNER_TM_TOPICS = [
     topic: "diabetes",
     bannerId: "FB_BANNER_MEDICAL_DIABETES",
     moduleId: "TM_02_MEDICAL_DIABETES",
-    trigger: { type: "tag" as const, values: ["medical_conditions_yes"] },
+    trigger: { type: "tag" as const, values: ["medical_contraindication"] },
   },
   {
     topic: "smoking",
@@ -87,6 +87,12 @@ const BANNER_TM_TOPICS = [
     bannerId: "FB_BANNER_BUDGET",
     moduleId: "TM_14_BUDGET_LOW",
     trigger: { type: "driver" as const, driver: "budget_type", values: ["economy"] },
+  },
+  {
+    topic: "budget_complexity",
+    bannerId: "FB_BANNER_BUDGET_COMPLEXITY",
+    moduleId: "TM_20_BUDGET_COMPLEXITY",
+    trigger: { type: "driver" as const, driver: "budget_complexity_tension", values: ["high"] },
   },
 ] as const;
 
@@ -163,7 +169,7 @@ export class TextModuleResolver {
   private shouldUseDetailedModules(driverState: DriverState): boolean {
     const anxietyLevel = driverState.drivers.anxiety_level?.value;
     const infoDepth = driverState.drivers.information_depth?.value;
-    return anxietyLevel === "severe" || infoDepth === "deep";
+    return anxietyLevel === "severe" || infoDepth === "detailed";
   }
 
   /**
@@ -187,7 +193,7 @@ export class TextModuleResolver {
    */
   private hasHighExpectationRisk(driverState: DriverState): boolean {
     const expectationRisk = driverState.drivers.expectation_risk?.value;
-    return expectationRisk === "elevated" || expectationRisk === "high";
+    return expectationRisk === "moderate" || expectationRisk === "high";
   }
 
   /**

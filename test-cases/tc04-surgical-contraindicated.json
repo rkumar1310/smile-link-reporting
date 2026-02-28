@@ -1,0 +1,47 @@
+{
+  "description": "TEST CASE 4: Surgical contraindicated",
+  "intake": {
+    "session_id": "tc-04-surgical-contraindicated",
+    "timestamp": "2026-02-28T10:00:00.000Z",
+    "language": "en",
+    "answers": [
+      { "question_id": "Q1", "answer": "functional_issues" },
+      { "question_id": "Q2", "answer": "5" },
+      { "question_id": "Q3", "answer": ["missing_damaged"] },
+      { "question_id": "Q4", "answer": ["yes_implants"] },
+      { "question_id": "Q5", "answer": "no_aesthetic_only" },
+      { "question_id": "Q6a", "answer": "one_missing" },
+      { "question_id": "Q6b", "answer": "side_chewing" },
+      { "question_id": "Q6c", "answer": "partially_restored" },
+      { "question_id": "Q6d", "answer": ["large_fillings_old_restorations"] },
+      { "question_id": "Q7", "answer": "functional_durable" },
+      { "question_id": "Q8", "answer": "best_price_quality_flexible" },
+      { "question_id": "Q9", "answer": "45_60" },
+      { "question_id": "Q10", "answer": "price_quality_flexible" },
+      { "question_id": "Q11", "answer": "maybe_need_info" },
+      { "question_id": "Q12", "answer": "1_year" },
+      { "question_id": "Q13", "answer": "no" },
+      { "question_id": "Q14", "answer": "no" },
+      { "question_id": "Q15", "answer": "good" },
+      { "question_id": "Q16a", "answer": "no_complete" },
+      { "question_id": "Q17", "answer": "yes" },
+      { "question_id": "Q18", "answer": "no" }
+    ]
+  },
+  "expected_tags": [
+    "medical_contraindication"
+  ],
+  "expected_drivers": {
+    "medical_constraints": "surgical_contraindicated",
+    "information_depth": "detailed",
+    "autonomy_level": "collaborative"
+  },
+  "expected_flags": {
+    "urgency_language_suppressed": true
+  },
+  "expected_interaction_rules": [
+    "P4.1a: surgical_contraindicated → info=detailed",
+    "P4.1b: surgical_contraindicated → autonomy=collaborative",
+    "P4.4: medical_constraints!=none → urgency_language_suppressed"
+  ]
+}

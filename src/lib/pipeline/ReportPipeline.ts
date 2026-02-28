@@ -20,6 +20,7 @@ import { DEFAULT_LANGUAGE } from "./types";
 import { intakeValidator } from "./validation/IntakeValidator";
 import { tagExtractor } from "./engines/TagExtractor";
 import { driverDeriver } from "./engines/DriverDeriver";
+import { driverInteractionEngine } from "./engines/DriverInteractionEngine";
 import { scenarioScorer } from "./engines/ScenarioScorer";
 import { generateNLGReport } from "./nlg";
 
@@ -151,6 +152,34 @@ export class ReportPipeline {
         duration_ms: Date.now() - driverStart
       });
 
+      // Build tag set (used by interaction engine and scenario scorer)
+      const tagSet = new Set(tagResult.tags.map(t => t.tag));
+
+      // Phase 2.5: Driver Interaction Engine
+      await this.emitProgress({
+        phase: 2.5,
+        phaseName: "driver_interactions",
+        status: "started",
+        message: "Applying driver interaction rules...",
+        timestamp: new Date().toISOString()
+      });
+
+      const interactionStart = Date.now();
+      const enrichedDriverState = driverInteractionEngine.apply(driverState, tagSet);
+
+      await this.emitProgress({
+        phase: 2.5,
+        phaseName: "driver_interactions",
+        status: "completed",
+        message: `Applied ${enrichedDriverState.interaction_audit?.length ?? 0} interaction overrides`,
+        timestamp: new Date().toISOString(),
+        metrics: {
+          overrides: enrichedDriverState.interaction_audit?.length ?? 0,
+          flags: Object.keys(enrichedDriverState.flags ?? {}).length,
+        },
+        duration_ms: Date.now() - interactionStart
+      });
+
       // Phase 3: Scenario Scoring
       await this.emitProgress({
         phase: 3,
@@ -161,9 +190,7 @@ export class ReportPipeline {
       });
 
       const scenarioStart = Date.now();
-      // Pass extracted tags to scorer for preferred_tags matching
-      const tagSet = new Set(tagResult.tags.map(t => t.tag));
-      const scenarioMatch = scenarioScorer.score(driverState, tagSet);
+      const scenarioMatch = scenarioScorer.score(enrichedDriverState, tagSet);
 
       await this.emitProgress({
         phase: 3,
@@ -196,7 +223,7 @@ export class ReportPipeline {
       const nlgStart = Date.now();
       const nlgOutput = await generateNLGReport({
         sessionId: intake.session_id,
-        driverState,
+        driverState: enrichedDriverState,
         tags: tagSet,
         language,
         tone: "TP-01",
@@ -261,7 +288,7 @@ export class ReportPipeline {
         session_id: intake.session_id,
         created_at: new Date().toISOString(),
         intake,
-        driver_state: driverState,
+        driver_state: enrichedDriverState,
         scenario_match: scenarioMatch,
         content_selections: [],
         tone_selection: {

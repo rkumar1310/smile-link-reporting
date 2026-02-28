@@ -69,7 +69,10 @@ export const L2DriverIds = [
   "expectation_risk",
   "experience_history",
   "decision_stage",
-  "autonomy_level"
+  "autonomy_level",
+  "periodontal_esthetic_tension",
+  "budget_complexity_tension",
+  "zone_priority"
 ] as const;
 export type L2DriverId = typeof L2DriverIds[number];
 
@@ -147,11 +150,24 @@ export interface DriverConflict {
   resolution_reason: string;
 }
 
+export type InteractionPriority = "P1_SAFETY" | "P2_CLINICAL" | "P3_TENSION" | "P4_COMMUNICATION";
+
+export interface InteractionAuditEntry {
+  rule_id: string;
+  priority: InteractionPriority;
+  driver_id: string;
+  previous_value: string;
+  new_value: string;
+  reason: string;
+}
+
 export interface DriverState {
   session_id: string;
   drivers: Record<DriverId, DriverValue>;
   conflicts: DriverConflict[];
   fallbacks_applied: DriverId[];
+  flags?: Record<string, boolean>;
+  interaction_audit?: InteractionAuditEntry[];
 }
 
 // =============================================================================

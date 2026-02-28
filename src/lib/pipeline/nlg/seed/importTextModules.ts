@@ -32,7 +32,7 @@ interface TextModuleInput {
 }
 
 /**
- * Text module definitions — sourced from Text Modules.docx (SL_DYNAMIC_LIBRARY_DEDUP_v1.1)
+ * Text module definitions — sourced from "New adapted text blocks.docx"
  */
 const TEXT_MODULES: TextModuleInput[] = [
   // ═══════════════════════════════════════════════════════════════════════════
@@ -43,8 +43,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "banner",
     topic: "pregnancy",
     content: {
-      en: "Pregnancy may influence timing and overall treatment burden, so non-urgent steps may be adapted or postponed. It can be helpful to discuss this explicitly with the dentist so planning fits the personal situation.",
-      nl: "Zwangerschap kan meewegen in timing en belasting, waardoor niet-dringende stappen soms worden aangepast of uitgesteld. Het kan helpend zijn dit expliciet met uw tandarts te bespreken.",
+      en: "During pregnancy, non-urgent procedures are generally approached with greater caution, especially when medication, anesthesia, or X-rays are involved. It is often assessed which steps can be postponed and which may be appropriate at that time. This can influence the sequence or timing of the treatment pathway.",
+      nl: "Tijdens een zwangerschap wordt meestal terughoudender omgegaan met niet-dringende ingrepen, vooral wanneer medicatie, verdoving of röntgenopnames betrokken zijn. Vaak wordt gekeken welke stappen kunnen wachten en welke op dat moment aangewezen lijken. Dit kan de volgorde of timing van het traject beïnvloeden.",
     },
   },
   {
@@ -52,8 +52,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "banner",
     topic: "diabetes",
     content: {
-      en: "A medical condition such as diabetes may influence healing and planning. The dentist can take general health and medication context into account when evaluating options.",
-      nl: "Een medische aandoening, zoals diabetes, kan invloed hebben op herstel en planning. Uw tandarts kan uw algemene gezondheid en medicatiecontext meenemen in de beoordeling.",
+      en: "In conditions such as diabetes, wound healing plays an important role, particularly in surgical or extensive treatments. When blood glucose levels are less stable, recovery may be slower. This is generally taken into account when assessing planning, with attention to overall health and medication.",
+      nl: "Bij aandoeningen zoals diabetes speelt wondgenezing een belangrijke rol, vooral bij chirurgische of uitgebreide behandelingen. Wanneer bloedsuikerwaarden minder stabiel zijn, kan herstel trager verlopen. Dit wordt doorgaans meegewogen in de inschatting van planning met aandacht voor de algemene gezondheid en medicatie.",
     },
   },
   {
@@ -61,8 +61,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "banner",
     topic: "smoking",
     content: {
-      en: "Smoking or vaping may affect healing and may increase complication risk, especially when tissue recovery matters. Sharing this openly can support realistic planning and expectations.",
-      nl: "Roken of vapen kan genezing beïnvloeden en het risico op complicaties verhogen, vooral wanneer weefselherstel belangrijk is. Dit open bespreken kan helpen om verwachtingen realistischer af te stemmen.",
+      en: "Smoking reduces blood flow to the gums and may delay healing after procedures. This is especially relevant for implants or when gum healing is important. It is generally considered when assessing healing time and follow-up.",
+      nl: "Roken vermindert de doorbloeding van het tandvlees en kan het herstel na ingrepen vertragen. Dit is vooral relevant bij implantaten of wanneer tandvleesherstel belangrijk is. Dit wordt doorgaans meegewogen in de inschatting van genezingsduur en opvolging.",
     },
   },
   {
@@ -70,8 +70,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "banner",
     topic: "periodontitis",
     content: {
-      en: "When periodontal concerns are present, gum stability may influence predictability. In many cases, stabilisation may be considered before other steps are evaluated.",
-      nl: "Bij parodontale problemen kan tandvleesstabiliteit de voorspelbaarheid beïnvloeden. In veel situaties wordt stabilisatie eerst mee bekeken vóór andere stappen worden overwogen.",
+      en: "In periodontal conditions, the stability of the gums and jawbone determines predictability. Active inflammation or progressive bone loss may make the placement of definitive restorations less predictable.",
+      nl: "Bij parodontale problemen is de stabiliteit van tandvlees en kaakbot bepalend voor voorspelbaarheid. Actieve ontsteking of voortschrijdend botverlies kan de plaatsing van definitieve restauraties minder voorspelbaar maken.",
     },
   },
   {
@@ -79,8 +79,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "banner",
     topic: "chronic_inflammation",
     content: {
-      en: "If chronic inflammation is present, timing and treatment order may be adjusted to support comfort and predictability. This can be discussed during the clinical assessment.",
-      nl: "Bij chronische ontsteking kan timing en volgorde van behandelingen worden aangepast om comfort en voorspelbaarheid te ondersteunen. Dit kan in het consult worden besproken.",
+      en: "In cases of chronic inflammation, gum stability generally plays a role in evaluating further steps. A biologically unstable foundation may reduce the predictability of restorations.",
+      nl: "Bij chronische ontsteking speelt de stabiliteit van het tandvlees doorgaans een rol in de beoordeling van verdere stappen. Een biologisch instabiele basis kan de voorspelbaarheid van restauraties verminderen.",
     },
   },
   {
@@ -88,8 +88,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "banner",
     topic: "poor_hygiene",
     content: {
-      en: "When oral hygiene needs attention, treatment durability may be affected. Improving daily care first can support more predictable outcomes.",
-      nl: "Wanneer mondhygiëne aandacht vraagt, kan dit de duurzaamheid van behandelingen beïnvloeden. Eerst basiszorg versterken kan meer voorspelbare resultaten ondersteunen.",
+      en: "Insufficient oral hygiene increases the risk of inflammation around restorations or implants. Improvement of daily care is taken into account when assessing long-term durability.",
+      nl: "Onvoldoende mondhygiëne verhoogt het risico op ontsteking rond restauraties of implantaten. Verbetering van dagelijkse verzorging speelt mee in de beoordeling van duurzaamheid.",
     },
   },
   {
@@ -97,8 +97,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "banner",
     topic: "bruxism",
     content: {
-      en: "Clenching or grinding may increase load on teeth and restorations. Material choice and protection may be planned more cautiously.",
-      nl: "Klemmen of knarsen kan extra belasting geven op tanden en restauraties. Materiaalkeuze en bescherming kunnen daardoor voorzichtiger worden gepland.",
+      en: "Grinding or clenching creates prolonged horizontal forces on teeth and restorations. This may lead to accelerated wear or loosening of dental work. It is generally considered when evaluating material strength and possible protective measures.",
+      nl: "Bij knarsen of klemmen ontstaan langdurige horizontale krachten op tanden en restauraties. Dit kan leiden tot versnelde slijtage of loskomen van werkstukken. Dit speelt doorgaans mee in de afweging rond materiaalsterkte en eventuele bescherming.",
     },
   },
   {
@@ -106,8 +106,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "banner",
     topic: "bone_loss",
     content: {
-      en: "Bone loss may influence feasibility, complexity, and timing of certain treatments. A clinical evaluation can clarify realistic options.",
-      nl: "Botverlies kan invloed hebben op haalbaarheid, complexiteit en timing van bepaalde behandelingen. Een klinische beoordeling kan realistische opties verduidelijken.",
+      en: "In cases of bone loss, the available height or width of the jawbone may be limited. This influences the position or length of implants and may require additional preparatory steps. The technical structure of the treatment pathway may be adjusted accordingly.",
+      nl: "Bij botverlies kan de beschikbare hoogte of breedte van het kaakbot beperkt zijn. Dit beïnvloedt de positie of lengte van implantaten en kan extra voorbereidende stappen vereisen. De technische opbouw van het traject kan hierop worden afgestemd.",
     },
   },
   {
@@ -115,8 +115,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "banner",
     topic: "anxiety",
     content: {
-      en: "Dental anxiety may influence pacing and comfort planning. Sharing this can help the dentist adapt communication and tempo.",
-      nl: "Tandheelkundige angst kan invloed hebben op tempo en comfortplanning. Dit delen kan helpen om communicatie en aanpak af te stemmen.",
+      en: "In cases of dental anxiety, smaller and clearly structured steps, along with thorough explanations in advance, may help. This can influence the pace of the treatment pathway but generally increases comfort and sense of control.",
+      nl: "Bij tandheelkundige angst kunnen kleinere, overzichtelijke stappen en duidelijke uitleg vooraf helpen. Dit kan het tempo van het traject beïnvloeden, maar verhoogt meestal het comfort en de controle.",
     },
   },
   {
@@ -124,8 +124,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "banner",
     topic: "growth_incomplete",
     content: {
-      en: "If jaw/facial growth is not completed, definitive solutions may be timed more cautiously to account for future changes.",
-      nl: "Wanneer groei nog niet voltooid is, wordt vaak voorzichtiger omgegaan met definitieve oplossingen om latere veranderingen beter op te vangen.",
+      en: "When jaw growth is not yet fully completed, definitive solutions may shift later due to further development. In younger patients, the timing of permanent procedures is considered more carefully.",
+      nl: "Wanneer de kaakgroei nog niet volledig is afgerond, kunnen definitieve oplossingen later verschuiven door verdere ontwikkeling. Bij jonge patiënten wordt de timing van permanente ingrepen zorgvuldiger afgewogen.",
     },
   },
 
@@ -137,8 +137,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "module",
     topic: "pregnancy",
     content: {
-      en: "Because pregnancy has been indicated, it may play a role in how treatments are considered and scheduled. Many people wonder what is appropriate at which moment, even without acute complaints. Decisions are often weighed more deliberately, so planning can be aligned with personal circumstances and expectations.",
-      nl: "Omdat u heeft aangegeven dat u zwanger bent, kan dit meewegen in hoe behandelingen worden gepland. Ook zonder acute klachten wordt timing en belasting vaak bewuster afgewogen, zodat de aanpak kan aansluiten bij uw situatie en verwachtingen.",
+      en: "During pregnancy, procedures involving medication, anesthesia, or X-rays are approached more cautiously. Non-urgent steps are often postponed until after delivery.\nThis may alter the sequence of the treatment pathway and extend the overall duration, without automatically affecting the final outcome.",
+      nl: "Tijdens een zwangerschap wordt terughoudender omgegaan met ingrepen waarbij medicatie, verdoving of röntgenopnames betrokken zijn. Niet-dringende stappen worden vaak verschoven tot na de bevalling.\nDit kan de volgorde van het traject veranderen en de totale doorlooptijd verlengen, zonder dat dit automatisch invloed heeft op het uiteindelijke resultaat.",
     },
   },
   {
@@ -146,8 +146,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "module",
     topic: "diabetes",
     content: {
-      en: "Because a medical condition such as diabetes has been indicated, this may influence how treatments are approached. Questions about healing and tolerance are common, which can affect preparation, timing, and follow-up. This does not automatically exclude treatment, but careful alignment can be more important.",
-      nl: "Omdat u een medische aandoening heeft aangegeven, zoals diabetes, kan dit invloed hebben op hoe behandelingen worden benaderd. Vragen over herstel en belastbaarheid kunnen mee bepalen hoe voorbereiding, timing en opvolging worden gepland.",
+      en: "In diabetes, wound healing plays a central role, particularly in surgical or extensive restorative procedures. Less stable blood glucose levels may slow recovery and increase the risk of complications.\nOverall health and medical stability are generally considered when assessing planning and recovery.",
+      nl: "Bij diabetes speelt wondgenezing een centrale rol, vooral bij chirurgische of uitgebreide restauratieve ingrepen. Minder stabiele bloedsuikerwaarden kunnen herstel vertragen en het risico op complicaties verhogen.\nAlgemene gezondheid en medische stabiliteit worden doorgaans meegewogen in de inschatting van planning en herstel.",
     },
   },
   {
@@ -155,8 +155,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "module",
     topic: "smoking",
     content: {
-      en: "Because smoking or vaping has been indicated, healing and comfort estimates may change. Aftercare, recovery expectations, and follow-up may be planned more conservatively. Open discussion can help keep expectations realistic.",
-      nl: "Omdat u heeft aangegeven dat u rookt of vapet, kan dit genezing en comfort mee beïnvloeden. Nazorg en opvolging worden vaak voorzichtiger gepland. Open bespreking helpt om verwachtingen realistisch te houden.",
+      en: "Smoking reduces blood flow to the gums and affects bone metabolism. This is particularly relevant for implants and procedures where tissue healing is essential.\nAs a result, the healing phase may take longer, and follow-up may play a more important role.",
+      nl: "Roken vermindert de doorbloeding van het tandvlees en beïnvloedt het botmetabolisme. Dit is vooral relevant bij implantaten en bij ingrepen waarbij weefselherstel essentieel is.\nHierdoor kan de genezingsfase langer duren en kan opvolging een belangrijkere rol spelen.",
     },
   },
   {
@@ -164,8 +164,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "module",
     topic: "bruxism",
     content: {
-      en: "Because clenching or grinding has been indicated, load management may be relevant. This can influence material choices, protective measures, and long-term durability, so the plan can match functional loading.",
-      nl: "Omdat u knarst of klemt, kan belasting een relevante factor zijn. Dit kan invloed hebben op materiaalkeuze, bescherming en duurzaamheid, zodat het plan beter aansluit bij uw kauwbelasting.",
+      en: "Grinding or clenching creates prolonged horizontal forces on teeth and restorations. This increases the likelihood of wear, cracks, or loosening of dental work.\nIt is generally considered when evaluating material strength, design, and possible protective measures to support durability.",
+      nl: "Bij knarsen of klemmen ontstaan langdurige horizontale krachten op tanden en restauraties. Dit verhoogt de kans op slijtage, barsten of loskomen van werkstukken.\nDit speelt doorgaans mee in de afweging rond materiaalsterkte, ontwerp en eventuele beschermende maatregelen om duurzaamheid te ondersteunen.",
     },
   },
   {
@@ -173,8 +173,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "module",
     topic: "periodontitis",
     content: {
-      en: "Because periodontal concerns have been indicated, stability and maintenance may become central. Sequence, predictability, and long-term upkeep may be weighed more carefully, depending on clinical findings.",
-      nl: "Omdat parodontale problemen zijn aangegeven, kan stabiliteit en onderhoud zwaarder doorwegen. Dit kan invloed hebben op volgorde, voorspelbaarheid en lange-termijnresultaten, afhankelijk van de klinische bevindingen.",
+      en: "In periodontal conditions, gum stability and bone level determine predictability. Active inflammation or progressive bone loss may negatively affect the lifespan of restorations.\nClinical gum stability is generally considered when evaluating further steps.",
+      nl: "Bij parodontale problematiek zijn tandvleesstabiliteit en botniveau bepalend voor voorspelbaarheid. Actieve ontsteking of voortschrijdend botverlies kan de levensduur van restauraties negatief beïnvloeden.\nDe klinische stabiliteit van het tandvlees speelt doorgaans mee in de beoordeling van verdere stappen.",
     },
   },
   {
@@ -182,8 +182,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "module",
     topic: "chronic_inflammation",
     content: {
-      en: "Because chronic inflammation has been indicated, timing and sequencing may be approached with extra care. Control and stabilisation may be prioritised to support predictability.",
-      nl: "Omdat er signalen van chronische ontsteking zijn, kan timing en volgorde voorzichtiger worden gepland. Controle en stabilisatie kunnen meer nadruk krijgen om voorspelbaarheid te ondersteunen.",
+      en: "Chronic inflammation is often associated with reduced biological stability. An active inflammatory condition may reduce the predictability of restorations.\nIn such situations, stability is generally taken into consideration during further planning.",
+      nl: "Chronische ontsteking gaat vaak samen met een verminderde biologische stabiliteit. Een actieve ontstekingsbasis kan de voorspelbaarheid van restauraties verminderen.\nStabiliteit kan in dergelijke situaties doorgaans mee in overweging genomen worden bij verdere planning.",
     },
   },
   {
@@ -191,8 +191,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "module",
     topic: "poor_hygiene",
     content: {
-      en: "Because oral hygiene needs attention, durability and maintenance may be affected. Staging and reinforcing basic routines first may support more predictable outcomes.",
-      nl: "Omdat mondhygiëne aandacht vraagt, kan behoud van resultaten moeilijker zijn. Fasering en eerst basiszorg versterken kan helpen om meer voorspelbare resultaten te ondersteunen.",
+      en: "Insufficient oral hygiene increases the risk of inflammation around crowns, bridges, or implants. This primarily affects long-term durability.\nImprovement of daily care is often considered when assessing long-term stability.",
+      nl: "Onvoldoende mondhygiëne verhoogt het risico op ontsteking rond kronen, bruggen of implantaten. Dat beïnvloedt vooral de duurzaamheid op lange termijn.\nVerbetering van dagelijkse verzorging speelt vaak mee in de inschatting van langetermijnstabiliteit.",
     },
   },
   {
@@ -200,8 +200,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "module",
     topic: "bone_loss",
     content: {
-      en: "Because bone loss has been indicated, stability and feasibility may vary by technique. Additional planning may be needed to keep options and expectations realistic.",
-      nl: "Omdat er aanwijzingen zijn van botverlies, kan stabiliteit en haalbaarheid per techniek verschillen. Extra planning kan nodig zijn om realistische opties te bepalen.",
+      en: "In cases of bone loss, the available height or width of the jawbone may be limited. This affects implant positioning and stability and may require additional preparatory steps.\nThe technical complexity of the treatment pathway increases as a result, which may influence planning and the number of appointments.",
+      nl: "Bij botverlies kan de beschikbare hoogte of breedte van het kaakbot beperkt zijn. Dit beïnvloedt de positionering en stabiliteit van implantaten en kan extra voorbereidende stappen vereisen.\nDe technische complexiteit van het traject neemt hierdoor toe, wat invloed kan hebben op planning en aantal afspraken.",
     },
   },
   {
@@ -209,8 +209,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "module",
     topic: "anxiety",
     content: {
-      en: "Because dental anxiety has been indicated, pacing, explanation, and comfort may be prioritised. This can help make the pathway feel manageable.",
-      nl: "Omdat angst of spanning is aangegeven, kunnen tempo, uitleg en comfort centraal staan. Dit kan helpen om het traject beter hanteerbaar te maken.",
+      en: "In cases of pronounced dental anxiety, smaller, clearly structured steps may contribute to a greater sense of control. This may slow the pace of the treatment pathway but usually increases perceived control.\nThe technical approach does not necessarily change, but the progression may.",
+      nl: "Bij uitgesproken tandheelkundige angst kunnen kleinere, overzichtelijke stappen bijdragen aan meer controle. Dit kan het tempo van het traject vertragen, maar verhoogt meestal het gevoel van controle.\nDe technische aanpak verandert hierdoor niet noodzakelijk, het verloop wel.",
     },
   },
   {
@@ -218,8 +218,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "module",
     topic: "age_context",
     content: {
-      en: "Because age is relevant, long-term comfort, recovery, and maintenance expectations may influence choices. Age does not set strict limits, but can guide what feels realistic.",
-      nl: "Omdat leeftijd relevant is, kunnen verwachtingen rond herstel, onderhoud en comfort op lange termijn mee richting geven. Leeftijd is geen vaste beperking, maar kan wel helpen bij keuzes.",
+      en: "Age primarily influences tissue healing, degree of wear, and maintenance needs. Younger patients generally have more stable bone, while in older patients existing restorations or bone loss more often play a role.\nThis does not automatically determine the choice of treatment but does influence expectations regarding durability.",
+      nl: "Leeftijd beïnvloedt vooral weefselherstel, slijtagegraad en onderhoudsbehoefte. Jongere patiënten hebben doorgaans stabieler bot, terwijl bij oudere patiënten bestaande restauraties of botverlies vaker meespelen.\nDit bepaalt niet automatisch de keuze van behandeling, maar wel de verwachtingen rond duurzaamheid.",
     },
   },
   {
@@ -227,8 +227,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "module",
     topic: "premium_aesthetic",
     content: {
-      en: "Because premium aesthetics are prioritised, detail, harmony, and finishing may become central. Planning and material choices may be aligned to the desired level of refinement.",
-      nl: "Omdat u premium esthetiek belangrijk vindt, kunnen detail, harmonie en afwerking centraal staan. Materiaalkeuze en voorbereiding kunnen daarop worden afgestemd.",
+      en: "Premium aesthetics focus on proportion, symmetry, margin finishing, and light reflection. Minor deviations are more quickly noticed in the visible zone.\nThis generally requires precise preparation and alignment before final placement to maintain predictability and reproducibility.",
+      nl: "Premium esthetiek draait om proportie, symmetrie, randafwerking en lichtreflectie. Kleine afwijkingen worden in de zichtzone sneller opgemerkt.\nDit vraagt doorgaans nauwkeurige voorbereiding en afstemming vóór definitieve plaatsing, zodat het eindresultaat voorspelbaar en reproduceerbaar blijft.",
     },
   },
   {
@@ -236,8 +236,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "module",
     topic: "aesthetic_style",
     content: {
-      en: 'Because an aesthetic style preference is present, choices around shape, shade, translucency, and texture may need careful alignment. No single style is "better," but fit is crucial.',
-      nl: 'Omdat u een stijlvoorkeur heeft, is afstemming over vorm, kleur, transparantie en textuur belangrijk. Geen stijl is "beter," maar passendheid is cruciaal.',
+      en: "In cases of a pronounced style preference, tooth length, color intensity, shape, and translucency play a role. Very bright shades or distinctive shapes deviate more quickly from natural aging patterns.",
+      nl: "Bij een uitgesproken stijlvoorkeur spelen tandlengte, kleurintensiteit, vorm en transparantie een rol. Een zeer heldere kleur of uitgesproken vorm wijkt sneller af van natuurlijke verouderingspatronen.",
     },
   },
   {
@@ -245,8 +245,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "module",
     topic: "functional_vs_aesthetic",
     content: {
-      en: "Because functional and aesthetic elements may both be present, clarifying priorities can help structure the sequence. This supports a coherent plan rather than fragmented steps.",
-      nl: "Omdat functionele en esthetische aspecten kunnen samenkomen, kan het verduidelijken van prioriteiten helpen om de volgorde logisch te structureren.",
+      en: "When function and aesthetics intersect, it is important that bite forces and design remain balanced. An aesthetic modification may influence force distribution.\nFunctional stability generally plays a role when considering aesthetic optimization.",
+      nl: "Wanneer functie en esthetiek samenkomen, is het belangrijk dat beetkrachten en vormgeving in balans blijven. Een esthetische wijziging kan de krachtsverdeling beïnvloeden.\nFunctionele stabiliteit speelt doorgaans een rol in de afweging bij esthetische optimalisatie.",
     },
   },
   {
@@ -254,8 +254,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "module",
     topic: "budget_low",
     content: {
-      en: "Because affordability is a key factor, options may be evaluated with cost-awareness. Staging and prioritisation may help keep planning realistic.",
-      nl: "Omdat betaalbaarheid belangrijk is, kunnen opties kostenbewust worden bekeken. Fasering en prioriteiten kunnen helpen om planning realistisch te houden.",
+      en: "With a limited budget, phasing often plays a role. Not all steps need to be performed simultaneously.\nThis may extend the total duration but allows priorities to be determined without neglecting the biological foundation.",
+      nl: "Bij een beperkt budget speelt fasering vaak een rol. Niet alle stappen hoeven tegelijk uitgevoerd te worden.\nDit kan de totale doorlooptijd verlengen, maar laat toe om prioriteiten te bepalen zonder de biologische basis te verwaarlozen.",
     },
   },
   {
@@ -263,8 +263,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "module",
     topic: "budget_premium",
     content: {
-      en: "Because a premium approach is preferred, quality and longevity may weigh more heavily than minimal cost. Choices can be made deliberately without needing to maximise everything.",
-      nl: "Omdat u een premium aanpak verkiest, kunnen kwaliteit en duurzaamheid zwaarder doorwegen dan minimale kost. Keuzes kunnen doordacht worden gemaakt zonder alles te maximaliseren.",
+      en: "In a premium approach, materials and finishing with higher precision and durability are generally selected. This mainly influences the level of detail and reproducibility.\nThe added value rarely lies in \"more procedures,\" but in precision and long-term stability.",
+      nl: "Bij een premium aanpak wordt doorgaans gekozen voor materialen en afwerking met hogere precisie en duurzaamheid. Dit beïnvloedt vooral detailniveau en reproduceerbaarheid.\nDe meerwaarde zit zelden in \"meer ingrepen\", maar in nauwkeurigheid en lange-termijnstabiliteit.",
     },
   },
   {
@@ -272,8 +272,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "module",
     topic: "tooth_status",
     content: {
-      en: "Tooth status (presence and condition) often shapes feasibility, complexity, and sequencing. Small differences can change what is realistic, so context matters.",
-      nl: "Uw tandstatus en conditie vormen vaak de basis voor haalbaarheid, complexiteit en volgorde. Kleine verschillen kunnen een groot effect hebben op wat realistisch is.",
+      en: "The current condition of teeth \u2014 such as large fillings, root canal treatments, or cracks \u2014 affects structural strength.\nThis partly determines whether preservation, reinforcement, or replacement is technically the most predictable option.",
+      nl: "De huidige conditie van tanden \u2014 zoals grote vullingen, wortelkanaalbehandelingen of scheuren \u2014 beïnvloedt de structurele sterkte.\nDit bepaalt mede of behoud, versterking of vervanging technisch het meest voorspelbaar is.",
     },
   },
   {
@@ -281,8 +281,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "module",
     topic: "oral_complexity",
     content: {
-      en: "When multiple factors interact, complexity may increase. Staging and coordination can support clearer expectations and a manageable plan.",
-      nl: "Wanneer meerdere factoren samenkomen, kan orale complexiteit toenemen. Fasering en afstemming kunnen helpen om verwachtingen en planning beter te organiseren.",
+      en: "When multiple issues occur simultaneously \u2014 such as tooth loss, wear, and gum problems \u2014 technical complexity increases.\nIn such cases, a phased approach may help build stability.",
+      nl: "Wanneer meerdere problemen samen voorkomen \u2014 zoals tandverlies, slijtage en tandvleesproblemen \u2014 stijgt de technische complexiteit.\nIn zulke situaties kan een gefaseerde aanpak bijdragen aan het opbouwen van stabiliteit.",
     },
   },
   {
@@ -290,8 +290,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "module",
     topic: "treatment_history",
     content: {
-      en: "Treatment history can shape expectations and trust. It does not determine outcomes, but can guide planning and communication.",
-      nl: "Uw behandelgeschiedenis kan verwachtingen en vertrouwen beïnvloeden. Dit bepaalt de toekomst niet, maar kan richting geven aan planning en communicatie.",
+      en: "Previous treatments may influence the current situation, for example due to scar tissue, altered bite, or existing restorative work.\nThis does not mean options are limited, but integration with existing work must be handled carefully.",
+      nl: "Eerdere behandelingen kunnen de huidige situatie beïnvloeden, bijvoorbeeld door littekenvorming, veranderde beet of bestaand restauratiewerk.\nDit betekent niet dat opties beperkt zijn, maar wel dat integratie met bestaand werk zorgvuldig moet gebeuren.",
     },
   },
   {
@@ -299,8 +299,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "module",
     topic: "general_health",
     content: {
-      en: "General health and capacity can influence how intensive a pathway feels. Pacing and scheduling may be adapted to what feels manageable.",
-      nl: "Uw algemene gezondheid en belastbaarheid kunnen meespelen in hoe intensief een traject aanvoelt. Tempo en planning kunnen worden afgestemd op wat haalbaar is.",
+      en: "General health affects recovery capacity and tolerance. Chronic conditions, medication, or reduced resistance may slow healing.\nPhysical resilience is generally considered when assessing planning and timing.",
+      nl: "Algemene gezondheid beïnvloedt herstelcapaciteit en belastbaarheid. Chronische aandoeningen, medicatie of verminderde weerstand kunnen herstel vertragen.\nFysieke belastbaarheid speelt doorgaans mee in de inschatting van planning en timing.",
     },
   },
 
@@ -312,8 +312,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "costblock",
     scenario_id: "S01",
     content: {
-      en: "Discolouration costs may vary by approach; whitening is often influenced by session count, method, and starting shade, while veneers are commonly per-tooth and influenced by material and finishing.",
-      nl: "Bij verkleuring kan de kost variëren volgens aanpak; bleken hangt vaak samen met sessies, methode en uitgangskleur, facings zijn meestal per tand en variëren met materiaal en afwerking.",
+      en: "In cases of discoloration, cost is determined by the type of treatment and its intensity. For whitening, the number of required sessions, the technique used (at-home or in-office), and the starting shade play a role.\nFor veneers, pricing is generally calculated per tooth, with material selection, individual shape correction, and tooth preparation influencing the total.",
+      nl: "Bij verkleuring wordt de kost bepaald door het type behandeling en de intensiteit ervan. Bij bleken spelen vooral het aantal benodigde sessies, de gebruikte techniek (thuis- of praktijkbleken) en de uitgangskleur een rol.\nBij facings wordt doorgaans per tand gerekend, waarbij materiaalkeuze, individuele vormcorrectie en tandvoorbereiding de prijs bepalen.",
     },
   },
   {
@@ -321,8 +321,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "costblock",
     scenario_id: "S02",
     content: {
-      en: "One missing tooth in a visible zone may vary by solution; implant pathways may depend on bone, materials, and aesthetics, while adhesive bridges may depend on position and loading.",
-      nl: "Bij één ontbrekende tand in de zichtzone kan de kost variëren volgens oplossing; implantaten hangen vaak samen met bot, materiaal en esthetiek, adhesieve bruggen met positie en belasting.",
+      en: "For a single missing tooth in the visible zone, cost depends on the chosen replacement method.\nWith an implant, factors such as available bone volume, the need for preparatory procedures, crown type, and aesthetic finishing influence the total.\nWith an adhesive bridge, pricing is mainly affected by the design, the number of involved teeth, and bite force distribution.",
+      nl: "Bij één ontbrekende tand in de zichtzone hangt de kost af van de gekozen vervangingsmethode.\nBij een implantaat bepalen onder meer de hoeveelheid beschikbaar bot, de nood aan voorbereidende stappen, het type kroon en de esthetische afwerking het totaal.\nBij een adhesieve brug wordt de prijs vooral beïnvloed door het ontwerp, het aantal betrokken tanden en de krachtsverdeling in de beet.",
     },
   },
   {
@@ -330,8 +330,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "costblock",
     scenario_id: "S03",
     content: {
-      en: "In the chewing zone, costs may reflect functional loading, support design, materials, and long-term structural demands.",
-      nl: "In de kauwzone kan de prijs vooral samenhangen met belasting, steunpunten, materiaalkeuze en structurele eisen op lange termijn.",
+      en: "In the chewing zone, cost is strongly influenced by load and durability. Material strength, crown or bridge type, and the condition of adjacent teeth play a greater role than aesthetic refinement.",
+      nl: "In de kauwzone wordt de kost sterk beïnvloed door belasting en duurzaamheid. Materiaalsterkte, kroon- of brugtype en de toestand van aangrenzende tanden spelen hier een grotere rol dan esthetische verfijning.",
     },
   },
   {
@@ -339,8 +339,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "costblock",
     scenario_id: "S04",
     content: {
-      en: "Adjacent multi-tooth gaps may be influenced by implant count, span length, and available bone.",
-      nl: "Bij 2\u20134 tanden naast elkaar kan de kost worden beïnvloed door aantal implantaten, lengte van de brug en beschikbaar botvolume.",
+      en: "When 2 to 4 adjacent teeth are missing, cost is determined by the number of implants or the length of the bridge construction.\nLonger spans often require additional structural support. Bone quality and volume may necessitate additional technical steps.",
+      nl: "Wanneer 2 tot 4 tanden naast elkaar ontbreken, wordt de kost bepaald door het aantal implantaten of de lengte van de brugconstructie.\nLangere overspanningen vereisen vaak extra structurele ondersteuning. Ook de kwaliteit en het volume van het kaakbot kunnen bijkomende technische stappen noodzakelijk maken.",
     },
   },
   {
@@ -348,8 +348,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "costblock",
     scenario_id: "S05",
     content: {
-      en: "Scattered gaps may vary by number of zones and staging; implants are often per-tooth, while zone-bridges depend on design and positioning.",
-      nl: "Bij verspreide gaten kan de kost variëren volgens aantal zones en fasering; implantaten zijn vaak per tand, zonebruggen hangen samen met ontwerp en positionering.",
+      en: "In cases of scattered missing teeth, pricing is typically calculated per zone. Each missing element may be assessed individually, making cost dependent on position, load, and integration with existing restorations.\nPhasing over multiple stages may influence overall planning.",
+      nl: "Bij verspreide tandgaten wordt meestal per zone gerekend. Elk ontbrekend element kan afzonderlijk beoordeeld worden, wat de kost afhankelijk maakt van positie, belasting en integratie met bestaande restauraties.\nFasering over meerdere momenten kan de totale planning beïnvloeden.",
     },
   },
   {
@@ -357,8 +357,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "costblock",
     scenario_id: "S06",
     content: {
-      en: "Mixed function + aesthetics may combine separate components; totals may vary by tooth count, materials, and finishing.",
-      nl: "Bij een mix van functie en esthetiek wordt de kost vaak opgebouwd uit meerdere componenten; totaal varieert met aantal tanden, materiaal en afwerking.",
+      en: "When both function and aesthetics must be restored, cost consists of multiple components: structural reconstruction, material selection, and finishing per tooth.\nThe number of involved elements and bite complexity largely determine the price.",
+      nl: "Wanneer zowel functie als esthetiek moeten worden hersteld, bestaat de kost uit meerdere componenten: structurele opbouw, materiaalkeuze en afwerking per tand.\nHet aantal betrokken elementen en de complexiteit van de beet bepalen hier het grootste deel van de prijs.",
     },
   },
   {
@@ -366,8 +366,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "costblock",
     scenario_id: "S07",
     content: {
-      en: "Segmental loss costs often increase with scale and structural requirements across multiple support points.",
-      nl: "Bij segmentair verlies nemen kosten vaak toe door schaal en structurele vereisten over meerdere steunpunten.",
+      en: "With segmental tooth loss over a larger area, cost generally increases due to the scale of reconstruction.\nMore support points, larger bridge constructions, and increased bite forces require technically more robust solutions.",
+      nl: "Bij segmentair tandverlies over een grotere zone stijgt de kost meestal door de schaal van het herstel. Meer steunpunten, grotere brugconstructies en verhoogde krachten in de beet vragen technisch robuustere oplossingen.",
     },
   },
   {
@@ -375,8 +375,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "costblock",
     scenario_id: "S08",
     content: {
-      en: "Extensive scattered loss may vary by zones, staging, and bone conditions; overall totals can differ widely.",
-      nl: "Bij uitgebreid verspreid verlies kan de kost sterk variëren door zones, fasering en botconditie.",
+      en: "In extensive and dispersed tooth loss, cost is determined by the number of zones, the selected replacement strategy, and the underlying bone condition.\nCombinations of fixed and removable solutions may further influence technical complexity.",
+      nl: "Bij uitgebreid en verspreid tandverlies wordt de kost bepaald door het aantal zones, de gekozen vervangingsstrategie en de onderliggende botconditie.\nCombinaties van vaste en uitneembare oplossingen kunnen de technische complexiteit verder beïnvloeden.",
     },
   },
   {
@@ -384,8 +384,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "costblock",
     scenario_id: "S09",
     content: {
-      en: "Full edentulism in one jaw may vary by fixed vs removable stability, implant configuration, and materials.",
-      nl: "Bij een tandeloze kaak kan de kost variëren door vast versus uitneembaar comfort, implantaatconfiguratie en materiaal.",
+      en: "For a fully edentulous jaw, cost depends on the chosen stabilization method: a fully removable denture, an implant-supported overdenture, or a fixed bridge construction.\nThe number of implants, connection type, and material selection determine the majority of the total.",
+      nl: "Bij een tandeloze kaak hangt de kost af van de gekozen stabilisatie: een volledig uitneembare prothese, een implantaatgedragen klikprothese of een vaste brugconstructie.\nHet aantal implantaten, het type verbinding en het gebruikte materiaal bepalen het grootste deel van het totaal.",
     },
   },
   {
@@ -393,8 +393,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "costblock",
     scenario_id: "S10",
     content: {
-      en: "Full-mouth rehabilitation may vary widely; fixed vs removable vs hybrid designs influence scope and technical complexity.",
-      nl: "Bij full-mouth herstel kan de kost sterk uiteenlopen; vast, uitneembaar of hybride beïnvloedt omvang en technische complexiteit.",
+      en: "In full-mouth rehabilitation, cost is influenced by the total number of teeth to be replaced or restored, the selected construction type (fixed, removable, or hybrid), and the need for preparatory stabilization.\nThe greater the technical reconstruction, the more extensive the planning and execution.",
+      nl: "Bij een full-mouth herstel wordt de kost beïnvloed door het totale aantal te vervangen of te restaureren tanden, de gekozen constructievorm (vast, uitneembaar of hybride) en de nood aan voorbereidende stabilisatie.\nHoe groter de technische heropbouw, hoe uitgebreider de planning en uitvoering.",
     },
   },
   {
@@ -402,8 +402,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "costblock",
     scenario_id: "S11",
     content: {
-      en: "Misalignment costs may depend on aligner pathway complexity versus per-tooth veneer scope and finishing.",
-      nl: "Bij scheefstand hangt de kost vaak af van complexiteit van aligners versus aantal facings en afwerking per tand.",
+      en: "In cases of misalignment, cost depends on the chosen correction method.\nAligner treatment is generally determined by treatment duration and complexity, while veneers are calculated per tooth based on preparation, material, and aesthetic finishing.",
+      nl: "Bij scheefstand hangt de kost af van de gekozen correctiemethode.\nAlignerbehandeling wordt meestal bepaald door de duur en complexiteit van het traject, terwijl facings per tand worden berekend op basis van voorbereiding, materiaal en esthetische afwerking.",
     },
   },
   {
@@ -411,8 +411,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "costblock",
     scenario_id: "S12",
     content: {
-      en: "Loose/pain scenarios may vary with stabilisation and replacement extent, design, and functional load.",
-      nl: "Bij losheid/pijn kan de kost variëren met de mate van stabilisatie en vervanging, ontwerp en belasting.",
+      en: "When teeth are mobile or painful, cost may relate to stabilization or replacement, depending on the underlying condition.\nThe underlying cause and chosen reconstruction determine the scope of treatment.",
+      nl: "Wanneer tanden los staan of pijnlijk zijn, kan de kost samenhangen met stabilisatie of vervanging, afhankelijk van de onderliggende situatie.\nDe onderliggende oorzaak en de gekozen heropbouw bepalen hier de omvang van het traject.",
     },
   },
   {
@@ -420,8 +420,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "costblock",
     scenario_id: "S13",
     content: {
-      en: "Young mild discolouration may remain limited with whitening; veneers may vary per-tooth by material and finishing.",
-      nl: "Bij jonge lichte verkleuring blijft de kost vaak beperkt met bleken; facings variëren per tand volgens materiaal en afwerking.",
+      en: "For mild discoloration without structural damage, whitening typically remains limited in scope.\nWhen shape correction or structural modification is required, veneers are calculated per tooth according to material choice and individual finishing.",
+      nl: "Bij lichte verkleuring zonder structurele schade blijft bleken doorgaans beperkt in omvang.\nWanneer vormcorrectie of structurele aanpassing nodig is, worden facings per tand berekend volgens materiaalkeuze en individuele afwerking.",
     },
   },
   {
@@ -429,8 +429,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "costblock",
     scenario_id: "S14",
     content: {
-      en: "Budget-focused pathways may be shaped by implant count, removable design type, and staging.",
-      nl: "Bij budgetfocus kunnen implantaat-aantal, prothesetype en fasering de kost sturen.",
+      en: "When budget is central, cost is strongly influenced by the number of implants, prosthetic type, and degree of phasing.\nStaging treatment may influence planning but does not alter the technical foundation of the solution.",
+      nl: "Wanneer budget centraal staat, wordt de kost sterk beïnvloed door het aantal implantaten, het type prothese en de mate van fasering.\nSpreiding in fases kan de planning beïnvloeden, maar verandert de technische basis van de oplossing niet.",
     },
   },
   {
@@ -438,8 +438,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "costblock",
     scenario_id: "S15",
     content: {
-      en: "Premium aesthetics may be influenced by per-tooth material, finishing detail, and planning/try-in intensity.",
-      nl: "Bij premium esthetiek spelen per-tand materiaal, detailniveau en planningsintensiteit vaak mee.",
+      en: "In premium aesthetic cases, pricing is primarily determined by material precision, individual tooth shaping, and the intensity of preparation and alignment.\nHigher levels of detail and reproducibility increase technical time investment.",
+      nl: "Bij premium esthetiek wordt de prijs vooral bepaald door materiaalprecisie, individuele vormopbouw per tand en de intensiteit van voorbereiding en afstemming.\nDetailniveau en reproduceerbaarheid verhogen hier de technische tijdsinvestering.",
     },
   },
   {
@@ -447,8 +447,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "costblock",
     scenario_id: "S16",
     content: {
-      en: "Wear/fracture repairs may range from conservative build-ups to per-tooth ceramics; durability and finishing influence totals.",
-      nl: "Bij slijtage/breuk kan de kost variëren van behoudende opbouw tot per-tand keramiek; duurzaamheid en afwerking sturen het totaal.",
+      en: "In cases of wear or fracture, cost depends on the degree of structural damage.\nLimited build-up requires fewer technical steps than full ceramic replacement per tooth, where material strength and shape correction are determining factors.",
+      nl: "Bij slijtage of breuk hangt de kost af van de mate van structurele schade.\nEen beperkte opbouw vraagt minder technische stappen dan volledige keramische vervanging per tand, waarbij materiaalsterkte en vormcorrectie bepalend zijn.",
     },
   },
   {
@@ -456,8 +456,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "costblock",
     scenario_id: "S17",
     content: {
-      en: "Adjacent restored teeth often trigger bridge vs implant comparison; preparation scope, materials, and bone conditions may influence totals.",
-      nl: "Bij herstelde buurttanden wordt vaak brug versus implantaat vergeleken; slijpwerk, materiaal en botconditie kunnen de kost beïnvloeden.",
+      en: "When adjacent teeth are already restored, a bridge is often compared with an implant.\nCost is influenced by the need for additional preparation, crown material type, and local bone condition.",
+      nl: "Wanneer aangrenzende tanden reeds gerestaureerd zijn, wordt vaak een brug vergeleken met een implantaat.\nDe kost wordt hier beïnvloed door de nood aan bijkomend slijpwerk, het type kroonmateriaal en de botconditie ter plaatse.",
     },
   },
 
@@ -469,8 +469,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "nuance",
     scenario_id: "S01",
     content: {
-      en: 'A "whiter" goal may look less natural if shade and translucency no longer match the face. The key trade-off is often enamel preservation and predictable everyday appearance versus maximal colour change.',
-      nl: 'Een "witter" resultaat kan minder natuurlijk ogen wanneer tint en translucentie niet meer bij het gezicht passen. De afweging ligt vaak tussen glazuurbewaring en voorspelbaar dagelijks eindbeeld versus maximale kleurverandering.',
+      en: "Intensive whitening or very white veneers often reduce natural enamel translucency. As a result, the surface may appear flatter and less vibrant in daylight.\nThe consideration lies between maximum whiteness and preservation of natural light reflection.",
+      nl: "Sterk bleken of zeer witte facings verminderen vaak de natuurlijke translucentie van glazuur. Hierdoor kan het oppervlak vlakker en minder levendig ogen bij daglicht.\nDe afweging ligt tussen maximale witheid en behoud van natuurlijke lichtbreking.",
     },
   },
   {
@@ -478,8 +478,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "nuance",
     scenario_id: "S02",
     content: {
-      en: "In a visible gap, small transition details (gum contour and light reflection) may drive how natural the result feels. The trade-off is often speed versus long-term stability and low-maintenance integration.",
-      nl: "In een zichtbare zone kunnen kleine overgangsdetails (tandvlees, lichtreflectie) bepalen hoe natuurlijk het resultaat aanvoelt. De afweging ligt vaak tussen snelheid en langetermijnstabiliteit met beperkt onderhoud.",
+      en: "In the front zone, differences of less than one millimeter in tooth length or gum line are visually noticeable. Irregular margin finishing increases this effect.\nThe consideration lies between rapid placement and maximum precision in finishing details.",
+      nl: "In de frontzone vallen verschillen van minder dan één millimeter in tandlengte of tandvleeslijn zichtbaar op. Onregelmatige randafwerking vergroot dit effect.\nDe afweging ligt tussen snelle plaatsing en maximale precisie in detailafwerking.",
     },
   },
   {
@@ -487,8 +487,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "nuance",
     scenario_id: "S03",
     content: {
-      en: "A posterior gap may feel manageable short-term while load gradually shifts to other teeth. The trade-off is often immediate comfort versus structural re-balancing that protects adjacent areas over time.",
-      nl: "Een achteraan ontbrekende tand kan op korte termijn meevallen terwijl belasting geleidelijk verschuift. De afweging ligt vaak tussen direct comfort en structureel herverdelen om aangrenzende zones te beschermen.",
+      en: "When a molar is missing, adjacent teeth absorb a greater share of chewing forces. Over time, this may lead to additional wear or tilting.\nThe consideration lies between monitoring and active redistribution of load.",
+      nl: "Wanneer een molaar ontbreekt, nemen de aangrenzende tanden een groter deel van de kauwkracht over. Dit kan op termijn extra slijtage of kanteling veroorzaken.\nDe afweging ligt tussen afwachten en actieve herverdeling van belasting.",
     },
   },
   {
@@ -496,8 +496,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "nuance",
     scenario_id: "S04",
     content: {
-      en: 'With adjacent gaps, durability is often determined by segment-level support, not just "filling space." The trade-off is often simplicity versus even force distribution across the whole segment.',
-      nl: 'Bij aaneensluitende gaten wordt duurzaamheid vaak bepaald door segmentondersteuning, niet enkel door "opvullen." De afweging ligt vaak tussen eenvoud en gelijkmatige krachtverdeling.',
+      en: "A bridge spanning multiple missing teeth creates a lever effect on the support points. The longer the span, the greater the mechanical load.\nThe consideration lies between fewer implants and greater structural stability.",
+      nl: "Een brug over meerdere ontbrekende tanden creëert een hefboomeffect op de steunpunten. Hoe langer de overspanning, hoe groter de mechanische belasting.\nDe afweging ligt tussen minder implantaten en meer structurele stabiliteit.",
     },
   },
   {
@@ -505,8 +505,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "nuance",
     scenario_id: "S05",
     content: {
-      en: "Scattered gaps can create imbalance if zones are treated without a global plan. The trade-off is often per-zone efficiency versus staged coherence across the full bite.",
-      nl: "Bij verspreide gaten kan onevenwicht ontstaan wanneer zones zonder globale visie worden aangepakt. De afweging ligt vaak tussen zonegewijze efficiëntie en gefaseerde samenhang in de beet.",
+      en: "Isolated corrections per zone do not automatically account for the overall bite. Uneven contact points may increase muscular strain.\nThe consideration lies between a local solution and global occlusal balance.",
+      nl: "Losstaande correcties per zone houden niet automatisch rekening met de totale beet. Ongelijke contactpunten kunnen spierbelasting verhogen.\nDe afweging ligt tussen lokale oplossing en globale occlusale balans.",
     },
   },
   {
@@ -514,8 +514,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "nuance",
     scenario_id: "S06",
     content: {
-      en: "In mixed cases, aesthetics tends to stay natural-looking only when function is structurally supported. The trade-off is often visible improvement versus integrated sequencing that remains stable.",
-      nl: "In combinatiescenario's blijft esthetiek vaak pas geloofwaardig wanneer functie structureel wordt gedragen. De afweging ligt vaak tussen zichtbare verbetering en geïntegreerde volgorde die stabiel blijft.",
+      en: "Changing the shape of front teeth affects how upper and lower teeth meet. Minor adjustments may shift contact points.\nThe consideration lies between aesthetic correction and functional consistency.",
+      nl: "Vormverandering van voortanden beïnvloedt hoe onder- en boventanden elkaar raken. Kleine aanpassingen kunnen contactpunten verplaatsen.\nDe afweging ligt tussen esthetische correctie en functionele consistentie.",
     },
   },
   {
@@ -523,8 +523,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "nuance",
     scenario_id: "S07",
     content: {
-      en: "Large segment loss requires multi-point structural support to feel reliable. The trade-off is often minimal intervention versus long-term stability and confidence.",
-      nl: "Bij groot segmentverlies is ondersteuning over meerdere steunpunten bepalend voor betrouwbaarheid. De afweging ligt vaak tussen minimale ingreep en langetermijnstabiliteit en zekerheid.",
+      en: "With multiple missing teeth, load per support point increases when the number of supporting elements remains limited. This raises the likelihood of technical complications.\nThe consideration lies between minimal invasiveness and structural reserve.",
+      nl: "Bij meerdere ontbrekende tanden stijgt de belasting per steunpunt wanneer het aantal dragende elementen beperkt blijft. Dit verhoogt de kans op technische complicaties.\nDe afweging ligt tussen minimale invasiviteit en structurele reserve.",
     },
   },
   {
@@ -532,8 +532,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "nuance",
     scenario_id: "S08",
     content: {
-      en: "When loss is widespread, symptoms may not match what is visibly missing, so planning cohesion matters. The trade-off is often zone-by-zone fixes versus a staged plan that preserves balance.",
-      nl: "Bij uitgebreid verspreid verlies komen klachten niet altijd overeen met wat zichtbaar ontbreekt, waardoor samenhangende planning belangrijk wordt. De afweging ligt vaak tussen zone-oplossingen en een gefaseerd plan dat evenwicht bewaart.",
+      en: "In extensive tooth loss, bite height may gradually decrease due to wear and instability. This alters muscle load and jaw position.\nThe consideration lies between isolated replacements and full bite rehabilitation.",
+      nl: "Bij uitgebreid tandverlies kan de beethoogte geleidelijk verlagen door slijtage en instabiliteit. Dit verandert spierbelasting en kaakpositie.\nDe afweging ligt tussen afzonderlijke vervangingen en volledige beetrehabilitatie.",
     },
   },
   {
@@ -541,8 +541,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "nuance",
     scenario_id: "S09",
     content: {
-      en: "Full edentulism changes daily confidence, and adaptation often takes time even with good technical function. The trade-off is often immediate expectations versus long-term comfort and maintenance predictability.",
-      nl: "Een tandeloze kaak beïnvloedt dagelijks vertrouwen en gewenning vraagt vaak tijd, ook bij technisch goede oplossingen. De afweging ligt vaak tussen onmiddellijke verwachtingen en langetermijncomfort met voorspelbaar onderhoud.",
+      en: "A new prosthesis initially changes the sensation in the mouth and jaw. Pressure points and speech adaptation are not uncommon at the beginning.\nThe consideration lies between immediate functionality and adaptation over time.",
+      nl: "Een nieuwe prothese verandert aanvankelijk het gevoel in mond en kaak. Drukpunten en spraakaanpassing zijn in het begin niet ongebruikelijk.\nDe afweging ligt tussen onmiddellijke functionaliteit en adaptatie over tijd.",
     },
   },
   {
@@ -550,8 +550,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "nuance",
     scenario_id: "S10",
     content: {
-      en: 'Full-mouth change is often a turning point where the pathway rhythm and sequencing affect how manageable it feels. The trade-off is often "quick decisions" versus a coherent plan that supports adaptation.',
-      nl: "Bij full-mouth verandering bepaalt ritme en volgorde van stappen vaak hoe hanteerbaar het traject aanvoelt. De afweging ligt vaak tussen snelle keuzes en een coherent plan dat gewenning ondersteunt.",
+      en: "In full reconstruction, the existing bite is often revised. Excessive changes in a single phase may complicate muscular adaptation.\nThe consideration lies between speed of transformation and controlled stabilization.",
+      nl: "Bij een volledige heropbouw wordt de bestaande beet vaak herzien. Te grote wijzigingen in één fase kunnen spieraanpassing bemoeilijken.\nDe afweging ligt tussen snelheid van transformatie en gecontroleerde stabilisatie.",
     },
   },
   {
@@ -559,8 +559,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "nuance",
     scenario_id: "S11",
     content: {
-      en: "Misalignment is often experienced subjectively through visibility and light reflection, not only tooth position. The trade-off is often process commitment versus speed of visible change.",
-      nl: "Scheefstand wordt vaak subjectief ervaren via zichtbaarheid en lichtreflectie, niet alleen via tandstand. De afweging ligt vaak tussen procesinzet en snelheid van zichtbaar effect.",
+      en: "Misalignment affects light reflection and shadow formation. A minor rotation may appear more visually disruptive than functionally necessary.\nThe consideration lies between visual perfection and treatment duration.",
+      nl: "Scheefstand beïnvloedt lichtval en schaduwvorming. Een kleine rotatie kan visueel storender zijn dan functioneel noodzakelijk.\nDe afweging ligt tussen visuele perfectie en behandelduur.",
     },
   },
   {
@@ -568,8 +568,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "nuance",
     scenario_id: "S12",
     content: {
-      en: "Pain/looseness may reduce confidence and gradually change eating behaviour. The trade-off is often temporary stabilisation versus predictable structural restoration.",
-      nl: "Pijn/losheid kan vertrouwen verminderen en eetgedrag geleidelijk veranderen. De afweging ligt vaak tussen tijdelijke stabilisatie en voorspelbaar structureel herstel.",
+      en: "Mobility is usually associated with loss of supporting tissue. Restoring only the visible part does not change underlying stability.\nThe consideration lies between symptom relief and structural management.",
+      nl: "Losheid gaat meestal samen met verlies van steunweefsel. Alleen het zichtbare deel herstellen verandert de onderliggende stabiliteit niet.\nDe afweging ligt tussen symptoomverlichting en structurele aanpak.",
     },
   },
   {
@@ -577,8 +577,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "nuance",
     scenario_id: "S13",
     content: {
-      en: "In young mild discolouration, subtlety is a deliberate choice and lighting can change perceived results. The trade-off is often easy repeatability versus longer-term colour stability.",
-      nl: "Bij jonge lichte verkleuring is subtiliteit een bewuste keuze en lichtomstandigheden beïnvloeden beleving. De afweging ligt vaak tussen eenvoudige herhaalbaarheid en langetermijnkleurstabiliteit.",
+      en: "With intact enamel, intensive discoloration correction may reduce the natural reflective quality of the surface.\nThe consideration lies between color enhancement and preservation of natural texture.",
+      nl: "Bij intact glazuur kan intensieve verkleuringcorrectie het oppervlak minder natuurlijk doen reflecteren.\nDe afweging ligt tussen kleurversterking en behoud van natuurlijke textuur.",
     },
   },
   {
@@ -586,8 +586,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "nuance",
     scenario_id: "S14",
     content: {
-      en: 'In a budget-focused stage, simplicity and maintenance can matter more than technical sophistication. The trade-off is often "more advanced" versus what stays comfortable and manageable long term.',
-      nl: 'In een budgetfase kunnen eenvoud en onderhoud zwaarder wegen dan technische complexiteit. De afweging ligt vaak tussen "meer geavanceerd" en wat haalbaar en comfortabel blijft.',
+      en: "Fewer implants or simpler constructions increase load per element. This may affect wear and maintenance frequency.\nThe consideration lies between initial cost and long-term load distribution.",
+      nl: "Minder implantaten of eenvoudigere constructies verhogen de belasting per element. Dit kan invloed hebben op slijtage en onderhoudsfrequentie.\nDe afweging ligt tussen initiële kost en lange-termijnbelasting.",
     },
   },
   {
@@ -595,8 +595,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "nuance",
     scenario_id: "S15",
     content: {
-      en: "Premium aesthetics tends to depend on preparation, alignment, and fine finishing, not material alone. The trade-off is often high-detail control versus scope and long-term predictability of the look.",
-      nl: "Premium esthetiek hangt vaak samen met voorbereiding en afstemming, niet alleen met materiaal. De afweging ligt vaak tussen detailcontrole en de voorspelbaarheid van het eindbeeld op lange termijn.",
+      en: "Premium aesthetics require precise symmetry, margin finishing, and color gradation. Minor deviations are immediately visible in the front zone.\nThe consideration lies between level of detail and practical feasibility.",
+      nl: "Premium esthetiek vereist exacte symmetrie, randafwerking en kleurgradatie. Kleine afwijkingen zijn in de frontzone direct zichtbaar.\nDe afweging ligt tussen detailniveau en praktische uitvoerbaarheid.",
     },
   },
   {
@@ -604,8 +604,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "nuance",
     scenario_id: "S16",
     content: {
-      en: "Wear/fracture often links function and aesthetics\u2014small shape changes can shift bite forces. The trade-off is often cosmetic correction versus structural support that stays comfortable.",
-      nl: "Slijtage/breuk verbindt functie en esthetiek: kleine vormaanpassingen kunnen beetkrachten beïnvloeden. De afweging ligt vaak tussen cosmetische correctie en structurele ondersteuning die comfortabel blijft.",
+      en: "Wear often reduces bite height. Restoring shape alone without correcting force distribution may result in renewed fracture.\nThe consideration lies between cosmetic repair and structural reconstruction.",
+      nl: "Slijtage verlaagt vaak de beethoogte. Enkel vormherstel zonder correctie van krachtsverdeling kan hernieuwde breuk veroorzaken.\nDe afweging ligt tussen cosmetisch herstel en structurele heropbouw.",
     },
   },
   {
@@ -613,8 +613,8 @@ const TEXT_MODULES: TextModuleInput[] = [
     module_type: "nuance",
     scenario_id: "S17",
     content: {
-      en: "With adjacent restorations, the key issue is integration with existing work and whether additional changes affect restored structures. The trade-off is often preserving existing restorations versus broader integration control.",
-      nl: "Bij bestaande restauraties draait het vaak om aansluiting op bestaand werk en impact van bijkomende ingrepen. De afweging ligt vaak tussen behoud van bestaande restauraties en meer controle over integratie.",
+      en: "Existing restorations may have different wear patterns or materials compared to new work. Transitions between both may create stress points.\nThe consideration lies between partial adjustment and complete reintegration.",
+      nl: "Bestaande restauraties kunnen andere slijtagepatronen of materialen hebben dan nieuw werk. Overgangen tussen beide kunnen spanningspunten creëren.\nDe afweging ligt tussen gedeeltelijke aanpassing en volledige herintegratie.",
     },
   },
 ];

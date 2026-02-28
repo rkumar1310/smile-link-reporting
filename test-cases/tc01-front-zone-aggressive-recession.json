@@ -1,0 +1,51 @@
+{
+  "description": "TEST CASE 1: Front zone + aggressive aesthetics + recession",
+  "intake": {
+    "session_id": "tc-01-front-aggressive-recession",
+    "timestamp": "2026-02-28T10:00:00.000Z",
+    "language": "en",
+    "answers": [
+      { "question_id": "Q1", "answer": "beautiful_youthful" },
+      { "question_id": "Q2", "answer": "3" },
+      { "question_id": "Q2a", "answer": "esthetics" },
+      { "question_id": "Q3", "answer": ["gum_recession"] },
+      { "question_id": "Q4", "answer": ["no_never"] },
+      { "question_id": "Q5", "answer": "no_aesthetic_only" },
+      { "question_id": "Q6a", "answer": "one_missing" },
+      { "question_id": "Q6b", "answer": "front_aesthetic_zone" },
+      { "question_id": "Q6c", "answer": "intact" },
+      { "question_id": "Q6d", "answer": ["mostly_intact_enamel"] },
+      { "question_id": "Q7", "answer": "hollywood" },
+      { "question_id": "Q8", "answer": "hollywood_bright_white" },
+      { "question_id": "Q9", "answer": "30_45" },
+      { "question_id": "Q10", "answer": "premium_best_result" },
+      { "question_id": "Q11", "answer": "yes_for_best_result" },
+      { "question_id": "Q12", "answer": "6_months" },
+      { "question_id": "Q13", "answer": "no" },
+      { "question_id": "Q14", "answer": "no" },
+      { "question_id": "Q15", "answer": "good" },
+      { "question_id": "Q16a", "answer": "no_complete" },
+      { "question_id": "Q17", "answer": "no" },
+      { "question_id": "Q18", "answer": "no" }
+    ]
+  },
+  "expected_tags": [
+    "issue_gum_recession",
+    "location_anterior",
+    "style_hollywood",
+    "natural_priority_low",
+    "status_single_missing",
+    "satisfaction_major_dissatisfaction"
+  ],
+  "expected_drivers": {
+    "zone_priority": "aesthetic_zone",
+    "periodontal_esthetic_tension": "high",
+    "expectation_risk": "high",
+    "treatment_philosophy": "balanced"
+  },
+  "expected_interaction_rules": [
+    "P3.1: gum_recession + anterior → periodontal_esthetic_tension=high",
+    "P3.2: high tension + aggressive → expectation_risk=high",
+    "P3.3: high tension → philosophy=balanced"
+  ]
+}

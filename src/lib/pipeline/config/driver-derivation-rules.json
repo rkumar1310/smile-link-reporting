@@ -182,7 +182,12 @@
       "safety_critical": false,
       "rules": [
         {
-          "tags_any": ["status_no_missing", "status_single_missing"],
+          "tags": ["status_no_missing"],
+          "value": "conditional",
+          "priority": 0
+        },
+        {
+          "tags": ["status_single_missing"],
           "value": "single_site",
           "priority": 1
         },
@@ -225,6 +230,12 @@
           "tags": ["tooth_health_bruxism"],
           "value": "elevated",
           "priority": 4,
+          "additive": true
+        },
+        {
+          "tags": ["history_periodontal"],
+          "value": "elevated",
+          "priority": 5,
           "additive": true
         }
       ],
@@ -551,6 +562,76 @@
       "fallback": {
         "value": "undefined",
         "reason": "Omit timeline language when unknown"
+      }
+    },
+    "zone_priority": {
+      "layer": "L2",
+      "safety_critical": false,
+      "rules": [
+        {
+          "tags": ["location_anterior"],
+          "value": "aesthetic_zone",
+          "priority": 1
+        },
+        {
+          "tags": ["location_posterior"],
+          "value": "functional_zone",
+          "priority": 2
+        },
+        {
+          "tags": ["location_both"],
+          "value": "mixed_zone",
+          "priority": 3
+        }
+      ],
+      "fallback": {
+        "value": "mixed_zone",
+        "reason": "Default to mixed when location unknown"
+      }
+    },
+    "periodontal_esthetic_tension": {
+      "layer": "L2",
+      "safety_critical": false,
+      "rules": [
+        {
+          "tags_any": ["issue_gum_recession", "history_periodontal"],
+          "value": "high",
+          "priority": 1
+        },
+        {
+          "tags_any": ["hygiene_basic", "hygiene_irregular"],
+          "value": "moderate",
+          "priority": 2
+        }
+      ],
+      "fallback": {
+        "value": "low",
+        "reason": "No periodontal-esthetic tension detected"
+      }
+    },
+    "budget_complexity_tension": {
+      "layer": "L2",
+      "safety_critical": false,
+      "rules": [
+        {
+          "tags_all": ["status_full_mouth_compromised", "budget_conscious"],
+          "value": "high",
+          "priority": 1
+        },
+        {
+          "tags_all": ["status_5_plus_missing", "budget_conscious"],
+          "value": "moderate",
+          "priority": 2
+        },
+        {
+          "tags_all": ["status_full_mouth_compromised", "budget_balanced"],
+          "value": "moderate",
+          "priority": 3
+        }
+      ],
+      "fallback": {
+        "value": "low",
+        "reason": "No budget-complexity tension detected"
       }
     }
   }

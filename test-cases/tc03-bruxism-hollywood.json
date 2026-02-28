@@ -1,0 +1,45 @@
+{
+  "description": "TEST CASE 3: Bruxism + aesthetic maximalist (Hollywood style)",
+  "intake": {
+    "session_id": "tc-03-bruxism-hollywood",
+    "timestamp": "2026-02-28T10:00:00.000Z",
+    "language": "en",
+    "answers": [
+      { "question_id": "Q1", "answer": "beautiful_youthful" },
+      { "question_id": "Q2", "answer": "6" },
+      { "question_id": "Q3", "answer": ["crooked_uneven"] },
+      { "question_id": "Q4", "answer": ["no_never"] },
+      { "question_id": "Q5", "answer": "no_aesthetic_only" },
+      { "question_id": "Q6a", "answer": "no_missing" },
+      { "question_id": "Q6b", "answer": "front_aesthetic_zone" },
+      { "question_id": "Q6c", "answer": "intact" },
+      { "question_id": "Q6d", "answer": ["bruxism"] },
+      { "question_id": "Q7", "answer": "hollywood" },
+      { "question_id": "Q8", "answer": "hollywood_bright_white" },
+      { "question_id": "Q9", "answer": "30_45" },
+      { "question_id": "Q10", "answer": "premium_best_result" },
+      { "question_id": "Q11", "answer": "yes_for_best_result" },
+      { "question_id": "Q12", "answer": "6_months" },
+      { "question_id": "Q13", "answer": "no" },
+      { "question_id": "Q14", "answer": "no" },
+      { "question_id": "Q15", "answer": "good" },
+      { "question_id": "Q16a", "answer": "no_complete" },
+      { "question_id": "Q17", "answer": "no" },
+      { "question_id": "Q18", "answer": "no" }
+    ]
+  },
+  "expected_tags": [
+    "tooth_health_bruxism",
+    "style_hollywood",
+    "natural_priority_low"
+  ],
+  "expected_drivers": {
+    "treatment_philosophy": "durability_focused",
+    "expectation_risk": "moderate"
+  },
+  "expected_interaction_rules": [
+    "P3.4: bruxism → philosophy=durability_focused",
+    "P3.6: bruxism + aggressive → expectation_risk>=moderate"
+  ],
+  "notes": "P3.4 fires setting durability_focused. P3.5 (aesthetic_maximalist safeguard) does not fire since P3.4 already overrode it. P3.6 enforces minimum moderate expectation risk."
+}
